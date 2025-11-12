@@ -1,0 +1,20 @@
+#todo-pile {
+  margin-top: 113px;
+}
+
+.player-name {
+  font-weight: bolder;
+}
+
+.player-title {
+  font-weight: bolder;
+  color: red;
+  text-decoration: line-through;
+}
+
+.player-wasted-title {
+  font-weight: bolder;
+  color: rgb(237, 210, 135);
+  background-color: black;
+  padding: 3px;
+}
