@@ -49,7 +49,7 @@ const initializeRelationshipsForParty = (rand, party) => {
             //but still chance of not yet being partners
             if (Math.abs(value) > 50 && roll > 0.60) {
                 familial = true;
-            } else if (Math.abs(value) > 50 && roll > 0.1) {
+            } else if (Math.abs(value) > 50 && roll > 0.4) {
                 console.log("JR NOTE: it should be romantic", romantic)
                 romantic = true;
             }

@@ -11,7 +11,7 @@ class Game {
     handleIntro = (parent) => {
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-        general_intro.innerHTML = `${this.players.length} members of the Church of the Faithful gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they suceed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
+        general_intro.innerHTML = `${this.players.length} members of the Church of the Faithful gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
 
         for (let player of this.players) {
             const ele = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
@@ -31,7 +31,7 @@ class Game {
             //relationships
             const family = getFamilyOfEntity(player);
             if (family && family.length > 1) {
-                text += `${family.map((i) => i.nameHTML()).join(", ")} are all members of their family.`;
+                text += `${family.map((i) => i.nameHTML()).join(", ")} are all members of their family. `;
             } else if (family && family.length === 1) {
                 text += `${family[0].nameHTML()} is a member of their family. `;
 
@@ -39,7 +39,7 @@ class Game {
 
             const romanticPartners = getRomanticPartnersOfEntity(player);
             if (romanticPartners && romanticPartners.length > 1) {
-                text += `${romanticPartners.map((i) => i.nameHTML()).join(", ")} are all members of their polycule.`;
+                text += `${romanticPartners.map((i) => i.nameHTML()).join(", ")} are all members of their polycule. `;
             } else if (romanticPartners && romanticPartners.length === 1) {
                 text += `${romanticPartners[0].nameHTML()} is their romantic partner. `;
 

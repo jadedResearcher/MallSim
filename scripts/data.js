@@ -2578,8 +2578,8 @@ const initGeneralBackstories = () => {
     general_backstories[ZAP] = ["really could stand to lay off with the electricity", "think having an elemental affinity is a subsitute for a personality"];
     general_backstories[LOVE] = ["love everyone they meet", "do everything with love", "never let hate into their heart"];
     general_backstories[SOUL] = ["know yourself quite thoroughly", "have a very stable personality", "are always looking into a mirror", "can see straight to anyones soul"];
-    general_backstories[ANGER] = ["have trouble controlling your temper", "aren't shy about letting people know when theres is a problem"];
-    general_backstories[WEB] = ["are a smug chess-master", "are manipulative to your core", "really enjoy spiders", "think spiders are very important to the eco-system"];
+    general_backstories[ANGER] = ["have trouble controlling their temper", "aren't shy about letting people know when theres is a problem"];
+    general_backstories[WEB] = ["are a smug chess-master", "are manipulative to their core", "really enjoy spiders", "think spiders are very important to the eco-system"];
     general_backstories[ROYALTY] = ["are experienced with ruling", "have full noble training", "have a princely aura"];
     general_backstories[ENDINGS] = ["were always going to end up dead", "will be an existentialist", "will focus more on the ending than the begining", "will keep your thoughts firmly in the future"];
     general_backstories[KNOWING] = ["are an accomplished scholar", "are obsessed with knowing everything", "are an insufferable know-it-all"];
