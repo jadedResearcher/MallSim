@@ -3,6 +3,7 @@
 
 
 const getStatsFromThemes = (theme_keys) => {
+    console.log("JR NOTE: getting stats for theme_keys", theme_keys)
     let mind = 0;
     let eye = 0;
     let tongue = 0;
@@ -12,6 +13,7 @@ const getStatsFromThemes = (theme_keys) => {
     for (let key of theme_keys) {
         count++;
         const theme = all_themes[key]
+        console.log("JR NOTE: theme is", theme)
         if (theme.stats) {
             eye += theme.stats[EYES_METAL_STATS]
             tongue += theme.stats[TONGUE_METAL_STATS]
@@ -30,12 +32,14 @@ const getStatsFromThemes = (theme_keys) => {
     tongue = tongue / count;
     arm = arm / count;
     leg = leg / count;
-    const ret = BASELINE_METAL_OBJECT;
+    const ret = {}
+    console.log("JR NOTE: BASELINE_METAL_OBJECT", BASELINE_METAL_OBJECT)
     ret[MIND_METAL_STATS] = mind;
     ret[EYES_METAL_STATS] = eye;
     ret[TONGUE_METAL_STATS] = tongue;
     ret[ARMS_METAL_STAT] = arm;
     ret[LEGS_METAL_STAT] = leg;
+    console.log("JR NOTE: ret", ret)
     return ret;
 
 }
@@ -388,6 +392,7 @@ const baby_endings = baby_endings_raw.split("\n")
 //the Eyes which hold what i see: http://farragofiction.com/ColonistsEyes5/?C=M;O=D
 //mind the aspect from homestuck
 //arms of the echidna spiral galaxy universe
+//legs vs tails for the lamia (trustworthy number of legs)
 
 //how well do you use your thoughts to solve problems. at zero you are functionally brain dead
 const MIND_METAL_STATS = "Mind";

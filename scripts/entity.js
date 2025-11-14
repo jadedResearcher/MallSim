@@ -116,7 +116,7 @@ class Entity {
     name = "Jane Doe"; //JR will probably steal this though, especially if you Join The Loop
     themes = [];
     stolen_name = false;
-    stats = BASELINE_METAL_OBJECT;
+    stats = {};
     title = "Null of Null";
     leader = false; //in sburbsim this decided ectobiology, who knows what this does, if anything, here
     //keyed by other persons title
@@ -131,7 +131,8 @@ class Entity {
         this.themes = themes;
         this.title = classpectFromThemeList(rand, themes);
         all_entities[this.title] = this;
-        this.stats = getStatsFromThemes(themes)
+        this.stats = getStatsFromThemes(this.themes);
+        console.log(`JR NOTE: ${this.name} has stats`, { stats: this.stats })
     }
 
     nameHTML = () => {
