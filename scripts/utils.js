@@ -163,6 +163,19 @@ const titleCase = (input) => {
   return ret.join(" ");
 }
 
+//googled this
+function arrayToHumanSentence(arr) {
+  if (arr.length === 0) {
+    return "";
+  } else if (arr.length === 1) {
+    return arr[0];
+  } else {
+    const firstElements = arr.slice(0, arr.length - 1);
+    const lastElement = arr[arr.length - 1];
+    return firstElements.join(", ") + " and " + lastElement;
+  }
+}
+
 function replaceStringAt(str, index, character) {
   return str.substr(0, index) + character + str.substr(index + character.length);
 }

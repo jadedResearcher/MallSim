@@ -1,3 +1,58 @@
+@font-face {
+  font-family: Gamer;
+  src: url("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/WeirdFonts/Curse%2012.ttf");
+}
+
+
+/*The Harvest is Leaking Into Zampanio More And More*/
+@font-face {
+  font-family: gameboy;
+  src: url("http://lavinraca.eyedolgames.com/TheHarvestWakes/Fonts/early-gameboy/Early%20GameBoy.ttf");
+}
+
+@font-face {
+  font-family: nunito;
+  src: url("Fonts/nunito/Nunito-Regular.ttf");
+}
+
+h1 {
+  font-family: gameboy;
+  margin-left: 120px;
+}
+
+.subtitle {
+  font-family: nunito;
+  margin-left: 120px;
+  font-weight: lighter;
+  font-style: italic;
+  margin-top: -31px;
+}
+
+body {
+  background-color: rgb(237, 210, 135);
+  color: black;
+  margin: 0px;
+  overflow: auto;
+  font-size: 18px;
+  background-size: 255px;
+  font-family: 'nunito', sans-serif;
+}
+
+
+.fake-background {
+  min-width: 100%;
+  min-height: 100%;
+  background-repeat: repeat;
+  opacity: 0.4;
+  position: fixed;
+  filter: grayscale(1);
+  top: 0px;
+  left: 0px;
+  z-index: -999;
+
+}
+
+
 #todo-pile {
   margin-top: 113px;
 }
@@ -17,4 +72,66 @@
   color: rgb(237, 210, 135);
   background-color: black;
   padding: 3px;
+}
+
+#container {
+  width: 1000px;
+  margin-left: 113px;
+  margin-right: auto;
+  margin-top: 17px;
+  box-shadow: 2px 2px 4px rgb(50, 37, 1);
+  display: inline-block;
+  padding: 16px;
+  border: 3px solid black;
+  border-radius: 8px;
+  background-color: rgb(237, 231, 213);
+  font-family: 'nunito', sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+.tick-bar {
+  position: fixed;
+  left: 0px;
+  top: 31px;
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+
+}
+
+.tick-bar-title {
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Gamer;
+  font-size: 21px;
+  text-decoration: underline;
+}
+
+
+.tick-button {
+  font-family: Gamer;
+  font-size: 21px;
+  border-left: none;
+  background-color: rgb(237, 210, 135);
+  box-shadow: 2px 2px 4px rgb(50, 37, 1);
+}
+
+.tick-once-button {
+  background-color: rgb(237, 210, 135);
+}
+
+.tick-ten-button {
+  background-color: rgb(201, 172, 91);
+}
+
+.tick-hundred-button {
+  background-color: rgb(177, 139, 32)
+}
+
+.story-beat::after {
+  content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 }

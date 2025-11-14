@@ -15,7 +15,7 @@ const debug = () => {
     const debug = createElementWithClassAndParent("div", container, "debug");
     const rand = new SeededRandom(seed);
     const game = new Game(rand);
+    game.start(debug);
     console.log("JR NOTE: debug entities", game.players);
-    game.handleIntro(debug);
 
 }

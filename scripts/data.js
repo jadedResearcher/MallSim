@@ -344,6 +344,38 @@ const baby_endings_raw = `III
 const baby_endings = baby_endings_raw.split("\n")
 
 
+//mind, eyes, tongue arms, legs (in order of affecting the world around you) (legs highest because they move you through it, changing the slice of world you exist in)
+//how well do you use your mind to solve problems. at zero you are functionally brain dead
+const METAL_STATS_MIND = "Mind";
+//how well do you use your eyes to perceive the world. at zero you are functionally blind.
+const METAL_STATS_EYES = "Eyes";
+//how well do you use your tongue to communicate to others. At zero you are functionally mute.
+const METAL_STATS_TONGUE = "Tongue";
+//how well do you use your arms to enact your will on the world (fighting, building, etc). At zero you are functionally passive.
+const METAL_STATS_ARMS = "Arms";
+//how well do you use your legs to nevigate the world (speed, dexterity, etc). At zero you are functionally unable to move.
+const METAL_STATS_LEGS = "Legs";
+
+
+
+
+
+const VERY_HIGH_STAT_VALUE = 20;
+const HIGH_STAT_VALUE = 15;
+const MEDIUM_STAT_VALUE = 10; //baseline human
+const LOW_STAT_VALUE = 5;
+const VERY_LOW_STAT_VALUE = 1;
+
+
+//make stats from this
+BASELINE_METAL_OBJECT = {}
+BASELINE_METAL_OBJECT[METAL_STATS_MIND] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_EYES] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_TONGUE] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_ARMS] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_LEGS] = MEDIUM_STAT_VALUE;
+
+
 
 const first_names = ["Hallow", "Eve", "Alya", "Duncan", "Tina", "Donut", "Ender", "Alaya", "Amadeus", "Vivienne ", "Masego", "Akua", "Catherine", "Harkam", "Indrani", "Benoit", "Lloyd", "Yor", "Anya", "Tony", "Ben", "Karen", "Ennis", "Dallas", "Berga", "Eve", "Adam", "Nice", "Luck", "Lucky", "Maiza", "Miria", "Czeslaw", "Ladd", "Marcoccio", "Issac", "Firo", "Claire", "Vino", "Jacuzzi", "Chane", "Mike", "Dracula", "Sypha", "Alucard", "Trevor", "Power", "Denji", "Aki", "Kobeni", "Tom", "Amelie", "Wanda", "Wodin", "Piper", "Jasna", "Brian", "Todd", "Joshua", "Wyatt", "Joshua", "Penny", "Jake", "Rachel", "Tobias", "Marco", "Cassie", "Tom", "Erek", "Camille", "Yongki", "Parker", "Ria", "Devona", "Neville", "Witherby", "Hoon", "River", "Khana", "Vik", "Craig", "John", "Jude", "Jade", "Joey", "Rose", "Roxy", "Jeff", "Dave", "Dirk", "Jove", "Jake", "Sophie", "Jaxon", "Basira", "Daisy", "Martin", "Georgie", "Sasha", "James", "Taylor", "Victoria", "Jean-Paul", "Bob", "Alice", "Carol", "Eve", "Adam", "Rachel", "Brian", "Aisha", "Alexandra", "Alex", "Tobias", "Marco", "Cassie", "Tom", "Lisa", "Sarah", " Sylvester", "Gordon", "Helen", "Jamie", "Lillian", "Mary", "Ashton", "Peter", "Zawhei", "Eirikr", "Volour", "Okarin", "Peewee", "Hagala", "Despap", "Othala", "Gertrude", "Mike", "Michael", "Peter", "Simon", "Manuela", "Annabel"];
 
@@ -830,7 +862,7 @@ let floor_backgrounds = {}
 let floor_foregrounds = {}
 let sprite_possibilities = {}
 
-let stats_map = {};
+let stats_map = {}; //theme key and then METAL object
 let person_posibilities = {};
 let object_possibilities = {};
 let location_possibilities = {};
@@ -1560,6 +1592,72 @@ const initWallPossibilities = () => {
     wall_possibilities[MUSIC] =  ["Symphonic Synthesia"] ;
     wall_possibilities[DEFENSE] =  ["Excalibur"] ;
     wall_possibilities[QUESTING] = ["Satisfaction"] ;*/
+}
+
+//METAL stats, Mind, Eyes, Tongue, Arms, Legs
+const initStats = () => {
+    /*//make stats from this
+BASELINE_METAL_OBJECT = {}
+BASELINE_METAL_OBJECT[METAL_STATS_MIND] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_EYES] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_TONGUE] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_ARMS] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[METAL_STATS_LEGS] = MEDIUM_STAT_VALUE;
+    */
+
+    //only need to specify any stat that is above or bellow medium
+    stats_map[ART] = { ...BASELINE_METAL_OBJECT }
+    stats_map[ART][METAL_STATS_EYES] = VERY_HIGH_STAT_VALUE;
+
+    super_name_possibilities_map[TECHNOLOGY] = ["Singularity"];
+    super_name_possibilities_map[TIME] = ["Stopped Clock"];
+    super_name_possibilities_map[SPACE] = ["Big Bang"];
+    super_name_possibilities_map[OCEAN] = ["Ship of Vescillation"];
+    super_name_possibilities_map[LONELY] = ["The Silence"];
+    super_name_possibilities_map[FIRE] = ["The Scoured Earth"];
+    super_name_possibilities_map[FREEDOM] = ["Unending Freedom"];
+    super_name_possibilities_map[STEALING] = ["All Mine"];
+    super_name_possibilities_map[BURIED] = ["Fallen Sky"];
+    super_name_possibilities_map[FLESH] = ["Physical God"];
+    super_name_possibilities_map[SCIENCE] = ["E=mc^2"];
+    super_name_possibilities_map[MATH] = ["Calculus Pop Quiz"];
+    super_name_possibilities_map[TWISTING] = ["This Is Not A Game"];
+    super_name_possibilities_map[DEATH] = ["Your Grave"];
+    super_name_possibilities_map[APOCALYPSE] = ["Ragnarok"];
+    super_name_possibilities_map[ANGELS] = ["Judgement Day"];
+    super_name_possibilities_map[SERVICE] = ["Special Service"];
+    super_name_possibilities_map[FAMILY] = ["Sins of the Father"];
+    super_name_possibilities_map[MAGIC] = ["Ritual of Ragnarok"];
+    super_name_possibilities_map[LIGHT] = ["Flash Bang"];
+    super_name_possibilities_map[HEALING] = ["Summon Phoenix"];
+    super_name_possibilities_map[PLANTS] = ["Forest's March"];
+    super_name_possibilities_map[HUNTING] = ["Nimrod's Chase"];
+    super_name_possibilities_map[DECAY] = ["Mass Grave"];
+    super_name_possibilities_map[CHOICES] = ["Timeline of Theseus"];
+    super_name_possibilities_map[ZAP] = ["Thor's Banana"];
+    super_name_possibilities_map[LOVE] = ["Mandatory Shipping Grid"];
+    super_name_possibilities_map[SOUL] = ["Know thyself."];
+    super_name_possibilities_map[ANGER] = ["Dethrone Creation"];
+    super_name_possibilities_map[WEB] = ["Puppet Master"];
+    super_name_possibilities_map[ROYALTY] = ["Excalibur"];
+    super_name_possibilities_map[ENDINGS] = ["The End"];
+    super_name_possibilities_map[KNOWING] = ["Omniscience"];
+    super_name_possibilities_map[GUIDING] = ["Path To Victory"];
+    super_name_possibilities_map[CRAFTING] = ["Legendary Forge"];
+    super_name_possibilities_map[LANGUAGE] = ["Topple the Tower"];
+    super_name_possibilities_map[BUGS] = ["Hivemother"];
+    super_name_possibilities_map[ADDICTION] = ["Dealer's Delight"];
+    super_name_possibilities_map[SPYING] = ["Surveillance State"];
+    super_name_possibilities_map[CLOWNS] = ["Ringmaster"];
+    super_name_possibilities_map[DOLLS] = ["Automatonophobia "];
+    super_name_possibilities_map[OBFUSCATION] = ["Knowledge Forever Lost"];
+    super_name_possibilities_map[CENSORSHIP] = ["Knowledge Forever Lost"];
+
+    super_name_possibilities_map[DARKNESS] = ["Night Eternal"];
+    super_name_possibilities_map[KILLING] = ["Bloodbath"];
+    super_name_possibilities_map[MUSIC] = ["Symphonic Synthesia"];
+    super_name_possibilities_map[DEFENSE] = ["Excalibur"];
+    super_name_possibilities_map[QUESTING] = ["Satisfaction"];
 }
 
 const initSuperNames = () => {
@@ -2554,30 +2652,30 @@ const initGeneralBackstories = () => {
     general_backstories[TIME] = ["are always on time to everything", "are kind of impatient", "seem to always have unlimited energy", "always know what time it is", "have an instinctive understanding of timing"];
     general_backstories[SPACE] = ["seem to always be a mile away when everyone is supposed to meet up", "are a very patient person", "have an amazing spatial sense", "always want to talk about space", "love being as high up as possible", "have absolutely no fear of heights"];
     general_backstories[STEALING] = ["have extremely light fingers", "have never met and object they didn't want to own", "have never been on the right side of the law", "have been in jail a few times"];
-    general_backstories[FREEDOM] = ["never let anyone tie them down", "have travel in your soul", "have never been able to settle down anywhere", "prides themself in their freedom"];
+    general_backstories[FREEDOM] = ["never let anyone tie them down", "have travel in their soul", "have never been able to settle down anywhere", "prides themself in their freedom"];
     general_backstories[FIRE] = ["are always enthralled by fire", "have a habit of setting everything on fire", "find fire really calming", "think fire is the best solution to most problems", "think that if you add fire to a problem you have a new problem"];
     general_backstories[LONELY] = ["are somehow always alone", "never really bonded with anyone", "feel comfortable on your own", "have social anxiety", "don't feel comfortable in a crowd", "mostly just focus on themself"];
     general_backstories[OCEAN] = ["are married to the sea", "love the ocean with all your heart", "are always surrounded by a thin fog", "can navigate any amount of seas", "feel most comfortable in the water", "can swim like a fish"];
     general_backstories[FLESH] = ["genuinely enjoy working out", "are remarkably beautiful", "have really good bones", "really are comfortable in your own skin"];
     general_backstories[BURIED] = ["are really calm under pressure", "really enjoy digging at the beach", "enjoy spelunking as a hobby"];
     general_backstories[SCIENCE] = ["enjoys learning the 'why' of everything", "treat life like a series of experiments", "always wear a labcoat"];
-    general_backstories[MATH] = ["are a very logical person", "can do all sorts of math in your head", "enjoy memorizing mathematical formulas"];
+    general_backstories[MATH] = ["are a very logical person", "can do all sorts of math in their head", "enjoy memorizing mathematical formulas"];
     general_backstories[TWISTING] = ["like things that arent what they seem but also are", "delight in getting someone to believe a lie", "really enjoy fractals", "enjoy needlessly convoluted plots", "constantly play tricks on those around you", "once tricked a friend into believing 'bananas' weren't actually real fruit", "created the game you are currently playing", "resolutely insist that 'fractal' is pronounced 'frack tall'", "lurk behind the options screen", 'hate you in particular', "are watching you", "know what you did", "are smiling just for you", "only want for you to realize the truth", "have never told you a lie", "would never give you up", "are the true reason this game exists", "are waiting for you", "wish you would find me already", "wonder if you've ever heard of the javascript console", "make this expression a lot: :) :) :)", "honestly don't know what you are doing here", "reassure you the menu is supposed to close", "suggest you just keep hitting the escape key"];
     general_backstories[DEATH] = ["think about death a lot", "are more comfortable with the dead than the living", "really are chill about the inevitability of death", "sometimes talk for hours about how nihlism is only logical"];
     general_backstories[APOCALYPSE] = ["constantly spew ominous bullshit", "alway remind everyone of how fragile the world truly is", "are just really a huge fan of apocalyptic explosions"];
     general_backstories[ANGELS] = ["walk the path of the gods", "always are a righteous person", "think deeply about the gods", "are a deeply religious person", "strive to do the will of the gods"];
     general_backstories[LIGHT] = ["shine with light wherever they go", "always look on the bright side of any situation", "always have a light source on hand"];
     general_backstories[SERVICE] = ["do your best to help those in need", "are always there with a helping hand", "keep your room spotless", "clean whenever they are stressed"];
-    general_backstories[FAMILY] = ["love your family with all your heart", "do everything for your family", "really loves your found family"];
+    general_backstories[FAMILY] = ["love your family with all their heart", "do everything for their family", "really love their found family"];
     general_backstories[MAGIC] = ["have a natural talent for magic", "are one of the skilled mages of this Era", "are a powerful Enchanter"];
     general_backstories[HEALING] = ["have a powerful healing aura", "have extensive medical training", "never ignore suffering"];
     general_backstories[PLANTS] = ["have an enduring love of flowers", "feel more comfortable in a forest than a city", "garden as a hobby"];
     general_backstories[HUNTING] = ["can track any person across any distance", "always seem to be hunting for the next big thing", "are a skilled tracker", "can survive indefinitely in the wild from game and foraging"];
     general_backstories[DECAY] = ["are a toxic person", "feel comfortable around the dead", "are always showing people gross things", "somehow always let food go bad"];
-    general_backstories[CHOICES] = ["are always aware that doing nothing is also a choice", "enjoy taunting others with your lack of choices"];
+    general_backstories[CHOICES] = ["are always aware that doing nothing is also a choice", "enjoy taunting others with their lack of choices"];
     general_backstories[ZAP] = ["really could stand to lay off with the electricity", "think having an elemental affinity is a subsitute for a personality"];
     general_backstories[LOVE] = ["love everyone they meet", "do everything with love", "never let hate into their heart"];
-    general_backstories[SOUL] = ["know yourself quite thoroughly", "have a very stable personality", "are always looking into a mirror", "can see straight to anyones soul"];
+    general_backstories[SOUL] = ["know theirself quite thoroughly", "have a very stable personality", "are always looking into a mirror", "can see straight to anyones soul"];
     general_backstories[ANGER] = ["have trouble controlling their temper", "aren't shy about letting people know when theres is a problem"];
     general_backstories[WEB] = ["are a smug chess-master", "are manipulative to their core", "really enjoy spiders", "think spiders are very important to the eco-system"];
     general_backstories[ROYALTY] = ["are experienced with ruling", "have full noble training", "have a princely aura"];
@@ -2655,6 +2753,7 @@ const initChildBackstories = () => {
 }
 
 const initThemeParts = () => {
+    initStats();
     initEmojis();
     initPeople();
     initObjects();
@@ -2715,9 +2814,10 @@ class Theme {
     tier;
 
 
-    constructor(key, tier, string_possibilities) {
+    constructor(key, tier, stats, string_possibilities) {
         this.key = key;
-        this.tier = tier;
+        this.stats = stats;
+        this.tier = tier; //fun fact, 2025 me has no clue what this ever did
         this.string_possibilities = string_possibilities;
 
         all_themes[key] = this;
@@ -2827,7 +2927,7 @@ function initThemes() {
         string_possibilities[FILTERS] = filter_possibilities[key];
 
 
-        new Theme(key, 0, string_possibilities);
+        new Theme(key, 0, stats_map[key], string_possibilities);
     }
 
 
