@@ -19,3 +19,10 @@ const debug = () => {
     console.log("JR NOTE: debug entities", game.players);
 
 }
+
+
+/*
+one of the Unmarked (so fresh they don't even have a title) made this incredible thing and gave me permission to host it (with credit)
+http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/DefinitelyNotNewAudioLogs/podcast_by_ellienamored.mp3
+
+*/

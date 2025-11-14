@@ -345,16 +345,16 @@ const baby_endings = baby_endings_raw.split("\n")
 
 
 //mind, eyes, tongue arms, legs (in order of affecting the world around you) (legs highest because they move you through it, changing the slice of world you exist in)
-//how well do you use your mind to solve problems. at zero you are functionally brain dead
-const METAL_STATS_MIND = "Mind";
-//how well do you use your eyes to perceive the world. at zero you are functionally blind.
-const METAL_STATS_EYES = "Eyes";
-//how well do you use your tongue to communicate to others. At zero you are functionally mute.
-const METAL_STATS_TONGUE = "Tongue";
-//how well do you use your arms to enact your will on the world (fighting, building, etc). At zero you are functionally passive.
-const METAL_STATS_ARMS = "Arms";
-//how well do you use your legs to nevigate the world (speed, dexterity, etc). At zero you are functionally unable to move.
-const METAL_STATS_LEGS = "Legs";
+//how well do you use your thoughts to solve problems. at zero you are functionally brain dead
+const MIND_METAL_STATS = "Mind";
+//how well do you use your senses to perceive the world. at zero you are functionally blind.
+const EYES_METAL_STATS = "Eyes";
+//how well do you use communication to communicate to others. At zero you are functionally mute.
+const TONGUE_METAL_STATS = "Tongue";
+//how well do you use your will on the world (fighting, building, etc). At zero you are functionally passive.
+const ARMS_METAL_STAT = "Arms";
+//how well do you use your ability to  move through the world (speed, dexterity, etc). At zero you are functionally unable to move.
+const LEGS_METAL_STAT = "Legs";
 
 
 
@@ -369,11 +369,11 @@ const VERY_LOW_STAT_VALUE = 1;
 
 //make stats from this
 BASELINE_METAL_OBJECT = {}
-BASELINE_METAL_OBJECT[METAL_STATS_MIND] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_EYES] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_TONGUE] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_ARMS] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_LEGS] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[MIND_METAL_STATS] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[EYES_METAL_STATS] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[TONGUE_METAL_STATS] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[ARMS_METAL_STAT] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[LEGS_METAL_STAT] = MEDIUM_STAT_VALUE;
 
 
 
@@ -1596,51 +1596,194 @@ const initWallPossibilities = () => {
 
 //METAL stats, Mind, Eyes, Tongue, Arms, Legs
 const initStats = () => {
-    /*//make stats from this
-BASELINE_METAL_OBJECT = {}
-BASELINE_METAL_OBJECT[METAL_STATS_MIND] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_EYES] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_TONGUE] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_ARMS] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[METAL_STATS_LEGS] = MEDIUM_STAT_VALUE;
-    */
+
+    //http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/DefinitelyNotNewAudioLogs/podcast_by_ellienamored.mp3
 
     //only need to specify any stat that is above or bellow medium
     stats_map[ART] = { ...BASELINE_METAL_OBJECT }
-    stats_map[ART][METAL_STATS_EYES] = VERY_HIGH_STAT_VALUE;
+    stats_map[ART][EYES_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[ART][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
 
-    super_name_possibilities_map[TECHNOLOGY] = ["Singularity"];
-    super_name_possibilities_map[TIME] = ["Stopped Clock"];
-    super_name_possibilities_map[SPACE] = ["Big Bang"];
-    super_name_possibilities_map[OCEAN] = ["Ship of Vescillation"];
-    super_name_possibilities_map[LONELY] = ["The Silence"];
-    super_name_possibilities_map[FIRE] = ["The Scoured Earth"];
-    super_name_possibilities_map[FREEDOM] = ["Unending Freedom"];
-    super_name_possibilities_map[STEALING] = ["All Mine"];
-    super_name_possibilities_map[BURIED] = ["Fallen Sky"];
-    super_name_possibilities_map[FLESH] = ["Physical God"];
-    super_name_possibilities_map[SCIENCE] = ["E=mc^2"];
-    super_name_possibilities_map[MATH] = ["Calculus Pop Quiz"];
-    super_name_possibilities_map[TWISTING] = ["This Is Not A Game"];
-    super_name_possibilities_map[DEATH] = ["Your Grave"];
-    super_name_possibilities_map[APOCALYPSE] = ["Ragnarok"];
-    super_name_possibilities_map[ANGELS] = ["Judgement Day"];
-    super_name_possibilities_map[SERVICE] = ["Special Service"];
-    super_name_possibilities_map[FAMILY] = ["Sins of the Father"];
-    super_name_possibilities_map[MAGIC] = ["Ritual of Ragnarok"];
-    super_name_possibilities_map[LIGHT] = ["Flash Bang"];
-    super_name_possibilities_map[HEALING] = ["Summon Phoenix"];
-    super_name_possibilities_map[PLANTS] = ["Forest's March"];
-    super_name_possibilities_map[HUNTING] = ["Nimrod's Chase"];
-    super_name_possibilities_map[DECAY] = ["Mass Grave"];
-    super_name_possibilities_map[CHOICES] = ["Timeline of Theseus"];
-    super_name_possibilities_map[ZAP] = ["Thor's Banana"];
-    super_name_possibilities_map[LOVE] = ["Mandatory Shipping Grid"];
-    super_name_possibilities_map[SOUL] = ["Know thyself."];
-    super_name_possibilities_map[ANGER] = ["Dethrone Creation"];
-    super_name_possibilities_map[WEB] = ["Puppet Master"];
-    super_name_possibilities_map[ROYALTY] = ["Excalibur"];
+
+    stats_map[TECHNOLOGY] = { ...BASELINE_METAL_OBJECT }
+    stats_map[TECHNOLOGY][MIND_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[TECHNOLOGY][EYES_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[TECHNOLOGY][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
+
+
+    stats_map[TIME] = { ...BASELINE_METAL_OBJECT }
+    stats_map[TIME][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[TIME][ARMS_METAL_STAT] = LOW_STAT_VALUE;
+
+    stats_map[SPACE] = { ...BASELINE_METAL_OBJECT }
+    stats_map[SPACE][LEGS_METAL_STAT] = LOW_STAT_VALUE;
+    stats_map[SPACE][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+
+    stats_map[LONELY] = { ...BASELINE_METAL_OBJECT }
+    stats_map[LONELY][TONGUE_METAL_STATS] = VERY_LOW_STAT_VALUE;
+
+
+    stats_map[FIRE] = { ...BASELINE_METAL_OBJECT }
+    stats_map[FIRE][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[FIRE][LEGS_METAL_STAT] = LOW_STAT_VALUE;
+
+
+    stats_map[FREEDOM] = { ...BASELINE_METAL_OBJECT }
+    stats_map[FREEDOM][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[FREEDOM][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
+
+
+    stats_map[STEALING] = { ...BASELINE_METAL_OBJECT }
+    stats_map[STEALING][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[BURIED] = { ...BASELINE_METAL_OBJECT }
+    stats_map[BURIED][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
+    stats_map[STEALING][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[FLESH] = { ...BASELINE_METAL_OBJECT }
+    stats_map[FLESH][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[FLESH][LEGS_METAL_STAT] = HIGH_STAT_VALUE;
+
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[SCIENCE] = { ...BASELINE_METAL_OBJECT }
+    stats_map[SCIENCE][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[SCIENCE][EYES_METAL_STATS] = HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[MATH] = { ...BASELINE_METAL_OBJECT }
+    stats_map[MATH][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+
+
+
+    stats_map[TWISTING] = { ...BASELINE_METAL_OBJECT }
+    //all or nothing baby, no restraint, KNOW restraint
+    stats_map[TWISTING][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[TWISTING][EYES_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[TWISTING][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[TWISTING][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[TWISTING][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
+
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[DEATH] = { ...BASELINE_METAL_OBJECT }
+    stats_map[DEATH][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[APOCALYPSE] = { ...BASELINE_METAL_OBJECT }
+    stats_map[APOCALYPSE][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[ANGELS] = { ...BASELINE_METAL_OBJECT }
+    stats_map[ANGELS][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[SERVICE] = { ...BASELINE_METAL_OBJECT }
+    stats_map[SERVICE][TONGUE_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[SERVICE][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[FAMILY] = { ...BASELINE_METAL_OBJECT }
+    stats_map[FAMILY][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[MAGIC] = { ...BASELINE_METAL_OBJECT }
+    stats_map[MAGIC][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[MAGIC][MIND_METAL_STATS] = HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[LIGHT] = { ...BASELINE_METAL_OBJECT }
+    stats_map[LIGHT][MIND_METAL_STATS] = HIGH_STAT_VALUE;
+
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[HEALING] = { ...BASELINE_METAL_OBJECT }
+    stats_map[HEALING][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[PLANTS] = { ...BASELINE_METAL_OBJECT }
+    stats_map[PLANTS][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[DECAY][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[HUNTING] = { ...BASELINE_METAL_OBJECT }
+    stats_map[HUNTING][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[HUNTING][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[DECAY] = { ...BASELINE_METAL_OBJECT }
+    stats_map[DECAY][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
+
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[CHOICES] = { ...BASELINE_METAL_OBJECT }
+    stats_map[CHOICES][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[ZAP] = { ...BASELINE_METAL_OBJECT }
+    stats_map[ZAP][LEGS_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[ZAP][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[LOVE] = { ...BASELINE_METAL_OBJECT }
+    stats_map[LOVE][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[SOUL] = { ...BASELINE_METAL_OBJECT }
+    stats_map[SOUL][EYES_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[ANGER] = { ...BASELINE_METAL_OBJECT }
+    stats_map[ANGER][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[ANGER][TONGUE_METAL_STATS] = HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[WEB] = { ...BASELINE_METAL_OBJECT }
+    stats_map[WEB][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[WEB][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[ROYALTY] = { ...BASELINE_METAL_OBJECT }
+    stats_map[ROYALTY][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[ROYALTY][TONGUE_METAL_STATS] = HIGH_STAT_VALUE;
+
+
     super_name_possibilities_map[ENDINGS] = ["The End"];
+
+    ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
+    //your thoughts, your senses, your social, your will, your movement
+    stats_map[ROYALTY] = { ...BASELINE_METAL_OBJECT }
+    stats_map[ROYALTY][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
+
+
+
     super_name_possibilities_map[KNOWING] = ["Omniscience"];
     super_name_possibilities_map[GUIDING] = ["Path To Victory"];
     super_name_possibilities_map[CRAFTING] = ["Legendary Forge"];
