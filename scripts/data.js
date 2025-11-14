@@ -1,6 +1,45 @@
 //https://genders.wtf/gauntlet/
 
 
+
+const getStatsFromThemes = (theme_keys) => {
+    let mind = 0;
+    let eye = 0;
+    let tongue = 0;
+    let arm = 0;
+    let leg = 0;
+    let count = 0;
+    for (let key of theme_keys) {
+        count++;
+        const theme = all_themes[key]
+        if (theme.stats) {
+            eye += theme.stats[EYES_METAL_STATS]
+            tongue += theme.stats[TONGUE_METAL_STATS]
+            arm += theme.stats[ARMS_METAL_STAT]
+            leg += theme.stats[LEGS_METAL_STAT]
+            mind += theme.stats[MIND_METAL_STATS]
+
+        } else {
+            console.error("JR NOTE: theme did not have stats: ", theme)
+        }
+
+    }
+
+    mind = mind / count;
+    eye = eye / count;
+    tongue = tongue / count;
+    arm = arm / count;
+    leg = leg / count;
+    const ret = BASELINE_METAL_OBJECT;
+    ret[MIND_METAL_STATS] = mind;
+    ret[EYES_METAL_STATS] = eye;
+    ret[TONGUE_METAL_STATS] = tongue;
+    ret[ARMS_METAL_STAT] = arm;
+    ret[LEGS_METAL_STAT] = leg;
+    return ret;
+
+}
+
 const grabAllKindsOfPeople = () => {
     let ret = [];
     for (let theme of Object.values(all_themes)) {
@@ -345,6 +384,11 @@ const baby_endings = baby_endings_raw.split("\n")
 
 
 //mind, eyes, tongue arms, legs (in order of affecting the world around you) (legs highest because they move you through it, changing the slice of world you exist in)
+//and they intentionallyl intersect with loaded concepts whenever i can
+//the Eyes which hold what i see: http://farragofiction.com/ColonistsEyes5/?C=M;O=D
+//mind the aspect from homestuck
+//arms of the echidna spiral galaxy universe
+
 //how well do you use your thoughts to solve problems. at zero you are functionally brain dead
 const MIND_METAL_STATS = "Mind";
 //how well do you use your senses to perceive the world. at zero you are functionally blind.

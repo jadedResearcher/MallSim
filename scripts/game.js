@@ -98,9 +98,11 @@ class Game {
 
             }
 
+            text += `<span class='spoiler'> Mind: ${player.stats[MIND_METAL_STATS]}, Eyes: ${player.stats[EYES_METAL_STATS]}, Tongue: ${player.stats[TONGUE_METAL_STATS]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
+
             ele.innerHTML = text;
 
-        }
+        }//end player loop
         const tick_bar = createElementWithClassAndParent("div", parent, "tick-bar");
         const title = createElementWithClassAndParent("div", tick_bar, "tick-bar-title");
         title.innerText = "Controls"

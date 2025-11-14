@@ -18,3 +18,4 @@ const classpectFromThemeList = (rand, themes) => {
 
     return "The " + rand.pickFrom(templates);
 }
+
