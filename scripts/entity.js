@@ -148,4 +148,30 @@ class Entity {
         }
         return `<span class='player-title'>${this.title}</span>`;
     }
+
+    //returns key and value of their best stat
+    highestStat = () => {
+        //BASELINE_METAL_OBJECT[MIND_METAL_STATS] = MEDIUM_STAT_VALUE;
+        let currentHighestStat = { key: MIND_METAL_STATS, value: this.stats[MIND_METAL_STATS] };
+        for (let [key, value] of Object.entries(this.stats)) {
+            //if equal, go more physical (down the chain)
+            if (value >= currentHighestStat.value) {
+                currentHighestStat = { key: key, value: value }
+            }
+        }
+        return currentHighestStat;
+    }
+
+    //returns key and value of their worst stat
+    lowestStat = () => {
+        //BASELINE_METAL_OBJECT[MIND_METAL_STATS] = MEDIUM_STAT_VALUE;
+        let currentLowestStat = { key: MIND_METAL_STATS, value: this.stats[MIND_METAL_STATS] };
+        for (let [key, value] of Object.entries(this.stats)) {
+            //if equal, go more mental (up the chain)
+            if (value < currentLowestStat.value) {
+                currentLowestStat = { key: key, value: value }
+            }
+        }
+        return currentLowestStat;
+    }
 }

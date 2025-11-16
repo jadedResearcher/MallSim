@@ -79,22 +79,43 @@ class Game {
             const backstory = pickARandomThemeFromListAndGrabKey(this.rand, player.themes, GENERALBACKSTORY, false);
             const compliemnt = pickARandomThemeFromListAndGrabKey(this.rand, player.themes, COMPLIMENT, false);
             const insult = pickARandomThemeFromListAndGrabKey(this.rand, player.themes, INSULT, false);
-            text += ` ${titleCase(insult)} but ${compliemnt}, they ${backstory}. `
+            text += ` ${titleCase(insult)} but ${compliemnt}, they ${backstory}.`
+
+            const bestStatMap = {};
+            //nothing too targeted, just a little line about where their current strength lies
+            bestStatMap[MIND_METAL_STATS] = ["They love thinking through a good puzzle.", "They love reading books and learning all sorts of new things.", "They're often the first to figure out a riddle."]
+            bestStatMap[EYES_METAL_STATS] = ["Their eyes never miss anything.", "They love taking in color and motion and the sounds of the world around them.", "They are always the first to compliment someones new hairstyle or outfit."]
+            bestStatMap[TONGUE_METAL_STATS] = ["They love rambling and talking for hours on end.", "They are a really good listener, and always have something insightful to say in return.", "Somehow, they manage to convince people to go along with all their ideas."]
+            bestStatMap[ARMS_METAL_STAT] = ["There just something that appeals to them about the thrill of violence.", "They think getting to build things with your hands is one of life's simple pleasures.", "They love figuring out how to repair things themselves instead of having someone else do it."]
+            bestStatMap[LEGS_METAL_STAT] = ["They are quick on their feet.", "Somehow, they never stop moving.", "They love exploring new places."]
+
+            text += ` ${this.rand.pickFrom(bestStatMap[player.highestStat().key])}`;
+
+
+            const worstStatMap = {};
+            //nothing too targeted, just a little line about where their current strength lies
+            worstStatMap[MIND_METAL_STATS] = ["Also, puzzles just don't interest them.", "They also find books and movies to be incredibly boring.", "They also don't get why people keep trying to complicate things, the world should be very simple."]
+            worstStatMap[EYES_METAL_STATS] = ["Loud sounds also don't bother them very much.", "They also often seem to be in their own little world.", "They also love just vibing with their own thoughts."]
+            worstStatMap[TONGUE_METAL_STATS] = ["They also often stumble over their own words.", "They also have trouble speaking up in groups.", "They also feel a little awkward when its their turn to speak."]
+            worstStatMap[ARMS_METAL_STAT] = ["They also prefer to just go with the flow.", "They also are a very peaceful person.", "Its also just easier for them to buy something premade versus learning how to make it themselves."]
+            worstStatMap[LEGS_METAL_STAT] = ["They also tend to walk at a relaxed pace.", "They also seem no rush to get anywhere.", "They're also often late to appointments."]
+
+            text += ` ${this.rand.pickFrom(worstStatMap[player.lowestStat().key])}`;
 
             //relationships
             const family = getFamilyOfEntity(player);
             if (family && family.length > 1) {
-                text += `${family.map((i) => i.nameHTML()).join(", ")} are all members of their family. `;
+                text += ` ${family.map((i) => i.nameHTML()).join(", ")} are all members of their family. `;
             } else if (family && family.length === 1) {
-                text += `${family[0].nameHTML()} is a member of their family. `;
+                text += ` ${family[0].nameHTML()} is a member of their family. `;
 
             }
 
             const romanticPartners = getRomanticPartnersOfEntity(player);
             if (romanticPartners && romanticPartners.length > 1) {
-                text += `${romanticPartners.map((i) => i.nameHTML()).join(", ")} are all members of their polycule. `;
+                text += ` ${romanticPartners.map((i) => i.nameHTML()).join(", ")} are all members of their polycule. `;
             } else if (romanticPartners && romanticPartners.length === 1) {
-                text += `${romanticPartners[0].nameHTML()} is their romantic partner. `;
+                text += ` ${romanticPartners[0].nameHTML()} is their romantic partner. `;
 
             }
 
