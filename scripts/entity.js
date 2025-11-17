@@ -115,6 +115,7 @@ class Relationship {
 class Entity {
     name = "Jane Doe"; //JR will probably steal this though, especially if you Join The Loop
     themes = [];
+    corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
     stats = {};
     title = "Null of Null";
@@ -174,4 +175,26 @@ class Entity {
         }
         return currentLowestStat;
     }
+
+    //if you're getting really corrupt you'll start getting a pull to 
+    //try to return back to the maze (go left and up)
+    //otherwise you prefer to right and down
+    //high eyes and legs stats makes you even more likely to move
+    //while tongue and arms and mind makes you want to stay where you are and try to figure things out more
+    decideWhereToGo = (rand, currentLocation, neighbors) => {
+        //todo
+    }
+
+
+
 }
+
+/*
+i just realized a horrible pun
+
+there is  a magic Harvest Fruit that lets you Join the Loop (i.e. become wasted)
+
+fruit loops
+
+finally, its not just lucky charms that is an inexplicable sugary cereal tie in
+*/

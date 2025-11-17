@@ -108,7 +108,7 @@ class Game {
         const intro_container = createElementWithClassAndParent("div", parent);
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
-        const mall_entrance = new Location("Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], []);
+        const mall_entrance = new Location("Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], 0, 0, []);
         mall_entrance.players = [...this.players];
         general_intro.innerHTML = `${arrayToHumanSentence(this.players.map((i) => i.nameHTML()))} enter the mall, nervous and excited about their impending adventure. <br><br>They are almost disappointed at how ... normal it seems.<br><br>Sure, it's abandoned, but other than the dust and gloom it seems like any other mall they've been to. <br><br>Surely deeper in is where the danger lurks...`;
         this.map.push([mall_entrance]);
@@ -124,9 +124,9 @@ class Game {
     //stores might be up or down but right ALWAYS exists
     handleAddingCorridorToEastOfLocation = (location, row, col) => {
         console.log("JR NOTE: spawning corridor east of location", { row, col, this: this })
-        const corridor = new Location("Corridor", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], []);
         let right_row = row;
         let right_col = col + 1;
+        const corridor = new Location("Corridor", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
 
         if (!this.map[right_row][right_col]) {
             console.log("JR NOTE: right does not exist")
