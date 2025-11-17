@@ -26,21 +26,50 @@ class Game {
         locations tick, not people (the mall is alive)
         each tick, look for locations that are awake (blood inside them)
 
+        order of operations:
+        decide if move
+        check for events
+        render mall
+
         "The twisted shops and forlorn geometry get worse the longer it suffers, he knows. It needs people. Like a body needs blood. Needs to have objects moved out of it, like blood cells moving oxygen. Helps it think better. Remember what it's supposed to be better."
     */
     tick = (parent) => {
-        const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
 
         const locations = this.getLocations();
 
         console.log("JR NOTE: ticking with this many lcoations", locations.length)
         if (locations.length === 0) {
             console.log("JR NOTE: no locations found, spawning entrance")
-            this.handleSpawningMallEntrance(tick_container);
+            this.handleSpawningMallEntrance(parent);
             return;
         }
+
+        this.movementAndInterctionTick(parent, locations)
+        this.eventTick(parent, locations);
+        //once done ticking each location with blood in it, render the current state of the mall
+    }
+
+    movementAndInterctionTick = (parent, locations) => {
+        const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
+
         //for each location
         //do interaction scene of everyone inside (if more than one)
+        //and have players decide whether to move or not individually
+        for (let location of locations) {
+            //only locations with players 
+            if (location.players.length > 0) {
+                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                start_phrase.innerHTML = `TODO: have ${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} interact with each other (altering relationships) and decide whether to move to a new location or stay here. List out their deicisons.`
+            }
+        }
+        this.renderMall(tick_container);
+
+    }
+
+    eventTick = (parent, locations) => {
+        const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
+
+        //for each location
         //check if any events happen. if not, do a little flavor text
         //if yes, stop checking events
         for (let location of locations) {
@@ -60,9 +89,8 @@ class Game {
                 }
             }
         }
-
-        //once done ticking each location with blood in it, render the current state of the mall
         this.renderMall(tick_container);
+
     }
 
     renderMall = (parent) => {
@@ -105,7 +133,9 @@ class Game {
     }
 
     handleSpawningMallEntrance = (parent) => {
-        const intro_container = createElementWithClassAndParent("div", parent);
+        const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
+
+        const intro_container = createElementWithClassAndParent("div", tick_container);
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
         const mall_entrance = new Location("Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], 0, 0, []);
@@ -114,7 +144,7 @@ class Game {
         this.map.push([mall_entrance]);
         this.handleAddingCorridorToEastOfLocation(mall_entrance, 0, 0);
 
-        this.renderMall(parent);
+        this.renderMall(tick_container);
 
     }
 

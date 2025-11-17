@@ -177,6 +177,10 @@ button {
   gap: 3px;
 }
 
+.sub-story-beat {
+  margin-top: 13px;
+}
+
 .player-icon {
   border-radius: 10000px;
   background-color: black;
