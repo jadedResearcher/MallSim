@@ -27,32 +27,31 @@ https://kittyhorrorshow.itch.io/anatomy
 */
 
 
+
+
+
 class Location {
     name = "???"
+    row = 0; //copying how truthsim does physical locations as a grid
+    col = 0;
     theme_keys = []; //for senses and flavor text and children (like a fancy clothes store can be Fire themed, not that a fire theme is more likely to have, i dunno, food)
-    northExit;
-    southExit;
-    eastExit;
-    westExit; //disgusting, i know, but this isn't eyedol HQ, its the MALL and it works different, at least here
     players = []; //locations tick, not players
     events = []; //doesn't mean anything yet, but will.
 
-    constructor(name, theme_keys, events, north, south, east, west) {
+    constructor(name, theme_keys, events) {
         this.name = name;
         this.events = events;
         this.theme_keys = theme_keys;
-        this.north = north;
-        this.south = south;
-        this.east = east;
-        this.west = west;
         console.log("JR NOTE: made location with theme", theme_keys)
     }
+
+
 
     //whoever is inside you pokes around and finds nothing
     //maybe they hear something in the distance or smell something
     renderGenericBoringNonEvent = (rand, parent) => {
         console.log("JR NOTE: renderGenericBoringNonEvent for: ", this.name)
-        const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
+        const intro_container = createElementWithClassAndParent("div", parent);
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
         const templates = [];//populate this based on what kind of players we have

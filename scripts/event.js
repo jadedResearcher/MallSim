@@ -33,7 +33,7 @@ class Event {
     //though i suppose you can reach outside players through the relationship they have with those inside
     //actually the horror writes itself
     applyResult = async (location, parent) => {
-        const ele = createElementWithClassAndParent("div", parent, "story-beat");
+        const ele = createElementWithClassAndParent("div", parent);
         ele.innerText = "JR NOTE: whoops looks like i forgot to override the result for this event of: " + name;
 
     }

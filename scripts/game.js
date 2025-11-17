@@ -1,12 +1,25 @@
 class Game {
     players = [];
-    locations = []; //position zero is the entrance
     rand;//only thing storing it, pass it to anything that needs to use it
-
+    //each row is a row in the map
+    //each cell is either undefined or a room in the mall
+    map = [];
     constructor(rand) {
         this.rand = rand;
         this.players = randomParty(rand);
 
+    }
+
+    getLocations = () => {
+        const ret = [];
+        for (let row of this.map) {
+            for (let item of row) {
+                if (item) { //its not empty space
+                    ret.push(item);
+                }
+            }
+        }
+        return ret;
     }
 
     /*
@@ -16,34 +29,57 @@ class Game {
         "The twisted shops and forlorn geometry get worse the longer it suffers, he knows. It needs people. Like a body needs blood. Needs to have objects moved out of it, like blood cells moving oxygen. Helps it think better. Remember what it's supposed to be better."
     */
     tick = (parent) => {
-        console.log("JR NOTE: ticking with this many lcoations", this.locations.length)
-        if (this.locations.length === 0) {
+        const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
+
+        const locations = this.getLocations();
+
+        console.log("JR NOTE: ticking with this many lcoations", locations.length)
+        if (locations.length === 0) {
             console.log("JR NOTE: no locations found, spawning entrance")
-            this.handleSpawningMallEntrance(parent);
+            this.handleSpawningMallEntrance(tick_container);
             return;
         }
         //for each location
         //do interaction scene of everyone inside (if more than one)
         //check if any events happen. if not, do a little flavor text
         //if yes, stop checking events
-
-        for (let location of this.locations) {
+        for (let location of locations) {
             console.log("JR NOTE: checking if location is awake: ", location.name)
             let event_happened = false;
 
             console.warn("JR NOTE: todo, scan location for valid events")
 
             if (!event_happened) {
-                location.renderGenericBoringNonEvent(this.rand, parent);
+                location.renderGenericBoringNonEvent(this.rand, tick_container);
             }
         }
 
         //once done ticking each location with blood in it, render the current state of the mall
-        this.renderMall(parent);
+        this.renderMall(tick_container);
     }
 
     renderMall = (parent) => {
-        console.warn("JR NOTE: i found myself unable to decide how i wanted this and i wans't making progress so i decided to just leave it for now and think on it while im coding")
+        console.log("JR NOTE: rendering mall", this.map)
+        const mall_container = createElementWithClassAndParent("div", parent, "mall-render");
+        for (let row of this.map) {
+            const rowEle = createElementWithClassAndParent("div", mall_container, "maze-row");
+            //console.log("JR NOTE: rendering map, row is ", row)
+
+            for (let cell of row) {
+                //console.log("JR NOTE: rendering map cell is ", cell)
+
+                if (cell) {
+                    const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+                    ele.innerText = cell.name;
+
+                } else {
+                    const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+                    ele.classList.add("empty-cell");
+                    ele.innerText = ".";
+                }
+            }
+        }
+
     }
 
     start = (parent) => {
@@ -51,13 +87,45 @@ class Game {
     }
 
     handleSpawningMallEntrance = (parent) => {
-        const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
+        const intro_container = createElementWithClassAndParent("div", parent);
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
-        const mall_entrance = new Location("Mall Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], []);
+        const mall_entrance = new Location("Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], []);
         mall_entrance.players = [...this.players];
         general_intro.innerHTML = `${arrayToHumanSentence(this.players.map((i) => i.nameHTML()))} enter the mall, nervous and excited about their impending adventure. <br><br>They are almost disappointed at how ... normal it seems.<br><br>Sure, it's abandoned, but other than the dust and gloom it seems like any other mall they've been to. <br><br>Surely deeper in is where the danger lurks...`;
-        this.locations.push(mall_entrance);
+        this.map.push([mall_entrance]);
+
+        this.renderMall(parent);
+
+    }
+
+    //if there is nothing to the south, make a coridor
+    //always allow east movement
+    //never empty (its a mall and it goes forever)
+    //stores might be up or down but right ALWAYS exists
+    handleAddingCorridorToEastOfLocation = (row, col) => {
+        const corridor = new Location("Corridor", [this.rand.pickFrom(this.theme_keys), this.rand.pickFrom(this.theme_keys), this.rand.pickFrom(keys)], []);
+        let right_row = row;
+        let right_col = col + 1;
+
+        if (!maze.map[right_row][right_col]) {
+            //if right does not exist, check if its col index is the same or greater than the rows length
+            //if so, need to add a new "undefined" cel to the end of every row in the maze
+            //then, pick my index and make a new random room
+            if (right_col < maze.map[right_row].length) {
+                maze.map[right_row][right_col] = corridor;
+                neighbor_count++;
+            } else {
+                if (right_col == maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
+                    for (let row of maze.map) {
+                        row.push(undefined);
+                    }
+                    maze.map[right_row][right_col] = corridor;
+
+                    neighbor_count++;
+                }
+            }
+        }
 
     }
 
