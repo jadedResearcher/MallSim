@@ -44,13 +44,20 @@ class Game {
         //check if any events happen. if not, do a little flavor text
         //if yes, stop checking events
         for (let location of locations) {
-            console.log("JR NOTE: checking if location is awake: ", location.name)
-            let event_happened = false;
+            //only locations with players 
+            if (location.players.length > 0) {
+                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
 
-            console.warn("JR NOTE: todo, scan location for valid events")
+                start_phrase.innerHTML = `${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} ${location.players.length > 1 ? "are" : "is"} poking around in the ${location.name}.`;
 
-            if (!event_happened) {
-                location.renderGenericBoringNonEvent(this.rand, tick_container);
+                console.log("JR NOTE: checking if location is awake: ", location.name)
+                let event_happened = false;
+
+                console.warn("JR NOTE: todo, scan location for valid events")
+
+                if (!event_happened) {
+                    location.renderGenericBoringNonEvent(this.rand, tick_container);
+                }
             }
         }
 
