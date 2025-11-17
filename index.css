@@ -167,7 +167,22 @@ button {
   white-space: nowrap;
 }
 
+.maze-cell.fog-of-war {
+  opacity: 50%;
+}
 
+.player-icon-holder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.player-icon {
+  border-radius: 10000px;
+  background-color: black;
+  height: 10px;
+  width: 10px;
+}
 
 .maze-cell {
   display: inline-block;
@@ -175,7 +190,7 @@ button {
   height: 80px;
   padding: 10px;
   border: 3px solid #434343;
-  background-color: #a10000;
+  background-color: #C4c4c4;
   cursor: pointer;
   overflow: hidden;
   opacity: 0.9;

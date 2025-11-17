@@ -72,6 +72,17 @@ class Game {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
                     ele.innerText = cell.name;
 
+                    if (cell.players.length === 0) {
+                        ele.classList.add("fog-of-war")
+                    } else {
+                        const icon_holder = createElementWithClassAndParent("div", ele, "player-icon-holder");
+                        //little black dots showing where players are
+                        for (let i = 0; i < cell.players.length; i++) {
+                            const icon = createElementWithClassAndParent("div", icon_holder, "player-icon");
+                        }
+                    }
+
+
                 } else {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
                     ele.classList.add("empty-cell");
@@ -94,6 +105,7 @@ class Game {
         mall_entrance.players = [...this.players];
         general_intro.innerHTML = `${arrayToHumanSentence(this.players.map((i) => i.nameHTML()))} enter the mall, nervous and excited about their impending adventure. <br><br>They are almost disappointed at how ... normal it seems.<br><br>Sure, it's abandoned, but other than the dust and gloom it seems like any other mall they've been to. <br><br>Surely deeper in is where the danger lurks...`;
         this.map.push([mall_entrance]);
+        this.handleAddingCorridorToEastOfLocation(mall_entrance, 0, 0);
 
         this.renderMall(parent);
 
@@ -103,26 +115,26 @@ class Game {
     //always allow east movement
     //never empty (its a mall and it goes forever)
     //stores might be up or down but right ALWAYS exists
-    handleAddingCorridorToEastOfLocation = (row, col) => {
-        const corridor = new Location("Corridor", [this.rand.pickFrom(this.theme_keys), this.rand.pickFrom(this.theme_keys), this.rand.pickFrom(keys)], []);
+    handleAddingCorridorToEastOfLocation = (location, row, col) => {
+        console.log("JR NOTE: spawning corridor east of location", { row, col, this: this })
+        const corridor = new Location("Corridor", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], []);
         let right_row = row;
         let right_col = col + 1;
 
-        if (!maze.map[right_row][right_col]) {
+        if (!this.map[right_row][right_col]) {
+            console.log("JR NOTE: right does not exist")
             //if right does not exist, check if its col index is the same or greater than the rows length
             //if so, need to add a new "undefined" cel to the end of every row in the maze
             //then, pick my index and make a new random room
-            if (right_col < maze.map[right_row].length) {
-                maze.map[right_row][right_col] = corridor;
+            if (right_col < this.map[right_row].length) {
+                this.map[right_row][right_col] = corridor;
                 neighbor_count++;
             } else {
-                if (right_col == maze.map[right_row].length && maze.rand.nextDouble() > odds_empty) {
-                    for (let row of maze.map) {
+                if (right_col == this.map[right_row].length) {
+                    for (let row of this.map) {
                         row.push(undefined);
                     }
-                    maze.map[right_row][right_col] = corridor;
-
-                    neighbor_count++;
+                    this.map[right_row][right_col] = corridor;
                 }
             }
         }
