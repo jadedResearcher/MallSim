@@ -15,11 +15,11 @@ const getStatsFromThemes = (theme_keys) => {
         const theme = all_themes[key]
         console.log("JR NOTE: theme is", theme)
         if (theme.stats) {
-            eye += theme.stats[EYES_METAL_STATS]
-            tongue += theme.stats[TONGUE_METAL_STATS]
+            eye += theme.stats[EYES_METAL_STAT]
+            tongue += theme.stats[TONGUE_METAL_STAT]
             arm += theme.stats[ARMS_METAL_STAT]
             leg += theme.stats[LEGS_METAL_STAT]
-            mind += theme.stats[MIND_METAL_STATS]
+            mind += theme.stats[MIND_METAL_STAT]
 
         } else {
             console.error("JR NOTE: theme did not have stats: ", theme)
@@ -34,9 +34,9 @@ const getStatsFromThemes = (theme_keys) => {
     leg = leg / count;
     const ret = {}
     console.log("JR NOTE: BASELINE_METAL_OBJECT", BASELINE_METAL_OBJECT)
-    ret[MIND_METAL_STATS] = mind;
-    ret[EYES_METAL_STATS] = eye;
-    ret[TONGUE_METAL_STATS] = tongue;
+    ret[MIND_METAL_STAT] = mind;
+    ret[EYES_METAL_STAT] = eye;
+    ret[TONGUE_METAL_STAT] = tongue;
     ret[ARMS_METAL_STAT] = arm;
     ret[LEGS_METAL_STAT] = leg;
     console.log("JR NOTE: ret", ret)
@@ -395,11 +395,11 @@ const baby_endings = baby_endings_raw.split("\n")
 //legs vs tails for the lamia (trustworthy number of legs)
 
 //how well do you use your thoughts to solve problems. at zero you are functionally brain dead
-const MIND_METAL_STATS = "Mind";
+const MIND_METAL_STAT = "Mind";
 //how well do you use your senses to perceive the world. at zero you are functionally blind.
-const EYES_METAL_STATS = "Eyes";
+const EYES_METAL_STAT = "Eyes";
 //how well do you use communication to communicate to others. At zero you are functionally mute.
-const TONGUE_METAL_STATS = "Tongue";
+const TONGUE_METAL_STAT = "Tongue";
 //how well do you use your will on the world (fighting, building, etc). At zero you are functionally passive.
 const ARMS_METAL_STAT = "Arms";
 //how well do you use your ability to  move through the world (speed, dexterity, etc). At zero you are functionally unable to move.
@@ -418,9 +418,9 @@ const VERY_LOW_STAT_VALUE = 1;
 
 //make stats from this
 BASELINE_METAL_OBJECT = {}
-BASELINE_METAL_OBJECT[MIND_METAL_STATS] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[EYES_METAL_STATS] = MEDIUM_STAT_VALUE;
-BASELINE_METAL_OBJECT[TONGUE_METAL_STATS] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[EYES_METAL_STAT] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[TONGUE_METAL_STAT] = MEDIUM_STAT_VALUE;
 BASELINE_METAL_OBJECT[ARMS_METAL_STAT] = MEDIUM_STAT_VALUE;
 BASELINE_METAL_OBJECT[LEGS_METAL_STAT] = MEDIUM_STAT_VALUE;
 
@@ -1685,14 +1685,14 @@ const initStats = () => {
 
     //only need to specify any stat that is above or bellow medium
     stats_map[ART] = { ...BASELINE_METAL_OBJECT }
-    stats_map[ART][EYES_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[ART][EYES_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[ART][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
 
 
     stats_map[TECHNOLOGY] = { ...BASELINE_METAL_OBJECT }
-    stats_map[TECHNOLOGY][MIND_METAL_STATS] = HIGH_STAT_VALUE;
-    stats_map[TECHNOLOGY][EYES_METAL_STATS] = HIGH_STAT_VALUE;
-    stats_map[TECHNOLOGY][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[TECHNOLOGY][MIND_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[TECHNOLOGY][EYES_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[TECHNOLOGY][TONGUE_METAL_STAT] = LOW_STAT_VALUE;
 
 
     stats_map[TIME] = { ...BASELINE_METAL_OBJECT }
@@ -1704,7 +1704,7 @@ const initStats = () => {
     stats_map[SPACE][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
     stats_map[LONELY] = { ...BASELINE_METAL_OBJECT }
-    stats_map[LONELY][TONGUE_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[LONELY][TONGUE_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
 
     stats_map[OCEAN] = { ...BASELINE_METAL_OBJECT }
@@ -1712,9 +1712,9 @@ const initStats = () => {
     //its no coincidence that waste and addiction share the same stat spread
     //obsession is a dangerous thing
     stats_map[WASTE] = { ...BASELINE_METAL_OBJECT }
-    stats_map[WASTE][MIND_METAL_STATS] = VERY_LOW_STAT_VALUE;
-    stats_map[WASTE][EYES_METAL_STATS] = VERY_LOW_STAT_VALUE;
-    stats_map[WASTE][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[WASTE][MIND_METAL_STAT] = VERY_LOW_STAT_VALUE;
+    stats_map[WASTE][EYES_METAL_STAT] = VERY_LOW_STAT_VALUE;
+    stats_map[WASTE][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[WASTE][ARMS_METAL_STAT] = VERY_LOW_STAT_VALUE;
     stats_map[WASTE][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
@@ -1725,7 +1725,7 @@ const initStats = () => {
 
     stats_map[FREEDOM] = { ...BASELINE_METAL_OBJECT }
     stats_map[FREEDOM][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
-    stats_map[FREEDOM][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[FREEDOM][TONGUE_METAL_STAT] = LOW_STAT_VALUE;
     stats_map[FREEDOM][ARMS_METAL_STAT] = LOW_STAT_VALUE;
 
 
@@ -1744,28 +1744,28 @@ const initStats = () => {
     stats_map[FLESH] = { ...BASELINE_METAL_OBJECT }
     stats_map[FLESH][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[FLESH][LEGS_METAL_STAT] = HIGH_STAT_VALUE;
-    stats_map[FLESH][MIND_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[FLESH][MIND_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[SCIENCE] = { ...BASELINE_METAL_OBJECT }
-    stats_map[SCIENCE][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
-    stats_map[SCIENCE][EYES_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[SCIENCE][MIND_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[SCIENCE][EYES_METAL_STAT] = HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[MATH] = { ...BASELINE_METAL_OBJECT }
-    stats_map[MATH][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[MATH][MIND_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[MATH][ARMS_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
 
 
     stats_map[TWISTING] = { ...BASELINE_METAL_OBJECT }
     //all or nothing baby, no restraint, KNOW restraint
-    stats_map[TWISTING][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
-    stats_map[TWISTING][EYES_METAL_STATS] = VERY_LOW_STAT_VALUE;
-    stats_map[TWISTING][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[TWISTING][MIND_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[TWISTING][EYES_METAL_STAT] = VERY_LOW_STAT_VALUE;
+    stats_map[TWISTING][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[TWISTING][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[TWISTING][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
@@ -1774,44 +1774,44 @@ const initStats = () => {
     //your thoughts, your senses, your social, your will, your movement
     stats_map[DEATH] = { ...BASELINE_METAL_OBJECT }
     stats_map[DEATH][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
-    stats_map[DEATH][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[DEATH][TONGUE_METAL_STAT] = LOW_STAT_VALUE;
 
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[APOCALYPSE] = { ...BASELINE_METAL_OBJECT }
     stats_map[APOCALYPSE][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
-    stats_map[APOCALYPSE][TONGUE_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[APOCALYPSE][TONGUE_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[ANGELS] = { ...BASELINE_METAL_OBJECT }
-    stats_map[ANGELS][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[ANGELS][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[SERVICE] = { ...BASELINE_METAL_OBJECT }
-    stats_map[SERVICE][TONGUE_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[SERVICE][TONGUE_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[SERVICE][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[FAMILY] = { ...BASELINE_METAL_OBJECT }
-    stats_map[FAMILY][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
-    stats_map[FAMILY][MIND_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[FAMILY][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[FAMILY][MIND_METAL_STAT] = LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[MAGIC] = { ...BASELINE_METAL_OBJECT }
     stats_map[MAGIC][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
-    stats_map[MAGIC][MIND_METAL_STATS] = HIGH_STAT_VALUE;
-    stats_map[MAGIC][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[MAGIC][MIND_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[MAGIC][TONGUE_METAL_STAT] = LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[LIGHT] = { ...BASELINE_METAL_OBJECT }
-    stats_map[LIGHT][MIND_METAL_STATS] = HIGH_STAT_VALUE;
-    stats_map[LIGHT][EYES_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[LIGHT][MIND_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[LIGHT][EYES_METAL_STAT] = HIGH_STAT_VALUE;
 
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
@@ -1832,8 +1832,8 @@ const initStats = () => {
     stats_map[HUNTING] = { ...BASELINE_METAL_OBJECT }
     stats_map[HUNTING][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[HUNTING][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
-    stats_map[HUNTING][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
-    stats_map[HUNTING][MIND_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[HUNTING][TONGUE_METAL_STAT] = LOW_STAT_VALUE;
+    stats_map[HUNTING][MIND_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
@@ -1845,10 +1845,10 @@ const initStats = () => {
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[CHOICES] = { ...BASELINE_METAL_OBJECT }
-    stats_map[CHOICES][MIND_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[CHOICES][MIND_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[CHOICES][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[CHOICES][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
-    stats_map[CHOICES][TONGUE_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[CHOICES][TONGUE_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
 
 
@@ -1857,38 +1857,38 @@ const initStats = () => {
     stats_map[ZAP] = { ...BASELINE_METAL_OBJECT }
     stats_map[ZAP][LEGS_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[ZAP][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
-    stats_map[ZAP][MIND_METAL_STATS] = LOW_STAT_VALUE;
-    stats_map[ZAP][TONGUE_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[ZAP][MIND_METAL_STAT] = LOW_STAT_VALUE;
+    stats_map[ZAP][TONGUE_METAL_STAT] = LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[LOVE] = { ...BASELINE_METAL_OBJECT }
-    stats_map[LOVE][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[LOVE][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[SOUL] = { ...BASELINE_METAL_OBJECT }
-    stats_map[SOUL][EYES_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[SOUL][EYES_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[ANGER] = { ...BASELINE_METAL_OBJECT }
     stats_map[ANGER][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
-    stats_map[ANGER][TONGUE_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[ANGER][TONGUE_METAL_STAT] = HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[WEB] = { ...BASELINE_METAL_OBJECT }
     stats_map[WEB][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
-    stats_map[WEB][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[WEB][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[WEB][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
-    stats_map[WEB][MIND_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[WEB][MIND_METAL_STAT] = LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[ROYALTY] = { ...BASELINE_METAL_OBJECT }
     stats_map[ROYALTY][ARMS_METAL_STAT] = HIGH_STAT_VALUE;
-    stats_map[ROYALTY][TONGUE_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[ROYALTY][TONGUE_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[ROYALTY][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
@@ -1900,16 +1900,16 @@ const initStats = () => {
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[KNOWING] = { ...BASELINE_METAL_OBJECT }
-    stats_map[KNOWING][EYES_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[KNOWING][EYES_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[GUIDING] = { ...BASELINE_METAL_OBJECT }
-    stats_map[GUIDING][EYES_METAL_STATS] = HIGH_STAT_VALUE;
-    stats_map[GUIDING][TONGUE_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[GUIDING][EYES_METAL_STAT] = HIGH_STAT_VALUE;
+    stats_map[GUIDING][TONGUE_METAL_STAT] = HIGH_STAT_VALUE;
     stats_map[GUIDING][LEGS_METAL_STAT] = HIGH_STAT_VALUE;
-    stats_map[GUIDING][MIND_METAL_STATS] = LOW_STAT_VALUE;
-    stats_map[GUIDING][EYES_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[GUIDING][MIND_METAL_STAT] = LOW_STAT_VALUE;
+    stats_map[GUIDING][EYES_METAL_STAT] = LOW_STAT_VALUE;
 
 
 
@@ -1921,28 +1921,28 @@ const initStats = () => {
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[LANGUAGE] = { ...BASELINE_METAL_OBJECT }
-    stats_map[LANGUAGE][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[LANGUAGE][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[LANGUAGE][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[BUGS] = { ...BASELINE_METAL_OBJECT }
-    stats_map[BUGS][MIND_METAL_STATS] = VERY_LOW_STAT_VALUE;
-    stats_map[BUGS][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[BUGS][MIND_METAL_STAT] = VERY_LOW_STAT_VALUE;
+    stats_map[BUGS][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[ADDICTION] = { ...BASELINE_METAL_OBJECT }
-    stats_map[ADDICTION][MIND_METAL_STATS] = VERY_LOW_STAT_VALUE;
-    stats_map[ADDICTION][EYES_METAL_STATS] = VERY_LOW_STAT_VALUE;
-    stats_map[ADDICTION][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[ADDICTION][MIND_METAL_STAT] = VERY_LOW_STAT_VALUE;
+    stats_map[ADDICTION][EYES_METAL_STAT] = VERY_LOW_STAT_VALUE;
+    stats_map[ADDICTION][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[ADDICTION][ARMS_METAL_STAT] = VERY_LOW_STAT_VALUE;
     stats_map[ADDICTION][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[SPYING] = { ...BASELINE_METAL_OBJECT }
-    stats_map[SPYING][EYES_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[SPYING][EYES_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
@@ -1950,37 +1950,37 @@ const initStats = () => {
     stats_map[CLOWNS] = { ...BASELINE_METAL_OBJECT }
     stats_map[CLOWNS][LEGS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[CLOWNS][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
-    stats_map[CLOWNS][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
-    stats_map[CLOWNS][MIND_METAL_STATS] = LOW_STAT_VALUE;
-    stats_map[CLOWNS][EYES_METAL_STATS] = LOW_STAT_VALUE;
+    stats_map[CLOWNS][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
+    stats_map[CLOWNS][MIND_METAL_STAT] = LOW_STAT_VALUE;
+    stats_map[CLOWNS][EYES_METAL_STAT] = LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[DOLLS] = { ...BASELINE_METAL_OBJECT }
-    stats_map[DOLLS][TONGUE_METAL_STATS] = VERY_HIGH_STAT_VALUE;
+    stats_map[DOLLS][TONGUE_METAL_STAT] = VERY_HIGH_STAT_VALUE;
     stats_map[DOLLS][LEGS_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[OBFUSCATION] = { ...BASELINE_METAL_OBJECT }
-    stats_map[OBFUSCATION][EYES_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[OBFUSCATION][EYES_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
 
     ////METAL stats, Mind, Eyes, Tongue, Arms, Legs
     //your thoughts, your senses, your social, your will, your movement
     stats_map[CENSORSHIP] = { ...BASELINE_METAL_OBJECT }
-    stats_map[CENSORSHIP][EYES_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[CENSORSHIP][EYES_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
 
     stats_map[DARKNESS] = { ...BASELINE_METAL_OBJECT }
-    stats_map[DARKNESS][EYES_METAL_STATS] = VERY_LOW_STAT_VALUE;
+    stats_map[DARKNESS][EYES_METAL_STAT] = VERY_LOW_STAT_VALUE;
 
     stats_map[KILLING] = { ...BASELINE_METAL_OBJECT }
     stats_map[KILLING][ARMS_METAL_STAT] = VERY_HIGH_STAT_VALUE;
 
 
     stats_map[MUSIC] = { ...BASELINE_METAL_OBJECT }
-    stats_map[MUSIC][EYES_METAL_STATS] = HIGH_STAT_VALUE;
+    stats_map[MUSIC][EYES_METAL_STAT] = HIGH_STAT_VALUE;
 
     stats_map[DEFENSE] = { ...BASELINE_METAL_OBJECT }
     stats_map[DEFENSE][ARMS_METAL_STAT] = HIGH_STAT_VALUE;

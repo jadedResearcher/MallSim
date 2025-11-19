@@ -32,13 +32,19 @@ https://kittyhorrorshow.itch.io/anatomy
 
 class Location {
     name = "???"
+    row = 0;
+    col = 0;
     corruption = 1; //rooms get deeper the further in they go
     theme_keys = []; //for senses and flavor text and children (like a fancy clothes store can be Fire themed, not that a fire theme is more likely to have, i dunno, food)
     players = []; //locations tick, not players
+    pending_players = []; //players moving into this location (needed so i don't tick them new)
+
     events = []; //doesn't mean anything yet, but will.
 
     constructor(name, theme_keys, row, col, events) {
         this.name = name;
+        this.row = row;
+        this.col = col;
         //deeper to the east you get but what REALLY starts adding up is deeper to the south
         this.corruption = row * 10 + col;
         this.events = events;

@@ -33,11 +33,11 @@ const balanceStatsDebug = () => {
     for (let theme of Object.values(all_themes)) {
         count++;
         if (theme.stats) {
-            eye += theme.stats[EYES_METAL_STATS]
-            tongue += theme.stats[TONGUE_METAL_STATS]
+            eye += theme.stats[EYES_METAL_STAT]
+            tongue += theme.stats[TONGUE_METAL_STAT]
             arm += theme.stats[ARMS_METAL_STAT]
             leg += theme.stats[LEGS_METAL_STAT]
-            mind += theme.stats[MIND_METAL_STATS]
+            mind += theme.stats[MIND_METAL_STAT]
 
         } else {
             console.error("JR NOTE: theme did not have stats: ", theme)

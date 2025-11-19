@@ -152,8 +152,8 @@ class Entity {
 
     //returns key and value of their best stat
     highestStat = () => {
-        //BASELINE_METAL_OBJECT[MIND_METAL_STATS] = MEDIUM_STAT_VALUE;
-        let currentHighestStat = { key: MIND_METAL_STATS, value: this.stats[MIND_METAL_STATS] };
+        //BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
+        let currentHighestStat = { key: MIND_METAL_STAT, value: this.stats[MIND_METAL_STAT] };
         for (let [key, value] of Object.entries(this.stats)) {
             //if equal, go more physical (down the chain)
             if (value >= currentHighestStat.value) {
@@ -165,8 +165,8 @@ class Entity {
 
     //returns key and value of their worst stat
     lowestStat = () => {
-        //BASELINE_METAL_OBJECT[MIND_METAL_STATS] = MEDIUM_STAT_VALUE;
-        let currentLowestStat = { key: MIND_METAL_STATS, value: this.stats[MIND_METAL_STATS] };
+        //BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
+        let currentLowestStat = { key: MIND_METAL_STAT, value: this.stats[MIND_METAL_STAT] };
         for (let [key, value] of Object.entries(this.stats)) {
             //if equal, go more mental (up the chain)
             if (value < currentLowestStat.value) {
@@ -181,8 +181,84 @@ class Entity {
     //otherwise you prefer to right and down
     //high eyes and legs stats makes you even more likely to move
     //while tongue and arms and mind makes you want to stay where you are and try to figure things out more
-    decideWhereToGo = (rand, currentLocation, neighbors) => {
-        //todo
+    decideWhereToGo = (ele, rand, currentLocation, north, south, east, west) => {
+        //go to the east (continue down current corridor)
+        console.log("JR NOTE: right now can only go to the east and west, eventaully flesh out movement better, but no point now when only east is real", { ele, rand, currentLocation, north, south, east, west });
+        let chosenLocation;
+
+        //can be forced because if literally nothing gets chosen, well, you made your choice
+        const chooseStay = (force) => {
+            console.log(`JR NOTE: will ${this.name} choose to stay?`, force)
+            //10 is an average stat value
+            let stayWeight = 0;
+            //surely we can find out more here before moving on?
+            stayWeight += 1 * this.stats[MIND_METAL_STAT];
+            stayWeight += 1 * this.stats[TONGUE_METAL_STAT];
+            stayWeight += 1 * this.stats[EYES_METAL_STAT];
+            //keep moving keep doing
+            stayWeight += -1 * this.stats[ARMS_METAL_STAT];
+            stayWeight += -1 * this.stats[LEGS_METAL_STAT];
+
+            console.log("JR NOTE: stay weight was", stayWeight)
+            if (force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
+                console.log("JR NOTE: going to stay")
+                ele.innerHTML = `${this.name} decides to stay in the ${currentLocation.name} for a little while longer, checking if they missed anything.`;
+                return currentLocation;
+
+            }
+        }
+
+        const chooseEast = () => {
+            console.log(`JR NOTE: will ${this.name} choose to go east?`)
+
+            if (east && this.corruption < 113 && rand.nextDouble() > 0.25) {
+                if (currentLocation.name === CORRIDOR_NAME) {
+                    ele.innerHTML = `${this.name} decides to continue walking down the mall corridor, and moves to the EAST.`;
+                } else {
+                    ele.innerHTML = `${this.name} decides to try out this new mall corridor, and moves to the EAST.`;
+                }
+                return east;
+            }
+        }
+
+        const chooseWest = () => {
+            console.log(`JR NOTE: will ${this.name} choose to go west?`)
+
+            if (west && this.corruption > 113 && rand.nextDouble() > 0.5) {
+                if (currentLocation.name === CORRIDOR_NAME) {
+                    ele.innerHTML = `${this.name} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST.`;
+                } else {
+                    ele.innerHTML = `${this.name} decides to try going back to a more familiar corridor, and moves to the WEST.`;
+                }
+                return west;
+            }
+        }
+
+        //first check if staying
+        //then check where  you want to go
+
+        chosenLocation = chooseStay();
+        if (!chosenLocation) {
+            chosenLocation = chooseEast();
+        }
+
+        if (!chosenLocation) {
+            chosenLocation = chooseWest();
+        }
+
+
+        if (!chosenLocation) {
+            chosenLocation = chooseStay(true);
+        }
+        if (currentLocation != chosenLocation) {
+            chosenLocation.pending_players.push(this);
+            removeItemOnce(currentLocation.players, this);
+        }
+
+        console.log("JR NOTE: the location I chose was: ", chosenLocation)
+
+
+
     }
 
 

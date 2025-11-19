@@ -4,6 +4,9 @@ Every event knows if its been triggered and knows how to apply its results (just
 some events are owned by specific locations (and can only trigger inside them) some are general purpose and any location can see if it triggers
 */
 
+//some events should embed videos to play
+//or pics of the blorbos
+
 class Event {
 
     name = "Default Event";
@@ -38,3 +41,6 @@ class Event {
 
     }
 }
+//the rememberist made this: https://www.youtube.com/playlist?list=PL2wuGklhkS7AQ_BOALQ8g_z-NkA5Jhleb
+//and this https://ellienamored.neocities.org/expeditionzampanio
+//the archiving watcher of threads made this: https://mircuskasarok.neocities.org/

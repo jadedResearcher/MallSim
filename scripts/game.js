@@ -1,3 +1,34 @@
+const CORRIDOR_NAME = "CORRIDOR"
+
+//row - 1
+const getNorth = (map, row, col) => {
+    if (row < 1) {
+        return undefined;
+    }
+    return map[row - 1][col];
+}
+
+//col + 1
+const getEast = (map, row, col) => {
+    return map[row][col + 1];
+}
+
+//col-1
+const getWest = (map, row, col) => {
+    return map[row][col - 1];
+}
+
+//row + 1
+const getSouth = (map, row, col) => {
+    //three elements, 0,1,2, if row is 3 its undefined
+    if (row >= map.length - 1) {
+        return undefined;
+    }
+    return map[row + 1][col];
+}
+
+
+
 class Game {
     players = [];
     rand;//only thing storing it, pass it to anything that needs to use it
@@ -58,8 +89,31 @@ class Game {
         for (let location of locations) {
             //only locations with players 
             if (location.players.length > 0) {
+                const north = getNorth(this.map, location.row, location.col)
+                const south = getSouth(this.map, location.row, location.col)
+                const east = getEast(this.map, location.row, location.col)
+                const west = getWest(this.map, location.row, location.col)
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `TODO: have ${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} interact with each other (altering relationships) and decide whether to move to a new location or stay here. List out their deicisons.`
+                start_phrase.innerHTML = `<span style='color:red'>TODO:</span> have ${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} interact with each other (altering relationships) and decide whether to move to a new location or stay here. List out their deicisons.`;
+                for (let player of location.players) {
+                    const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+
+                    player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                }
+
+            }
+        }
+
+        //clean up, move pending players into their locations
+        //can't do sooner or they might double tick
+        for (let location of locations) {
+            if (location.pending_players.length > 0) {
+                console.log(`JR NOTE: ${location.name}'s pending players`, location.pending_players)
+                for (let player of location.pending_players) {
+                    location.players.push(player);
+                }
+                location.pending_players = [];//clear out
+
             }
         }
         this.renderMall(tick_container);
@@ -156,7 +210,7 @@ class Game {
         console.log("JR NOTE: spawning corridor east of location", { row, col, this: this })
         let right_row = row;
         let right_col = col + 1;
-        const corridor = new Location("Corridor", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
+        const corridor = new Location(CORRIDOR_NAME, [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
 
         if (!this.map[right_row][right_col]) {
             console.log("JR NOTE: right does not exist")
@@ -200,9 +254,9 @@ class Game {
 
             const bestStatMap = {};
             //nothing too targeted, just a little line about where their current strength lies
-            bestStatMap[MIND_METAL_STATS] = ["They love thinking through a good puzzle.", "They love reading books and learning all sorts of new things.", "They're often the first to figure out a riddle."]
-            bestStatMap[EYES_METAL_STATS] = ["Their eyes never miss anything.", "They love taking in color and motion and the sounds of the world around them.", "They are always the first to compliment someones new hairstyle or outfit."]
-            bestStatMap[TONGUE_METAL_STATS] = ["They love rambling and talking for hours on end.", "They are a really good listener, and always have something insightful to say in return.", "Somehow, they manage to convince people to go along with all their ideas."]
+            bestStatMap[MIND_METAL_STAT] = ["They love thinking through a good puzzle.", "They love reading books and learning all sorts of new things.", "They're often the first to figure out a riddle."]
+            bestStatMap[EYES_METAL_STAT] = ["Their eyes never miss anything.", "They love taking in color and motion and the sounds of the world around them.", "They are always the first to compliment someones new hairstyle or outfit."]
+            bestStatMap[TONGUE_METAL_STAT] = ["They love rambling and talking for hours on end.", "They are a really good listener, and always have something insightful to say in return.", "Somehow, they manage to convince people to go along with all their ideas."]
             bestStatMap[ARMS_METAL_STAT] = ["There just something that appeals to them about the thrill of violence.", "They think getting to build things with your hands is one of life's simple pleasures.", "They love figuring out how to repair things themselves instead of having someone else do it."]
             bestStatMap[LEGS_METAL_STAT] = ["They are quick on their feet.", "Somehow, they never stop moving.", "They love exploring new places."]
 
@@ -211,9 +265,9 @@ class Game {
 
             const worstStatMap = {};
             //nothing too targeted, just a little line about where their current strength lies
-            worstStatMap[MIND_METAL_STATS] = ["Also, puzzles just don't interest them.", "They also find books and movies to be incredibly boring.", "They also don't get why people keep trying to complicate things, the world should be very simple."]
-            worstStatMap[EYES_METAL_STATS] = ["Loud sounds also don't bother them very much.", "They also often seem to be in their own little world.", "They also love just vibing with their own thoughts."]
-            worstStatMap[TONGUE_METAL_STATS] = ["They also often stumble over their own words.", "They also have trouble speaking up in groups.", "They also feel a little awkward when its their turn to speak."]
+            worstStatMap[MIND_METAL_STAT] = ["Also, puzzles just don't interest them.", "They also find books and movies to be incredibly boring.", "They also don't get why people keep trying to complicate things, the world should be very simple."]
+            worstStatMap[EYES_METAL_STAT] = ["Loud sounds also don't bother them very much.", "They also often seem to be in their own little world.", "They also love just vibing with their own thoughts."]
+            worstStatMap[TONGUE_METAL_STAT] = ["They also often stumble over their own words.", "They also have trouble speaking up in groups.", "They also feel a little awkward when its their turn to speak."]
             worstStatMap[ARMS_METAL_STAT] = ["They also prefer to just go with the flow.", "They also are a very peaceful person.", "Its also just easier for them to buy something premade versus learning how to make it themselves."]
             worstStatMap[LEGS_METAL_STAT] = ["They also tend to walk at a relaxed pace.", "They also seem no rush to get anywhere.", "They're also often late to appointments."]
 
@@ -236,7 +290,7 @@ class Game {
 
             }
 
-            text += `<span class='spoiler'> Mind: ${player.stats[MIND_METAL_STATS]}, Eyes: ${player.stats[EYES_METAL_STATS]}, Tongue: ${player.stats[TONGUE_METAL_STATS]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
+            text += `<span class='spoiler'> Mind: ${player.stats[MIND_METAL_STAT]}, Eyes: ${player.stats[EYES_METAL_STAT]}, Tongue: ${player.stats[TONGUE_METAL_STAT]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
 
             ele.innerHTML = text;
 
