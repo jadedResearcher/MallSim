@@ -201,6 +201,14 @@ button {
 
 }
 
+.mall-render {
+  overflow: auto;
+}
+
+.empty-cell {
+  opacity: 0;
+}
+
 .room-label {
   text-align: center;
   margin-top: 20px;

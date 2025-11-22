@@ -1,4 +1,4 @@
-const CORRIDOR_NAME = "CORRIDOR"
+const CORRIDOR_NAME = "Hall"
 
 //row - 1
 const getNorth = (map, row, col) => {
@@ -114,6 +114,7 @@ class Game {
                 //call add no matter what because it handles rng internally
                 console.warn("JR NOTE: todo add things to other directions as well (north and south) only (never add west, oddly enough)")
                 this.handleAddingCorridorToEastOfLocation(location);
+                this.handleAddingShopToSouthOfLocation(location);
             }
         }
         this.renderMall(tick_container);
@@ -203,7 +204,41 @@ class Game {
 
     }
 
-    //from truth sim
+    handleAddingShopToSouthOfLocation = (location, force = false) => {
+        let right_row = location.row + 1;
+        let right_col = location.col;
+        const odds_empty = force ? 0 : 10.3;
+        console.log("JR NOTE: processing handleAddingShopToSouthOfLocation, force is", { force, odds_empty, right_col, right_row })
+        //if the row doesn't even exist OR it does but theres nothing in the column
+        if (!this.map[right_row] || (this.map[right_row] && !this.map[right_row][right_col])) {
+            console.log("JR NOTE: i think i need to add a new row?")
+            //if down does not exist, check if its row index is the same or greater than how many rows there are
+            //if so, add a new row of all undefineds to the maze
+            //then, pick my index and make a new random room
+            console.warn("JR NOTE: todo pick from set of random shops with specific internalevents")
+            const random_shop = new Location("Shop", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
+
+            if (this.map[right_row] && right_row < this.map.length && this.rand.nextDouble() > odds_empty) {
+                this.map[right_row][right_col] = random_shop;
+            } else {
+                if (right_row == this.map.length && this.rand.nextDouble() < odds_empty) {
+                    const new_row = [];
+                    for (let cel of this.map[0]) {
+                        new_row.push(undefined);
+                    }
+                    this.map.push(new_row);
+                    this.map[right_row][right_col] = random_shop;
+
+                }
+            }
+        } else {
+            console.log("Jr NOTE: handleAddingShopToSouthOfLocation")
+        }
+
+    }
+
+
+    //from truth sim, is called "processRight" there
     //if there is nothing to the east, make a coridor
     //always allow east movement (other directions will have rng if something is there)
     //never empty (its a mall and it goes forever)
