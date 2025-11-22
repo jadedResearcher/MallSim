@@ -176,6 +176,10 @@ class Entity {
         return currentLowestStat;
     }
 
+    addCorruption = (value) => {
+        this.corruption += value;
+    }
+
     //if you're getting really corrupt you'll start getting a pull to 
     //try to return back to the maze (go left and up)
     //otherwise you prefer to right and down

@@ -52,6 +52,22 @@ class Location {
         console.log("JR NOTE: made location with theme", theme_keys)
     }
 
+    //handles corrupting them
+    movePlayersFromPendingToInternal = () => {
+        //was anyone added to this location?
+        let ret = false;
+        if (this.pending_players.length > 0) {
+            for (let player of this.pending_players) {
+                player.addCorruption(this.corruption);
+                ret = true;
+                this.players.push(player);
+            }
+            this.pending_players = [];//clear out
+
+        }
+        return ret;
+    }
+
 
 
     //whoever is inside you pokes around and finds nothing

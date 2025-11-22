@@ -31,6 +31,7 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
+    current_tick = 0;
     rand;//only thing storing it, pass it to anything that needs to use it
     //each row is a row in the map
     //each cell is either undefined or a room in the mall
@@ -65,7 +66,7 @@ class Game {
         "The twisted shops and forlorn geometry get worse the longer it suffers, he knows. It needs people. Like a body needs blood. Needs to have objects moved out of it, like blood cells moving oxygen. Helps it think better. Remember what it's supposed to be better."
     */
     tick = (parent) => {
-
+        this.current_tick++;
         const locations = this.getLocations();
 
         console.log("JR NOTE: ticking with this many lcoations", locations.length)
@@ -82,6 +83,8 @@ class Game {
 
     movementAndInterctionTick = (parent, locations) => {
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
+        const header = createElementWithClassAndParent("h2", tick_container, "story-title");
+        header.innerText = `Movement ${this.current_tick}`;
 
         //for each location
         //do interaction scene of everyone inside (if more than one)
@@ -107,13 +110,10 @@ class Game {
         //clean up, move pending players into their locations
         //can't do sooner or they might double tick
         for (let location of locations) {
-            if (location.pending_players.length > 0) {
-                console.log(`JR NOTE: ${location.name}'s pending players`, location.pending_players)
-                for (let player of location.pending_players) {
-                    location.players.push(player);
-                }
-                location.pending_players = [];//clear out
-
+            if (location.movePlayersFromPendingToInternal()) {
+                //call add no matter what because it handles rng internally
+                console.warn("JR NOTE: todo add things to other directions as well (north and south) only (never add west, oddly enough)")
+                this.handleAddingCorridorToEastOfLocation(location);
             }
         }
         this.renderMall(tick_container);
@@ -122,7 +122,8 @@ class Game {
 
     eventTick = (parent, locations) => {
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
-
+        const header = createElementWithClassAndParent("h2", tick_container, "story-title");
+        header.innerText = `Event ${this.current_tick}`;
         //for each location
         //check if any events happen. if not, do a little flavor text
         //if yes, stop checking events
@@ -196,24 +197,23 @@ class Game {
         mall_entrance.players = [...this.players];
         general_intro.innerHTML = `${arrayToHumanSentence(this.players.map((i) => i.nameHTML()))} enter the mall, nervous and excited about their impending adventure. <br><br>They are almost disappointed at how ... normal it seems.<br><br>Sure, it's abandoned, but other than the dust and gloom it seems like any other mall they've been to. <br><br>Surely deeper in is where the danger lurks...`;
         this.map.push([mall_entrance]);
-        this.handleAddingCorridorToEastOfLocation(mall_entrance, 0, 0);
+        this.handleAddingCorridorToEastOfLocation(mall_entrance);
 
         this.renderMall(tick_container);
 
     }
 
-    //if there is nothing to the south, make a coridor
-    //always allow east movement
+    //from truth sim
+    //if there is nothing to the east, make a coridor
+    //always allow east movement (other directions will have rng if something is there)
     //never empty (its a mall and it goes forever)
     //stores might be up or down but right ALWAYS exists
-    handleAddingCorridorToEastOfLocation = (location, row, col) => {
-        console.log("JR NOTE: spawning corridor east of location", { row, col, this: this })
-        let right_row = row;
-        let right_col = col + 1;
+    handleAddingCorridorToEastOfLocation = (location) => {
+        let right_row = location.row;
+        let right_col = location.col + 1;
         const corridor = new Location(CORRIDOR_NAME, [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
 
         if (!this.map[right_row][right_col]) {
-            console.log("JR NOTE: right does not exist")
             //if right does not exist, check if its col index is the same or greater than the rows length
             //if so, need to add a new "undefined" cel to the end of every row in the maze
             //then, pick my index and make a new random room
@@ -308,13 +308,17 @@ class Game {
         const tick_button2 = createElementWithClassAndParent("button", tick_bar, "tick-button tick-ten-button");
         tick_button2.innerText = "Tick 10x";
         tick_button2.onclick = () => {
-            window.alert("todo ten ticks")
+            for (let i = 0; i < 10; i++) {
+                this.tick(parent);
+            }
         }
 
         const tick_button3 = createElementWithClassAndParent("button", tick_bar, "tick-button tick-hundred-button");
         tick_button3.innerText = "Tick 100x";
         tick_button3.onclick = () => {
-            window.alert("todo 100 ticks")
+            for (let i = 0; i < 100; i++) {
+                this.tick(parent);
+            }
         }
 
     }
