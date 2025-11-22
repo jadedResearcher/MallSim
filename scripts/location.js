@@ -61,6 +61,7 @@ class Location {
                 player.addCorruption(this.corruption);
                 ret = true;
                 this.players.push(player);
+                player.current_location = this;
             }
             this.pending_players = [];//clear out
 

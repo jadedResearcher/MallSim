@@ -2,6 +2,9 @@ const CORRIDOR_NAME = "Hall"
 
 //row - 1
 const getNorth = (map, row, col) => {
+    if (!map[row]) {
+        return;
+    }
     if (row < 1) {
         return undefined;
     }
@@ -10,16 +13,26 @@ const getNorth = (map, row, col) => {
 
 //col + 1
 const getEast = (map, row, col) => {
+    if (!map[row]) {
+        return;
+    }
+    console.log("JRNOTE: getEast", { map, row, col })
     return map[row][col + 1];
 }
 
 //col-1
 const getWest = (map, row, col) => {
+    if (!map[row]) {
+        return;
+    }
     return map[row][col - 1];
 }
 
 //row + 1
 const getSouth = (map, row, col) => {
+    if (!map[row]) {
+        return;
+    }
     //three elements, 0,1,2, if row is 3 its undefined
     if (row >= map.length - 1) {
         return undefined;
@@ -145,6 +158,18 @@ class Game {
                 }
             }
         }
+
+        for (let player of this.players) {
+            //this happened as a bug during dev so of course i made an edge case for it, it was spooky how eventually alaya would always be alone (becaues she was less likely to go south)
+            if (!player.current_location) {
+                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams.`;
+            } else {
+                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                start_phrase.innerHTML = `${player.nameHTML()} is ${player.current_location.name}`;
+
+            }
+        }
         this.renderMall(tick_container);
 
     }
@@ -161,6 +186,9 @@ class Game {
 
                 if (cell) {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+                    if (cell.name != CORRIDOR_NAME) {
+                        ele.style.backgroundColor = "#a10000"
+                    }
                     ele.innerText = cell.name;
 
                     if (cell.players.length === 0) {
@@ -196,6 +224,9 @@ class Game {
 
         const mall_entrance = new Location("Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], 0, 0, []);
         mall_entrance.players = [...this.players];
+        for (let player of this.players) {
+            player.current_location = mall_entrance; //so they aren't screaming they're in teh void
+        }
         general_intro.innerHTML = `${arrayToHumanSentence(this.players.map((i) => i.nameHTML()))} enter the mall, nervous and excited about their impending adventure. <br><br>They are almost disappointed at how ... normal it seems.<br><br>Sure, it's abandoned, but other than the dust and gloom it seems like any other mall they've been to. <br><br>Surely deeper in is where the danger lurks...`;
         this.map.push([mall_entrance]);
         this.handleAddingCorridorToEastOfLocation(mall_entrance);
@@ -207,33 +238,44 @@ class Game {
     handleAddingShopToSouthOfLocation = (location, force = false) => {
         let right_row = location.row + 1;
         let right_col = location.col;
-        const odds_empty = force ? 0 : 10.3;
+        if (this.map[right_row] && this.map[right_row][right_col]) {
+            //there was a bug early on where it was spawning shops on top of each other and players were falling off the face of the map and it was scaring the shit out of me and i stayed up way too late trying to find them again
+            return;
+        }
+
+        //don't have shops touching each other
+        const east = getEast(this.map, right_row, right_col);
+        const west = getWest(this.map, right_row, right_col);
+        if ((east && east.name != CORRIDOR_NAME) || west && west.name != CORRIDOR_NAME) {
+            console.log("JR NOTE: handleAddingShopToSouthOfLocation would have a shop touching another shop", east, west)
+            return;
+        }
+
+        const odds_empty = force ? 0 : 0.3;
         console.log("JR NOTE: processing handleAddingShopToSouthOfLocation, force is", { force, odds_empty, right_col, right_row })
         //if the row doesn't even exist OR it does but theres nothing in the column
-        if (!this.map[right_row] || (this.map[right_row] && !this.map[right_row][right_col])) {
-            console.log("JR NOTE: i think i need to add a new row?")
-            //if down does not exist, check if its row index is the same or greater than how many rows there are
-            //if so, add a new row of all undefineds to the maze
-            //then, pick my index and make a new random room
-            console.warn("JR NOTE: todo pick from set of random shops with specific internalevents")
-            const random_shop = new Location("Shop", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
+        //if down does not exist, check if its row index is the same or greater than how many rows there are
+        //if so, add a new row of all undefineds to the maze
+        //then, pick my index and make a new random room
+        console.warn("JR NOTE: todo pick from set of random shops with specific internalevents")
+        const random_shop = new Location(`${this.rand.internal_seed} Shop`, [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
 
-            if (this.map[right_row] && right_row < this.map.length && this.rand.nextDouble() > odds_empty) {
-                this.map[right_row][right_col] = random_shop;
-            } else {
-                if (right_row == this.map.length && this.rand.nextDouble() < odds_empty) {
-                    const new_row = [];
-                    for (let cel of this.map[0]) {
-                        new_row.push(undefined);
-                    }
-                    this.map.push(new_row);
-                    this.map[right_row][right_col] = random_shop;
-
-                }
-            }
+        if (this.map[right_row] && right_row < this.map.length && this.rand.nextDouble() > odds_empty) {
+            console.log("JR NOTE: handleAddingShopToSouthOfLocation adding a shop to an existing row")
+            this.map[right_row][right_col] = random_shop;
         } else {
-            console.log("Jr NOTE: handleAddingShopToSouthOfLocation")
+            if (this.rand.nextDouble() < odds_empty) {
+                console.log("JR NOTE: handleAddingShopToSouthOfLocation making a new row")
+                const new_row = [];
+                for (let cel of this.map[0]) {
+                    new_row.push(undefined);
+                }
+                this.map.push(new_row);
+                this.map[right_row][right_col] = random_shop;
+
+            }
         }
+
 
     }
 
@@ -254,7 +296,6 @@ class Game {
             //then, pick my index and make a new random room
             if (right_col < this.map[right_row].length) {
                 this.map[right_row][right_col] = corridor;
-                neighbor_count++;
             } else {
                 if (right_col == this.map[right_row].length) {
                     for (let row of this.map) {

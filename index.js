@@ -1,3 +1,4 @@
+let game;
 window.onload = () => {
     initThemes();
     debug();
@@ -15,7 +16,7 @@ const debug = () => {
     //if there is an id it turns into a global var this is wild i only learned this recently
     const debug = createElementWithClassAndParent("div", container, "debug");
     const rand = new SeededRandom(seed);
-    const game = new Game(rand);
+    game = new Game(rand);
     game.start(debug);
     console.log("JR NOTE: debug entities", game.players);
 

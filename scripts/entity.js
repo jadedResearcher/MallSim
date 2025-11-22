@@ -117,6 +117,7 @@ class Entity {
     themes = [];
     corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
+    current_location; //can be undefined, usually if glitch
     stats = {};
     title = "Null of Null";
     leader = false; //in sburbsim this decided ectobiology, who knows what this does, if anything, here
@@ -190,6 +191,16 @@ class Entity {
         console.log("JR NOTE: right now can only go to the east and west, eventaully flesh out movement better, but no point now when only east is real", { ele, rand, currentLocation, north, south, east, west });
         let chosenLocation;
 
+        //continue down corridor
+        let loyalWeight = 0;
+        //get to the bottom of this before moving to a new branch
+        loyalWeight += 1 * this.stats[LEGS_METAL_STAT];
+        loyalWeight += 1 * this.stats[ARMS_METAL_STAT];
+        //explore new branches first
+        loyalWeight += -1 * this.stats[MIND_METAL_STAT];
+        loyalWeight += -1 * this.stats[EYES_METAL_STAT];
+        loyalWeight += -1 * this.stats[TONGUE_METAL_STAT];
+
         //can be forced because if literally nothing gets chosen, well, you made your choice
         const chooseStay = (force) => {
             console.log(`JR NOTE: will ${this.name} choose to stay?`, force)
@@ -203,6 +214,7 @@ class Entity {
             stayWeight += -1 * this.stats[ARMS_METAL_STAT];
             stayWeight += -1 * this.stats[LEGS_METAL_STAT];
 
+
             console.log("JR NOTE: stay weight was", stayWeight)
             if (force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
                 console.log("JR NOTE: going to stay")
@@ -215,13 +227,26 @@ class Entity {
         const chooseEast = () => {
             console.log(`JR NOTE: will ${this.name} choose to go east?`)
 
-            if (east && this.corruption < 113 && rand.nextDouble() > 0.25) {
+            if (east && this.corruption < 113 && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.name} decides to continue walking down the mall corridor, and moves to the EAST.`;
                 } else {
                     ele.innerHTML = `${this.name} decides to try out this new mall corridor, and moves to the EAST.`;
                 }
                 return east;
+            }
+        }
+
+        const chooseSouth = () => {
+            console.log(`JR NOTE: will ${this.name} choose to go south?`)
+
+            if (south && this.corruption < 113 && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
+                if (currentLocation.name === CORRIDOR_NAME) {
+                    ele.innerHTML = `${this.name} decides to explore the mysterious ${south.name} and moves to the  SOUTH.`;
+                } else {
+                    ele.innerHTML = `${this.name} barely even notices when the ${currentLocation.name} blends into a ${south.name}.`;
+                }
+                return south;
             }
         }
 
@@ -242,8 +267,15 @@ class Entity {
         //then check where  you want to go
 
         chosenLocation = chooseStay();
+
+
+
         if (!chosenLocation) {
             chosenLocation = chooseEast();
+        }
+
+        if (!chosenLocation) {
+            chosenLocation = chooseSouth();
         }
 
         if (!chosenLocation) {
