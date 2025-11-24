@@ -177,7 +177,27 @@ class Location {
         //alright now that i know what everyone COULD do, what are they actually doing?
         //even tho we initialized all game players (to know what your role is) we are only getting local ones
         for (let p of this.players) {
-            const options = possibleActions[p.name];
+            let options = possibleActions[p.name];
+
+            if (p.isStartingToFeelCorruption()) {
+                options.push(`${p.nameHTML()} is clutching their stomach.`)
+                options.push(`${p.nameHTML()} is sweating really bad.`)
+                options.push(`${p.nameHTML()} is breathing really hard.`)
+                options.push(`${p.nameHTML()} is grabbing and scratching at their head...`)
+                options.push(`${p.nameHTML()} is repeating little phrases quietly to themselves...over and over up and down...`)
+            }
+
+            //interesting the corruption only fully gets you when you're alone
+            //if something is happening to you, the Curiosity To See will pull you forward just that little bit longer
+            //its the quiet moments afterwards you need to worry about
+            if (p.hasHitMaxCorruption() && !p.corrupted) {
+                p.becomeCorrupted(rand);
+                options = [`${p.nameHTML()} screams and screams as their eyes seal over with ${p.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${p.mannequin_type} their screams strangle into nothing. `]
+            } else if (p.corrupted) {
+                options = [`What had once been ${p.nameHTML()} moves only when you cannot see them, their ${p.mannequin_type} limbs firmly locked into place as your gaze falls upon them.`]
+            }
+
+
             if (!options || options.length === 0) {
                 options.push(`${p.nameHTML()} isn't doing anything in particular.`);
             }

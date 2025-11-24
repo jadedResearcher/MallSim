@@ -246,6 +246,9 @@ class Relationship {
 class Entity {
     name = "Jane Doe"; //JR will probably steal this though, especially if you Join The Loop
     theme_keys = [];
+    dead = false;
+    corrupted = false;
+    mannequin_type = "wood"
     corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
     current_location; //can be undefined, usually if glitch
@@ -266,6 +269,37 @@ class Entity {
         all_entities[this.title] = this;
         this.stats = getStatsFromThemes(this.theme_keys);
         console.log(`JR NOTE: ${this.name} has stats`, { stats: this.stats })
+    }
+
+    //roll for mannequin type
+    //location will call this in a regular 'blank' event
+    //(the conceit is if something interesting is happening to you, you resist longer)
+    becomeCorrupted = (rand) => {
+        this.corrupted = true;
+        const types = ["wood", "plaster", "porcelain", "ceramic", "wood", "plastic", "wood", "plastic", "plastic"];
+        this.mannequin_type = rand.pickFrom(types);
+    }
+
+    //if you're starting to feel weird you start trying to leave
+    isStartingToFeelCorruption = () => {
+        let max = 113;
+        max += 1 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
+        max += -1 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
+        max += -1 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
+        max += -1 * this.stats[ARMS_METAL_STAT]; // if you give in to the urge to create, Zampanio gets you faster
+        max += +1 * this.stats[LEGS_METAL_STAT]; //just walk away
+        return this.corruption > max;
+    }
+
+    //have fun being a mannequin
+    hasHitMaxCorruption = () => {
+        let max = 413;
+        max += 2 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
+        max += -2 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
+        max += -2 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
+        max += -2 * this.stats[ARMS_METAL_STAT]; // if you give in to the urge to create, Zampanio gets you faster
+        max += +2 * this.stats[LEGS_METAL_STAT]; //just walk away
+        return this.corruption > max;
     }
 
     nameHTML = () => {
@@ -358,7 +392,7 @@ class Entity {
         const chooseEast = () => {
             console.log(`JR NOTE: will ${this.name} choose to go east?`)
 
-            if (east && this.corruption < 113 && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
+            if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.name} decides to continue walking down the mall corridor, and moves to the EAST.`;
                 } else {
@@ -371,7 +405,7 @@ class Entity {
         const chooseSouth = () => {
             console.log(`JR NOTE: will ${this.name} choose to go south?`)
 
-            if (south && this.corruption < 113 && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
+            if (south && !this.isStartingToFeelCorruption() && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.name} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH.`;
                 } else {
@@ -384,12 +418,23 @@ class Entity {
         const chooseWest = () => {
             console.log(`JR NOTE: will ${this.name} choose to go west?`)
 
-            if (west && this.corruption > 113 && rand.nextDouble() > 0.5) {
+            if (west && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
                 if (currentLocation.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.name} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST.`;
                 } else {
                     ele.innerHTML = `${this.name} decides to try going back to a more familiar corridor, and moves to the WEST.`;
                 }
+                return west;
+            }
+        }
+
+        const chooseNorth = () => {
+            console.log(`JR NOTE: will ${this.name} choose to go north?`)
+
+            if (north && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
+
+                ele.innerHTML = `${this.name} decides to try getting back to the entrance, and moves to the NORTH.`;
+
                 return west;
             }
         }
@@ -411,6 +456,10 @@ class Entity {
 
         if (!chosenLocation) {
             chosenLocation = chooseWest();
+        }
+
+        if (!chosenLocation) {
+            chosenLocation = chooseNorth();
         }
 
 
