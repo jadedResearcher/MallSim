@@ -153,7 +153,7 @@ class Game {
                 console.warn("JR NOTE: todo, scan location for valid events")
 
                 if (!event_happened) {
-                    location.renderGenericBoringNonEvent(this.rand, tick_container);
+                    location.renderGenericBoringNonEvent(this, this.rand, tick_container);
                 }
             }
         }
@@ -310,6 +310,12 @@ class Game {
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
         general_intro.innerHTML = `${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
+        const mindPlayer = getPartyHighestMind(this.players);
+        const eyesPlayer = getPartyHighestEyes(this.players);
+        const tonguePlayer = getPartyHighestTongue(this.players);
+        const armPlayer = getPartyHighestArms(this.players);
+        const legPlayer = getPartyHighestLegs(this.players);
+        console.log("JR NOTE: getting the relations", { tonguePlayer })
 
         for (let player of this.players) {
             const ele = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
@@ -346,6 +352,30 @@ class Game {
             worstStatMap[LEGS_METAL_STAT] = ["They also tend to walk at a relaxed pace.", "They also seem no rush to get anywhere.", "They're also often late to appointments."]
 
             text += ` ${this.rand.pickFrom(worstStatMap[player.lowestStat().key])}`;
+
+
+            const roles = [];
+            if (mindPlayer === player) {
+                roles.push("smart")
+            }
+
+            if (eyesPlayer === player) {
+                roles.push("observant")
+            }
+
+            if (tonguePlayer === player) {
+                roles.push("charismatic")
+            }
+
+            if (armPlayer === player) {
+                roles.push("handy")
+            }
+
+            if (legPlayer === player) {
+                roles.push("fast")
+            }
+
+            text += ` They are the ${arrayToHumanSentence(roles)} one.`;
 
             //relationships
             const family = getFamilyOfEntity(player);

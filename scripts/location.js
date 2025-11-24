@@ -76,7 +76,8 @@ class Location {
 
     //whoever is inside you pokes around and finds nothing
     //maybe they hear something in the distance or smell something
-    renderGenericBoringNonEvent = (rand, parent) => {
+    //take in game so we know what players are like relative to the full party (i don't care how high your mind stat is, are you "the smart one" or not)
+    renderGenericBoringNonEvent = (game, rand, parent) => {
         console.log("JR NOTE: renderGenericBoringNonEvent for: ", this.name)
         const intro_container = createElementWithClassAndParent("div", parent);
         intro_container.style.marginBottom = "50px"
@@ -88,18 +89,18 @@ class Location {
         const sound = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, SOUND, false);
 
         //its a coincidence that the only homestuck aspect was my old one. so sue me
-        const mindPlayer = getPartyHighestMind(this.players);
-        const eyesPlayer = getPartyHighestEyes(this.players);
-        const tonguePlayer = getPartyHighestTongue(this.players);
-        const armPlayer = getPartyHighestArms(this.players);
-        const legPlayer = getPartyHighestLegs(this.players);
+        const mindPlayer = getPartyHighestMind(game.players);
+        const eyesPlayer = getPartyHighestEyes(game.players);
+        const tonguePlayer = getPartyHighestTongue(game.players);
+        const armPlayer = getPartyHighestArms(game.players);
+        const legPlayer = getPartyHighestLegs(game.players);
 
 
-        const antiMindPlayer = getPartyLowestMind(this.players);
-        const antiEyesPlayer = getPartyLowestEyes(this.players);
-        const antiTonguePlayer = getPartyLowestTongue(this.players);
-        const antiArmPlayer = getPartyLowestArms(this.players);
-        const antiLegPlayer = getPartyLowestLegs(this.players);
+        const antiMindPlayer = getPartyLowestMind(game.players);
+        const antiEyesPlayer = getPartyLowestEyes(game.players);
+        const antiTonguePlayer = getPartyLowestTongue(game.players);
+        const antiArmPlayer = getPartyLowestArms(game.players);
+        const antiLegPlayer = getPartyLowestLegs(game.players);
 
 
         //gather up everything you might be able to do, keyed by player  name
@@ -108,7 +109,7 @@ class Location {
         //and hey, weird bugs feed me
         const possibleActions = {};
         //initialize
-        for (let p of this.players) {
+        for (let p of game.players) {
             possibleActions[p.name] = [];
         }
 
@@ -116,56 +117,56 @@ class Location {
         //we don't care about specifics of the stats just
         //what roll do you play in the party, relative to the others. 
 
-        if (mindPlayer) {
+        if (mindPlayer && this.players.includes(mindPlayer)) {
             possibleActions[mindPlayer.name].push(`${mindPlayer.nameHTML()} is planning what the next steps should be.`);
             possibleActions[mindPlayer.name].push(`${mindPlayer.nameHTML()} is thinking deeply about what to do next.`);
         }
 
-        if (antiMindPlayer) {
+        if (antiMindPlayer && this.players.includes(antiMindPlayer)) {
             possibleActions[antiMindPlayer.name].push(`${antiMindPlayer.nameHTML()} is thinking of nothing in particular.`);
             possibleActions[antiMindPlayer.name].push(`${antiMindPlayer.nameHTML()} is daydreaming about soup.`);
         }
 
 
-        if (eyesPlayer) {
+        if (eyesPlayer && this.players.includes(eyesPlayer)) {
             possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} pokes around at all the nooks and crannies but doesn't really find anything.`);
             possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} tries to figure out where the smell of ${smell} is coming from, but has no luck.`);
             possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} tries to figure out where the sound of ${sound} is coming from, but has no luck.`);
         }
 
-        if (antiEyesPlayer) {
+        if (antiEyesPlayer && this.players.includes(antiEyesPlayer)) {
             possibleActions[antiEyesPlayer.name].push(`${antiEyesPlayer.nameHTML()} barely even notices the smell of ${smell}.`);
             possibleActions[antiEyesPlayer.name].push(`${antiEyesPlayer.nameHTML()} barely even notices the taste of ${taste} lingering in the air.`);
         }
 
 
 
-        if (tonguePlayer) {
+        if (tonguePlayer && this.players.includes(tonguePlayer)) {
             possibleActions[tonguePlayer.name].push(`${tonguePlayer.nameHTML()} reminds ${this.players.length > 1 ? "everyone" : "themself"} to hydrate. They can't help recover ANY Harvest Fruit if they pass out from dehydration. `);
             possibleActions[tonguePlayer.name].push(`${tonguePlayer.nameHTML()} rambles to ${this.players.length > 1 ? "everyone" : "themself"} about what THEY are going to do once they are fully Wasted. What sick stunts can you do with the fabric of reality once you know how to hack it? `);
         }
 
-        if (antiTonguePlayer) {
+        if (antiTonguePlayer && this.players.includes(antiTonguePlayer)) {
             possibleActions[antiTonguePlayer.name].push(`${antiTonguePlayer.nameHTML()} doesn't really feel like talking to anyone. ${this.players.length > 1 ? "" : "They are glad to be alone."} `);
             possibleActions[antiTonguePlayer.name].push(`${antiTonguePlayer.nameHTML()} is silent. `);
         }
 
-        if (armPlayer) {
+        if (armPlayer && this.players.includes(armPlayer)) {
             possibleActions[armPlayer.name].push(`${armPlayer.nameHTML()} digs through various piles of junk on the floor, but doesn't find anything.`);
             possibleActions[armPlayer.name].push(`${armPlayer.nameHTML()} clears away debris and old signs, making sure everything is clear.`);
         }
 
-        if (antiArmPlayer) {
+        if (antiArmPlayer && this.players.includes(antiArmPlayer)) {
             possibleActions[antiArmPlayer.name].push(`${antiArmPlayer.nameHTML()} doesn't see anything obvious sticking out and doesn't really feel like digging around in piles of junk.`);
             possibleActions[antiArmPlayer.name].push(`${antiArmPlayer.nameHTML()} wishes that it wasn't so cluttered with debris and old signs everywhere.`);
         }
 
-        if (legPlayer) {
+        if (legPlayer && this.players.includes(legPlayer)) {
             possibleActions[legPlayer.name].push(`${legPlayer.nameHTML()} bounces lighty on their feet, ready for some action. They can almost taste the ${taste} in the next room.`);
             possibleActions[legPlayer.name].push(`${legPlayer.nameHTML()} is itching to find new areas of the Mall.`);
         }
 
-        if (antiLegPlayer) {
+        if (antiLegPlayer && this.players.includes(antiLegPlayer)) {
             possibleActions[antiLegPlayer.name].push(`${antiLegPlayer.nameHTML()} conserves their energy, sitting on a nearby bench for a while. They're surprised that it feels like ${feeling}.`);
             possibleActions[antiLegPlayer.name].push(`${antiLegPlayer.nameHTML()} worries that they're not spending enough time in each area to make sure everything is found.`);
         }
@@ -174,6 +175,7 @@ class Location {
         //METAL
         let ret = "";
         //alright now that i know what everyone COULD do, what are they actually doing?
+        //even tho we initialized all game players (to know what your role is) we are only getting local ones
         for (let p of this.players) {
             const options = possibleActions[p.name];
             if (!options || options.length === 0) {
