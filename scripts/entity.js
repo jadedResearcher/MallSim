@@ -245,7 +245,7 @@ class Relationship {
 
 class Entity {
     name = "Jane Doe"; //JR will probably steal this though, especially if you Join The Loop
-    themes = [];
+    theme_keys = [];
     corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
     current_location; //can be undefined, usually if glitch
@@ -261,10 +261,10 @@ class Entity {
 
     constructor(themes, rand) {
         this.name = `${rand.pickFrom(first_names)} ${rand.pickFrom(last_names)}`;
-        this.themes = themes;
+        this.theme_keys = themes;
         this.title = classpectFromThemeList(rand, themes);
         all_entities[this.title] = this;
-        this.stats = getStatsFromThemes(this.themes);
+        this.stats = getStatsFromThemes(this.theme_keys);
         console.log(`JR NOTE: ${this.name} has stats`, { stats: this.stats })
     }
 

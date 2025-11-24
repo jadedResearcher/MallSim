@@ -62,3 +62,32 @@ one of the Unmarked (so fresh they don't even have a title) made this incredible
 http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/DefinitelyNotNewAudioLogs/podcast_by_ellienamored.mp3
 
 */
+
+
+/*
+https://www.tumblr.com/jadedresearcher/787355043208839168?source=share
+
+my original notes sparked from this in June, 2025
+
+wooden mannequins dive into the mall looking for loot
+
+well they dont start that way
+
+the further they go the more mannequin they become, and the game only begins when they do
+
+looters can encounter mall blorbos, or even wanda herself as rare events
+
+WOULD YOU SURVIVE ZAMPANIO is the tag line
+
+pick your classpect and interests and have fun exploring the mall 
+
+the stores you find are based on the parties classpect and interests
+
+relationship engine, the whole works
+
+mannequization is god tiering
+
+
+
+
+*/

@@ -45,6 +45,7 @@ const getSouth = (map, row, col) => {
 class Game {
     players = [];
     current_tick = 0;
+    theme_keys = []; //collated from the players
     rand;//only thing storing it, pass it to anything that needs to use it
     //each row is a row in the map
     //each cell is either undefined or a room in the mall
@@ -52,6 +53,10 @@ class Game {
     constructor(rand) {
         this.rand = rand;
         this.players = randomParty(rand);
+        for (let player of this.players) {
+            console.log("JR NOTE: trying to scrape up themes from player,  ", { player, theme_keys_from_game: this.theme_keys })
+            this.theme_keys = this.theme_keys.concat(player.theme_keys);
+        }
 
     }
 
@@ -145,7 +150,7 @@ class Game {
             //only locations with players 
             if (location.players.length > 0) {
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} ${location.players.length > 1 ? "are" : "is"} poking around in the ${location.name}.`;
+                start_phrase.innerHTML = `${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} ${location.players.length > 1 ? "are" : "is"} poking around in the ${location.longer_name}.`;
 
                 console.log("JR NOTE: checking if location is awake: ", location.name)
                 let event_happened = false;
@@ -217,7 +222,7 @@ class Game {
         const intro_container = createElementWithClassAndParent("div", tick_container);
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
-        const mall_entrance = new Location("Entrance", "Mall Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], 0, 0, []);
+        const mall_entrance = new Location("Entrance", "Mall Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(this.theme_keys)], 0, 0, []);
         mall_entrance.players = [...this.players];
         for (let player of this.players) {
             player.current_location = mall_entrance; //so they aren't screaming they're in teh void
@@ -253,10 +258,10 @@ class Game {
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
         console.warn("JR NOTE: todo pick from set of random shops with specific internalevents", location);
-        const themes = [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)];
-        const personal_adj = pickARandomThemeFromListAndGrabKey(this.rand, themes, location.theme_keys, ADJ, true);
+        const themes = [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(this.theme_keys)];
+        const personal_adj = pickARandomThemeFromListAndGrabKey(this.rand, themes, ADJ, true);
 
-        const random_shop = new Location(`Shop`, `${this.rand.pickFrom(personal_adj)} Shop`, themes, right_row, right_col, []);
+        const random_shop = new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, []);
 
         if (this.map[right_row] && right_row < this.map.length && this.rand.nextDouble() > odds_empty) {
             console.log("JR NOTE: handleAddingShopToSouthOfLocation adding a shop to an existing row")
@@ -286,7 +291,7 @@ class Game {
     handleAddingCorridorToEastOfLocation = (location) => {
         let right_row = location.row;
         let right_col = location.col + 1;
-        const corridor = new Location(CORRIDOR_NAME, "Mall Corridor", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
+        const corridor = new Location(CORRIDOR_NAME, "Mall Corridor", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(this.theme_keys)], right_row, right_col, []);
 
         if (!this.map[right_row][right_col]) {
             //if right does not exist, check if its col index is the same or greater than the rows length
@@ -327,9 +332,9 @@ class Game {
             }
 
             //interests
-            const backstory = pickARandomThemeFromListAndGrabKey(this.rand, player.themes, GENERALBACKSTORY, false);
-            const compliemnt = pickARandomThemeFromListAndGrabKey(this.rand, player.themes, COMPLIMENT, false);
-            const insult = pickARandomThemeFromListAndGrabKey(this.rand, player.themes, INSULT, false);
+            const backstory = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, GENERALBACKSTORY, false);
+            const compliemnt = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, COMPLIMENT, false);
+            const insult = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, INSULT, false);
             text += ` ${titleCase(insult)} but ${compliemnt}, they ${backstory}.`
 
             const bestStatMap = {};
