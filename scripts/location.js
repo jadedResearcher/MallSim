@@ -32,6 +32,8 @@ https://kittyhorrorshow.itch.io/anatomy
 
 class Location {
     name = "???"
+    longer_name = "??? But Longer"
+
     row = 0;
     col = 0;
     corruption = 1; //rooms get deeper the further in they go
@@ -41,8 +43,9 @@ class Location {
 
     events = []; //doesn't mean anything yet, but will.
 
-    constructor(name, theme_keys, row, col, events) {
+    constructor(name, longer_name, theme_keys, row, col, events) {
         this.name = name;
+        this.longer_name = longer_name;
         this.row = row;
         this.col = col;
         //deeper to the east you get but what REALLY starts adding up is deeper to the south
@@ -76,69 +79,115 @@ class Location {
     renderGenericBoringNonEvent = (rand, parent) => {
         console.log("JR NOTE: renderGenericBoringNonEvent for: ", this.name)
         const intro_container = createElementWithClassAndParent("div", parent);
-        const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+        intro_container.style.marginBottom = "50px"
 
-        const templates = [];//populate this based on what kind of players we have
-
-
+        console.log("JR NOTE: this.theme keys is", this.theme_keys)
         const feeling = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, FEELING, false);
         const smell = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, SMELL, false);
         const taste = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, TASTE, false);
         const sound = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, SOUND, false);
 
+        //its a coincidence that the only homestuck aspect was my old one. so sue me
+        const mindPlayer = getPartyHighestMind(this.players);
+        const eyesPlayer = getPartyHighestEyes(this.players);
+        const tonguePlayer = getPartyHighestTongue(this.players);
+        const armPlayer = getPartyHighestArms(this.players);
+        const legPlayer = getPartyHighestLegs(this.players);
 
 
-        const curious_player = rand.pickFrom(this.players);
-        const accepting_player = rand.pickFrom(this.players);
+        const antiMindPlayer = getPartyLowestMind(this.players);
+        const antiEyesPlayer = getPartyLowestEyes(this.players);
+        const antiTonguePlayer = getPartyLowestTongue(this.players);
+        const antiArmPlayer = getPartyLowestArms(this.players);
+        const antiLegPlayer = getPartyLowestLegs(this.players);
 
-        const patient_player = rand.pickFrom(this.players);
-        const energetic_player = rand.pickFrom(this.players);
-        const idealistic_player = rand.pickFrom(this.players);
-        const realistic_player = rand.pickFrom(this.players);
 
-        const free_player = rand.pickFrom(this.players);
-        const loyal_player = rand.pickFrom(this.players);
-
-        //instead of being paired like this, real events will have templates and results that are reliant on who is present
-        //for example, at least one person who can SEE devona and one person who can CATCH her gets THIS path
-        if (curious_player) {
-            templates.push(`${curious_player.nameHTML()} pokes around at all the nooks and crannies but doesn't really find anything.`);
-            templates.push(`${curious_player.nameHTML()} tries to figure out where the smell of ${smell} is coming from, but has no luck.`);
-            templates.push(`${curious_player.nameHTML()} tries to figure out where the sound of ${sound} is coming from, but has no luck.`);
-        } else if (accepting_player) {
-            templates.push(`${accepting_player.nameHTML()} barely even notices the smell of ${smell}.`);
-            templates.push(`${accepting_player.nameHTML()} barely even notices the sound of ${smell}.`);
+        //gather up everything you might be able to do, keyed by player  name
+        //yes this means if two party members have identical names the system will confused
+        //we will too tho so its probably fine
+        //and hey, weird bugs feed me
+        const possibleActions = {};
+        //initialize
+        for (let p of this.players) {
+            possibleActions[p.name] = [];
         }
 
-        if (energetic_player) {
-            templates.push(`${energetic_player.nameHTML()} bounces lighty on their feet, ready for some action. They can almost taste the ${taste}.`);
 
-        } else if (patient_player) {
-            templates.push(`${patient_player.nameHTML()} conserves their energy, sitting on a nearby bench for a while. They're surprised that it feels like ${feeling}.`);
+        //we don't care about specifics of the stats just
+        //what roll do you play in the party, relative to the others. 
+
+        if (mindPlayer) {
+            possibleActions[mindPlayer.name].push(`${mindPlayer.nameHTML()} is planning what the next steps should be.`);
+            possibleActions[mindPlayer.name].push(`${mindPlayer.nameHTML()} is thinking deeply about what to do next.`);
         }
 
-        if (free_player) {
-            templates.push(`${free_player.nameHTML()} is itching to find new areas of the Mall.`);
-
-        } else if (loyal_player) {
-            templates.push(`${patient_player.nameHTML()} worries that they're not spending enough time in each area to make sure everything is found.`);
+        if (antiMindPlayer) {
+            possibleActions[antiMindPlayer.name].push(`${antiMindPlayer.nameHTML()} is thinking of nothing in particular.`);
+            possibleActions[antiMindPlayer.name].push(`${antiMindPlayer.nameHTML()} is daydreaming about soup.`);
         }
 
-        if (realistic_player) {
-            if (this.players.length > 1) {
-                templates.push(`${realistic_player.nameHTML()} reminds everyone to hydrate. They can't help recover ANY Harvest Fruit if they pass out from dehydration. `);
+
+        if (eyesPlayer) {
+            possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} pokes around at all the nooks and crannies but doesn't really find anything.`);
+            possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} tries to figure out where the smell of ${smell} is coming from, but has no luck.`);
+            possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} tries to figure out where the sound of ${sound} is coming from, but has no luck.`);
+        }
+
+        if (antiEyesPlayer) {
+            possibleActions[antiEyesPlayer.name].push(`${antiEyesPlayer.nameHTML()} barely even notices the smell of ${smell}.`);
+            possibleActions[antiEyesPlayer.name].push(`${antiEyesPlayer.nameHTML()} barely even notices the taste of ${taste} lingering in the air.`);
+        }
+
+
+
+        if (tonguePlayer) {
+            possibleActions[tonguePlayer.name].push(`${tonguePlayer.nameHTML()} reminds ${this.players.length > 1 ? "everyone" : "themself"} to hydrate. They can't help recover ANY Harvest Fruit if they pass out from dehydration. `);
+            possibleActions[tonguePlayer.name].push(`${tonguePlayer.nameHTML()} rambles to ${this.players.length > 1 ? "everyone" : "themself"} about what THEY are going to do once they are fully Wasted. What sick stunts can you do with the fabric of reality once you know how to hack it? `);
+        }
+
+        if (antiTonguePlayer) {
+            possibleActions[antiTonguePlayer.name].push(`${antiTonguePlayer.nameHTML()} doesn't really feel like talking to anyone. ${this.players.length > 1 ? "" : "They are glad to be alone."} `);
+            possibleActions[antiTonguePlayer.name].push(`${antiTonguePlayer.nameHTML()} is silent. `);
+        }
+
+        if (armPlayer) {
+            possibleActions[armPlayer.name].push(`${armPlayer.nameHTML()} digs through various piles of junk on the floor, but doesn't find anything.`);
+            possibleActions[armPlayer.name].push(`${armPlayer.nameHTML()} clears away debris and old signs, making sure everything is clear.`);
+        }
+
+        if (antiArmPlayer) {
+            possibleActions[antiArmPlayer.name].push(`${antiArmPlayer.nameHTML()} doesn't see anything obvious sticking out and doesn't really feel like digging around in piles of junk.`);
+            possibleActions[antiArmPlayer.name].push(`${antiArmPlayer.nameHTML()} wishes that it wasn't so cluttered with debris and old signs everywhere.`);
+        }
+
+        if (legPlayer) {
+            possibleActions[legPlayer.name].push(`${legPlayer.nameHTML()} bounces lighty on their feet, ready for some action. They can almost taste the ${taste} in the next room.`);
+            possibleActions[legPlayer.name].push(`${legPlayer.nameHTML()} is itching to find new areas of the Mall.`);
+        }
+
+        if (antiLegPlayer) {
+            possibleActions[antiLegPlayer.name].push(`${antiLegPlayer.nameHTML()} conserves their energy, sitting on a nearby bench for a while. They're surprised that it feels like ${feeling}.`);
+            possibleActions[antiLegPlayer.name].push(`${antiLegPlayer.nameHTML()} worries that they're not spending enough time in each area to make sure everything is found.`);
+        }
+
+
+        //METAL
+        let ret = "";
+        //alright now that i know what everyone COULD do, what are they actually doing?
+        for (let p of this.players) {
+            const options = possibleActions[p.name];
+            if (!options || options.length === 0) {
+                options.push(`${p.nameHTML()} isn't doing anything in particular.`);
             }
-        } else if (idealistic_player) {
-            if (this.players.length > 1) {
-                templates.push(`${idealistic_player.nameHTML()} rambles to everyone about what THEY are going to do once they are fully Wasted. What sick stunts can you do with the fabric of reality once you know how to hack it? `);
+            if (ret == "") {
+                ret += `<p>${rand.pickFrom(options)}</p>`;
+            } else {
+                const bridgeWords = ["", "", "", "", "", "", "", "", "Meanwhile, ", "At the same time, ", "Also, "];
+                ret += `<p>${rand.pickFrom(bridgeWords)}${rand.pickFrom(options)}</p>`;
             }
         }
 
-
-        console.log('JR NOTE: eventually select template variables based on stats. So a curious player will be the one poking around etc.')
-
-        const ret_options = [`${rand.pickFrom(templates)} <br><br>Meanwhile, ${rand.pickFrom(templates)}`];
-        general_intro.innerHTML = rand.pickFrom(ret_options);
+        intro_container.innerHTML = ret;
 
     }
 }

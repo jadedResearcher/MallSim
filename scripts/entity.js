@@ -1,6 +1,136 @@
 //keyed by title (names can be lost)
 const all_entities = {};
 
+/*
+BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[EYES_METAL_STAT] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[TONGUE_METAL_STAT] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[ARMS_METAL_STAT] = MEDIUM_STAT_VALUE;
+BASELINE_METAL_OBJECT[LEGS_METAL_STAT] = MEDIUM_STAT_VALUE;
+*/
+
+
+const getPartyLowestMind = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[MIND_METAL_STAT < ret[MIND_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyLowestEyes = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[EYES_METAL_STAT < ret[EYES_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyLowestTongue = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[TONGUE_METAL_STAT < ret[TONGUE_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyLowestArms = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[ARMS_METAL_STAT < ret[ARMS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyLowestLegs = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[LEGS_METAL_STAT < ret[LEGS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+
+
+const getPartyHighestMind = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[MIND_METAL_STAT > ret[MIND_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyHighestEyes = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[EYES_METAL_STAT > ret[EYES_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyHighestTongue = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[TONGUE_METAL_STAT > ret[TONGUE_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyHighestArms = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[ARMS_METAL_STAT > ret[ARMS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
+
+const getPartyHighestLegs = (party) => {
+    let ret;
+    for (let p of party) {
+        if (!ret) {
+            ret = p;
+        } else if (p.stats[LEGS_METAL_STAT > ret[LEGS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+            ret = p;
+        }
+    }
+    return ret;
+}
 
 const getFamilyOfEntity = (person) => {
     const ret = [];
@@ -218,7 +348,7 @@ class Entity {
             console.log("JR NOTE: stay weight was", stayWeight)
             if (force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
                 console.log("JR NOTE: going to stay")
-                ele.innerHTML = `${this.name} decides to stay in the ${currentLocation.name} for a little while longer, checking if they missed anything.`;
+                ele.innerHTML = `${this.name} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything.`;
                 return currentLocation;
 
             }
@@ -242,9 +372,9 @@ class Entity {
 
             if (south && this.corruption < 113 && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.name} decides to explore the mysterious ${south.name} and moves to the  SOUTH.`;
+                    ele.innerHTML = `${this.name} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH.`;
                 } else {
-                    ele.innerHTML = `${this.name} barely even notices when the ${currentLocation.name} blends into a ${south.name}.`;
+                    ele.innerHTML = `${this.name} barely even notices when the ${currentLocation.longer_name} blends into a ${south.longer_name}.`;
                 }
                 return south;
             }

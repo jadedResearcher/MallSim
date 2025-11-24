@@ -288,7 +288,28 @@ function stringtoseed(seed) {
   }
   return output
 }
+/*
+everyone leaves but i remain
 
+theres something ironic that when i went to record this thought, i was here
+right above remove item once. 
+
+every fan of zampanio i see has such passion but such a short spark
+
+
+that's not true of course. the Lonely whispers to me as it ever does
+
+
+but i hope
+
+i hope more people ready for the marathon
+
+can be found
+
+the sprint
+
+seems so draining
+*/
 function removeItemOnce(arr, value) {
   var index = arr.indexOf(value);
   if (index > -1) {

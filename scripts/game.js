@@ -145,7 +145,6 @@ class Game {
             //only locations with players 
             if (location.players.length > 0) {
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-
                 start_phrase.innerHTML = `${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} ${location.players.length > 1 ? "are" : "is"} poking around in the ${location.name}.`;
 
                 console.log("JR NOTE: checking if location is awake: ", location.name)
@@ -164,10 +163,6 @@ class Game {
             if (!player.current_location) {
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams.`;
-            } else {
-                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `${player.nameHTML()} is ${player.current_location.name}`;
-
             }
         }
         this.renderMall(tick_container);
@@ -222,7 +217,7 @@ class Game {
         const intro_container = createElementWithClassAndParent("div", tick_container);
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
-        const mall_entrance = new Location("Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], 0, 0, []);
+        const mall_entrance = new Location("Entrance", "Mall Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(keys)], 0, 0, []);
         mall_entrance.players = [...this.players];
         for (let player of this.players) {
             player.current_location = mall_entrance; //so they aren't screaming they're in teh void
@@ -257,8 +252,11 @@ class Game {
         //if down does not exist, check if its row index is the same or greater than how many rows there are
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
-        console.warn("JR NOTE: todo pick from set of random shops with specific internalevents")
-        const random_shop = new Location(`${this.rand.internal_seed} Shop`, [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
+        console.warn("JR NOTE: todo pick from set of random shops with specific internalevents", location);
+        const themes = [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)];
+        const personal_adj = pickARandomThemeFromListAndGrabKey(this.rand, themes, location.theme_keys, ADJ, true);
+
+        const random_shop = new Location(`Shop`, `${this.rand.pickFrom(personal_adj)} Shop`, themes, right_row, right_col, []);
 
         if (this.map[right_row] && right_row < this.map.length && this.rand.nextDouble() > odds_empty) {
             console.log("JR NOTE: handleAddingShopToSouthOfLocation adding a shop to an existing row")
@@ -288,7 +286,7 @@ class Game {
     handleAddingCorridorToEastOfLocation = (location) => {
         let right_row = location.row;
         let right_col = location.col + 1;
-        const corridor = new Location(CORRIDOR_NAME, [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
+        const corridor = new Location(CORRIDOR_NAME, "Mall Corridor", [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(keys)], right_row, right_col, []);
 
         if (!this.map[right_row][right_col]) {
             //if right does not exist, check if its col index is the same or greater than the rows length
