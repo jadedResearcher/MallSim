@@ -15,7 +15,7 @@ const getPartyLowestMind = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[MIND_METAL_STAT] > ret.stats[MIND_METAL_STAT]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[MIND_METAL_STAT] < ret.stats[MIND_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -27,7 +27,7 @@ const getPartyLowestEyes = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[EYES_METAL_STAT] > ret.stats[EYES_METAL_STAT]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[EYES_METAL_STAT] < ret.stats[EYES_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -39,7 +39,7 @@ const getPartyLowestTongue = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[TONGUE_METAL_STAT] > ret.stats[TONGUE_METAL_STAT]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[TONGUE_METAL_STAT] < ret.stats[TONGUE_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -51,7 +51,7 @@ const getPartyLowestArms = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[ARMS_METAL_STAT] > ret.stats[ARMS_METAL_STAT]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[ARMS_METAL_STAT] < ret.stats[ARMS_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -63,7 +63,7 @@ const getPartyLowestLegs = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[LEGS_METAL_STAT] > ret.stats[LEGS_METAL_STAT]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[LEGS_METAL_STAT] < ret.stats[LEGS_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -77,7 +77,7 @@ const getPartyHighestMind = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[MIND_METAL_STAT] < ret.stats[MIND_METAL_STAT]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[MIND_METAL_STAT] > ret.stats[MIND_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -89,7 +89,7 @@ const getPartyHighestEyes = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[EYES_METAL_STAT] < ret.stats[EYES_METAL_STAT]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[EYES_METAL_STAT] > ret.stats[EYES_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -99,12 +99,9 @@ const getPartyHighestEyes = (party) => {
 const getPartyHighestTongue = (party) => {
     let ret;
     for (let p of party) {
-        console.log(`JR NOTE: does ${p.name} have higher tongue? ${p.stats[TONGUE_METAL_STAT]} `)
         if (!ret) {
-            console.log("JR NOTE: default tongue player")
             ret = p;
         } else if (p.stats[TONGUE_METAL_STAT] > ret.stats[TONGUE_METAL_STAT]) {//if equal pick the one who came first, prefers leader
-            console.log("JR NOTE: new tongue player")
             ret = p;
         }
     }
@@ -117,7 +114,7 @@ const getPartyHighestArms = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[ARMS_METAL_STAT < ret.stats[ARMS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[ARMS_METAL_STAT > ret.stats[ARMS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -129,7 +126,7 @@ const getPartyHighestLegs = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[LEGS_METAL_STAT < ret.stats[LEGS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[LEGS_METAL_STAT > ret.stats[LEGS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
