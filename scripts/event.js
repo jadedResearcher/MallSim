@@ -11,6 +11,7 @@ class Event {
 
     name = "Default Event";
 
+    //sub classes will override this, that way checkconditions can be kept in this class unchanged
     internalConditionCheck = (location) => {
         return false;
     }
@@ -22,11 +23,11 @@ class Event {
         if it IS triggered, it will call applyResult with the location and the parent to render to
         and return true, otherwise it will return false;
 
-        async just in case
+        do not make it async , please its a nightmare
     */
-    checkConditions = async (location, parentEle) => {
-        if (internalConditionCheck(location)) {
-            await this.applyResult(location, parentEle);
+    checkConditions = (game, location, parentEle) => {
+        if (this.internalConditionCheck(location)) {
+            this.applyResult(game, location, parentEle);
             return true;
         }
         return false;
@@ -35,7 +36,9 @@ class Event {
     //no event can effect more than one location at a time. 
     //though i suppose you can reach outside players through the relationship they have with those inside
     //actually the horror writes itself
-    applyResult = async (location, parent) => {
+    //actually no i need game for changing things, nvm
+    //sub classes will override this, that way checkconditions can be kept in this class unchanged
+    applyResult = (game, location, parent) => {
         const ele = createElementWithClassAndParent("div", parent);
         ele.innerText = "JR NOTE: whoops looks like i forgot to override the result for this event of: " + name;
 
@@ -58,13 +61,30 @@ class EscapeMall extends Event {
 
     //is there at least one person ready to escape?
     internalConditionCheck = (location) => {
-        let ret = false;
-        for (let person in location.players) {
-            if (person.isStartingToFeelCorruption() && !person.corrupted) {
+        for (let player of location.players) {
+            console.log("JR NOTE: checking player for escape event ", player)
 
+            if (player.isStartingToFeelCorruption() && !player.corrupted) {
+                return true;
             }
         }
-        return ret;
+        return false;
+    }
+
+    applyResult = (game, location, parent) => {
+        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        //everyone ready to leave can leave together
+        const leaving = [];
+        for (let player of location.players) {
+            console.log("JR NOTE: applying player for escape event ", player)
+            if (player.isStartingToFeelCorruption() && !player.corrupted) {
+                leaving.push(player);
+                removeItemOnce(location.players, player);
+                removeItemOnce(game.players, player);
+            }
+        }
+        ele.innerHTML = `${arrayToHumanSentence(leaving.map((n) => n.nameHTML()))} ${leaving.length > 1 ? "leave" : "leaves"} the mall, finally free of this nightmare. No amount of knowlege and power is worth the changes they could feel creeping into their ${leaving.length > 1 ? "body" : "bodies"}.`;
+
     }
 }
 //https://lostinzampanio.neocities.org/fanfictions/were_you_just_a_satellite

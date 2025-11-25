@@ -41,7 +41,7 @@ class Location {
     players = []; //locations tick, not players
     pending_players = []; //players moving into this location (needed so i don't tick them new)
 
-    events = []; //doesn't mean anything yet, but will.
+    events = [];
 
     constructor(name, longer_name, theme_keys, row, col, events) {
         this.name = name;
@@ -53,6 +53,16 @@ class Location {
         this.events = events;
         this.theme_keys = theme_keys;
         console.log("JR NOTE: made location with theme", theme_keys)
+    }
+
+    checkEventsAndApplyNoMoreThanOne = (game, ele) => {
+        for (let event of this.events) {
+            let triggered = event.checkConditions(game, this, ele);
+            if (triggered) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //handles corrupting them

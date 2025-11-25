@@ -152,13 +152,15 @@ class Game {
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 start_phrase.innerHTML = `${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} ${location.players.length > 1 ? "are" : "is"} poking around in the ${location.longer_name}.`;
 
+                const event_phrase = createElementWithClassAndParent("div", tick_container, "event-beat");
+
                 //console.log("JR NOTE: checking if location is awake: ", location.name)
-                let event_happened = false;
+                let event_happened = location.checkEventsAndApplyNoMoreThanOne(this, event_phrase);
 
                 //console.warn("JR NOTE: todo, scan location for valid events")
 
                 if (!event_happened) {
-                    location.renderGenericBoringNonEvent(this, this.rand, tick_container);
+                    location.renderGenericBoringNonEvent(this, this.rand, event_phrase);
                 }
             }
         }
@@ -224,6 +226,8 @@ class Game {
 
         const mall_entrance = new Location("Entrance", "Mall Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(this.theme_keys)], 0, 0, []);
         mall_entrance.players = [...this.players];
+        mall_entrance.events.push(new EscapeMall());
+
         for (let player of this.players) {
             player.current_location = mall_entrance; //so they aren't screaming they're in teh void
         }

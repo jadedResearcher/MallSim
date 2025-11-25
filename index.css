@@ -201,6 +201,10 @@ button {
 
 }
 
+.event-beat {
+  margin-top: 31px;
+}
+
 .mall-render {
   overflow: auto;
 }
