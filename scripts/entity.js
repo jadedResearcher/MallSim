@@ -1,5 +1,6 @@
 //keyed by title (names can be lost)
 const all_entities = {};
+let DEBUG_PLAYERS = true;
 
 /*
 BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
@@ -282,7 +283,7 @@ class Entity {
 
     //if you're starting to feel weird you start trying to leave
     isStartingToFeelCorruption = () => {
-        let max = 113;
+        let max = 1000;
         max += 1 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
         max += -1 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
         max += -1 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
@@ -293,12 +294,12 @@ class Entity {
 
     //have fun being a mannequin
     hasHitMaxCorruption = () => {
-        let max = 413;
-        max += 2 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
-        max += -2 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
-        max += -2 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
-        max += -2 * this.stats[ARMS_METAL_STAT]; // if you give in to the urge to create, Zampanio gets you faster
-        max += +2 * this.stats[LEGS_METAL_STAT]; //just walk away
+        let max = 2000;
+        max += 200 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
+        max += -50 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
+        max += -50 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
+        max += -50 * this.stats[ARMS_METAL_STAT]; // if you give in to the urge to create, Zampanio gets you faster
+        max += +200 * this.stats[LEGS_METAL_STAT]; //just walk away
         return this.corruption > max;
     }
 
@@ -306,7 +307,7 @@ class Entity {
         if (this.stolen_name) { //lol names suck, why bother with them? so much easier to know people by what they're doing, right?
             return this.titleHTML();
         }
-        return `<span class='player-name'>${this.name}</span>`;
+        return `<span class='player-name'>${this.name}(${DEBUG_PLAYERS ? `DEBUG INFO: corruption:${this.corruption}` : ""})</span>`;
     }
 
     titleHTML = () => {
@@ -383,7 +384,11 @@ class Entity {
             console.log("JR NOTE: stay weight was", stayWeight)
             if (force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
                 console.log("JR NOTE: going to stay")
-                ele.innerHTML = `${this.name} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything.`;
+                //locations handle adding corruption if you move into them
+                //if you stay, i still want you to corrupt, so, here we are
+                this.addCorruption(currentLocation.corruption);
+
+                ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 return currentLocation;
 
             }
@@ -394,9 +399,9 @@ class Entity {
 
             if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.name} decides to continue walking down the mall corridor, and moves to the EAST.`;
+                    ele.innerHTML = `${this.name} decides to continue walking down the mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else {
-                    ele.innerHTML = `${this.name} decides to try out this new mall corridor, and moves to the EAST.`;
+                    ele.innerHTML = `${this.name} decides to try out this new mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 }
                 return east;
             }
@@ -407,9 +412,9 @@ class Entity {
 
             if (south && !this.isStartingToFeelCorruption() && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.name} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH.`;
+                    ele.innerHTML = `${this.name} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else {
-                    ele.innerHTML = `${this.name} barely even notices when the ${currentLocation.longer_name} blends into a ${south.longer_name}.`;
+                    ele.innerHTML = `${this.name} barely even notices when the ${currentLocation.longer_name} blends into a ${south.longer_name}${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 }
                 return south;
             }
@@ -420,9 +425,9 @@ class Entity {
 
             if (west && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.name} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST.`;
+                    ele.innerHTML = `${this.name} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else {
-                    ele.innerHTML = `${this.name} decides to try going back to a more familiar corridor, and moves to the WEST.`;
+                    ele.innerHTML = `${this.name} decides to try going back to a more familiar corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 }
                 return west;
             }
@@ -433,7 +438,7 @@ class Entity {
 
             if (north && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
 
-                ele.innerHTML = `${this.name} decides to try getting back to the entrance, and moves to the NORTH.`;
+                ele.innerHTML = `${this.name} decides to try getting back to the entrance, and moves to the NORTH${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
 
                 return west;
             }

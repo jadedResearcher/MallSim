@@ -49,7 +49,7 @@ class Location {
         this.row = row;
         this.col = col;
         //deeper to the east you get but what REALLY starts adding up is deeper to the south
-        this.corruption = row * 10 + col;
+        this.corruption = row * 2 + col;
         this.events = events;
         this.theme_keys = theme_keys;
         console.log("JR NOTE: made location with theme", theme_keys)
