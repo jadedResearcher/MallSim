@@ -106,7 +106,6 @@ const getPartyHighestTongue = (party) => {
             ret = p;
         }
     }
-    console.log("JR NOTE: returning ret", ret)
     return ret;
 }
 
@@ -283,7 +282,7 @@ class Entity {
 
     //if you're starting to feel weird you start trying to leave
     isStartingToFeelCorruption = () => {
-        let max = 1000;
+        let max = 1300;
         max += 1 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
         max += -1 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
         max += -1 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
@@ -306,6 +305,11 @@ class Entity {
     nameHTML = () => {
         if (this.stolen_name) { //lol names suck, why bother with them? so much easier to know people by what they're doing, right?
             return this.titleHTML();
+        }
+
+        if (this.corrupted) {
+            return `<span class='player-name'>${Zalgo.generate(this.name)}(${DEBUG_PLAYERS ? `DEBUG INFO: corruption:${this.corruption}` : ""})</span>`;
+
         }
         return `<span class='player-name'>${this.name}(${DEBUG_PLAYERS ? `DEBUG INFO: corruption:${this.corruption}` : ""})</span>`;
     }
@@ -383,7 +387,7 @@ class Entity {
 
             console.log("JR NOTE: stay weight was", stayWeight)
             if (force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
-                console.log("JR NOTE: going to stay")
+                console.log("JR NOTE: going to stay", force)
                 //locations handle adding corruption if you move into them
                 //if you stay, i still want you to corrupt, so, here we are
                 this.addCorruption(currentLocation.corruption);
@@ -436,11 +440,11 @@ class Entity {
         const chooseNorth = () => {
             console.log(`JR NOTE: will ${this.name} choose to go north?`)
 
-            if (north && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
+            if (north && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.1) {
+                console.log("JR NOTE: going north")
+                ele.innerHTML = `${this.name} decides to try getting back to the entrance, and moves NORTH, into the ${north.longer_name} ${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
 
-                ele.innerHTML = `${this.name} decides to try getting back to the entrance, and moves to the NORTH${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
-
-                return west;
+                return north;
             }
         }
 

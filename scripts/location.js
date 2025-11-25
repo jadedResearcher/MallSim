@@ -78,11 +78,11 @@ class Location {
     //maybe they hear something in the distance or smell something
     //take in game so we know what players are like relative to the full party (i don't care how high your mind stat is, are you "the smart one" or not)
     renderGenericBoringNonEvent = (game, rand, parent) => {
-        console.log("JR NOTE: renderGenericBoringNonEvent for: ", this.name)
+        //console.log("JR NOTE: renderGenericBoringNonEvent for: ", this.name)
         const intro_container = createElementWithClassAndParent("div", parent);
         intro_container.style.marginBottom = "50px"
 
-        console.log("JR NOTE: this.theme keys is", this.theme_keys)
+        //console.log("JR NOTE: this.theme keys is", this.theme_keys)
         const feeling = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, FEELING, false);
         const smell = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, SMELL, false);
         const taste = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, TASTE, false);

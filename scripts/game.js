@@ -16,7 +16,7 @@ const getEast = (map, row, col) => {
     if (!map[row]) {
         return;
     }
-    console.log("JRNOTE: getEast", { map, row, col })
+    //console.log("JRNOTE: getEast", { map, row, col })
     return map[row][col + 1];
 }
 
@@ -152,10 +152,10 @@ class Game {
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 start_phrase.innerHTML = `${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} ${location.players.length > 1 ? "are" : "is"} poking around in the ${location.longer_name}.`;
 
-                console.log("JR NOTE: checking if location is awake: ", location.name)
+                //console.log("JR NOTE: checking if location is awake: ", location.name)
                 let event_happened = false;
 
-                console.warn("JR NOTE: todo, scan location for valid events")
+                //console.warn("JR NOTE: todo, scan location for valid events")
 
                 if (!event_happened) {
                     location.renderGenericBoringNonEvent(this, this.rand, tick_container);
@@ -175,7 +175,7 @@ class Game {
     }
 
     renderMall = (parent) => {
-        console.log("JR NOTE: rendering mall", this.map)
+        //console.log("JR NOTE: rendering mall", this.map)
         const mall_container = createElementWithClassAndParent("div", parent, "mall-render");
         for (let row of this.map) {
             const rowEle = createElementWithClassAndParent("div", mall_container, "maze-row");
@@ -247,28 +247,28 @@ class Game {
         const east = getEast(this.map, right_row, right_col);
         const west = getWest(this.map, right_row, right_col);
         if ((east && east.name != CORRIDOR_NAME) || west && west.name != CORRIDOR_NAME) {
-            console.log("JR NOTE: handleAddingShopToSouthOfLocation would have a shop touching another shop", east, west)
+            //console.log("JR NOTE: handleAddingShopToSouthOfLocation would have a shop touching another shop", east, west)
             return;
         }
 
         const odds_empty = force ? 0 : 0.3;
-        console.log("JR NOTE: processing handleAddingShopToSouthOfLocation, force is", { force, odds_empty, right_col, right_row })
+        //console.log("JR NOTE: processing handleAddingShopToSouthOfLocation, force is", { force, odds_empty, right_col, right_row })
         //if the row doesn't even exist OR it does but theres nothing in the column
         //if down does not exist, check if its row index is the same or greater than how many rows there are
         //if so, add a new row of all undefineds to the maze
         //then, pick my index and make a new random room
-        console.warn("JR NOTE: todo pick from set of random shops with specific internalevents", location);
+        //console.warn("JR NOTE: todo pick from set of random shops with specific internalevents", location);
         const themes = [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(this.theme_keys)];
         const personal_adj = pickARandomThemeFromListAndGrabKey(this.rand, themes, ADJ, true);
 
         const random_shop = new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, []);
 
         if (this.map[right_row] && right_row < this.map.length && this.rand.nextDouble() > odds_empty) {
-            console.log("JR NOTE: handleAddingShopToSouthOfLocation adding a shop to an existing row")
+            // console.log("JR NOTE: handleAddingShopToSouthOfLocation adding a shop to an existing row")
             this.map[right_row][right_col] = random_shop;
         } else {
             if (this.rand.nextDouble() < odds_empty) {
-                console.log("JR NOTE: handleAddingShopToSouthOfLocation making a new row")
+                //console.log("JR NOTE: handleAddingShopToSouthOfLocation making a new row")
                 const new_row = [];
                 for (let cel of this.map[0]) {
                     new_row.push(undefined);

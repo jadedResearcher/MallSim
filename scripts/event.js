@@ -44,3 +44,27 @@ class Event {
 //the rememberist made this: https://www.youtube.com/playlist?list=PL2wuGklhkS7AQ_BOALQ8g_z-NkA5Jhleb
 //and this https://ellienamored.neocities.org/expeditionzampanio
 //the archiving watcher of threads made this: https://mircuskasarok.neocities.org/
+
+
+
+/*
+    attach this to any mall entrance to give players a chance to escape
+    thought they only instinctively move towards the entrace at the top left when they're panicking
+
+    this is the first event im creating so hopefully i figure it out okay
+*/
+class EscapeMall extends Event {
+    name = "Escape Mall";
+
+    //is there at least one person ready to escape?
+    internalConditionCheck = (location) => {
+        let ret = false;
+        for (let person in location.players) {
+            if (person.isStartingToFeelCorruption() && !person.corrupted) {
+
+            }
+        }
+        return ret;
+    }
+}
+//https://lostinzampanio.neocities.org/fanfictions/were_you_just_a_satellite
