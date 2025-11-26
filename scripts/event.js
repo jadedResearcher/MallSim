@@ -100,7 +100,7 @@ class YongkiKill extends Event {
         //even he can't predict or stop himself
         //a stranger even to himself
         if (location.livingNonMannequinPlayers().length > 0) {
-            return game.rand.nextDouble() > 0.5;
+            return game.rand.nextDouble() < 0.01;
         }
         return false;
 

@@ -153,7 +153,7 @@ class Game {
             const livingPlayers = location.livingPlayers()
             if (livingPlayers.length > 0) {
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `${arrayToHumanSentence(livingPlayers.map((i) => i.nameHTML()))} ${livingPlayers.length > 1 ? "are" : "is"} poking around in the ${location.longer_name}.`;
+                start_phrase.innerHTML = `${arrayToHumanSentence(livingPlayers.map((i) => i.nameHTML()))} ${livingPlayers.length > 1 ? "are" : "is"} poking around in the ${location.longer_name} at [${location.row},${location.col}].`;
 
                 const event_phrase = createElementWithClassAndParent("div", tick_container, "event-beat");
 
@@ -194,7 +194,7 @@ class Game {
                     if (cell.name != CORRIDOR_NAME) {
                         ele.style.backgroundColor = "#a10000"
                     }
-                    ele.innerText = cell.name;
+                    ele.innerHTML = cell.name + `<br>[${cell.row},${cell.col}]`;
 
                     if (cell.players.length === 0) {
                         ele.classList.add("fog-of-war")

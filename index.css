@@ -213,6 +213,7 @@ button {
 
 .mall-render {
   overflow: auto;
+  max-height: 500px;
 }
 
 .empty-cell {
