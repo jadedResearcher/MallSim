@@ -656,6 +656,8 @@ const keyToLocalStorageArray = (key) => {
     return initEmptyArrayAtKey(key);
   }
 }
+//https://lostinzampanio.neocities.org/chronicle_of_the_marked
+//https://archiveofourown.org/chapters/195222166?show_comments=true&view_full_work=false#comment_1047460766
 
 //http://jsfiddle.net/JKirchartz/wwckP/    horrorterror html stuff
 var Zalgo = {
