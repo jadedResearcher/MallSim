@@ -116,11 +116,11 @@ class Game {
                 const south = getSouth(this.map, location.row, location.col)
                 const east = getEast(this.map, location.row, location.col)
                 const west = getWest(this.map, location.row, location.col)
-                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `<span style='color:red'>TODO:</span> have ${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} interact with each other (altering relationships) and decide whether to move to a new location or stay here. List out their deicisons.`;
-                for (let player of livingPlayers) {
-                    const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
 
+                for (let player of livingPlayers) {
+                    player.interactWithPlayer(location.players, interaction_phrase);
                     player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
                 }
 

@@ -1,6 +1,11 @@
 //keyed by title (names can be lost)
 const all_entities = {};
 let DEBUG_PLAYERS = false;
+const FAMILY_LABEL = "family"
+const PARTNER_LABEL = "partner"
+const FRIEND_LABEL = "friend"
+const RIVAL_LABEL = "rival"
+const TEAM_LABEL = "team-mate"
 
 /*
 BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
@@ -9,6 +14,8 @@ BASELINE_METAL_OBJECT[TONGUE_METAL_STAT] = MEDIUM_STAT_VALUE;
 BASELINE_METAL_OBJECT[ARMS_METAL_STAT] = MEDIUM_STAT_VALUE;
 BASELINE_METAL_OBJECT[LEGS_METAL_STAT] = MEDIUM_STAT_VALUE;
 */
+
+
 
 
 const getPartyLowestMind = (party) => {
@@ -224,6 +231,26 @@ class Relationship {
         this.setRomance(romantic);
     }
 
+    getLabel = () => {
+        let relationship_label = TEAM_LABEL;
+        if (this.romantic) {
+            relationship_label = PARTNER_LABEL;
+        } else if (this.familial) {
+            relationship_label = FAMILY_LABEL;
+        } else if (this.value > 30) {
+            relationship_label = FRIEND_LABEL
+        } else if (this.value < -30) {
+            relationship_label = RIVAL_LABEL
+        }
+        return relationship_label;
+    }
+
+    //whatever direction it already is, keep going
+    deepenRelationship = () => {
+        //dividing it by itself gets it to be 1, then taking only one of the absolute values keeps the sign
+        this.value = this.value / Math.abs(this.value) * 10;
+    }
+
     //not value, just romance/family status
     syncFlagsToOtherRelationship = (other_relationship) => {
         if (other_relationship.familial) {
@@ -248,6 +275,7 @@ class Entity {
     theme_keys = [];
     dead = false;
     corrupted = false;
+    fear = 0;
     mannequin_type = "wood"
     corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
@@ -286,20 +314,106 @@ class Entity {
         this.state_of_corpse = state_of_corpse;
     }
 
+    //corpses and mannequins included
+    interactWithPlayer = (all_players_in_location, ele) => {
+
+        console.warn("JR NOTE: flesh out interaction later, use more stats.")
+        const mindPlayer = getPartyHighestMind(game.players);
+        const eyesPlayer = getPartyHighestEyes(game.players);
+        const tonguePlayer = getPartyHighestTongue(game.players);
+        const armPlayer = getPartyHighestArms(game.players);
+        const legPlayer = getPartyHighestLegs(game.players);
+
+        for (let player of all_players_in_location) {
+            if (player === this) {
+                break;
+            }
+            const relationship = this.relationships[player.title];
+            console.log("JR NOTE: trying to get relationship", { relationship, them: player.title, me: this.title })
+            relationship.deepenRelationship();
+            const relationship_label = relationship.getLabel();
+
+            //corpse party
+            if (player.dead) {
+                const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
+                if (this.fear < 13) {
+                    this.fear += 13; //congrats on your first corpse viewing
+                    deadbeat.innerHTML = `${this.nameHTML()} can't believe their eyes. ${player.nameHTML()} is ${player.state_of_corpse}. ${relationship.familial ? " How are they going to tell the rest of the family?" : ""} ${relationship.romantic ? "They...they'll never kiss them again. Never hold them...Never..." : ""} They start screaming and they aren't sure if they'll stop...`;
+                } else {
+                    this.fear += 1 //its just not the same as the first time
+                    deadbeat.innerHTML = `${this.nameHTML()} stares listlessly at ${player.nameHTML()}, wondering almost idly how it  became ${player.state_of_corpse}. They feel like their hold on reality is slipping away. How could they think this about their ${relationship_label}?`;
+
+                }
+                break;
+
+            }
+
+            //a familiar stranger
+            if (player.corrupted) {
+                const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
+                if (this.fear < 13) {
+                    //they don't know yet
+                    deadbeat.innerHTML = `${this.nameHTML()} almost doesn't notice the mannequin in the corner. How strange...it almost looks like... ${player.nameHTML()}? With dawning realization they understand the terrible fate that befell their ${relationship_label}.`;
+                } else {
+                    if (tonguePlayer === this) {
+                        deadbeat.innerHTML = `${this.nameHTML()} talks softely to ${player.nameHTML()}, hoping they understand past their blank facade.`;
+                    } else if (player === tonguePlayer) {
+                        deadbeat.innerHTML = `${this.nameHTML()} talks softely to ${player.nameHTML()}, hoping that they won't feel so alone.`;
+                    } else {
+                        deadbeat.innerHTML = `${this.nameHTML()} looks sadly at ${player.nameHTML}, all too aware of the fate they fell to.`;
+                    }
+
+                }
+                break;
+
+            }
+
+            const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
+
+            if (relationship.romantic) {
+                if (relationship.value > 0) {
+                    deadbeat.innerHTML = `${this.nameHTML()} spends a quiet moment with ${player.nameHTML()}, just enjoying the presence of their ${relationship_label}.`;
+                } else {
+                    deadbeat.innerHTML = `${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`;
+
+                }
+                break;
+            } else if (relationship.familial) {
+                if (relationship.value > 0) {
+                    deadbeat.innerHTML = `${this.nameHTML()} jokes around with ${player.nameHTML()}, reminding them of old times.`;
+                } else {
+                    deadbeat.innerHTML = `${this.nameHTML()} teases ${player.nameHTML()}.`;
+
+                }
+                break;
+            }
+
+
+            if (relationship.value > 0) {
+                deadbeat.innerHTML = `${this.nameHTML()} works well with ${player.nameHTML()}, supporting them.`;
+            } else {
+                deadbeat.innerHTML = `${this.nameHTML()} gets in the way of ${player.nameHTML()}, annoying them.`;
+
+            }
+
+
+        }
+    }
+
     //if you're starting to feel weird you start trying to leave
     isStartingToFeelCorruption = () => {
-        let max = 1300;
-        max += 1 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
-        max += -1 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
-        max += -1 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
-        max += -1 * this.stats[ARMS_METAL_STAT]; // if you give in to the urge to create, Zampanio gets you faster
-        max += +1 * this.stats[LEGS_METAL_STAT]; //just walk away
+        let max = 500;
+        max += 10 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
+        max += -10 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
+        max += -10 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
+        max += -10 * this.stats[ARMS_METAL_STAT]; // if you give in to the urge to create, Zampanio gets you faster
+        max += +10 * this.stats[LEGS_METAL_STAT]; //just walk away
         return this.corruption > max;
     }
 
     //have fun being a mannequin
     hasHitMaxCorruption = () => {
-        let max = 2000;
+        let max = 1000;
         max += 200 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
         max += -50 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
         max += -50 * this.stats[EYES_METAL_STAT]; //the Eye is vulnerable to Zampanio
@@ -358,11 +472,11 @@ class Entity {
     }
 
     decideWhereToGoAsAMannequin = (ele, rand, currentLocation, north, south, east, west) => {
-        let choices = [north, south, east, west, currentLocation];
+        let choices = [north, south, east, west, currentLocation].filter((i) => i);
         let chosen = rand.pickFrom(choices);
-        ele.innerHTML = `When you weren't looking, somehow ${this.nameHTML()} is in the ${chosen}, crumpled over a pile of junk.`;
-        if (currentLocation != chosenLocation) {
-            chosenLocation.pending_players.push(this);
+        ele.innerHTML = `When you weren't looking, somehow ${this.nameHTML()} is in the ${chosen.longer_name} [${chosen.row},${chosen.col}], crumpled over a pile of junk.`;
+        if (currentLocation != chosen) {
+            chosen.pending_players.push(this);
             removeItemOnce(currentLocation.players, this);
         }
     }

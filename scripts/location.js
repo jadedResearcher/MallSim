@@ -230,6 +230,9 @@ class Location {
         //alright now that i know what everyone COULD do, what are they actually doing?
         //even tho we initialized all game players (to know what your role is) we are only getting local ones
         for (let p of this.players) {
+            if (p.dead) {
+                break;//no more lively corpses
+            }
             let options = possibleActions[p.name];
 
             if (p.isStartingToFeelCorruption()) {
@@ -247,7 +250,7 @@ class Location {
                 p.becomeCorrupted(rand);
                 const monster_desc = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, MONSTER_DESC, false);
 
-                options = [`${p.nameHTML()} screams and screams as their eyes seal over with ${p.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${p.mannequin_type} their screams strangle into nothing. ${monster_desc} `]
+                options = [`${p.nameHTML()} screams and screams as their eyes seal over with ${p.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${p.mannequin_type} their screams strangle into nothing. Their new body, ${monster_desc} `]
             } else if (p.corrupted) {
                 /*
                 fun fact: if you're ever playing miside, in that maze where the mannequins chase you?

@@ -83,7 +83,7 @@ class EscapeMall extends Event {
                 removeItemOnce(game.players, player);
             }
         }
-        ele.innerHTML = `${arrayToHumanSentence(leaving.map((n) => n.nameHTML()))} ${leaving.length > 1 ? "leave" : "leaves"} the mall, finally free of this nightmare. No amount of knowlege and power is worth the changes they could feel creeping into their ${leaving.length > 1 ? "body" : "bodies"}.`;
+        ele.innerHTML = `${arrayToHumanSentence(leaving.map((n) => n.nameHTML()))} ${leaving.length > 1 ? "leave" : "leaves"} the mall, finally free of this nightmare. No amount of knowledge and power is worth the changes they could feel creeping into their ${leaving.length > 1 ? "bodies" : "body"}.`;
 
     }
 }
@@ -112,13 +112,17 @@ class YongkiKill extends Event {
         const formerNameHTML = redPaste.nameHTML();
         //yeah sure why not, he can kill mannequins (but not corpses)
         if (redPaste.corrupted) {
-            redPaste.kill(`mangled, shards of ${redPaste.mannequin_type} on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing.`);
+            redPaste.kill(`mangled, shards of ${redPaste.mannequin_type} on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing`);
 
         } else {
-            redPaste.kill(`mangled, a bloody smear on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing.`);
+            redPaste.kill(`mangled, a bloody smear on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing`);
         }
         let reaction = "";
         const humans = location.livingNonMannequinPlayers();
+
+        for (let human of humans) {
+            human.fear += 13; //this is not good
+        }
         const mannequins = location.livingMannequinPlayers();
 
         if (humans.length > 0) {
