@@ -1,6 +1,6 @@
 //keyed by title (names can be lost)
 const all_entities = {};
-let DEBUG_PLAYERS = true;
+let DEBUG_PLAYERS = false;
 
 /*
 BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
@@ -253,6 +253,7 @@ class Entity {
     stolen_name = false;
     current_location; //can be undefined, usually if glitch
     stats = {};
+    state_of_corpse = "";
     title = "Null of Null";
     leader = false; //in sburbsim this decided ectobiology, who knows what this does, if anything, here
     //keyed by other persons title
@@ -280,6 +281,11 @@ class Entity {
         this.mannequin_type = rand.pickFrom(types);
     }
 
+    kill = (state_of_corpse) => {
+        this.dead = true;
+        this.state_of_corpse = state_of_corpse;
+    }
+
     //if you're starting to feel weird you start trying to leave
     isStartingToFeelCorruption = () => {
         let max = 1300;
@@ -302,16 +308,16 @@ class Entity {
         return this.corruption > max;
     }
 
+    getName = () => {
+        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(this.name) : this.name}`);
+    }
+
+
     nameHTML = () => {
         if (this.stolen_name) { //lol names suck, why bother with them? so much easier to know people by what they're doing, right?
             return this.titleHTML();
         }
-
-        if (this.corrupted) {
-            return `<span class='player-name'>${Zalgo.generate(this.name)}(${DEBUG_PLAYERS ? `DEBUG INFO: corruption:${this.corruption}` : ""})</span>`;
-
-        }
-        return `<span class='player-name'>${this.name}(${DEBUG_PLAYERS ? `DEBUG INFO: corruption:${this.corruption}` : ""})</span>`;
+        return `<span class='player-name'>${this.getName()}${DEBUG_PLAYERS ? `(DEBUG INFO: corruption:${this.corruption})` : ""}</span>`;
     }
 
     titleHTML = () => {
@@ -351,6 +357,16 @@ class Entity {
         this.corruption += value;
     }
 
+    decideWhereToGoAsAMannequin = (ele, rand, currentLocation, north, south, east, west) => {
+        let choices = [north, south, east, west, currentLocation];
+        let chosen = rand.pickFrom(choices);
+        ele.innerHTML = `When you weren't looking, somehow ${this.nameHTML()} is in the ${chosen}, crumpled over a pile of junk.`;
+        if (currentLocation != chosenLocation) {
+            chosenLocation.pending_players.push(this);
+            removeItemOnce(currentLocation.players, this);
+        }
+    }
+
     //if you're getting really corrupt you'll start getting a pull to 
     //try to return back to the maze (go left and up)
     //otherwise you prefer to right and down
@@ -358,6 +374,9 @@ class Entity {
     //while tongue and arms and mind makes you want to stay where you are and try to figure things out more
     decideWhereToGo = (ele, rand, currentLocation, north, south, east, west) => {
         //go to the east (continue down current corridor)
+        if (this.corrupted) {
+            return this.decideWhereToGoAsAMannequin(ele, rand, currentLocation, north, south, east, west);
+        }
         console.log("JR NOTE: right now can only go to the east and west, eventaully flesh out movement better, but no point now when only east is real", { ele, rand, currentLocation, north, south, east, west });
         let chosenLocation;
 
@@ -480,7 +499,7 @@ class Entity {
             removeItemOnce(currentLocation.players, this);
         }
 
-        console.log("JR NOTE: the location I chose was: ", chosenLocation)
+        //console.log("JR NOTE: the location I chose was: ", chosenLocation)
 
 
 

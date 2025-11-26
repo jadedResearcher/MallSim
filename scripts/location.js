@@ -51,8 +51,51 @@ class Location {
         //deeper to the east you get but what REALLY starts adding up is deeper to the south
         this.corruption = row * 2 + col;
         this.events = events;
+        for (let event of generalEvents) {
+            this.events.push(event)
+        }
         this.theme_keys = theme_keys;
         console.log("JR NOTE: made location with theme", theme_keys)
+    }
+
+    livingNonMannequinPlayers = () => {
+        let ret = [];
+        for (let player of this.players) {
+            if (!player.dead && !player.corrupted) {
+                ret.push(player)
+            }
+        }
+        return ret;
+    }
+
+    livingMannequinPlayers = () => {
+        let ret = [];
+        for (let player of this.players) {
+            if (!player.dead && player.corrupted) {
+                ret.push(player)
+            }
+        }
+        return ret;
+    }
+
+    livingPlayers = () => {
+        let ret = [];
+        for (let player of this.players) {
+            if (!player.dead) {
+                ret.push(player)
+            }
+        }
+        return ret;
+    }
+
+    nonCorruptedPlayers = () => {
+        let ret = [];
+        for (let player of this.players) {
+            if (!player.corrupted) {
+                ret.push(player)
+            }
+        }
+        return ret;
     }
 
     checkEventsAndApplyNoMoreThanOne = (game, ele) => {
@@ -202,9 +245,19 @@ class Location {
             //its the quiet moments afterwards you need to worry about
             if (p.hasHitMaxCorruption() && !p.corrupted) {
                 p.becomeCorrupted(rand);
-                options = [`${p.nameHTML()} screams and screams as their eyes seal over with ${p.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${p.mannequin_type} their screams strangle into nothing. `]
+                const monster_desc = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, MONSTER_DESC, false);
+
+                options = [`${p.nameHTML()} screams and screams as their eyes seal over with ${p.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${p.mannequin_type} their screams strangle into nothing. ${monster_desc} `]
             } else if (p.corrupted) {
-                options = [`What had once been ${p.nameHTML()} moves only when you cannot see them, their ${p.mannequin_type} limbs firmly locked into place as your gaze falls upon them.`]
+                /*
+                fun fact: if you're ever playing miside, in that maze where the mannequins chase you?
+                you can just look down at your feet
+                it counts as seeing them (the reflection in the floor, i think)
+                it makes it hard to navigate the maze
+                but you can't die so
+                shrugs
+                */
+                options = [`${p.nameHTML()} moves only when you cannot see them, their ${p.mannequin_type} limbs firmly locked into place as your gaze falls upon them.`]
             }
 
 

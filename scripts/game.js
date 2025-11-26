@@ -109,14 +109,16 @@ class Game {
         //and have players decide whether to move or not individually
         for (let location of locations) {
             //only locations with players 
-            if (location.players.length > 0) {
+            const livingPlayers = location.livingPlayers()
+
+            if (livingPlayers.length > 0) {
                 const north = getNorth(this.map, location.row, location.col)
                 const south = getSouth(this.map, location.row, location.col)
                 const east = getEast(this.map, location.row, location.col)
                 const west = getWest(this.map, location.row, location.col)
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 start_phrase.innerHTML = `<span style='color:red'>TODO:</span> have ${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} interact with each other (altering relationships) and decide whether to move to a new location or stay here. List out their deicisons.`;
-                for (let player of location.players) {
+                for (let player of livingPlayers) {
                     const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
 
                     player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
@@ -148,9 +150,10 @@ class Game {
         //if yes, stop checking events
         for (let location of locations) {
             //only locations with players 
-            if (location.players.length > 0) {
+            const livingPlayers = location.livingPlayers()
+            if (livingPlayers.length > 0) {
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `${arrayToHumanSentence(location.players.map((i) => i.nameHTML()))} ${location.players.length > 1 ? "are" : "is"} poking around in the ${location.longer_name}.`;
+                start_phrase.innerHTML = `${arrayToHumanSentence(livingPlayers.map((i) => i.nameHTML()))} ${livingPlayers.length > 1 ? "are" : "is"} poking around in the ${location.longer_name}.`;
 
                 const event_phrase = createElementWithClassAndParent("div", tick_container, "event-beat");
 
@@ -198,8 +201,18 @@ class Game {
                     } else {
                         const icon_holder = createElementWithClassAndParent("div", ele, "player-icon-holder");
                         //little black dots showing where players are
-                        for (let i = 0; i < cell.players.length; i++) {
+                        for (let player of cell.players) {
                             const icon = createElementWithClassAndParent("div", icon_holder, "player-icon");
+
+                            if (player.dead) {
+                                icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><rect fill="none" height="24" width="24"/><path d="M12,2c-5.33,4.55-8,8.48-8,11.8c0,4.98,3.8,8.2,8,8.2s8-3.22,8-8.2C20,10.48,17.33,6.55,12,2z M7.83,14 c0.37,0,0.67,0.26,0.74,0.62c0.41,2.22,2.28,2.98,3.64,2.87c0.43-0.02,0.79,0.32,0.79,0.75c0,0.4-0.32,0.73-0.72,0.75 c-2.13,0.13-4.62-1.09-5.19-4.12C7.01,14.42,7.37,14,7.83,14z"/></svg>`;
+                            } else if (player.corrupted) {
+                                icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M2,16.5C2,19.54,4.46,22,7.5,22s5.5-2.46,5.5-5.5V10H2V16.5z M7.5,18.5C6.12,18.5,5,17.83,5,17h5 C10,17.83,8.88,18.5,7.5,18.5z M10,13c0.55,0,1,0.45,1,1c0,0.55-0.45,1-1,1s-1-0.45-1-1C9,13.45,9.45,13,10,13z M5,13 c0.55,0,1,0.45,1,1c0,0.55-0.45,1-1,1s-1-0.45-1-1C4,13.45,4.45,13,5,13z"/><path d="M11,3v6h3v2.5c0-0.83,1.12-1.5,2.5-1.5c1.38,0,2.5,0.67,2.5,1.5h-5V14v0.39c0.75,0.38,1.6,0.61,2.5,0.61 c3.04,0,5.5-2.46,5.5-5.5V3H11z M14,8.08c-0.55,0-1-0.45-1-1c0-0.55,0.45-1,1-1s1,0.45,1,1C15,7.64,14.55,8.08,14,8.08z M19,8.08 c-0.55,0-1-0.45-1-1c0-0.55,0.45-1,1-1s1,0.45,1,1C20,7.64,19.55,8.08,19,8.08z"/></g></g></svg>`;
+
+                            } else {
+                                icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+
+                            }
                         }
                     }
 

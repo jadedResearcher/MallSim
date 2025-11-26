@@ -12,7 +12,7 @@ class Event {
     name = "Default Event";
 
     //sub classes will override this, that way checkconditions can be kept in this class unchanged
-    internalConditionCheck = (location) => {
+    internalConditionCheck = (game, location) => {
         return false;
     }
 
@@ -26,7 +26,7 @@ class Event {
         do not make it async , please its a nightmare
     */
     checkConditions = (game, location, parentEle) => {
-        if (this.internalConditionCheck(location)) {
+        if (this.internalConditionCheck(game, location)) {
             this.applyResult(game, location, parentEle);
             return true;
         }
@@ -60,7 +60,7 @@ class EscapeMall extends Event {
     name = "Escape Mall";
 
     //is there at least one person ready to escape?
-    internalConditionCheck = (location) => {
+    internalConditionCheck = (game, location) => {
         for (let player of location.players) {
             console.log("JR NOTE: checking player for escape event ", player)
 
@@ -88,3 +88,53 @@ class EscapeMall extends Event {
     }
 }
 //https://lostinzampanio.neocities.org/fanfictions/were_you_just_a_satellite
+
+
+
+class YongkiKill extends Event {
+    name = "Yongki Kill";
+
+    //is there at least one person ready to escape?
+    internalConditionCheck = (game, location) => {
+        //you can't predict yongki, you can't stop him
+        //even he can't predict or stop himself
+        //a stranger even to himself
+        if (location.livingNonMannequinPlayers().length > 0) {
+            return game.rand.nextDouble() > 0.5;
+        }
+        return false;
+
+    }
+
+    applyResult = (game, location, parent) => {
+        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        const redPaste = game.rand.pickFrom(location.players);
+        const formerNameHTML = redPaste.nameHTML();
+        //yeah sure why not, he can kill mannequins (but not corpses)
+        if (redPaste.corrupted) {
+            redPaste.kill(`mangled, shards of ${redPaste.mannequin_type} on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing.`);
+
+        } else {
+            redPaste.kill(`mangled, a bloody smear on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing.`);
+        }
+        let reaction = "";
+        const humans = location.livingNonMannequinPlayers();
+        const mannequins = location.livingMannequinPlayers();
+
+        if (humans.length > 0) {
+            reaction += `${arrayToHumanSentence(humans.map((n) => n.nameHTML()))} boggle vacantly. ${formerNameHTML} was alive just now...just...just a second ago. Weren't...weren't they?`;
+        }
+        if (location.livingMannequinPlayers().length > 0) {
+            reaction += `${arrayToHumanSentence(mannequins.map((n) => n.nameHTML()))} twitches ever so slightly, blank face${mannequins.length > 0 ? "s" : ""} taking in the carnage.`;
+        }
+
+        ele.innerHTML = `${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a red smear on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
+
+    }
+
+}
+
+
+
+
+const generalEvents = [new YongkiKill()]
