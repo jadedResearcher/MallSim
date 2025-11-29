@@ -437,12 +437,13 @@ class Entity {
     }
 
     getName = () => {
-        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(this.name) : this.name}`);
+        let name_holder = this.wasted ? this.title : this.name;
+        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}`);
     }
 
 
     nameHTML = () => {
-        if (this.stolen_name) { //lol names suck, why bother with them? so much easier to know people by what they're doing, right?
+        if (this.stolen_name || this.wasted) { //lol names suck, why bother with them? so much easier to know people by what they're doing, right?
             return this.titleHTML();
         }
         return `<span class='player-name'>${this.getName()}${DEBUG_PLAYERS ? `(DEBUG INFO: corruption:${this.corruption})` : ""}</span>`;
@@ -459,19 +460,19 @@ class Entity {
         //automatically eat it if it would waste you
         if (!this.wasted && item.isFruit) {
             this.wasted = true;
-            ele.innerHTML = `${this.nameHTML()} has messily devoured the ${item.name} and has become Wasted as a result. They have Joined the Loop!`;
+            ele.innerHTML = ` ${this.getName()} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
         } else if (this.wasted && item.isFruit) {
-            ele.innerHTML = `${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
+            ele.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
 
         } else {
             this.inventory.push(item);
-            ele.innerHTML = `${this.nameHTML()} has picked up the ${item.name}! ${item.description}`;
+            ele.innerHTML = ` ${this.nameHTML()} has picked up the ${item.name}! ${item.description}`;
         }
     }
 
     removeItemFromInventory = (item, ele) => {
         removeItemOnce(this.inventory, item);
-        ele.innerHTML = `${this.nameHTML()} has dropped the ${item.name}!`;
+        ele.innerHTML = ` ${this.nameHTML()} has dropped the ${item.name}!`;
     }
 
     //returns key and value of their best stat

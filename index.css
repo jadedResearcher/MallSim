@@ -214,6 +214,7 @@ button {
 .mall-render {
   overflow: auto;
   max-height: 500px;
+  margin-top: 31px;
 }
 
 .empty-cell {

@@ -118,12 +118,12 @@ class RandomlyFindShoppingObject extends Event {
         const shopper = game.rand.pickFrom(location.players);
         const formerNameHTML = shopper.nameHTML();
         console.log("JR NOTE: eventually expand this with alchemy traits system. Have the 'its shiny, its crystal and its a sword' quip from sburbsim.");
-        const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.themes, ADJ, true);
-        const object = pickARandomThemeFromListAndGrabKey(game.rand, location.themes, OBJECT, true);
+        const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
+        const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
-        const oddsFruit = 0.1;
+        const oddsFruit = 0.75;
         if (game.rand.nextDouble() < oddsFruit) {
-            const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, false)
+            const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
             ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They cannot believe their luck when they stumble upon a ${item.name}!`;
             const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
@@ -131,7 +131,7 @@ class RandomlyFindShoppingObject extends Event {
         } else {
             const item = new Item(`${personal_adj} ${object}`, `It's a random item that JR hasn't fleshed out yet!`, false)
 
-            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shoper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!). `;
+            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!). `;
             const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
             shopper.addItemToInventory(item, pickupEle);
 
