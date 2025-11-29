@@ -276,9 +276,8 @@ class Game {
         //then, pick my index and make a new random room
         //console.warn("JR NOTE: todo pick from set of random shops with specific internalevents", location);
         const themes = [this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(location.theme_keys), this.rand.pickFrom(this.theme_keys)];
-        const personal_adj = pickARandomThemeFromListAndGrabKey(this.rand, themes, ADJ, true);
 
-        const random_shop = new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, []);
+        const random_shop = randomShop(this.rand, themes, right_row, right_col);
 
         if (this.map[right_row] && right_row < this.map.length && this.rand.nextDouble() > odds_empty) {
             // console.log("JR NOTE: handleAddingShopToSouthOfLocation adding a shop to an existing row")

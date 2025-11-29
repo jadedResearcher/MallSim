@@ -6,6 +6,7 @@ window.onload = () => {
 
 
 }
+//https://www.tumblr.com/verbosebabbler/801492874529259520/guides-alternate-zampaniosim-classpects?source=share
 
 const debug = () => {
     balanceStatsDebug();

@@ -91,6 +91,60 @@ class EscapeMall extends Event {
 
 
 
+
+//no skill, no stats, just an incredibly rare chance to just, stumble on it
+//because the mall WANTS you to find the goods you're looking for and take them back out
+//its blood moving through arteries
+//it craves it
+//poor training team, trying to contain things inside an abnormality was such a bad idea
+//but they have no choice
+//zampanio associates them with the mall now
+//they're lucky they can even leave it for short durations
+class RandomlyFindShoppingObject extends Event {
+    name = "Randomly Shopping Object";
+
+    //is there at least one person ready to escape?
+    internalConditionCheck = (game, location) => {
+        console.log("JR NOTE: todo if someone in the location has a shopping bag, increase odds of this event (the mall considers you even more a shopper), wire into stats too")
+        if (location.livingNonMannequinPlayers().length > 0) {
+            return game.rand.nextDouble() < 0.5;
+        }
+        return false;
+
+    }
+
+    applyResult = (game, location, parent) => {
+        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        const shopper = game.rand.pickFrom(location.players);
+        const formerNameHTML = shopper.nameHTML();
+        console.log("JR NOTE: eventually expand this with alchemy traits system. Have the 'its shiny, its crystal and its a sword' quip from sburbsim.");
+        const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.themes, ADJ, true);
+        const object = pickARandomThemeFromListAndGrabKey(game.rand, location.themes, OBJECT, true);
+
+        const oddsFruit = 0.1;
+        if (game.rand.nextDouble() < oddsFruit) {
+            const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, false)
+
+            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They cannot believe their luck when they stumble upon a ${item.name}!`;
+            const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
+            shopper.addItemToInventory(item, pickupEle);
+        } else {
+            const item = new Item(`${personal_adj} ${object}`, `It's a random item that JR hasn't fleshed out yet!`, false)
+
+            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shoper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!). `;
+            const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
+            shopper.addItemToInventory(item, pickupEle);
+
+        }
+
+    }
+
+}
+
+
+
+
+
 class YongkiKill extends Event {
     name = "Yongki Kill";
 

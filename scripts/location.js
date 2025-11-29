@@ -27,7 +27,12 @@ https://kittyhorrorshow.itch.io/anatomy
 */
 
 
+const randomShop = (rand, themes, right_row, right_col) => {
+    console.log("JR NOTE: todo have non generic shops, like clothings stores for wibby (use alchemy engine from sburbsim to have theme traits?) like royal can have fancy?")
+    const personal_adj = pickARandomThemeFromListAndGrabKey(rand, themes, ADJ, true);
 
+    return new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, [new RandomlyFindShoppingObject()]);
+}
 
 
 class Location {

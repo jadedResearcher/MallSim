@@ -219,6 +219,19 @@ const randomEntity = (rand) => {
 
 }
 
+class Item {
+    name = "Perfectly Generic Object"
+    description = "It is not HarvestFruit so it is probably useless."
+    isFruit = false; //the sales beast LOVES fruit, but also Zampanio has made it so all fruit within the mall is Harvest Fruit (which you can eat to Join the Loop/Become Wasted)
+
+    constructor(name, description, isFruit) {
+        console.log("JR NOTE: do i want this to get traits from themes? or have themes directly?")
+        this.name = name;
+        this.description = description;
+        this.isFruit = isFruit;
+    }
+}
+
 class Relationship {
     value = 0; //can  be negative
     romantic = false;
@@ -276,6 +289,7 @@ class Entity {
     dead = false;
     corrupted = false;
     fear = 0;
+    inventory = []; //list of items
     mannequin_type = "wood"
     corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
@@ -439,6 +453,25 @@ class Entity {
             return `<span class='player-wasted-title'>${this.title}</span>`;
         }
         return `<span class='player-title'>${this.title}</span>`;
+    }
+
+    addItemToInventory = (item, ele) => {
+        //automatically eat it if it would waste you
+        if (!this.wasted && item.isFruit) {
+            this.wasted = true;
+            ele.innerHTML = `${this.nameHTML()} has messily devoured the ${item.name} and has become Wasted as a result. They have Joined the Loop!`;
+        } else if (this.wasted && item.isFruit) {
+            ele.innerHTML = `${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
+
+        } else {
+            this.inventory.push(item);
+            ele.innerHTML = `${this.nameHTML()} has picked up the ${item.name}! ${item.description}`;
+        }
+    }
+
+    removeItemFromInventory = (item, ele) => {
+        removeItemOnce(this.inventory, item);
+        ele.innerHTML = `${this.nameHTML()} has dropped the ${item.name}!`;
     }
 
     //returns key and value of their best stat
