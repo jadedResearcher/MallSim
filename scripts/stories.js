@@ -87,3 +87,18 @@ And it's true. He hates the calm coldness inside of him that found this solution
 
 He gives the signal on the radio for everyone to regroup and begins the slow, grim work of helping Chick drag the body back upstairs.
 `
+
+
+//sam and doc slaughter shaking hands and saying "the only thing that matters is being palatable to hypothetical strangers who are really mean"
+//they took the "truth of their being" out back and shot it like a rabid dog
+
+
+/*
+post 2025 lavinraca: 
+
+and now the eye killer challenging them to duels is even funnier
+earlier loops it was a terrifying off wall thing for a serial killer to do
+very few cultists even had decks
+now its just
+"oh yes of course the monster in the air vent wants to play yugioh'
+*/

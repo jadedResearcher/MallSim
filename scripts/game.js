@@ -53,11 +53,49 @@ class Game {
     constructor(rand) {
         this.rand = rand;
         this.players = randomParty(rand);
+        this.addLoopingPlayersIfAny();
         for (let player of this.players) {
             console.log("JR NOTE: trying to scrape up themes from player,  ", { player, theme_keys_from_game: this.theme_keys })
             this.theme_keys = this.theme_keys.concat(player.theme_keys);
         }
 
+    }
+
+    //if a 'canon' player shares the title of a looping player
+    //that looping player also spawns
+    //i don't care if your name is piper or camellia or the "Innocent"
+    //if your TITLE is the Eye Killer you are the alternate self of the Eye Killer, deal with it
+    //tbf tho those three actually are genetically identical
+    //and titles are so varied that its going to be unlikely that you spawn as the alternate self of someone who isn't extremely similar to you
+    //but this amuses me anyways
+    //NOTE: this does mean if you have a million billion looping cultists this call will be hella slow
+    //thats literally the cautionary tale of zampanio
+    //let peewee eat them. cultists fit perfectly  in peewee mouth etc
+    //https://www.tumblr.com/elodieunderglass/186312312148/luritto-cornerof5thandvermouth
+    addLoopingPlayersIfAny = () => {
+        const players_to_add = [];
+        for (let player of this.players) {
+
+            for (let cultist of globalDataObject.loopingCultists) {
+                if (player.title === cultist.title) {
+                    const looping_player = new Entity(cultist.theme_keys, this.rand);
+                    looping_player.name = "Lost To Zampanio";
+                    looping_player.title = cultist.title;
+                    looping_player.relationships = {};
+                    for (let [key, value] of Object.entries(cultist.relationships)) {
+                        looping_player.relationships[key] = new Relationship(value.value, value.romantic, value.familial);
+                    }
+                    //new Relationship(value, romantic, familial)
+                    looping_player.stats = cultist.stats;
+                    looping_player.wasted = true;
+                    players_to_add.push(looping_player);
+                }
+            }
+        }
+
+        for (let p of players_to_add) {
+            this.players.push(p);
+        }
     }
 
     getLocations = () => {
@@ -330,6 +368,10 @@ class Game {
 
     }
 
+    /*
+wanda heard ai art is unethical and thats why the mall twists everyone into fucked up mannequins
+that way instead of ai her weird infinite procedural stuff can just be photos
+    */
     handleIntro = (parent) => {
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
@@ -346,6 +388,8 @@ class Game {
             let text = "";
             if (player.leader) {
                 text = `Leading the Faithful is ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
+            } else if (player.wasted) {
+                text = `... ${player.nameHTML()} is here as well. They rave of loops and spirals and no longer have a name. Their lips are stained black with the Harvest Fruit they already partook of. They will not explain why they have joined this expedition but something about them is strangely familiar...`;
             } else {
                 text = `There was also ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
             }

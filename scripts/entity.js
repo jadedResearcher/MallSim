@@ -7,6 +7,8 @@ const FRIEND_LABEL = "friend"
 const RIVAL_LABEL = "rival"
 const TEAM_LABEL = "team-mate"
 
+
+
 /*
 BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
 BASELINE_METAL_OBJECT[EYES_METAL_STAT] = MEDIUM_STAT_VALUE;
@@ -323,6 +325,14 @@ class Entity {
         this.mannequin_type = rand.pickFrom(types);
     }
 
+    //store the flanderized version of yourself into local storage
+    //when a new session starts with someone who 'is' you, you'll be added (not replace them)
+    //why do you think the echidna is causing a memory leak? 
+    joinTheLoop = () => {
+        globalDataObject.loopingCultists.push({ title: this.title, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys })
+        save();
+    }
+
     kill = (state_of_corpse) => {
         this.dead = true;
         this.state_of_corpse = state_of_corpse;
@@ -344,6 +354,13 @@ class Entity {
             }
             const relationship = this.relationships[player.title];
             console.log("JR NOTE: trying to get relationship", { relationship, them: player.title, me: this.title })
+            if (!relationship) {
+                const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
+                deadbeat.innerHTML = `${this.nameHTML()} doesn't know how to feel about ${player.nameHTML()}.`;
+                //technically you from another universe is your family, i'd argue
+                this.relationships[player.title] = new Relationship(0, false, player.title === this.title);
+                break;
+            }
             relationship.deepenRelationship();
             const relationship_label = relationship.getLabel();
 
@@ -435,7 +452,7 @@ class Entity {
         max += +200 * this.stats[LEGS_METAL_STAT]; //just walk away
         return this.corruption > max;
     }
-
+    //https://www.tumblr.com/jadedresearcher/801579387276378112/whiteantcrawls-helloitsbees?source=share
     getName = () => {
         let name_holder = this.wasted ? this.title : this.name;
         return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}`);
@@ -460,6 +477,7 @@ class Entity {
         //automatically eat it if it would waste you
         if (!this.wasted && item.isFruit) {
             this.wasted = true;
+            this.joinTheLoop();
             ele.innerHTML = ` ${this.getName()} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
         } else if (this.wasted && item.isFruit) {
             ele.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
@@ -570,9 +588,9 @@ class Entity {
 
             if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.name} decides to continue walking down the mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} decides to continue walking down the mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else {
-                    ele.innerHTML = `${this.name} decides to try out this new mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} decides to try out this new mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 }
                 return east;
             }
@@ -583,9 +601,9 @@ class Entity {
 
             if (south && !this.isStartingToFeelCorruption() && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.name} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else {
-                    ele.innerHTML = `${this.name} barely even notices when the ${currentLocation.longer_name} blends into a ${south.longer_name}${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} barely even notices when the ${currentLocation.longer_name} blends into a ${south.longer_name}${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 }
                 return south;
             }
@@ -596,9 +614,9 @@ class Entity {
 
             if (west && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.name} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else {
-                    ele.innerHTML = `${this.name} decides to try going back to a more familiar corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} decides to try going back to a more familiar corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 }
                 return west;
             }
@@ -609,7 +627,7 @@ class Entity {
 
             if (north && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.1) {
                 console.log("JR NOTE: going north")
-                ele.innerHTML = `${this.name} decides to try getting back to the entrance, and moves NORTH, into the ${north.longer_name} ${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                ele.innerHTML = `${this.nameHTML()} decides to try getting back to the entrance, and moves NORTH, into the ${north.longer_name} ${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
 
                 return north;
             }

@@ -3013,19 +3013,19 @@ const initGeneralBackstories = () => {
     general_backstories[ENDINGS] = ["were always going to end up dead", "will be an existentialist", "will focus more on the ending than the begining", "will keep your thoughts firmly in the future"];
     general_backstories[KNOWING] = ["are an accomplished scholar", "are obsessed with knowing everything", "are an insufferable know-it-all"];
     general_backstories[GUIDING] = ["try to gently lead those who are lost", "never gets lost", "are a soothing mentor"];
-    general_backstories[CRAFTING] = ["enjoy wood-working in your spare time", "are quite a skilled craftman", "are always collecting small objects to make things with"];
-    general_backstories[LANGUAGE] = ["alway have your nose in a book", "speaks every language of Zampanio", "can curse in a different language for each day of the week"];
+    general_backstories[CRAFTING] = ["enjoy wood-working in their spare time", "are quite a skilled craftman", "are always collecting small objects to make things with"];
+    general_backstories[LANGUAGE] = ["alway have their nose in a book", "speaks every language of Zampanio", "can curse in a different language for each day of the week"];
     general_backstories[BUGS] = ["does light bee-keeping when at home", "don't find bugs creepy", "always have at least one bug on your body"];
     general_backstories[ADDICTION] = ["enjoy gambling for any stakes", "have an addictive personality", "have never met a vice they didn't like"];
     general_backstories[SPYING] = ["have an extensive information network", "are always on top of the local gossip", "somehow always are aware of what everyone is doing"];
     general_backstories[CLOWNS] = ["are a clown", "have extensive ties to the Circus", "are an accomplished teller of jokes"];
-    general_backstories[DOLLS] = ["carry around a small antique doll", "carve faceless wooden figurines in your spare time"];
+    general_backstories[DOLLS] = ["carry around a small antique doll", "carve faceless wooden figurines in their spare time"];
     general_backstories[CENSORSHIP] = ["speak only in annoying riddles", "can write in any cipher", "never say what they actually mean", "seem to always be in the background"];
 
     general_backstories[OBFUSCATION] = ["speak only in annoying riddles", "can write in any cipher", "never say what they actually mean", "seem to always be in the background"];
     general_backstories[DARKNESS] = ["wear only black", "prefer moonlight to sunlight", "are more than a little edgy", "can see in the dark"];
     general_backstories[KILLING] = ["once killed a man just to see him die", "are cloaked in killing intent", "seem to always be covered in blood", "have an alarming collection of knives"];
-    general_backstories[MUSIC] = ["alway have a song on your lips", "can play any song they hear once by ear", "always has an instrument nearby", "always love being the eye of attention"];
+    general_backstories[MUSIC] = ["alway have a song on their lips", "can play any song they hear once by ear", "always has an instrument nearby", "always love being the eye of attention"];
     general_backstories[DEFENSE] = ["always protect the weak", "are always on edge for attack", "are always aware of all the exits", "sleep in full-plate armor"];
     general_backstories[QUESTING] = ["absolutely love helping out the little people", "are always on the lookout for the next great adventure"];
 }

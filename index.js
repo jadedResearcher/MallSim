@@ -1,6 +1,7 @@
 let game;
 window.onload = () => {
     initThemes();
+    load();
     debug();
 
 
