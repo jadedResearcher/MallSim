@@ -634,6 +634,19 @@ const addNumToArrayWithKey = (localStorageKey, targetString) => {
   localStorage[localStorageKey] = JSON.stringify(tmp);
 }
 
+const jrLog = (text) => {
+  const jrCSSTitle = "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:25px;text-decoration:underline;";
+  const jrCSSBody = "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;";
+  console.log(`%c${"JR NOTE:"}%c  ${text}`, jrCSSTitle, jrCSSBody);
+
+}
+
+/*
+i think its fun to make this
+beacuse
+instead of trying to capture theh mechanics of sburb
+im trying to capture the mechanics of the blorbos
+*/
 
 const removeStringFromArrayWithKey = (localStorageKey, targetString) => {
   let tmp = keyToLocalStorageArray(localStorageKey);

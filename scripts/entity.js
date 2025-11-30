@@ -290,6 +290,7 @@ class Entity {
     theme_keys = [];
     dead = false;
     corrupted = false;
+    monster_rating = 0; //every time you loop you lose a little bit more of your nuance
     fear = 0;
     inventory = []; //list of items
     mannequin_type = "wood"
@@ -429,6 +430,17 @@ class Entity {
 
 
         }
+    }
+
+    //witherby was the last of training to subcumb. everyone goes at different rates
+    isStartingToFeelMonstrous = () => {
+        let max = 3;
+        max += 1 * Math.ceil(this.stats[MIND_METAL_STAT] / 10); //you can rationalize that you're fine you're normal nothing is wrong this is just how people are sometimes (camille)
+        max += 1 * Math.ceil(this.stats[TONGUE_METAL_STAT] / 10); //you can tell yourself soothing stories about how much better you are than a monster (witherby)
+        max += -1 * Math.ceil(this.stats[EYES_METAL_STAT] / 10); //you can see exactly how monstrous you are and can't turn a blind eye (devona)
+        max += -1 * Math.ceil(this.stats[ARMS_METAL_STAT] / 10); //you instinctively lash out, whether you accept it or not you DO monstrous things (ria)
+        max += +1 * Math.ceil(this.stats[LEGS_METAL_STAT] / 10); //just keep going and going and going and maybe it will never catch up to you (neville)
+        return this.monster_rating > max;
     }
 
     //if you're starting to feel weird you start trying to leave

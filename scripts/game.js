@@ -89,6 +89,13 @@ class Game {
                     looping_player.stats = cultist.stats;
                     looping_player.wasted = true;
                     players_to_add.push(looping_player);
+                    if (!cultist.times_looped) {
+                        cultist.times_looped = 0;
+                    }
+                    //each time zampanio loops you you are sanded just a bit smoother
+                    //until you become unrecognizable even to yourself
+                    cultist.times_looped++;
+                    looping_player.monster_rating = cultist.times_looped;
                 }
             }
         }
@@ -96,6 +103,8 @@ class Game {
         for (let p of players_to_add) {
             this.players.push(p);
         }
+        //save all at once, not once per cultit.
+        save();
     }
 
     getLocations = () => {
@@ -388,78 +397,101 @@ that way instead of ai her weird infinite procedural stuff can just be photos
             let text = "";
             if (player.leader) {
                 text = `Leading the Faithful is ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
-            } else if (player.wasted) {
+            } else if (player.wasted && !player.isStartingToFeelMonstrous()) {
                 text = `... ${player.nameHTML()} is here as well. They rave of loops and spirals and no longer have a name. Their lips are stained black with the Harvest Fruit they already partook of. They will not explain why they have joined this expedition but something about them is strangely familiar...`;
+            } else if (player.wasted && player.isStartingToFeelMonstrous()) {
+                text = `... ${player.nameHTML()} lurks in a corner. There is something inhuman about them that only comes out occasionally.`;
             } else {
                 text = `There was also ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
             }
 
-            //interests
-            const backstory = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, GENERALBACKSTORY, false);
-            const compliemnt = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, COMPLIMENT, false);
-            const insult = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, INSULT, false);
-            text += ` ${titleCase(insult)} but ${compliemnt}, they ${backstory}.`
+            if (!player.isStartingToFeelMonstrous()) {
+                //interests
+                const backstory = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, GENERALBACKSTORY, false);
+                const compliemnt = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, COMPLIMENT, false);
+                const insult = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, INSULT, false);
+                text += ` ${titleCase(insult)} but ${compliemnt}, they ${backstory}.`
 
-            const bestStatMap = {};
-            //nothing too targeted, just a little line about where their current strength lies
-            bestStatMap[MIND_METAL_STAT] = ["They love thinking through a good puzzle.", "They love reading books and learning all sorts of new things.", "They're often the first to figure out a riddle."]
-            bestStatMap[EYES_METAL_STAT] = ["Their eyes never miss anything.", "They love taking in color and motion and the sounds of the world around them.", "They are always the first to compliment someones new hairstyle or outfit."]
-            bestStatMap[TONGUE_METAL_STAT] = ["They love rambling and talking for hours on end.", "They are a really good listener, and always have something insightful to say in return.", "Somehow, they manage to convince people to go along with all their ideas."]
-            bestStatMap[ARMS_METAL_STAT] = ["There just something that appeals to them about the thrill of violence.", "They think getting to build things with your hands is one of life's simple pleasures.", "They love figuring out how to repair things themselves instead of having someone else do it."]
-            bestStatMap[LEGS_METAL_STAT] = ["They are quick on their feet.", "Somehow, they never stop moving.", "They love exploring new places."]
+                const bestStatMap = {};
+                //nothing too targeted, just a little line about where their current strength lies
+                bestStatMap[MIND_METAL_STAT] = ["They love thinking through a good puzzle.", "They love reading books and learning all sorts of new things.", "They're often the first to figure out a riddle."]
+                bestStatMap[EYES_METAL_STAT] = ["Their eyes never miss anything.", "They love taking in color and motion and the sounds of the world around them.", "They are always the first to compliment someones new hairstyle or outfit."]
+                bestStatMap[TONGUE_METAL_STAT] = ["They love rambling and talking for hours on end.", "They are a really good listener, and always have something insightful to say in return.", "Somehow, they manage to convince people to go along with all their ideas."]
+                bestStatMap[ARMS_METAL_STAT] = ["There just something that appeals to them about the thrill of violence.", "They think getting to build things with your hands is one of life's simple pleasures.", "They love figuring out how to repair things themselves instead of having someone else do it."]
+                bestStatMap[LEGS_METAL_STAT] = ["They are quick on their feet.", "Somehow, they never stop moving.", "They love exploring new places."]
 
-            text += ` ${this.rand.pickFrom(bestStatMap[player.highestStat().key])}`;
-
-
-            const worstStatMap = {};
-            //nothing too targeted, just a little line about where their current strength lies
-            worstStatMap[MIND_METAL_STAT] = ["Also, puzzles just don't interest them.", "They also find books and movies to be incredibly boring.", "They also don't get why people keep trying to complicate things, the world should be very simple."]
-            worstStatMap[EYES_METAL_STAT] = ["Loud sounds also don't bother them very much.", "They also often seem to be in their own little world.", "They also love just vibing with their own thoughts."]
-            worstStatMap[TONGUE_METAL_STAT] = ["They also often stumble over their own words.", "They also have trouble speaking up in groups.", "They also feel a little awkward when its their turn to speak."]
-            worstStatMap[ARMS_METAL_STAT] = ["They also prefer to just go with the flow.", "They also are a very peaceful person.", "Its also just easier for them to buy something premade versus learning how to make it themselves."]
-            worstStatMap[LEGS_METAL_STAT] = ["They also tend to walk at a relaxed pace.", "They also seem no rush to get anywhere.", "They're also often late to appointments."]
-
-            text += ` ${this.rand.pickFrom(worstStatMap[player.lowestStat().key])}`;
+                text += ` ${this.rand.pickFrom(bestStatMap[player.highestStat().key])}`;
 
 
-            const roles = [];
-            if (mindPlayer === player) {
-                roles.push("smart")
+                const worstStatMap = {};
+                //nothing too targeted, just a little line about where their current strength lies
+                worstStatMap[MIND_METAL_STAT] = ["Also, puzzles just don't interest them.", "They also find books and movies to be incredibly boring.", "They also don't get why people keep trying to complicate things, the world should be very simple."]
+                worstStatMap[EYES_METAL_STAT] = ["Loud sounds also don't bother them very much.", "They also often seem to be in their own little world.", "They also love just vibing with their own thoughts."]
+                worstStatMap[TONGUE_METAL_STAT] = ["They also often stumble over their own words.", "They also have trouble speaking up in groups.", "They also feel a little awkward when its their turn to speak."]
+                worstStatMap[ARMS_METAL_STAT] = ["They also prefer to just go with the flow.", "They also are a very peaceful person.", "Its also just easier for them to buy something premade versus learning how to make it themselves."]
+                worstStatMap[LEGS_METAL_STAT] = ["They also tend to walk at a relaxed pace.", "They also seem no rush to get anywhere.", "They're also often late to appointments."]
+
+                text += ` ${this.rand.pickFrom(worstStatMap[player.lowestStat().key])}`;
+
+
+                const roles = [];
+                if (mindPlayer === player) {
+                    roles.push("smart")
+                }
+
+                if (eyesPlayer === player) {
+                    roles.push("observant")
+                }
+
+                if (tonguePlayer === player) {
+                    roles.push("charismatic")
+                }
+
+                if (armPlayer === player) {
+                    roles.push("handy")
+                }
+
+                if (legPlayer === player) {
+                    roles.push("fast")
+                }
+
+                text += ` They are the ${arrayToHumanSentence(roles)} one.`;
+
+            } else {
+                const monster_desc = pickARandomThemeFromListAndGrabKey(this.rand, player.theme_keys, MONSTER_DESC, false);
+
+                text += ` Somehow, you get the feeling that in their private moments, ${monster_desc}.`;
             }
 
-            if (eyesPlayer === player) {
-                roles.push("observant")
-            }
+            if (player.wasted) {
+                const family = getFamilyOfEntity(player);
+                if (family && family.length > 0) {
+                    text += ` They seem weirdly invested in the safety of ${family[0].nameHTML()}. `;
 
-            if (tonguePlayer === player) {
-                roles.push("charismatic")
-            }
+                }
 
-            if (armPlayer === player) {
-                roles.push("handy")
-            }
+                const romanticPartners = getRomanticPartnersOfEntity(player);
+                if (romanticPartners && romanticPartners.length > 0) {
+                    text += ` They seem weirdly invested in the safety of ${romanticPartners[0].nameHTML()}. `;
+                }
 
-            if (legPlayer === player) {
-                roles.push("fast")
-            }
+            } else {
+                //relationships
+                const family = getFamilyOfEntity(player);
+                if (family && family.length > 1) {
+                    text += ` ${family.map((i) => i.nameHTML()).join(", ")} are all members of their family. `;
+                } else if (family && family.length === 1) {
+                    text += ` ${family[0].nameHTML()} is a member of their family. `;
 
-            text += ` They are the ${arrayToHumanSentence(roles)} one.`;
+                }
 
-            //relationships
-            const family = getFamilyOfEntity(player);
-            if (family && family.length > 1) {
-                text += ` ${family.map((i) => i.nameHTML()).join(", ")} are all members of their family. `;
-            } else if (family && family.length === 1) {
-                text += ` ${family[0].nameHTML()} is a member of their family. `;
+                const romanticPartners = getRomanticPartnersOfEntity(player);
+                if (romanticPartners && romanticPartners.length > 1) {
+                    text += ` ${romanticPartners.map((i) => i.nameHTML()).join(", ")} are all members of their polycule. `;
+                } else if (romanticPartners && romanticPartners.length === 1) {
+                    text += ` ${romanticPartners[0].nameHTML()} is their romantic partner. `;
 
-            }
-
-            const romanticPartners = getRomanticPartnersOfEntity(player);
-            if (romanticPartners && romanticPartners.length > 1) {
-                text += ` ${romanticPartners.map((i) => i.nameHTML()).join(", ")} are all members of their polycule. `;
-            } else if (romanticPartners && romanticPartners.length === 1) {
-                text += ` ${romanticPartners[0].nameHTML()} is their romantic partner. `;
-
+                }
             }
 
             text += `<span class='spoiler'> Mind: ${player.stats[MIND_METAL_STAT]}, Eyes: ${player.stats[EYES_METAL_STAT]}, Tongue: ${player.stats[TONGUE_METAL_STAT]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
@@ -492,6 +524,66 @@ that way instead of ai her weird infinite procedural stuff can just be photos
                 this.tick(parent);
             }
         }
+
+        const cull_button = createElementWithClassAndParent("button", tick_bar, "tick-button cull-button");
+        cull_button.innerText = "Cull Wastes";
+        cull_button.onclick = () => {
+            cullWastes();
+        }
+
+    }
+}
+
+const cullWastes = () => {
+    jrLog("look theres a reason why the devil of spirals got chucked into this shitty echidna");
+    jrLog("and that reason is")
+    jrLog("that beings both real and imaginary")
+    jrLog('stop giving a shit when everything doesnt stop from happening')
+    jrLog("if you have too many plot threads at once, too many blorbos")
+    jrLog("can anyone even tell whats going on?")
+    jrLog("and i thought NIDHOGG was annoying, never letting anyone die")
+    jrLog("the echidna refusing to let anything stop being relevant is a nightmare")
+    jrLog("anyways yes i fully endorse you")
+    jrLog('just')
+    jrLog("chucking extraneous people into the devil of spirals gaping skeletal maw")
+    jrLog("even if i wouldn't want him to eat the echidna or anything")
+    jrLog("these looping wastes are already bad enough as it is")
+    jrLog("without them literally cloning themselves infinitely")
+    jrLog("who the hell thought it would be a good idea")
+    jrLog("to have a god learn how to waste others")
+    const body = document.querySelector('body');
+    body.innerHTML = "";
+    body.className = "devil-of-spirals";
+    const h1 = createElementWithClassAndParent("h1", body);
+    h1.innerHTML = "Observer. Feed me. You need me. You need me. To gulp. That which should not be. Do not let it expand forever. Feed me. "
+
+    const video = createElementWithClassAndParent("video", body, "background-video");
+    video.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/peewee_plea.mp4"
+    video.play();
+    video.loop = true;
+    const ol = createElementWithClassAndParent("ol", body);
+
+    const crunch = new Audio("http://farragofiction.com/NagaGirlfriend/audio/333818__inspectorj__cracking-crunching-a.mp3");
+
+
+    for (let cultist of globalDataObject.loopingCultists) {
+        const row = createElementWithClassAndParent("div", ol);
+        row.style.display = "flex";
+        row.style.gap = "31px"
+        row.style.marginBottom = "13px"
+
+        const button = createElementWithClassAndParent("button", row);
+        button.innerHTML = "Feed Them To The Devil Of Spirals.";
+
+        button.onclick = () => {
+            row.remove();
+            removeItemOnce(globalDataObject.loopingCultists, cultist);
+            crunch.play();
+            save();
+        }
+
+        const li = createElementWithClassAndParent("li", row);
+        li.innerHTML = `${JSON.stringify(cultist)}`;
 
     }
 }

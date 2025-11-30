@@ -47,6 +47,30 @@ body {
   font-family: 'nunito', sans-serif;
 }
 
+body.devil-of-spirals {
+  background-color: black;
+  color: white;
+
+  ol {
+    width: 50%;
+  }
+
+  li {
+    margin-top: 31px;
+  }
+
+  video {
+    height: 100vh;
+    right: 0px;
+    bottom: 0px;
+    position: relative;
+    display: block;
+    position: fixed;
+    z-index: -13;
+  }
+}
+
+
 
 .fake-background {
   min-width: 100%;
@@ -145,6 +169,12 @@ button {
 
 .tick-hundred-button {
   background-color: rgb(177, 139, 32)
+}
+
+
+.cull-button {
+  background-color: black;
+  color: white;
 }
 
 
