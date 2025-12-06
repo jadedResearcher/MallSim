@@ -45,6 +45,11 @@ const getSouth = (map, row, col) => {
 class Game {
     players = [];
     current_tick = 0;
+    initial_player_count = 0;
+    finished = false;
+    //list of special events, in order (not as detailed as AB will need, maybe,but a start)
+    //the generic event handles adding this, custom events don't need to worry
+    event_list = [];
     theme_keys = []; //collated from the players
     rand;//only thing storing it, pass it to anything that needs to use it
     //each row is a row in the map
@@ -54,6 +59,7 @@ class Game {
         this.rand = rand;
         this.players = randomParty(rand);
         this.addLoopingPlayersIfAny();
+        this.initial_player_count = this.players.length;
         for (let player of this.players) {
             console.log("JR NOTE: trying to scrape up themes from player,  ", { player, theme_keys_from_game: this.theme_keys })
             this.theme_keys = this.theme_keys.concat(player.theme_keys);
@@ -119,6 +125,31 @@ class Game {
         return ret;
     }
 
+    isItEpilogueTime = () => {
+        //everyone fled
+        if (this.players.length === 0) {
+            return true;
+        }
+
+        //if there is even one reason its not epilogue, its not epilogue
+        let ret = true;
+
+        for (let player of this.players) {
+            //yeah i could do this as an if with or clauses but for some reason i'm feeling spicy and no one can stop me
+            if (player.dead) {
+                //we could end
+            } else if (player.wasted) {
+                //we could end
+            } else if (player.corrupted) {
+                // we could end.
+            } else { //if even one person isn't dead or wasted or corrupted, its not over yet
+                return false;
+            }
+        }
+
+        return ret;
+    }
+
     /*
         locations tick, not people (the mall is alive)
         each tick, look for locations that are awake (blood inside them)
@@ -131,7 +162,16 @@ class Game {
         "The twisted shops and forlorn geometry get worse the longer it suffers, he knows. It needs people. Like a body needs blood. Needs to have objects moved out of it, like blood cells moving oxygen. Helps it think better. Remember what it's supposed to be better."
     */
     tick = (parent) => {
+        if (this.finished) {
+            return;
+        }
+        if (this.isItEpilogueTime()) {
+            this.finished = true;
+            this.handleEpilogue(parent);
+            return;
+        }
         this.current_tick++;
+
         const locations = this.getLocations();
 
         console.log("JR NOTE: ticking with this many lcoations", locations.length)
@@ -147,6 +187,9 @@ class Game {
     }
 
     movementAndInterctionTick = (parent, locations) => {
+        if (this.finished) {
+            return;
+        }
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
         const header = createElementWithClassAndParent("h2", tick_container, "story-title");
         header.innerText = `Movement ${this.current_tick}`;
@@ -189,6 +232,9 @@ class Game {
     }
 
     eventTick = (parent, locations) => {
+        if (this.finished) {
+            return;
+        }
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
         const header = createElementWithClassAndParent("h2", tick_container, "story-title");
         header.innerText = `Event ${this.current_tick}`;
@@ -280,6 +326,8 @@ class Game {
     start = (parent) => {
         this.handleIntro(parent);
     }
+
+
 
     handleSpawningMallEntrance = (parent) => {
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
@@ -377,6 +425,102 @@ class Game {
 
     }
 
+    handleEpilogue = (parent) => {
+        const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
+        const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+
+        const mannequins = [];
+        const corpses = [];
+        const wasted_corpses = [];
+        const wastes = [];
+        //no reason to check for the living, there should not be any tbh
+        for (let player of this.players) {
+            if (player.corrupted) {
+                mannequins.push(player)
+            }
+
+            if (player.dead) {
+                corpses.push(player);
+            }
+
+            if (player.wasted) {
+                wastes.push(player);
+            }
+
+            if (player.wasted && player.dead) {
+                wasted_corpses.push(player);
+            }
+        }
+
+        general_intro.innerHTML = `Mall Expedition: ${this.rand.initial_seed} has ended! Of ${this.initial_player_count} initial members, ${wastes.length} found Harvest Fruit and Joined The Loop!`;
+
+        if (wastes.length > 0 && corpses.length > 0) {
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `${arrayToHumanSentence(corpses.map((i) => i.getName()))} ${corpses.length > 1 ? "are" : "is"} placed in a very nice fine clothing display and covered in 1000 thread count linens as a proxy for being buried.`;
+        }
+
+        if (wastes.length > 0 && mannequins.length > 0) {
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `${arrayToHumanSentence(mannequins.map((i) => i.getName()))} will wander the Westerville Mall for the rest of this loop.`;
+        }
+
+        if (this.initial_player_count > this.players.length) {
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `History will forget any who could not handle the devotion necessary to obtain Harvest Fruit.`;
+
+        }
+
+        if (wasted_corpses.length > 0) {
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `Death is not the end for those in the Loop. When the next Universe is ready, there will be a copy of them eagerly awaiting adventures, with no knowledge of the pitiable corpse that lingers elsewhere.`;
+
+        }
+
+        if (this.players.length === wastes.length) {
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `Everyone has joined the Loop together! Their sanded smoothes copies spiralling across eternity will not be alone!`;
+
+        }
+
+        const next_section_intro = createElementWithClassAndParent("h2", intro_container, "sub-story-beat");
+        next_section_intro.innerText = "Final Stats:"
+
+        const stat_groups = createElementWithClassAndParent("div", intro_container, "epilogue-stats");
+
+
+        for (let player of this.players) {
+            const stat_intro = createElementWithClassAndParent("div", stat_groups, "player-epilogue-wrapper");
+
+            const makePair = (left, right) => {
+                const pair = createElementWithClassAndParent("div", stat_intro, "player-stat-pair");
+                const leftEle = createElementWithClassAndParent("div", pair, "player-stat-left");
+                leftEle.innerHTML = left;
+                const rightEle = createElementWithClassAndParent("div", pair, "player-stat-right");
+                rightEle.innerHTML = right;
+            }
+
+            makePair("Name:", player.nameHTML())
+            makePair("Title:", player.titleHTML())
+            makePair("Dead:", player.dead)
+            makePair("Corrupted:", player.corrupted)
+            makePair("Corruption:", player.corruption)
+            makePair("Wasted:", player.wasted)
+            makePair("Monstrous:", player.monster_rating)
+
+
+            for (let [key, value] of Object.entries(player.stats)) {
+                makePair(key, value)
+            }
+            makePair("Inventory: ", player.inventory.map((i) => i.name).join(","));
+
+        }
+
+
+
+
+
+    }
+
     /*
 wanda heard ai art is unethical and thats why the mall twists everyone into fucked up mannequins
 that way instead of ai her weird infinite procedural stuff can just be photos
@@ -384,7 +528,7 @@ that way instead of ai her weird infinite procedural stuff can just be photos
     handleIntro = (parent) => {
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-        general_intro.innerHTML = `${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
+        general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2><br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
         const mindPlayer = getPartyHighestMind(this.players);
         const eyesPlayer = getPartyHighestEyes(this.players);
         const tonguePlayer = getPartyHighestTongue(this.players);

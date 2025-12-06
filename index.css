@@ -171,10 +171,35 @@ button {
   background-color: rgb(177, 139, 32)
 }
 
+.epilogue-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.player-stat-left {
+  width: 75px;
+  font-weight: bolder;
+}
+
+.player-epilogue-wrapper {
+  border: 3px solid black;
+  border-radius: 13px;
+  padding: 13px;
+  width: 413px;
+}
+
+.player-stat-pair {
+  display: flex;
+  gap: 31px;
+  margin-bottom: 13px;
+}
+
 
 .cull-button {
   background-color: black;
   color: white;
+  margin-top: 31px;
 }
 
 
@@ -209,6 +234,15 @@ button {
 
 .sub-story-beat {
   margin-top: 13px;
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 13px;
+    max-height: 200px;
+    max-width: 100%;
+  }
 }
 
 .player-icon {

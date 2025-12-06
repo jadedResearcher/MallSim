@@ -330,6 +330,7 @@ class Entity {
     //when a new session starts with someone who 'is' you, you'll be added (not replace them)
     //why do you think the echidna is causing a memory leak? 
     joinTheLoop = () => {
+        this.sandSmoothByValue(MEDIUM_STAT_VALUE);//congratulations on becoming the 'you' you were always meant to be. technically this should happen a bit over time, over centuries, but we all know simulations are supposed to be super fast
         globalDataObject.loopingCultists.push({ title: this.title, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys })
         save();
     }
@@ -505,6 +506,73 @@ class Entity {
         ele.innerHTML = ` ${this.nameHTML()} has dropped the ${item.name}!`;
     }
 
+    //zampanio sands you smooth
+    //corrupts you into yourself
+    //you become more and more what you are, the highs and lows
+    //with anything in the middle slowly rubbed away
+    raiseHighestStat = (value) => {
+        const stat = this.highestStat();
+        this.raiseStat(stat[key], value);
+    }
+
+    reduceLowestStat = (value) => {
+        const stat = this.lowestStat();
+        this.raiseStat(stat[key], -1 * value);
+    }
+
+    //if youre not the best or the worst,
+    // become a bit more like a default human (MEDIUM_STAT_VALUE)
+    smoothOutMediocreStatsByOne = () => {
+        const high = this.highestStat();
+        const low = this.lowestStat();
+        for (let [key, value] of Object.entries(this.stats)) {
+            if (key !== high[key] && key !== low[key]) {
+                //lower it if you're too good at it
+                if (value > MEDIUM_STAT_VALUE) {
+                    this.raiseStat(key, -1);
+                } else if (value < MEDIUM_STAT_VALUE) { //raise it if you're too bad at it
+                    this.raiseStat(key, 1);
+
+                }
+            }
+        }
+
+    }
+
+    //zampanio only cares about the ways you stand out
+    //everything else gets lost to you
+    //the fanfic-ification of blorbos is mandatory in order to save space
+    //compression is a hell of a thing
+    sandSmoothByValue = (change_value) => {
+        const high = this.highestStat();
+        const low = this.lowestStat();
+        //console.log("JR NOTE: sandSmoothByValue", { name: this.title, high, low })
+        for (let [key, value] of Object.entries(this.stats)) {
+            if (key == high["key"]) {
+                console.log("JR NOTE: sandSmoothByValue raising high", key)
+                this.raiseStat(key, change_value);
+            } else if (key == low["key"]) {
+                console.log("JR NOTE: sandSmoothByValue reducing low", key)
+
+                this.raiseStat(key, -1 * change_value);
+
+            } else {
+                console.log("JR NOTE: sandSmoothByValue sanding smooth", key)
+
+                if (value > MEDIUM_STAT_VALUE) {
+                    //don't reduce it by TOO much, get stuck at the medium value
+                    this.stats[key] = Math.max(MEDIUM_STAT_VALUE, this.stats[key] - change_value)
+                } else if (value < MEDIUM_STAT_VALUE) { //raise it if you're too bad at it
+                    //don't raise it by TOO Much, get stuck at the medium value
+                    this.stats[key] = Math.min(MEDIUM_STAT_VALUE, this.stats[key] + change_value)
+
+                }
+            }
+
+        }
+
+    }
+
     //returns key and value of their best stat
     highestStat = () => {
         //BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
@@ -533,6 +601,10 @@ class Entity {
 
     addCorruption = (value) => {
         this.corruption += value;
+    }
+
+    raiseStat = (key, value) => {
+        this.stats[key] += value;
     }
 
     decideWhereToGoAsAMannequin = (ele, rand, currentLocation, north, south, east, west) => {

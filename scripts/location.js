@@ -251,6 +251,16 @@ class Location {
             //interesting the corruption only fully gets you when you're alone
             //if something is happening to you, the Curiosity To See will pull you forward just that little bit longer
             //its the quiet moments afterwards you need to worry about
+            //incidentally
+            //the mannequin thing
+            //is really funny to me
+            //if you're in the mall too long
+            //zampanio loses track of you
+            //SHOPPERS aren't in the mall that long
+            //so the only other humanoid thing you might be
+            //is a mannequin
+            //and it just
+            //assumes that about you without checking
             if (p.hasHitMaxCorruption() && !p.corrupted) {
                 p.becomeCorrupted(rand);
                 const monster_desc = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, MONSTER_DESC, false);

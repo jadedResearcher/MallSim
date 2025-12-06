@@ -5,7 +5,11 @@ however i want to hide them in this sim (radio cipher minigame?)
 
 parse them from here
 */
-
+/*
+http://www.farragofiction.com/ExperimentalMusic/
+and
+http://www.farragofiction.com/ASecondPersonalTranscript/
+*/
 //this one i wrote in 2022.
 const witherys_sacrificial_lamb = `The mall was like a head trauma patient, left bleeding and confused, but hanging onto life by a thread.
 

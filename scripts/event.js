@@ -27,6 +27,7 @@ class Event {
     */
     checkConditions = (game, location, parentEle) => {
         if (this.internalConditionCheck(game, location)) {
+            game.event_list.push(this.name);//help AB a little
             this.applyResult(game, location, parentEle);
             return true;
         }
@@ -121,7 +122,7 @@ class RandomlyFindShoppingObject extends Event {
         const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
-        const oddsFruit = 0.75;
+        const oddsFruit = 0.05;
         if (game.rand.nextDouble() < oddsFruit) {
             const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
@@ -186,7 +187,7 @@ class YongkiKill extends Event {
             reaction += `${arrayToHumanSentence(mannequins.map((n) => n.nameHTML()))} twitches ever so slightly, blank face${mannequins.length > 0 ? "s" : ""} taking in the carnage.`;
         }
 
-        ele.innerHTML = `${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a red smear on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
+        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/handdrip.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a red smear on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
 
     }
 
@@ -195,4 +196,66 @@ class YongkiKill extends Event {
 
 
 
-const generalEvents = [new YongkiKill()]
+class HydrationStation extends Event {
+    name = "Hydration Station";
+
+    //is there at least one person ready to escape?
+    internalConditionCheck = (game, location) => {
+        const players = location.livingNonMannequinPlayers();
+        if (players.length > 0) {
+            let shopping_count = 0;
+            //the Westerville Mall rewards good shoppers
+            for (let player of players) {
+                shopping_count += player.inventory.length;
+            }
+            const threshold = 3 + game.rand.getRandomNumberBetween(0, 3);
+            return shopping_count > threshold && game.rand.nextDouble() < 0.1;
+        }
+        return false;
+
+    }
+
+    applyResult = (game, location, parent) => {
+        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        const players = location.livingNonMannequinPlayers();
+        const hydrated_players = [];
+        const dehydrated_players = [];
+        for (let player of players) {
+            //no good answers here, have i mentioned zampanio is a horror game?
+            if (game.rand.nextDouble() > 0.3) {
+                hydrated_players.push(player);
+                player.addCorruption(-113);//its so refreshing, you've been acknowledged as a Shopper with Human needs, and that decreases the chances the Mall will consider you to be a Mannequin
+                player.sandSmoothByValue(3);//you drank the water. enjoy the new you. its more like you than you were before. guaranteed.
+            } else {
+                dehydrated_players.push(player);
+                player.addCorruption(113); //i guess you don't need water, and we all know what THAT means. you're a mannequin, right? The Westerville Mall knows.
+            }
+        }
+
+        /*${hydrated_players.length > 0 ? arrayToHumanSentence(hydrated_players.map((i) => i.nameHTML())) + "drank the water." : "No one is dumb enough to try drinking the Mystery Mall Fluid."} ${dehydrated_players.length > 0 ? arrayToHumanSentence(dehydrated_players.map((i) => i.nameHTML())) + "refuse" + dehydrated_players.length > 1 ? "" : "s" + "to drink the Mystery Mall Fluid." : ""}`;
+
+    */
+        let hydration_story = "";
+        if (hydrated_players.length > 0) {
+            hydration_story = ` ${arrayToHumanSentence(hydrated_players.map((i) => i.nameHTML())) + " drank the water eagerly."}`;
+
+        } else {
+            hydration_story = ` No one is dumb enough to try drinking the Mystery Mall Fluid.`;
+        }
+        let dehydration_story = "";
+        if (dehydrated_players.length > 0) {
+            dehydrated_story = " " + arrayToHumanSentence(dehydrated_players.map((i) => i.nameHTML())) + " did not dare to drink the Mystery Mall Fluid.";
+        }
+
+        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/upsetting_water_final.gif' >
+                ${arrayToHumanSentence(players.map((i) => i.nameHTML()))} ${players.length > 1 ? "are" : "is"} exhausted from a long day shopping and the Westerville Mall knows how to treat its shoppers right. 
+        They find an incredibly tempting HYDRATION STATION and a nice bench to rest their  feet on.${hydration_story}${dehydration_story} `;
+
+    }
+
+}
+
+
+
+
+const generalEvents = [new YongkiKill(), new HydrationStation]
