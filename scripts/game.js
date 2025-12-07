@@ -46,6 +46,7 @@ class Game {
     players = [];
     //peewee devours any new looping players before they can reach the next universe (useful if you want AB's session to ACTUALLY be helpful instead of filled with fate breaking assholes)
     eatWastesAutomatically = false;
+    summary;
     current_tick = 0;
     initial_player_count = 0;
     finished = false;
@@ -58,6 +59,7 @@ class Game {
     //each cell is either undefined or a room in the mall
     map = [];
     constructor(rand, eatWastesAutomatically) {
+        this.summary = new GameSummary();
         this.rand = rand;
         this.eatWastesAutomatically = eatWastesAutomatically;
         this.players = randomParty(rand);
@@ -429,6 +431,7 @@ class Game {
     }
 
     handleEpilogue = (parent) => {
+        this.summary.finalize(this);
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
@@ -459,7 +462,12 @@ class Game {
 
         if (wastes.length > 0 && corpses.length > 0) {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `${arrayToHumanSentence(corpses.map((i) => i.getName()))} ${corpses.length > 1 ? "are" : "is"} placed in a very nice fine clothing display and covered in 1000 thread count linens as a proxy for being buried.`;
+
+            if (corpses.length === this.players.length) {
+                detail.innerHTML = `There is no one left to bury the dead.`;
+
+            } else
+                detail.innerHTML = `${arrayToHumanSentence(corpses.map((i) => i.getName()))} ${corpses.length > 1 ? "are" : "is"} placed in a very nice fine clothing display and covered in 1000 thread count linens as a proxy for being buried.`;
         }
 
         if (wastes.length > 0 && mannequins.length > 0) {
@@ -505,10 +513,11 @@ class Game {
             makePair("Name:", player.nameHTML())
             makePair("Title:", player.titleHTML())
             makePair("Dead:", player.dead)
-            makePair("Corrupted:", player.corrupted)
+            makePair("Corrupted:", player.corrupted ? player.corrupted + (player.mannequin_type) : player.corrupted)
             makePair("Corruption:", player.corruption)
             makePair("Wasted:", player.wasted)
             makePair("Monstrous:", player.monster_rating)
+            makePair("Stolen Name:", player.stolen_name)
 
 
             for (let [key, value] of Object.entries(player.stats)) {
@@ -517,6 +526,8 @@ class Game {
             makePair("Inventory: ", player.inventory.map((i) => i.name).join(","));
 
         }
+
+        this.summary.renderSelf(intro_container);
 
 
 

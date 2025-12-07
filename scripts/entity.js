@@ -123,7 +123,7 @@ const getPartyHighestArms = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[ARMS_METAL_STAT > ret.stats[ARMS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[ARMS_METAL_STAT] > ret.stats[ARMS_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -135,7 +135,7 @@ const getPartyHighestLegs = (party) => {
     for (let p of party) {
         if (!ret) {
             ret = p;
-        } else if (p.stats[LEGS_METAL_STAT > ret.stats[LEGS_METAL_STAT]]) {//if equal pick the one who came first, prefers leader
+        } else if (p.stats[LEGS_METAL_STAT] > ret.stats[LEGS_METAL_STAT]) {//if equal pick the one who came first, prefers leader
             ret = p;
         }
     }
@@ -303,7 +303,7 @@ class Entity {
     leader = false; //in sburbsim this decided ectobiology, who knows what this does, if anything, here
     //keyed by other persons title
     relationships = {};
-    wasted = false; //same thing as Joining The Loop (because if you have wasted, why just passively let the end of the world end you? no, instead hook yourself up to Wanda's bullshit spiral and let yourself be dragged to the next universe, all fresh and pristine)
+    wasted = false; //same thing as Joining The Loop (because if you have wasted (i.e. know how to hack reality), why just passively let the end of the world end you? no, instead hook yourself up to Wanda's bullshit spiral and let yourself be dragged to the next universe, all fresh and pristine)
     //eventually things like inventory, relationships and stats
     //themes decide all that, themes decide everything
     //basically homestuck classpects

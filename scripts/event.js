@@ -102,7 +102,7 @@ class EscapeMall extends Event {
 //zampanio associates them with the mall now
 //they're lucky they can even leave it for short durations
 class RandomlyFindShoppingObject extends Event {
-    name = "Randomly Shopping Object";
+    name = "Shopping Time!";
 
     //is there at least one person ready to escape?
     internalConditionCheck = (game, location) => {
@@ -117,6 +117,8 @@ class RandomlyFindShoppingObject extends Event {
     applyResult = (game, location, parent) => {
         const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
         const shopper = game.rand.pickFrom(location.players);
+
+        shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
         const formerNameHTML = shopper.nameHTML();
         console.log("JR NOTE: eventually expand this with alchemy traits system. Have the 'its shiny, its crystal and its a sword' quip from sburbsim.");
         const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
@@ -164,6 +166,7 @@ class YongkiKill extends Event {
     applyResult = (game, location, parent) => {
         const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
         const redPaste = game.rand.pickFrom(location.players);
+
         const formerNameHTML = redPaste.nameHTML();
         //yeah sure why not, he can kill mannequins (but not corpses)
         if (redPaste.corrupted) {
@@ -208,7 +211,7 @@ class HydrationStation extends Event {
             for (let player of players) {
                 shopping_count += player.inventory.length;
             }
-            const threshold = 3 + game.rand.getRandomNumberBetween(0, 3);
+            const threshold = 1 + game.rand.getRandomNumberBetween(0, 3);
             return shopping_count > threshold && game.rand.nextDouble() < 0.1;
         }
         return false;
@@ -216,6 +219,7 @@ class HydrationStation extends Event {
     }
 
     applyResult = (game, location, parent) => {
+        console.log("JR NOTE: trying to hydrate")
         const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
         const players = location.livingNonMannequinPlayers();
         const hydrated_players = [];
@@ -237,6 +241,7 @@ class HydrationStation extends Event {
     */
         let hydration_story = "";
         if (hydrated_players.length > 0) {
+            game.summary.numberStats[game.summary.TIMES_HYDRATED]++;
             hydration_story = ` ${arrayToHumanSentence(hydrated_players.map((i) => i.nameHTML())) + " drank the water eagerly."}`;
 
         } else {
