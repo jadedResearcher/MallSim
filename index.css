@@ -47,6 +47,13 @@ body {
   font-family: 'nunito', sans-serif;
 }
 
+body.author-bot {
+  background-color: grey;
+  background-image: url(images/ab_bg.png);
+  /*easter egg, its a tileable asset i made from ABs crochet doll i had a picture of in sburbsim: http://farragofiction.com/SBURBSim/images/ab_doll2.jpg*/
+
+}
+
 body.devil-of-spirals {
   background-color: black;
   color: white;
@@ -195,6 +202,78 @@ button {
   margin-bottom: 13px;
 }
 
+.guide-bot {
+  position: fixed;
+  left: 66px;
+  -webkit-filter: drop-shadow(-1px -1px 13px #06FFC9);
+  filter: drop-shadow(-1px -1px 13px #06FFC9);
+}
+
+@keyframes glow {
+
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    -webkit-filter: drop-shadow(-1px -1px 13px #06FFC9);
+    filter: drop-shadow(-1px -1px 13px #06FFC9);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-filter: drop-shadow(1px 1px 13px #06FFC9);
+    filter: drop-shadow(1px 1px 13px #06FFC9);
+  }
+
+}
+
+@keyframes hover {
+
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transform: translate(1px, 3px);
+    -webkit-filter: drop-shadow(3px 3px 3px #06FFC9);
+    filter: drop-shadow(3px 3px 3px #06FFC9);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-1px, 0px);
+    -webkit-filter: drop-shadow(3px 3px 3px #06FFC9);
+    filter: drop-shadow(3px 3px 3px #06FFC9);
+  }
+
+}
+
+
+.sburb-container {
+  width: 1000px;
+  box-shadow: 2px 2px 4px rgb(50, 37, 1);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 13px;
+  background-color: #c4c4c4;
+  border: 3px solid black;
+  border-radius: 13px;
+  margin-top: 31px;
+}
+
+.ab-button {
+  background-color: #B6B6B6;
+  color: #0000FF;
+}
 
 .cull-button {
   background-color: black;

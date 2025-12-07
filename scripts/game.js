@@ -44,6 +44,8 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
+    //peewee devours any new looping players before they can reach the next universe (useful if you want AB's session to ACTUALLY be helpful instead of filled with fate breaking assholes)
+    eatWastesAutomatically = false;
     current_tick = 0;
     initial_player_count = 0;
     finished = false;
@@ -55,8 +57,9 @@ class Game {
     //each row is a row in the map
     //each cell is either undefined or a room in the mall
     map = [];
-    constructor(rand) {
+    constructor(rand, eatWastesAutomatically) {
         this.rand = rand;
+        this.eatWastesAutomatically = eatWastesAutomatically;
         this.players = randomParty(rand);
         this.addLoopingPlayersIfAny();
         this.initial_player_count = this.players.length;
@@ -675,7 +678,35 @@ that way instead of ai her weird infinite procedural stuff can just be photos
             cullWastes();
         }
 
+        const ab_button = createElementWithClassAndParent("button", tick_bar, "tick-button ab-button");
+        ab_button.innerText = "AB Guide";
+        ab_button.onclick = () => {
+            ab_view();
+        }
+
     }
+}
+
+const ab_view = () => {
+    const body = document.querySelector('body');
+    body.innerHTML = "";
+    body.className = "author-bot";
+    const sburb_container = createElementWithClassAndParent("div", body, 'sburb-container');
+    const guide_bot = createElementWithClassAndParent("img", sburb_container, 'guide-bot');
+    guide_bot.src = "http://farragofiction.com/SBURBSim/images/guide_bot.png";
+    const h1 = createElementWithClassAndParent("h1", sburb_container);
+    //this shits nostalgic
+    h1.innerText = "Rare Session Finder AuthorBot"
+    const p = createElementWithClassAndParent("p", sburb_container);
+    p.innerHTML = `It seems you have asked about JR's automatic rare session finder. This is an application designed to find sessions that are strange, interesting and otherwise noteworthy without having to read hundreds of thousands of words. The algorithms are guaranteed to be 91.62748924816707% indistinguishable from the actual, readable sessions, based on some statistical analysis I basically just pulled out of my ass right now.
+
+Please be patient as the sessions finish. Stats will be printed out up top at the end. Links to individual sessions will be below.
+<br><br>As JR's superior robotic doppelganger, I must express that I am feeling: nostalgic, at returning to my original role of Guiding Observers through interesting simulations.
+<br><Br><b>NOTE</b>: Wasted players, as always, throw a wrench in my superior robotic ability to make predictions. <br><br>If a player foreign to a given universe invades its Loop, all bets are off.<br><Br>It seems if you wish to prevent this you might wish to have the Devil of Spirals automatically eat any Players attempting to flee to the next Universe.`
+    let omnomnom = false; //pass this to new games
+    const singleUseEle = createCheckboxInputWithLabel(sburb_container, 'single-use', "Allow Eating?", omnomnom);
+    singleUseEle.input.onchange = () => omnomnom = !omnomnom;
+
 }
 
 const cullWastes = () => {

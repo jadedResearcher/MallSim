@@ -275,6 +275,8 @@ const createCheckboxInputWithLabel = (parent, id, labelText, initialValue) => {
 }
 
 
+
+
 const createElementWithClassAndParent = (eleName, parent, className) => {
   const ele = createElementWithClass(eleName, className);
   parent.append(ele);
