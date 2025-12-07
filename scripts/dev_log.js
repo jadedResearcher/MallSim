@@ -1,4 +1,5 @@
 const dev_log = {}
+//don't forget to update west if you see something interesting in the simulation
 dev_log["12/6/2025", `lulz
     finally thought to do one of these
     its so nostalgic

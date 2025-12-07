@@ -14,11 +14,11 @@ const debug = () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    const seed = urlParams.get('seed') ? parseInt(urlParams.get('seed')) : 13;
+    const seed = urlParams.get('seed') ? stringtoseed(urlParams.get('seed')) : 13;
     //if there is an id it turns into a global var this is wild i only learned this recently
     const debug = createElementWithClassAndParent("div", container, "debug");
     const rand = new SeededRandom(seed);
-    game = new Game(rand);
+    game = new Game(rand, false);
     game.start(debug);
     console.log("JR NOTE: debug entities", game.players);
 

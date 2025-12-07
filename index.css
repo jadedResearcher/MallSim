@@ -204,7 +204,8 @@ button {
 
 .guide-bot {
   position: fixed;
-  left: 66px;
+  left: -28px;
+  width: 215px;
   -webkit-filter: drop-shadow(-1px -1px 13px #06FFC9);
   filter: drop-shadow(-1px -1px 13px #06FFC9);
 }
@@ -268,6 +269,33 @@ button {
   border: 3px solid black;
   border-radius: 13px;
   margin-top: 31px;
+
+  input {
+    margin-left: 13px;
+    height: 25px;
+  }
+
+  .form-container {
+    margin-top: 13px;
+  }
+
+  label {
+    width: 333px;
+    border-top: 3px dotted white;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 13px;
+    vertical-align: top;
+  }
+
+  .button-container {
+    margin: 13px;
+  }
+
+  button {
+    font-family: Gamer;
+    font-size: 21px;
+  }
 }
 
 .ab-button {

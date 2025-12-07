@@ -283,7 +283,12 @@ const createElementWithClassAndParent = (eleName, parent, className) => {
   return ele;
 }
 
+//can take in an int or  a string and figure out how to make a seed int from that
 function stringtoseed(seed) {
+  const parsedInt = parseInt(seed);
+  if (!Number.isNaN(parseInt(parsedInt))) {
+    return parsedInt;
+  }
   var output = 0;
   for (var i = 0, len = seed.length; i < len; i++) {
     output += seed[i].charCodeAt(0)
