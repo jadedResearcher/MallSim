@@ -73,7 +73,13 @@ class EscapeMall extends Event {
     }
 
     applyResult = (game, location, parent) => {
-        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
         //everyone ready to leave can leave together
         const leaving = [];
         for (let player of location.players) {
@@ -108,14 +114,21 @@ class RandomlyFindShoppingObject extends Event {
     internalConditionCheck = (game, location) => {
         console.log("JR NOTE: todo if someone in the location has a shopping bag, increase odds of this event (the mall considers you even more a shopper), wire into stats too")
         if (location.livingNonMannequinPlayers().length > 0) {
-            return game.rand.nextDouble() < 0.5;
+            return game.rand.nextDouble() < 0.75;
         }
         return false;
 
     }
 
     applyResult = (game, location, parent) => {
-        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+
         const shopper = game.rand.pickFrom(location.players);
 
         shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
@@ -164,7 +177,13 @@ class YongkiKill extends Event {
     }
 
     applyResult = (game, location, parent) => {
-        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
         const redPaste = game.rand.pickFrom(location.players);
 
         const formerNameHTML = redPaste.nameHTML();
@@ -220,7 +239,13 @@ class HydrationStation extends Event {
 
     applyResult = (game, location, parent) => {
         console.log("JR NOTE: trying to hydrate")
-        const ele = createElementWithClassAndParent("div", parent, "sub-story-beat");
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
         const players = location.livingNonMannequinPlayers();
         const hydrated_players = [];
         const dehydrated_players = [];

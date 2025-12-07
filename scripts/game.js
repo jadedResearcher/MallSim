@@ -460,7 +460,7 @@ class Game {
 
         general_intro.innerHTML = `Mall Expedition: ${this.rand.initial_seed} has ended! Of ${this.initial_player_count} initial members, ${wastes.length} found Harvest Fruit and Joined The Loop!`;
 
-        if (wastes.length > 0 && corpses.length > 0) {
+        if (corpses.length > 0) {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
             if (corpses.length === this.players.length) {

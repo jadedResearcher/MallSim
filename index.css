@@ -20,6 +20,12 @@ h1 {
   margin-left: 120px;
 }
 
+h3 {
+  font-family: Gamer;
+  text-decoration: underline;
+  margin-bottom: 3px;
+}
+
 .spoiler {
   background-color: black;
   color: black;
