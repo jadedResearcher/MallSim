@@ -14,12 +14,12 @@ const ab_view = () => {
 Please be patient as the sessions finish. Stats will be printed out up top at the end. Links to individual sessions will be below.
 <br><br>As JR's superior robotic doppelganger, I must express that I am feeling: nostalgic, at returning to my original role of Guiding Observers through interesting simulations.
 <br><Br><b>NOTE</b>: Wasted players, as always, throw a wrench in my superior robotic ability to make predictions. <br><br>If a player foreign to a given universe invades its Loop, all bets are off.<br><Br>It seems if you wish to prevent this you might wish to have the Devil of Spirals automatically eat any Players attempting to flee to the next Universe.`
-    let omnomnom = false; //pass this to new games
+    let omnomnom = true; //pass this to new games
     const eatbutton = createCheckboxInputWithLabel(sburb_container, 'single-use', "Allow Eating?", omnomnom);
     eatbutton.input.onchange = () => omnomnom = !omnomnom;
 
 
-    let seed_text = "Zampanio"
+    let seed_text = "Zampanio" //translates to 831, should it be an arc number?
     const seed_input = createTextInputWithLabel(sburb_container, 'seed-input', "Seed:", seed_text);
     seed_input.input.onchange = () => seed = seed_input.input.value;
 
@@ -27,16 +27,39 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
     const tick_bar = createElementWithClassAndParent("div", sburb_container, "button-container");
     const tick_button = createElementWithClassAndParent("button", tick_bar, "tick-once-button");
     tick_button.innerText = "Simulate 1x Session";
+
+
+    const global_stats_container = createElementWithClassAndParent("div", sburb_container, "button-container");
+
+
+    const session_summary_container = createElementWithClassAndParent("div", sburb_container, "button-container");
+
     tick_button.onclick = () => {
-        simulateOneSession(stringtoseed(seed_text), omnomnom);
+        let seed = seed_text;
+        if (game) {
+            //pick a new seed
+            seed = game.rand.getRandomNumberBetween(0, 4294967296)
+        }
+        simulateOneSession(seed, omnomnom, session_summary_container, global_stats_container);
     }
 }
 
 
-const simulateOneSession = (seed, omnomnom) => {
+const simulateOneSession = (seed, omnomnom, session_summary_container, global_stats_container) => {
+    const startTime = performance.now();
     console.log("JR NOTE: simulating with seed of ")
     game = new Game(new SeededRandom(seed), omnomnom);
+    const throw_away_ele = document.createElement("div");
     //create a div but don't give it an attached dom to render to (will be very fast, react uses a virtual dom like this and apparently past me did too)
-    game.start(document.createElement("div"));
+    game.start(throw_away_ele);
+    for (let i = 0; i < 200; i++) {
+        game.tick(throw_away_ele);
+    }
     alert("done???")
+
+
+
+    const endTime = performance.now();;
+    game.summary.renderSelf(session_summary_container, `${Math.round((endTime - startTime) / 1000)}s`);
+
 }

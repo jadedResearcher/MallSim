@@ -8,6 +8,7 @@ class GameSummary {
     SEED = "Session Seed:"
 
     //add these to the constructor and finalize a swell
+
     NUMBER_INITIAL_PLAYERS = "# Initial Players:"
     NUMBER_ENDING_PLAYERS = "# Ending Players:"
     NUMBER_FLED_PLAYERS = "# Presumed Fled Players:"
@@ -27,8 +28,9 @@ class GameSummary {
     EVERYONE_DIED = "Everyone Died?"
     EVERYONE_LOOPING = "Everyone Looped?"
     EVERYONE_CORRUPTED = "Everyone Corrupted?";
+    ENDING_GOT = "ENDING NAME:";
 
-    SCENE_LIST = "Events Triggered";
+    SCENE_LIST = "Events Triggered:";
     MIND_MVP = "Mind MVP: "
     EYES_MVP = "Eyes MVP: "
     TONGUE_MVP = "Tongue MVP: "
@@ -62,6 +64,7 @@ class GameSummary {
         this.booleanStats[this.EVERYONE_LOOPING] = false;
         this.booleanStats[this.EVERYONE_CORRUPTED] = false;
 
+        this.stringStats[this.ENDING_GOT] = "ENDLESS";//this should only happen for ab, she only has 200 ticks of patience right now, no infinite loops for my dear sweet precious sweet sweet robotic doppelganger
         this.stringStats[this.MIND_MVP] = "No one :("
         this.stringStats[this.EYES_MVP] = "No one :("
         this.stringStats[this.TONGUE_MVP] = "No one :("
@@ -70,6 +73,15 @@ class GameSummary {
         this.stringStats[this.SCENE_LIST] = "None :("
 
 
+
+    }
+
+    setEnding = (ending_name) => {
+        this.stringStats[this.ENDING_GOT] = ending_name;
+    }
+
+    hasEnding = () => {
+        return this.stringStats[this.ENDING_GOT] != "ENDLESS"
     }
 
     finalize = (game) => {
@@ -134,12 +146,14 @@ class GameSummary {
 
     }
 
-    renderSelf = (parent) => {
+    renderSelf = (parent, ab_time) => {
         const ele = createElementWithClassAndParent("div", parent, "player-epilogue-wrapper");
         ele.style.marginTop = "31px"
         const h3 = createElementWithClassAndParent("h3", ele);
         h3.innerHTML = `Mall Expedition: #<a target='_blank' href ='${window.location.pathname}?seed=${this.numberStats[this.SEED]}'>${this.numberStats[this.SEED]}</a>`;
-
+        if (ab_time) {
+            h3.innerHTML += `<div style='font-family:Courier New; color: red;'> (${ab_time} to simulate 200 ticks)</div>`
+        }
         const makePair = (left, right) => {
             const pair = createElementWithClassAndParent("div", ele, "summary-stat-pair");
             const leftEle = createElementWithClassAndParent("div", pair, "summary-stat-left");

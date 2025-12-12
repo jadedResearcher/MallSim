@@ -56,8 +56,11 @@ body {
 body.author-bot {
   background-color: grey;
   background-image: url(images/ab_bg.png);
-  /*easter egg, its a tileable asset i made from ABs crochet doll i had a picture of in sburbsim: http://farragofiction.com/SBURBSim/images/ab_doll2.jpg*/
 
+  /*easter egg, its a tileable asset i made from ABs crochet doll i had a picture of in sburbsim: http://farragofiction.com/SBURBSim/images/ab_doll2.jpg*/
+  .player-epilogue-wrapper {
+    font-size: 12px;
+  }
 }
 
 body.devil-of-spirals {

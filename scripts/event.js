@@ -119,7 +119,7 @@ class RandomlyFindShoppingObject extends Event {
         return false;
 
     }
-
+    //https://www.twitch.tv/directory/category/zampaniosimulator/videos/all
     applyResult = (game, location, parent) => {
         const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
@@ -209,7 +209,7 @@ class YongkiKill extends Event {
             reaction += `${arrayToHumanSentence(mannequins.map((n) => n.nameHTML()))} twitches ever so slightly, blank face${mannequins.length > 0 ? "s" : ""} taking in the carnage.`;
         }
 
-        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/handdrip.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a red smear on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
+        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/hand_twirl_yongki-moshed-12-09-23-16-56-176.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a red smear on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
 
     }
 
@@ -265,6 +265,7 @@ class HydrationStation extends Event {
 
     */
         let hydration_story = "";
+
         if (hydrated_players.length > 0) {
             game.summary.numberStats[game.summary.TIMES_HYDRATED]++;
             hydration_story = ` ${arrayToHumanSentence(hydrated_players.map((i) => i.nameHTML())) + " drank the water eagerly."}`;
@@ -272,9 +273,10 @@ class HydrationStation extends Event {
         } else {
             hydration_story = ` No one is dumb enough to try drinking the Mystery Mall Fluid.`;
         }
+
         let dehydration_story = "";
         if (dehydrated_players.length > 0) {
-            dehydrated_story = " " + arrayToHumanSentence(dehydrated_players.map((i) => i.nameHTML())) + " did not dare to drink the Mystery Mall Fluid.";
+            dehydration_story = " " + arrayToHumanSentence(dehydrated_players.map((i) => i.nameHTML())) + " did not dare to drink the Mystery Mall Fluid.";
         }
 
         ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/upsetting_water_final.gif' >

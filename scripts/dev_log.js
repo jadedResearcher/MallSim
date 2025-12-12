@@ -23,3 +23,8 @@ dev_log["12/6/2025", `lulz
     made a custom gif for them and everything
     i wanna make more of those, they're fun
     and zampanio wants me to learn a new skill`]
+
+
+
+//http://farragofiction.com/RabbitSimPuppeteerOfTheLost/
+//https://archiveofourown.org/works/75585026

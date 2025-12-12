@@ -464,6 +464,7 @@ class Game {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
             if (corpses.length === this.players.length) {
+                setEnding("Death Ending");
                 detail.innerHTML = `There is no one left to bury the dead.`;
 
             } else
@@ -488,9 +489,28 @@ class Game {
         }
 
         if (this.players.length === wastes.length) {
+            this.summary.setEnding("Loop Ending");
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `Everyone has joined the Loop together! Their sanded smoothes copies spiralling across eternity will not be alone!`;
+            detail.innerHTML = `Everyone has joined the Loop together! Their sanded smooth copies spiralling across eternity will not be alone!`;
 
+        }
+
+        if (this.players.length === mannequins.length) {
+            this.summary.setEnding("Shambling Horror Ending");
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `Everyone will remain in the mall together until The End, frozen into parodies of the human form. There is a sort of peace in their blank faces. They will be together and they will End.`;
+
+        }
+
+        if (this.players.length === 0) {
+            this.summary.setEnding("Prudent Ending");
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `Everyone was way too prudent and intelligent to stay in this fucked up horror maze. They left. And you can too. You can stop digging into Zampanio at any time, and your future self will thank  you for it.`;
+
+        }
+
+        if (!this.summary.hasEnding()) {
+            this.summary.setEnding("Balanced Ending");
         }
 
         const next_section_intro = createElementWithClassAndParent("h2", intro_container, "sub-story-beat");
