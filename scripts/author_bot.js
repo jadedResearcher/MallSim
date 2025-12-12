@@ -39,8 +39,23 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
 
 
     const session_summary_container = createElementWithClassAndParent("div", sburb_container, "button-container");
+    let session_count = 0;
+    //handles time too
+    const syncGlobalStats = (summary) => {
+        session_count++;
+        console.log("JR NOTE: todo wire up more summary", session_count)
+        global_stats_container.innerHTML = "";
+        const makePair = (left, right) => {
+            const pair = createElementWithClassAndParent("div", global_stats_container, "summary-stat-pair");
+            const leftEle = createElementWithClassAndParent("div", pair, "summary-stat-left");
+            leftEle.innerHTML = left;
+            const rightEle = createElementWithClassAndParent("div", pair, "summary-stat-right");
+            rightEle.innerHTML = right;
+        }
+        makePair("Sessions Simulated: ", session_count)
+    }
 
-    tick_button.onclick = () => {
+    tick_button.onclick = async () => {
         const startTime = performance.now();
 
         let seed = seed_text;
@@ -48,13 +63,13 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
             //pick a new seed
             seed = game.rand.getRandomNumberBetween(0, 4294967296)
         }
-        simulateOneSession(seed, omnomnom, session_summary_container, global_stats_container);
+        simulateOneSession(seed, omnomnom, session_summary_container, syncGlobalStats);
         const endTime = performance.now();;
 
         alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
     }
 
-    tick_ten_button.onclick = () => {
+    tick_ten_button.onclick = async () => {
         const startTime = performance.now();
 
         let seed = seed_text;
@@ -63,7 +78,9 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
                 //pick a new seed
                 seed = game.rand.getRandomNumberBetween(0, 4294967296)
             }
-            simulateOneSession(seed, omnomnom, session_summary_container, global_stats_container);
+            //lets me render the stats live instead of blocking
+            await nextFrame();
+            simulateOneSession(seed, omnomnom, session_summary_container, syncGlobalStats);
 
         }
         const endTime = performance.now();;
@@ -71,7 +88,7 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
         alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
     }
 
-    tick_hundred_button.onclick = () => {
+    tick_hundred_button.onclick = async () => {
         const startTime = performance.now();
 
         let seed = seed_text;
@@ -80,7 +97,9 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
                 //pick a new seed
                 seed = game.rand.getRandomNumberBetween(0, 4294967296)
             }
-            simulateOneSession(seed, omnomnom, session_summary_container, global_stats_container);
+            //lets me render the stats live instead of blocking
+            await nextFrame();
+            simulateOneSession(seed, omnomnom, session_summary_container, syncGlobalStats);
 
         }
         const endTime = performance.now();;
@@ -90,7 +109,7 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
 }
 
 
-const simulateOneSession = (seed, omnomnom, session_summary_container, global_stats_container) => {
+const simulateOneSession = (seed, omnomnom, session_summary_container, globalSummaryCallback) => {
     const startTime = performance.now();
     console.log("JR NOTE: simulating with seed of ")
     game = new Game(new SeededRandom(seed), omnomnom);
@@ -105,5 +124,5 @@ const simulateOneSession = (seed, omnomnom, session_summary_container, global_st
 
     const endTime = performance.now();;
     game.summary.renderSelf(session_summary_container, calculatePerformanceInSeconds(startTime, endTime));
-
+    globalSummaryCallback(game.summary);
 }

@@ -13,6 +13,9 @@ const isItFriday = () => {
 
 }
 
+const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
+
+
 const calculatePerformanceInSeconds = (startTime, endTime) => {
   return `${Math.round((endTime - startTime) / 1000)} second(s)`;
 }

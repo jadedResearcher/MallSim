@@ -115,7 +115,9 @@ class Game {
             this.players.push(p);
         }
         //save all at once, not once per cultit.
-        save();
+        if (!this.eatWastesAutomatically) {
+            save();
+        }
     }
 
     getLocations = () => {
@@ -464,7 +466,7 @@ class Game {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
             if (corpses.length === this.players.length) {
-                setEnding("Death Ending", this.current_tick);
+                this.summary.setEnding("Death Ending", this.current_tick);
                 detail.innerHTML = `There is no one left to bury the dead.`;
 
             } else
