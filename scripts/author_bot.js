@@ -28,6 +28,12 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
     const tick_button = createElementWithClassAndParent("button", tick_bar, "tick-once-button");
     tick_button.innerText = "Simulate 1x Session";
 
+    const tick_ten_button = createElementWithClassAndParent("button", tick_bar, "tick-ten-button");
+    tick_ten_button.innerText = "Simulate 10x Session";
+
+
+    const tick_hundred_button = createElementWithClassAndParent("button", tick_bar, "tick-hundred-button");
+    tick_hundred_button.innerText = "Simulate 100x Session";
 
     const global_stats_container = createElementWithClassAndParent("div", sburb_container, "button-container");
 
@@ -35,12 +41,51 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
     const session_summary_container = createElementWithClassAndParent("div", sburb_container, "button-container");
 
     tick_button.onclick = () => {
+        const startTime = performance.now();
+
         let seed = seed_text;
         if (game) {
             //pick a new seed
             seed = game.rand.getRandomNumberBetween(0, 4294967296)
         }
         simulateOneSession(seed, omnomnom, session_summary_container, global_stats_container);
+        const endTime = performance.now();;
+
+        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
+    }
+
+    tick_ten_button.onclick = () => {
+        const startTime = performance.now();
+
+        let seed = seed_text;
+        for (let i = 0; i < 10; i++) {
+            if (game) {
+                //pick a new seed
+                seed = game.rand.getRandomNumberBetween(0, 4294967296)
+            }
+            simulateOneSession(seed, omnomnom, session_summary_container, global_stats_container);
+
+        }
+        const endTime = performance.now();;
+
+        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
+    }
+
+    tick_hundred_button.onclick = () => {
+        const startTime = performance.now();
+
+        let seed = seed_text;
+        for (let i = 0; i < 100; i++) {
+            if (game) {
+                //pick a new seed
+                seed = game.rand.getRandomNumberBetween(0, 4294967296)
+            }
+            simulateOneSession(seed, omnomnom, session_summary_container, global_stats_container);
+
+        }
+        const endTime = performance.now();;
+
+        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
     }
 }
 
@@ -55,11 +100,10 @@ const simulateOneSession = (seed, omnomnom, session_summary_container, global_st
     for (let i = 0; i < 200; i++) {
         game.tick(throw_away_ele);
     }
-    alert("done???")
 
 
 
     const endTime = performance.now();;
-    game.summary.renderSelf(session_summary_container, `${Math.round((endTime - startTime) / 1000)}s`);
+    game.summary.renderSelf(session_summary_container, calculatePerformanceInSeconds(startTime, endTime));
 
 }

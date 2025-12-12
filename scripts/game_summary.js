@@ -8,6 +8,7 @@ class GameSummary {
     SEED = "Session Seed:"
 
     //add these to the constructor and finalize a swell
+    NUMBER_TICKETS_TILL_END = "# Ticks Till Ending:"
 
     NUMBER_INITIAL_PLAYERS = "# Initial Players:"
     NUMBER_ENDING_PLAYERS = "# Ending Players:"
@@ -45,6 +46,7 @@ class GameSummary {
 
     constructor() {
         this.numberStats[this.SEED] = 0;
+        this.numberStats[this.NUMBER_TICKETS_TILL_END] = 0;
         this.numberStats[this.NUMBER_INITIAL_PLAYERS] = 0;
         this.numberStats[this.NUMBER_ENDING_PLAYERS] = 0;
         this.numberStats[this.NUMBER_FLED_PLAYERS] = 0;
@@ -76,8 +78,9 @@ class GameSummary {
 
     }
 
-    setEnding = (ending_name) => {
+    setEnding = (ending_name, tick_count) => {
         this.stringStats[this.ENDING_GOT] = ending_name;
+        this.numberStats[this.NUMBER_TICKETS_TILL_END] = tick_count;
     }
 
     hasEnding = () => {
@@ -152,7 +155,7 @@ class GameSummary {
         const h3 = createElementWithClassAndParent("h3", ele);
         h3.innerHTML = `Mall Expedition: #<a target='_blank' href ='${window.location.pathname}?seed=${this.numberStats[this.SEED]}'>${this.numberStats[this.SEED]}</a>`;
         if (ab_time) {
-            h3.innerHTML += `<div style='font-family:Courier New; color: red;'> (${ab_time} to simulate 200 ticks)</div>`
+            h3.innerHTML += `<div style='font-family:Courier New; color: red;'> (${ab_time})</div>`
         }
         const makePair = (left, right) => {
             const pair = createElementWithClassAndParent("div", ele, "summary-stat-pair");

@@ -13,6 +13,10 @@ const isItFriday = () => {
 
 }
 
+const calculatePerformanceInSeconds = (startTime, endTime) => {
+  return `${Math.round((endTime - startTime) / 1000)} second(s)`;
+}
+
 
 /*
 taking in a content ele is a pattern i learned from work, feels weird using it in vanilla
