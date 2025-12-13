@@ -18,6 +18,8 @@ class CollatedSummary {
     AVERAGE_CORRUPT = "Average Corrupt Players:";
     AVERAGE_LOOPING = "Average Looping Players:";
     AVERAGE_NAMELESS = "Average Nameless Players:";
+    AVERAGE_TIME = "Average Time In Millis:";
+
     //note , by definition this won't get any events that NEVER hit
     //ab could, for gigglesnort reasons, and i might upgrade this eventually to do so
     //but not in Version 1
@@ -43,6 +45,8 @@ class CollatedSummary {
             //JR NOTE on friday at almost midnight, i do not like this, this seems hard to maintain
             //but im tired and i want to at least see one working before i go to bed
             average_pairs[this.AVERAGE_TICKS] = this.sumValue(average_pairs[this.AVERAGE_TICKS], summary.numberStats[summary.NUMBER_TICKETS_TILL_END]);
+            average_pairs[this.AVERAGE_TIME] = this.sumValue(average_pairs[this.AVERAGE_TIME], summary.numberStats[summary.TIME_TAKEN_IN_MS])
+
             average_pairs[this.AVERAGE_PLAYERS] = this.sumValue(average_pairs[this.AVERAGE_PLAYERS], summary.numberStats[summary.NUMBER_INITIAL_PLAYERS])
             average_pairs[this.AVERAGE_FLED] = this.sumValue(average_pairs[this.AVERAGE_FLED], summary.numberStats[summary.NUMBER_FLED_PLAYERS])
             average_pairs[this.AVERAGE_DEAD] = this.sumValue(average_pairs[this.AVERAGE_DEAD], summary.numberStats[summary.NUMBER_DEAD_PLAYERS])
@@ -54,17 +58,17 @@ class CollatedSummary {
         }
 
         for (let [key, value] of Object.entries(event_stats)) {
-            makePair(key, value);
+            makePair(key, value.toFixed(2));
         }
 
         //wanna see both average and total
         for (let [key, value] of Object.entries(average_pairs)) {
-            makePair(key.replaceAll("Average", "Total"), value);
+            makePair(key.replaceAll("Average", "Total"), value.toFixed(2));
         }
 
 
         for (let [key, value] of Object.entries(average_pairs)) {
-            makePair(key, Math.round(value / this.summaries.length));
+            makePair(key, (value / this.summaries.length).toFixed(2));
         }
 
 
@@ -141,7 +145,7 @@ class GameSummary {
     TONGUE_MVP = "Tongue MVP: "
     ARMS_MVP = "Arms MVP: "
     LEGS_MVP = "Legs MVP: "
-
+    TIME_TAKEN_IN_MS = "Time Taken:"
 
 
     numberStats = {}
@@ -177,7 +181,7 @@ class GameSummary {
         this.stringStats[this.ARMS_MVP] = "No one :("
         this.stringStats[this.LEGS_MVP] = "No one :("
         this.stringStats[this.SCENE_LIST] = "None :("
-
+        this.numberStats[this.TIME_TAKEN_IN_MS] = "Time Is Fake :)" //only AB has time, as a superior robot
 
 
     }
@@ -220,7 +224,7 @@ class GameSummary {
         const tongue = getPartyHighestTongue(game.players);
         const arms = getPartyHighestArms(game.players);
         const legs = getPartyHighestLegs(game.players);
-        console.log("JR NOTE: mvps are: ", { mind, eyes, tongue, arms, legs, players: game.players })
+        // console.log("JR NOTE: mvps are: ", { mind, eyes, tongue, arms, legs, players: game.players })
 
         if (mind) {
             this.stringStats[this.MIND_MVP] = mind.nameHTML() + `(${mind.stats[MIND_METAL_STAT]})`;
@@ -256,13 +260,19 @@ class GameSummary {
     }
 
     renderSelf = (parent, ab_time) => {
+        if (ab_time) {
+            this.numberStats[this.TIME_TAKEN_IN_MS] = ab_time
+        }
+
         const ele = createElementWithClassAndParent("div", parent, "player-epilogue-wrapper");
         ele.style.marginTop = "31px"
         const h3 = createElementWithClassAndParent("h3", ele);
         h3.innerHTML = `Mall Expedition: #<a target='_blank' href ='${window.location.pathname}?seed=${this.numberStats[this.SEED]}'>${this.numberStats[this.SEED]}</a>`;
+
         if (ab_time) {
-            h3.innerHTML += `<div style='font-family:Courier New; color: red;'> (${ab_time})</div>`
+            h3.innerHTML += `<div style='font-family:Courier New; color: red;'> (${ab_time} milliseconds)</div>`
         }
+
         const makePair = (left, right) => {
             const pair = createElementWithClassAndParent("div", ele, "summary-stat-pair");
             const leftEle = createElementWithClassAndParent("div", pair, "summary-stat-left");

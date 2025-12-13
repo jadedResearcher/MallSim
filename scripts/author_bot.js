@@ -64,7 +64,7 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
         simulateOneSession(seed, omnomnom, session_summary_container, syncCollatedStats);
         const endTime = performance.now();;
 
-        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
+        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime) + " seconds!")
     }
 
     tick_ten_button.onclick = async () => {
@@ -83,7 +83,7 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
         }
         const endTime = performance.now();;
 
-        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
+        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime) + " seconds!")
     }
 
     tick_hundred_button.onclick = async () => {
@@ -102,7 +102,7 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
         }
         const endTime = performance.now();;
 
-        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
+        alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime) + " seconds!")
     }
 }
 
@@ -121,6 +121,6 @@ const simulateOneSession = (seed, omnomnom, session_summary_container, globalSum
 
 
     const endTime = performance.now();;
-    game.summary.renderSelf(session_summary_container, calculatePerformanceInSeconds(startTime, endTime));
+    game.summary.renderSelf(session_summary_container, parseFloat(calculatePerformanceInMilliSeconds(startTime, endTime).toFixed(2)));
     globalSummaryCallback(game.summary);
 }

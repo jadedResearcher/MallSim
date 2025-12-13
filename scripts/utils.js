@@ -17,8 +17,13 @@ const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
 
 
 const calculatePerformanceInSeconds = (startTime, endTime) => {
-  return `${Math.round((endTime - startTime) / 1000)} second(s)`;
+  return Math.round((endTime - startTime) / 1000);
 }
+
+const calculatePerformanceInMilliSeconds = (startTime, endTime) => {
+  return (endTime - startTime);
+}
+
 
 
 /*
