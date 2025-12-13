@@ -61,6 +61,10 @@ body.author-bot {
   .player-epilogue-wrapper {
     font-size: 12px;
   }
+
+  h3 {
+    font-family: 'Courier New', Courier, monospace;
+  }
 }
 
 body.devil-of-spirals {

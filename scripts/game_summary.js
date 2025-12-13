@@ -1,8 +1,33 @@
 
 
 
-//stores various variables about the game
 
+class CollatedSummary {
+    //NOTE if this starts dragging down time
+    //instead of recalculating summaries over and over
+    //store their stats and just a count
+    summaries = [];
+    constructor() {
+
+    }
+
+    renderSelf = (parent) => {
+        const makePair = (left, right) => {
+            const pair = createElementWithClassAndParent("div", parent, "summary-stat-pair");
+            const leftEle = createElementWithClassAndParent("div", pair, "summary-stat-left");
+            leftEle.innerHTML = left;
+            const rightEle = createElementWithClassAndParent("div", pair, "summary-stat-right");
+            rightEle.innerHTML = right;
+        }
+        makePair("Sessions Simulated: ", this.summaries.length)
+    }
+
+    addSummary = (summary) => {
+        this.summaries.push(summary);
+    }
+}
+
+//stores various variables about the game
 class GameSummary {
     //DON'T WANT THESE CONSTANTS TO POLLUTE THE GLOBAL NAME SPACE
     SEED = "Session Seed:"
@@ -77,6 +102,8 @@ class GameSummary {
 
 
     }
+
+
 
     setEnding = (ending_name, tick_count) => {
         this.stringStats[this.ENDING_GOT] = ending_name;

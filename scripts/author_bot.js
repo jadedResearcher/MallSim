@@ -18,8 +18,10 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
     const eatbutton = createCheckboxInputWithLabel(sburb_container, 'single-use', "Allow Eating?", omnomnom);
     eatbutton.input.onchange = () => omnomnom = !omnomnom;
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
 
-    let seed_text = "Zampanio" //translates to 831, should it be an arc number?
+    const seed_text = urlParams.get('seed') ? stringtoseed(urlParams.get('seed')) : stringtoseed("Zampanio");
     const seed_input = createTextInputWithLabel(sburb_container, 'seed-input', "Seed:", seed_text);
     seed_input.input.onchange = () => seed = seed_input.input.value;
 
@@ -35,35 +37,31 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
     const tick_hundred_button = createElementWithClassAndParent("button", tick_bar, "tick-hundred-button");
     tick_hundred_button.innerText = "Simulate 100x Session";
 
-    const global_stats_container = createElementWithClassAndParent("div", sburb_container, "button-container");
+    const collated_stats_container = createElementWithClassAndParent("div", sburb_container, "button-container");
 
 
     const session_summary_container = createElementWithClassAndParent("div", sburb_container, "button-container");
     let session_count = 0;
+    let collated_summary_data = new CollatedSummary();
     //handles time too
-    const syncGlobalStats = (summary) => {
+    const syncCollatedStats = (summary) => {
         session_count++;
         console.log("JR NOTE: todo wire up more summary", session_count)
-        global_stats_container.innerHTML = "";
-        const makePair = (left, right) => {
-            const pair = createElementWithClassAndParent("div", global_stats_container, "summary-stat-pair");
-            const leftEle = createElementWithClassAndParent("div", pair, "summary-stat-left");
-            leftEle.innerHTML = left;
-            const rightEle = createElementWithClassAndParent("div", pair, "summary-stat-right");
-            rightEle.innerHTML = right;
-        }
-        makePair("Sessions Simulated: ", session_count)
+        collated_stats_container.innerHTML = "";
+        collated_summary_data.addSummary(summary);
+        collated_summary_data.renderSelf(collated_stats_container);
+
     }
 
     tick_button.onclick = async () => {
         const startTime = performance.now();
 
         let seed = seed_text;
-        if (game) {
+        if (game && session_count !== 0) {
             //pick a new seed
             seed = game.rand.getRandomNumberBetween(0, 4294967296)
         }
-        simulateOneSession(seed, omnomnom, session_summary_container, syncGlobalStats);
+        simulateOneSession(seed, omnomnom, session_summary_container, syncCollatedStats);
         const endTime = performance.now();;
 
         alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime))
@@ -74,13 +72,13 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
 
         let seed = seed_text;
         for (let i = 0; i < 10; i++) {
-            if (game) {
+            if (game && session_count !== 0) {
                 //pick a new seed
                 seed = game.rand.getRandomNumberBetween(0, 4294967296)
             }
             //lets me render the stats live instead of blocking
             await nextFrame();
-            simulateOneSession(seed, omnomnom, session_summary_container, syncGlobalStats);
+            simulateOneSession(seed, omnomnom, session_summary_container, syncCollatedStats);
 
         }
         const endTime = performance.now();;
@@ -93,13 +91,13 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
 
         let seed = seed_text;
         for (let i = 0; i < 100; i++) {
-            if (game) {
+            if (game && session_count !== 0) {
                 //pick a new seed
                 seed = game.rand.getRandomNumberBetween(0, 4294967296)
             }
             //lets me render the stats live instead of blocking
             await nextFrame();
-            simulateOneSession(seed, omnomnom, session_summary_container, syncGlobalStats);
+            simulateOneSession(seed, omnomnom, session_summary_container, syncCollatedStats);
 
         }
         const endTime = performance.now();;
@@ -111,7 +109,7 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
 
 const simulateOneSession = (seed, omnomnom, session_summary_container, globalSummaryCallback) => {
     const startTime = performance.now();
-    console.log("JR NOTE: simulating with seed of ")
+    console.log("JR NOTE: simulating with seed of ", seed)
     game = new Game(new SeededRandom(seed), omnomnom);
     const throw_away_ele = document.createElement("div");
     //create a div but don't give it an attached dom to render to (will be very fast, react uses a virtual dom like this and apparently past me did too)
