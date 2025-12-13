@@ -11,6 +11,19 @@ class CollatedSummary {
 
     }
 
+    AVERAGE_TICKS = "Average Ticks Till End:";
+    AVERAGE_PLAYERS = "Average Initial Players:";
+    AVERAGE_FLED = "Average Fled Players:";
+    AVERAGE_DEAD = "Average Dead Players:";
+    AVERAGE_CORRUPT = "Average Corrupt Players:";
+    AVERAGE_LOOPING = "Average Looping Players:";
+    AVERAGE_NAMELESS = "Average Nameless Players:";
+    //note , by definition this won't get any events that NEVER hit
+    //ab could, for gigglesnort reasons, and i might upgrade this eventually to do so
+    //but not in Version 1
+    EVENT_STATS = "Event Stats:";
+
+
     renderSelf = (parent) => {
         const makePair = (left, right) => {
             const pair = createElementWithClassAndParent("div", parent, "summary-stat-pair");
@@ -19,17 +32,83 @@ class CollatedSummary {
             const rightEle = createElementWithClassAndParent("div", pair, "summary-stat-right");
             rightEle.innerHTML = right;
         }
-        makePair("Sessions Simulated: ", this.summaries.length)
+        makePair("Sessions Simulated: ", this.summaries.length);
+
+        //strings for left and right
+        const average_pairs = {};
+        let event_stats = {};
+
+
+        for (let summary of this.summaries) {
+            //JR NOTE on friday at almost midnight, i do not like this, this seems hard to maintain
+            //but im tired and i want to at least see one working before i go to bed
+            average_pairs[this.AVERAGE_TICKS] = this.sumValue(average_pairs[this.AVERAGE_TICKS], summary.numberStats[summary.NUMBER_TICKETS_TILL_END]);
+            average_pairs[this.AVERAGE_PLAYERS] = this.sumValue(average_pairs[this.AVERAGE_PLAYERS], summary.numberStats[summary.NUMBER_INITIAL_PLAYERS])
+            average_pairs[this.AVERAGE_FLED] = this.sumValue(average_pairs[this.AVERAGE_FLED], summary.numberStats[summary.NUMBER_FLED_PLAYERS])
+            average_pairs[this.AVERAGE_DEAD] = this.sumValue(average_pairs[this.AVERAGE_DEAD], summary.numberStats[summary.NUMBER_DEAD_PLAYERS])
+            average_pairs[this.AVERAGE_CORRUPT] = this.sumValue(average_pairs[this.AVERAGE_CORRUPT], summary.numberStats[summary.NUMBER_CORRUPT_PLAYERS])
+            average_pairs[this.AVERAGE_LOOPING] = this.sumValue(average_pairs[this.AVERAGE_LOOPING], summary.numberStats[summary.NUMBER_LOOPING_PLAYERS])
+            average_pairs[this.AVERAGE_NAMELESS] = this.sumValue(average_pairs[this.AVERAGE_NAMELESS], summary.numberStats[summary.NUMBER_NAMELESS_PLAYERS])
+            event_stats = this.eventsValue(event_stats, JSON.parse(summary.stringStats[summary.SCENE_LIST]));
+
+        }
+
+        for (let [key, value] of Object.entries(event_stats)) {
+            makePair(key, value);
+        }
+
+        //wanna see both average and total
+        for (let [key, value] of Object.entries(average_pairs)) {
+            makePair(key.replaceAll("Average", "Total"), value);
+        }
+
+
+        for (let [key, value] of Object.entries(average_pairs)) {
+            makePair(key, Math.round(value / this.summaries.length));
+        }
+
+
+
     }
+
+
+
+    //events are a json object of string/number pairs
+    //just wanna sum up the numbers while keeping the strings
+    eventsValue = (current_value, new_value) => {
+        console.log("JR NOTE: eventsValue", { current_value, new_value })
+        if (!current_value) {
+            current_value = {};
+        }
+        for (let [key, value] of Object.entries(new_value)) {
+            if (!current_value[key]) {
+                current_value[key] = 0;
+            }
+            current_value[key] += value;
+        }
+        return current_value;
+    }
+
+    //handles initailizing it
+    sumValue = (current_value, new_value) => {
+        if (!current_value) {
+            return new_value;
+        }
+        return current_value + new_value;
+    }
+
+
 
     addSummary = (summary) => {
         this.summaries.push(summary);
     }
 }
 
+
 //stores various variables about the game
 class GameSummary {
     //DON'T WANT THESE CONSTANTS TO POLLUTE THE GLOBAL NAME SPACE
+    //except that makes collation hard and its midnight so im gonna start sinning :) :) :)
     SEED = "Session Seed:"
 
     //add these to the constructor and finalize a swell
