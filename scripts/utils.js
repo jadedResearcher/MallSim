@@ -358,7 +358,6 @@ const incrementLocalStorageByOne = (KEY) => {
   if (!current) {
     current = 0;
   }
-  console.log("JR NOTE:", KEY, " was " + current)
 
   localStorage.setItem(KEY, parseInt(current) + 1)
 

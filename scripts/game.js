@@ -66,7 +66,6 @@ class Game {
         this.addLoopingPlayersIfAny();
         this.initial_player_count = this.players.length;
         for (let player of this.players) {
-            console.log("JR NOTE: trying to scrape up themes from player,  ", { player, theme_keys_from_game: this.theme_keys })
             this.theme_keys = this.theme_keys.concat(player.theme_keys);
         }
 
@@ -181,9 +180,7 @@ class Game {
 
         const locations = this.getLocations();
 
-        console.log("JR NOTE: ticking with this many lcoations", locations.length)
         if (locations.length === 0) {
-            console.log("JR NOTE: no locations found, spawning entrance")
             this.handleSpawningMallEntrance(parent);
             return;
         }

@@ -3,7 +3,6 @@
 
 
 const getStatsFromThemes = (theme_keys) => {
-    console.log("JR NOTE: getting stats for theme_keys", theme_keys)
     let mind = 0;
     let eye = 0;
     let tongue = 0;
@@ -13,7 +12,6 @@ const getStatsFromThemes = (theme_keys) => {
     for (let key of theme_keys) {
         count++;
         const theme = all_themes[key]
-        console.log("JR NOTE: theme is", theme)
         if (theme.stats) {
             eye += theme.stats[EYES_METAL_STAT]
             tongue += theme.stats[TONGUE_METAL_STAT]
@@ -33,13 +31,11 @@ const getStatsFromThemes = (theme_keys) => {
     arm = arm / count;
     leg = leg / count;
     const ret = {}
-    console.log("JR NOTE: BASELINE_METAL_OBJECT", BASELINE_METAL_OBJECT)
     ret[MIND_METAL_STAT] = mind;
     ret[EYES_METAL_STAT] = eye;
     ret[TONGUE_METAL_STAT] = tongue;
     ret[ARMS_METAL_STAT] = arm;
     ret[LEGS_METAL_STAT] = leg;
-    console.log("JR NOTE: ret", ret)
     return ret;
 
 }

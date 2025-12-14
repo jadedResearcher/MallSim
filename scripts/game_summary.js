@@ -112,7 +112,6 @@ class CollatedSummary {
     //events are a json object of string/number pairs
     //just wanna sum up the numbers while keeping the strings
     eventsValue = (current_value, new_value) => {
-        console.log("JR NOTE: eventsValue", { current_value, new_value })
         if (!current_value) {
             current_value = {};
         }
@@ -170,6 +169,7 @@ class GameSummary {
     EVERYONE_LOOPING = "Everyone Looped?"
     EVERYONE_CORRUPTED = "Everyone Corrupted?";
     ENDING_GOT = "ENDING NAME:";
+    THEME_LIST = "THEME LIST:";
 
     SCENE_LIST = "Events Triggered:";
     MIND_MVP = "Mind MVP: "
@@ -213,6 +213,7 @@ class GameSummary {
         this.stringStats[this.ARMS_MVP] = "No one :("
         this.stringStats[this.LEGS_MVP] = "No one :("
         this.stringStats[this.SCENE_LIST] = "None :("
+        this.stringStats[this.THEME_LIST] = "None :("
         this.numberStats[this.TIME_TAKEN_IN_MS] = "Time Is Fake :)" //only AB has time, as a superior robot
 
 
@@ -230,6 +231,7 @@ class GameSummary {
     }
 
     finalize = (game) => {
+        this.stringStats[this.THEME_LIST] = game.theme_keys.join(", ")
         this.numberStats[this.SEED] = game.rand.initial_seed;
         this.numberStats[this.NUMBER_INITIAL_PLAYERS] = game.initial_player_count;
         this.numberStats[this.NUMBER_ENDING_PLAYERS] = game.players.length;

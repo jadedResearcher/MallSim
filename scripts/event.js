@@ -63,7 +63,6 @@ class EscapeMall extends Event {
     //is there at least one person ready to escape?
     internalConditionCheck = (game, location) => {
         for (let player of location.players) {
-            console.log("JR NOTE: checking player for escape event ", player)
 
             if (player.isStartingToFeelCorruption() && !player.corrupted) {
                 return true;
@@ -83,7 +82,6 @@ class EscapeMall extends Event {
         //everyone ready to leave can leave together
         const leaving = [];
         for (let player of location.players) {
-            console.log("JR NOTE: applying player for escape event ", player)
             if (player.isStartingToFeelCorruption() && !player.corrupted) {
                 leaving.push(player);
                 removeItemOnce(location.players, player);
@@ -112,7 +110,6 @@ class RandomlyFindShoppingObject extends Event {
 
     //is there at least one person ready to escape?
     internalConditionCheck = (game, location) => {
-        console.log("JR NOTE: todo if someone in the location has a shopping bag, increase odds of this event (the mall considers you even more a shopper), wire into stats too")
         if (location.livingNonMannequinPlayers().length > 0) {
             return game.rand.nextDouble() < 0.75;
         }
@@ -133,7 +130,6 @@ class RandomlyFindShoppingObject extends Event {
 
         shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
         const formerNameHTML = shopper.nameHTML();
-        console.log("JR NOTE: eventually expand this with alchemy traits system. Have the 'its shiny, its crystal and its a sword' quip from sburbsim.");
         const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
@@ -238,7 +234,6 @@ class HydrationStation extends Event {
     }
 
     applyResult = (game, location, parent) => {
-        console.log("JR NOTE: trying to hydrate")
         const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
         const h3 = createElementWithClassAndParent("h3", cont);

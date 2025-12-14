@@ -192,7 +192,6 @@ const initializeRelationshipsForParty = (rand, party) => {
             if (Math.abs(value) > 50 && roll > 0.60) {
                 familial = true;
             } else if (Math.abs(value) > 50 && roll > 0.4) {
-                console.log("JR NOTE: it should be romantic", romantic)
                 romantic = true;
             }
             x.relationships[y.title] = new Relationship(value, romantic, familial);
@@ -228,7 +227,6 @@ class Item {
     isFruit = false; //the sales beast LOVES fruit, but also Zampanio has made it so all fruit within the mall is Harvest Fruit (which you can eat to Join the Loop/Become Wasted)
 
     constructor(name, description, isFruit) {
-        console.log("JR NOTE: do i want this to get traits from themes? or have themes directly?")
         this.name = name;
         this.description = description;
         this.isFruit = isFruit;
@@ -279,7 +277,6 @@ class Relationship {
         if (this.familial) {
             this.romantic = false;//no matter what
         } else {
-            console.log("JR NOTE: its okay to be romantic")
             this.romantic = value;
         }
     }
@@ -315,7 +312,6 @@ class Entity {
         this.title = classpectFromThemeList(rand, themes);
         all_entities[this.title] = this;
         this.stats = getStatsFromThemes(this.theme_keys);
-        console.log(`JR NOTE: ${this.name} has stats`, { stats: this.stats })
     }
 
     //roll for mannequin type
@@ -359,7 +355,6 @@ class Entity {
                 break;
             }
             const relationship = this.relationships[player.title];
-            console.log("JR NOTE: trying to get relationship", { relationship, them: player.title, me: this.title })
             if (!relationship) {
                 const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
                 deadbeat.innerHTML = `${this.nameHTML()} doesn't know how to feel about ${player.nameHTML()}.`;
@@ -550,18 +545,14 @@ class Entity {
     sandSmoothByValue = (change_value) => {
         const high = this.highestStat();
         const low = this.lowestStat();
-        //console.log("JR NOTE: sandSmoothByValue", { name: this.title, high, low })
         for (let [key, value] of Object.entries(this.stats)) {
             if (key == high["key"]) {
-                console.log("JR NOTE: sandSmoothByValue raising high", key)
                 this.raiseStat(key, change_value);
             } else if (key == low["key"]) {
-                console.log("JR NOTE: sandSmoothByValue reducing low", key)
 
                 this.raiseStat(key, -1 * change_value);
 
             } else {
-                console.log("JR NOTE: sandSmoothByValue sanding smooth", key)
 
                 if (value > MEDIUM_STAT_VALUE) {
                     //don't reduce it by TOO much, get stuck at the medium value
@@ -631,7 +622,6 @@ class Entity {
         if (this.corrupted) {
             return this.decideWhereToGoAsAMannequin(ele, rand, currentLocation, north, south, east, west);
         }
-        console.log("JR NOTE: right now can only go to the east and west, eventaully flesh out movement better, but no point now when only east is real", { ele, rand, currentLocation, north, south, east, west });
         let chosenLocation;
 
         //continue down corridor
@@ -646,7 +636,6 @@ class Entity {
 
         //can be forced because if literally nothing gets chosen, well, you made your choice
         const chooseStay = (force) => {
-            console.log(`JR NOTE: will ${this.name} choose to stay?`, force)
             //10 is an average stat value
             let stayWeight = 0;
             //surely we can find out more here before moving on?
@@ -658,9 +647,7 @@ class Entity {
             stayWeight += -1 * this.stats[LEGS_METAL_STAT];
 
 
-            console.log("JR NOTE: stay weight was", stayWeight)
             if (force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
-                console.log("JR NOTE: going to stay", force)
                 //locations handle adding corruption if you move into them
                 //if you stay, i still want you to corrupt, so, here we are
                 this.addCorruption(currentLocation.corruption);
@@ -672,7 +659,6 @@ class Entity {
         }
 
         const chooseEast = () => {
-            console.log(`JR NOTE: will ${this.name} choose to go east?`)
 
             if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
@@ -685,7 +671,6 @@ class Entity {
         }
 
         const chooseSouth = () => {
-            console.log(`JR NOTE: will ${this.name} choose to go south?`)
 
             if (south && !this.isStartingToFeelCorruption() && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
@@ -698,7 +683,6 @@ class Entity {
         }
 
         const chooseWest = () => {
-            console.log(`JR NOTE: will ${this.name} choose to go west?`)
 
             if (west && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
                 if (currentLocation.name === CORRIDOR_NAME) {
@@ -711,10 +695,8 @@ class Entity {
         }
 
         const chooseNorth = () => {
-            console.log(`JR NOTE: will ${this.name} choose to go north?`)
 
             if (north && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.1) {
-                console.log("JR NOTE: going north")
                 ele.innerHTML = `${this.nameHTML()} decides to try getting back to the entrance, and moves NORTH, into the ${north.longer_name} ${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
 
                 return north;

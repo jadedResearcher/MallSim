@@ -60,7 +60,6 @@ class Location {
             this.events.push(event)
         }
         this.theme_keys = theme_keys;
-        console.log("JR NOTE: made location with theme", theme_keys)
     }
 
     livingNonMannequinPlayers = () => {

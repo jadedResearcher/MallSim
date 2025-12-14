@@ -20,7 +20,6 @@ const debug = () => {
     const rand = new SeededRandom(seed);
     game = new Game(rand, false);
     game.start(debug);
-    console.log("JR NOTE: debug entities", game.players);
 
 }
 
@@ -54,7 +53,6 @@ const balanceStatsDebug = () => {
     arm = arm / count;
     leg = leg / count;
 
-    console.log("JR NOTE: current stat spread is: ", { mind, eye, tongue, arm, leg })
 
 }
 

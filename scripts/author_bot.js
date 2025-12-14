@@ -48,7 +48,6 @@ const ab_view = () => {
     //handles time too
     const syncCollatedStats = (summary) => {
         session_count++;
-        console.log("JR NOTE: todo wire up more summary", session_count)
         collated_stats_container.innerHTML = "";
         collated_summary_data.addSummary(summary);
         collated_summary_data.renderSelf(collated_stats_container);
@@ -111,7 +110,6 @@ const ab_view = () => {
 
 const simulateOneSession = (seed, omnomnom, session_summary_container, globalSummaryCallback) => {
     const startTime = performance.now();
-    console.log("JR NOTE: simulating with seed of ", seed)
     game = new Game(new SeededRandom(seed), omnomnom);
     const throw_away_ele = document.createElement("div");
     //create a div but don't give it an attached dom to render to (will be very fast, react uses a virtual dom like this and apparently past me did too)
