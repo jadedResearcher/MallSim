@@ -1,5 +1,21 @@
 const dev_log = {}
 //don't forget to update west if you see something interesting in the simulation
+
+dev_log["12/13/2024", `my dear sweet precious sweet sweet sweet sweet sweet sweet sweet ab
+    is helping me check session stability again
+    just like old times
+    sburbsim eat your heart out
+    mostly she has helped me find some typo bugs
+    haven't had THOSE since vanilla sburbsim
+    its weird
+    i'm almost tempted to use typescript just to keep those to a minimum
+    but i LIKE going raw javascript
+    i like the chaos and confusion
+    the insanity
+    zampanio SHOULD be written in teh shittiest
+    glitchiest
+    language possible
+    its just right`]
 dev_log["12/6/2025", `lulz
     finally thought to do one of these
     its so nostalgic

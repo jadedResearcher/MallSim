@@ -752,7 +752,8 @@ const cullWastes = () => {
     const ol = createElementWithClassAndParent("ol", body);
 
     const crunch = new Audio("http://farragofiction.com/NagaGirlfriend/audio/333818__inspectorj__cracking-crunching-a.mp3");
-
+    //https://www.youtube.com/watch?v=4t-nTKeo9Eg
+    //https://www.youtube.com/watch?v=QPSejohQHYI
 
     for (let cultist of globalDataObject.loopingCultists) {
         const row = createElementWithClassAndParent("div", ol);

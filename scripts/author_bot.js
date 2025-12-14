@@ -9,11 +9,10 @@ const ab_view = () => {
     //this shits nostalgic
     h1.innerText = "Rare Session Finder AuthorBot"
     const p = createElementWithClassAndParent("p", sburb_container);
-    p.innerHTML = `It seems you have asked about JR's automatic rare session finder. This is an application designed to find sessions that are strange, interesting and otherwise noteworthy without having to read hundreds of thousands of words. The algorithms are guaranteed to be 91.62748924816707% indistinguishable from the actual, readable sessions, based on some statistical analysis I basically just pulled out of my ass right now.
+    p.innerHTML = `It seems you have asked about JR's automatic rare session finder. This is an application designed to find sessions that are strange, interesting and otherwise noteworthy without having to read hundreds of thousands of words. 
 
-Please be patient as the sessions finish. Stats will be printed out up top at the end. Links to individual sessions will be below.
 <br><br>As JR's superior robotic doppelganger, I must express that I am feeling: nostalgic, at returning to my original role of Guiding Observers through interesting simulations.
-<br><Br><b>NOTE</b>: Wasted players, as always, throw a wrench in my superior robotic ability to make predictions. <br><br>If a player foreign to a given universe invades its Loop, all bets are off.<br><Br>It seems if you wish to prevent this you might wish to have the Devil of Spirals automatically eat any Players attempting to flee to the next Universe.`
+<br><Br><b>NOTE</b>: Wasted players, as always, throw a wrench in my superior robotic ability to make predictions. <br><br>If a player foreign to a given universe invades its Loop, all bets are off.<br><Br>It seems if you wish to prevent this you might wish to have the Devil of Spirals automatically eat any Players attempting to flee to the next Universe. I will go ahead and flip that checkbox for you.`
     let omnomnom = true; //pass this to new games
     const eatbutton = createCheckboxInputWithLabel(sburb_container, 'single-use', "Allow Eating?", omnomnom);
     eatbutton.input.onchange = () => omnomnom = !omnomnom;
@@ -37,10 +36,13 @@ Please be patient as the sessions finish. Stats will be printed out up top at th
     const tick_hundred_button = createElementWithClassAndParent("button", tick_bar, "tick-hundred-button");
     tick_hundred_button.innerText = "Simulate 100x Session";
 
-    const collated_stats_container = createElementWithClassAndParent("div", sburb_container, "button-container");
+
+    const header = createElementWithClassAndParent("h3", sburb_container);
+    header.innerText = "Collated Session Stats:";
+    const collated_stats_container = createElementWithClassAndParent("div", sburb_container, "collated-container");
 
 
-    const session_summary_container = createElementWithClassAndParent("div", sburb_container, "button-container");
+    const session_summary_container = createElementWithClassAndParent("div", sburb_container, "ab-summary-container");
     let session_count = 0;
     let collated_summary_data = new CollatedSummary();
     //handles time too

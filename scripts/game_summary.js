@@ -27,11 +27,13 @@ class CollatedSummary {
 
 
     renderSelf = (parent) => {
+
+
         const makePair = (left, right) => {
-            const pair = createElementWithClassAndParent("div", parent, "summary-stat-pair");
-            const leftEle = createElementWithClassAndParent("div", pair, "summary-stat-left");
+            const pair = createElementWithClassAndParent("div", parent, "collated-stat-pair");
+            const leftEle = createElementWithClassAndParent("div", pair, "collated-stat-left");
             leftEle.innerHTML = left;
-            const rightEle = createElementWithClassAndParent("div", pair, "summary-stat-right");
+            const rightEle = createElementWithClassAndParent("div", pair, "collated-stat-right");
             rightEle.innerHTML = right;
         }
         makePair("Sessions Simulated: ", this.summaries.length);
@@ -39,6 +41,7 @@ class CollatedSummary {
         //strings for left and right
         const average_pairs = {};
         let event_stats = {};
+        let ending_stats = {};
 
 
         for (let summary of this.summaries) {
@@ -54,11 +57,18 @@ class CollatedSummary {
             average_pairs[this.AVERAGE_LOOPING] = this.sumValue(average_pairs[this.AVERAGE_LOOPING], summary.numberStats[summary.NUMBER_LOOPING_PLAYERS])
             average_pairs[this.AVERAGE_NAMELESS] = this.sumValue(average_pairs[this.AVERAGE_NAMELESS], summary.numberStats[summary.NUMBER_NAMELESS_PLAYERS])
             event_stats = this.eventsValue(event_stats, JSON.parse(summary.stringStats[summary.SCENE_LIST]));
+            ending_stats = this.endingsValue(ending_stats, summary.stringStats[summary.ENDING_GOT]);
 
         }
 
-        for (let [key, value] of Object.entries(event_stats)) {
+
+        for (let [key, value] of Object.entries(ending_stats)) {
             makePair(key, value.toFixed(2));
+        }
+
+
+        for (let [key, value] of Object.entries(event_stats)) {
+            makePair("Event " + key, value.toFixed(2));
         }
 
         //wanna see both average and total
@@ -72,9 +82,31 @@ class CollatedSummary {
         }
 
 
-
+        //i am very tired today. i am not a fan of the holidays
+        //i get a whole week off soon and i might make a shit ton of events during that
+        //but for now im being gentle with myself
+        //zampanio is a marathon, not a sprint
+        //i gotta remind myself
+        //taking breaks is part of the process
+        //i say, like i didn't spend a chunk of a Forbidden Friday
+        //coding ab
+        //i just
+        //get so excited to find out the things she can guide me to
     }
 
+    //endings are just a string in new value
+    //i wanna add them up 
+    endingsValue = (current_value, new_value) => {
+        if (!current_value) {
+            current_value = {};
+        }
+        if (!current_value[new_value]) {
+            current_value[new_value] = 0;
+        }
+        current_value[new_value] += 1;
+
+        return current_value;
+    }
 
 
     //events are a json object of string/number pairs

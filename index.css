@@ -60,6 +60,7 @@ body.author-bot {
   /*easter egg, its a tileable asset i made from ABs crochet doll i had a picture of in sburbsim: http://farragofiction.com/SBURBSim/images/ab_doll2.jpg*/
   .player-epilogue-wrapper {
     font-size: 12px;
+    background-color: #e4e4e4;
   }
 
   h3 {
@@ -203,6 +204,8 @@ button {
 }
 
 
+
+
 .summary-stat-left {
   width: 200px;
   font-weight: bolder;
@@ -226,6 +229,52 @@ button {
   display: flex;
   gap: 31px;
   margin-bottom: 13px;
+}
+
+
+.collated-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-around;
+
+}
+
+.ab-summary-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-around;
+}
+
+
+
+
+.collated-stat-pair {
+  display: flex;
+  font-size: 12px;
+  flex-wrap: nowrap;
+  gap: 5px;
+  margin-bottom: 3px;
+  border: 1px solid black;
+  padding: 3px;
+  width: 200px;
+  background-color: #e4e4e4;
+  justify-content: space-around;
+}
+
+.collated-stat-left {
+  width: 150px;
+  font-weight: bolder;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.collated-stat-right {
+  width: 100px;
+  font-weight: bolder;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .guide-bot {

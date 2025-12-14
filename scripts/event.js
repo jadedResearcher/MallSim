@@ -289,5 +289,5 @@ class HydrationStation extends Event {
 
 
 
-
+//the events ANY room can have, not just shops
 const generalEvents = [new YongkiKill(), new HydrationStation]
