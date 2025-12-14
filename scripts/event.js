@@ -7,9 +7,12 @@ some events are owned by specific locations (and can only trigger inside them) s
 //some events should embed videos to play
 //or pics of the blorbos
 
+const DEFAULT_CHOSEN_EVENT_NAME = "Events With Branching Paths Will Set This";
+
 class Event {
 
     name = "Default Event";
+    chosen_name = DEFAULT_CHOSEN_EVENT_NAME;
 
     //sub classes will override this, that way checkconditions can be kept in this class unchanged
     internalConditionCheck = (game, location) => {
@@ -26,9 +29,12 @@ class Event {
         do not make it async , please its a nightmare
     */
     checkConditions = (game, location, parentEle) => {
+        //clear out any previous name
+        this.chosen_name = this.name;
         if (this.internalConditionCheck(game, location)) {
-            game.event_list.push(this.name);//help AB a little
             this.applyResult(game, location, parentEle);
+            game.event_list.push(this.chosen_name);//help AB a little
+
             return true;
         }
         return false;
@@ -72,6 +78,7 @@ class EscapeMall extends Event {
     }
 
     applyResult = (game, location, parent) => {
+
         const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
         const h3 = createElementWithClassAndParent("h3", cont);
@@ -127,6 +134,10 @@ class RandomlyFindShoppingObject extends Event {
 
 
         const shopper = game.rand.pickFrom(location.players);
+        //you need to have maxed out at least one stat to get a harvest fruit
+        //you can't just derp into one ten seconds in
+        const shopper_highest_stat = shopper.highestStat();
+
 
         shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
         const formerNameHTML = shopper.nameHTML();
@@ -134,10 +145,25 @@ class RandomlyFindShoppingObject extends Event {
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
         const oddsFruit = 0.05;
-        if (game.rand.nextDouble() < oddsFruit) {
+        if (shopper_highest_stat.value > VERY_HIGH_STAT_VALUE && game.rand.nextDouble() < oddsFruit) {
+            console.log("JR NOTE: harvest time")
+            this.chosen_name = "Harvest Time!"
             const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
-            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They cannot believe their luck when they stumble upon a ${item.name}!`;
+            let flavor = `They cannot believe their luck when they stumble upon a ${item.name}!`;
+            if (shopper_highest_stat.key === MIND_METAL_STAT) {
+                flavor = `They finally put the pieces together and solve the Riddle of the Mall, revealing a single ${item.name} nestled in a seemingly empty locker.`;
+            } else if (shopper_highest_stat.key === EYES_METAL_STAT) {
+                flavor = `Their keen eyes almost miss spotting the ${item.name} nestled in a seemingly empty shadowed corner.`;
+            } else if (shopper_highest_stat.key === TONGUE_METAL_STAT) {
+                flavor = `The information they had is good:, right where their contact said it would be, a single ${item.name}. `;
+            } else if (shopper_highest_stat.key === ARMS_METAL_STAT) {
+                flavor = `Their constant digging through trash, debris, abandoned merchandise has finally paid off! There, half buried under a shopping bag is, a single ${item.name}!`;
+            } else if (shopper_highest_stat.key === EYES_METAL_STAT) {
+                flavor = `Their legs pound the tile of the mall frantically, searching, pacing back and forth and back and forth until they finally...yes! There! They almost stumble over the ${item.name}, carelessly strewn in the less traveled path.`;
+            }
+            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! ${flavor}`;
+
             const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
             shopper.addItemToInventory(item, pickupEle);
         } else {
@@ -185,6 +211,8 @@ class YongkiKill extends Event {
         const formerNameHTML = redPaste.nameHTML();
         //yeah sure why not, he can kill mannequins (but not corpses)
         if (redPaste.corrupted) {
+            this.chosen_name = "Yongki Kill Mannequin!"
+
             redPaste.kill(`mangled, shards of ${redPaste.mannequin_type} on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing`);
 
         } else {
@@ -252,6 +280,8 @@ class HydrationStation extends Event {
                 player.sandSmoothByValue(3);//you drank the water. enjoy the new you. its more like you than you were before. guaranteed.
             } else {
                 dehydrated_players.push(player);
+                this.chosen_name = "Refused Hydration :("
+
                 player.addCorruption(113); //i guess you don't need water, and we all know what THAT means. you're a mannequin, right? The Westerville Mall knows.
             }
         }
@@ -266,6 +296,8 @@ class HydrationStation extends Event {
             hydration_story = ` ${arrayToHumanSentence(hydrated_players.map((i) => i.nameHTML())) + " drank the water eagerly."}`;
 
         } else {
+            this.chosen_name = "Everyone Refused Hydration :("
+
             hydration_story = ` No one is dumb enough to try drinking the Mystery Mall Fluid.`;
         }
 
@@ -285,4 +317,4 @@ class HydrationStation extends Event {
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [new YongkiKill(), new HydrationStation]
+const generalEvents = [new YongkiKill(), new HydrationStation()]

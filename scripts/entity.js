@@ -290,7 +290,7 @@ class Entity {
     corrupted = false;
     monster_rating = 0; //every time you loop you lose a little bit more of your nuance
     fear = 0;
-    inventory = []; //list of items
+    inventory = []; //list of items, i think its funny rn that all they do is function as a sort of 'good boi points' from the mall. good shoppers have lots of items :) :) :)
     mannequin_type = "wood"
     corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
