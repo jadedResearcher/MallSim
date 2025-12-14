@@ -445,6 +445,9 @@ class Entity {
 
     //if you're starting to feel weird you start trying to leave
     isStartingToFeelCorruption = () => {
+        if (this.wasted) {
+            return false; //:)
+        }
         let max = 500;
         max += 10 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
         max += -10 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
@@ -456,6 +459,9 @@ class Entity {
 
     //have fun being a mannequin
     hasHitMaxCorruption = () => {
+        if (this.wasted) {
+            return false; //:) its the first thing waasted players hack
+        }
         let max = 1000;
         max += 200 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
         max += -50 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them

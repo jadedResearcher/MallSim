@@ -260,7 +260,7 @@ class Location {
             //is a mannequin
             //and it just
             //assumes that about you without checking
-            if (p.hasHitMaxCorruption() && !p.corrupted) {
+            if (p.hasHitMaxCorruption() && !p.corrupted && !p.wasted) {
                 p.becomeCorrupted(rand);
                 const monster_desc = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, MONSTER_DESC, false);
 

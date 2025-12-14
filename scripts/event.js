@@ -151,7 +151,10 @@ class RandomlyFindShoppingObject extends Event {
             const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
             let flavor = `They cannot believe their luck when they stumble upon a ${item.name}!`;
-            if (shopper_highest_stat.key === MIND_METAL_STAT) {
+
+            if (shopper.corrupted) {
+                flavor = `Nothing as mundane as a mouth yawns open across the blank ${shopper.mannequin_type} expanse of their face,  stretching impossibly wide over a single ${item.name} they happened to fall onto.`;
+            } if (shopper_highest_stat.key === MIND_METAL_STAT) {
                 flavor = `They finally put the pieces together and solve the Riddle of the Mall, revealing a single ${item.name} nestled in a seemingly empty locker.`;
             } else if (shopper_highest_stat.key === EYES_METAL_STAT) {
                 flavor = `Their keen eyes almost miss spotting the ${item.name} nestled in a seemingly empty shadowed corner.`;
