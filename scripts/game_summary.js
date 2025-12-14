@@ -63,12 +63,12 @@ class CollatedSummary {
 
 
         for (let [key, value] of Object.entries(ending_stats)) {
-            makePair(key, value.toFixed(2));
+            makePair(key, value + ` (${(100 * (value / this.summaries.length)).toFixed(2)}%)`);
         }
 
 
         for (let [key, value] of Object.entries(event_stats)) {
-            makePair("Event " + key, value.toFixed(2));
+            makePair("Event " + key, value + ` (${(100 * (value / this.summaries.length)).toFixed(2)}%)`);
         }
 
         //wanna see both average and total

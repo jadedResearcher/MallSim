@@ -169,7 +169,8 @@ const getRomanticPartnersOfEntity = (person) => {
 const randomParty = (rand) => {
     //good enough party size for sburbsim but maybe a bit crowded for a mall expedition
     //"The others gawk at the insubordination. He's trying out six total this time. He thinks he almost has the dynamic perfected. "
-    const party_size = rand.getRandomNumberBetween(2, 6);
+    //actually make it be able to be bigger or smaller, but 6 is probably perfect
+    const party_size = rand.getRandomNumberBetween(2, 12);
     const ret = [];
     for (let i = 0; i < party_size; i++) {
         ret.push(randomEntity(rand));
