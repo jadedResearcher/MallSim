@@ -475,7 +475,7 @@ class Game {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             for (let corpse of corpses) {
                 const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-                detail2.innerHTML = `The ${corpse.nameHTML} is ${corpse.state_of_corpse}`;
+                detail2.innerHTML = `The ${corpse.nameHTML()} is ${corpse.state_of_corpse}`;
             }
             if (corpses.length === this.players.length) {
                 this.summary.setEnding("Death Ending", this.current_tick);
