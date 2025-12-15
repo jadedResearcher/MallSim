@@ -146,11 +146,11 @@ class RandomlyFindShoppingObject extends Event {
 
         const oddsFruit = 0.05;
         if (shopper_highest_stat.value > VERY_HIGH_STAT_VALUE && game.rand.nextDouble() < oddsFruit) {
-            console.log("JR NOTE: harvest time")
             this.chosen_name = "Harvest Time!"
             const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
             if (game.trickster_closer_eating_all_fruit) {
+                alert("should be fruit apocalypse")
                 ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper!
                 <br><br>
                 <img src='http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif'>
@@ -178,6 +178,7 @@ There is a long, staticky sound as she slowly breathes out.
 <br><br>
 And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds of thousands of fruit, shoved and pulped and crushed as they fill every millimeter of space in the mall.
 `;
+                this.chosen_name = "Wasted Trickster Closer Apocalypse"
                 game.fruitApocalypse = true;
                 return;
             }
@@ -267,7 +268,7 @@ class YongkiKill extends Event {
             reaction += `${arrayToHumanSentence(mannequins.map((n) => n.nameHTML()))} twitches ever so slightly, blank face${mannequins.length > 0 ? "s" : ""} taking in the carnage.`;
         }
 
-        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/hand_twirl_yongki-moshed-12-09-23-16-56-176.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a red smear on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
+        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/hand_twirl_yongki-moshed-12-09-23-16-56-176.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a ${redPaste.corrupted ? `pile of shattered ${redPaste.mannequin_type}` : "red smear"} on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
 
     }
 
@@ -282,11 +283,12 @@ class TricksterCloser extends Event {
         //theres fruit here
         //and she can eat it because you woke this part of the mall up with your presence
         if (location.players.length > 0 && !game.trickster_closer_repelled && !game.trickster_closer_eating_all_fruit) {
-            return game.rand.nextDouble() < 0.5;
+            return game.rand.nextDouble() < 0.009;
         }
         return false;
 
     }
+    //http://farragofiction.com/ColonistsEyes5/
 
     applyResult = (game, location, parent) => {
         const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
