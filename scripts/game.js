@@ -270,7 +270,10 @@ class Game {
                 //console.warn("JR NOTE: todo, scan location for valid events")
 
                 if (!event_happened) {
-                    location.renderGenericBoringNonEvent(this, this.rand, event_phrase);
+                    event_phrase.remove();
+                    const ele = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+
+                    location.renderGenericBoringNonEvent(this, this.rand, ele);
                 }
             }
         }
