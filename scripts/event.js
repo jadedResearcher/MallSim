@@ -125,6 +125,7 @@ class RandomlyFindShoppingObject extends Event {
     }
     //https://www.twitch.tv/directory/category/zampaniosimulator/videos/all
     applyResult = (game, location, parent) => {
+        console.log("JR NOTE: shopping time")
         const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
         const h3 = createElementWithClassAndParent("h3", cont);
@@ -144,13 +145,13 @@ class RandomlyFindShoppingObject extends Event {
         const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
-        const oddsFruit = 0.05;
+        const oddsFruit = 0.15;
         if (shopper_highest_stat.value > VERY_HIGH_STAT_VALUE && game.rand.nextDouble() < oddsFruit) {
-            this.chosen_name = "Harvest Time!"
+            this.chosen_name = "Harvest Fruit Shopped!"
+            console.log("JR NOTE: shopping time harvest fruit but what is closer status", game.trickster_closer_eating_all_fruit)
             const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
             if (game.trickster_closer_eating_all_fruit) {
-                alert("should be fruit apocalypse")
                 ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper!
                 <br><br>
                 <img src='http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif'>
@@ -283,7 +284,7 @@ class TricksterCloser extends Event {
         //theres fruit here
         //and she can eat it because you woke this part of the mall up with your presence
         if (location.players.length > 0 && !game.trickster_closer_repelled && !game.trickster_closer_eating_all_fruit) {
-            return game.rand.nextDouble() < 0.009;
+            return game.rand.nextDouble() < 0.03;
         }
         return false;
 
@@ -319,7 +320,7 @@ class TricksterCloser extends Event {
             `;
 
             if (mindPlayer.wasted) {
-                ele.innerHTML += `${player.nameHTML()} frantically scans the Codex of Ruin for this creature.
+                ele.innerHTML += `${mindPlayer.nameHTML()} frantically scans the Codex of Ruin for this creature.
                   <a href ='http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Wiggler%20Eater&data=N4IgdghgtgpiBcIAqALGACA6gSwOa4BsYAndAUQgBcSQAaEAExgGc9JLsB7MBEAGQC0mAQAYRAZjohi2ZgGteWAIKYplNLGa8AQgCUySpAAla6AIxnxpzGW2mAbPesBJJAGET5y6YDKSvmQ+phZW6D5Ihs5uDk7oAOIAqs58SKYCIaZufADySgDSwd7xSj58znFGqV6hcYZkeWRkAAqFNc66fNrZPkHVUsyUVFqIZAAaSGS6AHL+tBlNkWRTqRn6-s7hUXNWbgm6ztkJQQIAHACstDkAmrPp3kuTcWRIWwLikvQwAB4QAMaUBAAngB9dTEGAwUHYAAOw34QlEEnQAHdsAQCOhcDAwCQIOjAehONDcdR0NgwOh1BgAEZ-OS4YicACuYAYKOw6mZlHQvwgTNYYFw6GhjOpRCgzAAdOhBMIxOIycwyWBedCIGKMJwAGbocFa-nkoVa4hMjmS2ioDAEbhY0iyxEK2Rk3BgTjgtlU9BQN0YEWcDUSykoKjs9GE36-JnEJXqEMQcGUmC-FBgbC8-HoV3ctCkLV8giUc2YNAU6ngv5oNn2+UAciVAyoadDGMGck1FIgPM41uI+pbhowEFZ6GYaGbuogADcIFiUW6CAwY5x0DAQ1TsLmTRz0EO2cm0QxwWBJVJyQNyf9eG5OFBvWBMje7w-b9xTEY8Cg3x-T2BWLgUJQvB8JwyKmMBoEyiBYFQZByJSFQgzJrAYCAYg77-l+GHoNeL73rBpgAGokAS4FSOCIosKw3BATB4HPk+6DoZ+jHfvQDbUmiHIgkQk4wAQvBnGRMAMMCTBatizBwIgIiSiIUjIigHKQmJElSSAABMslSGKdKiTA4m-mpZhafQapEHpBmSbwxlyfQ2BQLgwLMMQvy8ABlDQvAAD0Xl5sQxAztqaYcNwkq-DeXkAFrQGqqacEYnAAuScheUyKACJwKCSrg2Bav0lBuiCTCDGicI+GOBDYG2SrGqahZqDCZhAQi8rjliOIBRmRIkhg5JBjSdIMsyw6opyTLcryBqCsKorilKWAlugADakCwAAuiiEBKgwG5JtQHrLtq4m5pwnAMKY27IsyC6ZjAvGkOCABWe3oLVZoNdC6m8D4TLUs9-xKvGg4MJOsjCZSy7JkmciEhS1ZItwO5etw6hAugtKsMwADc-XoNagokDKLVIk6bA+uduPegmfoBkqnARlGQZxgmNbUMmqbpmjWZkpQNX5pQNYnvQHDQpIiDFtiRNykiLCquD4UoRA5LIZQF28yOgwcL8EOcDDiOduFPZ9pSA7Ss43JOswSsesGFvcgF05YmyCndhgV3EAuS4rmuaAbq9W7cruPKKQuR4ngAvkAA'>"When L-W-003 escaped containment, its static took on a colorful tinge. It is said that it ravaged whole worlds to eat their fruit and children."</a>
       <br><br>            
 Shit.

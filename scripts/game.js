@@ -495,7 +495,7 @@ class Game {
 
         if (this.initial_player_count > this.players.length) {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `History will forget any who could not handle the devotion necessary to obtain Harvest Fruit.`;
+            detail.innerHTML = `History will forget any who could not handle the devotion necessary to obtain Harvest Fruit and instead fled.`;
 
         }
 
