@@ -31,14 +31,18 @@ const randomShop = (rand, themes, right_row, right_col) => {
     console.log("JR NOTE: todo have non generic shops, like clothings stores for wibby (use alchemy engine from sburbsim to have theme traits?) like royal can have fancy?")
     const personal_adj = pickARandomThemeFromListAndGrabKey(rand, themes, ADJ, true);
 
-    return new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, [new RandomlyFindShoppingObject()]);
+    if (rand.nextDouble() > 0.75) {
+        return new Location(`Smoothies`, `${personal_adj} Smoothies`, themes, right_row, right_col, [new TricksterCloser()], "rgba(161,0,66)");
+
+    }
+    return new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, [new RandomlyFindShoppingObject()], "#a10000");
 }
 
 
 class Location {
     name = "???"
     longer_name = "??? But Longer"
-
+    color; //special shops will be special colors
     row = 0;
     col = 0;
     corruption = 1; //rooms get deeper the further in they go
@@ -48,8 +52,11 @@ class Location {
 
     events = [];
 
-    constructor(name, longer_name, theme_keys, row, col, events) {
+    constructor(name, longer_name, theme_keys, row, col, events, color) {
         this.name = name;
+        if (color) {
+            this.color = color;
+        }
         this.longer_name = longer_name;
         this.row = row;
         this.col = col;
@@ -86,6 +93,16 @@ class Location {
         let ret = [];
         for (let player of this.players) {
             if (!player.dead) {
+                ret.push(player)
+            }
+        }
+        return ret;
+    }
+
+    deadPlayers = () => {
+        let ret = [];
+        for (let player of this.players) {
+            if (player.dead) {
                 ret.push(player)
             }
         }

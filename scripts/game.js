@@ -47,6 +47,10 @@ class Game {
     //peewee devours any new looping players before they can reach the next universe (useful if you want AB's session to ACTUALLY be helpful instead of filled with fate breaking assholes)
     eatWastesAutomatically = false;
     summary;
+    trickster_closer_eating_all_fruit = false; //come on did you REALLY think she's stay away from this?
+    trickster_closer_repelled = false;
+    fruitApocalypse = false; //srsly don't let her eat the fruit
+
     current_tick = 0;
     initial_player_count = 0;
     finished = false;
@@ -132,6 +136,12 @@ class Game {
     }
 
     isItEpilogueTime = () => {
+        if (this.fruitApocalypse) {
+            for (let player of this.players) {
+                player.kill("crushed to a pulp under tons upon tons of fruit."); //thems the breaks
+            }
+            return true;
+        }
         //everyone fled
         if (this.players.length === 0) {
             return true;
@@ -289,7 +299,9 @@ class Game {
                 if (cell) {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
                     if (cell.name != CORRIDOR_NAME) {
-                        ele.style.backgroundColor = "#a10000"
+                        ele.style.backgroundColor = cell.color;
+                    } else {
+                        ele.classList.add("corridor")
                     }
                     ele.innerHTML = cell.name + `<br>[${cell.row},${cell.col}]`;
 
@@ -461,7 +473,10 @@ class Game {
 
         if (corpses.length > 0) {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-
+            for (let corpse of corpses) {
+                const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+                detail2.innerHTML = `The ${corpse.nameHTML} is ${corpse.state_of_corpse}`;
+            }
             if (corpses.length === this.players.length) {
                 this.summary.setEnding("Death Ending", this.current_tick);
                 detail.innerHTML = `There is no one left to bury the dead.`;
@@ -505,6 +520,13 @@ class Game {
             this.summary.setEnding("Prudent Ending", this.current_tick);
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             detail.innerHTML = `Everyone was way too prudent and intelligent to stay in this fucked up horror maze. They left. And you can too. You can stop digging into Zampanio at any time, and your future self will thank  you for it.`;
+
+        }
+
+        if (this.fruitApocalypse) {
+            this.summary.setEnding("Fruit Ending", this.current_tick);
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `The Wasted Trickster Lonesome Witch of Threaded Motivation has turned all oxygen into fruit. The entire party is crushed to death, slowly, under all that weight. They...really should not have let her eat the Harvest Fruit!`;
 
         }
 
@@ -772,4 +794,10 @@ const cullWastes = () => {
         li.innerHTML = `${JSON.stringify(cultist)}`;
 
     }
+}
+
+
+//seriously no one should let trickster closer become wasted
+fruitApocalypse = () => {
+
 }

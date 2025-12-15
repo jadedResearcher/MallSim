@@ -150,6 +150,37 @@ class RandomlyFindShoppingObject extends Event {
             this.chosen_name = "Harvest Time!"
             const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
+            if (game.trickster_closer_eating_all_fruit) {
+                ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper!
+                <br><br>
+                <img src='http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif'>
+                 With a wet squelch a being of rainbow static messily devours the ${item.name} before ${shopper.nameHTML()} can get to it.
+                 <br><br>
+                 "Thems the breaks" she says, between dripping bites. 
+<br><br>
+"And you have to concede that it is far, far better for me to eat this, what was it, 'Harvest Fruit" rather than actual children, don't you?"
+<br><br>
+There is a pause as she licks all the indeterminate staticky parts that got sticky with juice.
+<br><br>
+The pause extends.
+<br><br>
+"Ah."
+<br><br>
+She says.
+<br><br>
+"Ah."
+<br><br>
+There is a long, staticky sound as she slowly breathes out.
+<br><br>
+"Is this what it is like all the time for my dearest flouriste? To have so much power? "
+<br><br>
+"I. I suppose then that it is time I began my true purpose. What use have I for restraint!"
+<br><br>
+And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds of thousands of fruit, shoved and pulped and crushed as they fill every millimeter of space in the mall.
+`;
+                game.fruitApocalypse = true;
+                return;
+            }
             let flavor = `They cannot believe their luck when they stumble upon a ${item.name}!`;
 
             if (shopper.corrupted) {
@@ -194,7 +225,7 @@ class YongkiKill extends Event {
         //you can't predict yongki, you can't stop him
         //even he can't predict or stop himself
         //a stranger even to himself
-        if (location.livingNonMannequinPlayers().length > 0) {
+        if (location.livingPlayers().length > 0) {
             return game.rand.nextDouble() < 0.01;
         }
         return false;
@@ -237,6 +268,89 @@ class YongkiKill extends Event {
         }
 
         ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/hand_twirl_yongki-moshed-12-09-23-16-56-176.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a red smear on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
+
+    }
+
+}
+
+class TricksterCloser extends Event {
+    name = "Trickster Closer Spawns";
+
+    //is there at least one person ready to escape?
+    internalConditionCheck = (game, location) => {
+        //she doesn't care if you're alive or dead, a human or a mannequin
+        //theres fruit here
+        //and she can eat it because you woke this part of the mall up with your presence
+        if (location.players.length > 0 && !game.trickster_closer_repelled && !game.trickster_closer_eating_all_fruit) {
+            return game.rand.nextDouble() < 0.5;
+        }
+        return false;
+
+    }
+
+    applyResult = (game, location, parent) => {
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const img = createElementWithClassAndParent("img", cont);
+        img.src = "http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif"
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+        //while she will spawn even if someone dies in a shop...
+        //its only the living who have a chance of stopping her
+        const living = location.livingPlayers();
+
+        if (living.length === 0) {
+            const dead = location.deadPlayers();
+            const chosen = game.rand.pickFrom(dead);
+            ele.innerHTML = `A shifting rainbow nightmare figure of static dimly illuminates ${chosen.nameHTML()} , paying it no attention. Instead it is absolutely devouring all the fruit in the ${location.name}. Luckily, it all seems to be just be regular fruit, none of the Holy Harvest varietal. <br><br>As it messily swallows the last bite, it flickers out of existence, searching for more.`;
+            game.trickster_closer_eating_all_fruit = true;
+        } else {
+            const mindPlayer = getPartyHighestMind(living);
+            ele.innerHTML = `${mindPlayer.nameHTML()} stumbles into a shifting rainbow nightmare of static absolutely devouring all the fruit in this ${location.name}. Luckily, it all seems to be just be regular fruit, none of the Holy Harvest varietal. 
+            <br><br>
+            The creature shifts and ${mindPlayer.nameHTML()}  gets a sense of being watched, despite there not being any obvious eyes. 
+            <br><br>
+            "Fruit!!! Yes. Delicious, scrumptious, juicy FRUIT." it cries. 
+            `;
+
+            if (mindPlayer.wasted) {
+                ele.innerHTML += `${player.nameHTML()} frantically scans the Codex of Ruin for this creature.
+                  <a href ='http://farragofiction.com/CodexOfRuin/viewer.html?name=The%20Wiggler%20Eater&data=N4IgdghgtgpiBcIAqALGACA6gSwOa4BsYAndAUQgBcSQAaEAExgGc9JLsB7MBEAGQC0mAQAYRAZjohi2ZgGteWAIKYplNLGa8AQgCUySpAAla6AIxnxpzGW2mAbPesBJJAGET5y6YDKSvmQ+phZW6D5Ihs5uDk7oAOIAqs58SKYCIaZufADySgDSwd7xSj58znFGqV6hcYZkeWRkAAqFNc66fNrZPkHVUsyUVFqIZAAaSGS6AHL+tBlNkWRTqRn6-s7hUXNWbgm6ztkJQQIAHACstDkAmrPp3kuTcWRIWwLikvQwAB4QAMaUBAAngB9dTEGAwUHYAAOw34QlEEnQAHdsAQCOhcDAwCQIOjAehONDcdR0NgwOh1BgAEZ-OS4YicACuYAYKOw6mZlHQvwgTNYYFw6GhjOpRCgzAAdOhBMIxOIycwyWBedCIGKMJwAGbocFa-nkoVa4hMjmS2ioDAEbhY0iyxEK2Rk3BgTjgtlU9BQN0YEWcDUSykoKjs9GE36-JnEJXqEMQcGUmC-FBgbC8-HoV3ctCkLV8giUc2YNAU6ngv5oNn2+UAciVAyoadDGMGck1FIgPM41uI+pbhowEFZ6GYaGbuogADcIFiUW6CAwY5x0DAQ1TsLmTRz0EO2cm0QxwWBJVJyQNyf9eG5OFBvWBMje7w-b9xTEY8Cg3x-T2BWLgUJQvB8JwyKmMBoEyiBYFQZByJSFQgzJrAYCAYg77-l+GHoNeL73rBpgAGokAS4FSOCIosKw3BATB4HPk+6DoZ+jHfvQDbUmiHIgkQk4wAQvBnGRMAMMCTBatizBwIgIiSiIUjIigHKQmJElSSAABMslSGKdKiTA4m-mpZhafQapEHpBmSbwxlyfQ2BQLgwLMMQvy8ABlDQvAAD0Xl5sQxAztqaYcNwkq-DeXkAFrQGqqacEYnAAuScheUyKACJwKCSrg2Bav0lBuiCTCDGicI+GOBDYG2SrGqahZqDCZhAQi8rjliOIBRmRIkhg5JBjSdIMsyw6opyTLcryBqCsKorilKWAlugADakCwAAuiiEBKgwG5JtQHrLtq4m5pwnAMKY27IsyC6ZjAvGkOCABWe3oLVZoNdC6m8D4TLUs9-xKvGg4MJOsjCZSy7JkmciEhS1ZItwO5etw6hAugtKsMwADc-XoNagokDKLVIk6bA+uduPegmfoBkqnARlGQZxgmNbUMmqbpmjWZkpQNX5pQNYnvQHDQpIiDFtiRNykiLCquD4UoRA5LIZQF28yOgwcL8EOcDDiOduFPZ9pSA7Ss43JOswSsesGFvcgF05YmyCndhgV3EAuS4rmuaAbq9W7cruPKKQuR4ngAvkAA'>"When L-W-003 escaped containment, its static took on a colorful tinge. It is said that it ravaged whole worlds to eat their fruit and children."</a>
+      <br><br>            
+Shit.
+<br><br>
+Oh shit.
+<br><Br>
+It's here for the harvest fruit. 
+<br><br>
+Shit.
+`;
+                //you don't need to be VERY smart to make a deal, trickster closer is kind of dumb, unlike the regular one
+                if (mindPlayer.stats[MIND_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                    ele.innerHTML += `${mindPlayer.nameHTML()} thinks quickly and offers a Deal. The creature will leave NOW and in exchange a quantity of fruit will be provided to it monthly. Forever. If  ${mindPlayer.nameHTML()} goes back on the deal, their body will be taken outside the universe to use as fertilizer for a Nidhogg Spawn Tree.
+<br><br>
+                    It's not ideal, but... the creature doesn't seem like it will remember the Deal for more than a few loops...right?
+                    <br><br>
+                    Better that then let them discover the Harvest Fruit waiting withing the Westerville Mall.
+                    `;
+                    this.chosen_name = "Trickster Closer Repelled";
+                    game.trickster_closer_repelled = true;
+                } else {
+                    ele.innerHTML += `${mindPlayer.nameHTML()} tries to fight off the creature, but their blows simply go through the static. As the creature finishes the last loud, slurping bite of fruit in the ${location.name}. <br><br> ${mindPlayer.nameHTML()} gets a sinking feeling.`;
+                    game.trickster_closer_eating_all_fruit = true;
+
+                }
+
+            } else {
+                ele.innerHTML += `${mindPlayer.nameHTML()} tries to fight off the creature, but their blows simply go through the static. As the creature finishes the last loud, slurping bite of fruit in the ${location.name}. <br><br> ${mindPlayer.nameHTML()} gets a sinking feeling.`;
+                game.trickster_closer_eating_all_fruit = true;
+
+            }
+        }
+
 
     }
 
