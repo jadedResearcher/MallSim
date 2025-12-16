@@ -312,7 +312,7 @@ class TricksterCloser extends Event {
             game.trickster_closer_eating_all_fruit = true;
         } else {
             const mindPlayer = getPartyHighestMind(living);
-            ele.innerHTML = `${mindPlayer.nameHTML()} stumbles into a shifting rainbow nightmare of static absolutely devouring all the fruit in this ${location.name}. Luckily, it all seems to be just be regular fruit, none of the Holy Harvest varietal. 
+            ele.innerHTML = `${mindPlayer.nameHTML()} stumbles into a shifting rainbow nightmare of static absolutely devouring all the fruit in this ${location.longer_name}. Luckily, it all seems to be just be regular fruit, none of the Holy Harvest varietal. 
             <br><br>
             The creature shifts and ${mindPlayer.nameHTML()}  gets a sense of being watched, despite there not being any obvious eyes. 
             <br><br>
@@ -337,7 +337,7 @@ Shit.
 <br><br>
                     It's not ideal, but... the creature doesn't seem like it will remember the Deal for more than a few loops...right?
                     <br><br>
-                    Better that then let them discover the Harvest Fruit waiting withing the Westerville Mall.
+                    Better that then let them discover the Harvest Fruit waiting within the Westerville Mall.
                     `;
                     this.chosen_name = "Trickster Closer Repelled";
                     game.trickster_closer_repelled = true;
