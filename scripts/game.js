@@ -68,6 +68,7 @@ class Game {
         this.eatWastesAutomatically = eatWastesAutomatically;
         this.players = randomParty(rand);
         this.addLoopingPlayersIfAny();
+        setSpritesForParty(this.rand, this.players);//game handles this because we don't want doubles
         this.initial_player_count = this.players.length;
         for (let player of this.players) {
             this.theme_keys = this.theme_keys.concat(player.theme_keys);
@@ -699,6 +700,7 @@ that way instead of ai her weird infinite procedural stuff can just be photos
             text += `<span class='spoiler'> Mind: ${player.stats[MIND_METAL_STAT]}, Eyes: ${player.stats[EYES_METAL_STAT]}, Tongue: ${player.stats[TONGUE_METAL_STAT]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
 
             ele.innerHTML = text;
+            const sprite = renderSpriteForEntity(ele, player)
 
         }//end player loop
         const tick_bar = createElementWithClassAndParent("div", parent, "tick-bar");

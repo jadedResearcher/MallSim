@@ -288,6 +288,8 @@ class Entity {
     theme_keys = [];
     dead = false;
     corrupted = false;
+    sprite_url = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/GuideOfHuntersAndHuntedGodtierSprites/stranger.png";
+    sprite_index = 0; //0-15, that'll get mapped to an x/y position later
     monster_rating = 0; //every time you loop you lose a little bit more of your nuance
     fear = 0;
     inventory = []; //list of items, i think its funny rn that all they do is function as a sort of 'good boi points' from the mall. good shoppers have lots of items :) :) :)

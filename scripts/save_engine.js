@@ -22,6 +22,7 @@ const deleteSave = () => {
     localStorage.removeItem(SAVE_KEY);
 }
 
+//http://www.purplefrog.com/~thoth/ruby/nobody-knows-shoes.pdf
 
 //up to what uses this to decide how often to save
 const save = () => {

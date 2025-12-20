@@ -358,10 +358,11 @@ Shit.
     }
 
 }
+//http://www.farragofiction.com/Gopher/NORTH/NORTH/NORTH/SOUTH/SOUTH/EAST/SOUTH/ILLUSION2/SOUTH/SOUTH/waypoint.txt
+//https://www.tumblr.com/verbosebabbler/803351874204024832/homestuck-classpect-pixel-redesigns-ive-always?source=share
+//https://www.tumblr.com/verbosebabbler/803353348789141504/zampaniosim-classpect-pixel-redesign-if-you?source=share
 
-
-
-
+//http://farragofiction.com/PerfectHeist/
 class HydrationStation extends Event {
     name = "Hydration Station";
 
