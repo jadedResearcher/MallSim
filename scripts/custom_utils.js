@@ -8,6 +8,71 @@ single function file
 probably should move it back to the utils file but like
 i kinda like the history of it
 */
+
+
+
+//each aspect and class has a list of themes that maps to them directly
+const aspect_mapping = {}
+const class_mapping = {}
+
+
+/*
+waste,technology,art,space,time,flesh,buried,stealing,freedom,
+fire,lonely,ocean,science,math,twisting,death,apocalypse,service,
+family,magic,angels,light,hunting,clowns,plants,decay,choices,zap,
+love,soul,anger,web,royalty,endings,knowing,guiding,crafting,addiction,
+spying,healing,dolls,obfuscation,censorship,darkness,killing,music,defense,
+questing,bugs,language'
+
+*/
+aspect_mapping["blood"] = ["family", "killing", "service"]
+aspect_mapping["breath"] = ["freedom", "questing", "music"]
+aspect_mapping["buried"] = ["buried", "math", "technology"]
+aspect_mapping["corruption"] = ["decay", "bugs", "waste"]
+aspect_mapping["desolation"] = ["fire", "waste", "killing"]
+aspect_mapping["doom"] = ["apocalypse", "waste", "endings"]
+aspect_mapping["end"] = ["death", "endings", "killing"]
+aspect_mapping["eye"] = ["knowing", "spying", "language"]
+aspect_mapping["flesh"] = ["flesh", "crafting", "art"]
+aspect_mapping["heart"] = ["love", "soul", "clowns"]
+aspect_mapping["hope"] = ["magic", "angels", "addiction"]
+aspect_mapping["hunt"] = ["hunting", "killing", "spying"]
+aspect_mapping["life"] = ["plants", "healing", "family"]
+aspect_mapping["light"] = ["light", "knowing", "language"]
+aspect_mapping["lonely"] = ["lonely", "ocean", "obfuscation"]
+aspect_mapping["mind"] = ["choices", "zap", "questing"]
+aspect_mapping["rage"] = ["anger", "killing", "decay"]
+aspect_mapping["slaughter"] = ["killing", "hunting", "lonely"]
+aspect_mapping["space"] = ["space", "freedom", "choices"]
+aspect_mapping["spiral"] = ["twisting", "waste", "obfuscation"]
+aspect_mapping["stranger"] = ["clowns", "dolls", "obfuscation"]
+aspect_mapping["time"] = ["time"] //zampanio notably lacks time, it SHOULD be rare
+aspect_mapping["void"] = ["obfuscation", "censorship", "darkness"]
+aspect_mapping["web"] = ["web", "addiction", "guiding"]
+
+
+class_mapping["lord"] = ["royalty", "waste", "addiction"]
+class_mapping["muse"] = ["art", "music", "language"]
+class_mapping["bard"] = ["art", "clowns", "music"]
+class_mapping["prince"] = ["royalty", "endings", "anger"]
+class_mapping["knight"] = ["defense", "questing", "obfuscation"]
+class_mapping["page"] = ["lonely", "bugs", "soul"]
+class_mapping["rogue"] = ["stealing", "defense", "questing"]
+class_mapping["thief"] = ["stealing", "kiling", "spying"]
+class_mapping["mage"] = ["technology", "math", "knowing"]
+class_mapping["seer"] = ["guiding", "magic", "knowing"]
+class_mapping["witch"] = ["magic", "crafting", "science"]
+class_mapping["sylph"] = ["ocean", "freedom", "healing"]
+class_mapping["heir"] = ["family", "choices", "guiding"]
+class_mapping["maid"] = ["service", "dolls", "angels"]
+
+
+
+//intentionally NOT related to the classpect system needed to use the Guide's sprites
+//zampanio is, among many other things, about layers
+//the TRUTH is layered
+//the X of Y does not work to summarize a person
+//any attempt to pretend it does is necessarily a Lie
 const classpectFromThemeList = (rand, themes) => {
     const name = pickARandomThemeFromListAndGrabKey(rand, themes, PERSON, true);
     const personal_adj = pickARandomThemeFromListAndGrabKey(rand, themes, ADJ, true);
@@ -44,11 +109,51 @@ const classpectFromThemeList = (rand, themes) => {
 */
 const setSpritesForParty = (rand, party) => {
     const base_url = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/GuideOfHuntersAndHuntedGodtierSprites/"
+
+    //keyed by player title
+    const ratings = {}
+    //add up aspect and class values, pick your highest for each
     for (let player of party) {
-        console.log("JR NOTE: please actually do this")
-        player.sprite_index = rand.getRandomNumberBetween(0, 15);
+        //player.sprite_index = rand.getRandomNumberBetween(0, 15);
     }
 }
+
+const calculateAspectRatingsForThemes = (theme_keys) => {
+    const ret = {};
+    for (let [key, value] of Object.entries(aspect_mapping)) {
+        ret[key] = 0;
+        let index = 0;
+        for (v of value) {
+            if (theme_keys.includes(v)) {
+                let amount = 1;
+                if (index === 0) {
+                    amount = 10; //heavily prioritize the main theme
+                } else if (index === 1) {
+                    amount = 2;
+                }
+                ret[key] += amount;
+            }
+            index++;
+        }
+    }
+    return ret;
+}
+
+const calculateClassRatingsForThemes = (theme_keys) => {
+    const ret = {}
+    for (let [key, value] of Object.entries(class_mapping)) {
+        ret[key] = 0;
+        for (v of value) {
+            if (theme_keys.includes(v)) {
+                ret[key]++; //does NOT heavily prioritize the main themes, class is allowed to be more weird
+            }
+        }
+    }
+    return ret;
+
+}
+
+
 
 const debugRenderSpriteForEntitty = () => {
     const body = document.querySelector("body");
