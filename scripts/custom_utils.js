@@ -46,7 +46,7 @@ const setSpritesForParty = (rand, party) => {
     const base_url = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/GuideOfHuntersAndHuntedGodtierSprites/"
     for (let player of party) {
         console.log("JR NOTE: please actually do this")
-        player.sprie_index = rand.getRandomNumberBetween(0, 15);
+        player.sprite_index = rand.getRandomNumberBetween(0, 15);
     }
 }
 

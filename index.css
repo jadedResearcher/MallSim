@@ -461,6 +461,12 @@ button {
   display: none;
 }
 
+.pose-as-a-team {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
 .entity-sprite {
   width: 81px;
   height: 150px;

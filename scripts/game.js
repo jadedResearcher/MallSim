@@ -593,7 +593,7 @@ that way instead of ai her weird infinite procedural stuff can just be photos
         const tonguePlayer = getPartyHighestTongue(this.players);
         const armPlayer = getPartyHighestArms(this.players);
         const legPlayer = getPartyHighestLegs(this.players);
-        console.log("JR NOTE: getting the relations", { tonguePlayer })
+        const poseAsTeam = createElementWithClassAndParent("div", intro_container, "pose-as-a-team");
 
         for (let player of this.players) {
             const ele = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
@@ -700,7 +700,8 @@ that way instead of ai her weird infinite procedural stuff can just be photos
             text += `<span class='spoiler'> Mind: ${player.stats[MIND_METAL_STAT]}, Eyes: ${player.stats[EYES_METAL_STAT]}, Tongue: ${player.stats[TONGUE_METAL_STAT]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
 
             ele.innerHTML = text;
-            const sprite = renderSpriteForEntity(ele, player)
+            const sprite = renderSpriteForEntity(poseAsTeam, player);
+            sprite.title = player.name;
 
         }//end player loop
         const tick_bar = createElementWithClassAndParent("div", parent, "tick-bar");
