@@ -288,8 +288,8 @@ class Entity {
     theme_keys = [];
     dead = false;
     corrupted = false;
-    sprite_aspect = aspect_mapping[0];
-    sprite_class = class_mapping[0];
+    sprite_aspect = Object.keys(aspect_mapping)[0];
+    sprite_class = Object.keys(class_mapping)[0];
     monster_rating = 0; //every time you loop you lose a little bit more of your nuance
     fear = 0;
     inventory = []; //list of items, i think its funny rn that all they do is function as a sort of 'good boi points' from the mall. good shoppers have lots of items :) :) :)

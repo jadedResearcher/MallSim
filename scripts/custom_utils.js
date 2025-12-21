@@ -174,12 +174,10 @@ const calculateClassRatingsForThemes = (theme_keys) => {
 const debugRenderSpriteForEntitty = () => {
     const body = document.querySelector("body");
     body.innerHTML = "";
-    const base_url = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/GuideOfHuntersAndHuntedGodtierSprites/"
 
     const rawList = `blood,breath,buried,corruption,desolation,doom,end,eye,flesh,heart,hope,hunt,life,light,lonely,mind,rage,slaughter,space,spiral,stranger,time,void,web`;
     const list = rawList.split(",");
 
-    console.log("JR NOTE: list is", list)
     for (let classname of Object.keys(class_mapping)) {
         const parent = createElementWithClassAndParent("div", body);
         parent.style.cssText = `display: flex; flex-wrap: wrap; gap: 3px;`;
@@ -203,22 +201,20 @@ const renderSpriteForEntity = (parent, entity) => {
     const class_array = Object.keys(class_mapping)
     //feeling lazy, just gonna map index to x,y coordinates till i discover a pattern
     const hopefully_temporary_mapping = {}
-    hopefully_temporary_mapping[class_array[0]] = [-19, 0]//good
-    hopefully_temporary_mapping[class_array[1]] = [-81, 0] ///good
-    hopefully_temporary_mapping[class_array[2]] = [-160, 0] //good
-    hopefully_temporary_mapping[class_array[3]] = [-218, 0] //good
-    hopefully_temporary_mapping[class_array[4]] = [-16, -137] //good
-    hopefully_temporary_mapping[class_array[5]] = [-85, -144] //good
-    hopefully_temporary_mapping[class_array[6]] = [-155, -145] //good
-    hopefully_temporary_mapping[class_array[7]] = [-225, -137] //good
-    hopefully_temporary_mapping[class_array[8]] = [-7, -280]//good
-    hopefully_temporary_mapping[class_array[9]] = [-81, -280] //good
-    hopefully_temporary_mapping[class_array[10]] = [-155, -280]//good
-    hopefully_temporary_mapping[class_array[11]] = [-226, -280]//good
-    hopefully_temporary_mapping[class_array[12]] = [-19, -416] //good
-    hopefully_temporary_mapping[class_array[13]] = [-88, -416] //good
-    hopefully_temporary_mapping[class_array[14]] = [-154, -416] //good
-    hopefully_temporary_mapping[class_array[15]] = [-227, -416] //good
+    hopefully_temporary_mapping[class_array[0]] = [-81, 0] ///good
+    hopefully_temporary_mapping[class_array[1]] = [-160, 0] //good
+    hopefully_temporary_mapping[class_array[2]] = [-16, -137] //good
+    hopefully_temporary_mapping[class_array[3]] = [-85, -144] //good
+    hopefully_temporary_mapping[class_array[4]] = [-155, -145] //good
+    hopefully_temporary_mapping[class_array[5]] = [-225, -137] //good
+    hopefully_temporary_mapping[class_array[6]] = [-7, -280]//good
+    hopefully_temporary_mapping[class_array[7]] = [-81, -280] //good
+    hopefully_temporary_mapping[class_array[8]] = [-155, -280]//good
+    hopefully_temporary_mapping[class_array[9]] = [-226, -280]//good
+    hopefully_temporary_mapping[class_array[10]] = [-19, -416] //good
+    hopefully_temporary_mapping[class_array[11]] = [-88, -416] //good
+    hopefully_temporary_mapping[class_array[12]] = [-154, -416] //good
+    hopefully_temporary_mapping[class_array[13]] = [-227, -416] //good
 
     sprite.style.backgroundPositionX = hopefully_temporary_mapping[entity.sprite_class][0] + "px"
     sprite.style.backgroundPositionY = hopefully_temporary_mapping[entity.sprite_class][1] + "px"
