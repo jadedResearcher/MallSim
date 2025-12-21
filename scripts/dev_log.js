@@ -1,6 +1,18 @@
 const dev_log = {}
 //don't forget to update west if you see something interesting in the simulation
 
+dev_log["12/20/2025", `guess whos on vacation for two whole weeks
+    its me
+    and i spent my whole saturday
+    the first day of my long break
+    integrating with the guide of hunters and hunteds sprites
+    they made all these cool zampaniosimnorth/discord server godtiers
+    and even tho i already had a classpect system
+    i wanted to use them
+    so i made a SECOND classpect system
+    that only is used to decide which sprite to use
+    unlike sburbsim its not recoloring on the fly
+    so should save us a lot of cpu`]
 dev_log["12/14/2025", "I spent all day making a complex set of scenes involving the trickster eating a harvest fruit because of course i did"]
 dev_log["12/13/2024", `my dear sweet precious sweet sweet sweet sweet sweet sweet sweet ab
     is helping me check session stability again
