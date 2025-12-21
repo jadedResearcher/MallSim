@@ -495,6 +495,7 @@ class Game {
 
             } else if (mannequins.length === living.length) {
                 detail.innerHTML = `Slowly, over time, while you're not watching, the mannequins of the Westerville Mall cover the dead with fine clothing, debris and shopping bags. Their impassive faces make it impossible to tell if they are grieving, but a burial has occured. The Westerville Mall is once again ready for shoppers.`;
+                this.summary.setEnding("Mannequin Burial Ending", this.current_tick);
 
             } else {
                 detail.innerHTML = `${arrayToHumanSentence(corpses.map((i) => i.getName()))} ${corpses.length > 1 ? "are" : "is"} placed in a very nice fine clothing display and covered in 1000 thread count linens as a proxy for being buried.`;
@@ -504,8 +505,15 @@ class Game {
         if (mannequins.length > 0) {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             for (let horror of mannequins) {
-                const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-                detail2.innerHTML = `The ${horror.nameHTML()} has gotten used to their new body of ${horror.mannequin_type}. They settle into their new, permanent, home.`;
+                if (horror.dead) {
+                    const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+                    detail2.innerHTML = `${horror.nameHTML()} still has a flicker of awareness in their ${horror.mannequin_type} body, mangled though it is.`;
+
+                } else {
+                    const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+                    detail2.innerHTML = `${horror.nameHTML()} has gotten used to their new body of ${horror.mannequin_type}. They settle into their new, permanent, home.`;
+
+                }
             }
         }
 

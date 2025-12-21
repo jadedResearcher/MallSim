@@ -291,7 +291,7 @@ const renderSpriteForEntity = (parent, entity) => {
     } else if (entity.dead) {
         sprite.style.filter = "brightness(0.0)"; //theres nothing inside
     } else if (entity.corrupted) {
-        sprite.style.filter = "brightness(100)"; //plastic
+        sprite.style.filter = "contrast(0) brightness(100)"; //plastic
     }
     return sprite;
 
