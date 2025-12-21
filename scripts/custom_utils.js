@@ -98,6 +98,14 @@ const renderSpriteForEntity = (parent, entity) => {
 
     sprite.style.backgroundPositionX = hopefully_temporary_mapping[entity.sprite_index][0] + "px"
     sprite.style.backgroundPositionY = hopefully_temporary_mapping[entity.sprite_index][1] + "px"
+
+    if (entity.wasted) {
+        sprite.style.filter = "contrast(100.0)";//they look more real
+    } else if (entity.dead) {
+        sprite.style.filter = "brightness(0.0)"; //theres nothing inside
+    } else if (entity.corrupted) {
+        sprite.style.filter = "contrast(0.1) grayscale(1)"; //plastic
+    }
     return sprite;
 
 }
