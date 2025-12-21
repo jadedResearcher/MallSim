@@ -454,6 +454,7 @@ class Game {
 
         const mannequins = [];
         const corpses = [];
+        const living = [];
         const wasted_corpses = [];
         const wastes = [];
         const poseAsTeam = createElementWithClassAndParent("div", intro_container, "pose-as-a-team");
@@ -466,6 +467,8 @@ class Game {
 
             if (player.dead) {
                 corpses.push(player);
+            } else {
+                living.push(player);
             }
 
             if (player.wasted) {
@@ -480,17 +483,30 @@ class Game {
         general_intro.innerHTML = `Mall Expedition: ${this.rand.initial_seed} has ended! Of ${this.initial_player_count} initial members, ${wastes.length} found Harvest Fruit and Joined The Loop!`;
 
         if (corpses.length > 0) {
-            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             for (let corpse of corpses) {
                 const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
                 detail2.innerHTML = `The ${corpse.nameHTML()} is ${corpse.state_of_corpse}`;
             }
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+
             if (corpses.length === this.players.length) {
                 this.summary.setEnding("Death Ending", this.current_tick);
                 detail.innerHTML = `There is no one left to bury the dead.`;
 
-            } else
+            } else if (mannequins.length === living.length) {
+                detail.innerHTML = `Slowly, over time, while you're not watching, the mannequins of the Westerville Mall cover the dead with fine clothing, debris and shopping bags. Their impassive faces make it impossible to tell if they are grieving, but a burial has occured. The Westerville Mall is once again ready for shoppers.`;
+
+            } else {
                 detail.innerHTML = `${arrayToHumanSentence(corpses.map((i) => i.getName()))} ${corpses.length > 1 ? "are" : "is"} placed in a very nice fine clothing display and covered in 1000 thread count linens as a proxy for being buried.`;
+            }
+        }
+
+        if (mannequins.length > 0) {
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            for (let horror of mannequins) {
+                const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+                detail2.innerHTML = `The ${horror.nameHTML()} has gotten used to their new body of ${horror.mannequin_type}. They settle into their new, permanent, home.`;
+            }
         }
 
         if (wastes.length > 0 && mannequins.length > 0) {
