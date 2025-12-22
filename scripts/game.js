@@ -302,9 +302,28 @@ class Game {
 
     }
 
+    longestRowLength = () => {
+        let ret = 0;
+        for (let row of this.map) {
+            if (row.length > ret) {
+                ret = row.length;
+            }
+        }
+        return ret;
+    }
+
     renderMall = (parent) => {
         //console.log("JR NOTE: rendering mall", this.map)
+        const zoomBar = createElementWithClassAndParent("div", parent, "horizontal-bar");
+
+
+
         const mall_container = createElementWithClassAndParent("div", parent, "mall-render");
+        let zoom_level = 9 / this.longestRowLength();
+
+        addMapControls(zoom_level, zoomBar, mall_container)
+
+
         for (let row of this.map) {
             const rowEle = createElementWithClassAndParent("div", mall_container, "maze-row");
             //console.log("JR NOTE: rendering map, row is ", row)
@@ -389,7 +408,7 @@ class Game {
     //that try to rewrite to everything they touch
     //it doesn't care what themes the parent location has, picks a single random food
     handleExpandingFoodCourt = (location) => {
-
+        const food_court_strength = 0.5; // what are the odds it overwrites a previous location?
         const handleEast = (theme_key) => {
             let right_row = location.row;
             let right_col = location.col + 1;
@@ -401,6 +420,10 @@ class Game {
             newLocation.isFoodCourt = true;
             const existing = getEast(this.map, location.row, location.col);
             if (existing) {
+
+                if (this.rand.nextDouble() > food_court_strength) {
+                    return;
+                }
                 //console.log("JR NOTE: trying to spread the food court east into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers
@@ -445,6 +468,10 @@ class Game {
             newLocation.isFoodCourt = true;
             const existing = getWest(this.map, location.row, location.col)
             if (existing) {
+
+                if (this.rand.nextDouble() > food_court_strength) {
+                    return;
+                }
                 //console.log("JR NOTE: trying to spread the food court west into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers
@@ -470,6 +497,10 @@ class Game {
             newLocation.isFoodCourt = true;
             const existing = getSouth(this.map, location.row, location.col)
             if (existing) {
+
+                if (this.rand.nextDouble() > food_court_strength) {
+                    return;
+                }
                 //console.log("JR NOTE: trying to spread the food court south into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers
@@ -509,6 +540,10 @@ class Game {
             newLocation.isFoodCourt = true;
             const existing = getNorth(this.map, location.row, location.col)
             if (existing) {
+
+                if (this.rand.nextDouble() > food_court_strength) {
+                    return;
+                }
                 //console.log("JR NOTE: trying to spread the food court west into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers

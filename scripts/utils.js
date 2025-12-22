@@ -286,7 +286,31 @@ const createCheckboxInputWithLabel = (parent, id, labelText, initialValue) => {
   return { container, input, label };
 }
 
+//default zoom of 1.0 make ssense
+const addMapControls = (default_zoom, zoom_controls_parent, ele_to_zoom) => {
+  let zoomLevel = default_zoom;
+  const zoomIn = createElementWithClassAndParent("button", zoom_controls_parent);
+  zoomIn.innerText = "Zoom In";
+  ele_to_zoom.style.transformOrigin = "top left";
 
+  const syncZoom = () => {
+    ele_to_zoom.style.transform = `scale(${zoomLevel})`;
+  }
+
+  zoomIn.onclick = () => {
+    zoomLevel += 0.1;
+    syncZoom();
+  }
+
+  const zoomOut = createElementWithClassAndParent("button", zoom_controls_parent);
+  zoomOut.innerText = "Zoom Out"
+
+  zoomOut.onclick = () => {
+    zoomLevel += -0.1;
+    syncZoom();
+  }
+  syncZoom();
+}
 
 
 const createElementWithClassAndParent = (eleName, parent, className) => {
