@@ -418,6 +418,12 @@ button {
   filter: brightness(0.5);
 }
 
+.maze-cell.selected {
+  opacity: 1;
+  filter: none;
+  outline: 10px solid black;
+}
+
 .player-icon-holder {
   display: flex;
   flex-wrap: wrap;

@@ -314,6 +314,10 @@ class Game {
 
     renderMall = (parent) => {
         //console.log("JR NOTE: rendering mall", this.map)
+        const detailSection = createElementWithClassAndParent("div", parent);
+        detailSection.innerText = "Click On Box For Details"
+
+
         const zoomBar = createElementWithClassAndParent("div", parent, "horizontal-bar");
 
 
@@ -333,6 +337,19 @@ class Game {
 
                 if (cell) {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+                    ele.onclick = () => {
+                        document.querySelectorAll(".selected").forEach((i) => i.classList.remove("selected"));
+                        ele.classList.add("selected");
+                        detailSection.innerHTML = `[${cell.row},${cell.col}]
+                        <br>
+                        <b>Name:</b> ${cell.longer_name}
+                        <br>
+                        <b>Inhabitants:</b> ${cell.players.length}
+                        <br>
+                        <b>Corruption Level:</b> ${cell.corruption}
+                        <br>
+                        <b>Possible Events:</b> ${cell.events.map((e) => e.name).join(",")}`;
+                    }
                     ele.title = `${cell.longer_name}(${cell.corruption})`;
                     if (cell.name != CORRIDOR_NAME) {
                         ele.style.backgroundColor = cell.color;
