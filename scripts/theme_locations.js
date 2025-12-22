@@ -56,7 +56,7 @@ const makeGenericThemedLocation = (rand, theme_key) => {
     const object = titleCase(all_themes[theme_key].pickPossibilityFor(OBJECT, rand));
     const location = titleCase(all_themes[theme_key].pickPossibilityFor(LOCATION, rand));
 
-    return new Location(titleCase(theme_key), `${object} ${location}`, theme_key, right_row, right_col, [], "rgba(236,185,10)");
+    return new Location(titleCase(theme_key), `${object} ${location}`, [theme_key], right_row, right_col, [], "rgba(236,185,10)");
 
 }
 

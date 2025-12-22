@@ -680,10 +680,13 @@ class Entity {
         const chooseEast = () => {
 
             if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
-                if (currentLocation.name === CORRIDOR_NAME) {
+                if (currentLocation.name === CORRIDOR_NAME && east.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.nameHTML()} decides to continue walking down the mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
-                } else {
+                } else if (east.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.nameHTML()} decides to try out this new mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                } else {
+                    ele.innerHTML = `${this.nameHTML()} decides to explore the mysterious ${east.longer_name} and moves to the  EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+
                 }
                 return east;
             }
@@ -693,9 +696,9 @@ class Entity {
 
             if (south && !this.isStartingToFeelCorruption() && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
-                    ele.innerHTML = `${this.nameHTML()} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH${DEBUG_PLAYERS ? `, gaining ${south.corruption} corruption` : ""}.`;
                 } else {
-                    ele.innerHTML = `${this.nameHTML()} barely even notices when the ${currentLocation.longer_name} blends into a ${south.longer_name}${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    ele.innerHTML = `${this.nameHTML()} barely even notices when the ${currentLocation.longer_name} blends into a ${south.longer_name}${DEBUG_PLAYERS ? `, gaining ${south.corruption} corruption` : ""}.`;
                 }
                 return south;
             }

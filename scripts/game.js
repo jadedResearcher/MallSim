@@ -295,6 +295,7 @@ class Game {
                 start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams.`;
             }
         }
+        tick_container.scrollIntoView();
         this.renderMall(tick_container);
 
     }
@@ -402,6 +403,8 @@ class Game {
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
+                newLocation.pending_players = [...existing.pending_players]
+
                 this.map[right_row][right_col] = newLocation;
             } else if (!this.map[right_row][right_col]) {
                 //if right does not exist, check if its col index is the same or greater than the rows length
@@ -442,6 +445,7 @@ class Game {
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
+                newLocation.pending_players = [...existing.pending_players]
                 this.map[right_row][right_col] = newLocation;
             } else {
                 this.map[right_row][right_col] = newLocation;
@@ -464,6 +468,8 @@ class Game {
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
+                newLocation.pending_players = [...existing.pending_players]
+
                 this.map[right_row][right_col] = newLocation;
             } else if (this.map[right_row] && right_row < this.map.length) {
                 this.map[right_row][right_col] = newLocation;
@@ -499,6 +505,8 @@ class Game {
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
+                newLocation.pending_players = [...existing.pending_players]
+
                 this.map[right_row][right_col] = newLocation;
             } else {
                 this.map[right_row][right_col] = newLocation;
