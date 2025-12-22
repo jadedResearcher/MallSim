@@ -118,9 +118,13 @@ const simulateOneSession = (seed, omnomnom, session_summary_container, globalSum
         game.tick(throw_away_ele);
     }
 
+    //the game isn't going to do this for you if its still going
+    if (!game.summary.hasEnding()) {
+        game.summary.finalize(game);
+    }
 
+    const endTime = performance.now();
 
-    const endTime = performance.now();;
     game.summary.renderSelf(session_summary_container, parseFloat(calculatePerformanceInMilliSeconds(startTime, endTime).toFixed(2)));
     globalSummaryCallback(game.summary);
 }

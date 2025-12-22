@@ -1,7 +1,18 @@
 const dev_log = {}
 //don't forget to update west if you see something interesting in the simulation
 
-dev_log["12/20/2025", `guess whos on vacation for two whole weeks
+dev_log["12/21/2025"] = `on this
+the longest night
+i decided to make an endless food court
+that warped and twisted space around it
+immediatel wyatt, the feather fairy, from debug session 13
+fell through reality and got stuck in an eternal leg hut chicken restaurant
+that no longer existed (it was replaced with a sandwhich shop)
+gotta love when the bugs you get making something backrooms adjacent
+explain how certain backrooms mechanics work
+lol`
+
+dev_log["12/20/2025"] = `guess whos on vacation for two whole weeks
     its me
     and i spent my whole saturday
     the first day of my long break
@@ -12,9 +23,9 @@ dev_log["12/20/2025", `guess whos on vacation for two whole weeks
     so i made a SECOND classpect system
     that only is used to decide which sprite to use
     unlike sburbsim its not recoloring on the fly
-    so should save us a lot of cpu`]
-dev_log["12/14/2025", "I spent all day making a complex set of scenes involving the trickster eating a harvest fruit because of course i did"]
-dev_log["12/13/2024", `my dear sweet precious sweet sweet sweet sweet sweet sweet sweet ab
+    so should save us a lot of cpu`
+dev_log["12/14/2025"] = "I spent all day making a complex set of scenes involving the trickster eating a harvest fruit because of course i did"
+dev_log["12/13/2024"] = `my dear sweet precious sweet sweet sweet sweet sweet sweet sweet ab
     is helping me check session stability again
     just like old times
     sburbsim eat your heart out
@@ -28,8 +39,8 @@ dev_log["12/13/2024", `my dear sweet precious sweet sweet sweet sweet sweet swee
     zampanio SHOULD be written in teh shittiest
     glitchiest
     language possible
-    its just right`]
-dev_log["12/6/2025", `lulz
+    its just right`
+dev_log["12/6/2025"] = `lulz
     finally thought to do one of these
     its so nostalgic
     what made me realize i should
@@ -51,7 +62,7 @@ dev_log["12/6/2025", `lulz
     oh oh and i added hydration events today
     made a custom gif for them and everything
     i wanna make more of those, they're fun
-    and zampanio wants me to learn a new skill`]
+    and zampanio wants me to learn a new skill`
 
 
 

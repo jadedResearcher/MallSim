@@ -212,8 +212,8 @@ class GameSummary {
         this.stringStats[this.TONGUE_MVP] = "No one :("
         this.stringStats[this.ARMS_MVP] = "No one :("
         this.stringStats[this.LEGS_MVP] = "No one :("
-        this.stringStats[this.SCENE_LIST] = "None :("
-        this.stringStats[this.THEME_LIST] = "None :("
+        this.stringStats[this.SCENE_LIST] = "[]"
+        this.stringStats[this.THEME_LIST] = "[]"
         this.numberStats[this.TIME_TAKEN_IN_MS] = "Time Is Fake :)" //only AB has time, as a superior robot
 
 

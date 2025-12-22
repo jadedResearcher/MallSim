@@ -328,13 +328,25 @@ class Entity {
     //store the flanderized version of yourself into local storage
     //when a new session starts with someone who 'is' you, you'll be added (not replace them)
     //why do you think the echidna is causing a memory leak? 
-    joinTheLoop = () => {
+    joinTheLoop = (ele) => {
         this.sandSmoothByValue(MEDIUM_STAT_VALUE);//congratulations on becoming the 'you' you were always meant to be. technically this should happen a bit over time, over centuries, but we all know simulations are supposed to be super fast
         //yes its accessing a global var called game but im in a hurry
         if (!game.eatWastesAutomatically) {
             globalDataObject.loopingCultists.push({ title: this.title, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys })
             save();
         }
+        const knowledge = document.querySelectorAll(".wasted-knowledge");
+        if (knowledge.length > 0) {
+            const knowledge_ele = createElementWithClassAndParent("div", ele, "sub-story-beat");
+            let text = "";
+            //ironic
+            for (let k of knowledge) {
+                text += k.innerHTML;
+            }
+            knowledge_ele.innerHTML = `${this.nameHTML()} sees with new eyes that which was missed before: ${text}.`;
+
+        }
+
     }
 
     kill = (state_of_corpse) => {
@@ -497,7 +509,7 @@ class Entity {
         //automatically eat it if it would waste you
         if (!this.wasted && item.isFruit) {
             this.wasted = true;
-            this.joinTheLoop();
+            this.joinTheLoop(ele);
             ele.innerHTML = ` ${this.getName()} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
         } else if (this.wasted && item.isFruit) {
             ele.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;

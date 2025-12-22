@@ -99,6 +99,61 @@ class EscapeMall extends Event {
 
     }
 }
+
+/*
+there SHOULD be an escape here
+its the place they entered from
+whats going on?
+*/
+class NoWayOut extends Event {
+    name = "No Way Out";
+
+    //is there at least one person ready to escape?
+    internalConditionCheck = (game, location) => {
+        if (location.row !== 0 || location.col !== 0) {
+            return false;
+        }
+        const hasEscape = location.events.filter((e) => e.name == "Escape Mall").length > 0
+        if (!hasEscape) {
+            for (let player of location.players) {
+                if (player.isStartingToFeelCorruption() && !player.corrupted) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    applyResult = (game, location, parent) => {
+
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+        //everyone ready to leave can leave together
+        const leaving = [];
+        for (let player of location.players) {
+            if (player.isStartingToFeelCorruption() && !player.corrupted) {
+                leaving.push(player);
+                console.log("JR NOTE: before no way out result, corruption is", player.corruption)
+                location.corruption += 13; //your perception of there being something wrong twists the space. the mall thinks you must be wrong. SHOPPERS understand how to leave malls. only mannequins don't know how to. so you must be a mannequin, right?
+                player.addCorruption(13); //just in case its somehow not very corrupt
+                player.addCorruption(location.corruption);
+                console.log("JR NOTE: after no way out result, corruption is", player.corruption)
+
+            }
+        }
+        ele.innerHTML = `${arrayToHumanSentence(leaving.map((n) => n.nameHTML()))} ${leaving.length > 1 ? "are" : "is"} desperately searching for a way to leave the mall. No amount of knowledge and power is worth the changes they could feel creeping into their ${leaving.length > 1 ? "bodies" : "body"}, getting worse every minute.`;
+
+    }
+}
+
+
+
+
 //https://lostinzampanio.neocities.org/fanfictions/were_you_just_a_satellite
 
 
@@ -125,7 +180,6 @@ class RandomlyFindShoppingObject extends Event {
     }
     //https://www.twitch.tv/directory/category/zampaniosimulator/videos/all
     applyResult = (game, location, parent) => {
-        console.log("JR NOTE: shopping time")
         const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
         const h3 = createElementWithClassAndParent("h3", cont);
@@ -138,6 +192,7 @@ class RandomlyFindShoppingObject extends Event {
         //you need to have maxed out at least one stat to get a harvest fruit
         //you can't just derp into one ten seconds in
         const shopper_highest_stat = shopper.highestStat();
+        let wasted_knowledge = `<span class="wasted-knowledge">The Westerville Mall knows there are two types of things that look like humans. Shoppers move around and take items of the mall and are happy and festive. Mannequins never leave the mall and are constantly screaming inside. If you fail to leave the mall soon enough, or if you are too scared, the Mall will assume you are a mannequin. Thems the breaks.</span>`;
 
 
         shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
@@ -148,10 +203,10 @@ class RandomlyFindShoppingObject extends Event {
         const oddsFruit = 0.15;
         if (shopper_highest_stat.value > VERY_HIGH_STAT_VALUE && game.rand.nextDouble() < oddsFruit) {
             this.chosen_name = "Harvest Fruit Shopped!"
-            console.log("JR NOTE: shopping time harvest fruit but what is closer status", game.trickster_closer_eating_all_fruit)
             const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
 
             if (game.trickster_closer_eating_all_fruit) {
+                wasted_knowledge = `<span class="wasted-knowledge">Trickster Closer has devoured whole universes of fruit, did you really think you could stop her from eating just one mall, infinite though it is?</span>`
                 ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper!
                 <br><br>
                 <img src='http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif'>
@@ -186,6 +241,7 @@ And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds
             let flavor = `They cannot believe their luck when they stumble upon a ${item.name}!`;
 
             if (shopper.corrupted) {
+                this.chosen_name = "Mannequin Ascension"
                 flavor = `Nothing as mundane as a mouth yawns open across the blank ${shopper.mannequin_type} expanse of their face,  stretching impossibly wide over a single ${item.name} they happened to fall onto.`;
             } if (shopper_highest_stat.key === MIND_METAL_STAT) {
                 flavor = `They finally put the pieces together and solve the Riddle of the Mall, revealing a single ${item.name} nestled in a seemingly empty locker.`;
@@ -205,17 +261,76 @@ And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds
         } else {
             const item = new Item(`${personal_adj} ${object}`, `It's a random item that JR hasn't fleshed out yet!`, false)
 
-            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!). `;
+            ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!).  `;
             const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
             shopper.addItemToInventory(item, pickupEle);
 
         }
+        ele.innerHTML += wasted_knowledge;
 
     }
 
 }
 
 
+
+
+
+
+class CorruptionEvent extends Event {
+    name = "Become A Mannequin";
+
+    //is there at least one person ready to escape?
+    internalConditionCheck = (game, location) => {
+        for (let player of location.players) {
+            if (player.hasHitMaxCorruption() && !player.corrupted) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    //fun fact
+    //im deeply unsettled by mannequins
+    //have been since i was a kid
+    applyResult = (game, location, parent) => {
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        const extantMannequins = location.livingMannequinPlayers();
+        const redPaste = game.rand.pickFrom(location.players);
+
+        const formerNameHTML = redPaste.nameHTML();
+        redPaste.becomeCorrupted(game.rand);
+
+        let reaction = "";
+        const humans = location.livingNonMannequinPlayers();
+
+
+        for (let human of humans) {
+            human.fear += 13; //this is not good
+            human.addCorruption(13); //shoppers shouldn't be scared inside malls, are you SURE you're a shopper?
+        }
+        const mannequins = location.livingMannequinPlayers();
+
+        if (humans.length > 0) {
+            reaction += `${arrayToHumanSentence(humans.map((n) => n.nameHTML()))} boggle vacantly. ${formerNameHTML} was ...meat just now...just...just a second ago. Weren't...weren't they? How...how are they ${redPaste.mannequin_type}? Are...did...are they dead?`;
+        }
+        if (extantMannequins.length > 0) {
+            reaction += `${arrayToHumanSentence(mannequins.map((n) => n.nameHTML()))} twitches ever so slightly, blank face${mannequins.length > 0 ? "s" : ""} welcoming their new kin.`;
+        }
+        const wasted_knowledge = `<span class="wasted-knowledge">The Westerville Mall knows there are two types of things that look like humans. Shoppers move around and take items of the mall and are happy and festive. Mannequins never leave the mall and are constantly screaming inside. If you fail to leave the mall soon enough, or if you are too scared, the Mall will assume you are a mannequin. Thems the breaks.</span>`;
+        const monster_desc = pickARandomThemeFromListAndGrabKey(game.rand, redPaste.theme_keys, MONSTER_DESC, false);
+
+        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/mannequin_hand.gif'>${formerNameHTML} falls to the floor, dripping a thick, viscous black fluid from every orifice. They scream and scream as their eyes seal over with ${redPaste.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${redPaste.mannequin_type} their screams strangle into nothing. Their new body, ${monster_desc}.  ${wasted_knowledge} ${reaction}`;
+
+    }
+
+}
 
 
 
@@ -438,4 +553,4 @@ class HydrationStation extends Event {
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [new YongkiKill(), new HydrationStation()]
+const generalEvents = [new CorruptionEvent(), new NoWayOut(), new YongkiKill(), new HydrationStation()]

@@ -294,7 +294,7 @@ class Location {
             //assumes that about you without checking
             if (p.hasHitMaxCorruption() && !p.corrupted && !p.wasted) {
                 p.becomeCorrupted(rand);
-                const monster_desc = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, MONSTER_DESC, false);
+                const monster_desc = pickARandomThemeFromListAndGrabKey(rand, p.theme_keys, MONSTER_DESC, false);
 
                 options = [`${p.nameHTML()} screams and screams as their eyes seal over with ${p.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${p.mannequin_type} their screams strangle into nothing. Their new body, ${monster_desc} `]
             } else if (p.corrupted) {

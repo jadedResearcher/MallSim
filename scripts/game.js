@@ -312,6 +312,7 @@ class Game {
 
                 if (cell) {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+                    ele.title = `${cell.longer_name}(${cell.corruption})`;
                     if (cell.name != CORRIDOR_NAME) {
                         ele.style.backgroundColor = cell.color;
                     } else {
@@ -401,7 +402,7 @@ class Game {
                 //console.log("JR NOTE: trying to spread the food court east into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers
-                newLocation.corruption += existing.corruption;
+                newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
@@ -445,7 +446,7 @@ class Game {
                 //console.log("JR NOTE: trying to spread the food court west into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers
-                newLocation.corruption += existing.corruption;
+                newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
@@ -470,7 +471,7 @@ class Game {
                 //console.log("JR NOTE: trying to spread the food court south into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers
-                newLocation.corruption += existing.corruption;
+                newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
@@ -509,7 +510,7 @@ class Game {
                 //console.log("JR NOTE: trying to spread the food court west into an existing location", { newName: newLocation.name, name: existing.name, existing })
 
                 //its WRONG to twist space like this, the mall remembers
-                newLocation.corruption += existing.corruption;
+                newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.players = [...existing.players];
