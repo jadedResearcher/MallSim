@@ -259,7 +259,7 @@ const debugRenderSpriteForEntitty = () => {
 
 
 const renderSpriteForEntity = (parent, entity) => {
-    console.log("JR NOTE: rendering", entity)
+    //console.log("JR NOTE: rendering", entity)
     const base_url = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/GuideOfHuntersAndHuntedGodtierSprites/"
 
     const sprite = createElementWithClassAndParent("div", parent, "entity-sprite");
