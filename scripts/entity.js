@@ -623,6 +623,8 @@ class Entity {
     }
 
     decideWhereToGoAsAMannequin = (ele, rand, currentLocation, north, south, east, west) => {
+        //its not you moving your limbs, not always
+        this.fear++;
         let choices = [north, south, east, west, currentLocation].filter((i) => i);
         let chosen = rand.pickFrom(choices);
         ele.innerHTML = `When you weren't looking, somehow ${this.nameHTML()} is in the ${chosen.longer_name} [${chosen.row},${chosen.col}], crumpled over a pile of junk.`;

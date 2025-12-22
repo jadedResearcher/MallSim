@@ -1,6 +1,15 @@
 const dev_log = {}
 //don't forget to update west if you see something interesting in the simulation
 
+dev_log["12/22/2025"] = `so it turns out
+its hard to calibrate
+just how aggressive
+the food court should be
+when i can't see the whole map
+so i finally upgraded the map system
+to have controls
+instead of just trying to get you to scroll in the super zoomed in version`;
+
 dev_log["12/21/2025"] = `on this
 the longest night
 i decided to make an endless food court

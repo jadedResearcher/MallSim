@@ -431,7 +431,7 @@ class Game {
     //that try to rewrite to everything they touch
     //it doesn't care what themes the parent location has, picks a single random food
     handleExpandingFoodCourt = (location) => {
-        const food_court_strength = 0.5; // what are the odds it overwrites a previous location?
+        const food_court_strength = 0.3; // what are the odds it overwrites a previous location?
         const handleEast = (theme_key) => {
             let right_row = location.row;
             let right_col = location.col + 1;
@@ -808,6 +808,7 @@ class Game {
             makePair("Dead:", player.dead)
             makePair("Corrupted:", player.corrupted ? player.corrupted + (player.mannequin_type) : player.corrupted)
             makePair("Corruption:", player.corruption)
+            makePair("Fear:", player.fear)
             makePair("Wasted:", player.wasted)
             makePair("Monstrous:", player.monster_rating)
             makePair("Stolen Name:", player.stolen_name)
