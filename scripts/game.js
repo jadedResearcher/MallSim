@@ -107,6 +107,8 @@ class Game {
                     //new Relationship(value, romantic, familial)
                     looping_player.stats = cultist.stats;
                     looping_player.wasted = true;
+                    looping_player.sprite_aspect = cultist.sprite_aspect;
+                    looping_player.sprite_class = cultist.sprite_class;
                     players_to_add.push(looping_player);
                     if (!cultist.times_looped) {
                         cultist.times_looped = 0;
@@ -609,6 +611,7 @@ class Game {
         this.summary.finalize(this);
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+        intro_container.scrollIntoView();
 
         const mannequins = [];
         const corpses = [];
@@ -682,7 +685,7 @@ class Game {
 
         if (this.initial_player_count > this.players.length) {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `History will forget any who could not handle the devotion necessary to obtain Harvest Fruit and instead fled.`;
+            detail.innerHTML = `The Westerville Mall has already forgeted any who could not handle the devotion necessary to obtain Harvest Fruit and instead fled. Not a Shopper, not a Mannequin, but an irrelevant third thing.`;
 
         }
 

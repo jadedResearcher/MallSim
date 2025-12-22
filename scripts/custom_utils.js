@@ -148,6 +148,11 @@ const setSpritesForParty = (rand, party) => {
     //yeah i could go for secondary themes but this is already way more complicated than i thought i was gonna do lol
     //not very zampanio of me but... i liked the guides sprites so much i wanted them to MEAN something
     for (let player of sorted_player_list) {
+        //if you're looping, you already know what you are and are doomed to never really change
+        //just become more of what you are
+        if (player.monster_rating > 1) {
+            break;
+        }
         let aspect_possibilities = aspect_ratings[player.title].filter((aspect) => !chosen_aspects.includes(aspect));
         if (aspect_possibilities.length === 0) {
             aspect_possibilities = Object.keys(aspect_mapping).filter((aspect) => !!chosen_aspects.includes(aspect))

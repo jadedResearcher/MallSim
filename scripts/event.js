@@ -170,7 +170,9 @@ class NoWayOut extends Event {
 class RandomlyFindShoppingObject extends Event {
     name = "Shopping Time!";
 
-    //is there at least one person ready to escape?
+    //is there at least one person ready to shop?
+    //technically there just has to be a human present
+    //but a mannequin can steal your item
     internalConditionCheck = (game, location) => {
         if (location.livingNonMannequinPlayers().length > 0) {
             return game.rand.nextDouble() < 0.75;
@@ -188,7 +190,9 @@ class RandomlyFindShoppingObject extends Event {
         const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
 
-        const shopper = game.rand.pickFrom(location.players);
+        //yes even if the mall was trying to give a human something
+        //a mannequin can take it
+        const shopper = game.rand.pickFrom(location.livingPlayers());
         //you need to have maxed out at least one stat to get a harvest fruit
         //you can't just derp into one ten seconds in
         const shopper_highest_stat = shopper.highestStat();

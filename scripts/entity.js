@@ -332,7 +332,7 @@ class Entity {
         this.sandSmoothByValue(MEDIUM_STAT_VALUE);//congratulations on becoming the 'you' you were always meant to be. technically this should happen a bit over time, over centuries, but we all know simulations are supposed to be super fast
         //yes its accessing a global var called game but im in a hurry
         if (!game.eatWastesAutomatically) {
-            globalDataObject.loopingCultists.push({ title: this.title, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys })
+            globalDataObject.loopingCultists.push({ title: this.title, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys, sprite_aspect: this.sprite_aspect, sprite_class: this.sprite_class })
             save();
         }
         const knowledge = document.querySelectorAll(".wasted-knowledge");
