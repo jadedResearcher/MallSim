@@ -73,6 +73,10 @@ class Game {
         for (let player of this.players) {
             this.theme_keys = this.theme_keys.concat(player.theme_keys);
         }
+        //resets them for this game, yeah im mixing an object and global variables
+        //so sue me
+        initThemeLocations(this.rand);
+
 
     }
 
@@ -236,10 +240,15 @@ class Game {
         //can't do sooner or they might double tick
         for (let location of locations) {
             if (location.movePlayersFromPendingToInternal()) {
-                //call add no matter what because it handles rng internally
-                console.warn("JR NOTE: todo add things to other directions as well (north and south) only (never add west, oddly enough)")
-                this.handleAddingCorridorToEastOfLocation(location);
-                this.handleAddingShopToSouthOfLocation(location);
+                if (location.isFoodCourt) {
+                    //food related places have custom theme events, eventaully everything will
+                    this.handleExpandingFoodCourt(location);
+                } else {
+                    //call add no matter what because it handles rng internally
+                    this.handleAddingCorridorToEastOfLocation(location);
+                    this.handleAddingShopToSouthOfLocation(location);
+                }
+
             }
         }
         this.renderMall(tick_container);
@@ -369,6 +378,138 @@ class Game {
         this.handleAddingCorridorToEastOfLocation(mall_entrance);
 
         this.renderMall(tick_container);
+
+    }
+
+    //a food court surrounds itself on all sides with food locations
+    //that try to rewrite to everything they touch
+    //it doesn't care what themes the parent location has, picks a single random food
+    handleExpandingFoodCourt = (location) => {
+
+        const handleEast = (theme_key) => {
+            let right_row = location.row;
+            let right_col = location.col + 1;
+            const template = theme_locations[theme_key];
+            if (!template) {
+                return;
+            }
+            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            newLocation.isFoodCourt = true;
+            const existing = getSouth(this.map, location.row, location.col)
+            if (existing) {
+                //its WRONG to twist space like this, the mall remembers
+                newLocation.corruption += existing.corruption;
+                //instead of players being lost to the void they 
+                //suddenly are in the new location
+                newLocation.players = [...existing.players];
+                this.map[right_row][right_col] = newLocation;
+            } else if (!this.map[right_row][right_col]) {
+                //if right does not exist, check if its col index is the same or greater than the rows length
+                //if so, need to add a new "undefined" cel to the end of every row in the maze
+                //then, pick my index and make a new random room
+                if (right_col < this.map[right_row].length) {
+                    this.map[right_row][right_col] = newLocation;
+                } else {
+                    if (right_col == this.map[right_row].length) {
+                        for (let row of this.map) {
+                            row.push(undefined);
+                        }
+                        this.map[right_row][right_col] = newLocation;
+                    }
+                }
+            }
+        }
+
+        //if the food court rewrites the ENTRANCE
+        //fleeing is no longer possible
+        const handleWest = (theme_key) => {
+            let right_row = location.row;
+            let right_col = location.col - 1;
+            if (right_col < 0) {
+                return;
+            }
+
+            const template = theme_locations[theme_key];
+            if (!template) {
+                return;
+            }
+            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            newLocation.isFoodCourt = true;
+            const existing = getWest(this.map, location.row, location.col)
+            if (existing) {
+                //its WRONG to twist space like this, the mall remembers
+                newLocation.corruption += existing.corruption;
+                //instead of players being lost to the void they 
+                //suddenly are in the new location
+                newLocation.players = [...existing.players];
+                this.map[right_row][right_col] = newLocation;
+            } else {
+                this.map[right_row][right_col] = newLocation;
+            }
+        }
+
+        const handleSouth = (theme_key) => {
+            let right_row = location.row + 1;
+            let right_col = location.col;
+            const template = theme_locations[theme_key];
+            if (!template) {
+                return;
+            }
+            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            newLocation.isFoodCourt = true;
+            const existing = getSouth(this.map, location.row, location.col)
+            if (existing) {
+                //its WRONG to twist space like this, the mall remembers
+                newLocation.corruption += existing.corruption;
+                //instead of players being lost to the void they 
+                //suddenly are in the new location
+                newLocation.players = [...existing.players];
+                this.map[right_row][right_col] = newLocation;
+            } else if (this.map[right_row] && right_row < this.map.length) {
+                this.map[right_row][right_col] = newLocation;
+            } else {
+                const new_row = [];
+                for (let cel of this.map[0]) {
+                    new_row.push(undefined);
+                }
+                this.map.push(new_row);
+                this.map[right_row][right_col] = newLocation;
+            }
+        }
+
+        //if the food court rewrites the ENTRANCE
+        //fleeing is no longer possible
+        const handleNorth = (theme_key) => {
+            let right_row = location.row - 1;
+            let right_col = location.col;
+            if (right_row < 0) {
+                return;
+            }
+
+            const template = theme_locations[theme_key];
+            if (!template) {
+                return;
+            }
+            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            newLocation.isFoodCourt = true;
+            const existing = getNorth(this.map, location.row, location.col)
+            if (existing) {
+                //its WRONG to twist space like this, the mall remembers
+                newLocation.corruption += existing.corruption;
+                //instead of players being lost to the void they 
+                //suddenly are in the new location
+                newLocation.players = [...existing.players];
+                this.map[right_row][right_col] = newLocation;
+            } else {
+                this.map[right_row][right_col] = newLocation;
+            }
+        }
+
+        handleNorth(this.rand.pickFrom(food_keys))
+        handleSouth(this.rand.pickFrom(food_keys))
+        handleEast(this.rand.pickFrom(food_keys))
+        handleWest(this.rand.pickFrom(food_keys))
+
 
     }
 

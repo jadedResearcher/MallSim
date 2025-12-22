@@ -33,14 +33,24 @@ const randomShop = (rand, themes, right_row, right_col) => {
 
     if (rand.nextDouble() > 0.75) {
         return new Location(`Smoothies`, `${personal_adj} Smoothies`, themes, right_row, right_col, [new TricksterCloser()], "rgba(161,0,66)");
-
     }
+
+    if (rand.nextDouble() > 0.95) {
+        const ret = new Location(`Food Court`, `${personal_adj} Food Court Entrance`, food_keys, right_row, right_col, [], "rgba(236,185,10)");
+        ret.isFoodCourt = true; //starts a food court spawning chain
+        return ret;
+    }
+
+
+
     return new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, [new RandomlyFindShoppingObject()], "#a10000");
 }
 
 
 class Location {
     name = "???"
+    //a food court entrance will start this, food courts have different spawning rules
+    isFoodCourt = false;
     longer_name = "??? But Longer"
     color; //special shops will be special colors
     row = 0;
@@ -67,6 +77,11 @@ class Location {
             this.events.push(event)
         }
         this.theme_keys = theme_keys;
+    }
+
+    //need to know the correct location because otherwise corruption will be wrong
+    cloneIntoLocation = (row, col) => {
+        return new Location(this.name, this.longer_name, [...this.theme_keys], row, col, [...this.events], this.color)
     }
 
     livingNonMannequinPlayers = () => {

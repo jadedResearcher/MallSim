@@ -659,8 +659,19 @@ class Entity {
                 //locations handle adding corruption if you move into them
                 //if you stay, i still want you to corrupt, so, here we are
                 this.addCorruption(currentLocation.corruption);
+                if (currentLocation.row === 0 && currentLocation.col === 0) {
+                    if (this.isStartingToFeelCorruption()) {
+                        ele.innerHTML = `${this.nameHTML()} desperately searches the ${currentLocation.longer_name} for a way out. It used to BE here, what.... How? They are freaking the fuck out. They KNOW they didn't get turned around, they were careful, they left the chalk marks, WHERE IS THE EXIT!?`;
+                    } else {
+                        ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, not quite ready to move further into the terrifying Westerville Mall.`;
 
-                ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    }
+
+                } else {
+                    ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+
+                }
+
                 return currentLocation;
 
             }
