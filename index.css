@@ -153,10 +153,21 @@ button {
   cursor: pointer;
 }
 
+.map-details {
+  z-index: 10;
+  position: relative;
+  background: rgb(237, 231, 213);
+  padding: 13px;
+}
+
 .horizontal-bar {
   display: flex;
+  z-index: 10;
+  background: rgb(237, 231, 213);
   flex-direction: row;
-  flex-wrap: no-wrap;
+  flex-wrap: nowrap;
+  position: relative;
+  padding: 13px;
   gap: 13px;
   margin-bottom: 13px;
   margin-top: 13px;

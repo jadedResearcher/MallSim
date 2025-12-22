@@ -314,7 +314,7 @@ class Game {
 
     renderMall = (parent) => {
         //console.log("JR NOTE: rendering mall", this.map)
-        const detailSection = createElementWithClassAndParent("div", parent);
+        const detailSection = createElementWithClassAndParent("div", parent, 'map-details');
         detailSection.innerText = "Click On Box For Details"
 
 
@@ -323,7 +323,7 @@ class Game {
 
 
         const mall_container = createElementWithClassAndParent("div", parent, "mall-render");
-        let zoom_level = 9 / this.longestRowLength();
+        let zoom_level = Math.min(1, 9 / this.longestRowLength());
 
         addMapControls(zoom_level, zoomBar, mall_container)
 
@@ -337,18 +337,24 @@ class Game {
 
                 if (cell) {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
+                    const cached_name = cell.longer_name;;
+                    const cached_inhabitants = cell.players.map((p) => p.nameHTML()).join(",");
+                    const cached_corruption = cell.corruption;
+                    const cached_events = cell.events.map((e) => e.name).join(",");
                     ele.onclick = () => {
+                        console.log("JR NOTE: cell was clicked", cell)
                         document.querySelectorAll(".selected").forEach((i) => i.classList.remove("selected"));
                         ele.classList.add("selected");
                         detailSection.innerHTML = `[${cell.row},${cell.col}]
                         <br>
-                        <b>Name:</b> ${cell.longer_name}
+                        <b>Name:</b> ${cached_name}
                         <br>
-                        <b>Inhabitants:</b> ${cell.players.length}
+                        <b>Inhabitants:</b> ${cached_inhabitants}
                         <br>
-                        <b>Corruption Level:</b> ${cell.corruption}
+            
+                        <b>Corruption Level:</b> ${cached_corruption}
                         <br>
-                        <b>Possible Events:</b> ${cell.events.map((e) => e.name).join(",")}`;
+                        <b>Possible Events:</b> ${cached_events}`;
                     }
                     ele.title = `${cell.longer_name}(${cell.corruption})`;
                     if (cell.name != CORRIDOR_NAME) {

@@ -289,21 +289,21 @@ const createCheckboxInputWithLabel = (parent, id, labelText, initialValue) => {
 //default zoom of 1.0 make ssense
 const addMapControls = (default_zoom, zoom_controls_parent, ele_to_zoom) => {
   let zoomLevel = default_zoom;
-  let panPosition = 0; //negative moves the map to the left which moves the view to the right
-
+  let panPositionX = 0; //negative moves the map to the left which moves the view to the right
+  let panPositionY = 0;
   const zoomIn = createElementWithClassAndParent("button", zoom_controls_parent);
   zoomIn.innerText = "Zoom In";
   ele_to_zoom.style.transformOrigin = "0px 0px";
 
   const syncZoom = () => {
-    panPosition = 0;
+    panPositionX = 0;
+    panPositionY = 0;
     syncPan();
     ele_to_zoom.style.transform = `scale(${zoomLevel})`;
   }
 
   const syncPan = () => {
-    console.log("JR NOTE: syncPan", panPosition)
-    ele_to_zoom.style.transformOrigin = `${panPosition}px 0px`;
+    ele_to_zoom.style.transformOrigin = `${panPositionX}px ${panPositionY}px`;
   }
 
 
@@ -325,7 +325,7 @@ const addMapControls = (default_zoom, zoom_controls_parent, ele_to_zoom) => {
   panLeft.innerText = "Pan Left"
 
   panLeft.onclick = () => {
-    panPosition += -300;
+    panPositionX += 300;
     syncPan();
   }
 
@@ -333,7 +333,23 @@ const addMapControls = (default_zoom, zoom_controls_parent, ele_to_zoom) => {
   panRight.innerText = "Pan Right"
 
   panRight.onclick = () => {
-    panPosition += 300;
+    panPositionX += -300;
+    syncPan();
+  }
+
+  const panUp = createElementWithClassAndParent("button", zoom_controls_parent);
+  panUp.innerText = "Pan Up"
+
+  panUp.onclick = () => {
+    panPositionY += 300;
+    syncPan();
+  }
+
+  const panDown = createElementWithClassAndParent("button", zoom_controls_parent);
+  panDown.innerText = "Pan Down"
+
+  panDown.onclick = () => {
+    panPositionY += -300;
     syncPan();
   }
 
