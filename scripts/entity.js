@@ -622,6 +622,16 @@ class Entity {
         this.stats[key] += value;
     }
 
+    //its not easy, to take a life
+    //camellia has riled the cultists up
+    //dehumanized the enemy
+    //but you still have to be a very specific kind of person
+    //to kill in coold blood
+    preparedToKill = () => {
+        //someone will kill if they prefer action strongly over compromise
+        return this.stats[ARMS_METAL_STAT] > HIGH_STAT_VALUE && this.stats[TONGUE_METAL_STAT] < MEDIUM_STAT_VALUE;
+    }
+
     decideWhereToGoAsAMannequin = (ele, rand, currentLocation, north, south, east, west) => {
         //its not you moving your limbs, not always
         this.fear++;

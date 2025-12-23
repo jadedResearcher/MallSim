@@ -925,6 +925,10 @@ that way instead of ai her weird infinite procedural stuff can just be photos
                     roles.push("fast")
                 }
 
+                if (roles.length === 0) {
+                    roles.push("normal")
+                }
+
                 text += ` They are the ${arrayToHumanSentence(roles)} one.`;
 
             } else {
@@ -963,8 +967,11 @@ that way instead of ai her weird infinite procedural stuff can just be photos
 
                 }
             }
+            if (player.preparedToKill()) {
+                text += " They are prepared to kill to secure what is rightfully theirs. "
+            }
 
-            text += `<span class='spoiler'> Mind: ${player.stats[MIND_METAL_STAT]}, Eyes: ${player.stats[EYES_METAL_STAT]}, Tongue: ${player.stats[TONGUE_METAL_STAT]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
+            text += ` <span class='spoiler'> Mind: ${player.stats[MIND_METAL_STAT]}, Eyes: ${player.stats[EYES_METAL_STAT]}, Tongue: ${player.stats[TONGUE_METAL_STAT]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
 
             ele.innerHTML = text;
             const sprite = renderSpriteForEntity(poseAsTeam, player);
