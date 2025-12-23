@@ -414,7 +414,7 @@ class Game {
 
         const mall_entrance = new Location("Entrance", "Mall Entrance", [QUESTING, GUIDING, LONELY, this.rand.pickFrom(this.theme_keys)], 0, 0, []);
         mall_entrance.players = [...this.players];
-        mall_entrance.events.push(new EscapeMall());
+        mall_entrance.events.push(escapeMall.clone());
 
         for (let player of this.players) {
             player.current_location = mall_entrance; //so they aren't screaming they're in teh void
@@ -435,11 +435,11 @@ class Game {
         const handleEast = (theme_key) => {
             let right_row = location.row;
             let right_col = location.col + 1;
-            const template = theme_locations[theme_key];
-            if (!template) {
+            const templates = theme_locations[theme_key];
+            if (!templates || templates.length === 0) {
                 return;
             }
-            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            const newLocation = this.rand.pickFrom(templates).cloneIntoLocation(right_row, right_col);
             newLocation.isFoodCourt = true;
             const existing = getEast(this.map, location.row, location.col);
             if (existing) {
@@ -483,11 +483,11 @@ class Game {
                 return;
             }
 
-            const template = theme_locations[theme_key];
-            if (!template) {
+            const templates = theme_locations[theme_key];
+            if (!templates || templates.length === 0) {
                 return;
             }
-            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            const newLocation = this.rand.pickFrom(templates).cloneIntoLocation(right_row, right_col);
             newLocation.isFoodCourt = true;
             const existing = getWest(this.map, location.row, location.col)
             if (existing) {
@@ -512,11 +512,11 @@ class Game {
         const handleSouth = (theme_key) => {
             let right_row = location.row + 1;
             let right_col = location.col;
-            const template = theme_locations[theme_key];
-            if (!template) {
+            const templates = theme_locations[theme_key];
+            if (!templates || templates.length === 0) {
                 return;
             }
-            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            const newLocation = this.rand.pickFrom(templates).cloneIntoLocation(right_row, right_col);
             newLocation.isFoodCourt = true;
             const existing = getSouth(this.map, location.row, location.col)
             if (existing) {
@@ -555,11 +555,11 @@ class Game {
                 return;
             }
 
-            const template = theme_locations[theme_key];
-            if (!template) {
+            const templates = theme_locations[theme_key];
+            if (!templates || templates.length === 0) {
                 return;
             }
-            const newLocation = template.cloneIntoLocation(right_row, right_col);
+            const newLocation = this.rand.pickFrom(templates).cloneIntoLocation(right_row, right_col);
             newLocation.isFoodCourt = true;
             const existing = getNorth(this.map, location.row, location.col)
             if (existing) {

@@ -273,20 +273,20 @@ const renderSpriteForEntity = (parent, entity) => {
     const class_array = Object.keys(class_mapping)
     //feeling lazy, just gonna map index to x,y coordinates till i discover a pattern
     const hopefully_temporary_mapping = {}
-    hopefully_temporary_mapping[class_array[0]] = [-81, 0] ///good
+    hopefully_temporary_mapping[class_array[0]] = [-80, 0] ///good
     hopefully_temporary_mapping[class_array[1]] = [-160, 0] //good
-    hopefully_temporary_mapping[class_array[2]] = [-16, -137] //good
-    hopefully_temporary_mapping[class_array[3]] = [-85, -146] //good
-    hopefully_temporary_mapping[class_array[4]] = [-155, -145] //good
-    hopefully_temporary_mapping[class_array[5]] = [-225, -137] //good
-    hopefully_temporary_mapping[class_array[6]] = [-7, -280]//good
-    hopefully_temporary_mapping[class_array[7]] = [-81, -280] //good
-    hopefully_temporary_mapping[class_array[8]] = [-155, -280]//good
-    hopefully_temporary_mapping[class_array[9]] = [-226, -280]//good
-    hopefully_temporary_mapping[class_array[10]] = [-19, -416] //good
-    hopefully_temporary_mapping[class_array[11]] = [-88, -416] //good
-    hopefully_temporary_mapping[class_array[12]] = [-154, -416] //good
-    hopefully_temporary_mapping[class_array[13]] = [-227, -416] //good
+    hopefully_temporary_mapping[class_array[2]] = [0, -137] //good
+    hopefully_temporary_mapping[class_array[3]] = [-80, -146] //good
+    hopefully_temporary_mapping[class_array[4]] = [-160, -145] //good
+    hopefully_temporary_mapping[class_array[5]] = [-240, -137] //good
+    hopefully_temporary_mapping[class_array[6]] = [0, -280]//good
+    hopefully_temporary_mapping[class_array[7]] = [-80, -280] //good
+    hopefully_temporary_mapping[class_array[8]] = [-160, -280]//good
+    hopefully_temporary_mapping[class_array[9]] = [-240, -280]//good
+    hopefully_temporary_mapping[class_array[10]] = [-0, -416] //good
+    hopefully_temporary_mapping[class_array[11]] = [-80, -416] //good
+    hopefully_temporary_mapping[class_array[12]] = [-160, -416] //good
+    hopefully_temporary_mapping[class_array[13]] = [-240, -416] //good
 
     sprite.style.backgroundPositionX = hopefully_temporary_mapping[entity.sprite_class][0] + "px"
     sprite.style.backgroundPositionY = hopefully_temporary_mapping[entity.sprite_class][1] + "px"

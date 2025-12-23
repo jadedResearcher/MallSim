@@ -28,11 +28,31 @@ https://kittyhorrorshow.itch.io/anatomy
 
 
 const randomShop = (rand, themes, right_row, right_col) => {
-    console.log("JR NOTE: todo have non generic shops, like clothings stores for wibby (use alchemy engine from sburbsim to have theme traits?) like royal can have fancy?")
+    let foundTemplates = [];
+
+    for (let theme of themes) {
+        console.log("JR NOTE: checking theme for template", { theme, template: theme_locations[theme] })
+        if (theme_locations[theme] && theme_locations[theme].length > 0) {
+            console.log("JR NOTE: found theme before", foundTemplates)
+            foundTemplates = foundTemplates.concat(theme_locations[theme])
+            console.log("JR NOTE: found theme after", foundTemplates)
+
+        }
+    }
+
+    console.log("JR NOTE: themes found were", foundTemplates)
+    if (foundTemplates.length > 0) {
+        const ret = rand.pickFrom(foundTemplates).cloneIntoLocation(right_row, right_col);
+        ret.theme_keys = themes; //don't throw away all the other themes
+        console.log("JR NOTE: spawning a template", ret);
+
+        return ret;
+    }
+
     const personal_adj = pickARandomThemeFromListAndGrabKey(rand, themes, ADJ, true);
 
     if (rand.nextDouble() > 0.75) {
-        return new Location(`Smoothies`, `${personal_adj} Smoothies`, themes, right_row, right_col, [new TricksterCloser()], "rgba(161,0,66)");
+        return new Location(`Smoothies`, `${personal_adj} Smoothies`, themes, right_row, right_col, [tricksterCloser.clone()], "rgba(161,0,66)");
     }
 
     if (rand.nextDouble() > 0.95) {
@@ -43,7 +63,7 @@ const randomShop = (rand, themes, right_row, right_col) => {
 
 
 
-    return new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, [new RandomlyFindShoppingObject()], "#a10000");
+    return new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, [randomlyFindShoppingObject.clone()], "#a10000");
 }
 
 
@@ -74,14 +94,16 @@ class Location {
         this.corruption = row * 2 + col;
         this.events = events;
         for (let event of generalEvents) {
-            this.events.push(event)
+            this.events.push(event.clone())
         }
         this.theme_keys = theme_keys;
     }
 
     //need to know the correct location because otherwise corruption will be wrong
     cloneIntoLocation = (row, col) => {
-        return new Location(this.name, this.longer_name, [...this.theme_keys], row, col, [...this.events], this.color)
+        let cloned_events = this.events.map((e) => e.clone());
+
+        return new Location(this.name, this.longer_name, [...this.theme_keys], row, col, cloned_events, this.color)
     }
 
     livingNonMannequinPlayers = () => {
