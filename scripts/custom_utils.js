@@ -276,7 +276,7 @@ const renderSpriteForEntity = (parent, entity) => {
     hopefully_temporary_mapping[class_array[0]] = [-81, 0] ///good
     hopefully_temporary_mapping[class_array[1]] = [-160, 0] //good
     hopefully_temporary_mapping[class_array[2]] = [-16, -137] //good
-    hopefully_temporary_mapping[class_array[3]] = [-85, -144] //good
+    hopefully_temporary_mapping[class_array[3]] = [-85, -146] //good
     hopefully_temporary_mapping[class_array[4]] = [-155, -145] //good
     hopefully_temporary_mapping[class_array[5]] = [-225, -137] //good
     hopefully_temporary_mapping[class_array[6]] = [-7, -280]//good

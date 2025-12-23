@@ -665,6 +665,20 @@ class Game {
 
     }
 
+    isInfiniteFoodCourt = (parent) => {
+        let ret = true;
+        for (let row of this.map) {
+            for (let item of row) {
+                if (item) { //its not empty space
+                    if (!item.isFoodCourt) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
     handleEpilogue = (parent) => {
         this.summary.finalize(this);
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
@@ -779,6 +793,10 @@ class Game {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             detail.innerHTML = `The Wasted Trickster Lonesome Witch of Threaded Motivation has turned all oxygen into fruit. The entire party is crushed to death, slowly, under all that weight. They...really should not have let her eat the Harvest Fruit!`;
 
+        }
+
+        if (this.isInfiniteFoodCourt()) {
+            this.summary.setEnding("Infinite Food Court Ending")
         }
 
         if (!this.summary.hasEnding()) {
