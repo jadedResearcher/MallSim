@@ -26,12 +26,10 @@ don't leave it alone... don't abandon it...
 https://kittyhorrorshow.itch.io/anatomy
 */
 
-
-const randomShop = (rand, themes, right_row, right_col) => {
+const randomThemedShop = (rand, themes, right_row, right_col) => {
     let foundTemplates = [];
 
     for (let theme of themes) {
-        console.log("JR NOTE: checking theme for template", { theme, template: theme_locations[theme] })
         if (theme_locations[theme] && theme_locations[theme].length > 0) {
             console.log("JR NOTE: found theme before", foundTemplates)
             foundTemplates = foundTemplates.concat(theme_locations[theme])
@@ -48,6 +46,10 @@ const randomShop = (rand, themes, right_row, right_col) => {
 
         return ret;
     }
+}
+
+const randomShop = (rand, themes, right_row, right_col) => {
+
 
     const personal_adj = pickARandomThemeFromListAndGrabKey(rand, themes, ADJ, true);
 
@@ -55,14 +57,19 @@ const randomShop = (rand, themes, right_row, right_col) => {
         return new Location(`Smoothies`, `${personal_adj} Smoothies`, themes, right_row, right_col, [tricksterCloser.clone()], "rgba(161,0,66)");
     }
 
-    if (rand.nextDouble() > 0.95) {
+    if (rand.nextDouble() > 0.75) {
         const ret = new Location(`Food Court`, `${personal_adj} Food Court Entrance`, food_keys, right_row, right_col, [], "rgba(236,185,10)");
         ret.isFoodCourt = true; //starts a food court spawning chain
         return ret;
     }
 
+    const ret = randomThemedShop(rand, themes, right_row, right_col);
+    if (ret) {
+        return ret;
+    }
 
 
+    //fallback
     return new Location(`Shop`, `${personal_adj} Shop`, themes, right_row, right_col, [randomlyFindShoppingObject.clone()], "#a10000");
 }
 
@@ -93,8 +100,11 @@ class Location {
         //deeper to the east you get but what REALLY starts adding up is deeper to the south
         this.corruption = row * 2 + col;
         this.events = events;
+        const existingEventNames = this.events.map((e) => e.name)
         for (let event of generalEvents) {
-            this.events.push(event.clone())
+            if (!existingEventNames.includes(event.name)) {
+                this.events.push(event.clone())
+            }
         }
         this.theme_keys = theme_keys;
     }
@@ -193,6 +203,8 @@ class Location {
         const intro_container = createElementWithClassAndParent("div", parent);
         intro_container.style.marginBottom = "50px"
 
+        const living = this.livingPlayers();
+
         //console.log("JR NOTE: this.theme keys is", this.theme_keys)
         const feeling = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, FEELING, false);
         const smell = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, SMELL, false);
@@ -200,6 +212,7 @@ class Location {
         const sound = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, SOUND, false);
 
         //its a coincidence that the only homestuck aspect was my old one. so sue me
+        //btw this SHOULD be game , if you're the smartest person on the team you act like it, doesn't matter if you'r ethe smartest here
         const mindPlayer = getPartyHighestMind(game.players);
         const eyesPlayer = getPartyHighestEyes(game.players);
         const tonguePlayer = getPartyHighestTongue(game.players);
@@ -215,71 +228,71 @@ class Location {
 
 
         //gather up everything you might be able to do, keyed by player  name
-        //yes this means if two party members have identical names the system will confused
+        //yes this means if two party members have identical titles the system will confused
         //we will too tho so its probably fine
         //and hey, weird bugs feed me
         const possibleActions = {};
         //initialize
-        for (let p of game.players) {
-            possibleActions[p.name] = [];
+        for (let p of this.livingPlayers()) {
+            possibleActions[p.title] = []; //don't use name, they might lose it
         }
 
 
         //we don't care about specifics of the stats just
         //what roll do you play in the party, relative to the others. 
 
-        if (mindPlayer && this.players.includes(mindPlayer)) {
-            possibleActions[mindPlayer.name].push(`${mindPlayer.nameHTML()} is planning what the next steps should be.`);
-            possibleActions[mindPlayer.name].push(`${mindPlayer.nameHTML()} is thinking deeply about what to do next.`);
+        if (mindPlayer && living.includes(mindPlayer)) {
+            possibleActions[mindPlayer.title].push(`${mindPlayer.nameHTML()} is planning what the next steps should be.`);
+            possibleActions[mindPlayer.title].push(`${mindPlayer.nameHTML()} is thinking deeply about what to do next.`);
         }
 
-        if (antiMindPlayer && this.players.includes(antiMindPlayer)) {
-            possibleActions[antiMindPlayer.name].push(`${antiMindPlayer.nameHTML()} is thinking of nothing in particular.`);
-            possibleActions[antiMindPlayer.name].push(`${antiMindPlayer.nameHTML()} is daydreaming about soup.`);
-        }
-
-
-        if (eyesPlayer && this.players.includes(eyesPlayer)) {
-            possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} pokes around at all the nooks and crannies but doesn't really find anything.`);
-            possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} tries to figure out where the smell of ${smell} is coming from, but has no luck.`);
-            possibleActions[eyesPlayer.name].push(`${eyesPlayer.nameHTML()} tries to figure out where the sound of ${sound} is coming from, but has no luck.`);
-        }
-
-        if (antiEyesPlayer && this.players.includes(antiEyesPlayer)) {
-            possibleActions[antiEyesPlayer.name].push(`${antiEyesPlayer.nameHTML()} barely even notices the smell of ${smell}.`);
-            possibleActions[antiEyesPlayer.name].push(`${antiEyesPlayer.nameHTML()} barely even notices the taste of ${taste} lingering in the air.`);
+        if (antiMindPlayer && living.includes(antiMindPlayer)) {
+            possibleActions[antiMindPlayer.title].push(`${antiMindPlayer.nameHTML()} is thinking of nothing in particular.`);
+            possibleActions[antiMindPlayer.title].push(`${antiMindPlayer.nameHTML()} is daydreaming about soup.`);
         }
 
 
-
-        if (tonguePlayer && this.players.includes(tonguePlayer)) {
-            possibleActions[tonguePlayer.name].push(`${tonguePlayer.nameHTML()} reminds ${this.players.length > 1 ? "everyone" : "themself"} to hydrate. They can't help recover ANY Harvest Fruit if they pass out from dehydration. `);
-            possibleActions[tonguePlayer.name].push(`${tonguePlayer.nameHTML()} rambles to ${this.players.length > 1 ? "everyone" : "themself"} about what THEY are going to do once they are fully Wasted. What sick stunts can you do with the fabric of reality once you know how to hack it? `);
+        if (eyesPlayer && living.includes(eyesPlayer)) {
+            possibleActions[eyesPlayer.title].push(`${eyesPlayer.nameHTML()} pokes around at all the nooks and crannies but doesn't really find anything.`);
+            possibleActions[eyesPlayer.title].push(`${eyesPlayer.nameHTML()} tries to figure out where the smell of ${smell} is coming from, but has no luck.`);
+            possibleActions[eyesPlayer.title].push(`${eyesPlayer.nameHTML()} tries to figure out where the sound of ${sound} is coming from, but has no luck.`);
         }
 
-        if (antiTonguePlayer && this.players.includes(antiTonguePlayer)) {
-            possibleActions[antiTonguePlayer.name].push(`${antiTonguePlayer.nameHTML()} doesn't really feel like talking to anyone. ${this.players.length > 1 ? "" : "They are glad to be alone."} `);
-            possibleActions[antiTonguePlayer.name].push(`${antiTonguePlayer.nameHTML()} is silent. `);
+        if (antiEyesPlayer && living.includes(antiEyesPlayer)) {
+            possibleActions[antiEyesPlayer.title].push(`${antiEyesPlayer.nameHTML()} barely even notices the smell of ${smell}.`);
+            possibleActions[antiEyesPlayer.title].push(`${antiEyesPlayer.nameHTML()} barely even notices the taste of ${taste} lingering in the air.`);
         }
 
-        if (armPlayer && this.players.includes(armPlayer)) {
-            possibleActions[armPlayer.name].push(`${armPlayer.nameHTML()} digs through various piles of junk on the floor, but doesn't find anything.`);
-            possibleActions[armPlayer.name].push(`${armPlayer.nameHTML()} clears away debris and old signs, making sure everything is clear.`);
+
+
+        if (tonguePlayer && living.includes(tonguePlayer)) {
+            possibleActions[tonguePlayer.title].push(`${tonguePlayer.nameHTML()} reminds ${this.players.length > 1 ? "everyone" : "themself"} to hydrate. They can't help recover ANY Harvest Fruit if they pass out from dehydration. `);
+            possibleActions[tonguePlayer.title].push(`${tonguePlayer.nameHTML()} rambles to ${this.players.length > 1 ? "everyone" : "themself"} about what THEY are going to do once they are fully Wasted. What sick stunts can you do with the fabric of reality once you know how to hack it? `);
         }
 
-        if (antiArmPlayer && this.players.includes(antiArmPlayer)) {
-            possibleActions[antiArmPlayer.name].push(`${antiArmPlayer.nameHTML()} doesn't see anything obvious sticking out and doesn't really feel like digging around in piles of junk.`);
-            possibleActions[antiArmPlayer.name].push(`${antiArmPlayer.nameHTML()} wishes that it wasn't so cluttered with debris and old signs everywhere.`);
+        if (antiTonguePlayer && living.includes(antiTonguePlayer)) {
+            possibleActions[antiTonguePlayer.title].push(`${antiTonguePlayer.nameHTML()} doesn't really feel like talking to anyone. ${this.players.length > 1 ? "" : "They are glad to be alone."} `);
+            possibleActions[antiTonguePlayer.title].push(`${antiTonguePlayer.nameHTML()} is silent. `);
         }
 
-        if (legPlayer && this.players.includes(legPlayer)) {
-            possibleActions[legPlayer.name].push(`${legPlayer.nameHTML()} bounces lighty on their feet, ready for some action. They can almost taste the ${taste} in the next room.`);
-            possibleActions[legPlayer.name].push(`${legPlayer.nameHTML()} is itching to find new areas of the Mall.`);
+        if (armPlayer && living.includes(armPlayer)) {
+            possibleActions[armPlayer.title].push(`${armPlayer.nameHTML()} digs through various piles of junk on the floor, but doesn't find anything.`);
+            possibleActions[armPlayer.title].push(`${armPlayer.nameHTML()} clears away debris and old signs, making sure everything is clear.`);
         }
 
-        if (antiLegPlayer && this.players.includes(antiLegPlayer)) {
-            possibleActions[antiLegPlayer.name].push(`${antiLegPlayer.nameHTML()} conserves their energy, sitting on a nearby bench for a while. They're surprised that it feels like ${feeling}.`);
-            possibleActions[antiLegPlayer.name].push(`${antiLegPlayer.nameHTML()} worries that they're not spending enough time in each area to make sure everything is found.`);
+        if (antiArmPlayer && living.includes(antiArmPlayer)) {
+            possibleActions[antiArmPlayer.title].push(`${antiArmPlayer.nameHTML()} doesn't see anything obvious sticking out and doesn't really feel like digging around in piles of junk.`);
+            possibleActions[antiArmPlayer.title].push(`${antiArmPlayer.nameHTML()} wishes that it wasn't so cluttered with debris and old signs everywhere.`);
+        }
+
+        if (legPlayer && living.includes(legPlayer)) {
+            possibleActions[legPlayer.title].push(`${legPlayer.nameHTML()} bounces lighty on their feet, ready for some action. They can almost taste the ${taste} in the next room.`);
+            possibleActions[legPlayer.title].push(`${legPlayer.nameHTML()} is itching to find new areas of the Mall.`);
+        }
+
+        if (antiLegPlayer && living.includes(antiLegPlayer)) {
+            possibleActions[antiLegPlayer.title].push(`${antiLegPlayer.nameHTML()} conserves their energy, sitting on a nearby bench for a while. They're surprised that it feels like ${feeling}.`);
+            possibleActions[antiLegPlayer.title].push(`${antiLegPlayer.nameHTML()} worries that they're not spending enough time in each area to make sure everything is found.`);
         }
 
 
@@ -287,11 +300,12 @@ class Location {
         let ret = "";
         //alright now that i know what everyone COULD do, what are they actually doing?
         //even tho we initialized all game players (to know what your role is) we are only getting local ones
-        for (let p of this.players) {
+        for (let p of living) {
             if (p.dead) {
                 break;//no more lively corpses
             }
-            let options = possibleActions[p.name];
+            let options = possibleActions[p.title];
+            !options && console.log("JR NOTE: options", options, possibleActions, p)
 
             if (p.isStartingToFeelCorruption()) {
                 options.push(`${p.nameHTML()} is clutching their stomach.`)

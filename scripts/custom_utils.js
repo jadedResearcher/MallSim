@@ -287,7 +287,7 @@ const renderSpriteForEntity = (parent, entity) => {
     hopefully_temporary_mapping[class_array[11]] = [-80, -416] //good
     hopefully_temporary_mapping[class_array[12]] = [-160, -416] //good
     hopefully_temporary_mapping[class_array[13]] = [-240, -416] //good
-
+    //https://ellienamored.neocities.org/rezamp/catalogue
     sprite.style.backgroundPositionX = hopefully_temporary_mapping[entity.sprite_class][0] + "px"
     sprite.style.backgroundPositionY = hopefully_temporary_mapping[entity.sprite_class][1] + "px"
 
