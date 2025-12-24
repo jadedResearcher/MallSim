@@ -1,5 +1,8 @@
 const dev_log = {}
 //don't forget to update west if you see something interesting in the simulation
+dev_log = ["12/24/2025"] = `all i want for christmas
+is to watch the eye killer show ppl her stabs
+what a magical season`
 
 dev_log["12/22/2025"] = `so it turns out
 its hard to calibrate

@@ -89,6 +89,9 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
         const item = new Item(`${personal_adj} ${object}`, `It's from the ${location.longer_name}!`, false)
+        if (item.isFruit) {
+            me.chosen_name = "Random Harvest Fruit Find!"
+        }
         ele.innerHTML = `${shopper.nameHTML()} dutifully performs the role of Shopper and purchases one ${item.name} from ${location.longer_name}! Luckily the Westerville Mall never fully understood what currency was, so they kinda just pick it up and take it! `;
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
         shopper.addItemToInventory(item, pickupEle);

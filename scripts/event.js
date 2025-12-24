@@ -604,7 +604,8 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
 
     //exactly 50/50 odds the Quatro Blade is mirrored or not
     if (game.rand.nextDouble() > 0.5) {
-        this.chosenName = "Quatro Blade Hid The Body"
+        me.chosen_name = "Quatro Blade Hid The Body"
+        console.log("JR NOTE: i am trying to change the name to", { name: me.chosenName, me })
         //not even an egg can save you here, she's stabbed you without even realizing she has
         //its how the Quatro Blade works
         removeItemOnce(location.players, artMurderVictim);
