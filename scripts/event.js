@@ -47,7 +47,7 @@ class Event {
         //clear out any previous name
         this.chosen_name = this.name;
         if (this.internalConditionCheck(game, location)) {
-            this.applyResult(game, location, parentEle);
+            this.applyResult(game, location, parentEle, this);
             game.event_list.push(this.chosen_name);//help AB a little
 
             return true;
@@ -61,7 +61,7 @@ class Event {
     //actually the horror writes itself
     //actually no i need game for changing things, nvm
     //instances will override this, that way checkconditions can be kept in this class unchanged
-    applyResult = (game, location, parent) => {
+    applyResult = (game, location, parent, me) => {
         const ele = createElementWithClassAndParent("div", parent);
         ele.innerText = "JR NOTE: whoops looks like i forgot to override the result for this event of: " + name;
 
@@ -93,7 +93,7 @@ const escapeMallinternalConditionCheck = (game, location) => {
     return false;
 }
 
-const escapeMallapplyResult = (game, location, parent) => {
+const escapeMallapplyResult = (game, location, parent, me) => {
 
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
@@ -142,7 +142,7 @@ noWayOutinternalConditionCheck = (game, location) => {
     return false;
 }
 
-noWayOutapplyResult = (game, location, parent) => {
+noWayOutapplyResult = (game, location, parent, me) => {
 
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
@@ -200,7 +200,7 @@ randomlyFindShoppingObjectinternalConditionCheck = (game, location) => {
 }
 
 //https://www.twitch.tv/directory/category/zampaniosimulator/videos/all
-randomlyFindShoppingObjectapplyResult = (game, location, parent) => {
+randomlyFindShoppingObjectapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
@@ -225,7 +225,7 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent) => {
 
     const oddsFruit = 0.15;
     if (shopper_highest_stat.value > VERY_HIGH_STAT_VALUE && game.rand.nextDouble() < oddsFruit) {
-        this.chosen_name = "Harvest Fruit Shopped!"
+        me.chosen_name = "Harvest Fruit Shopped!"
         const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`)
 
         if (game.trickster_closer_eating_all_fruit) {
@@ -257,14 +257,14 @@ There is a long, staticky sound as she slowly breathes out.
 <br><br>
 And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds of thousands of fruit, shoved and pulped and crushed as they fill every millimeter of space in the mall.
 `;
-            this.chosen_name = "Wasted Trickster Closer Apocalypse"
+            me.chosen_name = "Wasted Trickster Closer Apocalypse"
             game.fruitApocalypse = true;
             return;
         }
         let flavor = `They cannot believe their luck when they stumble upon a ${item.name}!`;
 
         if (shopper.corrupted) {
-            this.chosen_name = "Mannequin Ascension"
+            me.chosen_name = "Mannequin Ascension"
             flavor = `Nothing as mundane as a mouth yawns open across the blank ${shopper.mannequin_type} expanse of their face,  stretching impossibly wide over a single ${item.name} they happened to fall onto.`;
         } if (shopper_highest_stat.key === MIND_METAL_STAT) {
             flavor = `They finally put the pieces together and solve the Riddle of the Mall, revealing a single ${item.name} nestled in a seemingly empty locker.`;
@@ -315,7 +315,7 @@ corruptionEventinternalConditionCheck = (game, location) => {
 //fun fact
 //im deeply unsettled by mannequins
 //have been since i was a kid
-corruptionEventapplyResult = (game, location, parent) => {
+corruptionEventapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
@@ -367,7 +367,7 @@ yongkiKillinternalConditionCheck = (game, location) => {
 
 }
 
-yongkiKillapplyResult = (game, location, parent) => {
+yongkiKillapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
@@ -380,7 +380,7 @@ yongkiKillapplyResult = (game, location, parent) => {
     const formerNameHTML = redPaste.nameHTML();
     //yeah sure why not, he can kill mannequins (but not corpses)
     if (redPaste.corrupted) {
-        this.chosen_name = "Yongki Kill Mannequin!"
+        me.chosen_name = "Yongki Kill Mannequin!"
 
         redPaste.kill(`mangled, shards of ${redPaste.mannequin_type} on the ground, barely recognizable as ${redPaste.nameHTML()} except for scraps of clothing`);
 
@@ -424,7 +424,7 @@ tricksterCloserinternalConditionCheck = (game, location) => {
 }
 //http://farragofiction.com/ColonistsEyes5/
 
-tricksterCloserapplyResult = (game, location, parent) => {
+tricksterCloserapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
@@ -472,7 +472,7 @@ Shit.
                     <br><br>
                     Better that then let them discover the Harvest Fruit waiting within the Westerville Mall.
                     `;
-                this.chosen_name = "Trickster Closer Repelled";
+                me.chosen_name = "Trickster Closer Repelled";
                 game.trickster_closer_repelled = true;
             } else {
                 ele.innerHTML += `${mindPlayer.nameHTML()} tries to fight off the creature, but their blows simply go through the static. As the creature finishes the last loud, slurping bite of fruit in the ${location.name}. <br><br> ${mindPlayer.nameHTML()} gets a sinking feeling.`;
@@ -523,7 +523,7 @@ hydrationStationinternalConditionCheck = (game, location) => {
 
 }
 
-hydrationStationapplyResult = (game, location, parent) => {
+hydrationStationapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
@@ -542,7 +542,7 @@ hydrationStationapplyResult = (game, location, parent) => {
             player.sandSmoothByValue(3);//you drank the water. enjoy the new you. its more like you than you were before. guaranteed.
         } else {
             dehydrated_players.push(player);
-            this.chosen_name = "Refused Hydration :("
+            me.chosen_name = "Refused Hydration :("
 
             player.addCorruption(113); //i guess you don't need water, and we all know what THAT means. you're a mannequin, right? The Westerville Mall knows.
         }
@@ -558,7 +558,7 @@ hydrationStationapplyResult = (game, location, parent) => {
         hydration_story = ` ${arrayToHumanSentence(hydrated_players.map((i) => i.nameHTML())) + " drank the water eagerly."}`;
 
     } else {
-        this.chosen_name = "Everyone Refused Hydration :("
+        me.chosen_name = "Everyone Refused Hydration :("
 
         hydration_story = ` No one is dumb enough to try drinking the Mystery Mall Fluid.`;
     }
@@ -575,6 +575,79 @@ hydrationStationapplyResult = (game, location, parent) => {
 }
 
 const hydrationStation = makeEventSubType("Hydration Station", hydrationStationinternalConditionCheck, hydrationStationapplyResult);
+
+///////////////////////////////////
+
+const eyeKillerGetsYouconditionCheck = (game, location) => {
+    //lets be honest, she shows her stabs to mannequins too
+    //and boxes
+    //also she only kills those who are alone
+    //thats what hunting is for
+    //its so so scary to imagine a fair fight
+    if (location.livingPlayers().length === 1) {
+        return game.rand.nextDouble() > 0.75;
+    }
+    return false;
+}
+
+const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + this.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    const artMurderVictim = game.rand.pickFrom(location.players);
+    const formerName = artMurderVictim.nameHTML();
+    ele.innerHTML = `A single purple dot gleams from behind ${formerName}. The glint of a rusty razor, only the edge polished to a wicked sheen. `;
+
+    //exactly 50/50 odds the Quatro Blade is mirrored or not
+    if (game.rand.nextDouble() > 0.5) {
+        this.chosenName = "Quatro Blade Hid The Body"
+        //not even an egg can save you here, she's stabbed you without even realizing she has
+        //its how the Quatro Blade works
+        removeItemOnce(location.players, artMurderVictim);
+        removeItemOnce(game.players, artMurderVictim);
+        ele.innerHTML += `In a flash...there is nothing. No one was ever here. What happened to ${formerName}? They must have left the mall. Something sticky but unseen coats the ground. The Eye Killer silently lowers the Quatro Blade, safe at last.`;
+        if (artMurderVictim.hasEgg()) {
+            const egg = artMurderVictim.findEgg();
+            ele.innerHTML += `The Eye Killer is holding something. Its...${egg.name}? Where did she get that? ${egg.description}.`
+        }
+
+    } else {
+        if (artMurderVictim.hasEgg()) {
+            const egg = artMurderVictim.findEgg();
+            ele.innerHTML += `${formerName} whirls and thrusts out ...is that ${egg.name}? They know their cult lore well. Offer the one eyed monster in the vents an egg to barter for your life.  The Eye Killer accepts and vanishes without a trace.`
+        } else {
+            if (artMurderVictim.corrupted) {
+                me.chosen_name = "EyeKiller Destroy Mannequin!"
+
+                artMurderVictim.kill(`artfully aranged, pieces of ${artMurderVictim.mannequin_type} spelling out the words 'Stop Hunting Me' in large letters.`);
+
+            } else {
+                artMurderVictim.kill(`artfully arranged meat and blood and organs and bones and teeth spelling out 'Stop Hunting Me' in large letters, with the eyeless head of ${artMurderVictim.nameHTML()} delicately placed in the center.`);
+            }
+            ele.innerHTML += `The EyeKiller shows her stabs to ${formerName}. Repeatedly. You can't tear your eyes away from the glistening blade and the red blood and the meat that spews out from so so many cuts. Your eyes are drawn to each wound, as you helplessly catalog all the ways you COULD help, if you were in the same universe as the poor, poor victim. If there were just one fewer stab...  The Mirroed Quatro Blade whispers to you all the ways this death could be prevented, but alas... there is nothing you can do.`
+
+        }
+
+    }
+}
+
+const eyeKillerGetsYou = makeEventSubType(`Eye Killer Attack`, eyeKillerGetsYouconditionCheck, eyeKillerGetsYouapplyResult);
+
+
+///////////////////////////////
+
+
+
+
+
+
+
+
+
 
 
 

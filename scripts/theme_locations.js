@@ -48,7 +48,10 @@ const initThemeLocations = (rand) => {
     theme_locations[SUSHI].push(makeGenericThemedLocation(rand, SUSHI)); //parker
 
     //dont forget these are ARRAYS we are pushing into, can have more than one location per theme
-    theme_locations[HUNTING].push(makeGenericThemedLocation(rand, HUNTING, "Armory", "rgba(133,55,207)")); ////eye killer (this is NOT chill btw, you're literally a cultists)
+    theme_locations[HUNTING].push(makeGenericThemedLocation(rand, HUNTING, "Armory", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
+    theme_locations[KILLING].push(makeGenericThemedLocation(rand, KILLING, "Butcher", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
+    theme_locations[ART].push(makeGenericThemedLocation(rand, ART, "Craft Supply", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
+    theme_locations[TIME].push(makeGenericThemedLocation(rand, TIME, "Antiques", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
 
 
 }
@@ -70,7 +73,7 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
         return false;
     }
 
-    const applyResult = (game, location, parent) => {
+    const applyResult = (game, location, parent, me) => {
         const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
         const h3 = createElementWithClassAndParent("h3", cont);
@@ -100,6 +103,4 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
     return new Location(name, `${object} ${location}`, [theme_key], right_row, right_col, event_override, color_override ? color_override : "rgba(236,185,10)");
 
 }
-
-
 

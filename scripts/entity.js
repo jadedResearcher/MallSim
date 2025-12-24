@@ -325,6 +325,19 @@ class Entity {
         this.stats = getStatsFromThemes(this.theme_keys);
     }
 
+    //come on you know this is important
+    hasEgg = () => {
+        return (this.inventory.filter((i) => i.isEgg)).length > 0;
+    }
+
+    findEgg = () => {
+        for (let i of this.inventory) {
+            if (i.isEgg) {
+                return i;
+            }
+        }
+    }
+
     //roll for mannequin type
     //location will call this in a regular 'blank' event
     //(the conceit is if something interesting is happening to you, you resist longer)
