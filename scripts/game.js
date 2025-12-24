@@ -433,6 +433,10 @@ class Game {
     handleExpandingFoodCourt = (location) => {
         const food_court_strength = 0.3; // what are the odds it overwrites a previous location?
         const handleEast = (theme_key) => {
+            if (this.rand.nextDouble() > 0.75) {
+                this.handleAddingCorridorToEastOfLocation(location);
+                return;
+            }
             let right_row = location.row;
             let right_col = location.col + 1;
             const templates = theme_locations[theme_key];
@@ -510,6 +514,10 @@ class Game {
         }
 
         const handleSouth = (theme_key) => {
+            if (this.rand.nextDouble() > 0.75) {
+                this.handleAddingShopToSouthOfLocation(location);
+                return;
+            }
             let right_row = location.row + 1;
             let right_col = location.col;
             const templates = theme_locations[theme_key];

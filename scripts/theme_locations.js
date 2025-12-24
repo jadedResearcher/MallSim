@@ -54,15 +54,52 @@ const initThemeLocations = (rand) => {
 }
 
 //customize this later, this just speeds up part of the process
-const makeGenericThemedLocation = (rand, theme_key, location_override, color_override) => {
+const makeGenericThemedLocation = (rand, theme_key, location_override, color_override, event_override = []) => {
     //we aren't putting them anywhere yet, we're making a template
     const right_col = 0;
     const right_row = 0;
     const object = titleCase(all_themes[theme_key].pickPossibilityFor(OBJECT, rand));
+    const name = location_override ? location_override : titleCase(theme_key);
 
     const location = location_override ? location_override : titleCase(all_themes[theme_key].pickPossibilityFor(LOCATION, rand));
 
-    return new Location(location_override ? location_override : titleCase(theme_key), `${object} ${location}`, [theme_key], right_row, right_col, [], color_override ? color_override : "rgba(236,185,10)");
+    const conditionCheck = (game, location) => {
+        if (location.livingNonMannequinPlayers().length > 0) {
+            return game.rand.nextDouble() > 0.75;
+        }
+        return false;
+    }
+
+    const applyResult = (game, location, parent) => {
+        const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+        const h3 = createElementWithClassAndParent("h3", cont);
+        h3.innerText = "Important Event: " + this.name;
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+        //yes even if the mall was trying to give a human something
+        //a mannequin can take it
+        const shopper = game.rand.pickFrom(location.livingPlayers());
+        shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
+        const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, COMPLIMENT, true);
+        const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
+
+        const item = new Item(`${personal_adj} ${object}`, `It's from the ${location.longer_name}!`, false)
+        ele.innerHTML = `${shopper.nameHTML()} dutifully performs the role of Shopper and purchases one ${item.name} from ${location.longer_name}! Luckily the Westerville Mall never fully understood what currency was, so they kinda just pick it up and take it! `;
+        const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
+        shopper.addItemToInventory(item, pickupEle);
+
+
+    }
+
+
+
+    const themeShopping = makeEventSubType(`${name} Shopping!`, conditionCheck, applyResult);
+    event_override.push(themeShopping);
+    return new Location(name, `${object} ${location}`, [theme_key], right_row, right_col, event_override, color_override ? color_override : "rgba(236,185,10)");
 
 }
+
+
 

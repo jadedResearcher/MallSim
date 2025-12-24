@@ -198,6 +198,7 @@ randomlyFindShoppingObjectinternalConditionCheck = (game, location) => {
     return false;
 
 }
+
 //https://www.twitch.tv/directory/category/zampaniosimulator/videos/all
 randomlyFindShoppingObjectapplyResult = (game, location, parent) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
@@ -225,7 +226,7 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent) => {
     const oddsFruit = 0.15;
     if (shopper_highest_stat.value > VERY_HIGH_STAT_VALUE && game.rand.nextDouble() < oddsFruit) {
         this.chosen_name = "Harvest Fruit Shopped!"
-        const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`, true)
+        const item = new Item(`${personal_adj} Harvest Fruit`, `It's a Sacred Harvest Fruit! Eating this will cause anyone to Join the Loop and learn the Secrets Under Pinning Reality. (JR NOTE: lulz they'll become wasted just like me and the blorbos)`)
 
         if (game.trickster_closer_eating_all_fruit) {
             wasted_knowledge = `<span class="wasted-knowledge">Trickster Closer has devoured whole universes of fruit, did you really think you could stop her from eating just one mall, infinite though it is?</span>`

@@ -224,12 +224,21 @@ const randomEntity = (rand) => {
 class Item {
     name = "Perfectly Generic Object"
     description = "It is not HarvestFruit so it is probably useless."
+    //so many foods make zampanio treat you differently, come to think of it
     isFruit = false; //the sales beast LOVES fruit, but also Zampanio has made it so all fruit within the mall is Harvest Fruit (which you can eat to Join the Loop/Become Wasted)
-
-    constructor(name, description, isFruit) {
+    isEgg = false; //look, if it SAYS egg it IS egg and the eye killer knows this
+    constructor(name, description) {
         this.name = name;
         this.description = description;
-        this.isFruit = isFruit;
+        const nameCheck = this.name.toUpperCase();
+        if (nameCheck.includes("FRUIT")) {
+            this.isFruit = true;
+            this.name = titleCase(nameCheck.replaceAll("FRUIT", "HARVEST FRUIT"));
+        }
+
+        if (nameCheck.includes("EGG")) {
+            this.isEgg = true;
+        }
     }
 }
 

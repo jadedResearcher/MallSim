@@ -2111,21 +2111,21 @@ const initLocations = () => {
 
 const initObjects = () => {
 
-    object_possibilities[BAKERY] = ["bread", "roll", "baguette", "muffin", "slice", "pastries", "piece"];
-    object_possibilities[BREAKFAST] = ["pancakes", "bacon", "eggs", "waffles", "toast", "french toast", "scramble"];
+    object_possibilities[BAKERY] = ["fruit pie", "bread", "roll", "baguette", "muffin", "slice", "pastries", "piece"];
+    object_possibilities[BREAKFAST] = ["fruit cup", "pancakes", "bacon", "eggs", "waffles", "toast", "french toast", "scramble", "fried egg", "scambled egg", "over easy egg", "sunny-side up egg", "poached egg"];
     object_possibilities[BURGERS] = ["onion ring", "cheese", "fries", "burger", "fries", "shake", "tots", "milkshake", "butt", "ribs", "chicken", "pork"];
     object_possibilities[CHICKEN] = ["drumstick", "leg", "fry", "chicken", "wing", "thigh", "chicken breast", "tender", "fries"];
     object_possibilities[COFFEE] = ["coffee", "americano", "mocha", "espresso", "java", "bean", "tea", "cafe", "latte", "cappuccino", "mug"];
-    object_possibilities[DESSERTS] = ["pie", "cake", "cupcake", "ice cream", "snow cone", "gelato", "sherbert", "sorbet", "italian ice", "custard", "frozen yogurt", "milkshake", "treat"];
-    object_possibilities[DINER] = ["casserole", "soup", "salad", "stew", "special", "burger", "fries", "potato", "wrap", "bowl", "soup", "plate", "special"];
+    object_possibilities[DESSERTS] = ["fruit cake", "pie", "cake", "cupcake", "ice cream", "snow cone", "gelato", "sherbert", "sorbet", "italian ice", "custard", "frozen yogurt", "milkshake", "treat"];
+    object_possibilities[DINER] = ["fried egg", "scambled egg", "over easy egg", "sunny-side up egg", "poached egg", "casserole", "soup", "salad", "stew", "special", "burger", "fries", "potato", "wrap", "bowl", "soup", "plate", "special"];
     object_possibilities[ITALIAN] = ["ravioli", "pasta", "spaghetti", "lasagna", "parmesan", "ziti", "penne", "noodles", "tomato", "eggplant"];
     object_possibilities[MEXICAN] = ["bean", "torta", "cubano", "nacho", "tostada", "enchilada", "mole", "taco", "burrito", "fajita", "arepa", "empanada", "taquito", "quesadilla", "salsa", "dip"];
     object_possibilities[PIZZA] = ["slice", "pizza", "cheese", "mozarella", "calzone", "stromboli", "sandwich"];
     object_possibilities[PREMIUM] = ["lamb", "veal", "lobster", "crab", "fresh baked bread", "potato", "steak", "chop"];
-    object_possibilities[SALAD] = ["salad", "fry", "soup", "breadbowl"];
-    object_possibilities[SANDWICHES] = ["wrap", "pita", "sandwich", "hoagie", "sub"];
+    object_possibilities[SALAD] = ["fruit salad", "egg salad", "salad", "fry", "soup", "breadbowl"];
+    object_possibilities[SANDWICHES] = ["egg sandwich", "wrap", "pita", "sandwich", "hoagie", "sub"];
     object_possibilities[SEAFOOD] = ["fry", "shrimp", "fish", "crab", "seafood", "lobster", "boil", "tilapia", "hush puppies"];
-    object_possibilities[SUSHI] = ["sushi", "ramen", "udon", "katsu", "salad", "soup", "satay", "curry", "hibachi", "roll", "bowl", "fry", "sashimi", "nigiri", "ball", "tempura", "dumpling", "rice", "gyoza", "fried rice", "noodle"];
+    object_possibilities[SUSHI] = ["rice with egg", "sushi", "ramen", "udon", "katsu", "salad", "soup", "satay", "curry", "hibachi", "roll", "bowl", "fry", "sashimi", "nigiri", "ball", "tempura", "dumpling", "rice", "gyoza", "fried rice", "noodle"];
 
     object_possibilities[ART] = ["chisel", "paint brush", "paint pot", "sponge", "apron", "canvas"];
     object_possibilities[TECHNOLOGY] = ["computer", "lap-top", "phone", "tablet"];

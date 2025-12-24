@@ -31,19 +31,13 @@ const randomThemedShop = (rand, themes, right_row, right_col) => {
 
     for (let theme of themes) {
         if (theme_locations[theme] && theme_locations[theme].length > 0) {
-            console.log("JR NOTE: found theme before", foundTemplates)
             foundTemplates = foundTemplates.concat(theme_locations[theme])
-            console.log("JR NOTE: found theme after", foundTemplates)
-
         }
     }
 
-    console.log("JR NOTE: themes found were", foundTemplates)
     if (foundTemplates.length > 0) {
         const ret = rand.pickFrom(foundTemplates).cloneIntoLocation(right_row, right_col);
         ret.theme_keys = themes; //don't throw away all the other themes
-        console.log("JR NOTE: spawning a template", ret);
-
         return ret;
     }
 }
@@ -53,11 +47,11 @@ const randomShop = (rand, themes, right_row, right_col) => {
 
     const personal_adj = pickARandomThemeFromListAndGrabKey(rand, themes, ADJ, true);
 
-    if (rand.nextDouble() > 0.75) {
+    if (rand.nextDouble() > 0.95) {
         return new Location(`Smoothies`, `${personal_adj} Smoothies`, themes, right_row, right_col, [tricksterCloser.clone()], "rgba(161,0,66)");
     }
 
-    if (rand.nextDouble() > 0.75) {
+    if (rand.nextDouble() > 0.95) {
         const ret = new Location(`Food Court`, `${personal_adj} Food Court Entrance`, food_keys, right_row, right_col, [], "rgba(236,185,10)");
         ret.isFoodCourt = true; //starts a food court spawning chain
         return ret;
@@ -108,7 +102,7 @@ class Location {
         }
         this.theme_keys = theme_keys;
     }
-
+    //http://knucklessux.com/PuzzleBox/Secrets/misc/Zampanio_AP_Test_Sampler_by_SurvivorOfAvalances.pdf
     //need to know the correct location because otherwise corruption will be wrong
     cloneIntoLocation = (row, col) => {
         let cloned_events = this.events.map((e) => e.clone());
