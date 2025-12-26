@@ -1,4 +1,7 @@
 const dev_log = {}
+//http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
+
+
 //don't forget to update west if you see something interesting in the simulation
 dev_log = ["12/24/2025"] = `all i want for christmas
 is to watch the eye killer show ppl her stabs

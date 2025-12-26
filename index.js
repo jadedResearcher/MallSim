@@ -1,6 +1,8 @@
 let game;
 window.onload = () => {
     initThemes();
+    grabEyes();
+    grabCodeComments();
     load();
     debug();
 

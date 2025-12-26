@@ -641,6 +641,39 @@ const eyeKillerGetsYou = makeEventSubType(`Eye Killer Attack`, eyeKillerGetsYouc
 
 ///////////////////////////////
 
+///////////////////////////////////
+
+const wastesDoBullshitConditionCheck = (game, location) => {
+
+    if (location.livingWastedPlayers().length > 0) {
+        return game.rand.nextDouble() > 0.75 && eyeImages.length > 0 && ominousCodeComments.length > 0;
+    }
+    return false;
+}
+
+const wastesDoBullshitapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + this.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    const chosen = game.rand.pickFrom(location.livingWastedPlayers());
+    ele.innerHTML = `${chosen.nameHTML()} is rooting around in the Layers of Unreality Unseen By Most and boggles vacantly at their finding. `;
+    //eyes, code comments, whatever
+    if (game.rand.nextDouble() > 0.5) {
+        //lol 666
+        const file = game.rand.pickFrom(grabEyesForThemeKey(game.rand.pickFrom(chosen.theme_keys)));
+
+        ele.innerHTML += `<img alt=${file} title=${file} src='${file}'>`;
+    } else {
+        ele.innerHTML += `<div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div>`;
+    }
+}
+
+const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshitConditionCheck, wastesDoBullshitapplyResult);
+
 
 
 
@@ -653,4 +686,4 @@ const eyeKillerGetsYou = makeEventSubType(`Eye Killer Attack`, eyeKillerGetsYouc
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, yongkiKill, hydrationStation]
+const generalEvents = [corruptionEvent, noWayOut, yongkiKill, wastesDoBullshit, hydrationStation]

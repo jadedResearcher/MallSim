@@ -130,6 +130,16 @@ class Location {
         return ret;
     }
 
+    livingWastedPlayers = () => {
+        let ret = [];
+        for (let player of this.players) {
+            if (!player.dead && player.wasted) {
+                ret.push(player)
+            }
+        }
+        return ret;
+    }
+
     livingPlayers = () => {
         let ret = [];
         for (let player of this.players) {

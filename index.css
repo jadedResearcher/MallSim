@@ -451,6 +451,11 @@ button {
     margin-bottom: 13px;
     max-height: 200px;
     max-width: 100%;
+    cursor: pointer;
+  }
+
+  img:hover {
+    transform: scale(2.0);
   }
 }
 
@@ -492,6 +497,14 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
+}
+
+.ominous-code-comment {
+  font-family: 'Courier New', Courier, monospace;
+  color: red;
+  background-color: #B6B6B6;
+  border: 1px dotted red;
+  padding: 31px;
 }
 
 .entity-sprite {
