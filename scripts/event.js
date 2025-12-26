@@ -759,7 +759,14 @@ const wastesDoBullshitapplyResult = (game, location, parent, me) => {
 
         ele.innerHTML += `<img alt=${file} title=${file} src='${file}'>`;
     } else {
-        ele.innerHTML += `<div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div>`;
+        if (game.rand.nextDouble() > 0.5) {
+            ele.innerHTML += `<div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div>`;
+
+        } else {
+            const log = game.rand.pickFrom(Object.keys(dev_log))
+            ele.innerHTML += `<div class='ominous-code-comment'><b>Dev Log ${log}</b>: ${dev_log[log].split("\n").map((i) => `<div>${i}</div>`).join("")}</div>`;
+
+        }
     }
 }
 

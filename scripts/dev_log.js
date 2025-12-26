@@ -3,7 +3,16 @@ const dev_log = {}
 
 
 //don't forget to update west if you see something interesting in the simulation
-dev_log = ["12/24/2025"] = `all i want for christmas
+
+dev_log["12/25/2025"] = `merry reaping day or whatever
+wait no thats in august
+point is
+i spent all day coding
+wastes now actually do something appropriately meta
+parker is allowed to give out harvest fruit if he likes you
+all is right with the world`;
+
+dev_log["12/24/2025"] = `all i want for christmas
 is to watch the eye killer show ppl her stabs
 what a magical season`
 

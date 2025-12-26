@@ -104,7 +104,7 @@ const filterEyesForWordArrayOr = (wordArray) => {
     console.log("JR NOTE: searching for words", wordArray)
     return eyeImages.filter((eye) => {
         for (let word of wordArray) {
-            if (eye.toUpperCase().includes(word.toUpperCase())) {
+            if (word && eye.toUpperCase().includes(word.toUpperCase())) {
                 return true;
             }
         }
