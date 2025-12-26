@@ -282,7 +282,7 @@ And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
         shopper.addItemToInventory(item, pickupEle);
     } else {
-        const item = new Item(`${personal_adj} ${object}`, `It's a random item that JR hasn't fleshed out yet!`, false)
+        const item = new Item(`${personal_adj} ${object}`, `${shopper.nameHTML()} found this in the ${location.longer_name}!`, false)
 
         ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!).  `;
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
@@ -441,7 +441,7 @@ tricksterCloserapplyResult = (game, location, parent, me) => {
     if (living.length === 0) {
         const dead = location.deadPlayers();
         const chosen = game.rand.pickFrom(dead);
-        ele.innerHTML = `A shifting rainbow nightmare figure of static dimly illuminates ${chosen.nameHTML()} , paying it no attention. Instead it is absolutely devouring all the fruit in the ${location.name}. Luckily, it all seems to be just be regular fruit, none of the Holy Harvest varietal. <br><br>As it messily swallows the last bite, it flickers out of existence, searching for more.`;
+        ele.innerHTML = `A shifting rainbow nightmare figure of static dimly illuminates ${chosen.nameHTML()} , paying it no attention. Instead it is absolutely devouring all the fruit in the ${location.longer_name}. Luckily, it all seems to be just be regular fruit, none of the Holy Harvest varietal. <br><br>As it messily swallows the last bite, it flickers out of existence, searching for more.`;
         game.trickster_closer_eating_all_fruit = true;
     } else {
         const mindPlayer = getPartyHighestMind(living);
@@ -475,13 +475,13 @@ Shit.
                 me.chosen_name = "Trickster Closer Repelled";
                 game.trickster_closer_repelled = true;
             } else {
-                ele.innerHTML += `${mindPlayer.nameHTML()} tries to fight off the creature, but their blows simply go through the static. As the creature finishes the last loud, slurping bite of fruit in the ${location.name}. <br><br> ${mindPlayer.nameHTML()} gets a sinking feeling.`;
+                ele.innerHTML += `${mindPlayer.nameHTML()} tries to fight off the creature, but their blows simply go through the static. As the creature finishes the last loud, slurping bite of fruit in the ${location.longer_name}. <br><br> ${mindPlayer.nameHTML()} gets a sinking feeling.`;
                 game.trickster_closer_eating_all_fruit = true;
 
             }
 
         } else {
-            ele.innerHTML += `${mindPlayer.nameHTML()} tries to fight off the creature, but their blows simply go through the static. As the creature finishes the last loud, slurping bite of fruit in the ${location.name}. <br><br> ${mindPlayer.nameHTML()} gets a sinking feeling.`;
+            ele.innerHTML += `${mindPlayer.nameHTML()} tries to fight off the creature, but their blows simply go through the static. As the creature finishes the last loud, slurping bite of fruit in the ${location.longer_name}. <br><br> ${mindPlayer.nameHTML()} gets a sinking feeling.`;
             game.trickster_closer_eating_all_fruit = true;
 
         }
@@ -637,6 +637,97 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
 }
 
 const eyeKillerGetsYou = makeEventSubType(`Eye Killer Attack`, eyeKillerGetsYouconditionCheck, eyeKillerGetsYouapplyResult);
+
+
+///////////////////////////////
+
+
+///////////////////////////////////
+
+const parkerCheck = (game, location) => {
+    const eyes = getPartyHighestEyes(location.livingNonMannequinPlayers())
+    //you need to at least be somewhat obesrvant to spot the crack in the wall and hear the sounds
+    //if parker is too common, just up the stat gate
+    if (eyes && eyes.stats[EYES_METAL_STAT] > MEDIUM_STAT_VALUE) {
+        return game.rand.nextDouble() > 0.75;
+    }
+    return false;
+}
+
+const parkerEncounterapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + this.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    const player = getPartyHighestEyes(location.livingNonMannequinPlayers())
+    //        ele.innerHTML+=`<p></p>`;
+
+    ele.innerHTML += `<p>${player.nameHTML()} gingerly explores the ${location.longer_name}, hearing the unmistakable lip smacking sounds of something being eaten.</p>
+<p>They track the noises down to a crack in the wall, a single eye dimly visible within.</p>
+`;
+
+    if (player.stats[LEGS_METAL_STAT > HIGH_STAT_VALUE]) {
+        ele.innerHTML += `<p> ${player.nameHTML()}  fucking runs. There is nothing worth finding out here.</p>`;
+        return;
+    }
+
+    if (player.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
+        me.chosen_name = "Parker Befriended"
+        const playerFormerName = player.nameHTML();
+
+        const ele2 = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+        ele.innerHTML += `<p>The single eye widens, and before anything hasty can happen, ${playerFormerName} identifies themself and asks if they mysterious wall-person is eating something tasty.
+
+</p><p>A dry voice, cracking and raspy with disuse agrees that this Sushi is pretty good, just like their japanese animes. 
+
+</p><p>They warn ${playerFormerName} that no one is gonna be happy to find CULTISTS infesting the place, but they're fine by him.  
+
+</p><p>He gets being a fan of something bigger than oneself. 
+
+</p><p>The lone visible eye within the wall tears up a bit and NAME listens to a fifteen minute ramble about how great Hatsune Miku is and how if the Harvest could sing, she'd probably sound like Miku because of her TV head.
+
+</p><p>When he finishes, he thrusts a hand out of the wall, the drywall of it parting like dust and offers NAME a single DUSTY HARVEST FRUIT.
+</p>`;
+        player.addItemToInventory(new Item("Dusty Harvest Fruit", `The mysterious wall man, who called himself 'Parker', handed this to ${player.nameHTML()}`), ele2)
+        return;
+    }
+
+    ele.innerHTML += `<p>There is a deafeningly loud BANG in the enclosed area and ${player.nameHTML()} is disoriented. </p>`;
+
+    const whatHappend = game.rand.nextDouble();
+    if (whatHappend > 0.6) {
+        const target = game.rand.pickFrom(game.livingPlayers());
+        const targetFormerName = target.nameHTML();
+        target.kill("covered in blood, with a ragged hole ripped out of their chest by a high calibur bullet.")
+        if (target != player) {
+            me.chosen_name = "Gun-Tan Kills A Random Player"
+
+            ele.innerHTML += `<p>When they finally stop reeling, ${player.nameHTML()} can't find the eye again, and nothing else seems useful at the ${location.longer_name}. Time to move on.</p>
+            <p>Somewhere else, ${targetFormerName} lies bleeding on the ground. There is blood everywhere, and a hole gushing blood directly out of their heart....All goes dark, and they die, without ever knowing why.</p>`;
+        } else {
+            me.chosen_name = "Gun-Tan Kills In Line Of Sight"
+
+            ele.innerHTML += `<p>
+When they finally understand what happened, it is far too late. There is blood everywhere, and a hole gushing blood directly out of their heart...All goes dark, and they die.
+</p>`;
+        }
+        //killed a living member of the party
+    } else {
+        me.chosen_name = "Gun-Tan Kills A Random Human"
+        //who knows who they killed, not someone in the mall lol
+        ele.innerHTML += `<p>When they finally stop reeling, ${player.nameHTML()} can't find the eye again, and nothing else seems useful at the ${location.longer_name}. Time to move on.</p>`;
+
+    }
+
+
+
+
+}
+
+const parkerEncounter = makeEventSubType(`Parker Encounter`, parkerCheck, parkerEncounterapplyResult);
 
 
 ///////////////////////////////

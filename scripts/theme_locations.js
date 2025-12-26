@@ -33,7 +33,7 @@ const initThemeLocations = (rand) => {
     */
     theme_locations[BAKERY].push(makeGenericThemedLocation(rand, BAKERY)); //DEVONA AND NEVILLE
     theme_locations[BURGERS].push(makeGenericThemedLocation(rand, BURGERS)); //CFO
-    theme_locations[BREAKFAST].push(makeGenericThemedLocation(rand, BREAKFAST)); //captain
+    theme_locations[BREAKFAST].push(makeGenericThemedLocation(rand, BREAKFAST, undefined, [eyeKillerGetsYou])); //captain
     theme_locations[CHICKEN].push(makeGenericThemedLocation(rand, CHICKEN)); // camille
     theme_locations[COFFEE].push(makeGenericThemedLocation(rand, COFFEE)); //WIBBY
     theme_locations[DESSERTS].push(makeGenericThemedLocation(rand, PIZZA)); //YONGKI
@@ -45,16 +45,23 @@ const initThemeLocations = (rand) => {
     theme_locations[SALAD].push(makeGenericThemedLocation(rand, SALAD)); //doc slaughter
     theme_locations[SANDWICHES].push(makeGenericThemedLocation(rand, SANDWICHES)); //ria conspiracy boarding on is a hotdog a sandwich
     theme_locations[SEAFOOD].push(makeGenericThemedLocation(rand, SEAFOOD)); //vik
-    theme_locations[SUSHI].push(makeGenericThemedLocation(rand, SUSHI)); //parker
-
+    theme_locations[SUSHI].push(makeGenericThemedLocation(rand, SUSHI, undefined, undefined, [parkerEncounter])); //parker
+    //"rgba(132,90,20)"
     //dont forget these are ARRAYS we are pushing into, can have more than one location per theme
     theme_locations[HUNTING].push(makeGenericThemedLocation(rand, HUNTING, "Armory", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
-    theme_locations[KILLING].push(makeGenericThemedLocation(rand, KILLING, "Butcher", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
+    theme_locations[KILLING].push(makeGenericThemedLocation(rand, KILLING, "Butcher", "rgba(133,55,207)", [parkerEncounter, eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[ART].push(makeGenericThemedLocation(rand, ART, "Craft Supply", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[TIME].push(makeGenericThemedLocation(rand, TIME, "Antiques", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
 
+    theme_locations[BURIED].push(makeGenericThemedLocation(rand, BURIED, "Mining", "rgba(132,90,20)", [parkerEncounter]));
+    theme_locations[MUSIC].push(makeGenericThemedLocation(rand, MUSIC, "Records", "rgba(132,90,20)", [parkerEncounter]));
+    theme_locations[SPYING].push(makeGenericThemedLocation(rand, SPYING, "Cameras", "rgba(132,90,20)", [parkerEncounter]));
+    theme_locations[SPACE].push(makeGenericThemedLocation(rand, SPACE, "Planetarium", "rgba(132,90,20)", [parkerEncounter]));
+    theme_locations[STEALING].push(makeGenericThemedLocation(rand, STEALING, "Bank", "rgba(132,90,20)", [parkerEncounter]));
+
 
 }
+
 
 //customize this later, this just speeds up part of the process
 const makeGenericThemedLocation = (rand, theme_key, location_override, color_override, event_override = []) => {
@@ -88,7 +95,7 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
         const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, COMPLIMENT, true);
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
-        const item = new Item(`${personal_adj} ${object}`, `It's from the ${location.longer_name}!`, false)
+        const item = new Item(`${personal_adj} ${object}`, `It's clearly labeled as from the ${location.longer_name}!`, false)
         if (item.isFruit) {
             me.chosen_name = "Random Harvest Fruit Find!"
         }

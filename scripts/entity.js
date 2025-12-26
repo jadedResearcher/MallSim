@@ -530,9 +530,10 @@ class Entity {
     addItemToInventory = (item, ele) => {
         //automatically eat it if it would waste you
         if (!this.wasted && item.isFruit) {
+            const formerName = this.nameHTML();
             this.wasted = true;
             this.joinTheLoop(ele);
-            ele.innerHTML = ` ${this.getName()} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
+            ele.innerHTML = ` ${formerName} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
         } else if (this.wasted && item.isFruit) {
             ele.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
 

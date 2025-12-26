@@ -257,6 +257,16 @@ class Game {
 
     }
 
+    livingPlayers = () => {
+        let ret = [];
+        for (let player of this.players) {
+            if (!player.dead) {
+                ret.push(player)
+            }
+        }
+        return ret;
+    }
+
     eventTick = (parent, locations) => {
         if (this.finished) {
             return;
@@ -726,7 +736,7 @@ class Game {
         if (corpses.length > 0) {
             for (let corpse of corpses) {
                 const detail2 = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-                detail2.innerHTML = `The ${corpse.nameHTML()} is ${corpse.state_of_corpse}`;
+                detail2.innerHTML = `${corpse.nameHTML()} is ${corpse.state_of_corpse}`;
             }
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
 
