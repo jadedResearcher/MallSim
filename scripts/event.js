@@ -82,6 +82,82 @@ class Event {
 
 
 ////////////////////////////////////////////////////////////////////////////
+//this always goes well when it happens in movies
+//hey gang lets split the party because of petty infighting while we're in a fucked up and dangerous place :) :) :)
+const dramaticStormOffinternalConditionCheck = (game, location) => {
+    for (let player of location.livingPlayers()) {
+        for (let other_player of location.livingPlayers()) {
+            if (player.doYouHateThisPerson(other_player)) {
+                return game.rand.nextDouble() > 0.75; //at least one
+            }
+        }
+    }
+    return false;
+}
+
+const dramaticStormOffapplyResult = (game, location, parent, me) => {
+
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const dramaPairs = [];
+    for (let player of location.livingPlayers()) {
+        for (let other_player of location.livingPlayers()) {
+            if (player.doYouHateThisPerson(other_player)) {
+                dramaPairs.push([player, other_player]);
+            }
+        }
+    }
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + this.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    const north = getNorth(game.map, location.row, location.col)
+    const south = getSouth(game.map, location.row, location.col)
+    const east = getEast(game.map, location.row, location.col)
+    const west = getWest(game.map, location.row, location.col)
+    const options = [];
+
+    if (north) {
+        options.push(north)
+    }
+
+    if (south) {
+        options.push(south)
+    }
+
+    if (east) {
+        options.push(east)
+    }
+
+    if (west) {
+        options.push(west)
+    }
+
+    if (options.length === 0) {
+        //im having fun
+        ele.innerHTML = `Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT?WHY WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT???????????????????????????????????????`;
+    }
+
+    for (let pair of dramaPairs) {
+        const leaving = pair[0];
+        const target = pair[1];
+        const chosen = game.rand.pickFrom(options);
+        chosen.movePlayerInto(leaving);
+        leaving.changeRelationshipWithPlayerBy(-13)
+        target.changeRelationshipWithPlayerBy(-13);
+        const explanation = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        explanation.innerHTML = `${leaving.nameHTML()} has had enough of ${target.nameHTML()}'s bullshit. They storm off to the ${chosen.longer_name} without any real plan.`;
+
+    }
+
+
+}
+
+const dramaticStormOff = makeEventSubType("Dramatic Storm Off", dramaticStormOffinternalConditionCheck, dramaticStormOffapplyResult)
+
+
+
+////////////////////////////////////////////////////////////////////////////
 //is there at least one person ready to escape?
 const escapeMallinternalConditionCheck = (game, location) => {
     for (let player of location.livingPlayers()) {
@@ -795,4 +871,4 @@ const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshit
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, yongkiKill, wastesDoBullshit, hydrationStation]
+const generalEvents = [corruptionEvent, noWayOut, yongkiKill, dramaticStormOff, wastesDoBullshit, hydrationStation]

@@ -270,10 +270,8 @@ class Relationship {
 
     //whatever direction it already is, keep going
     deepenRelationship = () => {
-        console.log("JR NOTE: deepen relationship before", this.value)
         //dividing it by itself gets it to be 1, then taking only one of the absolute values keeps the sign
         this.value += this.value / Math.abs(this.value);
-        console.log("JR NOTE: deepen relationship after", this.value)
 
     }
 
@@ -482,10 +480,24 @@ class Entity {
         }
     }
 
+    doYouHateThisPerson = (person) => {
+        console.log("JR NOTE: doYouHateThisPerson", this.relationships, person)
+        if (!this.relationships[person.title]) {
+            return false;
+        }
+        return this.relationships[person.title].value < STRONG_RELATIONSHIP_VALUE * -1;
+    }
+
+    changeRelationshipWithPlayerBy = (player, value) => {
+        if (!this.relationships[player.title]) {
+            return false;
+        }
+        this.relationships[player.title].value += value;
+    }
+
     hateEveryoneALittleBitMore = () => {
         for (let relationship of Object.values(this.relationships)) {
-            relationship.value += -1 * (relationship.value / 20) - 13;
-            console.log("JR NOTE: irritbably lowering all relationships by 13", relationship.value)
+            relationship.value += -1 * (relationship.value / 20) - 2;
         }
     }
     //good or bad, i don't care right now
@@ -694,7 +706,7 @@ class Entity {
         ele.innerHTML = `When you weren't looking, somehow ${this.nameHTML()} is in the ${chosen.longer_name} [${chosen.row},${chosen.col}], crumpled over a pile of junk.`;
         if (currentLocation != chosen) {
             chosen.pending_players.push(this);
-            this.pending_location = chosenLocation;
+            this.pending_location = chosen;
         }
     }
 
@@ -758,7 +770,7 @@ class Entity {
 
         const chooseEast = () => {
 
-            if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.25)) {
+            if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME && east.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.nameHTML()} decides to continue walking down the mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else if (east.name === CORRIDOR_NAME) {
@@ -811,19 +823,14 @@ class Entity {
         const companions = currentLocation.livingPlayers();
         //ignore yourself
         if (companions.length > 1) {
-            console.log("JR NOTE: i am not alone", this)
             //is there anyone here you feel strongly about (good or bad)?
             //do they already have a pending_location?
             //if so, copy it from them without figuring out where you want to go on your own
             //only leave them if you decide you don't care anymore
             for (let companion of companions) {
-                console.log("JR NOTE: checking companion", companion)
                 if (companion !== this && companion.pending_location) {
-                    console.log("JR NOTE: someone in my location has a plan of where to go", companion)
                     const relationship = this.getStrongRelationshipOrNothing(companion);
-                    console.log("JR NOTE: relationship is", relationship)
                     if (relationship) {
-                        console.log("JR NOTE: I feel strongly enough to follow someone who went before me", companion);
                         chosenLocation = companion.pending_location;
                         ele.innerHTML = `${this.nameHTML()} decides to stick with ${companion.nameHTML()}. ${relationship.value > 0 ? "It just feels safer that way." : "They don't trust them as far as they can throw them and like HELL they're letting them out of their sight."}`;
 

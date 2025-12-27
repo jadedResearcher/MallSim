@@ -188,6 +188,10 @@ class Game {
         if (this.finished) {
             return;
         }
+        if (this.initial_player_count < this.players.length) {
+            //jr note: its WAY too easy for this mall to get flooded with clones rip
+            this.event_list.push("WARNING: IS THERE CLONING?")
+        }
         if (this.isItEpilogueTime()) {
             this.finished = true;
             this.handleEpilogue(parent);
@@ -214,7 +218,7 @@ class Game {
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
         const header = createElementWithClassAndParent("h2", tick_container, "story-title");
         header.innerText = `Movement ${this.current_tick}`;
-
+        let players_moving = 0;
         //for each location
         //do interaction scene of everyone inside (if more than one)
         //and have players decide whether to move or not individually
@@ -229,11 +233,10 @@ class Game {
                 const west = getWest(this.map, location.row, location.col)
                 const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                console.log("JR NOTE: players in this location are deciding where to go", location.longer_name)
                 for (let player of livingPlayers) {
+                    players_moving++;
                     player.interactWithPlayer(location.players, interaction_phrase);
                     player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
-                    console.log("JR NOTE: after deciding where to go, pending location is", { player, location: player.pending_location })
                 }
 
             }
@@ -257,6 +260,11 @@ class Game {
         //if you weren't going to move, make sure you get rid of your pending location anyways
         for (let player of this.players) {
             player.pending_location = undefined;
+        }
+
+        if (this.initial_player_count < players_moving) {
+            //jr note: its WAY too easy for this mall to get flooded with clones rip
+            this.event_list.push("WARNING: ARE PLAYERS SIMULTANEOUSLY IN MULTIPLE LOCATIONS?")
         }
         this.renderMall(tick_container);
 
