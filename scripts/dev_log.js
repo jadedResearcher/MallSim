@@ -4,6 +4,26 @@ const dev_log = {}
 
 //don't forget to update west if you see something interesting in the simulation
 
+dev_log["12/26/25 2"] = `haha
+turns out loving your family
+turns you into an implaccable army of clones
+who knew
+please stop flooding every free inch of the mall with your unending mass
+river will get jealous`
+
+
+
+
+dev_log["12/26/25"] = `merry whatever
+my present to you
+is spending time with your loved ones
+no longer rapidly and inevitably
+drains all emotion from your eyes
+making you no longer care if they live or die
+sorry for not noticing that sooner lol
+i was WONDERING why players were abandoning each other so quickly`
+
+
 dev_log["12/25/2025"] = `merry reaping day or whatever
 wait no thats in august
 point is

@@ -84,7 +84,7 @@ class Event {
 ////////////////////////////////////////////////////////////////////////////
 //is there at least one person ready to escape?
 const escapeMallinternalConditionCheck = (game, location) => {
-    for (let player of location.players) {
+    for (let player of location.livingPlayers()) {
 
         if (player.isStartingToFeelCorruption() && !player.corrupted) {
             return true;
@@ -104,14 +104,25 @@ const escapeMallapplyResult = (game, location, parent, me) => {
 
     //everyone ready to leave can leave together
     const leaving = [];
+    let corpses = [];
+    let living = [];
     for (let player of location.players) {
         if (player.isStartingToFeelCorruption() && !player.corrupted) {
             leaving.push(player);
+            if (player.dead) {
+                corpses.push(player);
+            } else {
+                living.push(player)
+            }
             removeItemOnce(location.players, player);
             removeItemOnce(game.players, player);
         }
     }
-    ele.innerHTML = `${arrayToHumanSentence(leaving.map((n) => n.nameHTML()))} ${leaving.length > 1 ? "leave" : "leaves"} the mall, finally free of this nightmare. No amount of knowledge and power is worth the changes they could feel creeping into their ${leaving.length > 1 ? "bodies" : "body"}.`;
+    if (corpses.length === 0) {
+        ele.innerHTML = `${arrayToHumanSentence(leaving.map((n) => n.nameHTML()))} ${leaving.length > 1 ? "leave" : "leaves"} the mall, finally free of this nightmare. No amount of knowledge and power is worth the changes they could feel creeping into their ${leaving.length > 1 ? "bodies" : "body"}.`;
+    } else {
+        ele.innerHTML = `${arrayToHumanSentence(living.map((n) => n.nameHTML()))} ${living.length > 1 ? "drag" : "drags"} ${arrayToHumanSentence(corpses.map((n) => n.nameHTML()))} out of the mall, tears streaking down their dust and blood caked cheeks.  No one should have their final resting place be here. Finally, finally they are free of this nightmare. `;
+    }
 
 }
 

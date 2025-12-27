@@ -188,8 +188,12 @@ class Location {
             for (let player of this.pending_players) {
                 player.addCorruption(this.corruption);
                 ret = true;
+                removeItemOnce(player.current_location.players, player);
+
                 this.players.push(player);
                 player.current_location = this;
+                player.pending_location = undefined;
+                console.log("JR NOTE: cleared out pending location", player)
             }
             this.pending_players = [];//clear out
 
@@ -317,6 +321,9 @@ class Location {
                 options.push(`${p.nameHTML()} is breathing really hard.`)
                 options.push(`${p.nameHTML()} is grabbing and scratching at their head...`)
                 options.push(`${p.nameHTML()} is repeating little phrases quietly to themselves...over and over up and down...`)
+                //unfortunately...you start to get irritable, too.
+                p.hateEveryoneALittleBitMore();
+
             }
 
             //interesting the corruption only fully gets you when you're alone

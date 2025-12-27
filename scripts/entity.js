@@ -6,7 +6,7 @@ const PARTNER_LABEL = "partner"
 const FRIEND_LABEL = "friend"
 const RIVAL_LABEL = "rival"
 const TEAM_LABEL = "team-mate"
-
+const STRONG_RELATIONSHIP_VALUE = 50;
 
 
 /*
@@ -189,9 +189,9 @@ const initializeRelationshipsForParty = (rand, party) => {
             const roll = rand.nextDouble();
             //if you feel strongly, equal odds of being familiy or partners
             //but still chance of not yet being partners
-            if (Math.abs(value) > 50 && roll > 0.60) {
+            if (Math.abs(value) > STRONG_RELATIONSHIP_VALUE && roll > 0.60) {
                 familial = true;
-            } else if (Math.abs(value) > 50 && roll > 0.4) {
+            } else if (Math.abs(value) > STRONG_RELATIONSHIP_VALUE && roll > 0.4) {
                 romantic = true;
             }
             x.relationships[y.title] = new Relationship(value, romantic, familial);
@@ -270,8 +270,11 @@ class Relationship {
 
     //whatever direction it already is, keep going
     deepenRelationship = () => {
+        console.log("JR NOTE: deepen relationship before", this.value)
         //dividing it by itself gets it to be 1, then taking only one of the absolute values keeps the sign
-        this.value = this.value / Math.abs(this.value) * 10;
+        this.value += this.value / Math.abs(this.value);
+        console.log("JR NOTE: deepen relationship after", this.value)
+
     }
 
     //not value, just romance/family status
@@ -306,6 +309,7 @@ class Entity {
     corruption = 0; //absorbs from exploring the maze
     stolen_name = false;
     current_location; //can be undefined, usually if glitch
+    pending_location; //so that you can tell your companions where you are going to go
     stats = {};
     state_of_corpse = "";
     title = "Null of Null";
@@ -407,10 +411,20 @@ class Entity {
                 if (this.fear < 13) {
                     this.fear += 13; //congrats on your first corpse viewing
                     deadbeat.innerHTML = `${this.nameHTML()} can't believe their eyes. ${player.nameHTML()} is ${player.state_of_corpse}. ${relationship.familial ? " How are they going to tell the rest of the family?" : ""} ${relationship.romantic ? "They...they'll never kiss them again. Never hold them...Never..." : ""} They start screaming and they aren't sure if they'll stop...`;
+
+                    if (this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE && !this.preparedToKill) {
+                        this.preparedToKill = true; //its life or death now, i'm sorry
+                        deadbeat.innerHTML += `They steel themselves. This has become life or death and they are not going to be a corpse. They are prepared to kill.`;
+                    }
+
                 } else {
+
                     this.fear += 1 //its just not the same as the first time
                     deadbeat.innerHTML = `${this.nameHTML()} stares listlessly at ${player.nameHTML()}, wondering almost idly how it  became ${player.state_of_corpse}. They feel like their hold on reality is slipping away. How could they think this about their ${relationship_label}?`;
-
+                    if (this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE && !this.preparedToKill) {
+                        this.preparedToKill = true; //its life or death now, i'm sorry
+                        deadbeat.innerHTML += `They steel themselves. This has become life or death and they are not going to be a corpse. They are prepared to kill.`;
+                    }
                 }
                 break;
 
@@ -433,7 +447,7 @@ class Entity {
 
                 }
                 break;
-
+                return;
             }
 
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
@@ -465,6 +479,23 @@ class Entity {
             }
 
 
+        }
+    }
+
+    hateEveryoneALittleBitMore = () => {
+        for (let relationship of Object.values(this.relationships)) {
+            relationship.value += -1 * (relationship.value / 20) - 13;
+            console.log("JR NOTE: irritbably lowering all relationships by 13", relationship.value)
+        }
+    }
+    //good or bad, i don't care right now
+    //just if its strong, return the relationship
+    //if its not, return nothing
+    getStrongRelationshipOrNothing = (player) => {
+        const relationship = this.relationships[player.title];
+
+        if (relationship.value > STRONG_RELATIONSHIP_VALUE) {
+            return relationship;
         }
     }
 
@@ -650,7 +681,7 @@ class Entity {
     //dehumanized the enemy
     //but you still have to be a very specific kind of person
     //to kill in coold blood
-    preparedToKill = () => {
+    preparedToKillInitially = () => {
         //someone will kill if they prefer action strongly over compromise
         return this.stats[ARMS_METAL_STAT] > HIGH_STAT_VALUE && this.stats[TONGUE_METAL_STAT] < MEDIUM_STAT_VALUE;
     }
@@ -663,7 +694,7 @@ class Entity {
         ele.innerHTML = `When you weren't looking, somehow ${this.nameHTML()} is in the ${chosen.longer_name} [${chosen.row},${chosen.col}], crumpled over a pile of junk.`;
         if (currentLocation != chosen) {
             chosen.pending_players.push(this);
-            removeItemOnce(currentLocation.players, this);
+            this.pending_location = chosenLocation;
         }
     }
 
@@ -672,8 +703,9 @@ class Entity {
     //otherwise you prefer to right and down
     //high eyes and legs stats makes you even more likely to move
     //while tongue and arms and mind makes you want to stay where you are and try to figure things out more
-    decideWhereToGo = (ele, rand, currentLocation, north, south, east, west) => {
+    decideWhereToGo = (parent, rand, currentLocation, north, south, east, west) => {
         //go to the east (continue down current corridor)
+        const ele = createElementWithClassAndParent("div", parent)
         if (this.corrupted) {
             return this.decideWhereToGoAsAMannequin(ele, rand, currentLocation, north, south, east, west);
         }
@@ -775,7 +807,35 @@ class Entity {
         //first check if staying
         //then check where  you want to go
 
-        chosenLocation = chooseStay();
+
+        const companions = currentLocation.livingPlayers();
+        //ignore yourself
+        if (companions.length > 1) {
+            console.log("JR NOTE: i am not alone", this)
+            //is there anyone here you feel strongly about (good or bad)?
+            //do they already have a pending_location?
+            //if so, copy it from them without figuring out where you want to go on your own
+            //only leave them if you decide you don't care anymore
+            for (let companion of companions) {
+                console.log("JR NOTE: checking companion", companion)
+                if (companion !== this && companion.pending_location) {
+                    console.log("JR NOTE: someone in my location has a plan of where to go", companion)
+                    const relationship = this.getStrongRelationshipOrNothing(companion);
+                    console.log("JR NOTE: relationship is", relationship)
+                    if (relationship) {
+                        console.log("JR NOTE: I feel strongly enough to follow someone who went before me", companion);
+                        chosenLocation = companion.pending_location;
+                        ele.innerHTML = `${this.nameHTML()} decides to stick with ${companion.nameHTML()}. ${relationship.value > 0 ? "It just feels safer that way." : "They don't trust them as far as they can throw them and like HELL they're letting them out of their sight."}`;
+
+                    }
+                }
+            }
+        }
+
+        //you might have chosen to go with a  friend already
+        if (!chosenLocation) {
+            chosenLocation = chooseStay();
+        }
 
 
 
@@ -801,17 +861,14 @@ class Entity {
         }
         if (currentLocation != chosenLocation) {
             chosenLocation.pending_players.push(this);
-            removeItemOnce(currentLocation.players, this);
+            this.pending_location = chosenLocation;
+        } else {
+            //choosing to stay, need to tell my friends about this
+            this.pending_location = chosenLocation;
         }
 
         //console.log("JR NOTE: the location I chose was: ", chosenLocation)
-
-
-
     }
-
-
-
 }
 
 /*

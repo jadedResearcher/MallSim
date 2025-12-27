@@ -229,10 +229,11 @@ class Game {
                 const west = getWest(this.map, location.row, location.col)
                 const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-
+                console.log("JR NOTE: players in this location are deciding where to go", location.longer_name)
                 for (let player of livingPlayers) {
                     player.interactWithPlayer(location.players, interaction_phrase);
                     player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                    console.log("JR NOTE: after deciding where to go, pending location is", { player, location: player.pending_location })
                 }
 
             }
@@ -252,6 +253,10 @@ class Game {
                 }
 
             }
+        }
+        //if you weren't going to move, make sure you get rid of your pending location anyways
+        for (let player of this.players) {
+            player.pending_location = undefined;
         }
         this.renderMall(tick_container);
 
@@ -985,7 +990,7 @@ that way instead of ai her weird infinite procedural stuff can just be photos
 
                 }
             }
-            if (player.preparedToKill()) {
+            if (player.preparedToKillInitially()) {
                 text += " They are prepared to kill to secure what is rightfully theirs. "
             }
 
