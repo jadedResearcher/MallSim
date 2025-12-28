@@ -4,6 +4,26 @@ const dev_log = {}
 
 //don't forget to update west if you see something interesting in the simulation
 
+dev_log["12/27/2025"] = `In Sound Mind is an Okay video game
+that has an incredible first chapter
+where mannequins are terrifying
+and only move when you aren't looking
+and stalking you
+and then
+just when they have you cornered
+offer you a thumbs up
+and a key
+and crouch down to help boost you up to an area you can't reach
+i wanted to capture that feeling
+your former companions are trapped forever in the Westerville mall
+no longer human
+blank empty face no longer able to emote
+or talk
+but they're still your former companions
+also lets be real
+the Westerville Mall knows mannequins are used to showcase products
+get to it `
+
 dev_log["12/26/25 2"] = `haha
 turns out loving your family
 turns you into an implaccable army of clones

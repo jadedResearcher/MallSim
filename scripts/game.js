@@ -265,6 +265,8 @@ class Game {
         if (this.initial_player_count < players_moving) {
             //jr note: its WAY too easy for this mall to get flooded with clones rip
             this.event_list.push("WARNING: ARE PLAYERS SIMULTANEOUSLY IN MULTIPLE LOCATIONS?")
+            const errorEle = createElementWithClassAndParent("div", tick_container, "error");
+            errorEle.innerHTML = "WARNING: ARE PLAYERS SIMULTANEOUSLY IN MULTIPLE LOCATIONS? " + players_moving;
         }
         this.renderMall(tick_container);
 
@@ -480,8 +482,9 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                newLocation.players = [...existing.players];
-                newLocation.pending_players = [...existing.pending_players]
+                for (let player of existing.players) {
+                    newLocation.movePlayerInto(player)
+                }
 
                 this.map[right_row][right_col] = newLocation;
             } else if (!this.map[right_row][right_col]) {
@@ -528,8 +531,9 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                newLocation.players = [...existing.players];
-                newLocation.pending_players = [...existing.pending_players]
+                for (let player of existing.players) {
+                    newLocation.movePlayerInto(player)
+                }
                 this.map[right_row][right_col] = newLocation;
             } else {
                 this.map[right_row][right_col] = newLocation;
@@ -561,8 +565,9 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                newLocation.players = [...existing.players];
-                newLocation.pending_players = [...existing.pending_players]
+                for (let player of existing.players) {
+                    newLocation.movePlayerInto(player)
+                }
 
                 this.map[right_row][right_col] = newLocation;
             } else if (this.map[right_row] && right_row < this.map.length) {
@@ -604,8 +609,9 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                newLocation.players = [...existing.players];
-                newLocation.pending_players = [...existing.pending_players]
+                for (let player of existing.players) {
+                    newLocation.movePlayerInto(player)
+                }
 
                 this.map[right_row][right_col] = newLocation;
             } else {

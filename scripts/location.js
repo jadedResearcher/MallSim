@@ -189,6 +189,7 @@ class Location {
         player.pending_location = undefined;
     }
 
+
     //handles corrupting them
     movePlayersFromPendingToInternal = () => {
         //was anyone added to this location?

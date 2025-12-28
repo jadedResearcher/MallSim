@@ -155,7 +155,125 @@ const dramaticStormOffapplyResult = (game, location, parent, me) => {
 
 const dramaticStormOff = makeEventSubType("Dramatic Storm Off", dramaticStormOffinternalConditionCheck, dramaticStormOffapplyResult)
 
+/////////////////
 
+
+
+////////////////////////////////////////////////////////////////////////////
+const ethicallyLootCorpseinternalConditionCheck = (game, location) => {
+    //is there a corpse anywhere in the game with items
+    //is there a mannequin anywhere in the game with items
+    //cool, who even cares about what locations are
+    //all that matters is there are items that are technically not "owned"
+    //the Westerville Mall wants potential shoppers to have them
+    if (game.rand.nextDouble > 0.99) {
+        return false;
+    }
+
+    let inventory_items_available = false;
+    let mannequins_available = false; //the westerville mall knows, mannequins are for showing off products
+    for (let player of game.players) {
+        if (player.dead && player.inventory.length > 0) {
+            inventory_items_available = true;
+        }
+
+        if (player.corrupted) {
+            mannequins_available = true;
+            if (player.inventory.length > 0) {
+                inventory_items_available = true;
+            }
+        }
+    }
+
+    return inventory_items_available && mannequins_available && location.livingNonMannequinPlayers().length > 0;
+}
+
+const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
+
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + this.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    //everyone ready to leave can leave together
+    const free_items = [];
+    //a random mannequin will be gifted all possible items that are unowned
+    //and will offer one to a player, ominously
+    let possible_mannequins = [];
+
+    //don't call remove function in entity, this is meant to happen secretly
+    for (let player of game.players) {
+        if (player.dead && player.inventory.length > 0) {
+            for (let item of player.inventory) {
+                removeItemOnce(player.inventory, item);
+                free_items.push(item);
+            }
+        }
+
+        if (player.corrupted) {
+            possible_mannequins.push(player);
+            if (player.inventory.length > 0) {
+                for (let item of player.inventory) {
+                    removeItemOnce(player.inventory, item);
+                    free_items.push(item);
+                }
+            }
+        }
+    }
+
+    const chosen_emmisary = game.rand.pickFrom(possible_mannequins);
+    chosen_emmisary.inventory = [...free_items]
+    const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
+
+    const players = location.livingNonMannequinPlayers();
+    const eyes = getPartyHighestEyes(players)
+    const arms = getPartyHighestArms(players)
+    console.log("JR NOTE: players, eyes", players, eyes)
+    const mannequin_graphic = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/helpful_friend.gif'>`;
+    //you need to at least be somewhat obesrvant to spot the crack in the wall and hear the sounds
+    //if parker is too common, just up the stat gate
+    if (eyes && eyes.stats[EYES_METAL_STAT] < MEDIUM_STAT_VALUE) {
+        me.chosen_name = "Mannequin Product Ignored"
+        ele.innerHTML = `${eyes.nameHTML()} walks right past the ${chosen_emmisary.mannequin_type} form of ${chosen_emmisary.nameHTML()}, frozen into place with an outstretched hand offering one ${chosen_item.name} without even realizing it. Apparently in a mall, mannequins simply fade into the background. <br>${mannequin_graphic}`;
+        return;
+    } else if (eyes) {
+        ele.innerHTML = `${eyes.nameHTML()} spots the  ${chosen_emmisary.mannequin_type} form of ${chosen_emmisary.nameHTML()}, frozen into place with an outstretched hand offering one ${chosen_item.name}. <br>${mannequin_graphic}<br>`;
+        //arms is not exactly courage, but a preference for action over inaction. of COURSE you pick up the spooky item, why wouldn't you?
+        if (arms && arms.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE) {
+            ele.innerHTML += `${arms.nameHTML()} confidently walks up to it and picks it up.`;
+            const ele2 = createElementWithClassAndParent("div", cont, "sub-story-beat");
+            const ele3 = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+            chosen_item.description += " A mannequin had this."
+
+            chosen_emmisary.removeItemFromInventory(chosen_item, ele2)
+            arms.addItemToInventory(chosen_item, ele3);
+
+        } else {
+            if (players.length > 1) {
+                ele.innerHTML += `Everyone stares at the object...held in the hand of their... presumably dead once companion. No one says anything, and eventually, as if by consensus, they all move on. Nothing good can come from interacting with this. Nothing.`;
+
+            } else {
+                ele.innerHTML += `${eyes.nameHTML()} stares at the object...held in the hand of their... presumably dead once companion. Eventually, they move on. Nothing good can come from interacting with this horror. Nothing.`;
+
+            }
+
+        }
+
+
+    } else {
+        ele.innerHTML += "Are there no players here?"
+    }
+
+
+}
+
+const ethicallyLootCorpse = makeEventSubType("Mannequin Highlight Product", ethicallyLootCorpseinternalConditionCheck, ethicallyLootCorpseapplyResult)
+
+
+/////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////
 //is there at least one person ready to escape?
@@ -219,6 +337,7 @@ noWayOutinternalConditionCheck = (game, location) => {
         return false;
     }
     const hasEscape = location.events.filter((e) => e.name == "Escape Mall").length > 0
+
     if (!hasEscape) {
         for (let player of location.players) {
             if (player.isStartingToFeelCorruption() && !player.corrupted) {
@@ -243,11 +362,9 @@ noWayOutapplyResult = (game, location, parent, me) => {
     for (let player of location.players) {
         if (player.isStartingToFeelCorruption() && !player.corrupted) {
             leaving.push(player);
-            console.log("JR NOTE: before no way out result, corruption is", player.corruption)
             location.corruption += 13; //your perception of there being something wrong twists the space. the mall thinks you must be wrong. SHOPPERS understand how to leave malls. only mannequins don't know how to. so you must be a mannequin, right?
             player.addCorruption(13); //just in case its somehow not very corrupt
             player.addCorruption(location.corruption);
-            console.log("JR NOTE: after no way out result, corruption is", player.corruption)
 
         }
     }
@@ -871,4 +988,4 @@ const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshit
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, yongkiKill, dramaticStormOff, wastesDoBullshit, hydrationStation]
+const generalEvents = [corruptionEvent, noWayOut, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]

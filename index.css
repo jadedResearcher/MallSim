@@ -441,6 +441,11 @@ button {
   gap: 3px;
 }
 
+.error {
+  color: red;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .sub-story-beat {
   margin-top: 13px;
 

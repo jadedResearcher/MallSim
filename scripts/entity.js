@@ -481,7 +481,6 @@ class Entity {
     }
 
     doYouHateThisPerson = (person) => {
-        console.log("JR NOTE: doYouHateThisPerson", this.relationships, person)
         if (!this.relationships[person.title]) {
             return false;
         }
