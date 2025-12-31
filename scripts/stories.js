@@ -320,14 +320,14 @@ const rotationCipherWithMapping = (text, letterMapping, current_rotation) => {
 const translateToRadio = (number, otherMax, otherMin) => {
     const min = 88;
     const max = 108;
-    console.log("JR NOTE: translateToRadio", { number, otherMax, otherMin })
+    //console.log("JR NOTE: translateToRadio", { number, otherMax, otherMin })
     return translateFromOldToNewScale(number, otherMax, otherMin, max, min);
 }
 
 const translateFromRadio = (number, otherMax, otherMin) => {
     const min = 88;
     const max = 108;
-    console.log("JR NOTE: translateFromRadio", { number, otherMax, otherMin })
+    //console.log("JR NOTE: translateFromRadio", { number, otherMax, otherMin })
 
     return translateFromOldToNewScale(number, max, min, otherMax, otherMin);
 }
@@ -338,7 +338,7 @@ const translateFromRadio = (number, otherMax, otherMin) => {
 //anyways you can test this by converting farenheit to celcius
 //translateFromOldToNewScale(32, 212, 32, 100, 0) (212 is to 100 as 32 is to 0)
 const translateFromOldToNewScale = (oldNumber, oldMax, oldMin, newMax, newMin) => {
-    console.log("JR NOTE: translateFromOldToNewScale", { oldNumber, oldMax, oldMin, newMax, newMin })
+    /// console.log("JR NOTE: translateFromOldToNewScale", { oldNumber, oldMax, oldMin, newMax, newMin })
     const t = (oldNumber - oldMin) / (oldMax - oldMin); //the ratio
     return newMin + t * (newMax - newMin)
 }
@@ -364,15 +364,13 @@ const renderRadioCipherStory = (story, ele) => {
     for (let i = lowest; i <= highest; i++) {
         letterMapping[String.fromCharCode(i)] = rand.getRandomNumberBetween(1, 26);
     }
-    console.log("JR NOTE: letter mapping created is", letterMapping)
 
     input.oninput = () => {
         const value = translateFromRadio(parseInt(input.value), max, min);
-        console.log("JR NOTE: raw radio value is", value)
         const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
-        story_container.innerHTML = rotationCipherWithMapping(story.text, letterMapping, translated_rotation);
+        story_container.innerHTML = "<h2>Tune the Radio</h2>" + rotationCipherWithMapping(story.text, letterMapping, translated_rotation);
     }
-    story_container.innerHTML = rotationCipherWithMapping(story.text, letterMapping, translateFromRadio(parseInt(input.value), max, min));
+    story_container.innerHTML = "<h2>Tune the Radio</h2>" + rotationCipherWithMapping(story.text, letterMapping, translateFromRadio(parseInt(input.value), max, min));
 
 }
 //https://www.youtube.com/watch?v=TCJU8DD3eGk&feature=youtu.be
