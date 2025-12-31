@@ -1053,6 +1053,12 @@ that way instead of ai her weird infinite procedural stuff can just be photos
             ab_view();
         }
 
+        const radio_button = createElementWithClassAndParent("button", tick_bar, "tick-button radio-button");
+        radio_button.innerText = "Radio (TODO hide till first story)";
+        radio_button.onclick = () => {
+            handleRenderingStoryList();
+        }
+
     }
 }
 

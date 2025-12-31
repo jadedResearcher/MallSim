@@ -269,6 +269,39 @@ const createNumberInputWithLabel = (parent, id, labelText, initialValue, max = 1
 
   return { container, input, label };
 }
+
+
+const createRangeInputWithLabel = (parent, initialValue, max = 113, min = -113) => {
+  console.log("JR NOTE: custom slider", { max, min, initialValue })
+  const container1 = createElementWithClassAndParent("div", parent, "slider-form-container-outer");
+  const container = createElementWithClassAndParent("div", container1, "slider-form-container-inner");
+  const grooves = createElementWithClassAndParent("div", container, "slider-form-groove-container");
+  for (let i = min; i < max; i += 0.5) {
+    if (i % 2 === 0) {
+      const majorTick = createElementWithClassAndParent("div", grooves, "slider-form-groove-major-tick");
+      majorTick.innerText = i;
+    } else {
+      const minorTick = createElementWithClassAndParent("div", grooves, "slider-form-groove-minor-tick");
+
+    }
+
+  }
+
+
+  const input = createElementWithClassAndParent("input", container)
+  input.type = "range";
+  input.className = "custom-range"
+  input.min = min;
+  input.max = max;
+  input.value = initialValue;
+
+
+
+
+  return { container, input };
+}
+
+
 const createCheckboxInputWithLabel = (parent, id, labelText, initialValue) => {
   const container = createElementWithClassAndParent("div", parent, "form-container");
 

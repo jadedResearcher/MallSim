@@ -179,8 +179,43 @@ button {
   top: 31px;
   display: flex;
   flex-direction: column;
-  gap: 31px;
+  gap: 13px;
 
+}
+
+.story-holder {
+  display: flex;
+  gap: 31px;
+  padding: 31px;
+}
+
+.story-button {
+  width: 300px;
+  border: none;
+  display: block;
+  outline: none;
+  background: none;
+  text-align: left;
+  text-decoration: underline;
+  margin-top: 13px;
+
+}
+
+.story-button:disabled {
+  opacity: 0.5;
+}
+
+.story-button::before {
+  content: "*";
+}
+
+.stories {
+  gap: 3px;
+}
+
+.stories .tick-button {
+  font-size: 14px !important;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .tick-bar-title {
@@ -391,6 +426,11 @@ button {
     font-family: Gamer;
     font-size: 21px;
   }
+}
+
+.radio-button {
+  background-color: white;
+  color: black;
 }
 
 .ab-button {

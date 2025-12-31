@@ -3,7 +3,7 @@ const dev_log = {}
 
 
 //don't forget to update west if you see something interesting in the simulation
-
+//https://ellienamored.neocities.org/rezamp/bones
 dev_log["12/27/2025"] = `In Sound Mind is an Okay video game
 that has an incredible first chapter
 where mannequins are terrifying
