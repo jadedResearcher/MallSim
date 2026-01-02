@@ -348,6 +348,11 @@ const translateFromOldToNewScale = (oldNumber, oldMax, oldMin, newMax, newMin) =
 //https://www.youtube.com/watch?v=GcumgV6zUvs
 //an Event will call this, but so will the unlocked stories so far
 const renderRadioCipherStory = (story, ele) => {
+    const static_audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/spookystatic.mp3");
+    static_audio.loop = true;
+    const muffled_audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/wanderer_coffin_muffled.mp3");
+    muffled_audio.loop = true;
+
     const rand = new SeededRandom(stringtoseed(story.title));
     //26 is the correct rotation, not 0
     const modifier = rand.getRandomNumberBetween(0, 26);
@@ -367,11 +372,32 @@ const renderRadioCipherStory = (story, ele) => {
         letterMapping[String.fromCharCode(i)] = rand.getRandomNumberBetween(1, 26);
     }
 
+    input.onmouseenter = () => {
+        //volume for static gets lighter the closer we are to 26
+        //volume for muffled gets louder the closer we are to 26
+        static_audio.play();
+        muffled_audio.play();
+    }
+
+    input.onmouseleave = () => {
+        static_audio.pause();
+        muffled_audio.pause();
+    }
+
     input.oninput = () => {
         const value = translateFromRadio(parseInt(input.value), max, min);
         const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
+        console.log("JR NOTE: translated rotation", translated_rotation)
+        static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
+        muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
+
         story_container.innerHTML = "<h2>Tune the Radio</h2>" + rotationCipherWithMapping(story.text, letterMapping, translated_rotation);
     }
+    const value = translateFromRadio(parseInt(input.value), max, min);
+    const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
+    console.log("JR NOTE: translated rotation", translated_rotation)
+    static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
+    muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
     story_container.innerHTML = "<h2>Tune the Radio</h2>" + rotationCipherWithMapping(story.text, letterMapping, translateFromRadio(parseInt(input.value), max, min));
 
 }
