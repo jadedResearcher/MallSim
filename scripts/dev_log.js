@@ -1,6 +1,9 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["1/1/2026"] = `i took a break from wiring up the radio
+to let vik have a quick snack
+just sudden inspiration is all`
 
 //don't forget to update west if you see something interesting in the simulation
 //https://ellienamored.neocities.org/rezamp/bones

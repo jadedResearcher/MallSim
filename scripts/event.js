@@ -108,7 +108,7 @@ const dramaticStormOffapplyResult = (game, location, parent, me) => {
         }
     }
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
     const north = getNorth(game.map, location.row, location.col)
@@ -193,7 +193,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
@@ -292,7 +292,7 @@ const escapeMallapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
@@ -353,7 +353,7 @@ noWayOutapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
@@ -408,7 +408,7 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
@@ -523,7 +523,7 @@ corruptionEventapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
     const extantMannequins = location.livingMannequinPlayers();
@@ -575,7 +575,7 @@ yongkiKillapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
@@ -632,7 +632,7 @@ tricksterCloserapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const img = createElementWithClassAndParent("img", cont);
     img.src = "http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif"
@@ -731,7 +731,7 @@ hydrationStationapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
@@ -798,7 +798,7 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
@@ -862,7 +862,7 @@ const parkerEncounterapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
     const player = getPartyHighestEyes(location.livingNonMannequinPlayers())
@@ -936,6 +936,161 @@ const parkerEncounter = makeEventSubType(`Parker Encounter`, parkerCheck, parker
 
 ///////////////////////////////
 
+
+censoredKillinternalConditionCheck = (game, location) => {
+    //im sorry, its Aleph for a reason
+    //this gets out of hand QuiCKLY
+    for (let player of location.players) {
+        //true random, nothing from Vik can be predicted or understood
+        if (player.censored && Math.random() > 0.5) {
+            return true; //they will keep killing and killing
+        }
+    }
+    return false;
+}
+
+censoredKillApplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    //living, dead, mannequin...it doesn't matter
+    const players = [...location.players];
+    for (let player of players) {
+        player.kill("[REDACTED].")
+        //its important we all know they die before whatever makes them never have been here.
+        //important for our peace of mind
+        //it might not be true
+        //but my simulation
+        //my rules
+        //i want to imagine they die
+        //before whatever it is
+        //happens
+        removeItemOnce(location.players, player);
+        removeItemOnce(game.players, player);
+    }
+    const spawn = new Entity([CENSORSHIP, DECAY], game.rand);
+    spawn.name = "[CENSORED]";
+    spawn.censored = true; // impossible trait they now have
+    spawn.corrupted = true; // they move like a mannequin
+    spawn.mannequin_type = "[CENSORED]"
+    spawn.fear = 800815;
+    spawn.fuckingHATEEveryoneInList(game.players);
+    location.movePlayerInto(spawn);
+    game.players.push(spawn);
+    generalEvents.unshift(censoredKill);//new places will be haunted by the censored beasts
+    location.events.unshift(censoredKill); //this place will be haunted
+    game.addGeneralEventToAllLocations(censoredKill); //add it everywhere as well
+
+    ele.innerHTML = censorRandomWords(`Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood.`);
+}
+
+const censoredKill = makeEventSubType("???", censoredKillinternalConditionCheck, censoredKillApplyResult);
+
+
+///////////////////////////////////
+
+const vikEncounterConditionCheck = (game, location) => {
+
+    if (location.livingNonMannequinPlayers().length > 0) {
+        return game.rand.nextDouble() > 0.75;
+    }
+    return false;
+}
+
+const vikEncounterapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+    const img = createElementWithClassAndParent("img", cont);
+    img.src = 'http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/the_censorship_was_for_your_protection.gif'
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    //everyone in this location shares the same fate
+    //whatever it is
+    //one [REDACTED] minion is created. it joins the player list just like a mannequin would
+    //and its everyones problem.
+
+    //noon and midnight the Harvest is no longer watching over you... or sometimes she's busy sleeping too deep or on break (true random, not seeded, i want vik to be a freaking headache for both me and AB)
+    if (new Date().getHours() == 0 || new Date().getHours() === 23 || Math.random() > 0.75) {
+        //living, dead, mannequin...it doesn't matter
+        const players = [...location.players];
+        for (let player of players) {
+            player.kill("[REDACTED].")
+            //its important we all know they die before whatever makes them never have been here.
+            //important for our peace of mind
+            //it might not be true
+            //but my simulation
+            //my rules
+            //i want to imagine they die
+            //before whatever it is
+            //happens
+            removeItemOnce(location.players, player);
+            removeItemOnce(game.players, player);
+        }
+        const spawn = new Entity([CENSORSHIP, DECAY], game.rand);
+        spawn.name = "[CENSORED]";
+        spawn.censored = true; // impossible trait they now have
+        spawn.corrupted = true; // they move like a mannequin
+        spawn.mannequin_type = "[CENSORED]"
+        spawn.fear = 800815;
+        spawn.fuckingHATEEveryoneInList(game.players);
+        location.movePlayerInto(spawn);
+        game.players.push(spawn);
+        generalEvents.unshift(censoredKill);//new places will be haunted by the censored beasts
+        location.events.unshift(censoredKill); //this place will be haunted
+        game.addGeneralEventToAllLocations(censoredKill); //add it everywhere as well
+
+        ele.innerHTML = censorRandomWords(`
+${arrayToHumanSentence(players.map((n) => n.nameHTML()))} encounters something in the dark. Something they can't quite... make out.
+<br><br>
+It heaves, it stutters, out of breath and out of pace, rotting and wrong, like mold, like meat. Its eyes open from every direction as they are surrounded, pinpricks of not-quite-light against the black. 
+<br><br>
+There is something there. They're sure of it. And yet it isn't there, never was, always is-- wicked and wrong, a predator, out of their sight and mind. 
+<br><br>
+Surely it's the pure light of their god protecting them. It's what keeps that which could maim them away. The worms kept away from the fruit. It's their rightful Harvest.
+<br><br>
+That is, until it isn't.
+<br><br>
+"So you're a 'believer', then." A soft voice murmurs, almost contemplative, out from the darkness. "I'd pray for your god's sake that it's not watching."
+<br><br>
+Something digs into their chest. They yell and they scream and they scuffle and fight as their voice goes hoarse, their limbs limp. 
+<br><br>
+Until all that remains is [REDACTED].
+<br><br>
+Lunch time mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm..
+`) + "[CENSORED] has begun stalking.";
+    } else {
+        //important, there is no scene name change for sparing vs dying
+        //ab doesn't get to know
+        //void players and breath players have always been her bane
+        const players = location.livingNonMannequinPlayers();
+        for (let player of players) {
+            player.fear += 31;//scary
+        }
+        //you're safe. 
+        //for now.
+        ele.innerHTML = censorRandomWords(`
+
+            ${arrayToHumanSentence(players.map((n) => n.nameHTML()))}  encounters something in the dark. Something they can't quite... make out.
+<br><br>
+It heaves, it stutters, out of breath and out of pace, rotting and wrong, like mold, like meat. Its eyes open from every direction as they are surrounded, pinpricks of not-quite-light against the black. 
+<br><br>
+There is something there. They're sure of it. And yet it isn't there, never was, always is-- wicked and wrong, a predator, out of their sight and mind. 
+<br><br>
+Surely it's the pure light of their god protecting them. It's what keeps that which could maim them away. The worms kept away from the fruit. It's their rightful Harvest.
+<br><br>
+They run away before its too late.
+`);
+    }
+}
+
+const vikEncounter = makeEventSubType(`[REDACTED ENCOUNTER]`, vikEncounterConditionCheck, vikEncounterapplyResult);
+
+
 ///////////////////////////////////
 
 const wastesDoBullshitConditionCheck = (game, location) => {
@@ -950,12 +1105,12 @@ const wastesDoBullshitapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
     const h3 = createElementWithClassAndParent("h3", cont);
-    h3.innerText = "Important Event: " + this.name;
+    h3.innerText = "Important Event: " + me.name;
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
     const chosen = game.rand.pickFrom(location.livingWastedPlayers());
-    ele.innerHTML = `${chosen.nameHTML()} is rooting around in the Layers of Unreality Unseen By Most and boggles vacantly at their finding. `;
+    ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/the_world_is_full_of_beauty_forthose_withtheeyes_tosee.gif'>${chosen.nameHTML()} is rooting around in the Layers of Unreality Unseen By Most and boggles vacantly at their finding. `;
     //eyes, code comments, whatever
     if (game.rand.nextDouble() > 0.5) {
         //lol 666

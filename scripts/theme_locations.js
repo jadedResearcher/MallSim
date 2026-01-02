@@ -44,7 +44,7 @@ const initThemeLocations = (rand) => {
     theme_locations[PREMIUM].push(makeGenericThemedLocation(rand, PREMIUM)); //K
     theme_locations[SALAD].push(makeGenericThemedLocation(rand, SALAD)); //doc slaughter
     theme_locations[SANDWICHES].push(makeGenericThemedLocation(rand, SANDWICHES)); //ria conspiracy boarding on is a hotdog a sandwich
-    theme_locations[SEAFOOD].push(makeGenericThemedLocation(rand, SEAFOOD)); //vik
+    theme_locations[SEAFOOD].push(makeGenericThemedLocation(rand, SEAFOOD, undefined, undefined, [vikEncounter])); //vik
     theme_locations[SUSHI].push(makeGenericThemedLocation(rand, SUSHI, undefined, undefined, [parkerEncounter])); //parker
     //"rgba(132,90,20)"
     //dont forget these are ARRAYS we are pushing into, can have more than one location per theme
@@ -59,6 +59,12 @@ const initThemeLocations = (rand) => {
     theme_locations[SPACE].push(makeGenericThemedLocation(rand, SPACE, "Planetarium", "rgba(132,90,20)", [parkerEncounter]));
     theme_locations[STEALING].push(makeGenericThemedLocation(rand, STEALING, "Bank", "rgba(132,90,20)", [parkerEncounter]));
 
+
+    theme_locations[CENSORSHIP].push(makeGenericThemedLocation(rand, CENSORSHIP, "[REDACTED]", "rgba(0,0,0)", [vikEncounter]));
+    theme_locations[DECAY].push(makeGenericThemedLocation(rand, DECAY, "Rot", "rgba(0,0,0)", [vikEncounter]));
+    theme_locations[OBFUSCATION].push(makeGenericThemedLocation(rand, OBFUSCATION, "Secrets", "rgba(0,0,0)", [vikEncounter]));
+    theme_locations[SERVICE].push(makeGenericThemedLocation(rand, SERVICE, "Service", "rgba(0,0,0)", [vikEncounter]));
+    theme_locations[MAGIC].push(makeGenericThemedLocation(rand, MAGIC, "Tricks", "rgba(0,0,0)", [vikEncounter]));
 
 }
 

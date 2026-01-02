@@ -494,6 +494,17 @@ class Entity {
         this.relationships[player.title].value += value;
     }
 
+    fuckingHATEEveryoneInList = (players) => {
+        for (let player of players) {
+            const r = this.relationships[player.title];
+            if (r) {
+                r.value = -113;
+            } else {
+                this.relationships[player.title] = new Relationship(-113, false, false)
+            }
+        }
+    }
+
     hateEveryoneALittleBitMore = () => {
         for (let relationship of Object.values(this.relationships)) {
             relationship.value += -1 * (relationship.value / 20) - 2;
@@ -504,6 +515,9 @@ class Entity {
     //if its not, return nothing
     getStrongRelationshipOrNothing = (player) => {
         const relationship = this.relationships[player.title];
+        if (!relationship) {
+            return;
+        }
 
         if (relationship.value > STRONG_RELATIONSHIP_VALUE) {
             return relationship;

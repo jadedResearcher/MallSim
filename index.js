@@ -1,5 +1,33 @@
 let game;
+window.addEventListener('error', (message, file, line, column, errorObj) => {
+    console.log(message)
+    const all = document.querySelectorAll(".story-beat");
+    let target = Object.values(all).at(-1);
+    if (!target) {
+        target = document.querySelector("body");
+    }
+    const error_ele = createElementWithClassAndParent("p", target, "sub-story-beat");
+    error_ele.innerHTML = Zalgo.generate("ERROR: NOTHING COULD BE SAVED");
+
+    const error_ele2 = createElementWithClassAndParent("p", target, "sub-story-beat");
+    error_ele2.innerHTML = message
+
+    const error_ele3 = createElementWithClassAndParent("p", target, "sub-story-beat");
+    error_ele3.innerHTML = file;
+
+    const error_ele4 = createElementWithClassAndParent("p", target, "sub-story-beat");
+    error_ele4.innerHTML = line;
+
+    const error_ele5 = createElementWithClassAndParent("p", target, "sub-story-beat");
+    error_ele5.innerHTML = column;
+
+
+    const error_ele6 = createElementWithClassAndParent("p", target, "sub-story-beat");
+    error_ele6.innerHTML = errorObj;
+
+});
 window.onload = () => {
+
     initThemes();
     grabEyes();
     grabCodeComments();

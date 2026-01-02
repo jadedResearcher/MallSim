@@ -295,6 +295,8 @@ const renderSpriteForEntity = (parent, entity) => {
         sprite.style.filter = "contrast(100.0)";//they look more real
     } else if (entity.dead) {
         sprite.style.filter = "brightness(0.0)"; //theres nothing inside
+    } else if (entity.censored) { //hey what do you mean censored??? thats not in the file...
+        sprite.style.boxShadow = "0 0 0 100px #ff0000 inset"
     } else if (entity.corrupted) {
         sprite.style.filter = "contrast(0) brightness(100)"; //plastic
     }

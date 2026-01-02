@@ -270,9 +270,19 @@ const createNumberInputWithLabel = (parent, id, labelText, initialValue, max = 1
   return { container, input, label };
 }
 
+//if you pass me html this might break the html
+//oh well
+const censorRandomWords = (text) => {
+  const split = text.split(" ");
+  let split2 = [];
+  for (let word of split) {
+    split2.push(Math.random() > 0.5 ? word : word.replaceAll(/./g, "█"))
+  }
+  return split2.join(" ");
+}
+
 
 const createRangeInputWithLabel = (parent, initialValue, max = 113, min = -113) => {
-  console.log("JR NOTE: custom slider", { max, min, initialValue })
   const container1 = createElementWithClassAndParent("div", parent, "slider-form-container-outer");
   const container = createElementWithClassAndParent("div", container1, "slider-form-container-inner");
   const grooves = createElementWithClassAndParent("div", container, "slider-form-groove-container");

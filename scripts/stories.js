@@ -11,6 +11,8 @@ and
 http://www.farragofiction.com/ASecondPersonalTranscript/
 */
 //this one i wrote in 2022.
+
+//i think its extremely important for all lore dumps to have gimmicks
 const witherys_sacrificial_lamb = `<p>The mall was like a head trauma patient, left bleeding and confused, but hanging onto life by a thread.</p>
 
 

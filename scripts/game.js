@@ -107,8 +107,12 @@ class Game {
                     //new Relationship(value, romantic, familial)
                     looping_player.stats = cultist.stats;
                     looping_player.wasted = true;
-                    looping_player.sprite_aspect = cultist.sprite_aspect;
-                    looping_player.sprite_class = cultist.sprite_class;
+                    if (cultist.sprite_aspect) {
+                        looping_player.sprite_aspect = cultist.sprite_aspect;
+                    }
+                    if (cultist.sprite_class) {
+                        looping_player.sprite_class = cultist.sprite_class;
+                    }
                     players_to_add.push(looping_player);
                     if (!cultist.times_looped) {
                         cultist.times_looped = 0;
@@ -127,6 +131,16 @@ class Game {
         //save all at once, not once per cultit.
         if (!this.eatWastesAutomatically) {
             save();
+        }
+    }
+
+    addGeneralEventToAllLocations = (event) => {
+        for (let row of this.map) {
+            for (let item of row) {
+                if (item) { //its not empty space
+                    item.events.unshift(event)
+                }
+            }
         }
     }
 
@@ -176,12 +190,12 @@ class Game {
     /*
         locations tick, not people (the mall is alive)
         each tick, look for locations that are awake (blood inside them)
-
+    
         order of operations:
         decide if move
         check for events
         render mall
-
+    
         "The twisted shops and forlorn geometry get worse the longer it suffers, he knows. It needs people. Like a body needs blood. Needs to have objects moved out of it, like blood cells moving oxygen. Helps it think better. Remember what it's supposed to be better."
     */
     tick = (parent) => {
@@ -794,7 +808,7 @@ class Game {
 
         if (this.initial_player_count > this.players.length) {
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `The Westerville Mall has already forgeted any who could not handle the devotion necessary to obtain Harvest Fruit and instead fled. Not a Shopper, not a Mannequin, but an irrelevant third thing.`;
+            detail.innerHTML = `The Westerville Mall has already forgotten any who could not handle the devotion necessary to obtain Harvest Fruit and instead fled. Not a Shopper, not a Mannequin, but an irrelevant third thing.`;
 
         }
 
@@ -884,12 +898,19 @@ class Game {
 
     }
 
+
+
     /*
-wanda heard ai art is unethical and thats why the mall twists everyone into fucked up mannequins
-that way instead of ai her weird infinite procedural stuff can just be photos
+    wanda heard ai art is unethical and thats why the mall twists everyone into fucked up mannequins
+    that way instead of ai her weird infinite procedural stuff can just be photos
     */
     handleIntro = (parent) => {
+        this.handleTickBar(parent);
+
+
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
+
+
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
         general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2><br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
         const mindPlayer = getPartyHighestMind(this.players);
@@ -898,7 +919,6 @@ that way instead of ai her weird infinite procedural stuff can just be photos
         const armPlayer = getPartyHighestArms(this.players);
         const legPlayer = getPartyHighestLegs(this.players);
         const poseAsTeam = createElementWithClassAndParent("div", intro_container, "pose-as-a-team");
-
         for (let player of this.players) {
             const ele = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             let text = "";
@@ -1015,6 +1035,10 @@ that way instead of ai her weird infinite procedural stuff can just be photos
             sprite.title = player.name;
 
         }//end player loop
+    }
+
+
+    handleTickBar = (parent) => {
         const tick_bar = createElementWithClassAndParent("div", parent, "tick-bar");
         const title = createElementWithClassAndParent("div", tick_bar, "tick-bar-title");
         title.innerText = "Controls"
@@ -1058,6 +1082,7 @@ that way instead of ai her weird infinite procedural stuff can just be photos
         radio_button.onclick = () => {
             handleRenderingStoryList();
         }
+
 
     }
 }

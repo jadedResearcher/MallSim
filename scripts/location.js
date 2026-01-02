@@ -182,7 +182,9 @@ class Location {
 
     movePlayerInto = (player) => {
         player.addCorruption(this.corruption);
-        removeItemOnce(player.current_location.players, player);
+        if (player.current_location) { //who says they came from anywhere?
+            removeItemOnce(player.current_location.players, player);
+        }
 
         this.players.push(player);
         player.current_location = this;
