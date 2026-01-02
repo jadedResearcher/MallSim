@@ -48,7 +48,12 @@ class Event {
         this.chosen_name = this.name;
         if (this.internalConditionCheck(game, location)) {
             this.applyResult(game, location, parentEle, this);
-            game.event_list.push(this.chosen_name);//help AB a little
+            if (this.chosen_name.includes("Shopping") && !this.chosen_name.includes("Harvest")) {
+                //please stop the shopping spam :( :( :(
+            } else {
+                game.event_list.push(this.chosen_name);//help AB a little
+
+            }
 
             return true;
         }
@@ -202,6 +207,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
     //a random mannequin will be gifted all possible items that are unowned
     //and will offer one to a player, ominously
     let possible_mannequins = [];
+    let censored_beasts = [];
 
     //don't call remove function in entity, this is meant to happen secretly
     for (let player of game.players) {
@@ -210,6 +216,10 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
                 removeItemOnce(player.inventory, item);
                 free_items.push(item);
             }
+        }
+
+        if (player.censored) {
+            censored_beasts.push(player)
         }
 
         if (player.corrupted) {
@@ -223,6 +233,44 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         }
     }
 
+    if (censored_beasts.length > 0) {
+        me.chosen_name = "???"
+        //living, dead, mannequin...it doesn't matter
+        const players = [...location.players];
+        for (let player of players) {
+            if (player.censored) {
+                //skip, no infighting, children
+            } else {
+                player.kill("[REDACTED].")
+                //its important we all know they die before whatever makes them never have been here.
+                //important for our peace of mind
+                //it might not be true
+                //but my simulation
+                //my rules
+                //i want to imagine they die
+                //before whatever it is
+                //happens
+                removeItemOnce(location.players, player);
+                removeItemOnce(game.players, player);
+            }
+        }
+        const spawn = new Entity([CENSORSHIP, DECAY], game.rand);
+        spawn.name = "[CENSORED]";
+        spawn.censored = true; // impossible trait they now have
+        spawn.corrupted = true; // they move like a mannequin
+        spawn.mannequin_type = "[CENSORED]"
+        spawn.fear = 800815;
+        spawn.fuckingHATEEveryoneInList(game.players);
+        location.movePlayerInto(spawn);
+        game.players.push(spawn);
+        generalEvents.unshift(censoredKill);//new places will be haunted by the censored beasts
+        location.events.unshift(censoredKill); //this place will be haunted
+        game.addGeneralEventToAllLocations(censoredKill); //add it everywhere as well
+
+        ele.innerHTML = censorRandomWords(`Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood. Passersby were amazed by the unusually large amounts of blood.`);
+        return;
+    }
+
     const chosen_emmisary = game.rand.pickFrom(possible_mannequins);
     chosen_emmisary.inventory = [...free_items]
     const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
@@ -230,7 +278,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
     const players = location.livingNonMannequinPlayers();
     const eyes = getPartyHighestEyes(players)
     const arms = getPartyHighestArms(players)
-    console.log("JR NOTE: players, eyes", players, eyes)
+    //console.log("JR NOTE: players, eyes", players, eyes)
     const mannequin_graphic = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/helpful_friend.gif'>`;
     //you need to at least be somewhat obesrvant to spot the crack in the wall and hear the sounds
     //if parker is too common, just up the stat gate
@@ -606,7 +654,7 @@ yongkiKillapplyResult = (game, location, parent, me) => {
         reaction += `${arrayToHumanSentence(mannequins.map((n) => n.nameHTML()))} twitches ever so slightly, blank face${mannequins.length > 0 ? "s" : ""} taking in the carnage.`;
     }
 
-    ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/hand_twirl_yongki-moshed-12-09-23-16-56-176.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a ${redPaste.corrupted ? `pile of shattered ${redPaste.mannequin_type}` : "red smear"} on the ground now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
+    ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/hand_twirl_yongki-moshed-12-09-23-16-56-176.gif'>${formerNameHTML} encounters...<i>something</i>. A blur. A hand. They are a ${redPaste.corrupted ? `pile of shattered ${redPaste.mannequin_type}` : "red smear"} on the ground of the ${location.longer_name} now, in the blink of an eye.<span class="wasted-knowledge">Yongki didn't mean to do it. Humans are so fragile. He only meant to say 'hello'.</span> ${reaction}`;
 
 }
 
@@ -809,7 +857,6 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
     //exactly 50/50 odds the Quatro Blade is mirrored or not
     if (game.rand.nextDouble() > 0.5) {
         me.chosen_name = "Quatro Blade Hid The Body"
-        console.log("JR NOTE: i am trying to change the name to", { name: me.chosenName, me })
         //not even an egg can save you here, she's stabbed you without even realizing she has
         //its how the Quatro Blade works
         removeItemOnce(location.players, artMurderVictim);
@@ -853,7 +900,7 @@ const parkerCheck = (game, location) => {
     //you need to at least be somewhat obesrvant to spot the crack in the wall and hear the sounds
     //if parker is too common, just up the stat gate
     if (eyes && eyes.stats[EYES_METAL_STAT] > MEDIUM_STAT_VALUE) {
-        return game.rand.nextDouble() > 0.75;
+        return game.rand.nextDouble() > 0.95;
     }
     return false;
 }
@@ -910,7 +957,7 @@ const parkerEncounterapplyResult = (game, location, parent, me) => {
             me.chosen_name = "Gun-Tan Kills A Random Player"
 
             ele.innerHTML += `<p>When they finally stop reeling, ${player.nameHTML()} can't find the eye again, and nothing else seems useful at the ${location.longer_name}. Time to move on.</p>
-            <p>Somewhere else, ${targetFormerName} lies bleeding on the ground. There is blood everywhere, and a hole gushing blood directly out of their heart....All goes dark, and they die, without ever knowing why.</p>`;
+            <p>Somewhere else, ${targetFormerName} lies bleeding on the ground of the ${location.longer_name}. There is blood everywhere, and a hole gushing blood directly out of their heart....All goes dark, and they die, without ever knowing why.</p>`;
         } else {
             me.chosen_name = "Gun-Tan Kills In Line Of Sight"
 
@@ -940,13 +987,17 @@ const parkerEncounter = makeEventSubType(`Parker Encounter`, parkerCheck, parker
 censoredKillinternalConditionCheck = (game, location) => {
     //im sorry, its Aleph for a reason
     //this gets out of hand QuiCKLY
+    let atLeastOneCensored = false;
+    let atLeastOneUnCensored = false; //they don't need to be alive, just not yet consumed
     for (let player of location.players) {
-        //true random, nothing from Vik can be predicted or understood
-        if (player.censored && Math.random() > 0.5) {
-            return true; //they will keep killing and killing
+        if (player.censored) {
+            atLeastOneCensored = true;
+        } else {
+            atLeastOneUnCensored = true;
         }
     }
-    return false;
+    //true random, nothing from Vik can be predicted or understood
+    return atLeastOneCensored && atLeastOneUnCensored && Math.random() > 0.5;
 }
 
 censoredKillApplyResult = (game, location, parent, me) => {
@@ -960,17 +1011,21 @@ censoredKillApplyResult = (game, location, parent, me) => {
     //living, dead, mannequin...it doesn't matter
     const players = [...location.players];
     for (let player of players) {
-        player.kill("[REDACTED].")
-        //its important we all know they die before whatever makes them never have been here.
-        //important for our peace of mind
-        //it might not be true
-        //but my simulation
-        //my rules
-        //i want to imagine they die
-        //before whatever it is
-        //happens
-        removeItemOnce(location.players, player);
-        removeItemOnce(game.players, player);
+        if (player.censored) {
+            //skip, no infighting, children
+        } else {
+            player.kill("[REDACTED].")
+            //its important we all know they die before whatever makes them never have been here.
+            //important for our peace of mind
+            //it might not be true
+            //but my simulation
+            //my rules
+            //i want to imagine they die
+            //before whatever it is
+            //happens
+            removeItemOnce(location.players, player);
+            removeItemOnce(game.players, player);
+        }
     }
     const spawn = new Entity([CENSORSHIP, DECAY], game.rand);
     spawn.name = "[CENSORED]";
@@ -996,7 +1051,7 @@ const censoredKill = makeEventSubType("???", censoredKillinternalConditionCheck,
 const vikEncounterConditionCheck = (game, location) => {
 
     if (location.livingNonMannequinPlayers().length > 0) {
-        return game.rand.nextDouble() > 0.75;
+        return game.rand.nextDouble() > 0.99;
     }
     return false;
 }

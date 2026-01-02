@@ -76,6 +76,7 @@ class Location {
     color; //special shops will be special colors
     row = 0;
     col = 0;
+    infinite = false; //infinite locations behave differently, and if you die inside them you spawn, alive, back at [0,0]
     corruption = 1; //rooms get deeper the further in they go
     theme_keys = []; //for senses and flavor text and children (like a fancy clothes store can be Fire themed, not that a fire theme is more likely to have, i dunno, food)
     players = []; //locations tick, not players
@@ -107,7 +108,9 @@ class Location {
     cloneIntoLocation = (row, col) => {
         let cloned_events = this.events.map((e) => e.clone());
 
-        return new Location(this.name, this.longer_name, [...this.theme_keys], row, col, cloned_events, this.color)
+        const ret = new Location(this.name, this.longer_name, [...this.theme_keys], row, col, cloned_events, this.color);
+        ret.infinite = this.infinite;
+        return ret;
     }
 
     livingNonMannequinPlayers = () => {

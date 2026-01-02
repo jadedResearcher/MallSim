@@ -1,6 +1,9 @@
 let game;
 window.addEventListener('error', (message, file, line, column, errorObj) => {
     console.log(message)
+    if (game) {
+        game.event_list.push("ERROR")
+    }
     const all = document.querySelectorAll(".story-beat");
     let target = Object.values(all).at(-1);
     if (!target) {

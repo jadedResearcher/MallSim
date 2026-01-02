@@ -44,6 +44,7 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
+    pending_clone_players = [];//why do we need this? :) :) ;)
     //peewee devours any new looping players before they can reach the next universe (useful if you want AB's session to ACTUALLY be helpful instead of filled with fate breaking assholes)
     eatWastesAutomatically = false;
     summary;
@@ -56,7 +57,8 @@ class Game {
     finished = false;
     //list of special events, in order (not as detailed as AB will need, maybe,but a start)
     //the generic event handles adding this, custom events don't need to worry
-    event_list = [];
+    //but you can also add to this so ab shows thigns that aren't TECHNICALLY events , like getting stuck in the infinite parking lot
+    event_list = []; //list of strings
     theme_keys = []; //collated from the players
     rand;//only thing storing it, pass it to anything that needs to use it
     //each row is a row in the map
@@ -202,10 +204,12 @@ class Game {
         if (this.finished) {
             return;
         }
-        if (this.initial_player_count < this.players.length) {
+
+        //haha whoops now i'm doing it on purpose
+        /*if (this.initial_player_count < this.players.length) {
             //jr note: its WAY too easy for this mall to get flooded with clones rip
             this.event_list.push("WARNING: IS THERE CLONING?")
-        }
+        }*/
         if (this.isItEpilogueTime()) {
             this.finished = true;
             this.handleEpilogue(parent);
@@ -214,6 +218,11 @@ class Game {
         this.current_tick++;
 
         const locations = this.getLocations();
+        for (let player of this.players) {
+            if (player.marked_for_cloning) {
+                this.players.push(player.clone(this.rand));
+            }
+        }
 
         if (locations.length === 0) {
             this.handleSpawningMallEntrance(parent);
@@ -229,16 +238,23 @@ class Game {
         if (this.finished) {
             return;
         }
+        //console.log("JR NOTE: movement tick", this.current_tick)
+
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
         const header = createElementWithClassAndParent("h2", tick_container, "story-title");
         header.innerText = `Movement ${this.current_tick}`;
         let players_moving = 0;
+
+
+
+
+
         //for each location
         //do interaction scene of everyone inside (if more than one)
         //and have players decide whether to move or not individually
         for (let location of locations) {
             //only locations with players 
-            const livingPlayers = location.livingPlayers()
+            const livingPlayers = location.livingPlayers();
 
             if (livingPlayers.length > 0) {
                 const north = getNorth(this.map, location.row, location.col)
@@ -255,6 +271,22 @@ class Game {
 
             }
         }
+
+        for (let player of this.players) {
+            if (!player.current_location) {
+                console.log("JR NOTE: recovering a locationless player", player.name, this.current_tick)
+                this.event_list.push("ERROR LOCATION")
+                //just toss them in the first place we can find (proably the entrance)
+                locations[0].movePlayerInto(player)
+                //this happened as a bug during dev so of course i made an edge case for it, it was spooky how eventually alaya would always be alone (becaues she was less likely to go south)
+                //and then of course the infinite parking garage does this to you on purpose if you die
+                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams. Suddenly they are somewhere...the ${locations[0].longer_name}? They are too rattled to care how this happened. `;
+
+            }
+        }
+
+
 
         //clean up, move pending players into their locations
         //can't do sooner or they might double tick
@@ -276,12 +308,13 @@ class Game {
             player.pending_location = undefined;
         }
 
-        if (this.initial_player_count < players_moving) {
+        //this only made sense before i made clones cannon
+        /*if (this.initial_player_count < players_moving) {
             //jr note: its WAY too easy for this mall to get flooded with clones rip
             this.event_list.push("WARNING: ARE PLAYERS SIMULTANEOUSLY IN MULTIPLE LOCATIONS?")
             const errorEle = createElementWithClassAndParent("div", tick_container, "error");
             errorEle.innerHTML = "WARNING: ARE PLAYERS SIMULTANEOUSLY IN MULTIPLE LOCATIONS? " + players_moving;
-        }
+        }*/
         this.renderMall(tick_container);
 
     }
@@ -300,6 +333,7 @@ class Game {
         if (this.finished) {
             return;
         }
+        //console.log("JR NOTE: event tick", this.current_tick)
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
         const header = createElementWithClassAndParent("h2", tick_container, "story-title");
         header.innerText = `Event ${this.current_tick}`;
@@ -329,13 +363,7 @@ class Game {
             }
         }
 
-        for (let player of this.players) {
-            //this happened as a bug during dev so of course i made an edge case for it, it was spooky how eventually alaya would always be alone (becaues she was less likely to go south)
-            if (!player.current_location) {
-                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams.`;
-            }
-        }
+
         tick_container.scrollIntoView();
         this.renderMall(tick_container);
 
@@ -378,10 +406,11 @@ class Game {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
                     const cached_name = cell.longer_name;;
                     const cached_inhabitants = cell.players.map((p) => p.nameHTML()).join(",");
+                    const cached_corpses = cell.deadPlayers().map((p) => `${p.nameHTML()}(${p.state_of_corpse})`).join(",");
+
                     const cached_corruption = cell.corruption;
                     const cached_events = cell.events.map((e) => e.name).join(",");
                     ele.onclick = () => {
-                        console.log("JR NOTE: cell was clicked", cell)
                         document.querySelectorAll(".selected").forEach((i) => i.classList.remove("selected"));
                         ele.classList.add("selected");
                         detailSection.innerHTML = `[${cell.row},${cell.col}]
@@ -390,7 +419,8 @@ class Game {
                         <br>
                         <b>Inhabitants:</b> ${cached_inhabitants}
                         <br>
-            
+                        <b>Corpses: </b> ${cached_corpses}
+                        <br>
                         <b>Corruption Level:</b> ${cached_corruption}
                         <br>
                         <b>Possible Events:</b> ${cached_events}`;

@@ -60,14 +60,36 @@ const initThemeLocations = (rand) => {
     theme_locations[STEALING].push(makeGenericThemedLocation(rand, STEALING, "Bank", "rgba(132,90,20)", [parkerEncounter]));
 
 
+
     theme_locations[CENSORSHIP].push(makeGenericThemedLocation(rand, CENSORSHIP, "[REDACTED]", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[DECAY].push(makeGenericThemedLocation(rand, DECAY, "Rot", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[OBFUSCATION].push(makeGenericThemedLocation(rand, OBFUSCATION, "Secrets", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[SERVICE].push(makeGenericThemedLocation(rand, SERVICE, "Service", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[MAGIC].push(makeGenericThemedLocation(rand, MAGIC, "Tricks", "rgba(0,0,0)", [vikEncounter]));
 
+    theme_locations[TIME].push(makeInfiniteParkingGarageToClone(TIME)) //leehunter
+    theme_locations[SPACE].push(makeInfiniteParkingGarageToClone(SPACE)) //river
+    theme_locations[ANGER].push(makeInfiniteParkingGarageToClone(ANGER)) //hoon
+
 }
 
+//there is no way out.
+//period
+//the only way parker got out was dying to river
+//http://farragofiction.com/ParkerLotLost/
+/*
+i think its kinda fun to be treating my own branch like i treated homestuck when making sburbsim
+looking for evidence of how things work
+twisting it and tweaking it where needed to make it easier to code
+*/
+const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
+
+    console.log("JR NOTE: three vents, leehunter, hoon, river")
+    //name, longer_name, theme_keys, row, col, events, color
+    const ret = new Location("Parking Lot", "Infinite Parking Lot", [theme_key], 0, 0, event_override, "rgba(255,255,255)");
+    ret.infinite = true;
+    return ret;
+}
 
 //customize this later, this just speeds up part of the process
 const makeGenericThemedLocation = (rand, theme_key, location_override, color_override, event_override = []) => {

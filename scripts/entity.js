@@ -6,6 +6,8 @@ const PARTNER_LABEL = "partner"
 const FRIEND_LABEL = "friend"
 const RIVAL_LABEL = "rival"
 const TEAM_LABEL = "team-mate"
+const CLONE_LABEL = "clone"
+
 const STRONG_RELATIONSHIP_VALUE = 50;
 
 
@@ -197,7 +199,10 @@ const initializeRelationshipsForParty = (rand, party) => {
             x.relationships[y.title] = new Relationship(value, romantic, familial);
         }
         //don't have a relationship with yourself
-        delete x.relationships[x.title];
+        x.relationships[x.title].clone = true;
+        x.relationships[x.title].familial = false;
+        x.relationships[x.title].romantic = false;
+
     }
     //now that all are done, clean up romance and family to make them symmetrical
     //do family first so theres no glitches
@@ -245,6 +250,7 @@ class Item {
 class Relationship {
     value = 0; //can  be negative
     romantic = false;
+    clone = false;
     familial = false; //if familial can not flip to romantic
 
     constructor(value, romantic, familial) {
@@ -296,6 +302,7 @@ class Relationship {
 class Entity {
     name = "Jane Doe"; //JR will probably steal this though, especially if you Join The Loop
     theme_keys = [];
+    marked_for_cloning = false;//don't worry about this :) :) :)
     dead = false;
     corrupted = false;
     sprite_aspect = Object.keys(aspect_mapping)[0];
@@ -373,7 +380,29 @@ class Entity {
 
     }
 
+    clone = (rand) => {
+        this.marked_for_cloning = false;
+        //new Entity(cultist.theme_keys, this.rand);
+        //a clone is never quite the same as the original now are they
+        const ret = new Entity(this.theme_keys, rand);
+        ret.relationships = { ...this.relationships };
+        ret.title = this.title;
+        ret.name = this.name;
+        ret.stats = { ...this.stats };
+        ret.sprite_aspect = this.sprite_aspect;
+        ret.sprite_class = this.sprite_class;
+        ret.fear = 113; //this is not okay, no matter how sure the westerville mall is that you're new, you KNOW you were somewhere else before (and hey, maybe this means you're LESS scared than you were a minute ago, could be that 113 fear is nothing compared to what you were previously enduring)
+        ret.corruption = 0; //you just entered the mall :) :) :) the Westerville Mall knows you're okay...for now
+        ret.current_location = undefined; //have fun with that :)
+        return ret;
+    }
+
     kill = (state_of_corpse) => {
+        if (this.current_location.infinite) {
+            console.log("JR NOTE: killing ", { name: this.name, state_of_corpse, location: this.current_location })
+            game.event_list.push("Died In Infinity");
+            this.marked_for_cloning = true;
+        }
         this.dead = true;
         this.state_of_corpse = state_of_corpse;
     }
@@ -759,7 +788,7 @@ class Entity {
             stayWeight += -1 * this.stats[LEGS_METAL_STAT];
 
 
-            if (force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
+            if (currentLocation.infinite || force || (currentLocation && stayWeight > 30 && rand.nextDouble() > 0.5)) {
                 //locations handle adding corruption if you move into them
                 //if you stay, i still want you to corrupt, so, here we are
                 this.addCorruption(currentLocation.corruption);
@@ -772,7 +801,14 @@ class Entity {
                     }
 
                 } else {
-                    ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                    if (currentLocation.infinite) {
+                        game.event_list.push("Infinite Wandering")
+                        ele.innerHTML = `No matter how much ${this.nameHTML()} wanders, they can not find a way out of the <a target='_blank' href='http://farragofiction.com/ParkerLotLost/'>${currentLocation.longer_name}</a>.`;
+
+                    } else {
+                        ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+
+                    }
 
                 }
 
