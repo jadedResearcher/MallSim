@@ -180,6 +180,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 13px;
+  z-index: 1000;
 
 }
 
@@ -445,7 +446,70 @@ button {
 }
 
 
+.river {
+  background-color: #e9a9a9 !important;
+  opacity: 0.9 !important;
+  filter: none !important;
+  color: #7f2323 !important;
+  border-radius: 13px;
+  border: 5px solid #7f2323 !important;
+  background-image: radial-gradient(circle at 50% 50%, transparent 0%, #e76f6f 90%) !important;
+}
 
+.river:hover {
+  animation-name: wiggle;
+  animation-timing-function: ease-in;
+  animation-duration: 10s;
+  animation-fill-mode: both;
+  animation-duration: 0.75s;
+}
+
+
+@keyframes wiggle {
+  0% {
+    transform: skewX(9deg);
+  }
+
+  10% {
+    transform: skewX(-8deg);
+  }
+
+  20% {
+    transform: skewX(7deg);
+  }
+
+  30% {
+    transform: skewX(-6deg);
+  }
+
+  40% {
+    transform: skewX(5deg);
+  }
+
+  50% {
+    transform: skewX(-4deg);
+  }
+
+  60% {
+    transform: skewX(3deg);
+  }
+
+  70% {
+    transform: skewX(-2deg);
+  }
+
+  80% {
+    transform: skewX(1deg);
+  }
+
+  90% {
+    transform: skewX(0deg);
+  }
+
+  100% {
+    transform: skewX(0deg);
+  }
+}
 
 .empty-cell {
   border: 3px solid rgba(0, 0, 0, 0);

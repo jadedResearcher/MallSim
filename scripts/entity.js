@@ -774,6 +774,7 @@ class Entity {
         loyalWeight += -1 * this.stats[MIND_METAL_STAT];
         loyalWeight += -1 * this.stats[EYES_METAL_STAT];
         loyalWeight += -1 * this.stats[TONGUE_METAL_STAT];
+        let avoidedGoo = false;
 
         //can be forced because if literally nothing gets chosen, well, you made your choice
         const chooseStay = (force) => {
@@ -806,7 +807,13 @@ class Entity {
                         ele.innerHTML = `No matter how much ${this.nameHTML()} wanders, they can not find a way out of the <a target='_blank' href='http://farragofiction.com/ParkerLotLost/'>${currentLocation.longer_name}</a>.`;
 
                     } else {
-                        ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                        if (!currentLocation.river && avoidedGoo) {
+                            ele.innerHTML = `${this.nameHTML()} watches with horror as all exits are blocked by a sizzling, viscous pink goo.`;
+                        } else if (currentLocation.river) {
+                            ele.innerHTML = `${this.nameHTML()} desparately tries to avoid the sizzling, viscous pink goo pouring into the ${currentLocation.longer_name}.`;
+                        } else {
+                            ele.innerHTML = `${this.nameHTML()} decides to stay in the ${currentLocation.longer_name} for a little while longer, checking if they missed anything${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
+                        }
 
                     }
 
@@ -888,27 +895,48 @@ class Entity {
             }
         }
 
+
         //you might have chosen to go with a  friend already
         if (!chosenLocation) {
             chosenLocation = chooseStay();
+            if (chosenLocation && chosenLocation.river) {
+                chosenLocation = undefined;
+                avoidedGoo = true;
+            }
         }
 
 
 
         if (!chosenLocation) {
             chosenLocation = chooseEast();
+            if (chosenLocation && chosenLocation.river) { //try to avoid dying on purpose in goo
+                chosenLocation = undefined;
+                avoidedGoo = true;
+            }
         }
 
         if (!chosenLocation) {
             chosenLocation = chooseSouth();
+            if (chosenLocation && chosenLocation.river) {//try to avoid dying on purpose in goo
+                chosenLocation = undefined;
+                avoidedGoo = true;
+            }
         }
 
         if (!chosenLocation) {
             chosenLocation = chooseWest();
+            if (chosenLocation && chosenLocation.river) {//try to avoid dying on purpose in goo
+                chosenLocation = undefined;
+                avoidedGoo = true;
+            }
         }
 
         if (!chosenLocation) {
             chosenLocation = chooseNorth();
+            if (chosenLocation && chosenLocation.river) {//try to avoid dying on purpose in goo
+                chosenLocation = undefined;
+                avoidedGoo = true;
+            }
         }
 
 

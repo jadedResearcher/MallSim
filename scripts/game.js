@@ -253,20 +253,32 @@ class Game {
         //do interaction scene of everyone inside (if more than one)
         //and have players decide whether to move or not individually
         for (let location of locations) {
+            const north = getNorth(this.map, location.row, location.col)
+            const south = getSouth(this.map, location.row, location.col)
+            const east = getEast(this.map, location.row, location.col)
+            const west = getWest(this.map, location.row, location.col)
             //only locations with players 
             const livingPlayers = location.livingPlayers();
+            if (location.river) {
+                location.spreadRiver(this.rand, north, south, east, west);
+            }
+
 
             if (livingPlayers.length > 0) {
-                const north = getNorth(this.map, location.row, location.col)
-                const south = getSouth(this.map, location.row, location.col)
-                const east = getEast(this.map, location.row, location.col)
-                const west = getWest(this.map, location.row, location.col)
+
                 const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 for (let player of livingPlayers) {
-                    players_moving++;
-                    player.interactWithPlayer(location.players, interaction_phrase);
-                    player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                    if (location.river) {
+                        //you will happy to know that river infecting the mall CHEWS through ram because, i presume, i made her little goo effect jiggly
+                        interaction_phrase.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/river.gif'>It's nothing personal as more and more pink goo floods into the ${location.longer_name}. It sizzles as it dissolves the ${player.corrupted ? player.mannequin_type : "flesh"} of ${player.nameHTML()}. There's no room for anything but her, here.`;
+                        player.kill(`dissolved into ${player.corrupted ? player.mannequin_type : "bones"} and goo`)
+                    } else {
+                        players_moving++;
+                        player.interactWithPlayer(location.players, interaction_phrase);
+                        player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                    }
+
                 }
 
             }
@@ -404,7 +416,10 @@ class Game {
 
                 if (cell) {
                     const ele = createElementWithClassAndParent("div", rowEle, "maze-cell");
-                    const cached_name = cell.longer_name;;
+                    if (cell.river) {
+                        ele.classList.add("river");
+                    }
+                    const cached_name = cell.longer_name;
                     const cached_inhabitants = cell.players.map((p) => p.nameHTML()).join(",");
                     const cached_corpses = cell.deadPlayers().map((p) => `${p.nameHTML()}(${p.state_of_corpse})`).join(",");
 
@@ -526,9 +541,9 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                for (let player of existing.players) {
-                    newLocation.movePlayerInto(player)
-                }
+                newLocation.transferPlayersFrom(existing);
+
+
 
                 this.map[right_row][right_col] = newLocation;
             } else if (!this.map[right_row][right_col]) {
@@ -575,9 +590,8 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                for (let player of existing.players) {
-                    newLocation.movePlayerInto(player)
-                }
+                newLocation.transferPlayersFrom(existing);
+
                 this.map[right_row][right_col] = newLocation;
             } else {
                 this.map[right_row][right_col] = newLocation;
@@ -609,9 +623,8 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                for (let player of existing.players) {
-                    newLocation.movePlayerInto(player)
-                }
+                newLocation.transferPlayersFrom(existing);
+
 
                 this.map[right_row][right_col] = newLocation;
             } else if (this.map[right_row] && right_row < this.map.length) {
@@ -653,9 +666,8 @@ class Game {
                 newLocation.corruption += 13 + existing.corruption * 2;
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
-                for (let player of existing.players) {
-                    newLocation.movePlayerInto(player)
-                }
+                newLocation.transferPlayersFrom(existing);
+
 
                 this.map[right_row][right_col] = newLocation;
             } else {
@@ -744,6 +756,20 @@ class Game {
             }
         }
 
+    }
+
+    everythingIsGoo = (parent) => {
+        let ret = true;
+        for (let row of this.map) {
+            for (let item of row) {
+                if (item) { //its not empty space
+                    if (!item.river) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return ret;
     }
 
     isInfiniteFoodCourt = (parent) => {
@@ -878,6 +904,10 @@ class Game {
 
         if (this.isInfiniteFoodCourt()) {
             this.summary.setEnding("Infinite Food Court Ending")
+        }
+
+        if (this.everythingIsGoo()) {
+            this.summary.setEnding("Goo Mall Ending")
         }
 
         if (!this.summary.hasEnding()) {

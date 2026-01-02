@@ -84,10 +84,46 @@ twisting it and tweaking it where needed to make it easier to code
 */
 const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
 
-    console.log("JR NOTE: three vents, leehunter, hoon, river")
+    console.log("JR NOTE: three events, leehunter, hoon, river")
+
+
+    const makeRiverEvent = () => {
+
+        const conditionCheck = (game, location) => {
+            if (location.livingNonMannequinPlayers().length > 0) {
+                return game.rand.nextDouble() > 0.99;
+            }
+            return false;
+        }
+
+        const applyResult = (game, location, parent, me) => {
+            /*much like yongki, there is nothing you can do to stop this
+            river doesn't even realize you're here
+            you can not be fast enough or clever enough
+            you are simply crushed like an ant
+            */
+            const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+            const h3 = createElementWithClassAndParent("h3", cont);
+            h3.innerText = "Important Event: " + this.name;
+            const living = location.livingPlayers()
+            const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+            ele.innerHTML = `${arrayToHumanSentence(living.map((n) => n.nameHTML()))} watch in horror as a viscous pink goo beings bubbling up from everywhere and nowhere.`;
+            location.river = true;
+
+
+        }
+
+
+
+        return makeEventSubType(`River Encounter`, conditionCheck, applyResult);
+    }
+    event_override.push(makeRiverEvent());
+
     //name, longer_name, theme_keys, row, col, events, color
     const ret = new Location("Parking Lot", "Infinite Parking Lot", [theme_key], 0, 0, event_override, "rgba(255,255,255)");
     ret.infinite = true;
+
     return ret;
 }
 

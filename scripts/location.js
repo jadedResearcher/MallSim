@@ -76,6 +76,7 @@ class Location {
     color; //special shops will be special colors
     row = 0;
     col = 0;
+    river = false; //possibly not the kind of river you're thinking about lol
     infinite = false; //infinite locations behave differently, and if you die inside them you spawn, alive, back at [0,0]
     corruption = 1; //rooms get deeper the further in they go
     theme_keys = []; //for senses and flavor text and children (like a fancy clothes store can be Fire themed, not that a fire theme is more likely to have, i dunno, food)
@@ -112,6 +113,22 @@ class Location {
         ret.infinite = this.infinite;
         return ret;
     }
+
+    //mostly used by the expanding food court
+    //if the location you're in suddenly shifts on you
+    //don't get lost in a shadow location, m'kay?
+    transferPlayersFrom = (existing) => {
+        for (let player of existing.players) {
+            player.current_location = this;
+            this.players.push(player)
+        }
+
+        for (let player of existing.pending_players) {
+            player.current_location = this;
+            this.pending_players.push(player)
+        }
+    };
+
 
     livingNonMannequinPlayers = () => {
         let ret = [];
@@ -183,6 +200,25 @@ class Location {
         return false;
     }
 
+    //its not malicious, she's just very big and you're too tiny to see as she shifts around to get more comfortable
+    spreadRiver = (rand, north, south, east, west) => {
+        if (north && rand.nextDouble() > 0.5) {
+            north.river = true;
+        }
+
+        if (south && rand.nextDouble() > 0.5) {
+            south.river = true;
+        }
+
+        if (east && rand.nextDouble() > 0.5) {
+            east.river = true;
+        }
+
+        if (west && rand.nextDouble() > 0.5) {
+            west.river = true;
+        }
+    }
+
     movePlayerInto = (player) => {
         player.addCorruption(this.corruption);
         if (player.current_location) { //who says they came from anywhere?
@@ -235,6 +271,12 @@ class Location {
         const tonguePlayer = getPartyHighestTongue(game.players);
         const armPlayer = getPartyHighestArms(game.players);
         const legPlayer = getPartyHighestLegs(game.players);
+
+        const locmindPlayer = getPartyHighestMind(this.players);
+        const loceyesPlayer = getPartyHighestEyes(this.players);
+        const loctonguePlayer = getPartyHighestTongue(this.players);
+        const locarmPlayer = getPartyHighestArms(this.players);
+        const loclegPlayer = getPartyHighestLegs(this.players);
 
 
         const antiMindPlayer = getPartyLowestMind(game.players);
@@ -363,6 +405,35 @@ class Location {
                 shrugs
                 */
                 options = [`${p.nameHTML()} moves only when you cannot see them, their ${p.mannequin_type} limbs firmly locked into place as your gaze falls upon them.`]
+            }
+
+            if (this.river) {
+                options = [];
+                if (p === loclegPlayer) {
+                    options.push(`${p.nameHTML()} is desperately trying to find solid locations to stand on, the sizzling pink goo driving them to feats of athleticism as they scramble up ledges, over garbage and onto kiosks.`)
+                }
+
+                if (p === locarmPlayer) {
+                    options.push(`${p.nameHTML()} is desperately trying to punch the encroaching pink goo, burning off the skin of their knuckles.`)
+                }
+
+                if (p === locmindPlayer) {
+                    options.push(`${p.nameHTML()} is desperately trying to figure out how to stop the pink goo but...theres nothing. It's too big.`)
+                }
+
+
+                if (p === loctonguePlayer) {
+                    options.push(`${p.nameHTML()} is desperately trying to reason with the pink goo, but it is unresponsive.`)
+                }
+
+                if (p === loceyesPlayer) {
+                    options.push(`${p.nameHTML()} is desperately looking for a way out of this, but all paths are sealed with the pink goo.`)
+                }
+                options.push(`${p.nameHTML()} doesn't even react as the sizzling pink goo laps at their feet and begins eating away at their shoes.`)
+
+                options.push(`${p.nameHTML()} begs the Harvest to save them from the sizzling pink goo.`)
+                options.push(`${p.nameHTML()} dunks their head into the sizling pink goo, hoping that it puts them out of their misery faster.`)
+                options.push(`${p.nameHTML()} begins to cry as the pink goo splashes against their ankles and eats through their shoes.`)
             }
 
 
