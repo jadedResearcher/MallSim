@@ -1,6 +1,34 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+
+dev_log["1/3/2026"] = `heheheheheheheeh
+only a few days left of my long vacation
+yesterday i let river eat the mall
+or rather
+stretch out into it
+dissolving everything in her wake
+today im letting leehunter go recruiting for their polycule
+river and leehunter were merged with something aleph
+back in tehir home universe
+and it freaking shows
+so hard to code thier effects
+hoon in comparison will just either kill you
+or let you listen to her radio and get lore
+im saving her for last because
+its the big reason i made sure to do the parking lot
+even tho training is the main focus here
+also i let people kill orchestra members before they can attack
+which accumulates monstrousness
+and wibby will enjoy that
+anyways i HOPE
+i can finish up leehunter
+and hoon
+before my vacation is over
+then go back to doing training team events
+when i have spoons leftover from my dayjob`
+
+
 dev_log["1/1/2026"] = `i took a break from wiring up the radio
 to let vik have a quick snack
 just sudden inspiration is all`

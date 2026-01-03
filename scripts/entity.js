@@ -406,7 +406,7 @@ class Entity {
         game.orchestra_name = new_name;
         this.name = new_name;
         this.title = new_name;
-        this.location = undefined; //if you're in the parking lot, you go somewhere else
+        this.current_location = undefined; //if you're in the parking lot, you go somewhere else
     }
 
     //it erodes the soul, to kill something that looks human
