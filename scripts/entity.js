@@ -364,7 +364,7 @@ class Entity {
         this.sandSmoothByValue(MEDIUM_STAT_VALUE);//congratulations on becoming the 'you' you were always meant to be. technically this should happen a bit over time, over centuries, but we all know simulations are supposed to be super fast
         //yes its accessing a global var called game but im in a hurry
         if (!game.eatWastesAutomatically) {
-            globalDataObject.loopingCultists.push({ title: this.title, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys, sprite_aspect: this.sprite_aspect, sprite_class: this.sprite_class })
+            globalDataObject.loopingCultists.push({ title: this.title, musical: this.musical, censored: this.censored, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys, sprite_aspect: this.sprite_aspect, sprite_class: this.sprite_class })
             save();
         }
         const knowledge = document.querySelectorAll(".wasted-knowledge");
@@ -389,6 +389,7 @@ class Entity {
         ret.relationships = { ...this.relationships };
         ret.title = this.title;
         ret.name = this.name;
+        ret.musical = this.musical; //you can't escape the orchestra meerly by dying
         ret.stats = { ...this.stats };
         ret.sprite_aspect = this.sprite_aspect;
         ret.sprite_class = this.sprite_class;
@@ -398,9 +399,19 @@ class Entity {
         return ret;
     }
 
+    becomeMusical = (game) => {
+        this.musical = true;
+        const firstname = this.name.split(" ")[0]
+        const new_name = game.orchestra_name + firstname;
+        game.orchestra_name = new_name;
+        this.name = new_name;
+        this.title = new_name;
+        this.location = undefined; //if you're in the parking lot, you go somewhere else
+    }
+
     //it erodes the soul, to kill something that looks human
     //can call this against a blorbo, theres just no target since they aren't simulated, only cultists are
-    murder = (state_of_corpse, target) => {
+    murder = (target, state_of_corpse) => {
         this.monster_rating++;
         if (target) {
             target.kill(state_of_corpse);
@@ -416,89 +427,111 @@ class Entity {
         this.state_of_corpse = state_of_corpse;
     }
 
-    //corpses and mannequins included
-    //i should almost certainly break this into smaller functions but its one of the last days of my winter break and you can't make me
-    interactWithPlayer = (rand, all_players_in_location, ele) => {
-
+    //returns if interaction happened, if so, no other should
+    interactWithCensor = (rand, player, ele) => {
         //censored will only kill them in an event, but they shouldn't be bickering or whatever.
         if (player.censored && !this.censored) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
             this.fear += 113;
             deadbeat.innerHTML = `${this.nameHTML()} cannot perceive ${player.nameHTML()} but they are very, very afraid.`;
-            return;
+            return true;
         } else if (this.censored && !player.censored) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
             player.fear += 113;
             deadbeat.innerHTML = `${this.nameHTML()} cannot perceive ${player.nameHTML()} but they are very, very afraid.`;
-            return;
+            return true;
         } else if (this.censored && player.censored) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
             player.fear += 113;
             deadbeat.innerHTML = `This is censored for your protection :) :) :) You're welcome!`;
-            return;
+            return true;
         }
+        return false;
+    }
 
+    //returns if interaction happened, if so, no other should
+    interactWithMusic = (game, rand, player, ele) => {
         //meanwhile the orchestra doesn't need an event, they simply take you ambiently
         if (player.musical && !this.musical) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
-            deadbeat.innerHTML = `${player.nameHTML()} plays a beautiful song for ${this.nameHTML()}.`;
+            deadbeat.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/istockphoto-1731602083-612x612-moshed-01-03-10-46-51-827.gif'>${player.nameHTML()} plays a beautiful song for ${this.nameHTML()}.`;
             if (this.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
-                this.musical = true;//you've enchanted them, they simply must have you, join the Westerville Polycule please
+                this.becomeMusical(game);//you've enchanted them, they simply must have you, join the Westerville Polycule please
                 this.stats = { ...BASELINE_METAL_OBJECT }; //you're part of the hivemand now, completely average
-                deadbeat.innerHTML += `${this.nameHTML()} feels their flesh and clothing become one with the Orchestra. Strange new thoughts and feelings enter their mind. They love their new family. They need to kill anyone who would try to take Fruit out of the Westerville Mall, because it would make their Conductor sad if it left. The universe might end if people eat too much Harvest Fruit. Protecting the universe is important. The Echidna is important. The Conductor is important. Music is important..........`;
-
+                deadbeat.innerHTML += `<br><br>${this.nameHTML()} feels their flesh and clothing become one with the Orchestra. Strange new thoughts and feelings enter their mind. They love their new family. They need to kill anyone who would try to take Fruit out of the Westerville Mall, because it would make their Conductor sad if it left. The universe might end if people eat too much Harvest Fruit. Protecting the universe is important. The Echidna is important. The Conductor is important. Music is important..........`;
+                game.event_list.push("Orchestral Bliss");
+                return true;
             } else {
                 this.fear += 113;
                 if (this.preparedToKill) {
-                    deadbeat.innerHTML += `${this.nameHTML()} doesn't know what the music will do to them but they feel in their bones its dangerous. They grab the loose detritis of the mall and hit ${player.nameHTML()} in the head over and over again, even after they stop playing, only stopping when they finally, finally stop breathing.`;
+                    deadbeat.innerHTML += `<br><br>${this.nameHTML()} doesn't know what the music will do to them but they feel in their bones its dangerous. They grab the loose detritis of the mall and hit ${player.nameHTML()} in the head over and over again, even after they stop playing, only stopping when they finally, finally stop breathing.`;
                     this.murder(player, "head caved in by a heavy object, likely improvised")
+                    game.event_list.push("Orchestral Defense");
 
+                    return true;
                 }
 
                 //become too old or too young but they got you
                 if (rand.nextDouble() > 0.5) {
-                    deadbeat.innerHTML += `The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly get older and older until they finally collapse to the ground, dead.`;
+                    deadbeat.innerHTML += `<br><br>The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly get older and older until they finally collapse to the ground, dead.`;
                     this.kill("wrinkled into an ancient mummy with whispy grey hair and thin, dessicated skin")
-                } else {
-                    deadbeat.innerHTML += `The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                    game.event_list.push("Orchestral Trumpet");
 
+                } else {
+                    deadbeat.innerHTML += `<br><br>The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                    game.event_list.push("Orchestral Piano");
                     this.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
                 }
             }
-            return;
+            return true;
 
         } else if (this.musical && !player.musical) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
-            deadbeat.innerHTML = `${this.nameHTML()} plays a beautiful song for ${player.nameHTML()}.`;
+            deadbeat.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/istockphoto-1731602083-612x612-moshed-01-03-10-46-51-827.gif'>${this.nameHTML()} plays a beautiful song for ${player.nameHTML()}.`;
             if (player.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) { //you've enchanted them, they simply must have you, join the Westerville Polycule please
-                player.musical = true;
+                player.becomeMusical(game);
                 player.stats = { ...BASELINE_METAL_OBJECT }; //you're part of the hivemand now, completely average
-                deadbeat.innerHTML += `${player.nameHTML()} feels their flesh and clothing become one with the Orchestra. Strange new thoughts and feelings enter their mind. They love their new family. They need to kill anyone who would try to take Fruit out of the Westerville Mall, because it would make their Conductor sad if it left. The universe might end if people eat too much Harvest Fruit. Protecting the universe is important. The Echidna is important. The Conductor is important. Music is important..........`;
+                deadbeat.innerHTML += `<br><br>${player.nameHTML()} feels their flesh and clothing become one with the Orchestra. Strange new thoughts and feelings enter their mind. They love their new family. They need to kill anyone who would try to take Fruit out of the Westerville Mall, because it would make their Conductor sad if it left. The universe might end if people eat too much Harvest Fruit. Protecting the universe is important. The Echidna is important. The Conductor is important. Music is important..........`;
+                game.event_list.push("Orchestral Bliss");
 
+                return true;
             } else {
                 player.fear += 113;
                 if (player.preparedToKill) {
-                    deadbeat.innerHTML += `${player.nameHTML()} doesn't know what the music will do to them but they feel in their bones its dangerous. They grab the loose detritis of the mall and hit ${this.nameHTML()} in the head over and over again, even after they stop playing, only stopping when they finally, finally stop breathing.`;
+                    deadbeat.innerHTML += `<br><br>${player.nameHTML()} doesn't know what the music will do to them but they feel in their bones its dangerous. They grab the loose detritis of the mall and hit ${this.nameHTML()} in the head over and over again, even after they stop playing, only stopping when they finally, finally stop breathing.`;
                     player.murder(this, "head caved in by a heavy object, likely improvised")
+                    game.event_list.push("Orchestral Defense");
 
+                    return true;
                 }
 
                 //become too old or too young but they got you
                 if (rand.nextDouble() > 0.5) {
-                    deadbeat.innerHTML += `The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
+                    deadbeat.innerHTML += `<br><br>The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
                     player.kill("wrinkled into an ancient mummy with whispy grey hair and thin, dessicated skin")
+                    game.event_list.push("Orchestral Trumpet");
+
                 } else {
-                    deadbeat.innerHTML += `The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                    deadbeat.innerHTML += `<br><br>The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                    game.event_list.push("Orchestral Piano");
 
                     player.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
                 }
             }
-            return;
+            return true;
         } else if (this.musical && !player.musical) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
-            deadbeat.innerHTML = `${this.nameHTML()} and ${player.nameHTML()} play a beautiful song together.`;
-            return;
+            deadbeat.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/istockphoto-1731602083-612x612-moshed-01-03-10-46-51-827.gif'>${this.nameHTML()} and ${player.nameHTML()} play a beautiful song together.`;
+            return true;
         }
+        return false;
+    }
+
+    //corpses and mannequins included
+    //i should almost certainly break this into smaller functions but its one of the last days of my winter break and you can't make me
+    interactWithPlayer = (game, rand, all_players_in_location, ele) => {
+
+
 
         console.warn("JR NOTE: flesh out interaction later, use more stats.")
         const mindPlayer = getPartyHighestMind(game.players);
@@ -511,6 +544,16 @@ class Entity {
             if (player === this) {
                 break;
             }
+
+            if (this.interactWithCensor(rand, player, ele)) {
+                break;
+            }
+
+            if (this.interactWithMusic(game, rand, player, ele)) {
+                break;
+            }
+
+
             const relationship = this.relationships[player.title];
             if (!relationship) {
                 const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
@@ -656,9 +699,10 @@ class Entity {
 
     //if you're starting to feel weird you start trying to leave
     isStartingToFeelCorruption = () => {
-        if (this.wasted) {
+        if (this.wasted || this.censored || this.musical) {
             return false; //:)
         }
+
         let max = 500;
         max += 10 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence
         max += -10 * this.stats[TONGUE_METAL_STAT]; //tell others about zampanio and listen to them
@@ -670,8 +714,8 @@ class Entity {
 
     //have fun being a mannequin
     hasHitMaxCorruption = () => {
-        if (this.wasted) {
-            return false; //:) its the first thing waasted players hack
+        if (this.wasted || this.censored || this.musical) {
+            return false; //:) its the first thing waasted players hack but also theres other ways to become a monster :)
         }
         let max = 1000;
         max += 200 * this.stats[MIND_METAL_STAT]; //you can last longer the higher  your intelligence

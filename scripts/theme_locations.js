@@ -87,6 +87,7 @@ const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
     console.log("JR NOTE: three events, leehunter, hoon, river")
 
 
+    //http://farragofiction.com/ASecondPersonalTranscript/
     const makeLeeHunterEvent = () => {
 
         const conditionCheck = (game, location) => {
@@ -130,39 +131,44 @@ const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
                 }
             }
 
-            ele.innerHTML = `${this.nameHTML()} plays a beautiful song for ${arrayToHumanSentence(possible_targets.map((e) => e.nameHTML()))} from every car in the Parking Lot, echoing from all directions at once. It cannot be stopped.`;
+            ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/istockphoto-1731602083-612x612-moshed-01-03-10-46-51-827.gif'>Two indistinct figures dressed somewhere between an Orchestra and a Marching Band plays a beautiful song for ${arrayToHumanSentence(possible_targets.map((e) => e.nameHTML()))} from every car in the Parking Lot, echoing from all directions at once. It cannot be stopped.`;
             if (to_recruit.length > 0) { //you've enchanted them, they simply must have you, join the Westerville Polycule please
                 for (player of to_recruit) {
-                    player.musical = true;
+                    player.becomeMusical(game);//you've enchanted them, they simply must have you, join the Westerville Polycule please
                     player.stats = { ...BASELINE_METAL_OBJECT }; //you're part of the hivemand now, completely average
                 }
-                ele.innerHTML += `${arrayToHumanSentence(to_recruit.map((e) => e.nameHTML()))} feels their flesh and clothing become one with the Orchestra. Strange new thoughts and feelings enter their mind. They love their new family. They need to kill anyone who would try to take Fruit out of the Westerville Mall, because it would make their Conductor sad if it left. The universe might end if people eat too much Harvest Fruit. Protecting the universe is important. The Echidna is important. The Conductor is important. Music is important..........`;
+                ele.innerHTML += `<br><br>${arrayToHumanSentence(to_recruit.map((e) => e.nameHTML()))} feels their flesh and clothing become one with the Orchestra. Strange new thoughts and feelings enter their mind. They love their new family. They need to kill anyone who would try to take Fruit out of the Westerville Mall, because it would make their Conductor sad if it left. The universe might end if people eat too much Harvest Fruit. Protecting the universe is important. The Echidna is important. The Conductor is important. Music is important..........`;
+                game.event_list.push("Orchestral Bliss");
 
-
-            } else {
-                for (player of to_kill_old) {
-                    player.kill("wrinkled into an ancient mummy with whispy grey hair and thin, dessicated skin")
-                }
-                if (to_kill_old.length > 0) {
-                    ele.innerHTML += `The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
-                }
-
-                for (player of to_kill_young) {
-                    player.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
-                }
-
-                if (to_kill_young.length > 0) {
-                    ele.innerHTML += `The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
-
-                }
             }
 
+            for (player of to_kill_old) {
+                player.kill("wrinkled into an ancient mummy with whispy grey hair and thin, dessicated skin")
+            }
+            if (to_kill_old.length > 0) {
+                game.event_list.push("Orchestral Trumpet");
 
+                ele.innerHTML += `<br><br>The trumpet's clarion call rings in ${arrayToHumanSentence(to_kill_old.map((e) => e.nameHTML()))} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
+            }
+
+            for (player of to_kill_young) {
+                player.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
+            }
+
+            if (to_kill_young.length > 0) {
+                game.event_list.push("Orchestral Piano");
+
+                ele.innerHTML += `<br><br>The soothing piano calms ${arrayToHumanSentence(to_kill_young.map((e) => e.nameHTML()))} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+
+            }
         }
 
 
 
-        return makeEventSubType(`River Encounter`, conditionCheck, applyResult);
+
+
+
+        return makeEventSubType(`LeeHunter Encounter`, conditionCheck, applyResult);
     }
 
     const makeRiverEvent = () => {
@@ -177,10 +183,10 @@ const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
         const applyResult = (game, location, parent, me) => {
 
             /*much like yongki, there is nothing you can do to stop this
- river doesn't even realize you're here
- you can not be fast enough or clever enough
- you are simply crushed like an ant
- */
+    river doesn't even realize you're here
+    you can not be fast enough or clever enough
+    you are simply crushed like an ant
+    */
             const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
             const h3 = createElementWithClassAndParent("h3", cont);

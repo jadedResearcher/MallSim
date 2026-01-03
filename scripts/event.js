@@ -90,11 +90,20 @@ class Event {
 //this always goes well when it happens in movies
 //hey gang lets split the party because of petty infighting while we're in a fucked up and dangerous place :) :) :)
 const dramaticStormOffinternalConditionCheck = (game, location) => {
+    if (location.infinite) {
+        /*as funny as this is, PLEASE stop getting so annoyed with your friends you just
+        no clip through the inescapable torture parking lot
+        */
+        return false;
+    }
     for (let player of location.livingPlayers()) {
         for (let other_player of location.livingPlayers()) {
-            if (player.doYouHateThisPerson(other_player)) {
-                return game.rand.nextDouble() > 0.75; //at least one
+            if (player != other_player) {
+                if (player.doYouHateThisPerson(other_player)) {
+                    return game.rand.nextDouble() > 0.75; //at least one
+                }
             }
+
         }
     }
     return false;
@@ -107,9 +116,12 @@ const dramaticStormOffapplyResult = (game, location, parent, me) => {
     const dramaPairs = [];
     for (let player of location.livingPlayers()) {
         for (let other_player of location.livingPlayers()) {
-            if (player.doYouHateThisPerson(other_player)) {
-                dramaPairs.push([player, other_player]);
+            if (player != other_player) {
+                if (player.doYouHateThisPerson(other_player)) {
+                    dramaPairs.push([player, other_player]);
+                }
             }
+
         }
     }
     const h3 = createElementWithClassAndParent("h3", cont);

@@ -44,6 +44,7 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
+    orchestra_name = "LeeHunter"
     pending_clone_players = [];//why do we need this? :) :) ;)
     //peewee devours any new looping players before they can reach the next universe (useful if you want AB's session to ACTUALLY be helpful instead of filled with fate breaking assholes)
     eatWastesAutomatically = false;
@@ -279,7 +280,7 @@ class Game {
                         player.kill(`dissolved into ${player.corrupted ? player.mannequin_type : "bones"} and goo`)
                     } else {
                         players_moving++;
-                        player.interactWithPlayer(this.rand, location.players, interaction_phrase);
+                        player.interactWithPlayer(this, this.rand, location.players, interaction_phrase);
                         player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
                     }
 
@@ -801,10 +802,22 @@ class Game {
         const living = [];
         const wasted_corpses = [];
         const wastes = [];
+        const censor_beasts = [];
+        const orchestra = [];
+
         const poseAsTeam = createElementWithClassAndParent("div", intro_container, "pose-as-a-team");
 
         //no reason to check for the living, there should not be any tbh
         for (let player of this.players) {
+
+            if (player.musical) {
+                orchestra.push(player);
+            }
+
+            if (player.censored) {
+                censor_beasts.push(player);
+            }
+
             if (player.corrupted) {
                 mannequins.push(player)
             }
@@ -889,8 +902,23 @@ class Game {
             this.summary.setEnding("Shambling Horror Ending", this.current_tick);
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             detail.innerHTML = `Everyone will remain in the mall together until The End, frozen into parodies of the human form. There is a sort of peace in their blank faces. They will be together and they will End.`;
-
         }
+
+        if (this.players.length === orchestra.length) {
+
+            //the greater westerville polycule might take over the world lol
+            this.summary.setEnding("Orchestra Ending", this.current_tick);
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `Everyone loves their conductor and has no need to eat Harvest Fruit. They play music and games and have fun all day long.`;
+        }
+
+        if (this.players.length === censor_beasts.length) {
+            this.summary.setEnding("Censored Ending", this.current_tick);
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `[CENSORED]`;
+        }
+
+
 
         if (this.players.length === 0) {
             this.summary.setEnding("Prudent Ending", this.current_tick);
@@ -933,6 +961,9 @@ class Game {
                 const leftEle = createElementWithClassAndParent("div", pair, "player-stat-left");
                 leftEle.innerHTML = left;
                 const rightEle = createElementWithClassAndParent("div", pair, "player-stat-right");
+                if (player.censored) {
+                    rightEle.classList.add("spoiler")
+                }
                 rightEle.innerHTML = right;
             }
 
@@ -943,6 +974,9 @@ class Game {
             makePair("Corruption:", player.corruption)
             makePair("Fear:", player.fear)
             makePair("Wasted:", player.wasted)
+            makePair("Musical:", player.musical)
+            makePair("Censored:", player.censored)
+
             makePair("Monstrous:", player.monster_rating)
             makePair("Stolen Name:", player.stolen_name)
 

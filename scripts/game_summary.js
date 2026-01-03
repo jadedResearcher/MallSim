@@ -73,6 +73,7 @@ class CollatedSummary {
 
         //wanna see both average and total
         for (let [key, value] of Object.entries(average_pairs)) {
+            console.log("JR NOTE: value is", value)
             makePair(key.replaceAll("Average", "Total"), value.toFixed(2));
         }
 

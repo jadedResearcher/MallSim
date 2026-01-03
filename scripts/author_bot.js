@@ -39,6 +39,9 @@ const ab_view = () => {
 
     const header = createElementWithClassAndParent("h3", sburb_container);
     header.innerText = "Collated Session Stats:";
+
+    const hint = createElementWithClassAndParent("p", sburb_container);
+    hint.innerText = "(searching the page for event names will help you find sessions with them)";
     const collated_stats_container = createElementWithClassAndParent("div", sburb_container, "collated-container");
 
 
