@@ -87,6 +87,84 @@ const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
     console.log("JR NOTE: three events, leehunter, hoon, river")
 
 
+    const makeLeeHunterEvent = () => {
+
+        const conditionCheck = (game, location) => {
+            if (location.livingNonMannequinPlayers().length > 0) {
+                return game.rand.nextDouble() > 0.99;
+            }
+            return false;
+        }
+
+        const applyResult = (game, location, parent, me) => {
+            /*
+ the parking lot crew don't innately care about containing anything
+ though hoon will do a weird facimile of "discipline" that was her previous job
+ but RIA cares and she's the Conductor of the Silent Orchestra so....
+ leehunter want you dead. they're doing it for her.
+ with river it was nothing personal, just an accident
+ with leehunter...they are making sure you're dead unless they noticed you from across the room and like your vibes
+ (by which i mean, want you to join their polycule, in which case you're not a cultist anymore because the hive mind isn't a cultist so everyone wins)
+*/
+            const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+            const h3 = createElementWithClassAndParent("h3", cont);
+            h3.innerText = "Important Event: " + this.name;
+            const possible_targets = location.livingNonMannequinPlayers()
+            const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+            const to_kill_old = [];
+            const to_kill_young = [];
+            const to_recruit = [];
+            for (let player of possible_targets) {
+                if (!player.musical && !player.censored) {
+                    if (player.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) { //you've enchanted them, they simply must have you, join the Westerville Polycule please
+                        to_recruit.push(player);
+                    } else {
+                        if (game.rand.nextDouble() > 0.5) {
+                            to_kill_old.push(player);
+                        } else {
+                            to_kill_young.push(player);
+                        }
+                    }
+
+                }
+            }
+
+            ele.innerHTML = `${this.nameHTML()} plays a beautiful song for ${arrayToHumanSentence(possible_targets.map((e) => e.nameHTML()))} from every car in the Parking Lot, echoing from all directions at once. It cannot be stopped.`;
+            if (to_recruit.length > 0) { //you've enchanted them, they simply must have you, join the Westerville Polycule please
+                for (player of to_recruit) {
+                    player.musical = true;
+                    player.stats = { ...BASELINE_METAL_OBJECT }; //you're part of the hivemand now, completely average
+                }
+                ele.innerHTML += `${arrayToHumanSentence(to_recruit.map((e) => e.nameHTML()))} feels their flesh and clothing become one with the Orchestra. Strange new thoughts and feelings enter their mind. They love their new family. They need to kill anyone who would try to take Fruit out of the Westerville Mall, because it would make their Conductor sad if it left. The universe might end if people eat too much Harvest Fruit. Protecting the universe is important. The Echidna is important. The Conductor is important. Music is important..........`;
+
+
+            } else {
+                for (player of to_kill_old) {
+                    player.kill("wrinkled into an ancient mummy with whispy grey hair and thin, dessicated skin")
+                }
+                if (to_kill_old.length > 0) {
+                    ele.innerHTML += `The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
+                }
+
+                for (player of to_kill_young) {
+                    player.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
+                }
+
+                if (to_kill_young.length > 0) {
+                    ele.innerHTML += `The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+
+                }
+            }
+
+
+        }
+
+
+
+        return makeEventSubType(`River Encounter`, conditionCheck, applyResult);
+    }
+
     const makeRiverEvent = () => {
 
         const conditionCheck = (game, location) => {
@@ -97,18 +175,19 @@ const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
         }
 
         const applyResult = (game, location, parent, me) => {
+
             /*much like yongki, there is nothing you can do to stop this
-            river doesn't even realize you're here
-            you can not be fast enough or clever enough
-            you are simply crushed like an ant
-            */
+ river doesn't even realize you're here
+ you can not be fast enough or clever enough
+ you are simply crushed like an ant
+ */
             const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
             const h3 = createElementWithClassAndParent("h3", cont);
             h3.innerText = "Important Event: " + this.name;
             const living = location.livingPlayers()
             const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
-            ele.innerHTML = `${arrayToHumanSentence(living.map((n) => n.nameHTML()))} watch in horror as a viscous pink goo beings bubbling up from everywhere and nowhere.`;
+            ele.innerHTML = `${arrayToHumanSentence(living.map((n) => n.nameHTML()))} watch in horror as a viscous pink goo begins bubbling up from everywhere and nowhere.`;
             location.river = true;
 
 
@@ -118,7 +197,7 @@ const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
 
         return makeEventSubType(`River Encounter`, conditionCheck, applyResult);
     }
-    event_override.push(makeRiverEvent());
+    event_override.push(makeLeeHunterEvent(), makeRiverEvent());
 
     //name, longer_name, theme_keys, row, col, events, color
     const ret = new Location("Parking Lot", "Infinite Parking Lot", [theme_key], 0, 0, event_override, "rgba(255,255,255)");

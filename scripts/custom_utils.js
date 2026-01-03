@@ -291,15 +291,27 @@ const renderSpriteForEntity = (parent, entity) => {
     sprite.style.backgroundPositionX = hopefully_temporary_mapping[entity.sprite_class][0] + "px"
     sprite.style.backgroundPositionY = hopefully_temporary_mapping[entity.sprite_class][1] + "px"
 
+    let filter = ``;
     if (entity.wasted) {
-        sprite.style.filter = "contrast(100.0)";//they look more real
-    } else if (entity.dead) {
-        sprite.style.filter = "brightness(0.0)"; //theres nothing inside
-    } else if (entity.censored) { //hey what do you mean censored??? thats not in the file...
-        sprite.style.boxShadow = "0 0 0 100px #ff0000 inset"
-    } else if (entity.corrupted) {
-        sprite.style.filter = "contrast(0) brightness(100)"; //plastic
+        filter += "contrast(100.0)";//they look more real
     }
+    if (entity.dead) {
+        filter += "brightness(0.0)"; //theres nothing inside
+    }
+    if (entity.censored) { //hey what do you mean censored??? thats not in the file...
+        sprite.style.boxShadow = "0 0 0 100px #ff0000 inset"
+    }
+    if (entity.corrupted) {
+        filter += "contrast(0) brightness(100)"; //plastic
+    }
+
+    if (entity.musical) {
+        filter += "grayscale(1) contrast(13) invert()"; //black and white
+
+    }
+
+
+    sprite.style.filter = filter;
     return sprite;
 
 }

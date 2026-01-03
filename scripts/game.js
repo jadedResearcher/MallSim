@@ -181,6 +181,10 @@ class Game {
                 //we could end
             } else if (player.corrupted) {
                 // we could end.
+            } else if (player.musical) {
+                //we could end
+            } else if (player.censored) {
+                //we could end
             } else { //if even one person isn't dead or wasted or corrupted, its not over yet
                 return false;
             }
@@ -275,7 +279,7 @@ class Game {
                         player.kill(`dissolved into ${player.corrupted ? player.mannequin_type : "bones"} and goo`)
                     } else {
                         players_moving++;
-                        player.interactWithPlayer(location.players, interaction_phrase);
+                        player.interactWithPlayer(this.rand, location.players, interaction_phrase);
                         player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
                     }
 
