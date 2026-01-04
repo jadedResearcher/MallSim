@@ -1664,6 +1664,7 @@ const initStats = () => {
     
     const NULL = "null";
     */
+    //https://www.youtube.com/watch?v=Zqjp89x_0bA
     stats_map[BAKERY] = { ...BASELINE_METAL_OBJECT }
     stats_map[BREAKFAST] = { ...BASELINE_METAL_OBJECT }
     stats_map[BURGERS] = { ...BASELINE_METAL_OBJECT }

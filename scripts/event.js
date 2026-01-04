@@ -270,6 +270,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         const spawn = new Entity([CENSORSHIP, DECAY], game.rand);
         spawn.name = "[CENSORED]";
         spawn.censored = true; // impossible trait they now have
+        this.monster_rating++;
         spawn.corrupted = true; // they move like a mannequin
         spawn.mannequin_type = "[CENSORED]"
         spawn.fear = 800815;
@@ -1043,6 +1044,8 @@ censoredKillApplyResult = (game, location, parent, me) => {
     const spawn = new Entity([CENSORSHIP, DECAY], game.rand);
     spawn.name = "[CENSORED]";
     spawn.censored = true; // impossible trait they now have
+    spawn.monster_rating++;
+
     spawn.corrupted = true; // they move like a mannequin
     spawn.mannequin_type = "[CENSORED]"
     spawn.fear = 800815;
@@ -1102,6 +1105,7 @@ const vikEncounterapplyResult = (game, location, parent, me) => {
         const spawn = new Entity([CENSORSHIP, DECAY], game.rand);
         spawn.name = "[CENSORED]";
         spawn.censored = true; // impossible trait they now have
+        spawn.monster_rating++;
         spawn.corrupted = true; // they move like a mannequin
         spawn.mannequin_type = "[CENSORED]"
         spawn.fear = 800815;

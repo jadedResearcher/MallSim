@@ -15,8 +15,20 @@ class CollatedSummary {
     AVERAGE_PLAYERS = "Average Initial Players:";
     AVERAGE_FLED = "Average Fled Players:";
     AVERAGE_DEAD = "Average Dead Players:";
+    AVERAGE_READY_TO_KILL = "Average Prepared To Kill Players:";
+
     AVERAGE_CORRUPT = "Average Corrupt Players:";
     AVERAGE_LOOPING = "Average Looping Players:";
+    AVERAGE_MUSIC = "Average Musical Players:";
+    AVERAGE_CENSORED = "Average Censored Players:";
+    AVERAGE_MONSTER_RATING = "Average Monster Rating:";
+    AVERAGE_MIND_RATING = "Average Mind:";
+    AVERAGE_EYES_RATING = "Average Eyes:";
+    AVERAGE_TONGUE_RATING = "Average Tongue:";
+    AVERAGE_ARMS_RATING = "Average Arms:";
+    AVERAGE_LEGS_RATING = "Average Legss:";
+
+
     AVERAGE_NAMELESS = "Average Nameless Players:";
     AVERAGE_TIME = "Average Time In Millis:";
 
@@ -53,8 +65,20 @@ class CollatedSummary {
             average_pairs[this.AVERAGE_PLAYERS] = this.sumValue(average_pairs[this.AVERAGE_PLAYERS], summary.numberStats[summary.NUMBER_INITIAL_PLAYERS])
             average_pairs[this.AVERAGE_FLED] = this.sumValue(average_pairs[this.AVERAGE_FLED], summary.numberStats[summary.NUMBER_FLED_PLAYERS])
             average_pairs[this.AVERAGE_DEAD] = this.sumValue(average_pairs[this.AVERAGE_DEAD], summary.numberStats[summary.NUMBER_DEAD_PLAYERS])
+            average_pairs[this.AVERAGE_READY_TO_KILL] = this.sumValue(average_pairs[this.AVERAGE_READY_TO_KILL], summary.numberStats[summary.NUMBER_READY_TO_KILL])
+
             average_pairs[this.AVERAGE_CORRUPT] = this.sumValue(average_pairs[this.AVERAGE_CORRUPT], summary.numberStats[summary.NUMBER_CORRUPT_PLAYERS])
             average_pairs[this.AVERAGE_LOOPING] = this.sumValue(average_pairs[this.AVERAGE_LOOPING], summary.numberStats[summary.NUMBER_LOOPING_PLAYERS])
+            average_pairs[this.AVERAGE_CENSORED] = this.sumValue(average_pairs[this.AVERAGE_CENSORED], summary.numberStats[summary.NUMBER_CENSORED_PLAYERS])
+            average_pairs[this.AVERAGE_MUSIC] = this.sumValue(average_pairs[this.AVERAGE_MUSIC], summary.numberStats[summary.NUMBER_MUSIC_PLAYERS])
+
+            average_pairs[this.AVERAGE_MONSTER_RATING] = this.sumValue(average_pairs[this.AVERAGE_MONSTER_RATING], summary.numberStats[summary.AVERAGE_MONSTER])
+            average_pairs[this.AVERAGE_MIND_RATING] = this.sumValue(average_pairs[this.AVERAGE_MIND_RATING], summary.numberStats[summary.AVERAGE_MIND])
+            average_pairs[this.AVERAGE_EYES_RATING] = this.sumValue(average_pairs[this.AVERAGE_EYES_RATING], summary.numberStats[summary.AVERAGE_EYES])
+            average_pairs[this.AVERAGE_TONGUE_RATING] = this.sumValue(average_pairs[this.AVERAGE_TONGUE_RATING], summary.numberStats[summary.AVERAGE_TONGUE])
+            average_pairs[this.AVERAGE_ARMS_RATING] = this.sumValue(average_pairs[this.AVERAGE_ARMS_RATING], summary.numberStats[summary.AVERAGE_ARMS])
+            average_pairs[this.AVERAGE_LEGS_RATING] = this.sumValue(average_pairs[this.AVERAGE_LEGS_RATING], summary.numberStats[summary.AVERAGE_LEGS])
+
             average_pairs[this.AVERAGE_NAMELESS] = this.sumValue(average_pairs[this.AVERAGE_NAMELESS], summary.numberStats[summary.NUMBER_NAMELESS_PLAYERS])
             event_stats = this.eventsValue(event_stats, JSON.parse(summary.stringStats[summary.SCENE_LIST]));
             ending_stats = this.endingsValue(ending_stats, summary.stringStats[summary.ENDING_GOT]);
@@ -158,11 +182,18 @@ class GameSummary {
     AVERAGE_TONGUE = "Average Tongue"
     AVERAGE_ARMS = "Average Arms"
     AVERAGE_LEGS = "Average Legs"
+    AVERAGE_MONSTER = "Average Monstrousness"
+
     MALL_SIZE = "Mall Size"
     NUMBER_STORES = "# Shops"
     NUMBER_DEAD_PLAYERS = "# Dead Players"
     NUMBER_CORRUPT_PLAYERS = "# Corrupt Players"
     NUMBER_LOOPING_PLAYERS = "# Looping Players"
+    NUMBER_CENSORED_PLAYERS = "# Censored Players"
+    NUMBER_MUSIC_PLAYERS = "# Musical Players"
+    NUMBER_READY_TO_KILL = "# Players Prepared to Kill"
+
+
     NUMBER_NAMELESS_PLAYERS = "# Nameless Players"
     TIMES_HYDRATED = "Times Hydrated:"
 
@@ -193,11 +224,23 @@ class GameSummary {
         this.numberStats[this.NUMBER_FLED_PLAYERS] = 0;
         this.numberStats[this.MALL_SIZE] = 0;
         this.numberStats[this.NUMBER_STORES] = 0;
+        this.numberStats[this.AVERAGE_MIND] = 0;
+        this.numberStats[this.AVERAGE_EYES] = 0;
+        this.numberStats[this.AVERAGE_TONGUE] = 0;
+        this.numberStats[this.AVERAGE_ARMS] = 0;
+        this.numberStats[this.AVERAGE_LEGS] = 0;
+        this.numberStats[this.AVERAGE_MONSTER] = 0;
+
 
 
         this.numberStats[this.NUMBER_DEAD_PLAYERS] = 0;
+        this.numberStats[this.NUMBER_READY_TO_KILL] = 0;
+
         this.numberStats[this.NUMBER_CORRUPT_PLAYERS] = 0;
         this.numberStats[this.NUMBER_LOOPING_PLAYERS] = 0;
+        this.numberStats[this.NUMBER_CENSORED_PLAYERS] = 0;
+        this.numberStats[this.NUMBER_MUSIC_PLAYERS] = 0;
+
         this.numberStats[this.NUMBER_NAMELESS_PLAYERS] = 0;
         this.numberStats[this.TIMES_HYDRATED] = 0;
 
@@ -245,8 +288,39 @@ class GameSummary {
 
 
         this.numberStats[this.NUMBER_DEAD_PLAYERS] = game.players.filter((i) => i.dead).length;
+        this.numberStats[this.NUMBER_READY_TO_KILL] = game.players.filter((i) => i.preparedToKill).length;
+
         this.numberStats[this.NUMBER_CORRUPT_PLAYERS] = game.players.filter((i) => i.corrupted).length;
         this.numberStats[this.NUMBER_LOOPING_PLAYERS] = game.players.filter((i) => i.wasted).length;;
+        this.numberStats[this.NUMBER_CENSORED_PLAYERS] = game.players.filter((i) => i.censored).length;;
+        this.numberStats[this.NUMBER_MUSIC_PLAYERS] = game.players.filter((i) => i.musical).length;;
+
+        this.numberStats[this.AVERAGE_MONSTER] = game.players.reduce((accumulator, p) => {
+            return accumulator + p.monster_rating;
+        }, 0);
+
+        this.numberStats[this.AVERAGE_MIND] = game.players.reduce((accumulator, p) => {
+            return accumulator + p.stats[MIND_METAL_STAT];
+        }, 0);
+
+        this.numberStats[this.AVERAGE_EYES] = game.players.reduce((accumulator, p) => {
+            return accumulator + p.stats[EYES_METAL_STAT];
+        }, 0);
+
+        this.numberStats[this.AVERAGE_TONGUE] = game.players.reduce((accumulator, p) => {
+            return accumulator + p.stats[TONGUE_METAL_STAT];
+        }, 0);
+
+        this.numberStats[this.AVERAGE_ARMS] = game.players.reduce((accumulator, p) => {
+            return accumulator + p.stats[ARMS_METAL_STAT];
+        }, 0);
+
+        this.numberStats[this.AVERAGE_LEGS] = game.players.reduce((accumulator, p) => {
+            return accumulator + p.stats[LEGS_METAL_STAT];
+        }, 0);
+
+
+
         this.numberStats[this.NUMBER_NAMELESS_PLAYERS] = game.players.filter((i) => i.stolen_name).length;;
 
         this.booleanStats[this.EVERYONE_DIED] = this.numberStats[this.NUMBER_DEAD_PLAYERS] === game.players.length;

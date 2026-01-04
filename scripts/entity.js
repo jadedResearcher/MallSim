@@ -353,6 +353,8 @@ class Entity {
     //(the conceit is if something interesting is happening to you, you resist longer)
     becomeCorrupted = (rand) => {
         this.corrupted = true;
+        this.monster_rating++;
+
         const types = ["wood", "plaster", "porcelain", "ceramic", "wood", "plastic", "wood", "plastic", "plastic"];
         this.mannequin_type = rand.pickFrom(types);
     }
@@ -361,6 +363,7 @@ class Entity {
     //when a new session starts with someone who 'is' you, you'll be added (not replace them)
     //why do you think the echidna is causing a memory leak? 
     joinTheLoop = (ele) => {
+        this.monster_rating++;
         this.sandSmoothByValue(MEDIUM_STAT_VALUE);//congratulations on becoming the 'you' you were always meant to be. technically this should happen a bit over time, over centuries, but we all know simulations are supposed to be super fast
         //yes its accessing a global var called game but im in a hurry
         if (!game.eatWastesAutomatically) {
@@ -401,6 +404,7 @@ class Entity {
 
     becomeMusical = (game) => {
         this.musical = true;
+        this.monster_rating++;
         const firstname = this.name.split(" ")[0]
         const new_name = game.orchestra_name + firstname;
         game.orchestra_name = new_name;
