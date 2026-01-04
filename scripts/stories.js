@@ -272,6 +272,26 @@ const ordered_stories = [
     new Story("Camellias's Candy Sermon", camellias_sermon),
 ]
 
+const getCurrentStory = () => {
+    if (!globalDataObject.highestStoryIndexUnlocked) {
+        globalDataObject.highestStoryIndexUnlocked = 0;
+    }
+    return ordered_stories[globalDataObject.highestStoryIndexUnlocked % ordered_stories.length]
+}
+
+const getNextStory = (pleaseSave) => {
+    console.log("JR NOTE: getNextStory", pleaseSave, globalDataObject)
+    if (!globalDataObject.highestStoryIndexUnlocked) {
+        globalDataObject.highestStoryIndexUnlocked = 0;
+    }
+    const ret = ordered_stories[globalDataObject.highestStoryIndexUnlocked % ordered_stories.length];
+    globalDataObject.highestStoryIndexUnlocked = globalDataObject.highestStoryIndexUnlocked + 1;
+    if (pleaseSave) {
+        save();
+    }
+    return ret;
+}
+
 const handleRenderingStoryList = () => {
     const container = document.querySelector('#container');
     container.innerHTML = "";
@@ -283,26 +303,31 @@ const handleRenderingStoryList = () => {
 
     const story_container = createElementWithClassAndParent("div", story_holder);
 
+    if (!globalDataObject.highestStoryIndexUnlocked) {
+        story_container.innerHTML = "ERROR: no stories unlocked???"
+    }
     let clicked = false;
-    for (let story of ordered_stories) {
-        const tick_button = createElementWithClassAndParent("button", tick_bar, "story-button");
-        tick_button.innerText = story.title;
-        tick_button.onclick = () => {
-            story_container.innerHTML = '';
-            renderRadioCipherStory(story, story_container)
-            document.querySelectorAll(".story-button").forEach((b) => { b.disabled = undefined })
+    for (let i = 0; i < ordered_stories.length; i++) {
+        if (i <= globalDataObject.highestStoryIndexUnlocked) {
+            const story = ordered_stories[i];
+            const tick_button = createElementWithClassAndParent("button", tick_bar, "story-button");
+            tick_button.innerText = story.title;
+            tick_button.onclick = () => {
+                story_container.innerHTML = '';
+                renderRadioCipherStory(story, story_container)
+                document.querySelectorAll(".story-button").forEach((b) => { b.disabled = undefined })
 
-            tick_button.disabled = true;
-        }
-        if (!clicked) {
-            clicked = true;
-            tick_button.click();
+                tick_button.disabled = true;
+            }
+            if (!clicked) {
+                clicked = true;
+                tick_button.click();
+            }
         }
     }
 }
 
 const rotationCipherWithMapping = (text, letterMapping, current_rotation) => {
-    console.log("JR NOTE: rotationCipherWithMapping", { text, letterMapping, current_rotation })
     const letters = text.split("");
     let ret = "";
     for (letter of letters) {
@@ -360,7 +385,8 @@ const renderRadioCipherStory = (story, ele) => {
     const min = 0 - modifier;
     const { input } = createRangeInputWithLabel(ele, 13, translateToRadio(max, max, min), translateToRadio(min, max, min))
     input.value = rand.getRandomNumberBetween(0 - modifier, 26 + modifier);
-    const story_container = createElementWithClassAndParent("div", ele);
+    const story_container = createElementWithClassAndParent("div", ele, 'radio-story-container');
+
 
     //wanna preserve capitalization
     const highest = 122;
@@ -387,7 +413,6 @@ const renderRadioCipherStory = (story, ele) => {
     input.oninput = () => {
         const value = translateFromRadio(parseInt(input.value), max, min);
         const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
-        console.log("JR NOTE: translated rotation", translated_rotation)
         static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
         muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
 
@@ -395,7 +420,6 @@ const renderRadioCipherStory = (story, ele) => {
     }
     const value = translateFromRadio(parseInt(input.value), max, min);
     const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
-    console.log("JR NOTE: translated rotation", translated_rotation)
     static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
     muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
     story_container.innerHTML = "<h2>Tune the Radio</h2>" + rotationCipherWithMapping(story.text, letterMapping, translateFromRadio(parseInt(input.value), max, min));

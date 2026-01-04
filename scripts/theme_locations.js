@@ -84,8 +84,68 @@ twisting it and tweaking it where needed to make it easier to code
 */
 const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
 
-    console.log("JR NOTE: three events, leehunter, hoon, river")
 
+    /*our only non aleph parking lot native. hoon isn't going to end the world
+    yeah you'll probably die but... just you, no one else*/
+    const makeHoonEvent = () => {
+
+        const audioOptionsRaw = `http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/audio/fx/HoonVoiceWorkByWisp/warning.mp3
+http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/audio/fx/HoonVoiceWorkByWisp/terminate_them.mp3
+http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/audio/fx/HoonVoiceWorkByWisp/supress_it_immediately.mp3
+http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/audio/fx/HoonVoiceWorkByWisp/second_alert.mp3
+http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/audio/fx/HoonVoiceWorkByWisp/neutralize_the_target.mp3
+http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/audio/fx/HoonVoiceWorkByWisp/kill_it_now.mp3`;
+        const audioOptions = audioOptionsRaw.split("\n");
+
+        const conditionCheck = (game, location) => {
+            /*she cheerfully kills mannequins and whatever else too
+            if you are currently not dead...you will be
+            though i think she shouldn't be able to kill [CENSORED] spawn
+            i think also she mostly only 1v1's people
+            cuz the radio just lets her know when its time to KILL
+            not which targets are valid
+            so...if you're in a group
+            she avoids you
+            
+            */
+            if (location.livingPlayers().length === 1) {
+                return game.rand.nextDouble() > 0.95;
+            }
+            return false;
+        }
+
+        const applyResult = (game, location, parent, me) => {
+
+            const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+            const h3 = createElementWithClassAndParent("h3", cont);
+            h3.innerText = "Important Event: " + this.name;
+            const target = location.livingPlayers()[0];
+            const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+            //the radio has...really strict ideas about who needs to die
+            //theres no such thing as being only a "little" monsterous to it
+            if (target.monster_rating > 0) {
+                me.chosen_name = "Radio Kill"
+                const explanation = createElementWithClassAndParent("div", ele, "sub-story-beat");
+                explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. It blurts out terrifying static <audio controls>
+  <source src="${game.rand.pickFrom(audioOptions)}" type="audio/mpeg">
+</audio> and the figure lurches to their feet, lassoing a noose around ${target.nameHTML()}'s neck. They struggle some, but ultimately, everything goes dark, and they die.`;
+                target.kill("deep purple and red bruises around their neck halloing a thick rope tied around it, thick scratches from their fingernails having tried to pry it off in time")
+            } else {
+                const explanation = createElementWithClassAndParent("div", ele, "sub-story-beat");
+                explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. With a husky voice, she offers to let them listen along for a while.`;
+
+                renderRadioCipherStory(getNextStory(!game.eatWastesAutomatically), ele);
+            }
+
+
+        }
+
+
+
+        return makeEventSubType(`Hoon Encounter`, conditionCheck, applyResult);
+    }
 
     //http://farragofiction.com/ASecondPersonalTranscript/
     const makeLeeHunterEvent = () => {
@@ -203,7 +263,8 @@ const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
 
         return makeEventSubType(`River Encounter`, conditionCheck, applyResult);
     }
-    event_override.push(makeLeeHunterEvent(), makeRiverEvent());
+    //in order of parker finding them
+    event_override.push(makeLeeHunterEvent(), makeHoonEvent(), makeRiverEvent());
 
     //name, longer_name, theme_keys, row, col, events, color
     const ret = new Location("Parking Lot", "Infinite Parking Lot", [theme_key], 0, 0, event_override, "rgba(255,255,255)");

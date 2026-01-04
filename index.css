@@ -550,6 +550,14 @@ button {
   font-family: 'Courier New', Courier, monospace;
 }
 
+.radio-story-container {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 500px;
+  overflow: auto;
+}
+
 .sub-story-beat {
   margin-top: 13px;
 

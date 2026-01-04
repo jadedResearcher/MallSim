@@ -90,9 +90,10 @@ class Event {
 //this always goes well when it happens in movies
 //hey gang lets split the party because of petty infighting while we're in a fucked up and dangerous place :) :) :)
 const dramaticStormOffinternalConditionCheck = (game, location) => {
-    if (location.infinite) {
+    if (location.infinite && game.rand.nextDouble() > 0.05) {
         /*as funny as this is, PLEASE stop getting so annoyed with your friends you just
         no clip through the inescapable torture parking lot
+        okay fine you can have a SMALL chance of angry stomping out of the infinite torture dungeon
         */
         return false;
     }

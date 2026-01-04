@@ -419,16 +419,24 @@ class Entity {
     }
 
     kill = (state_of_corpse) => {
-        if (this.current_location.infinite) {
+        if (this.current_location && this.current_location.infinite) {
             game.event_list.push("Died In Infinity");
             this.marked_for_cloning = true;
         }
         this.dead = true;
         this.state_of_corpse = state_of_corpse;
     }
+    //https://calljoker.com/zampanio
+    //https://spiralsrest.neocities.org/versions
+    //http://eyedolgames.com/ZampanioQuizEast/?direction=WEST
+    //http://eyedolgames.com/ZampanioQuizEast/?direction=EAST
+    //http://eyedolgames.com/ZampanioQuizEast/?direction=NORTH
 
     //returns if interaction happened, if so, no other should
     interactWithCensor = (rand, player, ele) => {
+        if (player.dead) {
+            return;
+        }
         //censored will only kill them in an event, but they shouldn't be bickering or whatever.
         if (player.censored && !this.censored) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
@@ -451,6 +459,9 @@ class Entity {
 
     //returns if interaction happened, if so, no other should
     interactWithMusic = (game, rand, player, ele) => {
+        if (player.dead) {
+            return false;
+        }
         //meanwhile the orchestra doesn't need an event, they simply take you ambiently
         if (player.musical && !this.musical) {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
@@ -512,7 +523,7 @@ class Entity {
                     game.event_list.push("Orchestral Trumpet");
 
                 } else {
-                    deadbeat.innerHTML += `<br><br>The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                    deadbeat.innerHTML += `<br><br>The soothing piano calms ${player.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
                     game.event_list.push("Orchestral Piano");
 
                     player.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
@@ -893,6 +904,9 @@ class Entity {
     //while tongue and arms and mind makes you want to stay where you are and try to figure things out more
     decideWhereToGo = (parent, rand, currentLocation, north, south, east, west) => {
         //go to the east (continue down current corridor)
+        if (this.dead) {
+            return; //PLEASE stop being lively corpses
+        }
         const ele = createElementWithClassAndParent("div", parent)
         if (this.corrupted) {
             return this.decideWhereToGoAsAMannequin(ele, rand, currentLocation, north, south, east, west);

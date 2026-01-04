@@ -279,9 +279,13 @@ class Game {
                         interaction_phrase.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/river.gif'>It's nothing personal as more and more pink goo floods into the ${location.longer_name}. It sizzles as it dissolves the ${player.corrupted ? player.mannequin_type : "flesh"} of ${player.nameHTML()}. There's no room for anything but her, here.`;
                         player.kill(`dissolved into ${player.corrupted ? player.mannequin_type : "bones"} and goo`)
                     } else {
-                        players_moving++;
-                        player.interactWithPlayer(this, this.rand, location.players, interaction_phrase);
-                        player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                        if (player.dead) {
+                            //please no more lively corpses;
+                        } else {
+                            players_moving++;
+                            player.interactWithPlayer(this, this.rand, location.players, interaction_phrase);
+                            player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                        }
                     }
 
                 }
@@ -298,7 +302,13 @@ class Game {
                 //this happened as a bug during dev so of course i made an edge case for it, it was spooky how eventually alaya would always be alone (becaues she was less likely to go south)
                 //and then of course the infinite parking garage does this to you on purpose if you die
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams. Suddenly they are somewhere...the ${locations[0].longer_name}? They are too rattled to care how this happened. `;
+                if (player.dead) {
+                    start_phrase.innerHTML = `${player.nameHTML()} is nowhere and then they are somewhere... ${locations[0].longer_name}. `;
+
+                } else {
+                    start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams. Suddenly they are somewhere...the ${locations[0].longer_name}? They are too rattled to care how this happened. `;
+
+                }
 
             }
         }
@@ -1175,11 +1185,15 @@ class Game {
             ab_view();
         }
 
-        const radio_button = createElementWithClassAndParent("button", tick_bar, "tick-button radio-button");
-        radio_button.innerText = "Radio (TODO hide till first story)";
-        radio_button.onclick = () => {
-            handleRenderingStoryList();
+        //if its not set, or its zero, ignore
+        if (globalDataObject.highestStoryIndexUnlocked) {
+            const radio_button = createElementWithClassAndParent("button", tick_bar, "tick-button radio-button");
+            radio_button.innerText = "Radio";
+            radio_button.onclick = () => {
+                handleRenderingStoryList();
+            }
         }
+
 
 
     }

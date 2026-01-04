@@ -14,6 +14,7 @@ const SAVE_KEY = 'ECHIDNA_MEMORY_LEAK_CULTISTS'
 //up to what uses this to define this
 //https://catalystsbathroomlibrary.neocities.org/
 let globalDataObject = {
+    highestStoryIndexUnlocked: 0,//for the radio
     loopingCultists: [] //an array, not a map, so that yes, you can end up with a dozen copies of the same person all with the same title. the echidna is an INCREDIBLY stupid, ineffiicent memory leak and its all of our problem (hopefully i'll remember to have a mode where peewee can eat excess cultists for you)
 }
 
