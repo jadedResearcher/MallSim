@@ -788,12 +788,20 @@ const translateFromOldToNewScale = (oldNumber, oldMax, oldMin, newMax, newMin) =
 //https://www.youtube.com/watch?v=GcumgV6zUvs
 //an Event will call this, but so will the unlocked stories so far
 const renderRadioCipherStory = (story, ele) => {
+    const rand = new SeededRandom(stringtoseed(story.title));
+
+    const audio_optionsRaw = `http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/wanderer_coffin_muffled.mp3
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/wanderer_coffin_muffled2.mp3
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/wanderer_coffin_muffled3.mp3
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/wanderer_coffin_muffled4.mp3
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/wanderer_coffin_muffled5.mp3`;
+    const audio_options = audio_optionsRaw.split("\n")
+
     const static_audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/spookystatic.mp3");
     static_audio.loop = true;
-    const muffled_audio = new Audio("http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/wanderer_coffin_muffled.mp3");
+    const muffled_audio = new Audio(rand.pickFrom(audio_options).trim());
     muffled_audio.loop = true;
 
-    const rand = new SeededRandom(stringtoseed(story.title));
     //26 is the correct rotation, not 0
     const modifier = rand.getRandomNumberBetween(0, 26);
     const max = 26 + modifier;
