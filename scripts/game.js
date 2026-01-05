@@ -945,11 +945,11 @@ class Game {
         }
 
         if (this.isInfiniteFoodCourt()) {
-            this.summary.setEnding("Infinite Food Court Ending")
+            this.summary.setEnding("Infinite Food Court Ending", this.current_tick)
         }
 
         if (this.everythingIsGoo()) {
-            this.summary.setEnding("Goo Mall Ending")
+            this.summary.setEnding("Goo Mall Ending", this.current_tick)
         }
 
         if (!this.summary.hasEnding()) {
