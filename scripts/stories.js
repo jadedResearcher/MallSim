@@ -64,7 +64,7 @@ const throg_diary_2 = `<p><span >OKAY MAYBE I WAS BEING A LITTLE MEAN BECAUSE I 
 <p><span >IM NOT STUPID</span></p>
 <p><span >REX ALWAYS BARKS WHEN YOU GO OUT</span></p>
 <p><span >ANYWAYS I THINK I WROTE ENOUGH BECAUSE POP ISNT WATCHING ME LIKE A HAWK ANYMORE SO IM GONNA GO PLAY OUTSIDE</span></p>
-<p><br></p>`;
+`;
 const throg_diary_3 = `<p><span >THIS IS STUPID AND IM NOT GOING TO DO IT THEY CANT MAKE ME DO IT</span></p>
 <p><span >AND ITS NOT&nbsp;</span><strong><span >FAIR</span></strong></p>
 <p><span >I THOUGHT THEY WERENT READING THIS AND YOU CANT JUST SUDDENLY READ IT AND SNITCH ON ME!!!!!!!!!!!!!!!!!!!!!!</span></p>
@@ -74,7 +74,7 @@ const throg_diary_3 = `<p><span >THIS IS STUPID AND IM NOT GOING TO DO IT THEY C
 <p><span >RAAAAAARGGH!!!!!!!!!!</span></p>
 <p><span >NOW THEY WANT ME TO ACTUALLY GO TO CULT MEETINGS SO GROWN UPS CAN ASK ME ABOUT MY DREAMS AND I DON&apos;T&nbsp;</span><strong><span >WANT&nbsp;</span></strong><span >TO</span></p>
 <p><span >ILL BURNINATE ANYONE WHO MAKES ME!!!!!!!!!!!!!!!!!!!!!!!!!!!</span></p>
-<p><br></p>`;
+`;
 const throg_diary_4 = `<p><span >I HATE THIS STUPID CULT</span></p>
 <p><span >THEY ALL THINK IM STUPID AND A LITTLE KID AND DONT KNOW ANYTHING</span></p>
 <p><span >THEY ASKED ME ALL THESE STUPID QUESTIONS THAT DIDNT EVEN&nbsp;</span><strong><span >MATTER&nbsp;</span></strong><span >AND THEN GOT MAD AT ME FOR NOT KNOWING THE ANSWER</span></p>
@@ -84,7 +84,7 @@ const throg_diary_4 = `<p><span >I HATE THIS STUPID CULT</span></p>
 <p><span >I DON&apos;T CARE HOW EXPENSIVE THAT LOBSTER WAS THATS A BIG RED BUG AND YOU CANT MAKE ME EAT IT!</span></p>
 <p>RAAAAAARGGH!!!!!!!!!!</p>
 
-<p><br></p>`;
+`;
 const throg_diary_5 = `<p><span >DEAR POP AND DAD,</span></p>
 <p><span >YOU&apos;LL BE SORRY YOU WERE SO MEAN TO ME.</span></p>
 <p><span >I AM GOING AWAY NOW AND YOU WONT FIND ME BECAUSE I AM SUPER GOOD AT HIDING.</span></p>
@@ -94,7 +94,7 @@ const throg_diary_5 = `<p><span >DEAR POP AND DAD,</span></p>
 <p><span >THATS BULLYING</span></p>
 <p><span >P.P.S I TOOK MY COSTUME WITH ME BECAUSE ITS MINE AND I BOUGHT IT WITH MY ALLOWANCE FROM THAT COOL STORE AT THE MALL AND IT WAS STUPID YOU TOOK IT AWAY FROM ME AND I KNEW WHERE YOU HID IT BECAUSE YOURE BAD AT HIDING</span></p>
 <p><span >P.P.P.S PLEASE TAKE CARE OF REX FOR ME HE DID NOTHING WRONG HERE</span></p>
-<p><br></p>`;
+`;
 const throg_diary_6_wibby_interlude = `<p><span >Witherby puffs out a sigh, ignoring the cold fog that swirls from his mouth, not even bothering to hide its strangeness with a cigarette.</span></p>
 <p><span >The kid ugly crying into his side in the dinosaur onesie wasn&apos;t exactly about to notice.</span></p>
 <p><span >His instincts tug on him. Polite and refined weren&apos;t going to work well on this Resident.&nbsp;</span></p>
@@ -138,7 +138,7 @@ const throg_diary_6_wibby_interlude = `<p><span >Witherby puffs out a sigh, igno
 <p><span >Classic runaway procedure.&nbsp;</span></p>
 <p><span >Give the kid a tour, point out the lack of bedtime stories and three square meals and toys and stuff as if its perks, have the kid come to their own conclusion about where they would rather be, &apos;regretfully&apos; escort them back outside, maybe even as far as a block or two from their house and be done with it all.</span></p>
 <p><span >He slips into his role fully, locking his cold, cold heart behind the warmly smiling mask.</span></p>
-<p><br></p>`;
+`;
 const throg_diary_7 = `<p><span >SO</span></p>
 <p><span >UH</span></p>
 <p><span >I GUESS I DON&apos;T REALLY HAVE TO WRITE IN THIS DUMB BOOK ANYMORE.</span></p>
@@ -164,12 +164,12 @@ const throg_diary_7 = `<p><span >SO</span></p>
 <p><span >I TOLD HIM I LIKED BEING A DINOSAUR AND POP AND DAD EXPLAINED ABOUT MY COSTUME LIKE I WASN&apos;T ALREADY WEARING IT AND THE BOSS LADY SAID THAT THERES THIS THING CALLED LARPING AND SHE COULD GET ME IN!</span></p>
 <p><span >APPARENTLY KIDS AND GROWNUPS WHO LARP GET TO WEAR COSTUMES AND HAVE COOL FIGHTS ALL THE TIME?????????? I THOUGHT EVERYONE WAS JUST BORING UNLESS ITS HALLOWEEN BUT APPARENTLY I JUST WASN&apos;T MEETING THE RIGHT KINDS OF GROWNUPS AND KIDS!</span></p>
 <p><span >SO HOPEFULLY THEY ARE COOL BUT NOT AS COOL AS ME AND AREN&apos;T MEAN OR STUPID OR SOMETHING.</span></p>
-<p><br></p>`;
+`;
 const throg_diary_8 = `<p><span >SO MARK THE WIZARD CAST THIS REALLY REALLY COOL SPELL TODAY AND KABLAM AND KABLOOY AND THERE WERE ALL THESE COOL SPECIAL EFFECTS AND I ASKED HIM HOW HE DID IT AND HE SAID THAT HE COULD SHOW ME THE APP ON HIS PHONE AND I ASKED IF I COULD USE IT TO BURNINATE STUFF BETTER DURING THE LARP AND HE SAID HE THOUGHT I COULD AND HE IS GOING TO COME OVER AFTER LARP TODAY TO EXPLAIN TO MY PARENTS WHAT APP I NEED AND WHY ITS TOTALLY WORTH THE MONEY TO SPEND ON IT AND THAT&apos;S SO COOL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span></p>
 <p><span >AND GINNY THE ELF SAID HER MOM NEVER LETS HER EAT DINO NUGGIES SO I TOLD HIM SHE HAD TO COME OVER TOO SO THAT SHE COULD HAVE DINO NUGGIES AT MY PLACE AND IT WOULD BE JUST LIKE THAT TIME WE FOUND MANA FROM THE GODS IN THE FOREST OF SECRETS BUT BETTER BECAUSE MANA IS JUST BREAD BUT DINONUGGIES ARE BREAD&nbsp;</span><strong><span >AND&nbsp;</span></strong><span >MEAT</span></p>
 <p><span >AND IM WRITING THIS HERE BECAUSE I THINK THIS MIGHT BE THE HAPPIEST IVE BEEN SINCE I GOT THIS BIG KIDS SIZED DINOSAUR COSTUME AND I THOUGHT MAYBE MY DIARY THING WANTED TO KNOW ABOUT ME BEING HAPPY BECAUSE I AM PRACTICING LETTING PEOPLE KNOW WHEN I AM HAPPY BECAUSE IT HELPS MY POP AND DAD AND TEACHERS AND THAT CULT BOSS LADY KNOW HOW TO HELP ME BE HAPPY</span></p>
 <p><span >ANYWAYS GOODBYE!</span></p>
-<p><br></p>`;
+`;
 
 
 const terri_report1 = `<p>>Ms. Wanda CEBro,</span></p>
@@ -180,7 +180,7 @@ const terri_report1 = `<p>>Ms. Wanda CEBro,</span></p>
 <p>>&nbsp;</span></p>
 <p>>Thank you for the opportunity to work together.</span></p>
 <p>>Terri Mathews</span></p>
-<p><br></p>`;
+`;
 const terri_report2 = `<p class="c6"><span class="c5">To</span><span class="c1">: Wanda, CEO of Eyedol Games</span></p>
   <p class="c10"><span class="c5">From</span><span class="c1">: JR, Leader of the Quotidian Quorom</span></p>
   <p class="c10"><span class="c5">Subject</span><span class="c1">: Corporate Espionage</span></p>
@@ -563,6 +563,395 @@ const harvest_parable = `<p><span >Once upon a time, there was a teen god named 
 
 `
 
+
+const eustaces_meat_dream = `<p><span >I wanna say I don&apos;t get paid enough for this shit, but I guess me being my own boss , more or less, means I should just &nbsp;give myself a raise.</span></p>
+
+<p><span >Heh.</span></p>
+
+<p><span >Anyways I want to use this blog as a way to organize my thoughts, figure out exactly how I got here. &nbsp;</span></p>
+
+<p><span >It can be a little...hard... remembering through the haze of, lets face it, depression, I was living through back then.</span></p>
+
+<p><span >I felt trapped...trapped by my shitty job, trapped by my mountain of debt (growing only bigger with each day somehow) and trapped by my own shitty fate.</span></p>
+
+<p><span >I could go on forever about my shitty job. Ghoul Halloween is a joke of a store, now you see it now you don&apos;t.&nbsp;</span></p>
+
+<p><span >They&apos;d expect you to set up a whole fully functioning store in just a couple of days and then the customers, would they respect the care and speed with which you organized things?</span><span ><br></span><span ><br></span><span >Hell no.</span></p>
+
+<p><span >And then, just as fast as you went up, you&apos;d tear what&apos;s left down, load it into trucks, labeled as best as you can all to do it all again next week, at some NEW semi abandoned location.&nbsp;</span></p>
+
+<p><span >With some NEW fucked up quirk like &quot;don&apos;t use the microwave at noon exactly&quot; or &quot;the employee breakroom is through the red door, there is no blue door. If you find a breakroom past a blue door do not trust any of the snacks inside&quot;.</span></p>
+
+<p><span >Yeah.</span></p>
+
+<p><span >I wish I was making it up too.</span></p>
+
+<p><span >It sounds fake.</span></p>
+
+<p><span >But only if you haven&apos;t worked retail before in Westerville, Ohio.</span></p>
+
+<p><span >And, small miracles, not many people have, I&apos;ve found out.</span></p>
+
+<p><span >Something about goods often just showing up on their own.</span></p>
+
+<p><span >Weird shit.</span></p>
+
+<p><span >But anyways, I&apos;m getting distracted.</span></p>
+
+<p><span >What was my point?</span></p>
+
+<p><span >Right.</span></p>
+
+<p><span >I was burnt out as hell.&nbsp;</span></p>
+
+<p><span >Yeah, I know what you&apos;re thinking, what retail employee isn&apos;t?</span></p>
+
+<p><span >But I had it...</span></p>
+
+<p><span >Well, I&apos;m not enough of a prick to say I had it worse than anybody...</span></p>
+
+<p><span >But...</span></p>
+
+<p><span >I never slept.</span></p>
+
+<p><span >Not a wink.</span></p>
+
+<p><span >Because any time I closed my eyes I was there.</span></p>
+
+<p><span >As awake as I am now, hand to the Angel of Knowledge and the Masses, but not in my shitty apartment, or the shitty breakroom or the bus stop bench or whatever.</span></p>
+
+<p><span >No.</span></p>
+
+<p><span >I&apos;d be there.</span></p>
+
+<p><span >In the corn maze.</span></p>
+
+<p><span >Exhausted.</span></p>
+
+<p><span >Just wanting to go home.</span></p>
+
+<p><span >Just wanting to get some sleep.</span></p>
+
+<p><span >But instead having to walk around the shit-forsaken corn, never knowing where I am, where I&apos;m going, what is even going on.</span></p>
+
+<p><span >Until.</span></p>
+
+<p><span >Inevitably.</span></p>
+
+<p><span >Over.</span></p>
+
+<p><span >And Over again.</span></p>
+
+<p><span >I die.</span></p>
+
+<p><span >Quick and clean, knife through the heart.</span></p>
+
+<p><span >I never see what does me in.</span></p>
+
+<p><span >I just.</span></p>
+
+<p><span >I just know that every time it happens I think to myself &quot;Sure. May as well happen.&quot;</span></p>
+
+
+<p><span >And.</span></p>
+
+<p><span >Isn&apos;t that just a kick in the teeth.</span></p>
+
+<p><span >I &apos;wake up&apos;, if you can even call what I was doing sleeping just minutes after closing my eyes, adrenaline shooting through my body.</span></p>
+
+<p><span >Good luck trying to &apos;sleep&apos; again after that, you know?</span></p>
+
+
+<p><span >Feeling bone tired but not as tired as I am in that shitty fucking maze.</span></p>
+
+<p><span >Not so tired that death would feel like the only possible release, if you get me.</span></p>
+
+
+<p><span >So.</span></p>
+
+<p><span >You&apos;ll forgive me if I wasn&apos;t exactly keen to follow the oh-so-well-meaning self care tips from coworkers, nosy old ladies or that freaking halloween maniac customer.</span></p>
+
+<p><span >At least that&apos;s how I knew her then.</span></p>
+
+<p><span >Terri isn&apos;t so bad, it turns out, once you start getting a decent amount of sleep.</span></p>
+
+<p><span >Still annoying as hell but... Not a bad friend.</span></p>
+
+<p><span >And before you judge me, if I refused to be friends with annoying people I would have eliminated 99% of the planet without even meeting them.</span></p>
+
+<p><span >Anyways.</span></p>
+
+<p><span >Yeah.</span></p>
+
+<p><span >I was burnt out as hell with a shitty job and a non existent sleep cycle.</span></p>
+
+<p><span >And then one day...</span></p>
+
+<p><span >Well, I guess I kinda accidentally buried the lede there, huh.</span></p>
+
+<p><span >Terri&apos;s annoying &apos;helpful&apos; attempts to help me sleep turned out to be exactly the thing I needed.</span></p>
+
+<p><span >Turns out SHE dreamed of the corn maze each night, too. &nbsp;I refused to believe it at first, almost even after she pulled out the fucked up mask one of the other people trapped in there with me always wore...</span></p>
+
+<p><span >But she got me admitting I had no other explanation for the things she knew.</span></p>
+
+<p><span >So of course it turns out she found the dreams decently restful, somehow, because insteada getting stabbed and almost being grateful for it she just wandered a maze forever.</span></p>
+
+<p><span >She still wasn&apos;t a FAN of it, of course, but for weird Terri reasons, not anything that would make sense to literally anyone else.</span></p>
+
+<p><span >Not important though, what IS important is that I wasn&apos;t the first other person she met who had the dreams.</span></p>
+
+<p><span >Apparently the kid I would see sometimes in my dreams, the one that&apos;s kinda not annoying... Twig.&nbsp;</span></p>
+
+<p><span >They are real, too.</span></p>
+
+<p><span >I remember feeling sorry for them when I found that out. They seemed to be having almost as bad a time as I was, but were so polite about it. You just knew they apologized to cashiers if their item wrung up wrong, you know? &nbsp;Not the kinda kid who deserved those kinda dreams.</span></p>
+
+<p><span >I feel sorry for them still, come to think of it, but for different reasons.</span></p>
+
+<p><span >Anyways, before I get ahead of myself, &nbsp;Terri offers to introduce me to some others who know whats going on. Some &quot;like minded individuals&quot; which shoulda tipped me off but I was not exactly operating under peak conditions there, you know?</span></p>
+
+<p><span >If it isn&apos;t clear yet? A cult.</span></p>
+
+<p><span >She wanted to introduce me to a cult.</span></p>
+
+<p><span >Because of course she did.</span></p>
+
+<p><span >If credulity were currency Terri would never have to stop buying halloween costumes so expensive it should be an actual literal crime.</span></p>
+
+<p><span >But as burnt out as I was?</span></p>
+
+<p><span >Nah, I had no clue.</span></p>
+
+<p><span >So I go down to the inner sanctum and I see all the candles and the fucked up sigil carved into the ground but somehow it wasn&apos;t until the ROBES got taken out that I started to get angry at myself for falling for this.</span></p>
+
+<p><span >Then I see the other kid, the loud one with the dinosaur costume and then i realize the hulking werewolf was Twig and something in me just says &quot;Sure. May as well happen.&quot;, just, the most fatalistic bullshit you can imagine.</span></p>
+
+<p><span >Because in my heart of hearts I knew they were going to kill me again.</span></p>
+
+<p><span >I was going to die and it was going to turn out this whole thing, my whole waking life was the dream and then I&apos;d be in the maze again and it would be the waking world and I...</span></p>
+
+<p><span >Couldn&apos;t even bring myself to care.</span></p>
+
+<p><span >Because the alternative was that it was all real. That Terri and that dinosaur kid and Twig and Me really were there and now really were here and this cult had something to do with it and...</span></p>
+
+
+<p><span >Hell, they probably were going to kill me even if that was the case, you know?</span></p>
+
+<p><span >So I just...</span></p>
+
+<p><span >Went still and got quiet and just...</span></p>
+
+<p><span >Watched.</span></p>
+
+<p><span >...</span></p>
+
+<p><span >And there she was. The Cultist.&nbsp;</span></p>
+
+<p><span >Walking out onto the stage all calm like and welcoming me to their midsts and calling me the &quot;Other Half&quot;.</span></p>
+
+<p><span >And there was something about her.</span></p>
+
+<p><span >Something...just....</span></p>
+
+<p><span >Clicked.</span></p>
+
+<p><span >I can&apos;t put it into words.</span></p>
+
+<p><span >Even after all this trying.</span></p>
+
+<p><span >I took classes, you know.</span></p>
+
+<p><span >Journalism ones.</span></p>
+
+<p><span >Creative writing when those failed.</span></p>
+
+<p><span >All to try to just.</span></p>
+
+<p><span >UNDERSTAND.</span></p>
+
+<p><span >What I guess isn&apos;t something that works that well with words.</span></p>
+
+
+<p><span >Point is, I guess I can outline what I&apos;ve managed to capture into simple words.</span></p>
+
+<p><span >I KNEW.</span></p>
+
+<p><span >I knew that this Cultist was named Camellia and she was a real work-a-holic.</span></p>
+
+<p><span >I knew that she hated me to her core, hated that I was her equal but that she would never so much as sniff her nose at me.</span></p>
+
+<p><span >I knew that she didn&apos;t realize she hated me. Thought hatred was &apos;beneath&apos; her. So she simply assumed she would never do it. And acted accordingly.</span></p>
+
+<p><span >I knew she was so emotionally constipated, so sure she was a simple puppet of her god&apos;s will that she hadn&apos;t even thought about what it meant that her god was half her.</span></p>
+
+<p><span >And I knew...</span></p>
+
+<p><span >I knew the other half of that god&apos;s mind?</span></p>
+
+<p><span >Was me.</span></p>
+
+
+<p><span >Suddenly, just like I feared, everything twisted on me.</span></p>
+
+<p><span >The corn maze WAS reality and this life WAS a dream.</span></p>
+
+<p><span >Did I really never think it was bizarre that Westerville, Ohio was the only city in the entire state?</span></p>
+
+<p><span >That the only other state was Orlando, Florida, of all things?</span><span ><br></span><span ><br></span><span >That the only other place in the world was Naples, Italy?</span></p>
+
+
+
+<p><span >And in that corn maze, yeah, I died. Over and over.</span></p>
+
+<p><span >Because someone had to.</span></p>
+
+<p><span >I died more than anyone.</span></p>
+
+<p><span >Maybe whoever decided those things found me annoying.</span></p>
+
+<p><span >Maybe they thought, &quot;Hey, if SOMEONE has to die it might as well be the suicidally depressed guy&quot;.</span></p>
+
+<p><span >And hell, if they killed one of the kids, or even Terri...&nbsp;</span></p>
+
+<p><span >I&apos;d think less of them.</span></p>
+
+
+<p><span >But that doesn&apos;t exactly make it easy to FORGIVE whatever twist of fate made me die so that a god could live.</span></p>
+
+
+<p><span >And I guess that Cultist lady was going through the same thing, because she looked at me, carefully not looking DOWN at me and nodded once. Like she knew me through and through and found me wanting, but wasn&apos;t gauche enough to say it.</span></p>
+
+<p><span >She declared me her equal, to the whole fucked up congregation of them, and then said that I would not be attending any services.</span><span ><br></span><span ><br></span><span >I would not be joining them in their &quot;Rite of Candy&quot;.</span></p>
+
+<p><span >And that any who equally disliked the &quot;Rite of Candy&quot; could seek me out for guidance, but that the very nature of &quot;Meat&quot; meant that I was unlikely to give it.</span></p>
+
+<p><span >And just like that, some of the more normal cultists got up and I took my &apos;get out of jail free card&apos; and skedaddled myself.&nbsp;</span></p>
+
+<p><span >I&apos;d hoped they would, you know, lead the way out of their weird compound but apparently everyone agreed *I* was the one leading so we wandered around lost for a while before I finally found the exit.</span></p>
+
+<p><span >Most of them wandered off after that but one stayed behind to shake my hand and tell me how meaningful it was that I just &quot;let myself exist in the moment and enjoy the peace of a nice walk, rather than hurry to my business&quot;.</span></p>
+
+<p><span >...</span></p>
+
+
+<p><span >So I go home.</span></p>
+
+<p><span >And I think.</span></p>
+
+<p><span >I think hard about everything I &apos;Knew&apos; seeing The Cultist that formed the other half of an actual for real god.</span></p>
+
+<p><span >And I came to a conclusion.</span></p>
+
+<p><span >Fuck Ghoul Halloween.</span></p>
+
+<p><span >Fuck my debt.</span></p>
+
+<p><span >If they wanted to come after me for it? Let them.</span></p>
+
+<p><span >Because you know what?</span></p>
+
+<p><span >IT WOULD BE INTERESTING.</span></p>
+
+<p><span >It.</span></p>
+
+<p><span >Would.</span></p>
+
+<p><span >Be.</span></p>
+
+<p><span >Different.</span></p>
+
+<p><span >Life didn&apos;t have to be a blurry exhausting trudge in a rut you can&apos;t possibly escape.</span></p>
+
+<p><span >You make one different choice and you end up a blasphemous god.</span></p>
+
+<p><span >I wasn&apos;t that god.</span></p>
+
+<p><span >I was the dream left behind from the mortal that fueled it.</span></p>
+
+<p><span >But why waste a dream working at my fucking JOB?</span></p>
+
+<p><span >And hell, if I was a dream so was everyone around me and they neither realized it or cared.</span></p>
+
+<p><span >Who cares if the corn maze was just a little bit more real than where I was now?</span><span ><br></span><span ><br></span><span >I was going...</span></p>
+
+
+<p><span >To enjoy myself.</span></p>
+
+<p><span >I was going to exist in the moment, in the meat of my body, and let the soft animal within call the shots.</span></p>
+
+<p><span >And no animal on this or any level of existence wants to work retail for 12 hour shifts at a time when they COULD be walking in a park and eating a little treat.</span></p>
+
+<p><span >So that&apos;s what I did.</span></p>
+
+<p><span >Completely fucked off of work, no call, no show.</span></p>
+
+<p><span >And they fired me, of course they did.</span></p>
+
+<p><span >And there was that old needlepoint of anxiety when it happened.&nbsp;</span><span ><br></span><span ><br></span><span >I had fucked up I was going to be thrown out onto the street I was going to die (again and again and again) but I just kinda....</span></p>
+
+<p><span >Let it wash over me.</span></p>
+
+<p><span >I had already seen that story.</span></p>
+
+<p><span >Let&apos;s find a new one.</span></p>
+
+<p><span >I tried out selling hot dogs in the park I was spending most of my time in anyways.</span></p>
+
+<p><span >The pay was shit, but I was out in the fresh air (and nowhere near Westerville&apos;s many, many corn fields).&nbsp;</span></p>
+
+<p><span >Debt collectors started coming for me, but they made the mistake of trying to go through Terri when I refused to answer my phone.</span></p>
+
+<p><span >Now HER nosy ass was aware of my problem and instead of asking me to try believing in crystals or whatever woo woo shit was her obsession of the week (mandated by her employer if you can believe it) she offered me a job instead.</span></p>
+
+<p><span >Apparently Eyedol Games was looking for a new crop of interns (confusedly onboarded by some old guy called &quot;The Intern&quot;) and you could be whatever age to get started.</span><span ><br></span><span ><br></span><span >I&apos;m not going to ...</span></p>
+
+<p><span >Well, I was going to say BORE but I think maybe I&apos;ll go with &quot;confuse&quot; instead.</span></p>
+
+<p><span >I&apos;m not gonna confuse you with the details of onboarding.</span></p>
+
+<p><span >Suffice it to say that when I made my two month mark and got an evaluation meeting with the &quot;CEBro&quot; (yes she&apos;s exactly as insufferable as that sounds) I wasn&apos;t exactly worrying about cash anymore.</span></p>
+
+<p><span >The job itself was a joke, but it gave me plenty of time to try out some hobbies, brush up on some skills I remember liking as a kid, that sort of thing.</span></p>
+
+<p><span >Sure sometimes I get a rush of guilt (am I an imposter? am I cheating the company out of a paycheck I don&apos;t deserve?) but that goes away pretty quick when I see that most of my coworkers are literal imposters pretending to be human via occasional thumping a keyboard and pouring coffee down the wrong hole.</span></p>
+
+
+<p><span >Plus as far as I can tell Eyedol has literally infinite money so...</span></p>
+
+<p><span >No harm no foul, I suppose.</span></p>
+
+<p><span >Terri somehow got the keys to my new apartment and comes over sometimes to remind me to pray to the Harvest for gratitude and I grumble but...</span></p>
+
+<p><span >In all honesty?</span><span ><br></span><span ><br></span><span >If it wasn&apos;t for the Harvest I&apos;d still be burnt out as hell and blindly trudging through my rut.</span></p>
+
+<p><span >I pray all the thanks I know how to give, because each night when I close my eyes I now see endless books and cards and cats and flowers and fruit.&nbsp;</span></p>
+
+<p><span >I see a world of plenty and peace and I wake rested.</span></p>
+
+<p><span >Hopeful.</span></p>
+
+<p><span >There&apos;s plenty I could get all upset over.</span></p>
+
+<p><span >I could try to stop the Cult from doing whatever the hell the &quot;Rite of Candy&quot; is.</span></p>
+
+<p><span >I could try to do more than just collect a paycheck from a scammy maze company.</span></p>
+
+<p><span >And I AM starting to get little commissions and stuff from my writing... Working on a novel, maybe....</span></p>
+
+<p><span >But for now...</span></p>
+
+<p><span >I think I&apos;m exactly where I need to be.</span></p>
+
+<p><span >And you really can&apos;t beat that.</span></p>
+
+<p><span >Signing off for now.</span></p>
+
+<p><span >-Eustace</span></p>
+`;
+
+
+
 const camellias_sermon = `<p><span >Fruit.</span></p>
 
 <p><span >I need not tell you, faithful, about fruit. We have come to know it sweetness through our worship, its many forms plucked from the branches of the tree called Divinity.&nbsp;</span></p>
@@ -599,6 +988,412 @@ const camellias_sermon = `<p><span >Fruit.</span></p>
 <p><span >Do not fail your god.</span></p>
 
 
+`;
+
+/*
+the boss is so fun to write for
+
+the boss, wibby, the closer and doc slaughter are my favorites to write because each in their own way has a strong theme of Control
+
+the Boss is to absurd lengths, he's a one note caricature of control, an ascended npc the Eye Killer adopted
+
+so its extra fun
+
+don't worry, he's TOTALLY in control while being a paralyzed puppet of his little sibling
+*/
+const boss_lament = `<p><span >You think I asked for this.</span></p>
+<p><span >Don&apos;t think I don&apos;t know that.</span></p>
+<p><span >Boo hoo, woe is me, you&apos;re thinking I&apos;m saying, like I am some kind of blameless victim in all this.</span></p>
+<p><span >You see the webs on my lil Bro&apos;s throat and eyes and you think I&apos;m some kinda monster. Some kinda monster that would hurt Sam or some shit.</span></p>
+<p><span >Don&apos;t deny it.</span></p>
+<p><span >I can see it written all over your face.</span></p>
+<p><span >You think I was living large, with my fingers in all the pies and my threads in every mess this fucked up city has to offer. The Boss of this whole Family.</span></p>
+<p><span >Do you have&nbsp;</span><strong><span >ANY&nbsp;</span></strong><span >idea, any&nbsp;</span><strong><span >FUCKING&nbsp;</span></strong><span >idea how hard I worked to keep everyone safe.</span></p>
+<p><span >You think</span><strong><span >&nbsp;I&apos;M&nbsp;</span></strong><span >a monster!? Me!</span></p>
+<p><span >Let me tell you, you know&nbsp;</span><strong><span >NOTHING&nbsp;</span></strong><span >of monsters.</span></p>
+<p><span >Fucking&nbsp;</span><strong><span >NOTHING</span></strong><span >.</span></p>
+<p><span >And its not like I can blame you for that, now can I?</span></p>
+<p><span >I&apos;m the reason you get to be all sheltered.&nbsp;</span><strong><span >I&apos;M</span></strong><span >&nbsp;the reason everyone is safely tucked into their beds at a reasonable hour, all secure in the knowledge that monsters are fakey fake BULLSHIT they don&apos;t gotta worry about.</span></p>
+<p><span >So yeah.</span></p>
+<p><span >Don&apos;t you dare fucking tell me I&nbsp;</span><strong><span >DESERVE</span></strong><span >&nbsp;to be all tied up in my own threads.</span></p>
+<p><span >To have the&nbsp;</span><strong><span >SAFETY NET</span></strong><span >&nbsp;I fucking WOVE for my lil bro turned on me.</span></p>
+<p><span >To feel it tug and insteada them dancing to my tune, I&apos;m dancing to theirs.&nbsp;</span></p>
+<p><span >Such a little twist and such a big consequence...</span></p>
+<p><span >Who knew...</span></p>
+<p><span >Who knew...</span></p>
+<p><span >...</span></p>
+<p><span >...</span></p>
+<p><span >...</span></p>
+<p><span >So.</span></p>
+<p><span >Yeah.</span></p>
+<p><span >Don&apos;t tell me I asked for this.</span></p>
+<p><span >And don&apos;t you fucking dare pity me.</span></p>
+<p><span >I don&apos;t need your help.</span></p>
+<p><span >I don&apos;t need anything.</span></p>
+<p><strong><span >*I*&nbsp;</span></strong><span >am in control here.&nbsp;</span></p>
+<p><span >Me.</span></p>
+<p><span >Who do you think taught Sam every single fucking thing they know.</span></p>
+<p><span >Maybe I&apos;m dancing to their tune but who do you fucking think taught them music.</span></p>
+<p><span >They&apos;re doing good.</span></p>
+<p><span >Good work.</span></p>
+<p><span >Keeping the city organized.</span></p>
+<p><span >Keeping the Family together.</span></p>
+<p><span >Keeping our noses clean.</span></p>
+<p><span >They knew better than to touch that fucked up fruit candy stuff when it started circulating on the street, didn&apos;t they.</span></p>
+<p><span >Just like their Big Bro.</span></p>
+<p><span >Ain&apos;t none of this Family gonna &quot;join the Loop&quot;, whatever the fresh fuck that means. Capiche?</span></p>
+<p><span >The Loop aint got nothing for us.</span></p>
+<p><span >Just... just shit no one wants to know.</span></p>
+<p><span >The Killer, now SHE is in the Loop, and you think that helped her even once?</span></p>
+<p><span >No.</span></p>
+<p><span >We stay a Family.</span></p>
+<p><span >We stay ourselves.</span></p>
+<p><span >We stay in control.</span></p>
+<p><span >And Sam, they&apos;re a good kid, they know that.</span></p>
+<p><span >So sure, there was a little accident with my webs. But they&apos;re making it work. Keeping things spinning.</span></p>
+<p><span >Proud of them.</span></p>
+<p><span >Always knew they would be the one to inherit the Family Business.</span></p>
+<p><span >Just never figured it would be while I was still breathing.</span></p>
+<p><span >And hey.</span></p>
+<p><span >Maybe they comes and checks on me soon. Once their &nbsp;other priorities are done.</span></p>
+<p><span >&nbsp;Opens a window or some shit.</span></p>
+<p><span >I could use a new view.</span></p>
+`;
+
+
+/*
+this is my first time really writing himbo
+
+i've done a lot of boss monologues, he's fun to write
+
+plus he's with the eye killer in the not!starwars hotel murderfest
+
+but himbo has always aluded me
+
+but somehow realizing that he needed to be the finale
+AND he had to still be weird about monster girls
+
+
+it all clicked into place
+
+my favorite part of writing him was going from harmless idiot to cold and cruel mob enforcer
+
+
+that and realizing his laid back gamzee-ish way of talking was DELIBERARELY to mock witherby
+
+wibby tries so hard not to sound like a cowboy, to not fall into a drawl and say 'improper' words like 'aint' 
+
+
+
+i think himbo delights in finding out EXACTLY What someone views as "embarrasingly dumb" and playing that up
+when pretending to be a fool
+
+hes not dumb
+he's just....really really really into a childrens card game and ladies who could kill him without blinking
+
+
+and can any of us blame him?
+
+yeah, when we first saw him, to the west, crushing on the eye killer , he was kinda unaware his family were in the mob
+
+but he was like, a teenager, you know?
+
+yeah HOSTAGE knew and was even being trained up into the family
+but that says a lot more about HIS family than about himbo, you know?
+
+still
+
+the nickname stuck
+
+and "the right hand" sure is a mouthful isn't it?
+
+so i liked finding a reason why "himbo" sticks to him in a way "hostage" doesn't to what is now "The Boss"
+
+can you tell they're my characters, not IC's?
+
+my autograph book sure is useful
+
+what even are names?
+*/
+const himbos_monologue = `<p><span >Fruit.</span></p>
+
+<p><span >You come to me asking about fruit.</span></p>
+
+<p><span >Me.</span></p>
+
+<p><span >Not the Boss.</span></p>
+
+<p><span >Not Sam.</span></p>
+
+<p><span >Me.</span></p>
+
+<p><span >That tells me a lot.</span></p>
+
+<p><span >*sigh*</span></p>
+
+<p><span >I know I don&apos;t look like much.</span></p>
+
+<p><span >Stupid.</span></p>
+
+<p><span >Childish.</span></p>
+
+<p><span >You don&apos;t got to hide it.</span></p>
+
+<p><span >You think I&apos;ll be easier to deal with than the other Family Executives.</span></p>
+
+<p><span >I get it.</span></p>
+
+<p><span >I know what they call me, whispered in the dark.</span></p>
+
+<p><span >&quot;The Right Hand&quot; doesn&apos;t suit me, does it?</span><span ><br></span><span ><br></span><span >Do I look like I get things done?</span></p>
+
+<p><span >No.</span></p>
+
+<p><span >&quot;Himbo&quot;.</span></p>
+
+<p><span >That&apos;s what they call me. When they think I can&apos;t hear.</span></p>
+
+<p><span >And you know what?</span></p>
+
+<p><span >I don&apos;t even care.</span></p>
+
+<p><span >I like playing card games.&nbsp;</span></p>
+
+<p><span >With...</span></p>
+
+<p><span >With...</span></p>
+
+<p><span >You know...</span></p>
+
+<p><span >HER.</span></p>
+
+<p><span >Ain&apos;t she just dreamy?</span><span ><br></span><span ><br></span><span >That single purple eye. The gleaming razor blade...</span></p>
+
+<p><span >That wild look when she realizes a combination she can play?</span></p>
+
+<p><span >She taught me everything I know about the Zampanio Card Game.</span></p>
+
+<p><span >So yeah.</span></p>
+
+<p><span >I&apos;m a Himbo. An idiot in love with a monster.</span></p>
+
+<p><span >And not just her...</span></p>
+
+<p><span >....</span></p>
+
+<p><span >Your boss... The lady with the sword...</span></p>
+
+<p><span >Maybe she can come by next time?</span></p>
+
+<p><span >I&apos;ll never forget the first time I met her... the way she loomed over me... just ....just breathing....and smiling....</span></p>
+
+
+
+<p><span >So.</span></p>
+
+<p><span >Anyways.</span></p>
+
+<p><span >Fruit.</span></p>
+
+<p><span >Yeah.</span></p>
+
+<p><span >We were talking about Fruit.</span></p>
+
+<p><span >Nasty stuff.</span></p>
+
+<p><span >We oppose it.</span></p>
+
+<p><span >Or...</span></p>
+
+<p><span >The Boss opposes it, which is the same thing, when it comes right down to it.</span></p>
+
+<p><span >We all follow his lead.</span></p>
+
+<p><span >So I guess you&apos;re surprised we worship the Harvest despite being against the Fruit?</span></p>
+
+<p><span >*sigh*</span></p>
+
+<p><span >We have a Dreamer with us.</span></p>
+
+<p><span >Yeah.</span></p>
+
+<p><span >Figures you&apos;re not surprised.</span></p>
+
+<p><span >Sam was never the same after coming back from that Corn Maze.</span></p>
+
+<p><span >Used to be a cute kid. &nbsp;Now they&apos;re just kinda a little Boss.</span></p>
+
+<p><span >Don&apos;t get me wrong, I love my best bro.</span></p>
+
+<p><span >Not that way or anything, though feeling his threads wrap around my neck just right is....</span></p>
+
+<p><span >...</span></p>
+
+
+<p><span >Ain&apos;t nothing like it.</span></p>
+
+
+<p><span >Anyways, Sam was changed and we changed right along with &apos;em.</span></p>
+
+<p><span >And we know the Harvest isn&apos;t supposed to be all hyped up on sugar and hunger.</span></p>
+
+<p><span >We know its not safe to have any Tom, Dick or Harry learn the secrets of reality and how to accidentally break it.</span></p>
+
+<p><span >So yeah.</span></p>
+
+<p><span >We oppose them.</span></p>
+
+<p><span >That Cult of fanatics.</span></p>
+
+<p><span >They may worship the same Harvest God but they ain&apos;t true believers.</span></p>
+
+<p><span >So yeah.</span></p>
+
+<p><span >Sounds like Sam sent you a tape.</span></p>
+
+<p><span >For all the fancy talk they do, for all they ape at being their Big Bro...</span></p>
+
+<p><span >They sure do not have a way with words, huh?</span></p>
+
+<p><span >You look insulted to hell and back. I don&apos;t need a big brain to see that.</span></p>
+
+<p><span >But you&apos;re here anyways.</span></p>
+
+<p><span >Maybe by talking to me you hope to send your own insulting message.</span></p>
+
+<p><span >A threat even?</span></p>
+
+<p><span >I don&apos;t give a fuck, if you&apos;ll excuse my french. Never was good at keeping a clean mouth, no matter how much the Boss wants it.</span></p>
+
+<p><span >You want to contain the Fruit?</span></p>
+
+<p><span >Be my guest.</span></p>
+
+<p><span >You want to not deal with the rest of the Family?</span><span ><br></span><span ><br></span><span >A-fuckin&apos; okay.</span></p>
+
+<p><span >Not my business.</span></p>
+
+<p><span >I&apos;m not gonna get bogged down in the details.</span></p>
+
+<p><span >As the Right Hand, its my job is to make things run smoothly.</span></p>
+
+<p><span >To make up for whatever fallings the Boss lets slip through the cracks, even if he is too proud to admit to &apos;em.</span></p>
+
+<p><span >And let me tell you, with Sam running things, and don&apos;t tell them I told you that, its even worse.</span></p>
+
+<p><span >So yeah.</span></p>
+
+<p><span >Insult us back. Insult me.</span></p>
+
+<p><span >Don&apos;t care.</span></p>
+
+<p><span >You contain those Fruit, and we&apos;ll keep giving you the resources you need to keep doing it.</span></p>
+
+<p><span >Figure money ain&apos;t terribly important to you, you seem on Eyedol&apos;s payroll, and good for you.</span></p>
+
+<p><span >But we both know there&apos;s other things we can provide.</span></p>
+
+<p><span >You tell that research lady I said &apos;hi&quot; by the by, and we&apos;ll get her her preferred type of relaxation aid sooner than you can say &quot;Exodia&quot;, yeah?</span></p>
+
+<p><span >...</span></p>
+
+<p><span >*scoff*</span></p>
+
+<p><span >Confess?</span></p>
+
+<p><span >Nah, brother, my hands are clean.</span></p>
+
+<p><span >Always have been.</span></p>
+
+<p><span >No one tells me shit.</span></p>
+
+<p><span >I&apos;m just a Himbo after all.</span></p>
+
+<p><span >And there&apos;s value in keeping at least one of us clean.</span></p>
+
+<p><span >Couldn&apos;t even tell you what we&apos;re gonna deliver to Ria. &nbsp;Might be over the counter cough syrup for all I care. Nasty smokers&apos; cough on that girl.</span></p>
+
+<p><span >So hey, maybe your little threat display was for nothing after all?</span></p>
+
+<p><span >No threads are gonna lace around your throat from ME.</span></p>
+
+<p><span >But looks like maybe you don&apos;t have the trump card you thought you did against little old harmless me.</span></p>
+
+<p><span >...</span></p>
+
+<p><span >Now isn&apos;t THAT an interesting idea?</span></p>
+
+<p><span >You sure about that now, brother?</span></p>
+
+<p><span >Sticks and stones and all that but...</span></p>
+
+<p><span >There&apos;s something &apos;bout glass houses too now ain&apos;t there?</span></p>
+
+<p><span >You sure you want to talk about how I&apos;m being used? How I&apos;ll be tossed out like rags and garbage once I am used up? To spit your ice like venom into the air and have me breathe it in? Coat my lungs?</span></p>
+
+<p><span >How much does YOUR family value you, to send you right into the lions den all alone.</span></p>
+
+<p><span >You guys aren&apos;t dumb enough to think I&apos;m still human, now do you? Just &apos;cause we choose not to enter the Loop doesn&apos;t make us lesser, I&apos;m sure you&apos;ll agree. &nbsp;I played my Fire Princess in defense position before you even got here. Not my fault you were dumb enough to attack me.</span></p>
+
+<p><span >There there.</span></p>
+
+<p><span >Now now.</span></p>
+
+<p><span >You&apos;re not my type, Witherby. &nbsp;Or should I call you &quot;Wibby&quot;, like your friends do?</span></p>
+
+<p><span >You guys aren&apos;t the only one with an information network.</span></p>
+
+<p><span >Now, we both have made our threats, both sides made our insults.&nbsp;</span></p>
+
+<p><span >We&apos;re all big and tough and definitely shouldn&apos;t be fucked with.</span></p>
+
+<p><span >So now how about we skip to the part where we work together even though we&apos;re not exactly friends and just live our lives.</span></p>
+
+<p><span >...</span></p>
+
+<p><span >Oh come on now, don&apos;t be like that.</span></p>
+
+<p><span >Chin up.</span></p>
+
+<p><span >You&apos;re in the Loop right?&nbsp;</span></p>
+
+<p><span >Next time you&apos;ll have all sorts of dirt on that new version of me.</span></p>
+
+<p><span >No way we&apos;ll get the better end of the deal next time.</span></p>
+
+<p><span >Why sweat the small stuff, yeah?</span></p>
+
+<p><span >*scoffs*</span></p>
+
+<p><span >Brother, you might just be a better person than me after all if you&apos;re so concerned about the fate of some other &quot;Himbo&quot;.&nbsp;</span></p>
+
+<p><span >Information is power and I can&apos;t deny that you Loopists are holding all the cards, in the end.</span></p>
+
+<p><span >Only natural that you&apos;ll do better and better each loop against those other Families.</span></p>
+
+<p><span >Not my problem though. Right now? The cards are in MY hand.</span></p>
+
+<p><span >I protect the Boss, I protect Sam, I protect the Family FROM the Boss and Sam&apos;s mistakes, you understand?</span></p>
+
+<p><span >Some other Universe?&nbsp;</span><span ><br></span><span ><br></span><span >Outside my paygrade.</span></p>
+
+<p><span >So you go ahead and you stop those Fruit Cultists from joining you in that hell of your own creation and you leave us to living our lives. And ONLY our lives.</span></p>
+
+<p><span >Maybe you can&apos;t see it, maybe its been happening so slow it just slips by unnoticed.</span></p>
+
+<p><span >But brother, from the outside looking in, that Loop thing... What it does to you?</span><span ><br></span><span ><br></span><span >I want no part of it.</span></p>
+
+<p><span >Hell, maybe you all were always this fucked up.</span></p>
+
+<p><span >But I ain&apos;t never seen a person fucked up in the ways you all are.</span></p>
+
+<p><span >So yeah.</span></p>
+
+<p><span >How does the Boss put it?</span></p>
+
+<p><span >You&apos;re free to go.</span></p>
+
+<p><span >Don&apos;t let me detain you.</span></p>
 `;
 
 
@@ -724,9 +1519,15 @@ const handleRenderingStoryList = () => {
     let clicked = false;
     for (let i = 0; i < ordered_stories.length; i++) {
         if (i <= globalDataObject.highestStoryIndexUnlocked) {
+            let chapter = "Chapter: " + i;
+            if (i === 0) {
+                chapter = "Prologue";
+            } else if (i === ordered_stories.length - 1) {
+                chapter = "Epilogue";
+            }
             const story = ordered_stories[i];
             const tick_button = createElementWithClassAndParent("button", tick_bar, "story-button");
-            tick_button.innerText = story.title;
+            tick_button.innerText = chapter + " " + story.title;
             tick_button.onclick = () => {
                 story_container.innerHTML = '';
                 renderRadioCipherStory(story, story_container)
@@ -834,18 +1635,19 @@ const renderRadioCipherStory = (story, ele) => {
     }
 
     input.oninput = () => {
-        const value = translateFromRadio(parseInt(input.value), max, min);
+        //round up no matter what
+        const value = Math.ceil(translateFromRadio(parseInt(input.value), max, min));
         const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
         static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
         muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
-
-        story_container.innerHTML = "<h2>Tune the Radio</h2>" + rotationCipherWithMapping(story.text, letterMapping, translated_rotation);
+        console.log("JR NOTE: translated_rotation", translated_rotation)
+        story_container.innerHTML = `<h2>Tune the Radio:</h2><p> ${story.title}</p>` + rotationCipherWithMapping(story.text, letterMapping, translated_rotation);
     }
     const value = translateFromRadio(parseInt(input.value), max, min);
     const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
     static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
     muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
-    story_container.innerHTML = "<h2>Tune the Radio</h2>" + rotationCipherWithMapping(story.text, letterMapping, translateFromRadio(parseInt(input.value), max, min));
+    story_container.innerHTML = `<h2>Tune the Radio</h2><p> ${story.title}</p> ` + rotationCipherWithMapping(story.text, letterMapping, translateFromRadio(parseInt(input.value), max, min));
 
 }
 
@@ -855,28 +1657,34 @@ const renderRadioCipherStory = (story, ele) => {
 //extremely real
 //even if the Harvest is no longer aware of it
 const ordered_stories = [
-    new Story("Prologue: Before The Cult, There Were Still Shoppers", witherys_sacrificial_lamb),
-    new Story("Chapter 1: Harvest Parable", harvest_parable),
-    new Story("Chapter 2: THROGDAZORG's Candy Diary 1", throg_diary_1),
-    new Story("Chapter 3: QQ Report: Terri 1", terri_report1), //terri quits eyedol games
+    new Story("Before The Cult, There Were Still Shoppers", witherys_sacrificial_lamb),
+    new Story("Harvest Parable", harvest_parable),
+    new Story("THROGDAZORG's Candy Diary 1", throg_diary_1),
+    new Story("QQ Report: Terri 1", terri_report1), //terri quits eyedol games
 
-    new Story("Chapter 4: THROGDAZORG's Candy Diary 2", throg_diary_2),
-    new Story("Chapter 5: QQ Report: Terri 2", terri_report2),
+    new Story("THROGDAZORG's Candy Diary 2", throg_diary_2),
+    new Story("QQ Report: Terri 2", terri_report2),
 
-    new Story("Chapter 5: THROGDAZORG's Candy Diary 3", throg_diary_3), //this is where the Cult finds out about the Dreamers
+    new Story("THROGDAZORG's Candy Diary 3", throg_diary_3), //this is where the Cult finds out about the Dreamers
 
-    new Story("Chapter 5: THROGDAZORG's Candy Diary 4", throg_diary_4),
-    new Story("Chapter 5: QQ Report: Terri 3", terri_report3), //terri finds twig
+    new Story("THROGDAZORG's Candy Diary 4", throg_diary_4),
+    new Story("QQ Report: Terri 3", terri_report3), //terri finds twig
 
-    new Story("Chapter 5: THROGDAZORG's Candy Diary 5", throg_diary_5),
-    new Story("Chapter 5: QQ Report: Terri 4", terri_report4), //terri joins cult
+    new Story("THROGDAZORG's Candy Diary 5", throg_diary_5),
+    new Story("QQ Report: Terri 4", terri_report4), //terri joins cult
 
-    new Story("Chapter 5: THROGDAZORG's Witherby Interlude 6", throg_diary_6_wibby_interlude),
+    new Story("THROGDAZORG's Witherby Interlude 6", throg_diary_6_wibby_interlude),
 
-    new Story("Chapter 5: THROGDAZORG's Candy Diary 7", throg_diary_7), //throg is safely back home and learns about larping
-    new Story("Chapter 5: QQ Report: Terri 5", terri_report5), //the trainin team is tasked to contain the harvest fruit
+    new Story("THROGDAZORG's Candy Diary 7", throg_diary_7), //throg is safely back home and learns about larping
 
-    new Story("Chapter 5: THROGDAZORG's Candy Diary 8", throg_diary_8), //throg has friends
+    new Story("The Boss' Lament", boss_lament), //the boss, also known as the Hostage (but not for a lot of loops now), is definitely, completely in control of things
+
+    new Story("QQ Report: Terri 5", terri_report5), //the trainin team is tasked to contain the harvest fruit
+
+    new Story("THROGDAZORG's Candy Diary 8", throg_diary_8), //throg has friends
+
+    new Story("Eustace's Meat Dream", eustaces_meat_dream), //terri brings eustace to the cult where he sees twig, throg and the Cultist and finds peace by fucking off from the cult, his job, everything. he joins eyedol riiiiight before terri quits it
+    new Story("Himbo's Monologue", himbos_monologue), //himbo negotiaties the terms in which the Family and the Training Team will be working together to contain the harvest fruit (namely, the training team is going to do all the work and take on all the risk and get very little in return other than 'support')
 
 ]
 
