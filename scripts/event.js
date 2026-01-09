@@ -246,6 +246,22 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         }
     }
 
+    if (waste) {
+        /*
+        wastes can read the code and they know that you can't tell the difference between a [CENSORED] mannequin offering a product and a regular one
+
+        */
+        me.chosen_name = "Mannequin Product Feared"
+        ele.innerHTML = `${waste.nameHTML()} absolutely does not let anyone even get NEAR the ${chosen_emmisary.mannequin_type} form of ${chosen_emmisary.nameHTML()}, frozen into place with an outstretched hand offering one ${chosen_item.name} When pressed, they mutter something about the code, and the horrifying secrets within.`;
+        return;
+    }
+
+    /*
+    just reading the session, you'll never know that this started out as  a regular mannequin offering a product 
+    and then it goes terribly wrong if you get too close (ignoring it or NOT)
+    but i wanted to make sure wastes knew
+    i think wastes should always be more scared of mannequin events like this than regular players
+    */
     if (censored_beasts.length > 0) {
         me.chosen_name = "???"
         //living, dead, mannequin...it doesn't matter
@@ -290,12 +306,20 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
     const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
 
     const players = location.livingNonMannequinPlayers();
+    let waste;
+    for (let player of players) {
+        if (player.wasted) {
+            waste = player;
+        }
+    }
     const eyes = getPartyHighestEyes(players)
     const arms = getPartyHighestArms(players)
     //console.log("JR NOTE: players, eyes", players, eyes)
     const mannequin_graphic = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/helpful_friend.gif'>`;
     //you need to at least be somewhat obesrvant to spot the crack in the wall and hear the sounds
     //if parker is too common, just up the stat gate
+
+
     if (eyes && eyes.stats[EYES_METAL_STAT] < MEDIUM_STAT_VALUE) {
         me.chosen_name = "Mannequin Product Ignored"
         ele.innerHTML = `${eyes.nameHTML()} walks right past the ${chosen_emmisary.mannequin_type} form of ${chosen_emmisary.nameHTML()}, frozen into place with an outstretched hand offering one ${chosen_item.name} without even realizing it. Apparently in a mall, mannequins simply fade into the background. <br>${mannequin_graphic}`;

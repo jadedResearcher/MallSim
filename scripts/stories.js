@@ -1956,6 +1956,18 @@ const renderRadioCipherStory = (story, ele) => {
         letterMapping[String.fromCharCode(i)] = rand.getRandomNumberBetween(1, 26);
     }
 
+    ele.pointerdown = () => {
+        //volume for static gets lighter the closer we are to 26
+        //volume for muffled gets louder the closer we are to 26
+        static_audio.play();
+        muffled_audio.play();
+    }
+
+    ele.pointerup = () => {
+        static_audio.pause();
+        muffled_audio.pause();
+    }
+
     input.onmouseenter = () => {
         //volume for static gets lighter the closer we are to 26
         //volume for muffled gets louder the closer we are to 26
