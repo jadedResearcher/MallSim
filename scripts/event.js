@@ -246,6 +246,14 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         }
     }
 
+    const players = location.livingNonMannequinPlayers();
+    let waste;
+    for (let player of players) {
+        if (player.wasted) {
+            waste = player;
+        }
+    }
+
     if (waste) {
         /*
         wastes can read the code and they know that you can't tell the difference between a [CENSORED] mannequin offering a product and a regular one
@@ -305,13 +313,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
     chosen_emmisary.inventory = [...free_items]
     const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
 
-    const players = location.livingNonMannequinPlayers();
-    let waste;
-    for (let player of players) {
-        if (player.wasted) {
-            waste = player;
-        }
-    }
+
     const eyes = getPartyHighestEyes(players)
     const arms = getPartyHighestArms(players)
     //console.log("JR NOTE: players, eyes", players, eyes)
