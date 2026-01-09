@@ -245,7 +245,9 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
             }
         }
     }
-
+    const chosen_emmisary = game.rand.pickFrom(possible_mannequins);
+    chosen_emmisary.inventory = [...free_items]
+    const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
     const players = location.livingNonMannequinPlayers();
     let waste;
     for (let player of players) {
@@ -309,9 +311,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         return;
     }
 
-    const chosen_emmisary = game.rand.pickFrom(possible_mannequins);
-    chosen_emmisary.inventory = [...free_items]
-    const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
+
 
 
     const eyes = getPartyHighestEyes(players)
