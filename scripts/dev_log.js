@@ -1,6 +1,17 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["1/8/2026"] = `guess who just finished the radio mechanic
+its this waste
+of blood
+its me
+jr
+added an easter egg so you can read them all just from a url
+so i could show a few interested parties
+not hard to find just put radio into the param list (after a ? or & depending on if its the first param or not)
+anyways
+really all i wanna do before 1/13 (sburbsims 9th anniversary)
+is the session customizer along with shareable urls`
 
 dev_log["1/3/2026"] = `heheheheheheheeh
 only a few days left of my long vacation
