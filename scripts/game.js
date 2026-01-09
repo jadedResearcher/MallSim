@@ -1186,7 +1186,7 @@ class Game {
         }
 
         //if its not set, or its zero, ignore
-        if (globalDataObject.highestStoryIndexUnlocked) {
+        if (globalDataObject.highestStoryIndexUnlocked || isItStoryTime()) {
             const radio_button = createElementWithClassAndParent("button", tick_bar, "tick-button radio-button");
             radio_button.innerText = "Radio";
             radio_button.onclick = () => {

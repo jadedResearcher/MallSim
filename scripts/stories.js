@@ -234,12 +234,12 @@ const terri_report3 = `<p class="c6"><span class="c5">To</span><span class="c1">
       known abnormality "TWIG" (see addendum LAV-C-003-A). </span></p>
   <p class="c0 c2"><span class="c1"></span></p>
   <p class="c0"><span class="c1">She participated in ESPIONAGE activities of a particularly low level, following "TWIG"
-      back to his warehouse location before being caught.</span></p>
+      back to their warehouse location before being caught.</span></p>
   <p class="c0 c2"><span class="c1"></span></p>
   <p class="c0"><span class="c1">Information was exchanged, including shared dreams involving a corn maze (see addendum
       LAV-C-002). </span></p>
   <p class="c0 c2"><span class="c1"></span></p>
-  <p class="c0"><span class="c1">A transcript of this exchange is as follows:</span></p>
+  <p class="c0"><span class="c1">A transcript of this exchange is as follows (labeled with date and time and format):</span></p>
   <p class="c0 c2"><span class="c1"></span></p>
   <p class="c0 c2"><span class="c1"></span></p>
   <p class="c0"><span class="c1">Terri: *gasp*</span></p>
@@ -1397,6 +1397,339 @@ const himbos_monologue = `<p><span >Fruit.</span></p>
 `;
 
 
+
+const samandtwig_report1 = `
+<p><strong><span>Abnormality Behavioral Update: Form Z-113-B2</span></strong></p>
+
+<p><strong><span>Reporting Member: T-R5 (Ria)</span></strong></p>
+<p><strong><span>Designation:</span></strong><span>&nbsp;L-C-002</span></p>
+<p><strong><span>Behavioral Category:&nbsp;</span></strong><span>Attachment</span></p>
+<p><strong><span>Date</span></strong><span>: December 31st, 2015</span></p>
+
+<p><strong><span>Team Member Notes:</span></strong></p>
+
+
+<p><span>Rather than wait for Egg Barter Enrichment, L-C-002 &nbsp;has delivered a series of objects to my desk unprompted.&nbsp;</span></p>
+
+<p><span>Objects appears to be an assortment of audio and video cassette tapes, each labeled with a time stamp and nothing else.</span></p>
+
+<p><span>L-C-002 was characteristically unforthcoming on any explanation for the behavior, so all I can do is see what&apos;s on them.</span></p>
+
+<p><span>I tasked the Twins with hunting me down equipment that could even play them.</span></p>
+
+<p><span>Transcriptions of each tape will be provided below, as well as context and occasional speculative interpretations.&nbsp;</span></p>
+
+
+<p><strong><u><span>Transcriptions Are Attached Below</span></u></strong></p>
+
+`
+const twig_discovers_sam2 = `
+<p><u><span>December 15th, 2015 &nbsp;11:34pm (Video)</span></u></p>
+
+<p><span>Grainy footage of trees, bushes, a well manicured lawn.&nbsp;</span><span>&nbsp; There is no audio.</span></p>
+
+
+<p><span>The camera zooms in, and something moves near a blurry bush. A shadow, but it doesn&apos;t seem quite human.</span></p>
+
+<p><span>Eyes gleam towards the camera and it is hastily turned off.</span></p>
+
+<p><span style="font-size:8pt;font-family:Arial,sans-serif;">1: &nbsp;The Twins confirm this is the estate of the Family (associated abnormalities include L-C-002 LAV-C-003-B).&nbsp;</span></p>
+
+
+`
+
+const twig_asks_rava_for_permission3 = `
+<p><u><span>December 15th, 2015 &nbsp;3:01am &nbsp;(Video)</span></u></p>
+
+
+<p><span>The camera is turned on in pure blackness.&nbsp;</span></p>
+
+<p><span>Quiet, stealthy movements slowly unscrew the cap from the camera and a dimly lit space is revealed. The camera&apos;s position is low to the ground, and wooden shipping crates ahead &nbsp;let only the barest hint of light through where they do not quite meet.&nbsp;</span></p>
+
+<p><span>&quot;You&apos;re not gonna like what you see, pup&quot; a growling voice&nbsp;</span><span>&nbsp;says &quot;You have no ties there anymore. Any sniffing around you do, all its gonna do is pull you back.&quot;</span></p>
+
+<p><span>&quot;Yeah. I got no ties. And who cares what happens to my... &nbsp;to him.&quot; a second voice says, less growl in it, more of a whimper, a whine. LAV-C-003-A, perhaps? &quot;But figuring out what kind of monster is pretending to be me...How to sniff it out when it&apos;s NOT this obvious... Isn&apos;t that good training? Don&apos;t you want me to know how to do that for you?&quot;</span></p>
+
+<p><span>&quot;Nah. I appreciate the effort, I really do, but... You do this, you do it for you, pup.&quot; &nbsp;A scrape of something. A chair being moved? A shadow lazily drifts across the shipping crate. &quot;If you fuck up, and I gotta save your ass, there&apos;s consequences. A dog who goes running back to its old master isn&apos;t a dog you can trust. So you be sure, damn sure, that you know why you&apos;re doing this.&quot;</span></p>
+
+<p><span>And then soft footsteps away.</span></p>
+
+<p><span>The camera lingers, almost curiously, zooming slowly on a crack between crates, the silence almost getting louder with the tension.</span></p>
+
+<p><span>Then, the second voice, more growl in it, no whimper, says, softly &quot;Fuck.&quot; A beat, and then almost plaintively. &quot;Fuck.&quot;</span></p>
+
+<p><span>No chair scrape this time, just the sound of flesh scraping something, and then soft footsteps away.&nbsp;</span></p>
+
+<p><span style="font-size:8pt;font-family:Arial,sans-serif;">&nbsp;2: Devona confirms this is &quot;Rava&quot;, currently no designation. The &quot;Hundmaster&quot; of LAV-C-003-A</span></p>
+
+
+`
+const twig_prowling4 = `
+<p><u><span>December 21th, 2015 &nbsp;12:13am (Video)</span></u></p>
+
+<p><span>The camera is turned on (no lens cap this time, did L-C-002 learn?) from a low, dark position.</span><span><br></span><span><br></span><span>Crickets are clearly heard.</span></p>
+<p><span>Eyes shine in the dark, not quite pointed towards the camera.</span></p>
+
+<p><span>The camera zooms out a bit and the faint glow of a window, light mostly blocked by thick curtains, a few feet away from the ground, is seen. The eyes are pointed towards it.</span></p>
+
+<p><span>Something flutters against the curtain.</span></p>
+
+<p><span>The crickets continue singing.</span></p>
+
+<p><span>The clip ends.</span></p>
+`
+
+const sam_findsout_about_twig5 = `
+<p><u><span>December 21th, 2015 &nbsp;1:55am (Audio Only)</span></u></p>
+
+<p><span>&quot;I swear, can&apos;t rely on anyone for anything!&quot; a thin voice, somehow familiar. No growl or whine, and slightly higher, but this has a note in common with the possible LAV-C-003-A from before. LAV-C-003-B, perhaps?</span></p>
+
+<p><span>The squeal of a cassette tape fast forwarding.&nbsp;</span><span><br></span><span><br></span><span>&quot;If you wanna say something, say it!&quot; plays from the recording, in the voice (known to this researcher) &nbsp;of the Big Brother of LAV-C-003-B (Note: Also known as the Boss of the Naples Crime Family, this individual is a confirmed victim of the Unos Autograph Book and as such, can not be referred to by anything approximating a name).&nbsp;</span></p>
+
+<p><span>The odds of the first voice being LAV-C-003-B have increased.&nbsp;</span></p>
+
+<p><span>There is a hiss of breath, almost buried under the ambient static of the recording.&nbsp;</span></p>
+
+<p><span>&quot;...you fucking dare?&quot;</span></p>
+
+<p><span>Silence.</span></p>
+
+<p><span>&quot;Dare use his voice?&quot;</span></p>
+
+
+<p><span>&quot;You think I don&apos;t know what he&apos;d say right now? Lay this shit on MY feet? Act like its MY fault?&quot;</span></p>
+
+<p><span>Silence.</span></p>
+
+<p><span>&quot;No. This is your fucking doing. What do I even pay you for? You&apos;re here to protect ME, to protect the FAMILY and you let some kind of MONSTER prowl outside my bedroom window at night?&quot;</span></p>
+
+<p><span>Silence.</span></p>
+
+<p><span>It stretches out with a tension you can almost cut with a knife.</span></p>
+
+<p><span>Clicking, perhaps a new cassette inserted into a player?</span></p>
+
+<p><span>The squeal of a cassette tape fast forwarding.</span></p>
+
+<p><span>&quot;N̷o̸t̴h̸i̵n̵g̷&acirc;̶&euro;̵&trade;̷s̸ ̸d̸u̵m̸b̶.̵.̸.̶ ̶I̸f̸ ̵i̵t̶ ̵g̶e̸t̷s̴ ̶m̶e̶.̸.̶.̷ ̷o̶u̷t̴t̵a̸ ̴y̵o̵u̴r̵.̵.̴.̴ ̷G̶r̴i̴p̵.̵&quot;</span></p>
+
+<p><span>The recording is thick with corruption, (This researcher speculates it comes from another Loop.) but the voice is clear. It&apos;s the same as the main speaker.</span></p>
+
+<p><span>There&apos;s a...unidentifiable sort of...whoosh? Almost a pop of nothing becoming something, like when one of the Twins transforms...but sort of backwards?</span></p>
+
+<p><span>And then a shriek, rapidly diminishing as if falling away, accompanied by clanks and thuds.</span></p>
+
+<p><span>The recording clicks off.</span></p>
+
+`
+const samandtwig_meetup6 = `
+
+<p><u><span>December 21th, 2015 &nbsp;2:14am (Video)</span></u></p>
+
+<p><span>The view is of a dimly lit room. Newspaper articles scatter it, paper the walls and floor, and the static of an older style tv augments the dim, golden light of a single bare bulb hanging from the ceiling.</span></p>
+
+<p><span>A figure, clearly identifiable as LAV-C-003-B is pacing in the small space. Ten paces forwards. Ten back.</span></p>
+
+<p><span>Back and forth.</span></p>
+
+<p><span>Back and forth.</span></p>
+
+<p><span>This continues for twelve additional minutes before the whoosh pops in again and an air vent manifests in the ceiling. Clanging and thudding and howling builds to a crescendo as a hulking figure drops down onto the floor, narrowly missing LAV-C-003-B.</span></p>
+
+<p><span>It springs to its feet, fangs bared, eyes glowing as it realizes its not alone. It is in full Hund form, notably further along than the last time this researcher encountered it.</span></p>
+
+<p><span>&nbsp; LAV-C-003-B whirls to meet it, faintly glimmering lines appearing around it.</span></p>
+
+<p><span>A shadowy figure appears behind both. L-C-002.</span></p>
+
+<p><span>The squeal of a tape recorder fast forwarding grabs the attention in the room.</span></p>
+
+<p><span>Despite the clear corruption (again, this research speculates its from a previous Loop), The voice is immediately recognizable as the one from the warehouse before, the one identifiable as the Hundmaster of LAV-C-003-A.</span></p>
+
+
+<p><span>&quot;D̷o̷e̴s̵ ̶t̴h̶a̷t̶ ̴s̵o̶u̷n̵d̵ ̵f̷u̵n̴ ̴t̶o̸ ̵y̶o̵u̴,̴ ̵T̶w̶i̶g̷?̷ ̸L̶i̴v̸i̶n̵g̷ ̵y̶o̴u̷r̶ ̴l̶i̶f̷e̴ ̷i̷n̷s̸i̵d̴e̸ ̵y̶o̷u̵r̵ ̵b̸r̸o̸t̴h̵e̶r̶&apos;̶s̴ ̸l̷i̶t̸t̷l̸e̴ ̵g̷i̵l̸d̵e̴d̵ ̶c̶a̵g̸e̶?̵ ̴G̷e̶t̷t̴i̷n̷g̶ ̶t̷a̷k̴e̴n̴ ̴o̸n̵ ̵w̶a̴l̵k̵i̷e̶s̶,̸ ̴g̴r̶o̶w̴i̴n̷g̷ ̵f̸a̶t̷ ̴o̶f̷f̵ ̵w̴h̶a̵t̸e̷v̵e̸r̸ ̶l̵i̷e̴s̵ ̶h̷e̷&apos;̸s̸ ̸g̵o̶t̵t̴a̶ ̸t̷e̴l̵l̴ ̷t̶o̸ ̷k̴e̸e̴p̴ ̸y̶o̷u̴ ̷s̴a̵f̵e̶?̵ ̸A̵l̷l̵ ̴w̸h̸i̸l̵e̴ ̷h̵e̸ ̶p̸a̶r̴a̸d̸e̷s̴ ̶h̴i̶s̵ ̶o̶w̸n̶ ̴l̵i̸t̵t̵l̴e̷ ̵p̵e̶t̶ ̵a̸r̵o̷u̴n̴d̶?̸&quot;&nbsp;</span></p>
+
+<p><span>A pause.</span></p>
+
+<p><span>&nbsp;&quot;O̶n̵e̶ ̵h̵e̵ ̸c̵a̶n̸&apos;̶t̶ ̷e̷v̵e̴n̵ ̴t̴a̷m̸e̴?̸&quot;</span></p>
+
+<p><span>A pause.</span></p>
+
+<p><span>&quot;S̸u̵i̸t̸ ̵y̵o̷u̸r̶s̴e̴l̷f̶,̴ ̸i̸f̷ ̶t̷h̴a̴t̵&apos;̷s̸ ̵w̷h̶a̵t̴ ̴y̸o̶u̷ ̸w̸a̷n̵t̶ ̴t̴o̷ ̷d̷o̷.̷ ̷B̵u̵t̵.̸.̷.̴ ̸w̷e̸ ̵c̵o̶u̵l̶d̸ ̴b̶e̷ ̷s̵o̷m̷e̸t̶h̴i̵n̴g̴ ̶s̵t̴r̷o̵n̶g̷,̸ ̵i̸f̷ ̸y̵o̵u̴ ̵b̴e̴c̶o̵m̴e̵ ̶m̴i̸n̵e̴.&quot;&nbsp;</span></p>
+
+<p><span>An extended silence.</span></p>
+
+<p><span>&quot;̴N̴o̴t̷h̴i̸n̷g̶ ̵w̷i̸l̴l̵ ̷e̷v̵e̸r̴ ̶h̶o̶l̸d̶ ̶y̵o̵u̵ ̵b̶a̶c̷k̴ ̷a̶g̶a̶i̷n̷.&rdquo;</span></p>
+
+<p><span>LAV-C-003-A has their back to the camera. They are extremely still, eyes locked onto the shadowy figure of L-C-002.</span></p>
+
+
+<p><span>LAV-C-003-B isn&apos;t even bothering to look at her, facing the camera incidentally as they lock eyes with LAV-C-003-A.&nbsp;</span></p>
+
+<p><span>&quot;Care to explain? How, per se, is this horseshit of dropping me in here, making me wait twenty minutes, only to TRAP me in here with the MONSTER! &nbsp;How! Is! This! GUARDING ME!?&quot;</span></p>
+
+<p><span>Silence.</span></p>
+
+<p><span>The recording plays the words of the Hundmaster again.</span></p>
+
+<p><span>LAV-C-003-B screams in frustration.</span></p>
+
+<p><span>LAV-C-003-A finally makes a decision, and sits, carefully, with their back pressed into a corner, face half visible to the camera.&nbsp;</span></p>
+
+<p><span>Their words, when spoken, are carefully chosen, but with that edge of growl they tried to suppress around their Master.&nbsp;</span></p>
+
+<p><span>&quot;What are you.&quot;</span></p>
+
+<p><span>Not a question. No hint of upturned inflection at the end. No room to deny the inhuman nature of LAV-C-003-B.</span></p>
+
+<p><span>LAV-C-003-B snorts. &quot;That&apos;s rich, coming from YOU. What you want a job? Heard we hire monsters around here? Well we&apos;re not hiring anymore. We got more than enough right now&quot;, they say, jerking a finger towards L-C-002. &quot;And the ones we got are barely trained enough as it is.&quot;</span></p>
+
+<p><span>LAV-C-003-A&apos;s eyes narrow.</span></p>
+
+<p><span>&quot;What are you. You&apos;re not what you seem. You&apos;re not me.&quot;</span></p>
+
+<p><span>LAV-C-003-B throws their hands up. &quot;I swear I would trade away the Family Fortune for just ONE monster that makes any gods-damned sense around here.&quot;</span></p>
+
+<p><span>Apparently enough time has passed since the adrenaline of the sudden fall and fight. LAV-C-003-A&apos;&apos;s bulk begins slipping away, their features softening, becoming more human.</span></p>
+
+<p><span>More obviously a mirror of LAV-C-003-B.&nbsp;</span></p>
+
+<p><span>This is the first record of A and B being near each other and this researcher notes the following visual differences through the grain and blur of the video cassette:</span></p>
+
+<ul>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>A has obviously sharper teeth, though nothing outside of human norm.</span></p>
+    </li>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>A has more scars coating their body.</span></p>
+    </li>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>A has more muscle in general, and leaner features.</span></p>
+    </li>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>A has shaggy, unwashed hair and unkempt clothing.</span></p>
+    </li>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>B is softer in general, more body fat, cleaner, shorter hair, less muscle.</span></p>
+    </li>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>B&apos;s eyes are slightly unfocused at all times.</span></p>
+    </li>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>B seems more tightly strung. They react to things more obviously, almost twitchy.&nbsp;</span></p>
+    </li>
+    <li style="list-style-type:disc;font-size:11pt;font-family:Arial,sans-serif;">
+        <p><span>B seems to move, just slightly, almost involuntarily whenever anyone around them moves</span></p>
+    </li>
+</ul>
+
+<p><span>B jumps backwards when they notice the similarities.</span></p>
+
+<p><span>L-C-002 plays the recording of the Hundmaster one final time.</span></p>
+
+<p><span>When it ends, she holds up her Razor (Researcher Note: this has been confirmed in previous loops to be Artifact 4: the Quatro Blade). She slowly, exaggeratedly carefully, slices the air between the two.</span></p>
+
+<p><span>She gestures at A, then B.</span></p>
+
+<p><span>She fumbles with something in her shadow, and the squeal of tapes again.</span></p>
+
+<p><span>&quot;One enters... Two...leaves.&quot; plays the clearly doctored audio.</span></p>
+
+<p><span>A is standing now.</span></p>
+
+<p><span>&quot;I ran away from home. Got tired of my Big Bro calling the shots. Rava offered me training, a purpose. A looser collar. &quot;</span></p>
+
+<p><span>B is pacing again, 5 steps back and forth against the narrow side of the room, as far from A as possible. &nbsp;&quot;See I KNOW this is bullshit cuz I would NEVER betray my family to go be.... what are you, homeless or something? A homeless dog?&quot;</span></p>
+
+<p><span>They stop their pacing, glancing at L-C-002, who raises the shadowy tape recorder.</span></p>
+
+<p><span>&quot;Second thought. I don&apos;t wanna hear whatever fucked up recording you have that proves me wrong.&quot; &nbsp;They pause. Collect their thoughts. &nbsp;&quot;Fine. Maybe when I was a stupid kid, fresh outta college, I had ideas I could live out on my own. Spit on the generosity of my Family. Sure.&quot;</span></p>
+
+<p><span>They stare intensely at A. &nbsp;&quot;So if you&apos;re trying to say you&apos;re. What. Some fucked up alternate version of me? Fine. Thanks. Glad to hear I made the right choice.&quot;</span></p>
+
+<p><span>A begins growling. &quot;And I&apos;m glad to find out that remaining a pampered pet would have turned me into &quot; a pause, wrinkling their nose &quot;this.&quot; A snaggletoothed grin &quot;Do you know how to even talk if you&apos;re not bitching about something? Why complain when you can just DO something?&quot;</span></p>
+
+<p><span>B goes straight backed with fury. It&apos;s actually... a little funny to see. &nbsp;Like, they&apos;re the opposite of intimidating without their Family backing them up and they&apos;re going toe to toe with this Hund and... Right.&nbsp;</span></p>
+
+<p><span>Anyways.&nbsp;</span></p>
+
+<p><span>B stomps their foot, which I thought people only did in movies to show they&apos;re brats, and demands L-C-002 take them back.&nbsp;</span></p>
+
+<p><span>She draws near to the camera, and leans over it, and the feed ends.</span></p>
+
+`
+
+const samandtwig_negotiatin7 = `
+<p><u><span>December 31th, 2015 &nbsp;3:33pm (Video)</span></u></p>
+
+
+<p><span>The video begins with LAV-C-003-B sitting in front an impressive dark wood desk, polished to a shine, no clutter or dust besmirching it.&nbsp;</span></p>
+
+<p><span>They are at ease, well groomed, and their Big Brother is standing quietly beside them, looking stern, but approving.&nbsp;</span></p>
+
+<p><span>&quot;Hello. If this video reaches where I hope it will, I am speaking to the Training Team of the Westerville Mall. &quot; &nbsp;A winning smile graces LAV-C-003-B&apos;s face, and its echo flits over to the Big Brother.</span></p>
+
+<p><span>&quot;I represent the Family of Naples Italy, as I&apos;m sure you&apos;re aware. It appears we have a common enemy, of sorts.&quot;</span></p>
+
+<p><span>LAV-C-003-B &nbsp;folds their hands neatly on top of the desk.&nbsp;</span></p>
+
+<p><span>&quot;I want to make clear that I wholly disavow the actions of... Any part of that &quot;Cult of the Harvest&quot; business, no matter what involvement my... shall we say, Sibling? has with them.&quot;</span></p>
+
+<p><span>Their Big Brother finally stirs, leaning over slightly to hand a thin manilla folder to LAV-C-003-B, who opens it and makes a show of leafing through it.</span></p>
+
+<p><span>&quot;My associates inform you have had quite the conflict with them, as of late.&quot;</span></p>
+
+<p><span>Another winning smile, this one not quite reaching the eyes.&nbsp;</span></p>
+
+<p><span>&quot;I will be blunt. Their activities risk destabilizing part of my Business. A Business I am well aware one of your number has quite an interest in seeing continuing to run smoothly. &quot;</span></p>
+
+<p><span>&quot;That Harvest Fruit or whatever they&apos;re calling that drug hitting the street.. &nbsp;It cannot be allowed to continue. Not only does this Cult have exclusive supply, I&apos;m sure you&apos;d agree that it hardly seems safe for the masses to access.&quot;</span></p>
+
+<p><span>&quot;As they say, the enemy of my enemy is my friend. If you agree to ally with the Family, I&apos;m sure we&apos;ll both benefit. &nbsp;I can provide, as a sweetener to bring you to the table, a guarantee of access to the softer drugs our Family trades in, as well as any assistance required in securing their supply of the Fruit.&quot;</span></p>
+
+<p><span>The camera zooms into LAV-C-003-B&apos;s face, the first hint that a third person was in the room at all.</span></p>
+
+<p><span>&quot;All you need do is agree to guard the Fruit.&quot;</span></p>
+
+<p><span>The manilla folder is carelessly tossed onto the desk.</span><span><br></span><span><br></span><span>&quot;You excel at &apos;containing&apos; things, right? &nbsp;And that fucked up Mall you live in... well, its not exactly easy to dive into. We learned that lesson the hard way. By the way, tell Witherby &apos;fuck you&apos; for me, would you?&quot;</span></p>
+
+<p><span>The smile has become smarmy.</span></p>
+
+<p><span>&quot;Your little camera girl made it clear that none of you have any intention of &apos;getting too close&apos; to me or mine. &nbsp;Fine. I&apos;m sure both sides benefit from such an arrangement.&quot;</span></p>
+
+<p><span>&quot;So send me a recording back with your response. &nbsp;No internet, no traces. My bodyguard will see it gets to me.&quot;</span></p>
+
+<p><span>The recording ends.</span></p>
+
+`
+const samandtwig_addendum8 = `
+<p><strong><u><span>Addendum</span></u></strong></p>
+
+<p><span>Witherby handled quizzing L-C-002 on why she sent the additional tapes. Near as he can figure it was in &quot;good faith&quot;, as he put it. LAV-C-003-B doesn&apos;t seem aware we have the info, but then they ALSO don&apos;t know we have a barter system already established with L-C-002.</span></p>
+
+<p><span>Devona and Neville did some digging and it DOES seem like the Family has been actively working to keep Harvest Fruit off the street. It&apos;s just kinda hard to keep Wasted, Looping Cultists from just stealing them right back.&nbsp;</span></p>
+
+<p><span>Along with all the rest of the info we&apos;ve been collecting on the Cult&apos;s activity, and I&apos;d say (purely speculation of course) that Twig, I&apos;m sorry LAV-C-003-A being part of the Cult might be motivating LAV-C-003-B to oppose them extra strongly.</span></p>
+
+<p><span>I think Doc Slaughter would say that proving you&apos;re better than your past self is a huge motivator for some people.</span></p>
+
+<p><span>Anyways.</span></p>
+
+<p><span>Obviously we&apos;re not going to trust the Family. But... Containing the Aleph tier threat of the Harvest Fruit has to be our highest priority.</span></p>
+
+<p><span>And NO I am not just saying that because it gets me all the weed I want.</span></p>
+
+<p><span>Promise.</span></p>
+
+<p><span>Witherby, if you&apos;re reading this, I super promise.</span></p>
+
+<p><span>Anyways.&nbsp;</span></p>
+
+<p><span>We talked it over as a group and I guess we don&apos;t want to send a recording back. No telling what that spider monster, sorry, LAV-C-003-A &nbsp;could do with our images, freely given, &nbsp;you know?</span><span><br></span><span><br></span><span>Witherby says he has a lead on some light Attachment Work he can do with one of the Family&apos;s higher ups, maybe see what support they can give us besides drugs.&nbsp;</span></p>
+
+`;
+
+
 /*8
 
 i actually did have fun writing the himbo
@@ -1516,9 +1849,10 @@ const handleRenderingStoryList = () => {
     if (!globalDataObject.highestStoryIndexUnlocked) {
         story_container.innerHTML = "ERROR: no stories unlocked???"
     }
+    const number_stories_unlocked = isItStoryTime() ? ordered_stories.length : globalDataObject.highestStoryIndexUnlocked
     let clicked = false;
     for (let i = 0; i < ordered_stories.length; i++) {
-        if (i <= globalDataObject.highestStoryIndexUnlocked) {
+        if (i < number_stories_unlocked) {
             let chapter = "Chapter: " + i;
             if (i === 0) {
                 chapter = "Prologue";
@@ -1637,10 +1971,10 @@ const renderRadioCipherStory = (story, ele) => {
     input.oninput = () => {
         //round up no matter what
         const value = Math.ceil(translateFromRadio(parseInt(input.value), max, min));
-        const translated_rotation = value <= 26 ? value : 26 - Math.abs(26 - value);
+        const translated_rotation = value <= 26 ? value : 27 - Math.abs(27 - value);
         static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
         muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
-        console.log("JR NOTE: translated_rotation", translated_rotation)
+        console.log("JR NOTE: translated_rotation,value", translated_rotation, value)
         story_container.innerHTML = `<h2>Tune the Radio:</h2><p> ${story.title}</p>` + rotationCipherWithMapping(story.text, letterMapping, translated_rotation);
     }
     const value = translateFromRadio(parseInt(input.value), max, min);
@@ -1649,6 +1983,17 @@ const renderRadioCipherStory = (story, ele) => {
     muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
     story_container.innerHTML = `<h2>Tune the Radio</h2><p> ${story.title}</p> ` + rotationCipherWithMapping(story.text, letterMapping, translateFromRadio(parseInt(input.value), max, min));
 
+}
+
+const isItStoryTime = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const radio = urlParams.get('radio');
+    if (radio) {
+        return true;
+    }
+    return false;
 }
 
 //unlike most of my work, this is in a linear order
@@ -1660,34 +2005,68 @@ const ordered_stories = [
     new Story("Before The Cult, There Were Still Shoppers", witherys_sacrificial_lamb),
     new Story("Harvest Parable", harvest_parable),
     new Story("THROGDAZORG's Candy Diary 1", throg_diary_1),
+    new Story("Ria Receives a Report", samandtwig_report1),
+
     new Story("QQ Report: Terri 1", terri_report1), //terri quits eyedol games
 
     new Story("THROGDAZORG's Candy Diary 2", throg_diary_2),
+    new Story("Twig Makes a Discovery", twig_discovers_sam2),
+
     new Story("QQ Report: Terri 2", terri_report2),
 
     new Story("THROGDAZORG's Candy Diary 3", throg_diary_3), //this is where the Cult finds out about the Dreamers
+    new Story("Twig Goes It Alone", twig_asks_rava_for_permission3),
+
 
     new Story("THROGDAZORG's Candy Diary 4", throg_diary_4),
     new Story("QQ Report: Terri 3", terri_report3), //terri finds twig
 
-    new Story("THROGDAZORG's Candy Diary 5", throg_diary_5),
+    new Story("Twig Prowling", twig_prowling4),
+
+
+    new Story("THROGDAZORG's Candy Diary 5 ", throg_diary_5),
     new Story("QQ Report: Terri 4", terri_report4), //terri joins cult
+
+    new Story("Sam Makes a Discovery", sam_findsout_about_twig5),
+
 
     new Story("THROGDAZORG's Witherby Interlude 6", throg_diary_6_wibby_interlude),
 
     new Story("THROGDAZORG's Candy Diary 7", throg_diary_7), //throg is safely back home and learns about larping
 
-    new Story("The Boss' Lament", boss_lament), //the boss, also known as the Hostage (but not for a lot of loops now), is definitely, completely in control of things
+    new Story("Sam and Twigs Wild Ride", samandtwig_meetup6), //i don't know why, but "sam and twigs wild ride" is what i'll always call their whole deal....i want to get off Mr Bones Wild Ride and all that... except kinda opposite. both think its fucked up the other exists but don't want to rejoin or like, stop existing
+
+
+    new Story("The Boss' Lament", boss_lament), //the boss, also known as the Hostage (but not for a lot of loops now), is definitely, completely in control of things, also i did not MEAN to make this the only one you can't fully uncipher from the radio, but here we are, horseshoes in play
 
     new Story("QQ Report: Terri 5", terri_report5), //the trainin team is tasked to contain the harvest fruit
 
+    new Story("Sam Makes an Offer You Can't Refuse", samandtwig_negotiatin7),
+
+
     new Story("THROGDAZORG's Candy Diary 8", throg_diary_8), //throg has friends
 
+    new Story("The Training Team Makes a Decision", samandtwig_addendum8), //usually sending wibby to deal with a 'soft target' is a good idea, isn't it?
+
     new Story("Eustace's Meat Dream", eustaces_meat_dream), //terri brings eustace to the cult where he sees twig, throg and the Cultist and finds peace by fucking off from the cult, his job, everything. he joins eyedol riiiiight before terri quits it
+
     new Story("Himbo's Monologue", himbos_monologue), //himbo negotiaties the terms in which the Family and the Training Team will be working together to contain the harvest fruit (namely, the training team is going to do all the work and take on all the risk and get very little in return other than 'support')
 
 ]
 
+/*
+showcasing wibby rescuing throg lets us see how he NORMALLY opperates
+to leave the void he flounders in with himbo in more stark contrast
+
+seriously
+people who are used to operating in irrelevance are...
+kinda wibbys weakness
+
+
+one way or another
+
+
+*/
 
 
 //https://www.youtube.com/watch?v=TCJU8DD3eGk&feature=youtu.be
