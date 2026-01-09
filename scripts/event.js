@@ -338,6 +338,8 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
 
             chosen_emmisary.removeItemFromInventory(chosen_item, ele2)
             arms.addItemToInventory(chosen_item, ele3);
+            arms.addCorruption(-113 + -1 * location.corruption);//you were so brave and such a good shopper for picking out a highlighted item
+
 
         } else {
             if (players.length > 1) {
@@ -510,7 +512,7 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent, me) => {
     let wasted_knowledge = `<span class="wasted-knowledge">The Westerville Mall knows there are two types of things that look like humans. Shoppers move around and take items of the mall and are happy and festive. Mannequins never leave the mall and are constantly screaming inside. If you fail to leave the mall soon enough, or if you are too scared, the Mall will assume you are a mannequin. Thems the breaks.</span>`;
 
 
-    shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
+    shopper.addCorruption(-13 + + -1 * location.corruption);//congrats, shoppers aren't mannequins!
     const formerNameHTML = shopper.nameHTML();
     const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
     const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
@@ -626,7 +628,8 @@ corruptionEventapplyResult = (game, location, parent, me) => {
 
     for (let human of humans) {
         human.fear += 13; //this is not good
-        human.addCorruption(13); //shoppers shouldn't be scared inside malls, are you SURE you're a shopper?
+        human.addCorruption(13 + location.corruption); //shoppers shouldn't be scared inside malls, are you SURE you're a shopper?
+
     }
     const mannequins = location.livingMannequinPlayers();
 
@@ -830,13 +833,13 @@ hydrationStationapplyResult = (game, location, parent, me) => {
         //no good answers here, have i mentioned zampanio is a horror game?
         if (game.rand.nextDouble() > 0.3) {
             hydrated_players.push(player);
-            player.addCorruption(-113);//its so refreshing, you've been acknowledged as a Shopper with Human needs, and that decreases the chances the Mall will consider you to be a Mannequin
+            player.addCorruption(-113 + -10 * location.corruption);//its so refreshing, you've been acknowledged as a Shopper with Human needs, and that decreases the chances the Mall will consider you to be a Mannequin
             player.sandSmoothByValue(3);//you drank the water. enjoy the new you. its more like you than you were before. guaranteed.
         } else {
             dehydrated_players.push(player);
             me.chosen_name = "Refused Hydration :("
 
-            player.addCorruption(113); //i guess you don't need water, and we all know what THAT means. you're a mannequin, right? The Westerville Mall knows.
+            player.addCorruption(113 + 10 * location.corruption); //i guess you don't need water, and we all know what THAT means. you're a mannequin, right? The Westerville Mall knows.
         }
     }
 
