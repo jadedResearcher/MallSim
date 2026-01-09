@@ -161,12 +161,12 @@ const throg_diary_7 = `<p><span >SO</span></p>
 <p><span >MAYBE BECAUSE I YELL A LOT THEIR EARS CANT UNDERSTAND WHEN IM UPSET YELLING?</span></p>
 <p><span >SO I TOLD THEM IF I WAS UPSET YELLING I&apos;D TELL THEM I WAS UPSET YELLING SO THEY WOULDNT GET CONFUSED BUT THAT CONFUSED THEM TOO!</span></p>
 <p><span >THEN THE CULT BOSS OR WHOEVER, THE LADY WITH ALL THE HAIR CAME BY AND APOLOGIZED TO ME TOO AND SAID THAT I WAS TOO COOL TO LOSE AND ASKED WHAT WOULD MAKE ME HAPPY.</span></p>
-<p><span >I TOLD HIM I LIKED BEING A DINOSAUR AND POP AND DAD EXPLAINED ABOUT MY COSTUME LIKE I WASN&apos;T ALREADY WEARING IT AND THE BOSS LADY SAID THAT THERES THIS THING CALLED LARPING AND SHE COULD GET ME IN!</span></p>
+<p><span >I TOLD HER I LIKED BEING A DINOSAUR AND POP AND DAD EXPLAINED ABOUT MY COSTUME LIKE I WASN&apos;T ALREADY WEARING IT AND THE BOSS LADY SAID THAT THERES THIS THING CALLED LARPING AND SHE COULD GET ME IN!</span></p>
 <p><span >APPARENTLY KIDS AND GROWNUPS WHO LARP GET TO WEAR COSTUMES AND HAVE COOL FIGHTS ALL THE TIME?????????? I THOUGHT EVERYONE WAS JUST BORING UNLESS ITS HALLOWEEN BUT APPARENTLY I JUST WASN&apos;T MEETING THE RIGHT KINDS OF GROWNUPS AND KIDS!</span></p>
 <p><span >SO HOPEFULLY THEY ARE COOL BUT NOT AS COOL AS ME AND AREN&apos;T MEAN OR STUPID OR SOMETHING.</span></p>
 `;
 const throg_diary_8 = `<p><span >SO MARK THE WIZARD CAST THIS REALLY REALLY COOL SPELL TODAY AND KABLAM AND KABLOOY AND THERE WERE ALL THESE COOL SPECIAL EFFECTS AND I ASKED HIM HOW HE DID IT AND HE SAID THAT HE COULD SHOW ME THE APP ON HIS PHONE AND I ASKED IF I COULD USE IT TO BURNINATE STUFF BETTER DURING THE LARP AND HE SAID HE THOUGHT I COULD AND HE IS GOING TO COME OVER AFTER LARP TODAY TO EXPLAIN TO MY PARENTS WHAT APP I NEED AND WHY ITS TOTALLY WORTH THE MONEY TO SPEND ON IT AND THAT&apos;S SO COOL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span></p>
-<p><span >AND GINNY THE ELF SAID HER MOM NEVER LETS HER EAT DINO NUGGIES SO I TOLD HIM SHE HAD TO COME OVER TOO SO THAT SHE COULD HAVE DINO NUGGIES AT MY PLACE AND IT WOULD BE JUST LIKE THAT TIME WE FOUND MANA FROM THE GODS IN THE FOREST OF SECRETS BUT BETTER BECAUSE MANA IS JUST BREAD BUT DINONUGGIES ARE BREAD&nbsp;</span><strong><span >AND&nbsp;</span></strong><span >MEAT</span></p>
+<p><span >AND GINNY THE ELF SAID HER MOM NEVER LETS HER EAT DINO NUGGIES SO I TOLD HER SHE HAD TO COME OVER TOO SO THAT SHE COULD HAVE DINO NUGGIES AT MY PLACE AND IT WOULD BE JUST LIKE THAT TIME WE FOUND MANA FROM THE GODS IN THE FOREST OF SECRETS BUT BETTER BECAUSE MANA IS JUST BREAD BUT DINONUGGIES ARE BREAD&nbsp;</span><strong><span >AND&nbsp;</span></strong><span >MEAT</span></p>
 <p><span >AND IM WRITING THIS HERE BECAUSE I THINK THIS MIGHT BE THE HAPPIEST IVE BEEN SINCE I GOT THIS BIG KIDS SIZED DINOSAUR COSTUME AND I THOUGHT MAYBE MY DIARY THING WANTED TO KNOW ABOUT ME BEING HAPPY BECAUSE I AM PRACTICING LETTING PEOPLE KNOW WHEN I AM HAPPY BECAUSE IT HELPS MY POP AND DAD AND TEACHERS AND THAT CULT BOSS LADY KNOW HOW TO HELP ME BE HAPPY</span></p>
 <p><span >ANYWAYS GOODBYE!</span></p>
 `;
@@ -1730,6 +1730,62 @@ const samandtwig_addendum8 = `
 `;
 
 
+
+const bonus_vik = `On the subject of increased player count;
+<br><br>
+It has come to our attention-- and as the Information team, we are obliged to warn you-- that we have seen a spike in users entering the maze, also known as 'looping'. 
+<br><br>
+For the sake of reference, seeing as we do not have a set definition of this word in our records despite its relevance, 'looping' refers to the act of an instanced person or identity utilizing the maze (again, a meaningless term at this point. I would propose instead the 'Wanderer's maze', or 'the Gopher Hole') in order to traverse this universe's arm without the need of time travel. This means that they retain their memories, and are brought back at the start of the arm once the world ends.
+<br><br>
+There are several implications to take into consideration:
+<br><br>
+<li>The cultists are not only venturing into the mall in droves, but some are actually succeeding;</li>
+<li>These looping individuals then tend to go back into the cult, forming some sort of inner circle;</li>
+<li>The increased amount of 'active participants' is taking a toll on our ability to contain them.</li>
+<br><br>
+To our benefit, the new 'looped' individuals are not trained soldiers but instead run-of-the-mill religious fanatics. They do not understand how to use their understanding of the universe in order to better their situation-- all of their efforts go into uncovering 'secrets'.
+<br><br>
+However, it is impossible to deny that are now fighting a war of attrition. There are ever-increasing numbers of them, and, even with the Mafia's 'collaboration', a set number of us.
+<br><br>
+In my professional opinion: I would suggest to stop expecting the echidna to 'sort it out through its whims' and start taking some direct countermeasures.
+<br><br><br><br>
+-V`;
+
+const bonus_vik2 = `Memo, internal:
+<br><br>
+It would, against all odds, seem like it is actually 'sorting itself out through its whims'.
+<br><br>
+We have records of people we had flagged as previously looping to have disappeared entirely. According to our contacts, something outside of our periphery is eating them. They are referred to as 'the Devil of Spirals'. This implies it is another form of that snake that has been wandering around adopting children and getting murdered.
+<br><br>
+There is nothing we can do about this. Why it is eating these ones specifically, I am not sure. I am not inclined to find out, and it is out of our reach and purview. But it would appear she was right, in the end.
+<br><br>
+God I hate her so much.
+<br><br><br><br>
+-V`;
+
+const bonus_cultist = `I wanted to write down some of the monsters we've seen here, so no one gets freaked out. Better to be safe than anxious!!
+<br><br>
+<b>Mannequins:</b> These things show up if you're not doing enough shopping. They can be made of wood, or plastic, or ceramic, or all that stuff. They don't look like they do a lot, except be creepy? Still I wouldn't be getting close to them. You don't want to be the first person that has SOMETHING happen to them, right?
+<br><br>
+<b>Bugs:</b> Normal bugs! They crawl and move around and stuff. They're nothing to worry about, they're more scared of you than you are of them! Problem is that they attract the Crushing Man.
+<br><br>
+<b>The Crushing Man:</b> Crushes your bones. Hangs out near mall gyms and places with insects. My friend ran into him and the only thing I have left of her is her shirt! So don't do that!
+<br><br>
+<b>The Eye Killer:</b> Yeah, the actual serial killer from the news. I don't know why they're here! I don't want to find out either, it doesn't matter how much we're upset she ran away! Stabs you in known and unknown ways. Anything is fair game too, you can use that to your advantage.
+<br><br>
+<b>'Gun-Tan'</b>: Sometimes your friends get shot by a high caliber bullet while you aren't looking and there's nothing you can do to help them. That's just how it goes. No idea what causes it. Just don't cry out for them too loudly so you don't attract any unwanted attention!
+<br><br>
+<b>The laughing doll baby head that follows you only if you enter the mall on a Friday Night</b>: I don't want to talk about this one.
+<br><br>
+<b>The Goo:</b> The mall ocassionally just gets filled with goo. Best thing you can do is run for your life. It's usually right back to normal the day after, so maybe it targets anyone who's in there?
+<br><br>
+<b>The Pipes:</b> Hey, they say there's people stick in the pipes who wail loudly if they sense anyone coming. You better not help them at all and get out of there fast! Not only are they probably heretics but Other Stuff likes looking where there's sound, so you know. 
+<br><br>
+Don't let any of that stop you from finding that fruit and your True Purpose.
+<br><br><br><br>
+For the glory of the Harvest!`;
+
+
 /*8
 
 i actually did have fun writing the himbo
@@ -1856,8 +1912,10 @@ const handleRenderingStoryList = () => {
             let chapter = "Chapter: " + i;
             if (i === 0) {
                 chapter = "Prologue";
-            } else if (i === ordered_stories.length - 1) {
+            } else if (i === 25) {
                 chapter = "Epilogue";
+            } else if (i > 25) {
+                chapter = "Bonus"
             }
             const story = ordered_stories[i];
             const tick_button = createElementWithClassAndParent("button", tick_bar, "story-button");
@@ -2063,6 +2121,12 @@ const ordered_stories = [
     new Story("Eustace's Meat Dream", eustaces_meat_dream), //terri brings eustace to the cult where he sees twig, throg and the Cultist and finds peace by fucking off from the cult, his job, everything. he joins eyedol riiiiight before terri quits it
 
     new Story("Himbo's Monologue", himbos_monologue), //himbo negotiaties the terms in which the Family and the Training Team will be working together to contain the harvest fruit (namely, the training team is going to do all the work and take on all the risk and get very little in return other than 'support')
+
+    new Story("Vik's Report by IC ", bonus_vik),
+
+    new Story("Vik's Memo by IC", bonus_vik2),
+
+    new Story("Cultist Notes by IC", bonus_cultist),
 
 ]
 
