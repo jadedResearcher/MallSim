@@ -19,38 +19,74 @@ const session_customizer = () => {
     a2.innerText = '.'
     a2.style.color = "black"
 
+    const { input, label, container } = createTextInputWithLabel(sburb_container, undefined, "Expedition #:", game.rand.initial_seed)
+    input.style.marginLeft = "13px"
+
+    const button = createElementWithClassAndParent("button", sburb_container);
+    button.innerText = "Sync Team Sprites From Themes";
+
+
     const players_container = createElementWithClassAndParent("div", sburb_container, 'player-flex');
 
-
-    for (let player of game.players) {
-        const player_edit_box = createElementWithClassAndParent("div", players_container, 'player-edit-box');
-
-        editOnePlayer(player, player_edit_box);
+    const handleChange = () => {
+        console.warn("TODO: need to display json box, special brittle string i make and url link")
     }
+
+
+    const renderPlayers = () => {
+        players_container.innerHTML = '';
+        for (let player of game.players) {
+            const player_edit_box = createElementWithClassAndParent("div", players_container, 'player-edit-box');
+            editOnePlayer(player, player_edit_box, handleChange);
+        }
+    }
+    renderPlayers();
+
+
+    button.onclick = () => {
+        setSpritesForParty(new SeededRandom(stringtoseed(input.value)), game.players);
+        renderPlayers();
+    }
+
+
 
 
 }
 
 
-const editOnePlayer = (player, parent) => {
+const editOnePlayer = (player, parent, change_callback) => {
+    console.log("JR NOTE: editOnePlayer", player)
+    parent.innerHTML = "";
     const left = createElementWithClassAndParent("div", parent, "left");
     const right = createElementWithClassAndParent("div", parent, 'right');
 
 
-    const sprite = renderSpriteForEntity(left, player)
-    sprite.style.backgroundColor = 'rgb(237, 231, 213)'
+    const sprite_parent = createElementWithClassAndParent("div", left);
+
+    const sprite = renderSpriteForEntity(sprite_parent, player)
+    sprite_parent.style.backgroundColor = 'rgb(237, 231, 213)'
 
 
     const makeName = () => {
         const { container, input, label } = createTextInputWithLabel(right, undefined, "Name:", player.name)
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+            player.name = input.value;
+            change_callback();
+            //editOnePlayer(player, parent,change_callback); //only call this for things that would effect graphics
+        }
     }
 
     const makeTitle = () => {
         const { container, input, label } = createTextInputWithLabel(right, undefined, "Title:", player.title)
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+            player.title = input.value;
+            change_callback();
+            //editOnePlayer(player, parent,change_callback);
+        }
     }
 
     const makeThemes = () => {
@@ -76,8 +112,29 @@ const editOnePlayer = (player, parent) => {
         input.size = 6;
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+            console.log("JR NOTE: change value is", input.value)
+
+            player.theme_keys = input.value;
+            change_callback();
+            //editOnePlayer(player, parent,change_callback);
+        }
     }
 
+
+    /*
+    i think my favorite part
+is that
+what you look like
+matters a LOT in homestuck
+but not at all in mallsim
+if you let yourself look like you should "by default" then
+it sorta reflects your themes
+but you can change your outfit without changing your themes
+it is not what it is
+assuming familiarity with zampanio
+can be dangerous
+    */
     const makeSpriteAspect = () => {
         const options = [];
         for (let sprite_aspect of Object.keys(aspect_mapping)) {
@@ -86,6 +143,11 @@ const editOnePlayer = (player, parent) => {
         const { container, input, label } = createSelectInputWithLabel(right, undefined, "Sprite Aspect:", options, player.sprite_aspect)
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+            player.sprite_aspect = input.value;
+            change_callback();
+            editOnePlayer(player, parent, change_callback);
+        }
     }
 
     const makeSpriteClass = () => {
@@ -96,25 +158,53 @@ const editOnePlayer = (player, parent) => {
         const { container, input, label } = createSelectInputWithLabel(right, undefined, "Sprite Class:", options, player.sprite_class)
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+
+            player.sprite_class = input.value;
+            change_callback();
+            editOnePlayer(player, parent, change_callback);
+        }
     }
 
 
     const makeWasted = () => {
+        console.log("JR NOTE: player wasted is", player.wasted)
         const { container, input, label } = createCheckboxInputWithLabel(right, undefined, "Wasted:", player.wasted)
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+            console.log("JR NOTE: change value is", input.checked)
+
+            player.wasted = !!input.checked;
+            change_callback();
+            editOnePlayer(player, parent, change_callback);
+        }
     }
 
     const makeCorrupted = () => {
         const { container, input, label } = createCheckboxInputWithLabel(right, undefined, "Corrupted:", player.corrupted)
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+            console.log("JR NOTE: change value is", input.checked)
+
+            player.corrupted = !!input.checked;
+            editOnePlayer(player, parent, change_callback);
+            change_callback();
+        }
     }
 
     const makeMusical = () => {
         const { container, input, label } = createCheckboxInputWithLabel(right, undefined, "Musical:", player.musical)
         label.className = "edit-left"
         container.className = 'edit-pair'
+        input.onchange = () => {
+            console.log("JR NOTE: change value is", input.checked)
+
+            player.musical = !!input.checked;
+            editOnePlayer(player, parent, change_callback);
+            change_callback();
+        }
     }
 
     makeName();
