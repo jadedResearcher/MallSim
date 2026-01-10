@@ -19,8 +19,13 @@ const session_customizer = () => {
     a2.innerText = '.'
     a2.style.color = "black"
 
+    const players_container = createElementWithClassAndParent("div", sburb_container, 'player-flex');
+
+
     for (let player of game.players) {
-        editOnePlayer(player, sburb_container);
+        const player_edit_box = createElementWithClassAndParent("div", players_container, 'player-edit-box');
+
+        editOnePlayer(player, player_edit_box);
     }
 
 
@@ -28,9 +33,8 @@ const session_customizer = () => {
 
 
 const editOnePlayer = (player, parent) => {
-    const player_edit_box = createElementWithClassAndParent("div", parent, 'player-edit-box');
-    const left = createElementWithClassAndParent("div", player_edit_box, "left");
-    const right = createElementWithClassAndParent("div", player_edit_box, 'right');
+    const left = createElementWithClassAndParent("div", parent, "left");
+    const right = createElementWithClassAndParent("div", parent, 'right');
 
 
     const sprite = renderSpriteForEntity(left, player)
@@ -50,19 +54,46 @@ const editOnePlayer = (player, parent) => {
     }
 
     const makeThemes = () => {
-        const { container, input, label } = createCheckboxInputWithLabel(right, undefined, "Themes:", player.wasted)
+        const options = [];
+        for (let key of getAllThemeKeysMinusFood()) {
+            options.push({ label: titleCase(key), value: key })
+        }
+
+        //make sure the themes we have are clustered at the top
+        options.sort(function (a, b) {
+            if (player.theme_keys.includes(a.value)) {
+                return -1;
+            }
+
+            if (player.theme_keys.includes(b.value)) {
+                return 1;
+            }
+            return 0;
+        });
+
+
+        const { container, input, label } = createMultiSelectInputWithLabel(right, undefined, "Themes:", options, player.theme_keys);
+        input.size = 6;
         label.className = "edit-left"
         container.className = 'edit-pair'
     }
 
     const makeSpriteAspect = () => {
-        const { container, input, label } = createCheckboxInputWithLabel(right, undefined, "Wasted:", player.wasted)
+        const options = [];
+        for (let sprite_aspect of Object.keys(aspect_mapping)) {
+            options.push({ label: titleCase(sprite_aspect), value: sprite_aspect })
+        }
+        const { container, input, label } = createSelectInputWithLabel(right, undefined, "Sprite Aspect:", options, player.sprite_aspect)
         label.className = "edit-left"
         container.className = 'edit-pair'
     }
 
     const makeSpriteClass = () => {
-        const { container, input, label } = createCheckboxInputWithLabel(right, undefined, "Wasted:", player.wasted)
+        const options = [];
+        for (let sprite_aspect of Object.keys(class_mapping)) {
+            options.push({ label: titleCase(sprite_aspect), value: sprite_aspect })
+        }
+        const { container, input, label } = createSelectInputWithLabel(right, undefined, "Sprite Class:", options, player.sprite_class)
         label.className = "edit-left"
         container.className = 'edit-pair'
     }

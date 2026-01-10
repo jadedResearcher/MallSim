@@ -395,10 +395,17 @@ button {
 }
 
 .survival-container {
-  width: 1000px;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
   padding: 13px;
+
+  .player-flex {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 
   .player-edit-box {
     border: 1px solid red;
@@ -407,16 +414,25 @@ button {
     display: flex;
     gap: 31px;
     margin-bottom: 13px;
+
+    input {
+      width: 200px;
+    }
+
+    select {
+      width: 200px;
+    }
   }
 
   .edit-pair {
     display: flex;
-    gap: 31px;
-    margin-bottom: 13px;
+    gap: 3px;
+    font-size: 13px;
+    margin-bottom: 3px;
   }
 
   .edit-left {
-    width: 200px;
+    width: 100px;
     font-weight: bolder;
     border-bottom: 3px dotted black;
   }

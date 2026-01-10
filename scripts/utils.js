@@ -311,6 +311,50 @@ const createRangeInputWithLabel = (parent, initialValue, max = 113, min = -113) 
   return { container, input };
 }
 
+//options is array of label,value pairs
+const createSelectInputWithLabel = (parent, id, labelText, options, selected_option) => {
+  const container = createElementWithClassAndParent("div", parent, "form-container");
+
+  const label = createElementWithClassAndParent("label", container)
+  label.for = id;
+  label.innerText = labelText;
+
+  const input = createElementWithClassAndParent("select", container);
+  for (let option of options) {
+    const o = createElementWithClassAndParent("option", input);
+    o.value = option.value;
+    o.innerText = option.label;
+    if (o.value === selected_option) {
+      o.selected = true;
+    }
+
+  }
+
+  return { container, input, label };
+}
+
+//options is array of label,value pairs
+const createMultiSelectInputWithLabel = (parent, id, labelText, options, selected_options) => {
+  const container = createElementWithClassAndParent("div", parent, "form-container");
+
+  const label = createElementWithClassAndParent("label", container)
+  label.for = id;
+  label.innerText = labelText;
+
+  const input = createElementWithClassAndParent("select", container);
+  input.multiple = true;
+  for (let option of options) {
+    const o = createElementWithClassAndParent("option", input);
+    o.value = option.value;
+    o.innerText = option.label;
+    if (selected_options.includes(o.value)) {
+      o.selected = true;
+    }
+
+  }
+
+  return { container, input, label };
+}
 
 const createCheckboxInputWithLabel = (parent, id, labelText, initialValue) => {
   const container = createElementWithClassAndParent("div", parent, "form-container");
