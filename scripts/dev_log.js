@@ -1,6 +1,90 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["1/9/2026"] = `super glad i made that radio hack
+IC wrote some stories for it after reading all mine
+so hype about that!!!`
+
+/*
+i reread the twin secrets and yeah
+it slaps
+because i love the omniscient third person narrator
+getting to know the things unsaid
+because from the outside
+devona is anxious, neville is chill
+but from the inside its very much the inverse
+and devona is the only one that really understands that 
+like, neville very much thinks devona is brave 
+but he's not anxious :)
+witherby knows of course
+witherby knows nearly everything
+because its kind of a Sin
+training team's Sin is always, always, always enablement
+they enable each other so much
+camille is allowed to become more and more a monster without feeling guilt
+neville is allwoed to have anxiety spirals that destroy the world but not acknowledge them
+ria WAs allowed to wallow in despair and drugs and depression (leehunter pulled her out of that on accident)
+and devona and witherby just.... enabled all that, and each other
+they don't even talk to each other about the secrets they know
+
+
+you know something thats interesting
+that im realizing
+witherby very much is obssessed with Ria
+in this "i failed you i sinned" way
+he treats her like a counterpart
+an opposite
+hot and cold
+but
+BUT
+in doing that he sorta
+ignores something much more obvious
+devona and witherby are the only people who See in a team of people willfully blind
+witherby knows the burden devona takes on with neville
+devona knows the burden witherby takes on by being aware of all the Sin the team does
+and they never talk to each other
+not like literally 
+but
+they're both so "well this is none of my business to spread"
+that even when they KNOW that the other knows some 'secret'
+they just
+don't talk about it
+wibby is someone resistant to the white damage devona causes by info dumping
+and devona isn't gonna probably trigger an ice queen blizzard or something
+but they still just
+don't parse each other as confidants
+because yeah, neville is SOMEHWAT of an asshole
+but thats what i mean by the sin of enablement
+if there wasn't a whole ass friend group closing ranks around him and maintaining the status quo
+it would be a lot easier for him to realize what he's doing
+
+
+just like ria, left SOLELY with training as a peer group, was only ever spiralling around despair and drugs
+she'd 'get better' sometimes, with strict training
+and then revert
+but the thing about neville is BECAUSE his coping strategy is avoidance
+its really really really hard to break out
+
+ria got out of her rut just by finding some lesbians to mentor
+but neville has friends outside training :)
+he has hobbies :)
+he goes to therapy :)
+from every outside metric he is fine and healthy
+even fiona doens't catch it
+
+~~~
+
+neville shares with wibby this
+illusion of connection
+not to say that their relationship is an illusion
+but they both make strangers feel WAY more connected to them than they feel in return
+neville SEEMS like he has lots of friends
+close ones even
+he's helped them out plenty with big stuff
+and they don't know a single personal detail about him
+
+
+*/
 dev_log["1/8/2026"] = `guess who just finished the radio mechanic
 its this waste
 of blood

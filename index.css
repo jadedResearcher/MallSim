@@ -53,6 +53,11 @@ body {
   font-family: 'nunito', sans-serif;
 }
 
+body.survival {
+  background-color: black;
+  color: red;
+}
+
 body.author-bot {
   background-color: grey;
   background-image: url(images/ab_bg.png);
@@ -389,6 +394,34 @@ button {
 
 }
 
+.survival-container {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 13px;
+
+  .player-edit-box {
+    border: 1px solid red;
+    padding: 13px;
+    margin-bottom: 31px;
+    display: flex;
+    gap: 31px;
+    margin-bottom: 13px;
+  }
+
+  .edit-pair {
+    display: flex;
+    gap: 31px;
+    margin-bottom: 13px;
+  }
+
+  .edit-left {
+    width: 200px;
+    font-weight: bolder;
+    border-bottom: 3px dotted black;
+  }
+}
+
 
 .sburb-container {
   width: 1000px;
@@ -437,6 +470,11 @@ button {
 .ab-button {
   background-color: #B6B6B6;
   color: #0000FF;
+}
+
+.survive-button {
+  background-color: black;
+  color: red;
 }
 
 .cull-button {

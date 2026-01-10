@@ -1185,6 +1185,12 @@ class Game {
             ab_view();
         }
 
+
+        const survive_button = createElementWithClassAndParent("button", tick_bar, "tick-button survive-button");
+        survive_button.innerText = "Survive";
+        survive_button.onclick = () => {
+            session_customizer();
+        }
         //if its not set, or its zero, ignore
         if (globalDataObject.highestStoryIndexUnlocked || isItStoryTime()) {
             const radio_button = createElementWithClassAndParent("button", tick_bar, "tick-button radio-button");
