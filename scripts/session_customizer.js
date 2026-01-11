@@ -89,6 +89,26 @@ const editOnePlayer = (player, parent, change_callback) => {
         }
     }
 
+    const makeStats = () => {
+
+        const box = createElementWithClassAndParent("div", right);
+        box.style.marginTop = "13px"
+        box.style.marginBottom = "13px"
+
+        for (let [key, value] of Object.entries(player.stats)) {
+            //const createNumberInputWithLabel = (parent, id, labelText, initialValue, max = 113, min = -113) => {
+
+            const { container, input, label } = createNumberInputWithLabel(box, undefined, `${key}`, value, VERY_HIGH_STAT_VALUE, 0)
+            label.className = "edit-left"
+            container.className = 'edit-pair'
+            input.onchange = () => {
+                player.stats[key] = input.value;
+                change_callback();
+                //editOnePlayer(player, parent,change_callback);
+            }
+        }
+    }
+
     const makeThemes = () => {
         const theme_box = createElementWithClassAndParent("div", right);
         theme_box.style.marginTop = "13px"
@@ -249,13 +269,82 @@ can be dangerous
         }
     }
 
+
+    const makeRelationships = () => {
+        const box = createElementWithClassAndParent("div", right);
+        box.style.marginTop = "13px"
+        box.style.marginBottom = "13px"
+
+        const header = createElementWithClassAndParent("div", box);
+        header.innerText = "Feelings For:"
+        header.style.marginBottom = "13px";
+        header.style.textDecoration = "underline"
+
+        const makeFamilial = (relationship, ele) => {
+            const { container, input, label } = createCheckboxInputWithLabel(ele, undefined, "Family:", relationship.familial)
+            input.style.width = "50px"
+            label.style.fontSize = "13px"
+
+            input.onchange = () => {
+                console.log("JR NOTE: change value is", input.checked)
+
+                relationship.familial = !!input.checked;
+                editOnePlayer(player, parent, change_callback);
+                change_callback();
+            }
+        }
+
+        const makeRomantic = (relationship, ele) => {
+            const { container, input, label } = createCheckboxInputWithLabel(ele, undefined, "Romantic:", relationship.romantic)
+            input.style.width = "50px"
+            label.style.fontSize = "13px"
+
+            input.onchange = () => {
+                console.log("JR NOTE: change value is", input.checked)
+                relationship.romantic = !!input.checked;
+
+                editOnePlayer(player, parent, change_callback);
+                change_callback();
+            }
+        }
+
+
+        for ([key, relationship] of Object.entries(player.relationships)) {
+
+            const { container, input, label } = createNumberInputWithLabel(box, undefined, `${key}: `, relationship.value, STRONG_RELATIONSHIP_VALUE, -1 * STRONG_RELATIONSHIP_VALUE)
+            label.className = "edit-left"
+            label.style.whiteSpace = "nowrap";
+            label.style.fontSize = "10px"
+            container.className = 'edit-pair'
+            const boxes = createElementWithClassAndParent("div", box);
+            boxes.style.display = "flex"
+            boxes.style.marginBottom = "20px"
+
+            boxes.style.width = "200px";
+            boxes.style.marginLeft = "auto";
+            makeFamilial(relationship, boxes)
+            makeRomantic(relationship, boxes)
+
+            const clone_key = key;
+            input.onchange = () => {
+                console.log("JR NOTE: clone key", clone_key)
+                player.relationships[clone_key].value = input.value;
+                change_callback();
+                //editOnePlayer(player, parent,change_callback);
+            }
+        }
+    }
+
     makeName();
     makeTitle();
     makeThemes();
     makeSprite();
+    makeStats();
     makeWasted();
     makeCorrupted();
     makeMusical();
+
+    makeRelationships();
 
 
 }
