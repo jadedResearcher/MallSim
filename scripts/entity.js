@@ -184,6 +184,7 @@ const randomParty = (rand) => {
 
 const initializeRelationshipsForParty = (rand, party) => {
     for (let x of party) {
+        x.relationships = {};//reset
         for (let y of party) {
             const value = rand.getRandomNumberBetween(-113, 113);
             let romantic = false;
@@ -328,11 +329,28 @@ class Entity {
     //basically homestuck classpects
 
     constructor(themes, rand) {
+        this.randomize(rand, themes)
+    }
+
+    randomize = (rand, hardcoded_themes) => {
+        if (hardcoded_themes) {
+            this.theme_keys = hardcoded_themes;
+        } else {
+            const no_food_themes = getAllThemeKeysMinusFood();
+
+            this.theme_keys = [rand.pickFrom(no_food_themes),
+            rand.pickFrom(no_food_themes),
+            rand.pickFrom(no_food_themes),
+            rand.pickFrom(no_food_themes)]
+        }
         this.name = `${rand.pickFrom(first_names)} ${rand.pickFrom(last_names)}`;
-        this.theme_keys = themes;
-        this.title = classpectFromThemeList(rand, themes);
+        this.title = classpectFromThemeList(rand, this.theme_keys);
         all_entities[this.title] = this;
         this.stats = getStatsFromThemes(this.theme_keys);
+
+        for (let relationship of Object.values(this.relationships)) {
+            relationship.value = rand.getRandomNumberBetween(-1 * STRONG_RELATIONSHIP_VALUE, STRONG_RELATIONSHIP_VALUE)
+        }
     }
 
     //come on you know this is important
@@ -382,6 +400,26 @@ class Entity {
 
         }
 
+    }
+
+    /*for shareable urls and the like (joining the loop has its own subset, doesn't include name but DOES include censored), its interesting that they're related
+    unlike in wigglersim, don't make the mistake of stringifying it too early
+    however i DO want to record the index of theme keys and sprite info
+    
+    */
+    export = () => {
+        const ret = {
+            name: this.name,
+            title: this.title,
+            musical: this.musical,
+            relationships: this.relationships,
+            stats: this.stats,
+            theme_keys: this.theme_keys.map((t) => keys.indexOf(t)),
+            sprite_aspect: Object.keys(aspect_mapping).indexOf(this.sprite_aspect),
+            sprite_class: Object.keys(class_mapping).indexOf(this.sprite_class)
+        };
+
+        return ret;
     }
 
     clone = (rand) => {

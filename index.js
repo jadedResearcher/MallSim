@@ -41,17 +41,35 @@ window.onload = () => {
 
 }
 //https://www.tumblr.com/verbosebabbler/801492874529259520/guides-alternate-zampaniosim-classpects?source=share
-
+//its funny this started as debug and now its just... the only way to render the game, whoops
 const debug = () => {
-    balanceStatsDebug();
+    //balanceStatsDebug();
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
     const seed = urlParams.get('seed') ? stringtoseed(urlParams.get('seed')) : 13;
+    const custom = urlParams.get('custom')
     //if there is an id it turns into a global var this is wild i only learned this recently
     const debug = createElementWithClassAndParent("div", container, "debug");
     const rand = new SeededRandom(seed);
     game = new Game(rand, false);
+
+    if (custom) {
+        try {
+            const json_text = JSONCrush.uncrush((custom));
+            console.info("JR NOTE: ", { custom, json_text })
+            game.importPlayersFromJSON(json_text);
+        } catch (e) {
+            console.log("JR NOTE: Error caught, here's some data", { custom })
+            alert("Something went wrong importing players. Are you suuuuuure you didn't mess up wasting them?")
+            console.error(e)
+        }
+
+    }
+
+
+
+
     game.start(debug);
 
 }

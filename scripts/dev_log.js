@@ -1,6 +1,29 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+
+dev_log["1/10/2026"] = `there is something so cathartic
+to take the things i always found so creepy about sburbsim
+and lean into it
+how fucked up is it that you can 'customize' a session?
+delete people from it like they never existed
+replace others
+add whole new people that everyone "always knew"
+im having a LOT of fun
+maybe too much fun
+obsession is a dangerous thing
+and i have done nearly nothing but code all day
+but its nice
+to feel this again
+in a way i haven't much since sburbsim
+i'm not saying i haven't enjoyed making literally everything else in my branch of zampanio
+more
+theres nothing like sburbsim for just dragging you forward
+for having 'just one more thing' you can add spiral into complexities and delight
+to wonder how the hell 8 entire people all hopped into the parking lot together and then IMMEDIATELY got turned into goo
+what are the odds
+what are the odds`
+
 dev_log["1/9/2026"] = `super glad i made that radio hack
 IC wrote some stories for it after reading all mine
 so hype about that!!!`

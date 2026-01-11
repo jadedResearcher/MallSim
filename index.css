@@ -413,12 +413,15 @@ button {
     margin-bottom: 13px;
   }
 
+  .top {
+    display: flex;
+    gap: 31px;
+  }
+
   .player-edit-box {
     border: 1px solid red;
     padding: 13px;
     margin-bottom: 31px;
-    display: flex;
-    gap: 31px;
     margin-bottom: 13px;
 
     input {

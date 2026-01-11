@@ -83,17 +83,73 @@ class Game {
 
     }
 
-    //if a 'canon' player shares the title of a looping player
-    //that looping player also spawns
-    //i don't care if your name is piper or camellia or the "Innocent"
-    //if your TITLE is the Eye Killer you are the alternate self of the Eye Killer, deal with it
-    //tbf tho those three actually are genetically identical
-    //and titles are so varied that its going to be unlikely that you spawn as the alternate self of someone who isn't extremely similar to you
-    //but this amuses me anyways
-    //NOTE: this does mean if you have a million billion looping cultists this call will be hella slow
-    //thats literally the cautionary tale of zampanio
-    //let peewee eat them. cultists fit perfectly  in peewee mouth etc
-    //https://www.tumblr.com/elodieunderglass/186312312148/luritto-cornerof5thandvermouth
+    //not for looping
+    exportPlayersForCustomization = () => {
+        return JSON.stringify(this.players.map((i) => i.export()))
+    }
+
+    /*
+    overrides the natives of this universe with whoever you want instead
+    there are definitely no ethical considerations for doing this and there is no good reason why inhabitants of this universe
+    are terrified of Observers like you :) :) ;)
+
+    its a mystery for the ages
+
+    anyways don't forget that themes and sprite stuff aren't strings, but indices
+
+    theme_keys: this.theme_keys.map((t) => keys.indexOf(t)),
+    sprite_aspect: Object.keys(aspect_mapping).indexOf(this.sprite_aspect),
+    sprite_class: Object.keys(class_mapping).indexOf(this.sprite_class)
+    */
+    importPlayersFromJSON = (json_text) => {
+        console.log("JR NOTE: json text is", json_text)
+        try {
+            const json = JSON.parse(json_text);
+            const players_to_add = [];
+            for (let cultist of json) {
+                console.log("JR NOTE: cultist theme keys is", cultist.theme_keys)
+
+                const theme_keys = cultist.theme_keys.map((t) => keys[t])
+                console.log("JR NOTE: theme keys is", theme_keys)
+                const np = new Entity(theme_keys, this.rand);
+                np.name = cultist.name;
+                np.title = cultist.title;
+                all_entities[np.title] = np;
+                np.relationships = {};
+                for (let [key, value] of Object.entries(cultist.relationships)) {
+                    np.relationships[key] = new Relationship(value.value, value.romantic, value.familial);
+                }
+                //new Relationship(value, romantic, familial)
+                np.stats = cultist.stats;
+                np.wasted = cultist.wasted;
+                if (cultist.sprite_aspect) {
+                    np.sprite_aspect = Object.keys(aspect_mapping)[cultist.sprite_aspect];
+                }
+                if (cultist.sprite_class) {
+                    np.sprite_class = Object.keys(class_mapping)[cultist.sprite_class];
+                }
+                np.fear = 13; //they can't quite explain why but they feel uneasy about....something
+                players_to_add.push(np);
+            }
+            this.players = [...players_to_add]
+        } catch (e) {
+            alert("JR NOTE: what are you trying to pull. this isn't valid json to grab players from...")
+            console.error(e)
+            console.error("JR NOTE: what are you trying to pull. this isn't valid json to grab players from...")
+        }
+    }
+
+    /*if a 'canon' player shares the title of a looping player
+    that looping player also spawns
+    i don't care if your name is piper or camellia or the "Innocent"
+    if your TITLE is the Eye Killer you are the alternate self of the Eye Killer, deal with it
+    tbf tho those three actually are genetically identical
+    and titles are so varied that its going to be unlikely that you spawn as the alternate self of someone who isn't extremely similar to you
+    but this amuses me anyways
+    NOTE: this does mean if you have a million billion looping cultists this call will be hella slow
+    thats literally the cautionary tale of zampanio
+    let peewee eat them. cultists fit perfectly  in peewee mouth etc
+    https://www.tumblr.com/elodieunderglass/186312312148/luritto-cornerof5thandvermouth */
     addLoopingPlayersIfAny = () => {
         const players_to_add = [];
         for (let player of this.players) {
@@ -103,6 +159,8 @@ class Game {
                     const looping_player = new Entity(cultist.theme_keys, this.rand);
                     looping_player.name = "Lost To Zampanio";
                     looping_player.title = cultist.title;
+                    //all_entities[np.title] = np; everyone knows them as the name of the version of them native to this session, 
+
                     looping_player.relationships = {};
                     for (let [key, value] of Object.entries(cultist.relationships)) {
                         looping_player.relationships[key] = new Relationship(value.value, value.romantic, value.familial);

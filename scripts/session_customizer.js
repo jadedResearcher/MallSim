@@ -1,3 +1,4 @@
+
 const session_customizer = () => {
     const body = document.querySelector('body');
     body.innerHTML = "";
@@ -19,47 +20,93 @@ const session_customizer = () => {
     a2.innerText = '.'
     a2.style.color = "black"
 
-    const { input, label, container } = createTextInputWithLabel(sburb_container, undefined, "Expedition #:", game.rand.initial_seed)
-    input.style.marginLeft = "13px"
+    const textObject = createTextInputWithLabel(sburb_container, undefined, "Expedition #:", game.rand.initial_seed)
+    textObject.input.style.marginLeft = "13px"
+    textObject.label.className = "edit-left"
+    textObject.container.className = 'edit-pair'
+
+    const textAreaObject = createTextAreaInputWithLabel(sburb_container, undefined, "JSON*:", game.exportPlayersForCustomization())
+    textAreaObject.input.style.marginLeft = "13px"
+    textAreaObject.input.style.marginTop = "13px"
+    textAreaObject.label.className = "edit-left"
+    textAreaObject.container.className = 'edit-pair'
+    const warning = createElementWithClassAndParent("div", sburb_container);
+    warning.innerHTML = `*<i>WARNING: edit the JSON directly at your own risk. This is VERY likely to glitch out if you typo.</i>`
+
+    textAreaObject.input.onchange = () => {
+        game.importPlayersFromJSON(textAreaObject.input.value);
+        renderPlayers();
+    }
+
 
     const button_bar = createElementWithClassAndParent("div", sburb_container, "horizontal-bar");
     button_bar.style.backgroundColor = "transparent"
 
+    //has to happen here becuase the game tries to make everyone look distinct
     const sync_sprite_button = createElementWithClassAndParent("button", button_bar);
     sync_sprite_button.innerText = "Sync Team Sprites From Themes";
+
+    //has to happen because relationships are a group thing
+    const relationship_button = createElementWithClassAndParent("button", button_bar);
+    relationship_button.innerText = "Redo Team Relationships (needed if you add or randomize ppl)";
+
+    const randomize = createElementWithClassAndParent("button", button_bar);
+    randomize.innerText = "Randomize All Players";
 
     const add_button = createElementWithClassAndParent("button", button_bar);
     add_button.innerText = "Add Player";
 
 
 
-
+    const shareable_url = createElementWithClassAndParent("a", sburb_container, 'shareable-url');
+    shareable_url.target = "_blank";
+    shareable_url.innerText = "Shareable URL (click to view session)";
     const players_container = createElementWithClassAndParent("div", sburb_container, 'player-flex');
 
     const handleChange = () => {
-        console.warn("TODO: need to display json box, special brittle string i make and url link")
         renderPlayers();
     }
 
 
     const renderPlayers = () => {
-        players_container.innerHTML = '';
+        players_container.innerHTML = ``;
+        const custom = encodeURIComponent(JSONCrush.crush(game.exportPlayersForCustomization()));
+        console.log("JR NOTE: custom is", custom)
+        shareable_url.href = `${window.location.pathname}?seed=${textObject.input.value}&custom=${custom}`;
         for (let player of game.players) {
-            const player_edit_box = createElementWithClassAndParent("div", players_container, 'player-edit-box');
-            editOnePlayer(player, player_edit_box, handleChange);
+            const container = createElementWithClassAndParent("div", players_container, 'player-edit-box');
+
+            const top = createElementWithClassAndParent("div", container, 'top');
+            const bottom = createElementWithClassAndParent("div", container);
+
+            editOnePlayer(player, top, bottom, handleChange);
         }
     }
     renderPlayers();
 
     add_button.onclick = () => {
-        game.players.push(randomEntity(new SeededRandom(stringtoseed(input.value))))
+        game.players.push(randomEntity(new SeededRandom(stringtoseed(textObject.input.value))))
         renderPlayers();
 
     }
 
     sync_sprite_button.onclick = () => {
-        setSpritesForParty(new SeededRandom(stringtoseed(input.value)), game.players);
+        setSpritesForParty(new SeededRandom(stringtoseed(textObject.input.value)), game.players);
         renderPlayers();
+    }
+
+
+    randomize.onclick = () => {
+        game.players.forEach((p) => p.randomize(game.rand));
+        setSpritesForParty(new SeededRandom(stringtoseed(textObject.input.value)), game.players);
+        initializeRelationshipsForParty(game.rand, game.players)
+        renderPlayers();
+    }
+
+    relationship_button.onclick = () => {
+        initializeRelationshipsForParty(game.rand, game.players);
+        renderPlayers();
+
     }
 
 
@@ -68,7 +115,7 @@ const session_customizer = () => {
 }
 
 
-const editOnePlayer = (player, parent, change_callback) => {
+const editOnePlayer = (player, parent, bottom, change_callback) => {
     console.log("JR NOTE: editOnePlayer", player)
     parent.innerHTML = "";
     const left = createElementWithClassAndParent("div", parent, "left");
@@ -275,7 +322,7 @@ can be dangerous
 
 
     const makeRelationships = () => {
-        const box = createElementWithClassAndParent("div", right);
+        const box = createElementWithClassAndParent("div", bottom);
         box.style.marginTop = "13px"
         box.style.marginBottom = "13px"
 
@@ -287,7 +334,7 @@ can be dangerous
         const makeFamilial = (relationship, ele) => {
             const { container, input, label } = createCheckboxInputWithLabel(ele, undefined, "Family:", relationship.familial)
             input.style.width = "50px"
-            label.style.fontSize = "13px"
+            label.style.fontSize = "10px"
 
             input.onchange = () => {
                 console.log("JR NOTE: change value is", input.checked)
@@ -300,7 +347,7 @@ can be dangerous
         const makeRomantic = (relationship, ele) => {
             const { container, input, label } = createCheckboxInputWithLabel(ele, undefined, "Romantic:", relationship.romantic)
             input.style.width = "50px"
-            label.style.fontSize = "13px"
+            label.style.fontSize = "10px"
 
             input.onchange = () => {
                 console.log("JR NOTE: change value is", input.checked)
@@ -316,8 +363,11 @@ can be dangerous
             const { container, input, label } = createNumberInputWithLabel(box, undefined, `${key}: `, relationship.value, STRONG_RELATIONSHIP_VALUE, -1 * STRONG_RELATIONSHIP_VALUE)
             label.className = "edit-left"
             label.style.whiteSpace = "nowrap";
+            label.style.width = "fit-content";
+
             label.style.fontSize = "10px"
             container.className = 'edit-pair'
+            container.style.justifyContent = "space-between"
             const boxes = createElementWithClassAndParent("div", box);
             boxes.style.display = "flex"
             boxes.style.marginBottom = "20px"
@@ -346,6 +396,15 @@ can be dangerous
     makeMusical();
 
     makeRelationships();
+
+    const randomize = createElementWithClassAndParent("button", right);
+    randomize.innerText = "Randomize Player";
+
+    randomize.onclick = () => {
+        player.randomize(game.rand);
+        change_callback();
+
+    }
 
     const remove_button = createElementWithClassAndParent("button", right);
     remove_button.innerText = "Eat Player";
