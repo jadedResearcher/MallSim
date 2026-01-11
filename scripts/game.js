@@ -102,15 +102,12 @@ class Game {
     sprite_class: Object.keys(class_mapping).indexOf(this.sprite_class)
     */
     importPlayersFromJSON = (json_text) => {
-        console.log("JR NOTE: json text is", json_text)
         try {
             const json = JSON.parse(json_text);
             const players_to_add = [];
             for (let cultist of json) {
-                console.log("JR NOTE: cultist theme keys is", cultist.theme_keys)
 
                 const theme_keys = cultist.theme_keys.map((t) => keys[t])
-                console.log("JR NOTE: theme keys is", theme_keys)
                 const np = new Entity(theme_keys, this.rand);
                 np.name = cultist.name;
                 np.title = cultist.title;
@@ -120,7 +117,11 @@ class Game {
                     np.relationships[key] = new Relationship(value.value, value.romantic, value.familial);
                 }
                 //new Relationship(value, romantic, familial)
-                np.stats = cultist.stats;
+                console.log("JR NOTE: cultist stats are", cultist.stats)
+                np.stats = {};
+                for (let [key, value] of Object.entries(cultist.stats)) {
+                    np.stats[key] = parseFloat(value);
+                }
                 np.wasted = cultist.wasted;
                 if (cultist.sprite_aspect) {
                     np.sprite_aspect = Object.keys(aspect_mapping)[cultist.sprite_aspect];

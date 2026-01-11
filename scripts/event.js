@@ -701,7 +701,54 @@ yongkiKillapplyResult = (game, location, parent, me) => {
 
 }
 
+/*
+IC NOTE: (on witherby)
+on the all in all, with the cultists, he would simultaneously enjoy, detest, and fear his own feelings on the matter
+feeling fed feels very good actually. a million hail marys.
 
+1) i need to help get rid of these cultists
+2) i can't do my usual means, unless i want to burn out from trying to youtube pipeline one million cultists for 50 years
+3) it is objectively at that point, best to exploit their vulnerable sensibilities to being in a group as cultists
+4) actually, it feels really good to indulge. i like them when they fear me. i should feed more
+5) oh god, what the fuck am i thinking. these are still people. this is a sin
+6) that's gross. i'm gross. we gotta get normal.
+7) six million hail marys
+8) well i can't just fucking do nothing
+*/
+
+/*
+wibby waking up to his own 'monstrousness' has been really really fucking shit for his mental health
+theres a reason his diary got Weird
+and it took yongki writing in it to shake him out of his funk
+and even then he just
+freaked out about rabbit
+then ran away
+then un-ran away
+and then went "btw we're beefing with the cult now"
+even before the whole harvest fruit thing
+*/
+
+
+/*
+i think at some point someone explained "invasive species" to him
+probably in terms of being bad for snails
+he knows its bad to kill people :(
+but it turns out its NOT bad if its an invasive species
+and he DOES like the feel of meat and blood
+its nice not to have to be so careful
+also theres like, even odds that sometimes its captain
+and he is Doing His Duty
+but from an outside perspective, you don't really care WHICH person is squishing you to a pulp before the photons are even done hitting your retinas
+*/
+
+/*
+IC NOTE: 
+yongki, if anything, is acutely aware and prepared to kill, even if he's not assigning any strong moral duty to it
+captain is. captain is locked in
+but yongki is a beast
+Yongki's infinite body stat and captain's clock-like precision are a strong contender of 'why do the bad guys never send their strongest first'
+turns out most cultists can be derailed by letting yongki loose for a bit
+*/
 const yongkiKill = makeEventSubType("Yongki Kill", yongkiKillinternalConditionCheck, yongkiKillapplyResult);
 
 //////////////////////////////////////
