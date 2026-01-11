@@ -22,14 +22,23 @@ const session_customizer = () => {
     const { input, label, container } = createTextInputWithLabel(sburb_container, undefined, "Expedition #:", game.rand.initial_seed)
     input.style.marginLeft = "13px"
 
-    const button = createElementWithClassAndParent("button", sburb_container);
-    button.innerText = "Sync Team Sprites From Themes";
+    const button_bar = createElementWithClassAndParent("div", sburb_container, "horizontal-bar");
+    button_bar.style.backgroundColor = "transparent"
+
+    const sync_sprite_button = createElementWithClassAndParent("button", button_bar);
+    sync_sprite_button.innerText = "Sync Team Sprites From Themes";
+
+    const add_button = createElementWithClassAndParent("button", button_bar);
+    add_button.innerText = "Add Player";
+
+
 
 
     const players_container = createElementWithClassAndParent("div", sburb_container, 'player-flex');
 
     const handleChange = () => {
         console.warn("TODO: need to display json box, special brittle string i make and url link")
+        renderPlayers();
     }
 
 
@@ -42,8 +51,13 @@ const session_customizer = () => {
     }
     renderPlayers();
 
+    add_button.onclick = () => {
+        game.players.push(randomEntity(new SeededRandom(stringtoseed(input.value))))
+        renderPlayers();
 
-    button.onclick = () => {
+    }
+
+    sync_sprite_button.onclick = () => {
         setSpritesForParty(new SeededRandom(stringtoseed(input.value)), game.players);
         renderPlayers();
     }
@@ -74,7 +88,6 @@ const editOnePlayer = (player, parent, change_callback) => {
         input.onchange = () => {
             player.name = input.value;
             change_callback();
-            //editOnePlayer(player, parent,change_callback); //only call this for things that would effect graphics
         }
     }
 
@@ -85,7 +98,6 @@ const editOnePlayer = (player, parent, change_callback) => {
         input.onchange = () => {
             player.title = input.value;
             change_callback();
-            //editOnePlayer(player, parent,change_callback);
         }
     }
 
@@ -104,7 +116,6 @@ const editOnePlayer = (player, parent, change_callback) => {
             input.onchange = () => {
                 player.stats[key] = input.value;
                 change_callback();
-                //editOnePlayer(player, parent,change_callback);
             }
         }
     }
@@ -132,7 +143,6 @@ const editOnePlayer = (player, parent, change_callback) => {
                 console.log("JR NOTE: trying to change theme", { index_copy, value: input.value })
                 player.theme_keys[index_copy - 1] = input.value;
                 change_callback();
-                //editOnePlayer(player, parent, change_callback);
             }
         }
 
@@ -168,7 +178,6 @@ const editOnePlayer = (player, parent, change_callback) => {
 
             player.theme_keys = Array.from(input.selectedOptions).map((o) => o.value);
             change_callback();
-            editOnePlayer(player, parent, change_callback);
         }
     }
 
@@ -204,7 +213,6 @@ can be dangerous
             input.onchange = () => {
                 player.sprite_aspect = input.value;
                 change_callback();
-                editOnePlayer(player, parent, change_callback);
             }
         }
 
@@ -220,7 +228,6 @@ can be dangerous
 
                 player.sprite_class = input.value;
                 change_callback();
-                editOnePlayer(player, parent, change_callback);
             }
         }
         makeSpriteAspect();
@@ -239,7 +246,6 @@ can be dangerous
 
             player.wasted = !!input.checked;
             change_callback();
-            editOnePlayer(player, parent, change_callback);
         }
     }
 
@@ -251,7 +257,6 @@ can be dangerous
             console.log("JR NOTE: change value is", input.checked)
 
             player.corrupted = !!input.checked;
-            editOnePlayer(player, parent, change_callback);
             change_callback();
         }
     }
@@ -264,7 +269,6 @@ can be dangerous
             console.log("JR NOTE: change value is", input.checked)
 
             player.musical = !!input.checked;
-            editOnePlayer(player, parent, change_callback);
             change_callback();
         }
     }
@@ -289,7 +293,6 @@ can be dangerous
                 console.log("JR NOTE: change value is", input.checked)
 
                 relationship.familial = !!input.checked;
-                editOnePlayer(player, parent, change_callback);
                 change_callback();
             }
         }
@@ -303,7 +306,6 @@ can be dangerous
                 console.log("JR NOTE: change value is", input.checked)
                 relationship.romantic = !!input.checked;
 
-                editOnePlayer(player, parent, change_callback);
                 change_callback();
             }
         }
@@ -330,7 +332,6 @@ can be dangerous
                 console.log("JR NOTE: clone key", clone_key)
                 player.relationships[clone_key].value = input.value;
                 change_callback();
-                //editOnePlayer(player, parent,change_callback);
             }
         }
     }
@@ -345,6 +346,22 @@ can be dangerous
     makeMusical();
 
     makeRelationships();
+
+    const remove_button = createElementWithClassAndParent("button", right);
+    remove_button.innerText = "Eat Player";
+    const crunch = new Audio("http://farragofiction.com/NagaGirlfriend/audio/333818__inspectorj__cracking-crunching-a.mp3");
+
+    remove_button.onclick = () => {
+        /*
+        even in sburbsim, i always thought it was fucked up to just...delete players from sessions
+
+        now you have to sit and LISTEN to your sins, observer
+        */
+        crunch.play();
+        removeItemOnce(game.players, player);
+        change_callback();
+
+    }
 
 
 }

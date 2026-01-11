@@ -1216,7 +1216,7 @@ const cullWastes = () => {
     jrLog("can anyone even tell whats going on?")
     jrLog("and i thought NIDHOGG was annoying, never letting anyone die")
     jrLog("the echidna refusing to let anything stop being relevant is a nightmare")
-    jrLog("anyways yes i fully endorse you")
+    jrLog("anyways yes i fully endorse you all")
     jrLog('just')
     jrLog("chucking extraneous people into the devil of spirals gaping skeletal maw")
     jrLog("even if i wouldn't want him to eat the echidna or anything")

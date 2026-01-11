@@ -408,9 +408,7 @@ button {
   }
 
   button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+
     margin-top: 13px;
     margin-bottom: 13px;
   }
