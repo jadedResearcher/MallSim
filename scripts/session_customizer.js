@@ -90,6 +90,37 @@ const editOnePlayer = (player, parent, change_callback) => {
     }
 
     const makeThemes = () => {
+        const theme_box = createElementWithClassAndParent("div", right);
+        theme_box.style.marginTop = "13px"
+        theme_box.style.marginBottom = "13px"
+
+        const options = [];
+        const theme_keys = [...getAllThemeKeysMinusFood()];
+        theme_keys.sort();
+        for (let key of theme_keys) {
+            options.push({ label: titleCase(key), value: key })
+        }
+
+        let index = 0;
+        for (let theme of player.theme_keys) {
+            index++;
+            const { container, input, label } = createSelectInputWithLabel(theme_box, undefined, `Theme ${index}:`, options, theme)
+            label.className = "edit-left"
+            container.className = 'edit-pair'
+            const index_copy = index; //otherwise this gets incremented next loop, need to store a local copy
+            input.onchange = () => {
+                console.log("JR NOTE: trying to change theme", { index_copy, value: input.value })
+                player.theme_keys[index_copy - 1] = input.value;
+                change_callback();
+                //editOnePlayer(player, parent, change_callback);
+            }
+        }
+
+    }
+
+    //abandoned this one, multiselect works like ass on desktop
+    //so just saying theres only 4 themes, no weird ass omni players
+    const makeThemesMultiSelect = () => {
         const options = [];
         for (let key of getAllThemeKeysMinusFood()) {
             options.push({ label: titleCase(key), value: key })
@@ -113,13 +144,14 @@ const editOnePlayer = (player, parent, change_callback) => {
         label.className = "edit-left"
         container.className = 'edit-pair'
         input.onchange = () => {
-            console.log("JR NOTE: change value is", input.value)
+            console.log("JR NOTE: change value is", input.selectedOptions)
 
-            player.theme_keys = input.value;
+            player.theme_keys = Array.from(input.selectedOptions).map((o) => o.value);
             change_callback();
-            //editOnePlayer(player, parent,change_callback);
+            editOnePlayer(player, parent, change_callback);
         }
     }
+
 
 
     /*
@@ -135,36 +167,46 @@ it is not what it is
 assuming familiarity with zampanio
 can be dangerous
     */
-    const makeSpriteAspect = () => {
-        const options = [];
-        for (let sprite_aspect of Object.keys(aspect_mapping)) {
-            options.push({ label: titleCase(sprite_aspect), value: sprite_aspect })
+
+    const makeSprite = () => {
+        const sprite_box = createElementWithClassAndParent("div", right);
+        sprite_box.style.marginTop = "13px"
+        sprite_box.style.marginBottom = "13px"
+
+        const makeSpriteAspect = () => {
+            const options = [];
+            for (let sprite_aspect of Object.keys(aspect_mapping)) {
+                options.push({ label: titleCase(sprite_aspect), value: sprite_aspect })
+            }
+            const { container, input, label } = createSelectInputWithLabel(sprite_box, undefined, "Sprite Aspect:", options, player.sprite_aspect)
+            label.className = "edit-left"
+            container.className = 'edit-pair'
+            input.onchange = () => {
+                player.sprite_aspect = input.value;
+                change_callback();
+                editOnePlayer(player, parent, change_callback);
+            }
         }
-        const { container, input, label } = createSelectInputWithLabel(right, undefined, "Sprite Aspect:", options, player.sprite_aspect)
-        label.className = "edit-left"
-        container.className = 'edit-pair'
-        input.onchange = () => {
-            player.sprite_aspect = input.value;
-            change_callback();
-            editOnePlayer(player, parent, change_callback);
+
+        const makeSpriteClass = () => {
+            const options = [];
+            for (let sprite_aspect of Object.keys(class_mapping)) {
+                options.push({ label: titleCase(sprite_aspect), value: sprite_aspect })
+            }
+            const { container, input, label } = createSelectInputWithLabel(sprite_box, undefined, "Sprite Class:", options, player.sprite_class)
+            label.className = "edit-left"
+            container.className = 'edit-pair'
+            input.onchange = () => {
+
+                player.sprite_class = input.value;
+                change_callback();
+                editOnePlayer(player, parent, change_callback);
+            }
         }
+        makeSpriteAspect();
+        makeSpriteClass();
     }
 
-    const makeSpriteClass = () => {
-        const options = [];
-        for (let sprite_aspect of Object.keys(class_mapping)) {
-            options.push({ label: titleCase(sprite_aspect), value: sprite_aspect })
-        }
-        const { container, input, label } = createSelectInputWithLabel(right, undefined, "Sprite Class:", options, player.sprite_class)
-        label.className = "edit-left"
-        container.className = 'edit-pair'
-        input.onchange = () => {
-
-            player.sprite_class = input.value;
-            change_callback();
-            editOnePlayer(player, parent, change_callback);
-        }
-    }
 
 
     const makeWasted = () => {
@@ -210,8 +252,7 @@ can be dangerous
     makeName();
     makeTitle();
     makeThemes();
-    makeSpriteAspect();
-    makeSpriteClass();
+    makeSprite();
     makeWasted();
     makeCorrupted();
     makeMusical();
