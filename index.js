@@ -59,6 +59,7 @@ const debug = () => {
             const json_text = JSONCrush.uncrush((custom));
             console.info("JR NOTE: ", { custom, json_text })
             game.importPlayersFromJSON(json_text);
+            game.custom = true;
         } catch (e) {
             console.log("JR NOTE: Error caught, here's some data", { custom })
             alert("Something went wrong importing players. Are you suuuuuure you didn't mess up wasting them?")

@@ -143,7 +143,16 @@ const editOnePlayer = (player, parent, bottom, change_callback) => {
         label.className = "edit-left"
         container.className = 'edit-pair'
         input.onchange = () => {
+            //title is a special case, because relationships are stored by TITLE (not something as fallible as a mere name), when you update your title, update all relationships so you don't end up with orphans
+            for (let p of game.players) {
+                const r = p.relationships[player.title];
+                console.log("JR NOTE: r is", r)
+                p.relationships[input.value] = r; //move the old relationship to the new title
+                delete p.relationships[player.title]; //delete the reference to the old relationship
+            }
             player.title = input.value;
+
+
             change_callback();
         }
     }

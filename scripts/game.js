@@ -66,6 +66,7 @@ class Game {
     //each cell is either undefined or a room in the mall
     map = [];
     constructor(rand, eatWastesAutomatically) {
+
         this.summary = new GameSummary();
         this.rand = rand;
         this.eatWastesAutomatically = eatWastesAutomatically;
@@ -104,6 +105,7 @@ class Game {
     importPlayersFromJSON = (json_text) => {
         try {
             const json = JSON.parse(json_text);
+            console.log("JR NOTE: json is", json)
             const players_to_add = [];
             for (let cultist of json) {
 
@@ -111,6 +113,9 @@ class Game {
                 const np = new Entity(theme_keys, this.rand);
                 np.name = cultist.name;
                 np.title = cultist.title;
+                np.wasted = cultist.wasted;
+                np.musical = cultist.musical;
+                np.corrupted = cultist.corrupted;
                 all_entities[np.title] = np;
                 np.relationships = {};
                 for (let [key, value] of Object.entries(cultist.relationships)) {
@@ -122,7 +127,6 @@ class Game {
                 for (let [key, value] of Object.entries(cultist.stats)) {
                     np.stats[key] = parseFloat(value);
                 }
-                np.wasted = cultist.wasted;
                 if (cultist.sprite_aspect) {
                     np.sprite_aspect = Object.keys(aspect_mapping)[cultist.sprite_aspect];
                 }
@@ -1076,7 +1080,13 @@ class Game {
 
 
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
-
+        if (game.custom) {
+            const ele = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            ele.innerText = "Something horrible has happened here. The very flesh of reality cries out that an atrocity has occurred...but none can point where or how. The Universe was not meant to be this way."
+            const a = createElementWithClassAndParent("a", ele,);
+            a.href = `${window.location.pathname}?seed=${this.rand.initial_seed}`;
+            a.innerText = " Restore The Universe?";
+        }
 
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
         general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2><br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
@@ -1089,6 +1099,7 @@ class Game {
         for (let player of this.players) {
             const ele = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             let text = "";
+
             if (player.leader) {
                 text = `Leading the Faithful is ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
             } else if (player.wasted && !player.isStartingToFeelMonstrous()) {
