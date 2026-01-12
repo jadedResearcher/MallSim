@@ -105,7 +105,6 @@ class Game {
     importPlayersFromJSON = (json_text) => {
         try {
             const json = JSON.parse(json_text);
-            console.log("JR NOTE: json is", json)
             const players_to_add = [];
             for (let cultist of json) {
 
@@ -122,7 +121,6 @@ class Game {
                     np.relationships[key] = new Relationship(value.value, value.romantic, value.familial);
                 }
                 //new Relationship(value, romantic, familial)
-                console.log("JR NOTE: cultist stats are", cultist.stats)
                 np.stats = {};
                 for (let [key, value] of Object.entries(cultist.stats)) {
                     np.stats[key] = parseFloat(value);

@@ -101,7 +101,7 @@ const grabEyesForThemeKey = (theme_key) => {
 
 
 const filterEyesForWordArrayOr = (wordArray) => {
-    console.log("JR NOTE: searching for words", wordArray)
+    //console.log("JR NOTE: searching for words", wordArray)
     return eyeImages.filter((eye) => {
         for (let word of wordArray) {
             if (word && eye.toUpperCase().includes(word.toUpperCase())) {

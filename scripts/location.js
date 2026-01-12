@@ -364,7 +364,6 @@ class Location {
                 break;//no more lively corpses
             }
             let options = possibleActions[p.title];
-            !options && console.log("JR NOTE: options", options, possibleActions, p)
 
             if (p.isStartingToFeelCorruption()) {
                 options.push(`${p.nameHTML()} is feeling weird... They are clutching their stomach.`)

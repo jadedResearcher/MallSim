@@ -71,7 +71,6 @@ const session_customizer = () => {
     const renderPlayers = () => {
         players_container.innerHTML = ``;
         const custom = encodeURIComponent(JSONCrush.crush(game.exportPlayersForCustomization()));
-        console.log("JR NOTE: custom is", custom)
         shareable_url.href = `${window.location.pathname}?seed=${textObject.input.value}&custom=${custom}`;
         for (let player of game.players) {
             const container = createElementWithClassAndParent("div", players_container, 'player-edit-box');
@@ -116,7 +115,6 @@ const session_customizer = () => {
 
 
 const editOnePlayer = (player, parent, bottom, change_callback) => {
-    console.log("JR NOTE: editOnePlayer", player)
     parent.innerHTML = "";
     const left = createElementWithClassAndParent("div", parent, "left");
     const right = createElementWithClassAndParent("div", parent, 'right');
@@ -146,7 +144,6 @@ const editOnePlayer = (player, parent, bottom, change_callback) => {
             //title is a special case, because relationships are stored by TITLE (not something as fallible as a mere name), when you update your title, update all relationships so you don't end up with orphans
             for (let p of game.players) {
                 const r = p.relationships[player.title];
-                console.log("JR NOTE: r is", r)
                 p.relationships[input.value] = r; //move the old relationship to the new title
                 delete p.relationships[player.title]; //delete the reference to the old relationship
             }
@@ -196,7 +193,6 @@ const editOnePlayer = (player, parent, bottom, change_callback) => {
             container.className = 'edit-pair'
             const index_copy = index; //otherwise this gets incremented next loop, need to store a local copy
             input.onchange = () => {
-                console.log("JR NOTE: trying to change theme", { index_copy, value: input.value })
                 player.theme_keys[index_copy - 1] = input.value;
                 change_callback();
             }
@@ -230,8 +226,6 @@ const editOnePlayer = (player, parent, bottom, change_callback) => {
         label.className = "edit-left"
         container.className = 'edit-pair'
         input.onchange = () => {
-            console.log("JR NOTE: change value is", input.selectedOptions)
-
             player.theme_keys = Array.from(input.selectedOptions).map((o) => o.value);
             change_callback();
         }
@@ -293,13 +287,10 @@ can be dangerous
 
 
     const makeWasted = () => {
-        console.log("JR NOTE: player wasted is", player.wasted)
         const { container, input, label } = createCheckboxInputWithLabel(right, undefined, "Wasted:", player.wasted)
         label.className = "edit-left"
         container.className = 'edit-pair'
         input.onchange = () => {
-            console.log("JR NOTE: change value is", input.checked)
-
             player.wasted = !!input.checked;
             change_callback();
         }
@@ -310,8 +301,6 @@ can be dangerous
         label.className = "edit-left"
         container.className = 'edit-pair'
         input.onchange = () => {
-            console.log("JR NOTE: change value is", input.checked)
-
             player.corrupted = !!input.checked;
             change_callback();
         }
@@ -322,8 +311,6 @@ can be dangerous
         label.className = "edit-left"
         container.className = 'edit-pair'
         input.onchange = () => {
-            console.log("JR NOTE: change value is", input.checked)
-
             player.musical = !!input.checked;
             change_callback();
         }
@@ -346,8 +333,6 @@ can be dangerous
             label.style.fontSize = "10px"
 
             input.onchange = () => {
-                console.log("JR NOTE: change value is", input.checked)
-
                 relationship.familial = !!input.checked;
                 change_callback();
             }
@@ -359,7 +344,6 @@ can be dangerous
             label.style.fontSize = "10px"
 
             input.onchange = () => {
-                console.log("JR NOTE: change value is", input.checked)
                 relationship.romantic = !!input.checked;
 
                 change_callback();
@@ -388,7 +372,6 @@ can be dangerous
 
             const clone_key = key;
             input.onchange = () => {
-                console.log("JR NOTE: clone key", clone_key)
                 player.relationships[clone_key].value = input.value;
                 change_callback();
             }

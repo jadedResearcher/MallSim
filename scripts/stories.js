@@ -1879,7 +1879,6 @@ const getCurrentStory = () => {
 }
 
 const getNextStory = (pleaseSave) => {
-    console.log("JR NOTE: getNextStory", pleaseSave, globalDataObject)
     if (!globalDataObject.highestStoryIndexUnlocked) {
         globalDataObject.highestStoryIndexUnlocked = 0;
     }
@@ -2044,7 +2043,6 @@ const renderRadioCipherStory = (story, ele) => {
         const translated_rotation = value <= 26 ? value : 27 - Math.abs(27 - value);
         static_audio.volume = Math.min(1, Math.max(0, (26 - translated_rotation) / 26));
         muffled_audio.volume = Math.min(1, Math.max(0, translated_rotation / 26));
-        console.log("JR NOTE: translated_rotation,value", translated_rotation, value)
         story_container.innerHTML = `<h2>Tune the Radio:</h2><p> ${story.title}</p>` + rotationCipherWithMapping(story.text, letterMapping, translated_rotation);
     }
     const value = translateFromRadio(parseInt(input.value), max, min);
