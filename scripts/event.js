@@ -1302,7 +1302,7 @@ const nevilleHuntingCheck = (game, location) => {
     const players = location.players;
     for (let player of players) {
         //neville is, lets face it, kind of obvlivious, he might just lumber past you without realizing you're his target but you still hear him
-        if (player.hunted() && game.rand.nextDouble() > 0.15) {
+        if (!player.dead && player.hunted() && game.rand.nextDouble() > 0.15) {
             return true;
         }
     }
@@ -1331,6 +1331,13 @@ const nevilleHuntingapplyResult = (game, location, parent, me) => {
         return;
     }
 
+    if (sinner.corrupted) {
+        ele.innerHTML = `A hulking bird bursts out and a slash on their chest gapes open into a toothy maw. ${sinner.nameHTML()} is bitten clean in half, splinters of ${sinner.mannequin_type} flying everywhere.<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/Breaching_Neville_pixel_by_the_guideofhunters.gif'>
+`;
+        sinner.kill(`bitten clean in half, jagged shards of ${sinner.mannequin_type} trailing from both halves`); //neville is a picky eater
+        console.warn("JR NOTE: need to have the bunker event happen next")
+    }
+
     if (game.rand.nextDouble() > 0.09) { //neville might just be near but not near enough to bite you in half
         ele.innerHTML = `${sinner.nameHTML()} is pushing themself to the brink of exhaustion running, but the crashing and howling behind them doesn't let up. The steady, constant beat of it hounds their heels, raises the hairs on the back of their neck and drives them forward, breath frothing out of their mouth in panic. 
 <br><br>
@@ -1355,6 +1362,7 @@ Something is shuffling behind them, sniffing.
 Everything goes dark. They feel an odd sort of peace, finally able to rest.
 <br><Br>
 And they die.
+<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/Breaching_Neville_pixel_by_the_guideofhunters.gif'>
 `;
         sinner.kill("bitten clean in half, organs trailing from both halves"); //neville is a picky eater
         console.warn("JR NOTE: need to have the bunker event happen next")
@@ -1489,6 +1497,8 @@ They start running in the opposite direction.
         arms.sin_array.push(TWIN_KILLER);
         game.hunting = true;
         generalEvents.unshift(nevilleHuntingEvent);
+        game.addGeneralEventToAllLocations(nevilleHuntingEvent); //add it everywhere as well
+
 
         if (witnesses) {
             for (let p of players) {
