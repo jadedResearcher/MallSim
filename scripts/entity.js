@@ -10,6 +10,11 @@ const CLONE_LABEL = "clone"
 
 const STRONG_RELATIONSHIP_VALUE = 50;
 
+const TWIN_KILLER = "TWIN_KILLER";
+const TEAM_KILLER = "TEAM_KILLER";
+const MONSTER_KILLER = "MONSTER_KILLER";
+
+
 
 /*
 BASELINE_METAL_OBJECT[MIND_METAL_STAT] = MEDIUM_STAT_VALUE;
@@ -307,6 +312,7 @@ class Entity {
     dead = false;
     musical = false; //hey how could this be bad???
     corrupted = false;
+    preparedToKill = false;
     sprite_aspect = Object.keys(aspect_mapping)[0];
     sprite_class = Object.keys(class_mapping)[0];
     monster_rating = 0; //every time you loop you lose a little bit more of your nuance, plus every time you kill, hoon and wibby respond to this
@@ -319,6 +325,8 @@ class Entity {
     pending_location; //so that you can tell your companions where you are going to go
     stats = {};
     state_of_corpse = "";
+    sin_array = [];// oh boy do so many entities HATE it when you sin
+    fleeing = false; //you'll auto flee if you're corrupt enough, but theres plenty of reasons to want to get the hell out of dodge
     title = "Null of Null";
     leader = false; //in sburbsim this decided ectobiology, who knows what this does, if anything, here
     //keyed by other persons title
@@ -330,6 +338,13 @@ class Entity {
 
     constructor(themes, rand) {
         this.randomize(rand, themes)
+    }
+
+    hunted = () => {
+        if (this.sin_array.includes(TWIN_KILLER)) {
+            return true;
+        }
+        return false;
     }
 
     randomize = (rand, hardcoded_themes) => {
@@ -625,7 +640,7 @@ class Entity {
                     this.fear += 13; //congrats on your first corpse viewing
                     deadbeat.innerHTML = `${this.nameHTML()} can't believe their eyes. ${player.nameHTML()} is ${player.state_of_corpse}. ${relationship.familial ? " How are they going to tell the rest of the family?" : ""} ${relationship.romantic ? "They...they'll never kiss them again. Never hold them...Never..." : ""} They start screaming and they aren't sure if they'll stop...`;
 
-                    if (this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE && !this.preparedToKill) {
+                    if (this.stats[ARMS_METAL_STAT] > LOW_STAT_VALUE && !this.preparedToKill) {
                         this.preparedToKill = true; //its life or death now, i'm sorry
                         deadbeat.innerHTML += `They steel themselves. This has become life or death and they are not going to be a corpse. They are prepared to kill.`;
                     }
@@ -634,7 +649,7 @@ class Entity {
 
                     this.fear += 1 //its just not the same as the first time
                     deadbeat.innerHTML = `${this.nameHTML()} stares listlessly at ${player.nameHTML()}, wondering almost idly how it  became ${player.state_of_corpse}. They feel like their hold on reality is slipping away. How could they think this about their ${relationship_label}?`;
-                    if (this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE && !this.preparedToKill) {
+                    if (this.stats[ARMS_METAL_STAT] > LOW_STAT_VALUE && !this.preparedToKill) {
                         this.preparedToKill = true; //its life or death now, i'm sorry
                         deadbeat.innerHTML += `They steel themselves. This has become life or death and they are not going to be a corpse. They are prepared to kill.`;
                     }
@@ -781,7 +796,7 @@ class Entity {
     //https://www.tumblr.com/jadedresearcher/801579387276378112/whiteantcrawls-helloitsbees?source=share
     getName = () => {
         let name_holder = this.wasted ? this.title : this.name;
-        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}`);
+        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""}`);
     }
 
 
@@ -924,7 +939,7 @@ class Entity {
     //to kill in coold blood
     preparedToKillInitially = () => {
         //someone will kill if they prefer action strongly over compromise
-        return this.stats[ARMS_METAL_STAT] > HIGH_STAT_VALUE && this.stats[TONGUE_METAL_STAT] < MEDIUM_STAT_VALUE;
+        return this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE && this.stats[TONGUE_METAL_STAT] < MEDIUM_STAT_VALUE;
     }
 
     decideWhereToGoAsAMannequin = (ele, rand, currentLocation, north, south, east, west) => {
@@ -1042,8 +1057,8 @@ class Entity {
         }
 
         const chooseWest = () => {
-
-            if (west && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.5) {
+            const fleeing = this.fleeing || this.isStartingToFeelCorruption()
+            if (west && fleeing && rand.nextDouble() > 0.5) {
                 if (currentLocation.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.nameHTML()} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else {
@@ -1054,8 +1069,9 @@ class Entity {
         }
 
         const chooseNorth = () => {
+            const fleeing = this.fleeing || this.isStartingToFeelCorruption()
 
-            if (north && this.isStartingToFeelCorruption() && rand.nextDouble() > 0.1) {
+            if (north && fleeing && rand.nextDouble() > 0.1) {
                 ele.innerHTML = `${this.nameHTML()} decides to try getting back to the entrance, and moves NORTH, into the ${north.longer_name} ${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
 
                 return north;

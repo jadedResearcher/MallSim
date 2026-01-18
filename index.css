@@ -31,6 +31,20 @@ h3 {
   color: black;
 }
 
+.secrets-of-the-universe {
+  position: relative;
+}
+
+.secrets-of-the-universe:before {
+  content: '';
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(transparent -50px, rgb(237, 231, 213));
+}
+
 .spoiler:hover {
   color: white;
 }
@@ -160,6 +174,8 @@ button {
 
 .map-details {
   z-index: 10;
+  border-top: 1px solid black;
+  margin-top: 13px;
   position: relative;
   background: rgb(237, 231, 213);
   padding: 13px;

@@ -1139,6 +1139,19 @@ const censoredKill = makeEventSubType("???", censoredKillinternalConditionCheck,
 
 
 ///////////////////////////////////
+//http://farragofiction.com/ASecondTranscript/
+//http://farragofiction.com/BulletproofTheory/
+/*
+//http://farragofiction.com/UnifiedTheory/
+its interesting to see how the loops have changed ria
+she goes from hoping to become wasted (pun intended) in order to destroy the world
+to
+actively
+preventing others from becoming wasted
+without partaking herself
+to SAVE the world
+*/
+
 
 const vikEncounterConditionCheck = (game, location) => {
 
@@ -1240,7 +1253,10 @@ const vikEncounter = makeEventSubType(`[REDACTED ENCOUNTER]`, vikEncounterCondit
 
 
 ///////////////////////////////////
-
+//http://farragofiction.com/DocSlaughterFileServer/
+//http://knucklessux.com/ADepressingTranscript
+//http://knucklessux.com/ABulletproofTranscript
+//http://farragofiction.com/PerfectHeist/
 const wastesDoBullshitConditionCheck = (game, location) => {
 
     if (location.livingWastedPlayers().length > 0) {
@@ -1282,7 +1298,284 @@ const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshit
 
 
 
+const nevilleHuntingCheck = (game, location) => {
+    const players = location.players;
+    for (let player of players) {
+        //neville is, lets face it, kind of obvlivious, he might just lumber past you without realizing you're his target but you still hear him
+        if (player.hunted() && game.rand.nextDouble() > 0.15) {
+            return true;
+        }
+    }
 
+    return false;
+}
+
+const nevilleHuntingapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const players = location.players;
+    let sinner;
+    for (let player of players) {
+        if (player.hunted()) {
+            sinner = player;
+        }
+    }
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    if (!sinner) {
+        ele.innerHTML = `Thrashing and howling and crashing is heard echoing throughout the mall.`;
+        return;
+    }
+
+    if (game.rand.nextDouble() > 0.09) { //neville might just be near but not near enough to bite you in half
+        ele.innerHTML = `${sinner.nameHTML()} is pushing themself to the brink of exhaustion running, but the crashing and howling behind them doesn't let up. The steady, constant beat of it hounds their heels, raises the hairs on the back of their neck and drives them forward, breath frothing out of their mouth in panic. 
+<br><br>
+Whatever is hunting them hasn't found them yet, and they can't stop until the hunt ends, one way or another.
+`;
+    } else {
+        me.chosen_name = "Bitten In Half"
+        ele.innerHTML = `${sinner.nameHTML()} is pushing themself to the brink of exhaustion running, but the crashing and howling behind them doesn't let up. The steady, constant beat of it hounds their heels, raises the hairs on the back of their neck and drives them forward, breath frothing out of their mouth in panic. 
+<br><Br>
+They almost don't even feel what happens as they're suddenly falling to the floor. 
+<br><Br>
+They can't feel their legs.
+<br><Br>
+Oh god.
+<br><Br>
+Oh god they can't feel their....
+<br><Br>
+Blood is seeping around their face as it lies smeared into the cold tile of the Westerville Mall.
+<br><Br>
+Something is shuffling behind them, sniffing. 
+<br><Br>
+Everything goes dark. They feel an odd sort of peace, finally able to rest.
+<br><Br>
+And they die.
+`;
+        sinner.kill("bitten clean in half, organs trailing from both halves"); //neville is a picky eater
+        console.warn("JR NOTE: need to have the bunker event happen next")
+    }
+
+
+}
+
+
+
+
+const nevilleHuntingEvent = makeEventSubType(`Twin Brother Encounter`, nevilleHuntingCheck, nevilleHuntingapplyResult);
+
+
+
+
+
+const devonaconditionCheck = (game, location) => {
+    /*if EITHER twin is hunting, you will NOT see their regular events anymore
+    because one is a giant ass were bird and the other is... you know... dead
+    this probably paints a VERY different picture if you don't know who the twins are or what their deal is, lol
+    */
+
+    if (game.hunting) {
+        return false;
+    }
+
+    if (location.livingNonMannequinPlayers().length > 0) {
+        return game.rand.nextDouble() > 0.95;
+    }
+    return false;
+}
+
+const devonaapplyResult = (game, location, parent, me) => {
+
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+    /*
+    devona is COMPLICATED to encounter (unlike neville)
+
+    FIRST you need to see her (hard, she's good at hiding)
+    then you need to CATCH her (not that hard, she sweats just existing)
+
+    THEN you need to interact with her 
+    are you keyed up and ready to kill?  (hope you're ready to get hunted by a big were neville bird)
+    are you strong enough to scare her into talking (you might not like what happens if you do)
+    or does she just sort of awkwardly ask you to leave and then....you let her go)
+
+    (TODO need four events total, devona/neville encounter and then devona/neville hunting (which gets added to general if the encounter goes poorly enough))
+
+    */
+
+    /*these might all be the same people, thats fine. all that matters is that 
+    when the chips are down, the person most likely to do each task will be based on their relative standing in the group they are in
+    if you're used to someone else being on watch...you're not going to be looking too hard if they're around, you know?
+    */
+
+    const players = location.livingNonMannequinPlayers();
+    const eyes = getPartyHighestEyes(players);
+    const legs = getPartyHighestLegs(players);
+    const arms = getPartyHighestArms(players);
+
+    const doNotSeeHer = () => {
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${eyes.nameHTML()} gets the feeling of...being watched. They cast their eyes about in all directions, but somehow never manage to notice anything out of place in the bizarre advertising posters, piles of dusty merchandise, debris, plastic plants and colorful shopping bags. `;
+    }
+
+    const doSeeHer = () => {
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${eyes.nameHTML()} gets the feeling of...being watched. They cast their eyes about in all directions, but its hard to  notice anything out of place in the bizarre advertising posters, piles of dusty merchandise, debris, plastic plants and colorful shopping bags.  
+<br><br>
+Wait!
+<br><br>
+THERE! Just barely visible around a corner!
+<br><br>
+There's a gleam of a camera lens! Right near the floor!
+<br><br>
+And a shadowy figure behind it!
+`;
+
+    }
+
+    const cantCatchher = () => {
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${legs.nameHTML()} sprints after the shadowy figure but trips over their own legs. 
+<br><br>
+By the time they untangle themself from all the various shopping litter, the figure is long gone.
+`;
+
+    }
+
+    const doCatchher = () => {
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${legs.nameHTML()} sprints after the shadowy figure and is almost disappointed at how easy they are to catch. <br><br>
+A terrified girl stares up at them, teeth oddly sharp, trembling in ${legs.nameHTML()}'s grip.
+<br><Br>
+It's actually a little confusing how hard they were to spot, because they are in weird white and red armor, almost shining against the dirt and grime of the mall.
+<img src ='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/scared_devona.gif'>
+
+`;
+
+    }
+
+    const killHer = () => {
+        let witnesses = []; //even if you were prepared to kill you weren't prepared to see your friend do it in front of you
+        for (let player of players) {
+            if (player != arms) {
+                player.fear += 13;
+                witnesses.push(player)
+            }
+        }
+
+        const witnessText1 = witnesses.length > 0 ? `(${arrayToHumanSentence(witnesses.map((n) => n.nameHTML()))} boggles, mouth opening and closing over and over. )` : "";
+        const witnessText2 = witnesses.length > 0 ? `(${arrayToHumanSentence(witnesses.map((n) => n.nameHTML()))} finally finds their voice, stammering out 'why' and 'how could you' but ${arms.nameHTML()} is still staring, wide eyed, in the direction of the howl. )` : "";
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${arms.nameHTML()} is too keyed up by the chase, by the thrill of the hunt, by the FEAR and ANGER pulsing in their chest and before they can even fully think through it they've grabbed the strange girl and snapped her neck.
+<br><br>
+She sags, like a puppet with its strings cut, against the arms of ${arms.nameHTML()}. 
+<br><br>
+${witnessText1}
+<br><br>
+Only seconds later, from deep within the mall, a HOWL of rage and fear and grief echoes. The sound is strange, somehow the most important sound ${arms.nameHTML()} has ever heard.
+<br><br>
+${witnessText2}
+<br><br><br><br>
+They start running in the opposite direction.
+`;
+        arms.fleeing = true; //like hell you're staying around after hearing that HOWL,neville really is the opposite of a void player in so many ways and also isn't
+        arms.sin_array.push(TWIN_KILLER);
+        game.hunting = true;
+        generalEvents.unshift(nevilleHuntingEvent);
+
+        if (witnesses) {
+            for (let p of players) {
+                //you even hate YOURSELF a little bit more
+                p.fuckingHATEEveryoneInList([arms]);
+            }
+        }
+    }
+
+    const devonaSpillsTheBeans = () => {
+        let formerName = arms.nameHTML();
+        for (let player of players) {
+            player.becomeCorrupted(game.rand)
+        }
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${formerName} decides to intimidate the trembling sharp toothed girl and to their surprise, it seems to work?
+<br><br>
+<span class='secrets-of-the-universe'>She starts rambling, almost incoherently, explaining that she lives here (in the mall), her name is Devona and she didn't know last names were things until she came to this universe and  that all her friends live here, that they're (her friends)  a whole team (designation Training) supposed to stop bad things from happening and that the Harvest Fruit is a bad thing (sorry about the blasphemy!) and they're  (the training team) just trying to keep the Universe safe because otherwise it will fill up with looping cultists (you guys) and not have room for anything else  and also that the Universe is in the shape of an Echidna and they, the training team that is,  love it and theyre  (still the training team) protecting it and that her twin wants to protect it too although of course he's not BIOLOGICALLY her twin and actually did you know that humans diverge from their nearest ancestor by only a few percentages points in terms of DNA and so how can you (hypothetical you this time, she doesn't mean to say YOU you thinks she's not twins with her brother) say we aren't twins anyways and actually they (scientists this time) think there was a population bottleneck at some point in human history and thats why we (humanity, not just the training team, that would be weird)  can all mostly donate blood and organs to each other and most animals can't do that and......</span>
+<br><br>
+Seemingly hours later, the blood finally stops seeping out of ${arrayToHumanSentence(players.map((n) => n.nameHTML()))}'s ears. Their ${arrayToHumanSentence(players.map((n) => n.mannequin_type))} face is frozen in a rictus of pain and horror.
+<br><br>
+The Knowledge of the Universe has poured into them and there is no longer any room for what used to be them, at all.  The Westerville Mall knows what to do with such empty vessels, and puts them to work.
+`;
+
+
+    }
+
+    const letHerGo = () => {
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${arms.nameHTML()}  awkwardly tries to intimidate the sharp toothed girl, who only shakes slightly harder. 
+<br><Br>
+She swallows, hard, and stammers out a warning, saying that the Cult has to leave, has to stop trying to come back, that its dangerous. 
+<br><br>
+${arms.nameHTML()} wants to argue back against the obvious blasphemy but just really wants this conversation to be over. 
+<br><br>
+They let the girl go, who immediately darts away. 
+<br><br>
+What a waste of time.
+`;
+
+    }
+
+    const placeholder = () => {
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = ``;
+
+    }
+
+    if (eyes.stats[EYES_METAL_STAT] < HIGH_STAT_VALUE) { //she is pretty good (but not supernaturally good) at hiding
+        me.chosen_name = "Devona Watches"
+        return doNotSeeHer();
+    } else {
+        doSeeHer();
+        //don't return, keep going, what do you do now that you see her
+
+        if (legs.stats[LEGS_METAL_STAT] < LOW_STAT_VALUE) { //she is below average at running, she sweats just existing
+            me.chosen_name = "Devona Escapes"
+
+            cantCatchher();
+            return;
+        } else {
+            doCatchher();
+
+            if (arms.preparedToKill) { //someone else might be ready to kill, but they're deferring to whoever USUALLY takes charge with these things
+                me.chosen_name = "Now You Fucked Up (Hunted)"
+
+                killHer();
+                return;
+            } else {
+                if (arms.stats[ARMS_METAL_STAT] > LOW_STAT_VALUE) { //its not hard at all to get her to sing, but boy are you gonna regret doing that
+                    me.chosen_name = "Now You Fucked Up (Hollowed Out)"
+                    devonaSpillsTheBeans();
+                    return;
+                } else {
+                    letHerGo();
+                    return;
+                }
+            }
+        }
+
+    }
+
+
+
+}
+
+const devonaEvent = makeEventSubType(`Devona Encounter`, devonaconditionCheck, devonaapplyResult);
 
 
 
@@ -1291,4 +1584,4 @@ const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshit
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
+const generalEvents = [corruptionEvent, noWayOut, devonaEvent, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]

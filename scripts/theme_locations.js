@@ -31,7 +31,7 @@ const initThemeLocations = (rand) => {
     depending on your stats (for example, if you have really high arm and low everythign else, you might kill devona before you realize she's not a threat)
     and that would add neville to the event list, with a specific target of YOU
     */
-    theme_locations[BAKERY].push(makeGenericThemedLocation(rand, BAKERY)); //DEVONA AND NEVILLE
+    theme_locations[BAKERY].push(makeGenericThemedLocation(rand, BAKERY, undefined, undefined, [devonaEvent])); //DEVONA AND NEVILLE
     theme_locations[BURGERS].push(makeGenericThemedLocation(rand, BURGERS)); //CFO
     theme_locations[BREAKFAST].push(makeGenericThemedLocation(rand, BREAKFAST, undefined, [eyeKillerGetsYou])); //captain
     theme_locations[CHICKEN].push(makeGenericThemedLocation(rand, CHICKEN)); // camille
@@ -48,14 +48,14 @@ const initThemeLocations = (rand) => {
     theme_locations[SUSHI].push(makeGenericThemedLocation(rand, SUSHI, undefined, undefined, [parkerEncounter])); //parker
     //"rgba(132,90,20)"
     //dont forget these are ARRAYS we are pushing into, can have more than one location per theme
-    theme_locations[HUNTING].push(makeGenericThemedLocation(rand, HUNTING, "Armory", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
+    theme_locations[HUNTING].push(makeGenericThemedLocation(rand, HUNTING, "Armory", "rgba(133,55,207)", [eyeKillerGetsYou, devonaEvent])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[KILLING].push(makeGenericThemedLocation(rand, KILLING, "Butcher", "rgba(133,55,207)", [parkerEncounter, eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[ART].push(makeGenericThemedLocation(rand, ART, "Craft Supply", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[TIME].push(makeGenericThemedLocation(rand, TIME, "Antiques", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
 
     theme_locations[BURIED].push(makeGenericThemedLocation(rand, BURIED, "Mining", "rgba(132,90,20)", [parkerEncounter]));
     theme_locations[MUSIC].push(makeGenericThemedLocation(rand, MUSIC, "Records", "rgba(132,90,20)", [parkerEncounter]));
-    theme_locations[SPYING].push(makeGenericThemedLocation(rand, SPYING, "Cameras", "rgba(132,90,20)", [parkerEncounter]));
+    theme_locations[SPYING].push(makeGenericThemedLocation(rand, SPYING, "Cameras", "rgba(132,90,20)", [parkerEncounter, devonaEvent]));
     theme_locations[SPACE].push(makeGenericThemedLocation(rand, SPACE, "Planetarium", "rgba(132,90,20)", [parkerEncounter]));
     theme_locations[STEALING].push(makeGenericThemedLocation(rand, STEALING, "Bank", "rgba(132,90,20)", [parkerEncounter]));
 
@@ -66,6 +66,10 @@ const initThemeLocations = (rand) => {
     theme_locations[OBFUSCATION].push(makeGenericThemedLocation(rand, OBFUSCATION, "Secrets", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[SERVICE].push(makeGenericThemedLocation(rand, SERVICE, "Service", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[MAGIC].push(makeGenericThemedLocation(rand, MAGIC, "Tricks", "rgba(0,0,0)", [vikEncounter]));
+
+
+    theme_locations[LIGHT].push(makeGenericThemedLocation(rand, LIGHT, "Lighting", "rgba(255,255,255)", [devonaEvent]));
+
 
     theme_locations[TIME].push(makeInfiniteParkingGarageToClone(TIME)) //leehunter
     theme_locations[SPACE].push(makeInfiniteParkingGarageToClone(SPACE)) //river
@@ -84,7 +88,7 @@ twisting it and tweaking it where needed to make it easier to code
 */
 const makeInfiniteParkingGarageToClone = (theme_key, event_override = []) => {
 
-
+    //http://farragofiction.com/RadioTranscript/
     /*our only non aleph parking lot native. hoon isn't going to end the world
     yeah you'll probably die but... just you, no one else*/
     const makeHoonEvent = () => {
@@ -123,9 +127,9 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
             const target = location.livingPlayers()[0];
             const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
-            //the radio has...really strict ideas about who needs to die
-            //theres no such thing as being only a "little" monsterous to it
-            if (target.monster_rating > 0) {
+            /*the radio has...really strict ideas about who needs to die
+            theres no such thing as being only a "little" monsterous to it*/
+            if (target.monster_rating > 0 || target.sin_array.length > 0) {
                 me.chosen_name = "Radio Kill"
                 const explanation = createElementWithClassAndParent("div", ele, "sub-story-beat");
                 explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. It blurts out terrifying static <audio controls>
@@ -134,7 +138,8 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
                 target.kill("deep purple and red bruises around their neck halloing a thick rope tied around it, thick scratches from their fingernails having tried to pry it off in time")
             } else {
                 const explanation = createElementWithClassAndParent("div", ele, "sub-story-beat");
-                explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. With a husky voice, she offers to let them listen along for a while.`;
+                target.preparedToKill = true; //its quiet. you barely even notice the change inside you. but you're laced with violence. ready to leave this parking lot and kill with little rhyme or reason, the radio isn't safe
+                explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. With a husky voice, she offers to let them listen along for a while. Something within ${target.nameHTML()}'s heart shifts to a new frequency, but they can't explain how.`;
 
                 renderRadioCipherStory(getNextStory(!game.eatWastesAutomatically), ele);
             }
@@ -258,8 +263,6 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
 
 
         }
-
-
 
         return makeEventSubType(`River Encounter`, conditionCheck, applyResult);
     }

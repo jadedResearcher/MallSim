@@ -44,6 +44,7 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
+    hunting = false; //is one of the twins breaching?
     orchestra_name = "LeeHunter"
     pending_clone_players = [];//why do we need this? :) :) ;)
     //peewee devours any new looping players before they can reach the next universe (useful if you want AB's session to ACTUALLY be helpful instead of filled with fate breaking assholes)
@@ -135,6 +136,8 @@ class Game {
                 players_to_add.push(np);
             }
             this.players = [...players_to_add]
+            this.players[0].leader = true;
+
         } catch (e) {
             alert("JR NOTE: what are you trying to pull. this isn't valid json to grab players from...")
             console.error(e)
@@ -980,7 +983,7 @@ class Game {
             //the greater westerville polycule might take over the world lol
             this.summary.setEnding("Orchestra Ending", this.current_tick);
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `Everyone loves their conductor and has no need to eat Harvest Fruit. They play music and games and have fun all day long.`;
+            detail.innerHTML = `Everyone loves their conductor and has no need to eat Harvest Fruit which would make their Conductor so very very sad :(. They play music and games and have fun all day long.`;
         }
 
         if (this.players.length === censor_beasts.length) {
@@ -990,11 +993,23 @@ class Game {
         }
 
 
+        /*
+the mall loves it when people come in, secure goods or services, and then leave safely
+everything is working as intended
+the mall is
+in its own way
+very much like camille
+who was always the first inhabitant
+the mall is SO SURE its a normal mall
+its a little confused sometimes, sure
+but
+its so normal
+        */
 
         if (this.players.length === 0) {
             this.summary.setEnding("Prudent Ending", this.current_tick);
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `Everyone was way too prudent and intelligent to stay in this fucked up horror maze. They left. And you can too. You can stop digging into Zampanio at any time, and your future self will thank  you for it.`;
+            detail.innerHTML = `Everything and nothing swirls in the sleeping mind of the Westerville Mall, endless possibilities left with no Truth to root to. With no Shoppers there is no Truth. They all died. They all ate Harvest Fruit. They all encountered any number of the monsterous residents of the Mall. The Mall has no way to know the Truth.<br><Br>But you and I? We know.  Everyone was way too prudent to stay in this fucked up horror maze. They left. And you can too. You can stop digging into Zampanio at any time, and your future self will thank  you for it.<br><br>[GOOD END] `;
 
         }
 
@@ -1046,7 +1061,9 @@ class Game {
             makePair("Fear:", player.fear)
             makePair("Wasted:", player.wasted)
             makePair("Musical:", player.musical)
+
             makePair("Censored:", player.censored)
+            makePair("Prepared To Kill:", player.preparedToKill)
 
             makePair("Monstrous:", player.monster_rating)
             makePair("Stolen Name:", player.stolen_name)

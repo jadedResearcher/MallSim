@@ -2,6 +2,48 @@ const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
 
+dev_log["1/13/2026"] = `i was gonna have this in a sort of v1 ready to go state for 1/13
+whoops
+it has been a Week
+i am very tired
+but don't worry
+now the cultists can be hunted for sport
+well
+technically vengence
+but still
+its for our entertainment
+so its a KIND of sport
+anyways
+once all of training is in
+i'll put this in...
+honestly i keep considering north vs south
+north becuase theres no gameplay
+south because it is what it is
+i kinda was thinking this would be a MINI sim originnally
+which means no direction
+but whoops
+ive been working on this for like
+three months
+two months?
+time`
+
+/*
+i am very tired (long week) but just found out angelfire has been down for like
+a week?
+
+i feel weird about this
+
+on the one hand it is ABSOLUTELY wild that teen me's website still exists and you can look at it
+
+on the other hand, teen me sure does like doxxing themself
+
+its also wild i've gotten to see what it feels like to leave a legacy behind and be mourned
+
+the fact that they thought i died when really i just lost access to an email address and a couple passwords
+is
+
+so wild
+*/
 dev_log["1/10/2026"] = `there is something so cathartic
 to take the things i always found so creepy about sburbsim
 and lean into it
