@@ -1,5 +1,25 @@
 const CORRIDOR_NAME = "Hall"
+const BUNKER_NAME = "Bunker From Twin's Death" //witherby tries not to feel jealous that HIS death does not make neville go into the bunker and end the world, and feels guilty that he fails...guilty for so many reasons (he's monstrous to be jealous of nevilles familial relationship, he's monstrous to wish an apocalypse upon the world he's monstrous to not be satisfied being alone alone alone alone alone alone alone alone alone)
+/*
+whats funny to me
+is he's ALSO jealous
+that neville cares so much as to end the world
+and feels guilty he's "so cold" he'd never do that
+ignoring the fact
+that he LITERALY did that once
+with ice
 
+its not the same obviously
+he did that for 
+
+>checks notes
+
+dispassionate reasons
+he's not emotional
+like he simultaneously is jealous of ria and neville for being "so warm"
+and also certain he is "too emotional" and has to hide it all away to protect everyone including himself
+
+*/
 //row - 1
 const getNorth = (map, row, col) => {
     if (!map[row]) {

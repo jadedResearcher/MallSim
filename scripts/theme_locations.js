@@ -308,11 +308,23 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
         const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, COMPLIMENT, true);
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
-        const item = new Item(`${personal_adj} ${object}`, `It's clearly labeled as from the ${location.longer_name}!`, false)
+        const item = new Item(`${personal_adj} ${object}`, `It's clearly labeled as from the ${location.longer_name}! ${shopper.nameHTML()} bought this originally!`, false)
         if (item.isFruit) {
             me.chosen_name = "Random Harvest Fruit Find!"
         }
-        ele.innerHTML = `${shopper.nameHTML()} dutifully performs the role of Shopper and purchases one ${item.name} from ${location.longer_name}! Luckily the Westerville Mall never fully understood what currency was, so they kinda just pick it up and take it! `;
+        if (shopper.fleeing) {
+            me.chosen_name = "Late With Starbucks";
+            ele.innerHTML = `${shopper.nameHTML()} is in a hurry to escape this terrifying mall, but something compels them to take to the time to stop and purchases one ${item.name} from ${location.longer_name}! Luckily the Westerville Mall never fully understood what currency was, so they kinda just pick it up and take it! `;
+
+        } else if (shopper.corrupted) {
+            me.chosen_name = "Mannequin Shopper"
+            ele.innerHTML = `${shopper.nameHTML()} is asked by the Westerville Mall to begin showcasing ${item.name} from ${location.longer_name}!  `;
+
+        } else {
+            ele.innerHTML = `${shopper.nameHTML()} dutifully performs the role of Shopper and purchases one ${item.name} from ${location.longer_name}! Luckily the Westerville Mall never fully understood what currency was, so they kinda just pick it up and take it! `;
+
+        }
+        console.log("JR NOTE: shopping", shopper.fleeing, shopper)
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
         shopper.addItemToInventory(item, pickupEle);
 

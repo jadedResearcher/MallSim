@@ -224,8 +224,14 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
 
     //don't call remove function in entity, this is meant to happen secretly
     for (let player of game.players) {
+        const inventory = [...player.inventory]
+
         if (player.dead && player.inventory.length > 0) {
-            for (let item of player.inventory) {
+            for (let item of inventory) {
+                if (!item.name.includes("Bloody")) {
+                    item.name = `Bloody ${item.name}`;
+                }
+                console.log("JR NOTE: looting a corpse, item is now bloody", item, player)
                 removeItemOnce(player.inventory, item);
                 free_items.push(item);
             }
@@ -238,7 +244,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         if (player.corrupted) {
             possible_mannequins.push(player);
             if (player.inventory.length > 0) {
-                for (let item of player.inventory) {
+                for (let item of inventory) {
                     removeItemOnce(player.inventory, item);
                     free_items.push(item);
                 }
@@ -327,7 +333,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         ele.innerHTML = `${eyes.nameHTML()} walks right past the ${chosen_emmisary.mannequin_type} form of ${chosen_emmisary.nameHTML()}, frozen into place with an outstretched hand offering one ${chosen_item.name} without even realizing it. Apparently in a mall, mannequins simply fade into the background. <br>${mannequin_graphic}`;
         return;
     } else if (eyes) {
-        ele.innerHTML = `${eyes.nameHTML()} spots the  ${chosen_emmisary.mannequin_type} form of ${chosen_emmisary.nameHTML()}, frozen into place with an outstretched hand offering one ${chosen_item.name}. <br>${mannequin_graphic}<br>`;
+        ele.innerHTML = `${eyes.nameHTML()} spots the  ${chosen_emmisary.mannequin_type} form of ${chosen_emmisary.nameHTML()}, frozen into place with an outstretched hand offering one ${chosen_item.name}. ${chosen_item.description} <br><br>${mannequin_graphic}<br>`;
         //arms is not exactly courage, but a preference for action over inaction. of COURSE you pick up the spooky item, why wouldn't you?
         if (arms && arms.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE) {
             ele.innerHTML += `${arms.nameHTML()} confidently walks up to it and picks it up.`;
@@ -1363,9 +1369,26 @@ Everything goes dark. They feel an odd sort of peace, finally able to rest.
 <br><Br>
 And they die.
 <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/Breaching_Neville_pixel_by_the_guideofhunters.gif'>
+<br><Br>
+<br><br>
+<br>
+Deep within the Westerville Mall, shutters come down, protecting one specific room from all outside influences.
+<br><br>
+A hulking bird, blood and chunks of meat and viscera dripping from a gaping maw in its chest, slowly shrivels into a man.
+<br><br>
+His expression is hard to read behind the sunglasses, but there is a sunny smile on his face when a well dressed man with cold features steps into his view. 
+<br><br>
+Piece by piece, the outside fades away, leaving only the peace within this Bunker. The man is exactly where he needs to be, with the only person who matters to him. Nothing bad has ever happened to him, and nothing bad will ever happen to him again. 
+<br><br>
+
+
+<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/exactly_where-moshed-05-03-23-31-43-287.gif'>
 `;
+
+
         sinner.kill("bitten clean in half, organs trailing from both halves"); //neville is a picky eater
-        console.warn("JR NOTE: need to have the bunker event happen next")
+        location.name = "Bunker"
+        location.longer_name = BUNKER_NAME;
     }
 
 
