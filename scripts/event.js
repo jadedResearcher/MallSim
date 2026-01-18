@@ -959,6 +959,7 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
         removeItemOnce(game.players, artMurderVictim);
         ele.innerHTML += `In a flash...there is nothing. No one was ever here. What happened to ${formerName}? They must have left the mall. Something sticky but unseen coats the ground. The Eye Killer silently lowers the Quatro Blade, safe at last.`;
         if (artMurderVictim.hasEgg()) {
+            me.chosen_name = "Quatro Blade Gifts Egg"
             const egg = artMurderVictim.findEgg();
             ele.innerHTML += `The Eye Killer is holding something. Its...${egg.name}? Where did she get that? ${egg.description}.`
         }
@@ -967,6 +968,8 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
         if (artMurderVictim.hasEgg()) {
             const egg = artMurderVictim.findEgg();
             ele.innerHTML += `${formerName} whirls and thrusts out ...is that ${egg.name}? They know their cult lore well. Offer the one eyed monster in the vents an egg to barter for your life.  The Eye Killer accepts and vanishes without a trace.`
+            me.chosen_name = "Eye Killer Accepts Bribe";
+            return;
         } else {
             if (artMurderVictim.corrupted) {
                 me.chosen_name = "EyeKiller Destroy Mannequin!"
@@ -1341,7 +1344,13 @@ const nevilleHuntingapplyResult = (game, location, parent, me) => {
         ele.innerHTML = `A hulking bird bursts out and a slash on their chest gapes open into a toothy maw. ${sinner.nameHTML()} is bitten clean in half, splinters of ${sinner.mannequin_type} flying everywhere.<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/Breaching_Neville_pixel_by_the_guideofhunters.gif'>
 `;
         sinner.kill(`bitten clean in half, jagged shards of ${sinner.mannequin_type} trailing from both halves`); //neville is a picky eater
-        console.warn("JR NOTE: need to have the bunker event happen next")
+        location.name = "Bunker"
+        location.longer_name = BUNKER_NAME;
+        for (let player of location.players) {
+            removeItemOnce(game.players, player);
+        }
+        location.players = [];
+        location.pending_players = [];//no one is left
     }
 
     if (game.rand.nextDouble() > 0.09) { //neville might just be near but not near enough to bite you in half
@@ -1378,7 +1387,7 @@ A hulking bird, blood and chunks of meat and viscera dripping from a gaping maw 
 <br><br>
 His expression is hard to read behind the sunglasses, but there is a sunny smile on his face when a well dressed man with cold features steps into his view. 
 <br><br>
-Piece by piece, the outside fades away, leaving only the peace within this Bunker. The man is exactly where he needs to be, with the only person who matters to him. Nothing bad has ever happened to him, and nothing bad will ever happen to him again. 
+Piece by piece, the outside fades away, leaving only the peace within this Bunker. The man is exactly where he needs to be, with the only person who matters to him. Nothing bad has ever happened to him, and nothing bad will ever happen to him again. There are no corpses here. No cultists. He is safe.
 <br><br>
 
 
@@ -1386,9 +1395,15 @@ Piece by piece, the outside fades away, leaving only the peace within this Bunke
 `;
 
 
+        //technically we'll never see this corpse because neville is disappaering it
         sinner.kill("bitten clean in half, organs trailing from both halves"); //neville is a picky eater
         location.name = "Bunker"
         location.longer_name = BUNKER_NAME;
+        for (let player of location.players) {
+            removeItemOnce(game.players, player);
+        }
+        location.players = [];
+        location.pending_players = [];//no one is left
     }
 
 
