@@ -308,6 +308,7 @@ class Relationship {
 class Entity {
     name = "Jane Doe"; //JR will probably steal this though, especially if you Join The Loop
     theme_keys = [];
+    number = 0; //every time you take an action, increment this number, so i can keep track if you're duplicated
     marked_for_cloning = false;//don't worry about this :) :) :)
     dead = false;
     musical = false; //hey how could this be bad???
@@ -666,11 +667,11 @@ class Entity {
                     deadbeat.innerHTML = `${this.nameHTML()} almost doesn't notice the mannequin in the corner. How strange...it almost looks like... ${player.nameHTML()}? With dawning realization they understand the terrible fate that befell their ${relationship_label}.`;
                 } else {
                     if (tonguePlayer === this) {
-                        deadbeat.innerHTML = `${this.nameHTML()} talks softely to ${player.nameHTML()}, hoping they understand past their blank facade.`;
+                        deadbeat.innerHTML = `${this.nameHTML()} talks softly to ${player.nameHTML()}, hoping they understand past their blank facade.`;
                     } else if (player === tonguePlayer) {
-                        deadbeat.innerHTML = `${this.nameHTML()} talks softely to ${player.nameHTML()}, hoping that they won't feel so alone.`;
+                        deadbeat.innerHTML = `${this.nameHTML()} talks softly to ${player.nameHTML()}, hoping that they won't feel so alone.`;
                     } else {
-                        deadbeat.innerHTML = `${this.nameHTML()} looks sadly at ${player.nameHTML}, all too aware of the fate they fell to.`;
+                        deadbeat.innerHTML = `${this.nameHTML()} looks sadly at ${player.nameHTML()}, all too aware of the fate they fell to.`;
                     }
 
                 }
@@ -796,7 +797,7 @@ class Entity {
     //https://www.tumblr.com/jadedresearcher/801579387276378112/whiteantcrawls-helloitsbees?source=share
     getName = () => {
         let name_holder = this.wasted ? this.title : this.name;
-        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""}`);
+        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""} ${this.number ? "# " + (this.number + 1) : ""}`);
     }
 
 

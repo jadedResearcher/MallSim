@@ -327,6 +327,11 @@ class Game {
         if (this.finished) {
             return;
         }
+
+        for (let player of this.livingPlayers()) {
+            player.number = -1; //being called to do something will set it to zero, which give you no label, but if you do multiple things in one tick, then you're in multuiple places at once and i want to note that in your name
+
+        }
         //console.log("JR NOTE: movement tick", this.current_tick)
 
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
@@ -364,6 +369,7 @@ class Game {
                     const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                     const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                     for (let player of livingPlayers) {
+                        player.number++;
                         if (location.river) {
                             //you will happy to know that river infecting the mall CHEWS through ram because, i presume, i made her little goo effect jiggly
                             interaction_phrase.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/river.gif'>It's nothing personal as more and more pink goo floods into the ${location.longer_name}. It sizzles as it dissolves the ${player.corrupted ? player.mannequin_type : "flesh"} of ${player.nameHTML()}. There's no room for anything but her, here.`;
@@ -386,7 +392,6 @@ class Game {
 
         for (let player of this.players) {
             if (!player.current_location) {
-                console.log("JR NOTE: recovering a locationless player", player.name, this.current_tick)
                 this.event_list.push("ERROR LOCATION")
                 //just toss them in the first place we can find (proably the entrance)
                 this.map[0][0].movePlayerInto(player)
@@ -416,7 +421,7 @@ class Game {
                     if (location.movePlayersFromPendingToInternal()) {
                         if (location.isFoodCourt) {
                             //food related places have custom theme events, eventaully everything will
-                            this.handleExpandingFoodCourt(location);
+                            this.handleExpandingFoodCourt(location, tick_container);
                         } else {
                             //call add no matter what because it handles rng internally
                             this.handleAddingCorridorToEastOfLocation(location);
@@ -631,7 +636,7 @@ class Game {
     //a food court surrounds itself on all sides with food locations
     //that try to rewrite to everything they touch
     //it doesn't care what themes the parent location has, picks a single random food
-    handleExpandingFoodCourt = (location) => {
+    handleExpandingFoodCourt = (location, ele) => {
         const food_court_strength = 0.3; // what are the odds it overwrites a previous location?
         const handleEast = (theme_key) => {
             if (this.rand.nextDouble() > 0.75) {
@@ -659,6 +664,36 @@ class Game {
                 //instead of players being lost to the void they 
                 //suddenly are in the new location
                 newLocation.transferPlayersFrom(existing);
+                if (this.rand.nextDouble() > 0.95) {
+                    /*
+                    this replicates, on purpose, with a little story blurb
+                    a bug that has plagued me for WEEKS
+                    sometimes, just occasionally, players were cloning themselves but also not really, from the food court
+                    it turned out it was because of how i was keeping references to original locations in a list of locations
+                    rather than the location the food court transformed it into
+                    whoops
+                    */
+                    const doubledPlayer = this.rand.pickFrom(this.players);
+                    doubledPlayer.fear += 13;
+                    const general_intro = createElementWithClassAndParent("p", ele, "sub-story-beat");
+                    this.event_list.push("Food Court Clone")
+                    if (doubledPlayer.dead) {
+                        general_intro.innerHTML = `${doubledPlayer.nameHTML()} sags slightly in the gloom of the Westerville mall. Quietly, with no fanfair, the space around it warps, and it is now in both the ${newLocation.longer_name} and the ${doubledPlayer.current_location.longer_name}.  `;
+
+                    } else {
+                        if (doubledPlayer.corrupted) {
+                            general_intro.innerHTML = `${doubledPlayer.nameHTML()} is suddenly in more than one place at a time. The Westerville Mall is sure this is fine. Who can even tell if something is the same mannequin they saw before? Duplicates are fine.`
+
+                        } else {
+                            general_intro.innerHTML = `${doubledPlayer.nameHTML()} feels a swirl of vertigo as their world view shifts. Suddenly, their vision, their hearing, their experience, splits into a new shard. They can't tell whats real anymore. How did they get to ${newLocation.longer_name}? Actually no, they aren't there, they're still at the ${doubledPlayer.current_location.longer_name}...right?`
+
+                        }
+
+                    }
+
+                    newLocation.players.push(doubledPlayer);
+                }
+
 
 
 
