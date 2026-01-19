@@ -342,15 +342,12 @@ class Game {
         //do interaction scene of everyone inside (if more than one)
         //and have players decide whether to move or not individually
         for (let row_index = 0; row_index < this.map.length; row_index++) {
-            console.log("JR NOTE: row is", row_index, this.map)
             for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
-                console.log("JR NOTE: col is", col_index)
 
                 const location = this.map[row_index][col_index];
                 if (!location) {
                     continue; //don't stop the for loop, move on, this isn't for us
                 }
-                console.log("JR NOTE: location is", location)
                 const north = getNorth(this.map, location.row, location.col)
                 const south = getSouth(this.map, location.row, location.col)
                 const east = getEast(this.map, location.row, location.col)
@@ -392,15 +389,15 @@ class Game {
                 console.log("JR NOTE: recovering a locationless player", player.name, this.current_tick)
                 this.event_list.push("ERROR LOCATION")
                 //just toss them in the first place we can find (proably the entrance)
-                locations[0].movePlayerInto(player)
+                this.map[0][0].movePlayerInto(player)
                 //this happened as a bug during dev so of course i made an edge case for it, it was spooky how eventually alaya would always be alone (becaues she was less likely to go south)
                 //and then of course the infinite parking garage does this to you on purpose if you die
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                 if (player.dead) {
-                    start_phrase.innerHTML = `${player.nameHTML()} is nowhere and then they are somewhere... ${locations[0].longer_name}. `;
+                    start_phrase.innerHTML = `${player.nameHTML()} is nowhere and then they are somewhere... ${this.map[0][0].longer_name}. `;
 
                 } else {
-                    start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams. Suddenly they are somewhere...the ${locations[0].longer_name}? They are too rattled to care how this happened. `;
+                    start_phrase.innerHTML = `${player.nameHTML()} is nowhere and they see nothing and hear nothing not even their own screams. Suddenly they are somewhere...the ${this.map[0][0].longer_name}? They are too rattled to care how this happened. `;
 
                 }
 
