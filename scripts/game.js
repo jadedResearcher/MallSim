@@ -328,10 +328,7 @@ class Game {
             return;
         }
 
-        for (let player of this.livingPlayers()) {
-            player.number = -1; //being called to do something will set it to zero, which give you no label, but if you do multiple things in one tick, then you're in multuiple places at once and i want to note that in your name
 
-        }
         //console.log("JR NOTE: movement tick", this.current_tick)
 
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
@@ -369,7 +366,6 @@ class Game {
                     const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                     const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                     for (let player of livingPlayers) {
-                        player.number++;
                         if (location.river) {
                             //you will happy to know that river infecting the mall CHEWS through ram because, i presume, i made her little goo effect jiggly
                             interaction_phrase.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/river.gif'>It's nothing personal as more and more pink goo floods into the ${location.longer_name}. It sizzles as it dissolves the ${player.corrupted ? player.mannequin_type : "flesh"} of ${player.nameHTML()}. There's no room for anything but her, here.`;

@@ -308,7 +308,6 @@ class Relationship {
 class Entity {
     name = "Jane Doe"; //JR will probably steal this though, especially if you Join The Loop
     theme_keys = [];
-    number = 0; //every time you take an action, increment this number, so i can keep track if you're duplicated
     marked_for_cloning = false;//don't worry about this :) :) :)
     dead = false;
     musical = false; //hey how could this be bad???
@@ -797,7 +796,7 @@ class Entity {
     //https://www.tumblr.com/jadedresearcher/801579387276378112/whiteantcrawls-helloitsbees?source=share
     getName = () => {
         let name_holder = this.wasted ? this.title : this.name;
-        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""} ${this.number ? "# " + (this.number + 1) : ""}`);
+        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""}`);
     }
 
 
