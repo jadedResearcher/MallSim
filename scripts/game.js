@@ -318,12 +318,12 @@ class Game {
             return;
         }
 
-        this.movementAndInterctionTick(parent, locations)
-        this.eventTick(parent, locations);
+        this.movementAndInterctionTick(parent)
+        this.eventTick(parent);
         //once done ticking each location with blood in it, render the current state of the mall
     }
 
-    movementAndInterctionTick = (parent, locations) => {
+    movementAndInterctionTick = (parent) => {
         if (this.finished) {
             return;
         }
@@ -341,39 +341,49 @@ class Game {
         //for each location
         //do interaction scene of everyone inside (if more than one)
         //and have players decide whether to move or not individually
-        for (let location of locations) {
-            const north = getNorth(this.map, location.row, location.col)
-            const south = getSouth(this.map, location.row, location.col)
-            const east = getEast(this.map, location.row, location.col)
-            const west = getWest(this.map, location.row, location.col)
-            //only locations with players 
-            const livingPlayers = location.livingPlayers();
-            if (location.river) {
-                location.spreadRiver(this.rand, north, south, east, west);
-            }
+        for (let row_index = 0; row_index < this.map.length; row_index++) {
+            console.log("JR NOTE: row is", row_index, this.map)
+            for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
+                console.log("JR NOTE: col is", col_index)
+
+                const location = this.map[row_index][col_index];
+                if (!location) {
+                    continue; //don't stop the for loop, move on, this isn't for us
+                }
+                console.log("JR NOTE: location is", location)
+                const north = getNorth(this.map, location.row, location.col)
+                const south = getSouth(this.map, location.row, location.col)
+                const east = getEast(this.map, location.row, location.col)
+                const west = getWest(this.map, location.row, location.col)
+                //only locations with players 
+                const livingPlayers = location.livingPlayers();
+                if (location.river) {
+                    location.spreadRiver(this.rand, north, south, east, west);
+                }
 
 
-            if (livingPlayers.length > 0) {
+                if (livingPlayers.length > 0) {
 
-                const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                for (let player of livingPlayers) {
-                    if (location.river) {
-                        //you will happy to know that river infecting the mall CHEWS through ram because, i presume, i made her little goo effect jiggly
-                        interaction_phrase.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/river.gif'>It's nothing personal as more and more pink goo floods into the ${location.longer_name}. It sizzles as it dissolves the ${player.corrupted ? player.mannequin_type : "flesh"} of ${player.nameHTML()}. There's no room for anything but her, here.`;
-                        player.kill(`dissolved into ${player.corrupted ? player.mannequin_type : "bones"} and goo`)
-                    } else {
-                        if (player.dead) {
-                            //please no more lively corpses;
+                    const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                    const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                    for (let player of livingPlayers) {
+                        if (location.river) {
+                            //you will happy to know that river infecting the mall CHEWS through ram because, i presume, i made her little goo effect jiggly
+                            interaction_phrase.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/river.gif'>It's nothing personal as more and more pink goo floods into the ${location.longer_name}. It sizzles as it dissolves the ${player.corrupted ? player.mannequin_type : "flesh"} of ${player.nameHTML()}. There's no room for anything but her, here.`;
+                            player.kill(`dissolved into ${player.corrupted ? player.mannequin_type : "bones"} and goo`)
                         } else {
-                            players_moving++;
-                            player.interactWithPlayer(this, this.rand, location.players, interaction_phrase);
-                            player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                            if (player.dead) {
+                                //please no more lively corpses;
+                            } else {
+                                players_moving++;
+                                player.interactWithPlayer(this, this.rand, location.players, interaction_phrase);
+                                player.decideWhereToGo(player_phrase, this.rand, location, north, south, east, west);
+                            }
                         }
+
                     }
 
                 }
-
             }
         }
 
@@ -401,17 +411,23 @@ class Game {
 
         //clean up, move pending players into their locations
         //can't do sooner or they might double tick
-        for (let location of locations) {
-            if (location.movePlayersFromPendingToInternal()) {
-                if (location.isFoodCourt) {
-                    //food related places have custom theme events, eventaully everything will
-                    this.handleExpandingFoodCourt(location);
-                } else {
-                    //call add no matter what because it handles rng internally
-                    this.handleAddingCorridorToEastOfLocation(location);
-                    this.handleAddingShopToSouthOfLocation(location);
-                }
+        //note CAN not loop on location because this MODIFIES location (expanding food court)
+        for (let row_index = 0; row_index < this.map.length; row_index++) {
+            for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
+                const location = this.map[row_index][col_index];
+                if (location) {
+                    if (location.movePlayersFromPendingToInternal()) {
+                        if (location.isFoodCourt) {
+                            //food related places have custom theme events, eventaully everything will
+                            this.handleExpandingFoodCourt(location);
+                        } else {
+                            //call add no matter what because it handles rng internally
+                            this.handleAddingCorridorToEastOfLocation(location);
+                            this.handleAddingShopToSouthOfLocation(location);
+                        }
 
+                    }
+                }
             }
         }
         //if you weren't going to move, make sure you get rid of your pending location anyways
@@ -440,7 +456,7 @@ class Game {
         return ret;
     }
 
-    eventTick = (parent, locations) => {
+    eventTick = (parent) => {
         if (this.finished) {
             return;
         }
@@ -451,25 +467,30 @@ class Game {
         //for each location
         //check if any events happen. if not, do a little flavor text
         //if yes, stop checking events
-        for (let location of locations) {
-            //only locations with players 
-            const livingPlayers = location.livingPlayers()
-            if (livingPlayers.length > 0) {
-                const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
-                start_phrase.innerHTML = `${arrayToHumanSentence(livingPlayers.map((i) => i.nameHTML()))} ${livingPlayers.length > 1 ? "are" : "is"} poking around in the ${location.longer_name} at [${location.row},${location.col}].`;
+        for (let row_index = 0; row_index < this.map.length; row_index++) {
+            for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
+                const location = this.map[row_index][col_index];            //only locations with players 
+                if (!location) {
+                    continue; //don't stop the for loop, move on, this isn't for us
+                }
+                const livingPlayers = location.livingPlayers()
+                if (livingPlayers.length > 0) {
+                    const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                    start_phrase.innerHTML = `${arrayToHumanSentence(livingPlayers.map((i) => i.nameHTML()))} ${livingPlayers.length > 1 ? "are" : "is"} poking around in the ${location.longer_name} at [${location.row},${location.col}].`;
 
-                const event_phrase = createElementWithClassAndParent("div", tick_container, "event-beat");
+                    const event_phrase = createElementWithClassAndParent("div", tick_container, "event-beat");
 
-                //console.log("JR NOTE: checking if location is awake: ", location.name)
-                let event_happened = location.checkEventsAndApplyNoMoreThanOne(this, event_phrase);
+                    //console.log("JR NOTE: checking if location is awake: ", location.name)
+                    let event_happened = location.checkEventsAndApplyNoMoreThanOne(this, event_phrase);
 
-                //console.warn("JR NOTE: todo, scan location for valid events")
+                    //console.warn("JR NOTE: todo, scan location for valid events")
 
-                if (!event_happened) {
-                    event_phrase.remove();
-                    const ele = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+                    if (!event_happened) {
+                        event_phrase.remove();
+                        const ele = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
 
-                    location.renderGenericBoringNonEvent(this, this.rand, ele);
+                        location.renderGenericBoringNonEvent(this, this.rand, ele);
+                    }
                 }
             }
         }

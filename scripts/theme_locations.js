@@ -324,7 +324,6 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
             ele.innerHTML = `${shopper.nameHTML()} dutifully performs the role of Shopper and purchases one ${item.name} from ${location.longer_name}! Luckily the Westerville Mall never fully understood what currency was, so they kinda just pick it up and take it! `;
 
         }
-        console.log("JR NOTE: shopping", shopper.fleeing, shopper)
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
         shopper.addItemToInventory(item, pickupEle);
 

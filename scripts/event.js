@@ -231,7 +231,6 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
                 if (!item.name.includes("Bloody")) {
                     item.name = `Bloody ${item.name}`;
                 }
-                console.log("JR NOTE: looting a corpse, item is now bloody", item, player)
                 removeItemOnce(player.inventory, item);
                 free_items.push(item);
             }
