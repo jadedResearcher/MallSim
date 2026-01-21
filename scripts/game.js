@@ -1149,6 +1149,19 @@ its so normal
             this.summary.setEnding("Balanced Ending", this.current_tick);
         }
 
+        const final_mall = createElementWithClassAndParent("h2", intro_container, "sub-story-beat");
+        final_mall.innerText = "Map Progression"
+        const map_animation_button = createElementWithClassAndParent("button", intro_container);
+        map_animation_button.innerText = `View Map Animation (Expedition: ${this.rand.initial_seed})?`
+        const mall_container = createElementWithClassAndParent("div", intro_container, "mall-render");
+        mall_container.style.height = "500px";
+        map_animation_button.onclick = () => {
+            mallRenderAnimation(mall_container)
+        }
+
+
+
+
         const next_section_intro = createElementWithClassAndParent("h2", intro_container, "sub-story-beat");
         next_section_intro.innerText = "Final Stats:"
 

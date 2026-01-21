@@ -316,3 +316,30 @@ const renderSpriteForEntity = (parent, entity) => {
 
 }
 
+
+const mallRenderAnimation = async (target) => {
+    /*
+    first, grab all instances of class mall-render
+
+    then, for each render
+    make a record of what its parent is
+
+    then INSTEAD embed it to my target for a half second
+    then put it back to its original parent
+
+    */
+
+    const eles = Array.from(document.querySelectorAll(".mall-render"));
+    //if this is slow or otherwise annoying, its probably trying to restructure the dom doing this
+    //can try things like adding a parent to the render element so the size is the same even if i yoink
+    //or even cloning it (might be slow) instead of moving it 
+
+    for (ele of eles) {
+        console.log("JR NOTE: render")
+        const parent = ele.parentElement;
+        target.append(ele);
+        await sleep(100);
+        parent.append(ele);
+    }
+
+}
