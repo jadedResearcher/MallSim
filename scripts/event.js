@@ -1344,7 +1344,10 @@ const nevilleHuntingapplyResult = (game, location, parent, me) => {
 `;
         sinner.kill(`bitten clean in half, jagged shards of ${sinner.mannequin_type} trailing from both halves`); //neville is a picky eater
         location.name = "Bunker"
+        location.events = [makeEventSubType("Everything Is Fine Forever :)", () => true, () => true)]
         location.longer_name = BUNKER_NAME;
+        location.corruption = -800815 //void players love this muber for some reason
+
         for (let player of location.players) {
             removeItemOnce(game.players, player);
         }
@@ -1398,6 +1401,9 @@ Piece by piece, the outside fades away, leaving only the peace within this Bunke
         sinner.kill("bitten clean in half, organs trailing from both halves"); //neville is a picky eater
         location.name = "Bunker"
         location.longer_name = BUNKER_NAME;
+        location.corruption = -800815 //void players love this muber for some reason
+        location.events = [makeEventSubType("Everything Is Fine Forever :)", () => true, () => true)]
+
         for (let player of location.players) {
             removeItemOnce(game.players, player);
         }

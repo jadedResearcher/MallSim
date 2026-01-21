@@ -1,5 +1,5 @@
 const CORRIDOR_NAME = "Hall"
-const BUNKER_NAME = "Bunker From Twin's Death" //witherby tries not to feel jealous that HIS death does not make neville go into the bunker and end the world, and feels guilty that he fails...guilty for so many reasons (he's monstrous to be jealous of nevilles familial relationship, he's monstrous to wish an apocalypse upon the world he's monstrous to not be satisfied being alone alone alone alone alone alone alone alone alone)
+const BUNKER_NAME = "Bunker From Nothing At All Its Probably Fine It's Great In Here :)" //witherby tries not to feel jealous that HIS death does not make neville go into the bunker and end the world, and feels guilty that he fails...guilty for so many reasons (he's monstrous to be jealous of nevilles familial relationship, he's monstrous to wish an apocalypse upon the world he's monstrous to not be satisfied being alone alone alone alone alone alone alone alone alone)
 /*
 whats funny to me
 is he's ALSO jealous
@@ -64,6 +64,7 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
+    bunker_phase = 0; //is neville breaching x2 combo?
     hunting = false; //is one of the twins breaching?
     orchestra_name = "LeeHunter"
     pending_clone_players = [];//why do we need this? :) :) ;)
@@ -323,6 +324,43 @@ class Game {
         //once done ticking each location with blood in it, render the current state of the mall
     }
 
+    handleBunker = (parent, location) => {
+        this.bunker_phase++; //it starts at zero, we do not void out OURSELVEs....theres something kind of fun that witherby ends teh world in a steadily increasing blizzad, and neville ends it in concentric rings of nothingness
+        const voidLocation = (l) => {
+            if (l.longer_name === BUNKER_NAME) {
+                return; //neville i swear to fuck if you erase yourself again we are going to have Words. you're supposed to be chill and happy in your little bunker, not seeking self destruction (that's RIAS thing)
+            }
+            this.map[l.row][l.col] = undefined; //like you never existed
+            //its not like the parking lot. being voided out by nevilles bunker doesn't make you nowhere (and thus recover you to the entrance), you simply are irrelevant, you no longer matter, your fate is unseen unheard unwitnessed, you are just *gone*
+            for (let player of l.players) {
+                removeItemOnce(game.players, player);
+            }
+
+            const explanation = createElementWithClassAndParent("p", parent, "sub-story-beat");
+            explanation.innerHTML = `${l.longer_name} doesn't matter at [${l.row} ${l.col}]. Neville is safe in his bunker.`;
+
+
+        }
+
+        //this.bunker_phase
+        for (let row = location.row - this.bunker_phase; row < location.row + this.bunker_phase; row++) {
+            //neville, don't try to erase the void either please
+            if (this.map[row]) {
+                for (let col = location.col - this.bunker_phase; col < location.col + this.bunker_phase; col++) {
+                    const target = this.map[row][col];
+                    if (target) {
+                        voidLocation(target);
+                    }
+                }
+            }
+
+        }
+
+
+
+
+    }
+
     movementAndInterctionTick = (parent) => {
         if (this.finished) {
             return;
@@ -349,6 +387,11 @@ class Game {
                 const location = this.map[row_index][col_index];
                 if (!location) {
                     continue; //don't stop the for loop, move on, this isn't for us
+                }
+
+                if (location.longer_name === BUNKER_NAME) {
+                    this.handleBunker(tick_container, location); //will slowly erase everything
+                    continue; //don't jump out of the for loop, 
                 }
                 const north = getNorth(this.map, location.row, location.col)
                 const south = getSouth(this.map, location.row, location.col)
@@ -1095,6 +1138,11 @@ its so normal
 
         if (this.everythingIsGoo()) {
             this.summary.setEnding("Goo Mall Ending", this.current_tick)
+        }
+
+        if (this.getLocations().length === 0) {
+            this.summary.setEnding("Bunker Ending", this.current_tick)
+
         }
 
         if (!this.summary.hasEnding()) {
