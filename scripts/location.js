@@ -220,6 +220,15 @@ class Location {
         }
     }
 
+    removeEvent = (event) => {
+        const copyOfEvents = [...this.events]
+        for (let e of copyOfEvents) {
+            if (event.name === e.name) {
+                removeItemOnce(this.events, e)
+            }
+        }
+    }
+
     movePlayerInto = (player) => {
         player.addCorruption(this.corruption);
         if (player.current_location) { //who says they came from anywhere?

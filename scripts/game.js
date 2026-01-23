@@ -222,6 +222,16 @@ class Game {
         }
     }
 
+    removeGeneralEventToAllLocations = (event) => {
+        for (let row of this.map) {
+            for (let item of row) {
+                if (item) { //its not empty space
+                    item.removeEvent(event);
+                }
+            }
+        }
+    }
+
     addGeneralEventToAllLocations = (event) => {
         for (let row of this.map) {
             for (let item of row) {

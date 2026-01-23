@@ -1306,6 +1306,225 @@ const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshit
 
 
 
+
+const devonaHuntingCheck = (game, location) => {
+    const players = location.players;
+    for (let player of players) {
+        //devona knows exactly where you are but is waiting for the perfect moment to strike
+        if (!player.dead && player.hunted() && game.rand.nextDouble() > 0.15) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+const devonaHuntingapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const players = location.players;
+    let sinner;
+    for (let player of players) {
+        if (player.hunted()) {
+            sinner = player;
+        }
+    }
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    if (!sinner) {
+        ele.innerHTML = `The silence is echoding.`;
+        return;
+    }
+
+    if (sinner.corrupted) {
+        ele.innerHTML = `${sinner.nameHTML()} is strewn over heaps of trash and empty shopping bags as the hulking form of a giant bird appears in front of them. It is trembling with anticipation.
+<br><br>
+A slash, almost a wound opens up in the birds giant chest, revealing rows upon rows of teeth. 
+<br><br>
+${sinner.nameHTML()} never knows why they were targeted for death, but they see every instant of it until they finally see nothing at all.
+
+        
+        <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/Breaching_Devona_pixel_by_the_guide_ofhunters.gif'>
+`;
+        sinner.kill(`crushed into splinters of ${sinner.mannequin_type} from a monstrous beak`); //devona isn't going to eat a mannequin, but she DOES like the crunchy texture of sharpening her beak on them, if they are her prey
+        return;
+    }
+
+    ele.innerHTML = `${sinner.nameHTML()} boggles vacantly as the hulking form of a giant bird appears in front of them, closing off all avenues of escape, penning them in just right between collapsed bits of wall and trash. It must have been waiting for exactly this moment. It is trembling with anticipation.
+    <br><br>
+    A slash, almost a wound opens up in the birds giant chest, revealing rows upon rows of teeth. 
+    <br><br>
+    ${sinner.nameHTML()} never knows why they were targeted for death, but they see every instant of it until they finally see nothing at all.
+    
+            
+            <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/Breaching_Devona_pixel_by_the_guide_ofhunters.gif'>
+    `;
+
+
+    sinner.kill("only a few recognizable body parts remain, with dull chunks torn out of them by a monstrous beak"); //devona will eat literally anything, especially if its intense
+
+
+
+
+
+
+}
+
+
+
+
+const devonaHuntingEvent = makeEventSubType(`Twin Sister Encounter`, devonaHuntingCheck, devonaHuntingapplyResult);
+
+
+
+const nevilleEncounterConditionCheck = (game, location) => {
+
+    /*if EITHER twin is hunting, you will NOT see their regular events anymore
+    because one is a giant ass were bird and the other is... you know... dead
+    this probably paints a VERY different picture if you don't know who the twins are or what their deal is, lol
+    */
+
+    if (game.hunting) {
+        return false;
+    }
+
+    if (location.livingNonMannequinPlayers().length > 0) {
+        return game.rand.nextDouble() > 0.95;
+    }
+    return false;
+}
+
+const nevilleEncounterapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const intro = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    /*
+        Neville should be MUCH simpler to encounter than devona.
+        
+        You litereally can't miss him. He's much harder to kill, but do you really want to???
+    */
+
+    const players = location.livingNonMannequinPlayers();
+    const eyes = getPartyHighestEyes(players);
+    const arms = getPartyHighestArms(players);
+    const legs = getPartyHighestLegs(players);
+
+    intro.innerHTML = `${eyes.nameHTML()} spots a really obvious dude strolling toward them, wearing dull white and red armor. He has bleached blond hair and sunglasses (indoors, in a really dark abandoned mall). 
+<br><br>
+He waves when he spots ${eyes.nameHTML()} and starts ambling slightly faster towards them.
+
+He greets ${eyes.nameHTML()} and asks if they tried out the food court yet, really great soup there.
+`;
+
+    if (arms.preparedToKill) {
+        const conclusion = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        let witnesses = []; //even if you were prepared to kill you weren't prepared to see your friend do it in front of you
+        for (let player of players) {
+            if (player != arms) {
+                player.fear += 13;
+                witnesses.push(player)
+            }
+        }
+
+        const witnessText1 = witnesses.length > 0 ? `(${arrayToHumanSentence(witnesses.map((n) => n.nameHTML()))} boggles, mouth opening and closing over and over. )` : "";
+
+        const item = game.rand.pickFrom(arms.inventory);
+
+        if (item && arms.stats[ARMS_METAL_STAT] > HIGH_STAT_VALUE) {
+            //you managed to kill neville with an item
+            me.chosen_name = "Now You Fucked Up (Weapon)" //with devona, it doesn't matter if you have a weapon or not, or how strong you are really.... she just... is a wet paper bag unless you are too
+            conclusion.innerHTML = `${arms.nameHTML()} is way too keyed up from all the horror and violence to be fooled by anything like this.  They swing the ${item.name} they've been carrying around at the weirdly calm man and the angle is just right. He collapses, like a puppet with its strings cut.
+<br><br>
+            ${witnessText1}
+<br><br>
+The silence that rings out in the aftermath is somehow...deafening. 
+<br><Br>
+${arms.nameHTML()} shrugs, and moves on after checking there is nothing useful in any of the bodies pockets.
+`;
+            arms.sin_array.push(TWIN_KILLER);
+            game.hunting = true;
+            generalEvents.unshift(devonaHuntingEvent);
+            game.addGeneralEventToAllLocations(devonaHuntingEvent); //add it everywhere as well
+
+        } else if (!item && arms.stats[ARMS_METAL_STAT] > VERY_HIGH_STAT_VALUE) {
+            //holy shit how did you kill neville with your bare hands?
+            me.chosen_name = "Now You Fucked Up (Bare Hands)"
+
+            conclusion.innerHTML = `${arms.nameHTML()} is way too keyed up from all the horror and violence to be fooled by anything like this.  They throw a punch at the weirdly calm man and the angle is just right and their strength monstrously strong. He collapses, like a puppet with its strings cut.
+            <br><br>
+                        ${witnessText1}
+            <br><br>
+            The silence that rings out in the aftermath is somehow...deafening. 
+            <br><Br>
+            ${arms.nameHTML()} shrugs, and moves on after checking there is nothing useful in any of the bodies pockets.
+            `;
+            arms.sin_array.push(TWIN_KILLER);
+            game.hunting = true;
+            generalEvents.unshift(devonaHuntingEvent);
+            removeItemOnce(generalEvents, me)
+            game.removeGeneralEventToAllLocations(me); //you can never encounter him again
+
+            game.addGeneralEventToAllLocations(devonaHuntingEvent); //add it everywhere as well
+
+        } else {
+            //seriously why did you think you could kill neville, his fortitude is his highest stat
+            conclusion.innerHTML = `${arms.nameHTML()} is way too keyed up from all the horror and violence to be fooled by anything like this.  They throw a punch at the weirdly calm man and he just kind of takes it and seems baffled.
+<br><br>
+"Not Cool :(" he says, somehow pronouncing the sad face even as his friendly expression doesn't falter. 
+<br><br>
+He stands there for a bit, warns everyone they should leave the mall, then just kind of leaves himself, as an example of good behavior.
+<br><br>
+${arms.nameHTML()} tries to follow him but its like the Mall itself shadows him.
+<br><br>
+What a waste of time.
+`;
+            for (let player of players) {
+                //quietly make everyone involved in this pointless event just a little bit less relevant to the Mall
+                player.addCorruption(13);
+            }
+        }
+
+    } else {
+        const conclusion = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        conclusion.innerHTML = `${arms.nameHTML()} isn't interested in soup and instead asks where they might find Harvest Fruit.
+<br><br>
+The chill dude's face darkens so briefly its easy to imagine it didn't happen. 
+
+<br><br>
+"Not Cool :(" he says, somehow pronouncing the sad face even as his friendly expression doesn't falter. 
+<br><br>
+He stands there for a bit, then just kind of leaves. 
+<br><br>
+${legs.nameHTML()} tries to follow him but its like the Mall itself shadows him once he's no longer relevant.
+<br><br>
+What a waste of time.
+`;
+        for (let player of players) {
+            //quietly make everyone involved in this pointless event just a little bit less relevant to the Mall
+            player.addCorruption(13);
+        }
+
+    }
+
+
+
+
+
+
+}
+
+const nevilleEncounter = makeEventSubType(`Neville Encounter`, nevilleEncounterConditionCheck, nevilleEncounterapplyResult);
+
+
+
+
 const nevilleHuntingCheck = (game, location) => {
     const players = location.players;
     for (let player of players) {
@@ -1353,6 +1572,7 @@ const nevilleHuntingapplyResult = (game, location, parent, me) => {
         }
         location.players = [];
         location.pending_players = [];//no one is left
+        return;
     }
 
     if (game.rand.nextDouble() > 0.09) { //neville might just be near but not near enough to bite you in half
@@ -1541,6 +1761,9 @@ They start running in the opposite direction.
         game.hunting = true;
         generalEvents.unshift(nevilleHuntingEvent);
         game.addGeneralEventToAllLocations(nevilleHuntingEvent); //add it everywhere as well
+        game.removeGeneralEventToAllLocations(me); //you can never encounter her again
+
+        removeItemOnce(generalEvents, me)
 
 
         if (witnesses) {
@@ -1581,6 +1804,10 @@ They let the girl go, who immediately darts away.
 <br><br>
 What a waste of time.
 `;
+        for (let player of players) {
+            //quietly make everyone involved in this pointless event just a little bit less relevant to the Mall
+            player.addCorruption(13);
+        }
 
     }
 
