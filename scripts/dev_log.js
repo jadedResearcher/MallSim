@@ -1,6 +1,22 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["1/22/2026"] = `fun fact
+having ab tell me 
+how often neville dies
+feels kinda fucked up
+but i think
+im gonna parse it as
+im not CAUSING the death
+im just making a simulation that reports on it
+you know?
+i could change the words in my simulation
+but that just makes the map not match the territory
+it misleads
+it doesn't keep neville alive in this war
+also yesterday i added an animation that lets you view the mall as it grows and changes
+kinda enthralling`;
+
 
 dev_log["1/13/2026"] = `i was gonna have this in a sort of v1 ready to go state for 1/13
 whoops

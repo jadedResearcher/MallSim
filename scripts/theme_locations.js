@@ -31,7 +31,7 @@ const initThemeLocations = (rand) => {
     depending on your stats (for example, if you have really high arm and low everythign else, you might kill devona before you realize she's not a threat)
     and that would add neville to the event list, with a specific target of YOU
     */
-    theme_locations[BAKERY].push(makeGenericThemedLocation(rand, BAKERY, undefined, undefined, [devonaEvent])); //DEVONA AND NEVILLE
+    theme_locations[BAKERY].push(makeGenericThemedLocation(rand, BAKERY, undefined, undefined, [devonaEvent, nevilleEncounter])); //DEVONA AND NEVILLE
     theme_locations[BURGERS].push(makeGenericThemedLocation(rand, BURGERS)); //CFO
     theme_locations[BREAKFAST].push(makeGenericThemedLocation(rand, BREAKFAST, undefined, [eyeKillerGetsYou])); //captain
     theme_locations[CHICKEN].push(makeGenericThemedLocation(rand, CHICKEN)); // camille
@@ -48,7 +48,7 @@ const initThemeLocations = (rand) => {
     theme_locations[SUSHI].push(makeGenericThemedLocation(rand, SUSHI, undefined, undefined, [parkerEncounter])); //parker
     //"rgba(132,90,20)"
     //dont forget these are ARRAYS we are pushing into, can have more than one location per theme
-    theme_locations[HUNTING].push(makeGenericThemedLocation(rand, HUNTING, "Armory", "rgba(133,55,207)", [eyeKillerGetsYou, devonaEvent])); ////eye killer (this is NOT chill btw, you're literally a cultists)
+    theme_locations[HUNTING].push(makeGenericThemedLocation(rand, HUNTING, "Armory", "rgba(133,55,207)", [eyeKillerGetsYou, devonaEvent, nevilleEncounter])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[KILLING].push(makeGenericThemedLocation(rand, KILLING, "Butcher", "rgba(133,55,207)", [parkerEncounter, eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[ART].push(makeGenericThemedLocation(rand, ART, "Craft Supply", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
     theme_locations[TIME].push(makeGenericThemedLocation(rand, TIME, "Antiques", "rgba(133,55,207)", [eyeKillerGetsYou])); ////eye killer (this is NOT chill btw, you're literally a cultists)
@@ -63,10 +63,12 @@ const initThemeLocations = (rand) => {
 
     theme_locations[CENSORSHIP].push(makeGenericThemedLocation(rand, CENSORSHIP, "[REDACTED]", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[DECAY].push(makeGenericThemedLocation(rand, DECAY, "Rot", "rgba(0,0,0)", [vikEncounter]));
-    theme_locations[OBFUSCATION].push(makeGenericThemedLocation(rand, OBFUSCATION, "Secrets", "rgba(0,0,0)", [vikEncounter]));
+    theme_locations[OBFUSCATION].push(makeGenericThemedLocation(rand, OBFUSCATION, "Secrets", "rgba(0,0,0)", [vikEncounter, nevilleEncounter]));
     theme_locations[SERVICE].push(makeGenericThemedLocation(rand, SERVICE, "Service", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[MAGIC].push(makeGenericThemedLocation(rand, MAGIC, "Tricks", "rgba(0,0,0)", [vikEncounter]));
 
+    theme_locations[DARKNESS].push(makeGenericThemedLocation(rand, OBFUSCATION, "Darkroom", "rgba(0,0,0)", [vikEncounter, nevilleEncounter]));
+    theme_locations[MATH].push(makeGenericThemedLocation(rand, OBFUSCATION, "Calculators", "rgba(0,0,0)", [nevilleEncounter]));
 
     theme_locations[LIGHT].push(makeGenericThemedLocation(rand, LIGHT, "Lighting", "rgba(255,255,255)", [devonaEvent]));
 

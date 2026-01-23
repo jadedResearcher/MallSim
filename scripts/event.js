@@ -1295,7 +1295,7 @@ const wastesDoBullshitapplyResult = (game, location, parent, me) => {
 
         } else {
             const log = game.rand.pickFrom(Object.keys(dev_log))
-            ele.innerHTML += `<div class='ominous-code-comment'><b>Dev Log ${log}</b>: ${dev_log[log].split("\n").map((i) => `<div>${i}</div>`).join("")}</div>`;
+            ele.innerHTML += `<div class='ominous-code-comment'><b>JR Log ${log}</b>: ${dev_log[log].split("\n").map((i) => `<div>${i}</div>`).join("")}</div>`;
 
         }
     }
@@ -1311,7 +1311,7 @@ const devonaHuntingCheck = (game, location) => {
     const players = location.players;
     for (let player of players) {
         //devona knows exactly where you are but is waiting for the perfect moment to strike
-        if (!player.dead && player.hunted() && game.rand.nextDouble() > 0.15) {
+        if (!player.dead && player.hunted() && game.rand.nextDouble() > 0.95) {
             return true;
         }
     }
@@ -1336,7 +1336,7 @@ const devonaHuntingapplyResult = (game, location, parent, me) => {
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
     if (!sinner) {
-        ele.innerHTML = `The silence is echoding.`;
+        ele.innerHTML = `The silence is echoing.`;
         return;
     }
 
@@ -1393,7 +1393,7 @@ const nevilleEncounterConditionCheck = (game, location) => {
     }
 
     if (location.livingNonMannequinPlayers().length > 0) {
-        return game.rand.nextDouble() > 0.95;
+        return game.rand.nextDouble() > 0.993;
     }
     return false;
 }
@@ -1439,6 +1439,7 @@ He greets ${eyes.nameHTML()} and asks if they tried out the food court yet, real
 
         if (item && arms.stats[ARMS_METAL_STAT] > HIGH_STAT_VALUE) {
             //you managed to kill neville with an item
+            item.name = `Bloody ${item.name}`;
             me.chosen_name = "Now You Fucked Up (Weapon)" //with devona, it doesn't matter if you have a weapon or not, or how strong you are really.... she just... is a wet paper bag unless you are too
             conclusion.innerHTML = `${arms.nameHTML()} is way too keyed up from all the horror and violence to be fooled by anything like this.  They swing the ${item.name} they've been carrying around at the weirdly calm man and the angle is just right. He collapses, like a puppet with its strings cut.
 <br><br>
@@ -1864,4 +1865,4 @@ const devonaEvent = makeEventSubType(`Devona Encounter`, devonaconditionCheck, d
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, devonaEvent, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
+const generalEvents = [corruptionEvent, noWayOut, devonaEvent, nevilleEncounter, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
