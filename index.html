@@ -31,94 +31,112 @@
 
 
 <body>
-  <img src="http://www.farragofiction.com/AudioLogs/images/wallpaper.png" class="fake-background">
-  <h1>Mall Session Simulator</h1>
-  <div class="subtitle">A Zampanio Fan Game by jadedResearcher</div>
+  <div id="centered-contents">
+    <div id="universe"></div>
+    <img src="http://www.farragofiction.com/AudioLogs/images/wallpaper.png" class="fake-background">
+    <h1>Mall Session Simulator</h1>
+    <div class="subtitle">A Zampanio Fan Game by jadedResearcher</div>
 
-  <div
-    data-attr-jr-note="remember all dom elements with ids are global variables too, didn't know that before, explains a lot of weird not-bugs"
-    id="container">
-  </div>
-  <li>special seeds like expedition 33</li>
-  <li>if a player is higher in the order in game (i.e. leader) and you try to eat fruit before them they'll fight you
-    for it instinctively, only results in death if they or you are ready to kill adn don't like each other</li>
-  <br><br>
-  <div>Some Sprites By: The <a target="_blank"
-      href='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/GuideOfHuntersAndHuntedGodtierSprites/'>Guide
-      of Hunters and Hunted</a> </div>
-  <div>Camellia Sermon by: IC</div>
-  <div>Programming,Writing,Etc By: <a target="_blank" href='http://farragofiction.com/ZampanioSimNorth/?seed=0'>JR</a>
-  </div>
-  <div id='todo-pile'>
-    <div>back button for culling
+    <div
+      data-attr-jr-note="remember all dom elements with ids are global variables too, didn't know that before, explains a lot of weird not-bugs"
+      id="container">
     </div>
-    <div>in addition to hunting, neville can bunker down</div>
-    <li>srsly don't forget to make items do things even if they're not fruit</li>
-    <li>become part of marching band with leehunter</li>
-    <li>if fear too high, become mannequin no matter what event</li>
-    <div>blorbos should be able to leave items with mannequins to see if they give them to the potential Shoppers (eggs,
-      harvest fruit, a bullseye for guntan to target, etc)</div>
-    <li>should mannequins turn back dramatically if they're no longer corrupted? (maybe if they actually manage to shop
-      even while a mannequin it breaks the curse?)</li>
-    <li>upgrade AB to render a tiny snapshot of the final mall map for each session, useful for changing map algorithms
-    </li>
-    <li>todo: people who like each other try to stay together (protects you from the eye killer and wibby)</li>
-    <li>window level error handler like sburbsim used to have, blaming Wastes</li>
-    <li>don't forget to do the parking lot kinda like food court but worse (leehunter, hoon, river)</li>
-    <li>do something with fear (its not just corruption)</li>
-    <div>don't forget .wasted-knowledge</div>
-    <div>wire up devlog</div>
-    <div>4631</div>
-    <div>theme based quests, just little ones, even procedural ones i don't care</div>
-    <li>ab should list out classes and aspects</li>
-    <li>parking lot entrance has no exits, events are all lee hunter/hoon river themed (river kills you, its the only
-      way out)</li>
-    <div>ability to make custom sessions (name, four themes, )</div>
-    <div>ability to customize who is diving into the mall (give them themes and starting stats and relationships)</div>
-    <li>if monster rating high enough (isStartingToFeelMonstrous) looping players have special events where they breach
-      and kill/corrupt/waste/eject from the maze specific players </li>
-    <li>skeleton peewee screen where you can have him eat specific looping cultists to try to cut down on the memory
-      leak</li>
-    <li>event where wasted players look at the comments in the source code</li>
-    <li>if a mannequin kills you (only if they hate you) they take your stuff, if it includes fruit, they become wasted
-    </li>
-    <li>for each player that flees, have them make a little report to the cult with what they experienced. (snapshot of
-      summary when they leave? internal memory? they'd need speaking quirks and stat based variations)</li>
-    <li>i should multiply stats by their monstrous quotient i think</li>
-    <li>Button to view players inventory every tick</li>
-    <li>general event where a wasted player can be randomly aware of a comment in MallSims own code. they boggle
-      vacantly at it.</li>
-    <li>eye killer challenging them to yugioh</li>
-    <li>expand theme data to work sburbsim item traits from alchemy engine into this (i.e. each theme knows its purpose
-      adjectives vs shape vs material etc)</li>
-    <li>have shops spawn items withing them from their theme (yes that means fruit might show up from that)</li>
-    <li>elevators can be found that take you to different maps, random chance a map is just the infinite parking garage
-    </li>
-    <li>silly maccus event with their video</li>
-    <li>don't forget to flesh out all events by adding variation based on stats and dont' forget events can CHANGE your
-      stats</li>
-    <li>if in the loop, don't go corrupt</li>
-    <li>event about flipping your shit because your fear is too high, calms you down a bit</li>
-    <li>ab needs to help me calibrate eventually</li>
-    <li>use guides sprites for blorbos but obscure them, the're not PEOPLE to the cultists</li>
-    <li>interview (https://www.youtube.com/watch?v=Gbj-dPP7Ur4) where the intern is mentioned as someones favorite
-      character, make sure they're in here </li>
-    <li>event where the eye killer duels a cultist (kills them if they lose), the cultists are entirely unsurprised by
-      this because they play yugioh all the time for hte harvest</li>
-    <li>if player is corpse or in the loop or corrupted change their icon to reflect this (no inner fill if dead, red if
-      in the loop, yellow if corrupt)</li>
-    <li>should maze cells get more and more dark the more corruption they have (gets worse to the right and down)?</li>
-    <li>word fruit should be blue</li>
-    <li>let jr steal names</li>
-    <li>special ending if ALL join the loop, special ending if ALL corrupt, special ending if ALL die</li>
-    <li>special parking lot area with hoon/lee/hunter/river</li>
-    <li>find a word to make always blue please, add javascript ending to do this</li>
-    <li>link to that story where witherby sacrifices the Lamb</li>
-    <li>finish writing post harvest epilogue fic to hide in here</li>
-    <li>add game.js file that knows how to introduce the party, then start ticking</li>
-    <li>if a Cultist Joins the Loop they inject the hacking script tag from eyedol games into the dom if its not there
-      already (also gets a Wasted flag)</li>
-    <li>if an event has an abnormality in it, link to codex of ruin entry for it (even if training monster)</li>
+    <li>special seeds like expedition 33</li>
+    <li>if a player is higher in the order in game (i.e. leader) and you try to eat fruit before them they'll fight you
+      for it instinctively, only results in death if they or you are ready to kill adn don't like each other</li>
+    <br><br>
+    <div>Some Sprites By: The <a target="_blank"
+        href='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/GuideOfHuntersAndHuntedGodtierSprites/'>Guide
+        of Hunters and Hunted</a> </div>
+    <div>Camellia Sermon by: IC</div>
+    <div>Programming,Writing,Etc By: <a target="_blank" href='http://farragofiction.com/ZampanioSimNorth/?seed=0'>JR</a>
+    </div>
+    <div id='todo-pile'>
+      <div>back button for culling
+      </div>
+      <li>add updated blorbo bios to codex of ruin for things like nevilles Bunker and devonas Fragment Of the Universe
+        (but only if you see them here, remember, codex of ruin can CHANGE based on how you play zampanio)
+        and wibbys Snow Queen</li>
+      <div>in addition to hunting, neville can bunker down</div>
+      <li>srsly don't forget to make items do things even if they're not fruit</li>
+      <li>become part of marching band with leehunter</li>
+      <li>if fear too high, become mannequin no matter what event</li>
+      <div>blorbos should be able to leave items with mannequins to see if they give them to the potential Shoppers
+        (eggs,
+        harvest fruit, a bullseye for guntan to target, etc)</div>
+      <li>should mannequins turn back dramatically if they're no longer corrupted? (maybe if they actually manage to
+        shop
+        even while a mannequin it breaks the curse?)</li>
+      <li>upgrade AB to render a tiny snapshot of the final mall map for each session, useful for changing map
+        algorithms
+      </li>
+      <li>todo: people who like each other try to stay together (protects you from the eye killer and wibby)</li>
+      <li>window level error handler like sburbsim used to have, blaming Wastes</li>
+      <li>don't forget to do the parking lot kinda like food court but worse (leehunter, hoon, river)</li>
+      <li>do something with fear (its not just corruption)</li>
+      <div>don't forget .wasted-knowledge</div>
+      <div>wire up devlog</div>
+      <div>4631</div>
+      <div>theme based quests, just little ones, even procedural ones i don't care</div>
+      <li>ab should list out classes and aspects</li>
+      <li>parking lot entrance has no exits, events are all lee hunter/hoon river themed (river kills you, its the only
+        way out)</li>
+      <div>ability to make custom sessions (name, four themes, )</div>
+      <div>ability to customize who is diving into the mall (give them themes and starting stats and relationships)
+      </div>
+      <li>if monster rating high enough (isStartingToFeelMonstrous) looping players have special events where they
+        breach
+        and kill/corrupt/waste/eject from the maze specific players </li>
+      <li>skeleton peewee screen where you can have him eat specific looping cultists to try to cut down on the memory
+        leak</li>
+      <li>event where wasted players look at the comments in the source code</li>
+      <li>if a mannequin kills you (only if they hate you) they take your stuff, if it includes fruit, they become
+        wasted
+      </li>
+      <li>for each player that flees, have them make a little report to the cult with what they experienced. (snapshot
+        of
+        summary when they leave? internal memory? they'd need speaking quirks and stat based variations)</li>
+      <li>i should multiply stats by their monstrous quotient i think</li>
+      <li>Button to view players inventory every tick</li>
+      <li>general event where a wasted player can be randomly aware of a comment in MallSims own code. they boggle
+        vacantly at it.</li>
+      <li>eye killer challenging them to yugioh</li>
+      <li>expand theme data to work sburbsim item traits from alchemy engine into this (i.e. each theme knows its
+        purpose
+        adjectives vs shape vs material etc)</li>
+      <li>have shops spawn items withing them from their theme (yes that means fruit might show up from that)</li>
+      <li>elevators can be found that take you to different maps, random chance a map is just the infinite parking
+        garage
+      </li>
+      <li>silly maccus event with their video</li>
+      <li>don't forget to flesh out all events by adding variation based on stats and dont' forget events can CHANGE
+        your
+        stats</li>
+      <li>if in the loop, don't go corrupt</li>
+      <li>event about flipping your shit because your fear is too high, calms you down a bit</li>
+      <li>ab needs to help me calibrate eventually</li>
+      <li>use guides sprites for blorbos but obscure them, the're not PEOPLE to the cultists</li>
+      <li>interview (https://www.youtube.com/watch?v=Gbj-dPP7Ur4) where the intern is mentioned as someones favorite
+        character, make sure they're in here </li>
+      <li>event where the eye killer duels a cultist (kills them if they lose), the cultists are entirely unsurprised by
+        this because they play yugioh all the time for hte harvest</li>
+      <li>if player is corpse or in the loop or corrupted change their icon to reflect this (no inner fill if dead, red
+        if
+        in the loop, yellow if corrupt)</li>
+      <li>should maze cells get more and more dark the more corruption they have (gets worse to the right and down)?
+      </li>
+      <li>word fruit should be blue</li>
+      <li>let jr steal names</li>
+      <li>special ending if ALL join the loop, special ending if ALL corrupt, special ending if ALL die</li>
+      <li>special parking lot area with hoon/lee/hunter/river</li>
+      <li>find a word to make always blue please, add javascript ending to do this</li>
+      <li>link to that story where witherby sacrifices the Lamb</li>
+      <li>finish writing post harvest epilogue fic to hide in here</li>
+      <li>add game.js file that knows how to introduce the party, then start ticking</li>
+      <li>if a Cultist Joins the Loop they inject the hacking script tag from eyedol games into the dom if its not there
+        already (also gets a Wasted flag)</li>
+      <li>if an event has an abnormality in it, link to codex of ruin entry for it (even if training monster)</li>
+    </div>
   </div>
 </body>
 

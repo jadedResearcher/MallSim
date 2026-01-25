@@ -15,6 +15,26 @@
   src: url("Fonts/nunito/Nunito-Regular.ttf");
 }
 
+#centered-contents {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  position: relative;
+}
+
+body::after {
+  background-image: url(images/universe_bg_itsababyechidna_sogross.png);
+  background-position: center 0px;
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 4000px;
+  z-index: -1000;
+}
+
 h1 {
   font-family: gameboy;
   margin-left: 120px;

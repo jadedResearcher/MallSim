@@ -1861,6 +1861,103 @@ const devonaEvent = makeEventSubType(`Devona Encounter`, devonaconditionCheck, d
 
 
 
+/*
+i wanna do ria first
+but where i'm struggling is...what are her encounter conditions
+the twins, obviously you just bump into them, they're the scouts
+but ria mostly stays holed up in her conspiracy room
+she's got connections to leehunter, which are playing their song
+importantly, because leehunter is in play, ria isn't as suceptible to despair (contrast her with how she is in EastEast, where she just keeps blowing up for no reason)
+so her fire should be deliberate
+maybe more contained than just "end game"
+She's not the hatchet man of the team (that's camille) but she literally has the most fire power
+Ria is associated with the twins
+they're her eyes 
+so maybe
+if you have encountered neville or devona (without killing them)
+they quietly add a scene for ria being a possible encounter for anyone
+you might stumble into her in a fire or whatever store
+but she's not a GENERAL event till the twins are done
+Ria is about connecctions, about the bigger picture.
+I think she should target the leader.
+Failing that, whoever has the best Eyes.
+Or Arms, given they could accidentally kill the twins.
+But can I see ria doing a premediatated murder?
+Maybe I SHOULD let her experience despair and burn the whole mall down?
+She can't stop people from looping (or training would have been FUCKED long ago)
+What would cause ria despair...
+Ah.
+Ah!
+Okay I'm doing this backwards.
+Do CAMILLE first.
+If the person she's trying to backstab has high enough Tongue, she can get baited into speaking.
+That kills her.
+And THEN Ria gets added as a general event (if you are in a room marked as Funeral For Butterflies, Ria might spawn and do her tea kettle laugh and then the game ends)
+cool
+two for one
+So.
+Camille's head falls off. She goes into the coffin, room gets marked as a Funeral.
+Ria gets added to the rooms events.
+If you leave fast enough you might not set her off (if she finds camille alone she might not explode at you)
+But if someone else stumbles upon her grieving...
+Could record which tick Camille died so Ria can progress in her grief.
+If a funeral is in progress, expanding wave of rooms that get Ria's event?
+She won't explode till she finds a Cultist.
+And she doesn't leave the Coffin till like, i dunno, ten ticks. 
+ticking time bomb
+So. 
+
+Ten ticks of her gnashing her teeth and wailing over a corpse, then a coffin. 
+
+Then, she starts wandering at random while freaking the fuck out. 
+
+
+However I think she should never explode in a parking lot, leehunter stabelize her.
+I think also if you encounter her in a room Wibby could spawn in, she should be calmer.
+
+she'll still kill you, but ONLY you. Not end the run.
+Ria is about connections.
+To Camille.
+To leeHunter
+
+To the twins
+
+To wibby.
+So.
+In order.
+(god its so narratively good that Ria's doesn't have "a scene" but a scattered web of connected ones)
+okay
+*/
+
+/*
+* Twins will add a Ria Encounter to the game (which can't trigger if a funeral is in progress). 
+
+* a regular, non despairing ria encounter has her sweat and ramble and try to PROVE to you that harvest fruit isn't good for the universe to get you to leave (I think if your Mind is high enough, that should work, unlike anything the twins attempt)
+
+* camille should try to randomly backstab anyone about to pick up harvest fruit , or about to be killed by some other means  (do i have eles i can grab for that? scan the document?) , if you have high tongue you can bait her into talking (the Cult knows these blorbos because they're looping now)
+
+* if camille dies, the place she dies in becomes a Funeral and has the Ria event inside where if you so much as look at her she explodes the mall
+
+* ten ticks after camille dies, the mall adds ria as a wandering encounter you can find anywhere
+
+* if wandering, grieving ria encounters you and something DOESN'T stop her , she blows up and ends your run
+
+* if ria is encountered somewhere leehunter or wibby could be encountered (check event list), she only kills the cultists in that room, but doesn't end the run
+
+* wibby encounter has him do Attachment work on you. If your tongue is low enough, he convinces you to leave. If your tongue is high enough, he snowqueen 
+breeches and the run ends UNLESS your arm is high enough to kill him first.   Also if you are a Sinner he freezes you to death without the other stuff happening
+
+
+
+
+
+ i am currently delighted that i've made ria and wibby so simiilar
+
+they might just convince you to leave
+they might just kill you in particular
+they might just destroy the world
+witherby is absolutely convinced that ria is his opposite
+*/
 
 
 
