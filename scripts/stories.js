@@ -10,6 +10,9 @@ http://www.farragofiction.com/ExperimentalMusic/
 and
 http://www.farragofiction.com/ASecondPersonalTranscript/
 */
+
+//https://lostinzampanio.neocities.org/
+
 //google docs is useful to convert doc to html and keep formatting, download as zipped web page then extract
 const throg_diary_1 = `<p><span >SO</span></p>
 

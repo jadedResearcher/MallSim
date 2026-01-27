@@ -22,7 +22,7 @@
   position: relative;
 }
 
-body::after {
+body:not(.author-bot):not(.survival):not(.devil-of-spirals)::after {
   background-image: url(images/universe_bg_itsababyechidna_sogross.png);
   background-position: center 0px;
   position: fixed;
