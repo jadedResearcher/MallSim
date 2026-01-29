@@ -1288,14 +1288,14 @@ const wastesDoBullshitapplyResult = (game, location, parent, me) => {
         //lol 666
         const file = game.rand.pickFrom(grabEyesForThemeKey(game.rand.pickFrom(chosen.theme_keys)));
 
-        ele.innerHTML += `<img alt=${file} title=${file} src='${file}'>`;
+        ele.innerHTML += `Some sort of..."Eyes" from beyond reality? <img alt=${file} title=${file} src='${file}'>`;
     } else {
         if (game.rand.nextDouble() > 0.5) {
-            ele.innerHTML += `<div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div>`;
+            ele.innerHTML += `Some sort of...comments from the creator of reality? <div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div><div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div><div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div>`;
 
         } else {
             const log = game.rand.pickFrom(Object.keys(dev_log))
-            ele.innerHTML += `<div class='ominous-code-comment'><b>JR Log ${log}</b>: ${dev_log[log].split("\n").map((i) => `<div>${i}</div>`).join("")}</div>`;
+            ele.innerHTML += `Some sort of...developer log from the creation of reality? Apparently it happened in .... the future? Everyone knows the world ends by 2022, no matter what... what even does it mean for ...it to have been created in 2025? 2026?<div class='ominous-code-comment'><b>JR Log ${log}</b>: ${dev_log[log].split("\n").map((i) => `<div>${i}</div>`).join("")}</div>`;
 
         }
     }

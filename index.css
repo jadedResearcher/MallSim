@@ -737,6 +737,7 @@ button {
   background-color: #B6B6B6;
   border: 1px dotted red;
   padding: 31px;
+  margin-top: 13px;
 }
 
 .entity-sprite {

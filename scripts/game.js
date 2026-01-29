@@ -443,7 +443,14 @@ class Game {
             if (!player.current_location) {
                 this.event_list.push("ERROR LOCATION")
                 //just toss them in the first place we can find (proably the entrance)
-                this.map[0][0].movePlayerInto(player)
+                if (this.map[0][0]) {
+                    this.map[0][0].movePlayerInto(player)
+                } else {
+                    this.event_list.push("VOIDED ENTRANCE")
+
+                    start_phrase.innerHTML = `The mall is not the mall is not the mall is not the mall is not the mall is not the mall is not the mall is not the mall.`;
+                    return;
+                }
                 //this happened as a bug during dev so of course i made an edge case for it, it was spooky how eventually alaya would always be alone (becaues she was less likely to go south)
                 //and then of course the infinite parking garage does this to you on purpose if you die
                 const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
