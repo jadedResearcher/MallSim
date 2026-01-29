@@ -1880,234 +1880,485 @@ what parts of them are THEM (heart) and whats parts of them would change as the 
 
 ~~~~~~~~~
 
-JR
- — 11/10/2022 1:38 PM
+JR  — 11/10/2022 1:02 PM
+how goes? 
+
+IC — 11/10/2022 1:02 PM
+Work
+Blorbo spinning
+
+JR  — 11/10/2022 1:03 PM
+rotate
+
+IC — 11/10/2022 1:03 PM
+it was brought to my attnetion that if parker ever got red eyes as a suit its syndromes would squash him like a fly
+
+JR  — 11/10/2022 1:03 PM
+red eyes?
+
+IC — 11/10/2022 1:03 PM
+the spider
+
+JR  — 11/10/2022 1:03 PM
+what does the suit do?
+
+IC — 11/10/2022 1:04 PM
+well. nothing new
+but thinking of parkers intensity of being in warm damp places in fugues and protecting his blorbos
+and then trapping people forever
+
+JR  — 11/10/2022 1:10 PM
+hes a lil spider
+in a burried way vs rias puppet way
+
+IC — 11/10/2022 1:11 PM
+ye
+it's funny to sometimes think what they'd be like if they'd had different suits
+
+JR  — 11/10/2022 1:17 PM
+parker is ALL about the aus
+i think if ria had magic bullet shed be less dangerous in a world-ending-sense but more dangerous in a deranged-gunman-holed-up-with-so-msny-drugs sense
+scarier in a real world way
+
+IC — 11/10/2022 1:19 PM
+SCARIER IN A REAL WORLD WAY FORREAL
+
+JR  — 11/10/2022 1:19 PM
+parker has a gun but he blatantly doesnt vibe like an active shooter
+
+IC — 11/10/2022 1:19 PM
+i mean he's got the 4chan streak
+but hes more a passive shooter
+
+JR  — 11/10/2022 1:20 PM
+he kills thru apathy
+while ria cares so so much
+
+IC — 11/10/2022 1:20 PM
+i think witherby and camille could switch suits and the results would be deranged
+altho 'suits' is strong w camille
+but you get the gist
+
+JR  — 11/10/2022 1:21 PM
+witherby would just flat out vanish
+no will to chaf against the restrictions
+a spiral of guilt that he ",deserves" the isolation for being so cold
+he would vanish and no one would even notice
+camille would gleefully go full on paladin
+
+IC — 11/10/2022 1:22 PM
+the one plus is that he would slay absolute penis with a coat and katana
+
+JR  — 11/10/2022 1:22 PM
+i mean he would
+like a lil 90s gothic comic book protag
+
+IC — 11/10/2022 1:23 PM
+camille is SO happy to just. yeah execute the will of god
+
+JR  — 11/10/2022 1:23 PM
+lil skull friend
+she loves hearing confessions
+look
+theyre bonding!
+friends tell each other secrets!
+
+IC — 11/10/2022 1:24 PM
+EVEN WITH ANOTHER SUIT SHES STILL DERANGED
+
+JR  — 11/10/2022 1:24 PM
+shes not as "we are friends the second i see you" sure
+but people are telling her their deepest secrets
+constantly
+no way she doesnt go deranged from all that parasocial attention
+
+IC — 11/10/2022 1:25 PM
+oh yeah she would
+she still needs to make friends in her bones
+
+JR  — 11/10/2022 1:25 PM
+she doesn't have the temperence
+
+IC — 11/10/2022 1:25 PM
+yep
+
+JR  — 11/10/2022 1:26 PM
+meanwhile i feel like k would shatter if swapped with yongki
+just
+dust
+the utter terror
+
+IC — 11/10/2022 1:26 PM
+??
+
+JR  — 11/10/2022 1:27 PM
+imagine knowing and CARING you could lose everything about yourself in an instant
+
+IC — 11/10/2022 1:27 PM
+yeaaah
+k wouldnt leave the house
+
+JR  — 11/10/2022 1:27 PM
+that some OTHER you is prowling the edges of reality, think hes BETTER than you, waiting to STEAL fron you
+
+IC — 11/10/2022 1:28 PM
+k would just go in the maze, find a tiny box, and never leave
+they'd find him 15 loops later reduced to the instinct anyway
+
+JR  — 11/10/2022 1:28 PM
+would go bond with Alt
+
+IC — 11/10/2022 1:29 PM
+alt would never show him a mirror
+its fine
+
+JR  — 11/10/2022 1:29 PM
+k would be SO ready to throw in with alt
+how dare flower chick think shes better than alt
+more "real"
+k only has empathy if he can twist it to make it about himself
+k is terrified of his captain equivalent so wants to bitch with alt
+same as Gaze K liked bitching with leehunter
+
+IC — 11/10/2022 1:31 PM
+meanwhile. yongki with gaze
+i mean
+idk how captain fits here, who's 'realer' here, but
+
+JR  — 11/10/2022 1:31 PM
+captain would crumple with gaze
+always being seen and Judged
+
+IC — 11/10/2022 1:31 PM
+oh yeah
+
+JR  — 11/10/2022 1:31 PM
+yongki would have a lil friend
+
+IC — 11/10/2022 1:31 PM
+it whispering maliciously in his ear
+yongki like friend
+
+JR  — 11/10/2022 1:31 PM
+he would teach gaze every word he learns 
+
+IC — 11/10/2022 1:32 PM
+gaze would teach him to kill. it's. they gotta make him unlearn that
+
+JR  — 11/10/2022 1:32 PM
+gaze whispers to him how viscous blood is
+meanwhile apparently the twins just ...either swap with each other or jointly swap with, like, vik
+i think if the twins literally couldnt be seen by anyone but each other theyd go hella insular 
+
+IC — 11/10/2022 1:34 PM
+elaborate
+
+JR  — 11/10/2022 1:34 PM
+full on codeoendant
+
+IC — 11/10/2022 1:34 PM
+Ooh yeah
+they would
+100
+
+JR  — 11/10/2022 1:34 PM
+decide all they need is each other and lose boundaries
+
+IC — 11/10/2022 1:34 PM
+melt into each other
+
+JR  — 11/10/2022 1:34 PM
+corruption, you know?
+
+IC — 11/10/2022 1:35 PM
+and they could too
+being censored and all
+skin is but a barrier really
+
+JR  — 11/10/2022 1:35 PM
+a blurred distinction
+they retreat heavily from the others
+meanwhile vik would go VIOLENT if anyone touched someone they cared about
+
+IC — 11/10/2022 1:36 PM
+well. what is new 
+
+JR  — 11/10/2022 1:36 PM
+almost in addictive way
+imsgine only being able to walk when full of righteous anger
+
+IC — 11/10/2022 1:36 PM
+ooooh
+yeaah
+
+JR  — 11/10/2022 1:36 PM
+imagine finding more and more excises to hulk out
+sinking into anger less in a toxic, passive way and more in an active, vengeance way
+
+IC — 11/10/2022 1:37 PM
+nod nod nod
+
+JR  — 11/10/2022 1:37 PM
+vik is still vik but look at how the circumstances change
+
+
+
+JR  — 11/10/2022 1:38 PM
 so what im getting here is this au has everyone so much more isolated
+
 IC — 11/10/2022 1:38 PM
 oh yeah by far
 except yongki. yongki always win
-JR
- — 11/10/2022 1:39 PM
+
+JR  — 11/10/2022 1:39 PM
 parker on fire at the edge of the universe impotently trying to burn his way out
-JR
- — 11/10/2022 1:39 PM
+
+JR  — 11/10/2022 1:39 PM
 its literally in the code
 yongki wins
+
 IC — 11/10/2022 1:39 PM
 but yeaj
 also except camille. she isn't having a horrid time but shes still
 doing a conviction
-JR
- — 11/10/2022 1:40 PM
+
+JR  — 11/10/2022 1:40 PM
 shes the opposite of isolated
 shes building a cult
 she loves them all so so much
 but that isolates her from the other blorbos
+
 IC — 11/10/2022 1:42 PM
 the others just dont like having their soul read
 Except ria! But not in a good way
-JR
- — 11/10/2022 1:45 PM
+
+JR  — 11/10/2022 1:45 PM
 i feel like ria joins her in the cult
 makes it just so much more violent
 paranoia and drugs and guns
+
 IC — 11/10/2022 1:45 PM
 she's her favorite :) it's just like old times
-JR
- — 11/10/2022 1:45 PM
+
+JR  — 11/10/2022 1:45 PM
 and camille amplifies it all by giving it a veneer of moral correctness
+
 IC — 11/10/2022 1:45 PM
 ria talking and her listening
-JR
- — 11/10/2022 1:46 PM
+
+JR  — 11/10/2022 1:46 PM
 how can any of this be wrong when they confess regularly and are forgiven?
 the cult opposed eyedol games
 sometimes they have events where parker comes to diatribe on how eyedol games abd wanda is tge root of all evil 
 whole new meaning to "burning man"
 parker is just, always dehydrated
+
 IC — 11/10/2022 1:47 PM
 IT'S BURNING MAN
-JR
- — 11/10/2022 1:47 PM
+
+JR  — 11/10/2022 1:47 PM
 so overheated
 lol
 proud of that one
+
 IC — 11/10/2022 1:48 PM
 this is really just a cult au bc really
 With camille's continuing NEAR ENDLESS DRIVE
 she can def try and get the team back together
-JR
- — 11/10/2022 1:48 PM
+
+JR  — 11/10/2022 1:48 PM
 camille really does set the tone doesn't she
+
 IC — 11/10/2022 1:48 PM
 i mean its how the team came together first
 she found and assembled them
 gave them somewhere to stay
 why would this be different
-JR
- — 11/10/2022 1:49 PM
+
+JR  — 11/10/2022 1:49 PM
 well one reason would be the lack of armor
 shes not as desperate for ambient companionship
+
 IC — 11/10/2022 1:50 PM
 true enough
 but
-JR
- — 11/10/2022 1:50 PM
+
+JR  — 11/10/2022 1:50 PM
 but she does love her friends with all her heart
+
 IC — 11/10/2022 1:50 PM
 yeah you got it
 yeah all these cultists are nice
 but
 her friends :(
-JR
- — 11/10/2022 1:52 PM
+
+JR  — 11/10/2022 1:52 PM
 so she tries to track witherby and twins down
+
 IC — 11/10/2022 1:52 PM
 camille didnt assemble the team because she was SUPREMELY ARMOR LONELY
 for the longest time she was trying NOT to
 but. her friends
-JR
- — 11/10/2022 1:53 PM
+
+JR  — 11/10/2022 1:53 PM
 witherby can talk, that was always camilles derangement, but...  theres just a spark gone from him.  he doesn't know what his purpose is anymore 
 and cults do enjoy that ennui
 ria has been an advocate of violence and comvinces witherby that words and manipulation were useless anyways
 its time to use that sword
+
 IC — 11/10/2022 1:54 PM
 GET PACKING WIBBY
 WE GO DOWN SWINGING HERE
 and really, who's wibby to say much for it
-JR
- — 11/10/2022 1:55 PM
+
+JR  — 11/10/2022 1:55 PM
 its not like he has anything to fight that with
 the armor sings for blood
 and everything hes built up about himself is blocked off
 cant go charm randos into doing what he wants anymore
 and god hasnt he always, just a little bit, wanted to just go apeshit?
+
 IC — 11/10/2022 1:56 PM
 yeaaah
 just lose your marbles
-JR
- — 11/10/2022 1:56 PM
+
+JR  — 11/10/2022 1:56 PM
 stop trying to be the adorable little business man that makes granmas fork over the cash
 the twins are harder tho
 the instant panic effect combined with the fact that censored is working VERY well with the bards aspects
 its hard to find them
 hard to communicate with them
+
 IC — 11/10/2022 1:57 PM
 witherby full cowboy mode
 yeaah
 twins are doing their own thing
-JR
- — 11/10/2022 1:57 PM
+
+JR  — 11/10/2022 1:57 PM
 cowboy with a kitana
 i think the twins might be unreachable till they get lee hunter
+
 IC — 11/10/2022 1:58 PM
 or at least parker
 basically confirmed to be immune to it
-JR
- — 11/10/2022 1:58 PM
+
+JR  — 11/10/2022 1:58 PM
 because regardless of whether or not they are a hive mind, i think lee Hunter know about toxic relationships 
 parkers immune yeah, but i think would accidentally convinice them the outside world is Corrupt and Bad 
+
 IC — 11/10/2022 1:59 PM
 snrk
-JR
- — 11/10/2022 1:59 PM
+
+JR  — 11/10/2022 1:59 PM
 they need someone to detangle them from themselves
+
 IC — 11/10/2022 1:59 PM
 they're busy terrorizing a cornfield in ohio for centuries
-JR
- — 11/10/2022 2:00 PM
+
+JR  — 11/10/2022 2:00 PM
 devona wants to hide from a scary world and Neville wants to protect her no matter what, never lose her, never ever 
 shes rotting inside of him
 perfectly safe, perfectly contained
+
 IC — 11/10/2022 2:01 PM
 they're safe :) 
 no one can take them from each other (:
-JR
- — 11/10/2022 2:03 PM
+
+JR  — 11/10/2022 2:03 PM
 hes so afraid of losing her hes stangnating them both
 and i think lee hunter might be able to pierce that protective toxic layer
 if theyre still the orchestra its thru wanting for the twins what they can't have
 
 if something else its thry experience detangling from each other
+
 IC — 11/10/2022 2:04 PM
 im thinking its melting love
 where it's. complicated
-JR
- — 11/10/2022 2:05 PM
+
+JR  — 11/10/2022 2:05 PM
 so so similar to what the twins have made of themselves
 but ut doesn't have to be that way
 they have options
+
 IC — 11/10/2022 2:05 PM
 they're LESS hivemindy honestly but they're making through
-JR
- — 11/10/2022 2:06 PM
+
+JR  — 11/10/2022 2:06 PM
 better able to identify the toxicity
 instead of it just being the air
 do you think either of tgem have judgement bird?
+
 IC — 11/10/2022 2:07 PM
 i think it gets pushed down
 river has jbird
-JR
- — 11/10/2022 2:07 PM
+
+JR  — 11/10/2022 2:07 PM
 or is the orchestra gonna just take hoon alone
+
 IC — 11/10/2022 2:07 PM
 hoon has tso
-JR
- — 11/10/2022 2:07 PM
+
+JR  — 11/10/2022 2:07 PM
 hoon hive mind with radio
 a hive mind of a single person gone mad from isolation
 there should be SOMEONE ELSE here and theres not
 so
 radio
+
 IC — 11/10/2022 2:09 PM
 radio
-JR
- — 11/10/2022 2:10 PM
+
+JR  — 11/10/2022 2:10 PM
 like that volleyball in castaway
 the orchestra cant handle having a single mind
 so it doesn't 
+
 IC — 11/10/2022 2:11 PM
 point is! the little combine making its own little religious seattle polycule
-JR
- — 11/10/2022 2:11 PM
+
+JR  — 11/10/2022 2:11 PM
 lolol
 facts
+
 IC — 11/10/2022 2:14 PM
 camille like all her friends so much :)
 together they discover how to stop beating each other up and also an incredible hatred for the universe
-JR
- — 11/10/2022 2:15 PM
+
+JR  — 11/10/2022 2:15 PM
 it unites them all 
+
 IC — 11/10/2022 2:16 PM
 camille wasn't even parsing the whole this world is broken thing. it's just ria said it out loud and she went 'well my god seems to agree. so'
 and ria and wibby find some enjoyment out of purging infidels even if wibby is kind of a constant doubter
-JR
- — 11/10/2022 2:21 PM
+
+JR  — 11/10/2022 2:21 PM
 witherby doubts so hard
 https://en.m.wikipedia.org/wiki/Doubting_Thomas 
+
 IC — 11/10/2022 2:22 PM
 yeaah
-JR
- — 11/10/2022 2:22 PM
+
+JR  — 11/10/2022 2:22 PM
 but he's trying
 he cant do his slick talking stuff
 but this is meaning at least
 better than disappearing
+
 IC — 11/10/2022 2:23 PM
 they vibe next to each other
 the armor can't get attached, the marksman kills everything he loves
 so they get each other, to an extent
-JR
- — 11/10/2022 2:26 PM
+
+JR  — 11/10/2022 2:26 PM
 contrast that with how ria and witherby fell apart in the main branch
+
 IC — 11/10/2022 2:28 PM
 yee
 little enforcers getting along
 ria keeps witherby's faith strong and tolerates his deviances
 witherby has less of a guilt-spiral penance whenever he has to get ria sober enough to do the job
-JR
- — 11/10/2022 2:32 PM
+
+JR  — 11/10/2022 2:32 PM
 if anything the tough love she needs to temporarily sober up is exactly what the armor allows
 its the closest friendship he can have
 dumping cold water on her drunk ass
@@ -2115,50 +2366,57 @@ so she can give a sermon in an hour
 he falls deep into snark, too
 he's still GOOD at talking, but now has to use it to hurt
 bitter lil fallen priest
+
 IC — 11/10/2022 2:33 PM
 this compels me so much
 its so interesting
-JR
- — 11/10/2022 2:33 PM
+
+JR  — 11/10/2022 2:33 PM
 :)
+
 IC — 11/10/2022 2:34 PM
 it's like 'ooooh what if they were all EVIL' but less that and more 'oh these guys go insane if you change their syndromes even a little'
 they're assholes to each other but in a way they both tolerate
 it has boundaries, somehow
-JR
- — 11/10/2022 2:39 PM
+
+JR  — 11/10/2022 2:39 PM
 ria needs someone to keep her vaguely functional and witherby is so so lonely
 and yeah, main branch is p stable at this point so it makes sense an offshoot is weirder than it
+
 IC — 11/10/2022 2:42 PM
 i mean the main branch is still WEIRD its just not a cult
 ria accidentally becoming a little mentor to witherby is fun. even if its for a christian death cult
-JR
- — 11/10/2022 2:44 PM
+
+JR  — 11/10/2022 2:44 PM
 i do enjoy that they get to be close
 witherby grumps anytime she calls him "kid" cuz HE isnt the one forgetting to wear pants
+
 IC — 11/10/2022 2:44 PM
 YEAH YEAH KID SUCK IT UP
 i don't want to. put your pants on
 witherby just. you know you'd be in better shape to do the job if you werent drunk all the time
 and it sounds MEAN as hell, because witherby is mean, but he can ONLY be mean
 it causes a fight and she cools off later
-JR
- — 11/10/2022 2:49 PM
+
+JR  — 11/10/2022 2:49 PM
 okay you know what
 they have a bit of disco Elysium vibe
+
 IC — 11/10/2022 2:49 PM
 they do
-JR
- — 11/10/2022 2:49 PM
+
+JR  — 11/10/2022 2:49 PM
 the main chara
 straight laced snarky twink and drunk disaster who is nevertheless a target of loyalty
+
 IC — 11/10/2022 2:50 PM
 i 100% believe that witherby smokes the same way kim does
 once a night, at a rate so slow it'd be easier to FALL OFF
 than to get addicted
-JR
- — 11/10/2022 2:50 PM
+
+JR  — 11/10/2022 2:50 PM
 witherby is a man of such painstaking restraint
+
 IC — 11/10/2022 2:54 PM
 so yeah they have disco elysium vibes
 theyre also both cops
@@ -2167,45 +2425,49 @@ yknow
 for a closed off apocalyptic cult taking over ohio
 
 
-JR
- — 11/10/2022 2:55 PM
+JR  — 11/10/2022 2:55 PM
 lol
 and then the world
+
 IC — 11/10/2022 2:55 PM
 AND THEN ITALY
 it's. heavily impeeded for a long time because the twins show up hungry more sooner than later and they can't predict WHERE it's gonna nest next
 camille has learned through careful consideration that bullets don't work. words don't work either
 she's frustrated that their friends are showing up and eating the rest of her friends but she's nothing if not persistent
 she'll rebuild, no problem
-JR
- — 11/10/2022 3:01 PM
+
+JR  — 11/10/2022 3:01 PM
 it takes so long for lee hunter to finally arrive
 
 and even longer for them to be healed enough to even try to heal others
 by then the twins are so entrenched
+
 IC — 11/10/2022 3:01 PM
 devona is so so small inside neville's large body
 so well protected
-JR
- — 11/10/2022 3:01 PM
+
+JR  — 11/10/2022 3:01 PM
 so safe
+
 IC — 11/10/2022 3:02 PM
 basically immobile inside
 only neville can hear her
 and neville's hardly interested in talking to anyone but her anyway
-JR
- — 11/10/2022 3:06 PM
+
+JR  — 11/10/2022 3:06 PM
 shes constantly chattering to him
 saying basically nothing
 but its a soothing nothing
+
 IC — 11/10/2022 3:06 PM
 it's white noise to him
 they'd seen the others before! but they panicked and tried to shoot them
 so clearly they aren't friends anymore, for some reason
-JR
- — 11/10/2022 3:06 PM
+
+JR  — 11/10/2022 3:06 PM
 the outside world is so so dangerous and corrupt
 just look wgat it did to their so called friends
+
 IC — 11/10/2022 3:07 PM
 so clearly it's not worth dealing with it
 i like to think they accidentally hit it off with yongki
@@ -2216,22 +2478,24 @@ warm
 yongki's literally too powerful to fall prey to the effect it's Just How He Works
 mirror or not
 there are no horrors to comprehend 
-JR
- — 11/10/2022 3:15 PM
+
+JR  — 11/10/2022 3:15 PM
 yongki befriends horrors
 show gaze to them
 devona hates it but she can just hide in Neville
 neville likes gaze okay
 physically cant touch him
 10/10
+
 IC — 11/10/2022 3:16 PM
 just an eyeball
 yongki accidentally tames them and now they grab him every loop
-JR
- — 11/10/2022 3:17 PM
+
+JR  — 11/10/2022 3:17 PM
 they treat yongki as the Pure Boy
 the Only Good Thing In A Corrupt World
 turns out censored was influencing vik
+
 IC — 11/10/2022 3:17 PM
 shrk
 yongki doesn't mind
@@ -2239,58 +2503,65 @@ although yongki wants to go out and let gaze stare at things
 vik would LOVE to be a little contrarian about the cult but. community
 it's a temptation
 it's hard for vik
-JR
- — 11/10/2022 3:21 PM
+
+JR  — 11/10/2022 3:21 PM
 ultimately i think its gonna depend on who vik loves enough to avenge
+
 IC — 11/10/2022 3:22 PM
 yeah basically
 gotta make a friend and then tear into other people mercilessly
 which. really. who is it if yongkis weird but ok. is it k
 my man is melting
 he's in a little box
-JR
- — 11/10/2022 3:23 PM
+
+JR  — 11/10/2022 3:23 PM
 and vik didnt have as much of a connection to k as captain
 tho
+
 IC — 11/10/2022 3:24 PM
 yep
-JR
- — 11/10/2022 3:24 PM
+
+JR  — 11/10/2022 3:24 PM
 if the mirror still lost captain
+
 IC — 11/10/2022 3:24 PM
 thats the issue innit
-JR
- — 11/10/2022 3:24 PM
+
+JR  — 11/10/2022 3:24 PM
 and k ended up being the new experiment for it 
+
 IC — 11/10/2022 3:24 PM
 yeah that makes sense
-JR
- — 11/10/2022 3:24 PM
+
+JR  — 11/10/2022 3:24 PM
 then vikk might try to protect k
 since they couldn't protect captain
 in this scenario yongki is Just Like That rather than wiped from too many mirrors
 maybe every other version of captain was already dead
+
 IC — 11/10/2022 3:25 PM
 nod nod
-JR
- — 11/10/2022 3:25 PM
+
+JR  — 11/10/2022 3:25 PM
 so yongki was a null
+
 IC — 11/10/2022 3:25 PM
 well what do YOU think happened
-JR
- — 11/10/2022 3:29 PM
+
+JR  — 11/10/2022 3:29 PM
 i think ppl would just get mirrored sometimes, for Science
 
 captain got mirrord andcwhat showed up in his place was anamolous enough they grabbed yongki outta the experiment to run OTHER tests on
 
 which meant they needed a new "volunteer"
 and k fit the bill
+
 IC — 11/10/2022 3:30 PM
 and k
 does not want to lose the spot he stole
 from the mirrored k
-JR
- — 11/10/2022 3:31 PM
+
+JR  — 11/10/2022 3:31 PM
 yuuuup
 this k longed for another world, one where he could get what he was DUE
 he was just a clerk over there, but snuck into the mirrors room
@@ -2303,47 +2574,52 @@ but now , in the echidna, he sees The Mirror out of the corner of his eye
 and he cant PROVE its stalking him
 but
 he has too much to lose
+
 IC — 11/10/2022 3:34 PM
 he is NOT losing the good thing he's got
 except that unlike yongki, whenever he resets he resets to the point where he entered the loop
 so he has no fucking idea
 that he keeps falling for it
-JR
- — 11/10/2022 3:37 PM
+
+JR  — 11/10/2022 3:37 PM
 god
 yeah his grubby lil heart refuses to share
 even with himself
+
 IC — 11/10/2022 3:38 PM
 so mostly vik stays with k
 smashing mirrors
-JR
- — 11/10/2022 3:39 PM
+
+JR  — 11/10/2022 3:39 PM
 k loves it
 big powerful minion who smashes anyone you say hurt you?
 its great
 its what duncan thinks i am
+
 IC — 11/10/2022 3:39 PM
 k often just downright lies to get vik riled up and beat something up
 and vik has no reason to want to think too much about it
-JR
- — 11/10/2022 3:40 PM
+
+JR  — 11/10/2022 3:40 PM
 vik wants it too, that rush
 thst power
 always on behalf of another
 so their morality is without question
+
 IC — 11/10/2022 3:40 PM
 it doesn't matter if wha they're doing is Correct
 just that it's deserved
-JR
- — 11/10/2022 3:41 PM
+
+JR  — 11/10/2022 3:41 PM
 punishment
 needless to say EVENTUALLY its k who gets punished
 but it goes a long time without it
 see heres  the thing
+
 IC — 11/10/2022 3:41 PM
 yea
-JR
- — 11/10/2022 3:41 PM
+
+JR  — 11/10/2022 3:41 PM
 yongkis innocence was in a sort of divine way?
 k's innocence is closer to willfull ignorance, a SHIELD from consequences
 when vik finally punishes him and breaks off, k gets reset
@@ -2351,11 +2627,12 @@ and has NO CLUE why vik is suddenly being "so unfair"
 entitled clueless whining bit with a root of truth
 THIS k didnt do anything wrong
 and it isnt fair
+
 IC — 11/10/2022 3:44 PM
 he came out and suddenly his bestie HATED him
 when he didnt even DO anything
-JR
- — 11/10/2022 3:44 PM
+
+JR  — 11/10/2022 3:44 PM
 nevermind that k was def already lying and on a power trip before this universe
 nevermind that he absolutely had plans to get worse
 k can armor himself in that mantra of "unfair" and blame the world
@@ -2363,20 +2640,23 @@ i feel he could go decently captain
 if he can get the eyes of the world on him... he can take them ALL away
 send them somewhere worse
 and bring better people in
+
 IC — 11/10/2022 3:46 PM
 oh yeah
-JR
- — 11/10/2022 3:46 PM
+
+JR  — 11/10/2022 3:46 PM
 FAIR people
+
 IC — 11/10/2022 3:46 PM
 snip
-JR
- — 11/10/2022 3:46 PM
+
+JR  — 11/10/2022 3:46 PM
 erase anyone he doesn't like
 cuz as long as HIS eyes are closed....
 the mirror can be fed anyone at all
 and hes perfectly safe
 so yeah k goes full on villain i think 
+
 IC — 11/10/2022 3:47 PM
 he can shape out the world to his liking
 especially fun bc if camille tries to one sin him its just
@@ -2384,27 +2664,30 @@ especially fun bc if camille tries to one sin him its just
 ...
 D:
 boy where are your secrets
-JR
- — 11/10/2022 3:48 PM
+
+JR  — 11/10/2022 3:48 PM
 lolololol
 oh yes
 k is just immune from guilt
 in his heart of hearts he has never done anything wrong
+
 IC — 11/10/2022 3:50 PM
 BOY WHAT IS WRONG WITH YOU
-JR
- — 11/10/2022 3:52 PM
+
+JR  — 11/10/2022 3:52 PM
 the cult hates k so much
 they want to DESTROY the universe, or at least whats wrong with it
 not
 GIVE it to random assholes
 and have to live in some OTHER , probably WORSE , universe
+
 IC — 11/10/2022 3:54 PM
 why would they want to be set out to an even worse universe with more work to do just so one guy can have his kicks
-JR
- — 11/10/2022 3:54 PM
+
+JR  — 11/10/2022 3:54 PM
 without even a guarantee theyd all be in the SAME universe
 what kinda cult wants to be SPLIT UP
+
 IC — 11/10/2022 3:59 PM
 exactly
 so
@@ -2412,27 +2695,30 @@ got a lot of things to take care of
 between avoiding the twins and basically restraining k as fast as they can
 this is a lot harder WITHOUT the twins
 their recon has gone AWOL
-JR
- — 11/10/2022 4:00 PM
+
+JR  — 11/10/2022 4:00 PM
 its one reason they cult
 no outside info
+
 IC — 11/10/2022 4:00 PM
 camille's SURE they can convince them SOMEHOW but they can't even get close to them
 so instead they have to try to close out and see what they can do from where they stand
-JR
- — 11/10/2022 4:03 PM
+
+JR  — 11/10/2022 4:03 PM
 just throw new people at them
 see if anything sticks
 and lee hunter does
+
 IC — 11/10/2022 4:04 PM
 something about them being one slime resonates with the twins
 oh. same hat
+
 IC — 11/10/2022 4:15 PM
 i REALLY do think the interesting trio of just. wibby ria and camille is so morbidly interesting
 because. camille isn't your TYPICAL cult leader? she's still being horribly manipulative but god knows she doesn't mean 80% of it
 her friends believing in one sin is just a natural extension of her trusting them
-JR
- — 11/10/2022 4:46 PM
+
+JR  — 11/10/2022 4:46 PM
 she has absoultely no evil in her heart
 one sin can cooerate ths
 
