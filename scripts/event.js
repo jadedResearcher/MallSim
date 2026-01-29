@@ -1291,7 +1291,10 @@ const wastesDoBullshitapplyResult = (game, location, parent, me) => {
         ele.innerHTML += `Some sort of..."Eyes" from beyond reality? <img alt=${file} title=${file} src='${file}'>`;
     } else {
         if (game.rand.nextDouble() > 0.5) {
-            ele.innerHTML += `Some sort of...comments from the creator of reality? <div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div><div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div><div class='ominous-code-comment'>${game.rand.pickFrom(ominousCodeComments)}</div>`;
+            const cleanUpRandomComment = () => {
+                return game.rand.pickFrom(ominousCodeComments).replaceAll(/\n/g, "<br>")
+            }
+            ele.innerHTML += `Some sort of...comments from the creator of reality? <div class='ominous-code-comment'>${cleanUpRandomComment()}</div><div class='ominous-code-comment'>${cleanUpRandomComment()}</div><div class='ominous-code-comment'>${cleanUpRandomComment()}</div>`;
 
         } else {
             const log = game.rand.pickFrom(Object.keys(dev_log))
