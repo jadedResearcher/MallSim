@@ -27,7 +27,7 @@ https://kittyhorrorshow.itch.io/anatomy
 */
 
 const randomThemedShop = (rand, themes, right_row, right_col) => {
-    let foundTemplates = [];
+    let foundTemplates = []; //always at least SOME chance of a non themed shop
 
     for (let theme of themes) {
         if (theme_locations[theme] && theme_locations[theme].length > 0) {
@@ -58,7 +58,7 @@ const randomShop = (rand, themes, right_row, right_col) => {
     }
 
     const ret = randomThemedShop(rand, themes, right_row, right_col);
-    if (ret) {
+    if (ret || rand.nextDouble() > 0.88) { //not guaranteed to have a themed shop
         return ret;
     }
 

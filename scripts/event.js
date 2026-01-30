@@ -342,7 +342,7 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
             chosen_item.description += " A mannequin had this."
 
             chosen_emmisary.removeItemFromInventory(chosen_item, ele2)
-            arms.addItemToInventory(chosen_item, ele3);
+            arms.addItemToInventory(game, chosen_item, ele3);
             arms.addCorruption(-113 + -1 * location.corruption);//you were so brave and such a good shopper for picking out a highlighted item
 
 
@@ -579,13 +579,13 @@ And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds
         ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! ${flavor}`;
 
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
-        shopper.addItemToInventory(item, pickupEle);
+        shopper.addItemToInventory(game, item, pickupEle);
     } else {
         const item = new Item(`${personal_adj} ${object}`, `${shopper.nameHTML()} found this in the ${location.longer_name}!`, false)
 
         ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!).  `;
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
-        shopper.addItemToInventory(item, pickupEle);
+        shopper.addItemToInventory(game, item, pickupEle);
 
     }
     ele.innerHTML += wasted_knowledge;
@@ -1040,7 +1040,7 @@ const parkerEncounterapplyResult = (game, location, parent, me) => {
 
 </p><p>When he finishes, he thrusts a hand out of the wall, the drywall of it parting like dust and offers NAME a single DUSTY HARVEST FRUIT.
 </p>`;
-        player.addItemToInventory(new Item("Dusty Harvest Fruit", `The mysterious wall man, who called himself 'Parker', handed this to ${player.nameHTML()}`), ele2)
+        player.addItemToInventory(game, new Item("Dusty Harvest Fruit", `The mysterious wall man, who called himself 'Parker', handed this to ${player.nameHTML()}`), ele2)
         return;
     }
 

@@ -327,7 +327,7 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
 
         }
         const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
-        shopper.addItemToInventory(item, pickupEle);
+        shopper.addItemToInventory(game, item, pickupEle);
 
 
     }

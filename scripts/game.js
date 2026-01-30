@@ -64,6 +64,7 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
+    tick_funeral_began = undefined; //for ria
     bunker_phase = 0; //is neville breaching x2 combo?
     hunting = false; //is one of the twins breaching?
     orchestra_name = "LeeHunter"

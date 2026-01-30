@@ -7,6 +7,7 @@ const FRIEND_LABEL = "friend"
 const RIVAL_LABEL = "rival"
 const TEAM_LABEL = "team-mate"
 const CLONE_LABEL = "clone"
+const FUNERAL_FOR_DEAD_BUTTERFLIES = "Funeral For Dead Butterflies";
 
 const STRONG_RELATIONSHIP_VALUE = 50;
 
@@ -814,9 +815,97 @@ class Entity {
         return `<span class='player-title'>${this.title}</span>`;
     }
 
-    addItemToInventory = (item, ele) => {
+    addItemToInventory = (game, item, ele) => {
         //automatically eat it if it would waste you
         if (!this.wasted && item.isFruit) {
+            /*
+            camille is just built different
+            instead of an event
+            she simply lurks
+            waiting for doom
+            so she can kill it
+            */
+            //if you're in a session ending in 4...thems the breaks, you are NOT going to get wasted on camilles watch
+            if (game.rand.nextDouble() < 0.4 || game.rand.initial_seed % 10 === 4) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
+                if (this.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
+                    ele.innerHTML = ` 
+${this.nameHTML()} raises the ${item.name} to their lips on base instinct, ready to devour it when some other, deeper instinct has them look behind them. 
+<br><Br>
+A tall woman looms there, a blade at the ready. 
+<br><Br>
+Immediately ${this.nameHTML()} begins talking, rambling really, trying to demand the strange woman explain why they are attacking them, what crime they commited, asking if they're a cop, if they're with that 'training team' they heard defends the mall, asking why they try to stop them from getting the fruit.
+<br><Br>
+The woman opens her mouth to speak only for something to squelch within her. 
+<br><Br>
+She gasps out just a few words and her words become wetter, more guttural.   The Fruit is Tainted. Unloved by the Universe. Dangerous.  All who eat suffer. All who eat cause suffering. 
+<br><Br>
+A thick red line opens along her throat and blood begins gushing out in thick pulses. 
+<br><Br>
+Finally, her head slides off her body, and it tumbles backwards.
+<br><br>
+<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/oh_huh_2-moshed-01-29-23-11-06-030.gif'>
+
+${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly enfold the rapidly cooling corpse, spinning a coffin from thin air.
+`;
+                    /*
+
+(and why yes, she is not thinking about the implications that her and her friends being in the loop is both suffering and causing suffering, why do you ask)
+
+
+vik doesn't get it
+or does and is maliciously pretending they don't
+theres a reason camille insists on still doing corporation work
+in still using the veneer of normalcy
+the forms
+the beurocracy
+camille both is inherently aware of, and trying to ignoroe, the weight on her shoulders
+haven't they ALWAYS been saving the world with their work?
+isn't this no different than an aleph teir threat?
+but it is.
+its not one world
+its not even all worlds
+its all POSSIBLE worlds
+if the echidna runs out of space, reality crashes
+and the space its chewing through is whats allocated for... everything
+ever
+the future
+the past
+the present
+the entire creation cycle of sburb dies with the echidna
+OR
+you know
+you can kill it
+before it eats through everything
+but she won't
+she protects it
+immune system
+                    */
+                    game.tick_funeral_began = game.current_tick; //ria spends ten ticks mourning in the funeral, then her event starts responding ANYWHERE
+                    game.event_list.push("The End Is Dead")
+                    this.current_location.name = "Funeral"
+                    this.current_location.longer_name = FUNERAL_FOR_DEAD_BUTTERFLIES
+                } else {
+                    ele.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
+                    <br><br>
+                    Is that... metal?  Sticking...out of their chest? 
+                    <br><br>
+                    The red coating it blossoms like a flower and then just as silently, the blade is withdrawn.
+                    <br><br>
+                    They fall to their knees.
+                    <br><br>
+                    As the life fades from their eyes, they realize they never even saw who stabbed them.
+                    <br><br>
+                    As if granting a final mercy, their view suddenly tumbles, and as their vision blurs, they catch a glimpse of a gently smiling woman...and of ${this.nameHTML()}'s own headless torsa, falling limply forward.
+                    <br>
+                    <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/the_last_thing_you_see.gif'>
+                    `;
+                    game.event_list.push("The End");
+                    this.kill("decapitated with a clean slice, head neatly beside the body, blood stained in all directions. If you look closely, you can see a stab wound in the chest, but the blood from the missing head seems to almost completely cover it. The head must have been removed within minutes of the stab.")
+
+                }
+                return;
+            }
+
             const formerName = this.nameHTML();
             this.wasted = true;
             this.joinTheLoop(ele);
