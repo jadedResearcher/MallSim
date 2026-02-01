@@ -251,7 +251,26 @@ const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
         }
     }
     const chosen_emmisary = game.rand.pickFrom(possible_mannequins);
-    chosen_emmisary.inventory = [...free_items]
+    //random chance the mannequin messily devours any harvest fruit rather than showcase it like a good construct
+    if (game.rand.nextDouble() > 0.5) {
+        const item_ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        /*
+good news
+the cultists have found a counter for the End
+if they get themselves turned into mannequins first
+she won't be pulled to stab them
+and if the mall asks them to showcase harvest fruit
+they can turn into this horrible half looping thing
+and then NEXT loop
+they respawn as a human again
+        */
+        for (let item of free_items) {
+            chosen_emmisary.addItemToInventory(game, item, item_ele, true)
+        }
+    } else {
+        chosen_emmisary.inventory = [...free_items]
+
+    }
     const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
     const players = location.livingNonMannequinPlayers();
     let waste;

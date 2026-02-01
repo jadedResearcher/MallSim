@@ -815,7 +815,7 @@ class Entity {
         return `<span class='player-title'>${this.title}</span>`;
     }
 
-    addItemToInventory = (game, item, ele) => {
+    addItemToInventory = (game, item, ele, surpress_spam) => {
         //automatically eat it if it would waste you
         if (!this.wasted && item.isFruit) {
             /*
@@ -890,9 +890,13 @@ immune system
                     game.tick_funeral_began = game.current_tick; //ria spends ten ticks mourning in the funeral, then her event starts responding ANYWHERE
                     game.event_list.push("The End Is Dead")
                     this.current_location.name = "Funeral"
+                    this.inventory.push(item);
+
                     this.current_location.longer_name = FUNERAL_FOR_DEAD_BUTTERFLIES
                     return;
                 } else {
+                    this.inventory.push(item);
+
                     ele.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
                     <br><br>
                     Is that... metal?  Sticking...out of their chest? 
@@ -927,11 +931,17 @@ immune system
             }
 
         } else if (this.wasted && item.isFruit) {
+            this.inventory.push(item);
+
             ele.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
 
         } else {
+
             this.inventory.push(item);
-            ele.innerHTML = ` ${this.nameHTML()} has picked up the ${item.name}! ${item.description}`;
+            if (!surpress_spam) { //mannequins would generate a lot of this
+                ele.innerHTML = ` ${this.nameHTML()} has picked up the ${item.name}! ${item.description}`;
+
+            }
         }
     }
 
