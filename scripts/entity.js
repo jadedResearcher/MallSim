@@ -834,6 +834,7 @@ class Entity {
             //if you're in a session ending in 4...thems the breaks, you are NOT going to get wasted on camilles watch
             if (!this.corrupted && game.rand.nextDouble() < 0.4 || game.rand.initial_seed % 10 === 4) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
                 if (this.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
+                    //you don't get killed but you DO forget to eat your fruit
                     ele.innerHTML = ` 
 ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, ready to devour it when some other, deeper instinct has them look behind them. 
 <br><Br>
@@ -890,6 +891,7 @@ immune system
                     game.event_list.push("The End Is Dead")
                     this.current_location.name = "Funeral"
                     this.current_location.longer_name = FUNERAL_FOR_DEAD_BUTTERFLIES
+                    return;
                 } else {
                     ele.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
                     <br><br>
