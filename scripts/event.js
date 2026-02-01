@@ -520,6 +520,28 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent, me) => {
     shopper.addCorruption(-13 + + -1 * location.corruption);//congrats, shoppers aren't mannequins!
     const formerNameHTML = shopper.nameHTML();
     const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
+    
+    if(game.rand.nextDouble()>0.95){
+        /*
+        I wanna show off this physical book KR made, then my nesting partner 3d scanned and I turned into a gif
+
+        */
+        const item = new Item(`${personal_adj} Harvest Book`, `It's a Sacred Harvest Book! Reading this will cause anyone to find solace in their faith, and become just a little more resolute in their desire to Shop for and Purchase a Harvest Fruit!`)
+        me.chosen_name = "Harvest Book Shopped!"
+        shopper.fear = 0;
+        shopper.corruption = 0;
+        ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper!
+        <br><br>
+        They eagerly purchase the ${item.name} they see on sale.
+        <br><br>No price is too much for the solace of the holy knowledge!
+        <br><br>
+        <img style='background: linear-gradient(45deg, black, gray); border: 3px inset black; border-radius: 13px;' src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/harvest_closed.gif'>`;
+        const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
+
+        shopper.addItemToInventory(game, item, pickupEle);
+        return;
+
+    }
     const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
     const oddsFruit = 0.15;
@@ -667,6 +689,11 @@ yongkiKillinternalConditionCheck = (game, location) => {
 
 }
 
+/* the former captain of the info team and yongki are trying to figure out how to NOT kill people with their inhuman strength
+the cultists are rare humans its okay to kill, so they're practice
+plus captain likes Doing His Duty
+and Yongki likes how nice and viscous blood feels 
+*/
 yongkiKillapplyResult = (game, location, parent, me) => {
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
