@@ -284,7 +284,7 @@ class Relationship {
     //whatever direction it already is, keep going
     deepenRelationship = () => {
         //dividing it by itself gets it to be 1, then taking only one of the absolute values keeps the sign
-        this.value += this.value / Math.abs(this.value);
+        this.value += Math.round(this.value / Math.abs(this.value));
 
     }
 
@@ -401,7 +401,7 @@ class Entity {
         this.sandSmoothByValue(MEDIUM_STAT_VALUE);//congratulations on becoming the 'you' you were always meant to be. technically this should happen a bit over time, over centuries, but we all know simulations are supposed to be super fast
         //yes its accessing a global var called game but im in a hurry
         if (!game.eatWastesAutomatically) {
-            globalDataObject.loopingCultists.push({ title: this.title, musical: this.musical, censored: this.censored, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys, sprite_aspect: this.sprite_aspect, sprite_class: this.sprite_class })
+            globalDataObject.loopingCultists.push({ homeBranch: game.rand.initial_seed, title: this.title, musical: this.musical, censored: this.censored, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys, sprite_aspect: this.sprite_aspect, sprite_class: this.sprite_class })
             save();
         }
         const knowledge = document.querySelectorAll(".wasted-knowledge");
@@ -738,7 +738,7 @@ class Entity {
 
     hateEveryoneALittleBitMore = () => {
         for (let relationship of Object.values(this.relationships)) {
-            relationship.value += -1 * (relationship.value / 20) - 2;
+            relationship.value += Math.round(-1 * (relationship.value / 20) - 2);
         }
     }
     //good or bad, i don't care right now
@@ -824,9 +824,15 @@ class Entity {
             she simply lurks
             waiting for doom
             so she can kill it
+
+            also she doesn't get that instinctual tug towards mannequins
+            they don't count as "alive" to her aspects of death and doom
+            so
+            in the rare case that a mannequin gets its <INSERT MATERIAL HERE> hands on some fruit
+            it ascends just fine
             */
             //if you're in a session ending in 4...thems the breaks, you are NOT going to get wasted on camilles watch
-            if (game.rand.nextDouble() < 0.4 || game.rand.initial_seed % 10 === 4) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
+            if (!this.corrupted && game.rand.nextDouble() < 0.4 || game.rand.initial_seed % 10 === 4) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
                 if (this.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
                     ele.innerHTML = ` 
 ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, ready to devour it when some other, deeper instinct has them look behind them. 
@@ -909,7 +915,15 @@ immune system
             const formerName = this.nameHTML();
             this.wasted = true;
             this.joinTheLoop(ele);
-            ele.innerHTML = ` ${formerName} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
+            if (this.corrupted) {
+                game.event_list.push("Mannequin Ascension")
+                ele.innerHTML = `You do not understand how ${formerName} managed to messily devoured the ${item.name} through a blank ${this.mannequin_type} face and at this point you're afraid to ask. They have become the ${this.nameHTML()} as a result. They have Joined the Loop! <br><br><img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/get_ahead-moshed-02-01-10-05-10-088.gif'>`;
+
+            } else {
+                ele.innerHTML = ` ${formerName} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
+
+            }
+
         } else if (this.wasted && item.isFruit) {
             ele.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
 

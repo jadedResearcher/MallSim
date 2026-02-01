@@ -186,6 +186,7 @@ body.devil-of-spirals {
   border-radius: 8px;
   background-color: rgb(237, 231, 213);
   font-family: 'nunito', sans-serif;
+  line-height: 22px;
 }
 
 button {

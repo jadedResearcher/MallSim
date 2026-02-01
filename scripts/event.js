@@ -520,8 +520,8 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent, me) => {
     shopper.addCorruption(-13 + + -1 * location.corruption);//congrats, shoppers aren't mannequins!
     const formerNameHTML = shopper.nameHTML();
     const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
-    
-    if(game.rand.nextDouble()>0.95){
+
+    if (game.rand.nextDouble() > 0.95) {
         /*
         I wanna show off this physical book KR made, then my nesting partner 3d scanned and I turned into a gif
 
@@ -585,9 +585,8 @@ And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds
         let flavor = `They cannot believe their luck when they stumble upon a ${item.name}!`;
 
         if (shopper.corrupted) {
-            me.chosen_name = "Mannequin Ascension"
             flavor = `Nothing as mundane as a mouth yawns open across the blank ${shopper.mannequin_type} expanse of their face,  stretching impossibly wide over a single ${item.name} they happened to fall onto.`;
-        } if (shopper_highest_stat.key === MIND_METAL_STAT) {
+        } else if (shopper_highest_stat.key === MIND_METAL_STAT) {
             flavor = `They finally put the pieces together and solve the Riddle of the Mall, revealing a single ${item.name} nestled in a seemingly empty locker.`;
         } else if (shopper_highest_stat.key === EYES_METAL_STAT) {
             flavor = `Their keen eyes almost miss spotting the ${item.name} nestled in a seemingly empty shadowed corner.`;
