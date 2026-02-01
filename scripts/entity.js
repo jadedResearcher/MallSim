@@ -412,7 +412,15 @@ class Entity {
             for (let k of knowledge) {
                 text += k.innerHTML;
             }
-            knowledge_ele.innerHTML = `${this.nameHTML()} sees with new eyes that which was missed before: ${text}.`;
+            /*
+            fun fact, the wasted-knowledge system wasn't working for a while
+            i didn't realize
+            so when i fixed a seemingly unrelated bug
+            i was suddenly jumpscared by walls of text about yongki not meaning it and mannequins screaming inside
+            10/10 zampanio experience
+            so i decided to lean into that spook and style this text scary like
+            */
+            knowledge_ele.innerHTML = `${this.nameHTML()} sees with new eyes that which was missed before, the weight of it cracking their mind open as a wave of vertigo takes them: <p class='madness'>${text}</p>.<br><Br>As they adjust to their new senses, composure returns to them. The secrets of the universe settling into their brain.`;
 
         }
 
@@ -831,11 +839,12 @@ class Entity {
             in the rare case that a mannequin gets its <INSERT MATERIAL HERE> hands on some fruit
             it ascends just fine
             */
-            //if you're in a session ending in 4...thems the breaks, you are NOT going to get wasted on camilles watch
-            if (!this.corrupted && game.rand.nextDouble() < 0.4 || game.rand.initial_seed % 10 === 4) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
+            //if you're in a session ending in 4...thems the breaks, you are NOT going to get wasted on camilles watch (though she still can't sense mannequins as they are neither alive nor)
+            if (((!this.corrupted && !this.wasted) && game.rand.nextDouble() < 0.4) || (!this.corrupted && game.rand.initial_seed % 10 === 4)) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
                 if (this.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
                     //you don't get killed but you DO forget to eat your fruit
-                    ele.innerHTML = ` 
+                    const child = createElementWithClassAndParent('p', ele)
+                    child.innerHTML = ` 
 ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, ready to devour it when some other, deeper instinct has them look behind them. 
 <br><Br>
 A tall woman looms there, a blade at the ready. 
@@ -896,8 +905,9 @@ immune system
                     return;
                 } else {
                     this.inventory.push(item);
+                    const child = createElementWithClassAndParent('p', ele)
 
-                    ele.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
+                    child.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
                     <br><br>
                     Is that... metal?  Sticking...out of their chest? 
                     <br><br>
@@ -923,23 +933,30 @@ immune system
             this.joinTheLoop(ele);
             if (this.corrupted) {
                 game.event_list.push("Mannequin Ascension")
-                ele.innerHTML = `You do not understand how ${formerName} managed to messily devoured the ${item.name} through a blank ${this.mannequin_type} face and at this point you're afraid to ask. They have become the ${this.nameHTML()} as a result. They have Joined the Loop! <br><br><img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/get_ahead-moshed-02-01-10-05-10-088.gif'>`;
+                const child = createElementWithClassAndParent('p', ele)
+
+                child.innerHTML = `You do not understand how ${formerName} managed to messily devoured the ${item.name} through a blank ${this.mannequin_type} face and at this point you're afraid to ask. They have become the ${this.nameHTML()} as a result. They have Joined the Loop! <br><br><img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/get_ahead-moshed-02-01-10-05-10-088.gif'>`;
 
             } else {
-                ele.innerHTML = ` ${formerName} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
+                const child = createElementWithClassAndParent('p', ele)
+
+                child.innerHTML = ` ${formerName} has messily devoured the ${item.name} and has become the ${this.nameHTML()} as a result. They have Joined the Loop!`;
 
             }
 
         } else if (this.wasted && item.isFruit) {
             this.inventory.push(item);
+            const child = createElementWithClassAndParent('p', ele)
 
-            ele.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
+            child.innerHTML = ` ${this.nameHTML()} reverently picks up the ${item.name}! While they are already Wasted, they are not about to leave the sacred item behind just lying on the floor. ${item.description}`;
 
         } else {
 
             this.inventory.push(item);
             if (!surpress_spam) { //mannequins would generate a lot of this
-                ele.innerHTML = ` ${this.nameHTML()} has picked up the ${item.name}! ${item.description}`;
+                const child = createElementWithClassAndParent('p', ele)
+
+                child.innerHTML = ` ${this.nameHTML()} has picked up the ${item.name}! ${item.description}`;
 
             }
         }

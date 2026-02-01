@@ -185,8 +185,15 @@ body.devil-of-spirals {
   border: 3px solid black;
   border-radius: 8px;
   background-color: rgb(237, 231, 213);
+  font-size: 16px;
   font-family: 'nunito', sans-serif;
-  line-height: 22px;
+  line-height: 18px;
+}
+
+.madness {
+  padding: 113px;
+  font-size: 10px;
+  animation: shake 1s linear infinite;
 }
 
 button {
@@ -402,6 +409,27 @@ button {
   90% {
     -webkit-filter: drop-shadow(1px 1px 13px #06FFC9);
     filter: drop-shadow(1px 1px 13px #06FFC9);
+  }
+
+}
+
+@keyframes shake {
+
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transform: translate(1px, 3px);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-1px, -3px);
   }
 
 }
