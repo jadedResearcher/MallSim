@@ -1,3 +1,87 @@
+/*
+i should have a tutorial on how to make personal backups of your favorite sins
+in case linode goes the way of angelfire
+or i get hit by a bus or something
+*/
+
+/*
+i meant sims
+before
+not sins
+people can figure out how to backup their sins on their own time
+i don't need to provide tutorials for that
+*/
+
+/*
+if you ever feel like making a personal backup of any of my sims/games/pages
+
+
+what you do is look at the index.html file (or bathroom.html file, whatever) as text (might have to be on desktop to do this)
+
+it'll have a list of things it pulls in like <script> tags or
+
+  <link rel="stylesheet" href="index.css">
+
+
+  you wanna save that html file and all the <script> tag files it pulls in, 
+
+  like this index.js file
+
+  if it says something like 
+
+    <script src="index.js"></script>
+
+    that means the index.js file should be in the same folder as the index.html or whatever file
+
+    if it instead says something like 
+
+      <script src="scripts/third_party/json_crush.js"></script>
+
+      that means you want to put the "json_crush.js" file into a folder called "third_party" which itself is in a folder called "scripts"
+
+      i make kinda complicated stuff
+
+      images will be harder to save
+
+      if you're on pc, you can open up the network tab and run a simulation (or otherwise make the page do whatever it does)
+      and see what images/music/whatever it pulls in
+
+      same rules as scripts, 
+
+      though i tend to make my images and music a maze?
+
+      so instead of "everything a web page uses is a subfolder of that web page
+      
+      it might be just on a completely different page entirely
+      
+      i like using the bathroomsim for storage a lot, for reasons
+      for example
+
+      http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/get_ahead.mp4
+
+      before that it was TwoGayJokes
+      http://farragofiction.com/TwoGayJokes/Stories/L-U-000-print.pdf
+
+      if its files from places like that its much harder
+
+      you'd need to go into the code and look for anywhere its looking for a file like that and replace it with wherever you're actually putting it
+
+      bluh
+
+      the rot takes all in the end
+
+      so maybe this isn't feasible
+
+      maybe i made my stuff just... impossible to fully back up
+
+      ah well
+
+      thats why i make 'lets plays' occasionally, right?
+      "
+
+*/
+
+
 let game;
 window.addEventListener('error', (message, file, line, column, errorObj) => {
     console.log(message)

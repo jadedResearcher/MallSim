@@ -1,6 +1,44 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["2/3/2026", `i totally forgot before
+    to make a devlog
+    about how funny it was
+    the other day
+    i wanted to add a new mannequin graphic
+    when they ascended into the loop
+    but realized they weren't picking up harvest fruit correctly
+    when they were showcasing products
+    from dead cultists camille had stabbed
+    so now they were, except if they picked up TWO fruit
+    it would only do the pickup effect for the second and they'd enter the loop out of nowhere
+    so i fixed the bug of it overriding itself
+    and then suddenly the sim is printing out line after line about 
+    how  yongki didn't mean it
+    and mannequins are screaming inside
+    and im just all 
+0_0
+wtf
+what the actual fuck
+and for this brief
+glorious moment
+i wondered if my code was
+for real for real
+haunted
+and it turned out
+there was this entire waste mechanic
+where some scenes had hidden text
+and when you joined the loop
+you'd print out any scenes that had been missed
+and it ws just
+never happening
+because it would get overwritten by eating the fruit
+and i never noticed
+and now that i fixed THAT bug another, unrelated bug was fixed
+and jump scared me
+and now we all know this together
+i love making sims`]
+
 dev_log["1/22/2026"] = `fun fact
 having ab tell me 
 how often neville dies

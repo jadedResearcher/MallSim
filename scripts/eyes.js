@@ -11,6 +11,7 @@ let ominousCodeComments = [];
 const ominousCodeCommentURLs = [
     "http://farragofiction.com/MallSim/scripts/event.js",
     "http://farragofiction.com/MallSim/scripts/game.js",
+    "http://farragofiction.com/MallSim/index.js",
     "http://farragofiction.com/MallSim/scripts/game_summary.js",
     "http://farragofiction.com/MallSim/scripts/location.js",
     "http://farragofiction.com/MallSim/scripts/entity.js",
