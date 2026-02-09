@@ -1,7 +1,20 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
-dev_log["2/3/2026", `i totally forgot before
+
+dev_log["2/8/2026"] = `it has been a Week
+i mean
+both literally
+since i last did a devlog
+and like
+capitalized for emphasis cuz wow this week sucked
+but
+i did manage to
+in the end
+pun intended
+finish wiring up camille`;
+
+dev_log["2/3/2026"] = `i totally forgot before
     to make a devlog
     about how funny it was
     the other day
@@ -37,7 +50,7 @@ and i never noticed
 and now that i fixed THAT bug another, unrelated bug was fixed
 and jump scared me
 and now we all know this together
-i love making sims`]
+i love making sims`
 
 /*
 https://www.tumblr.com/jadedresearcher/807767587264118784/perhaps-i-care-far-too-much-about-answers-but-why?source=share
