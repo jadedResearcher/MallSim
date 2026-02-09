@@ -39,6 +39,57 @@ and jump scared me
 and now we all know this together
 i love making sims`]
 
+/*
+https://www.tumblr.com/jadedresearcher/807767587264118784/perhaps-i-care-far-too-much-about-answers-but-why?source=share
+
+Ask: Perhaps I care far too much about answers but why does Zampanio want observers to live a long life
+
+Answer: 
+
+There's a lot of theories floating around out there.
+
+The one most compelling to me is... Well. 
+
+We all know that Zampanio is a fandom without a center, right?
+
+There probably IS no game called Zampanio...
+
+THEREFORE, Zampanio is an idea that ONLY lives within the minds of the people engaging with it. 
+
+There's no dusty board game someone can dig up in 50 years.
+
+No miraculously working game boy cartridge that hasn't yet run out of battery. 
+
+It's just.... us?
+
+So BECAUSE you know about Zampanio, it wants you to live, for the same reason that no one wants their *house* to fall over.
+
+The meme is "Zampanio needs you to live a long, healthy life".
+
+Not want.
+
+Need.
+
+And its important to keep BOTH readings of it mind.
+
+
+* You are needed live a long, healthy life, for Zampanio.
+* Zampanio will live a long, healthy life, as long as it has you, which is needed to accomplish this.
+
+
+Basically a cognitive parasite, right?
+
+Of course, the mundane explanation is less fun, but I mean, memes are the dna of the soul right? Can't exactly have an idea live without a host.  
+
+Actually take it back, the mundane version still sounds like a cognitive parasite. 
+
+#in house of leaves
+#theres a theory that WE are the ~minotaur~
+#haunting the pages
+#but i'd argue for
+#zampanio
+#we are the *house*
+*/
 dev_log["1/22/2026"] = `fun fact
 having ab tell me 
 how often neville dies

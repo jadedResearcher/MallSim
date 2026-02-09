@@ -64,7 +64,7 @@ const getSouth = (map, row, col) => {
 
 class Game {
     players = [];
-    tick_funeral_began = undefined; //for ria
+    tick_funeral_began = undefined; //for camille and ria
     bunker_phase = 0; //is neville breaching x2 combo?
     hunting = false; //is one of the twins breaching?
     orchestra_name = "LeeHunter"
@@ -448,6 +448,7 @@ class Game {
                     this.map[0][0].movePlayerInto(player)
                 } else {
                     this.event_list.push("VOIDED ENTRANCE")
+                    const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
 
                     start_phrase.innerHTML = `The mall is not the mall is not the mall is not the mall is not the mall is not the mall is not the mall is not the mall.`;
                     return;

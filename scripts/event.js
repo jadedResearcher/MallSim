@@ -533,7 +533,7 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent, me) => {
     //you need to have maxed out at least one stat to get a harvest fruit
     //you can't just derp into one ten seconds in
     const shopper_highest_stat = shopper.highestStat();
-    let wasted_knowledge = `<span class="wasted-knowledge">The Westerville Mall knows there are two types of things that look like humans. Shoppers move around and take items of the mall and are happy and festive. Mannequins never leave the mall and are constantly screaming inside. If you fail to leave the mall soon enough, or if you are too scared, the Mall will assume you are a mannequin. Thems the breaks.</span>`;
+    let wasted_knowledge = `<span class="wasted-knowledge">The Westerville Mall knows there are two types of things that look like humans. Shoppers move around and take items out of the mall and are happy and festive. Mannequins never leave the mall and are constantly screaming inside. If you fail to leave the mall soon enough, or if you are too scared, the Mall will assume you are a mannequin. Thems the breaks.</span>`;
 
 
     shopper.addCorruption(-13 + + -1 * location.corruption);//congrats, shoppers aren't mannequins!
@@ -684,7 +684,7 @@ corruptionEventapplyResult = (game, location, parent, me) => {
     if (extantMannequins.length > 0) {
         reaction += `${arrayToHumanSentence(mannequins.map((n) => n.nameHTML()))} twitches ever so slightly, blank face${mannequins.length > 0 ? "s" : ""} welcoming their new kin.`;
     }
-    const wasted_knowledge = `<span class="wasted-knowledge">The Westerville Mall knows there are two types of things that look like humans. Shoppers move around and take items of the mall and are happy and festive. Mannequins never leave the mall and are constantly screaming inside. If you fail to leave the mall soon enough, or if you are too scared, the Mall will assume you are a mannequin. Thems the breaks.</span>`;
+    const wasted_knowledge = `<span class="wasted-knowledge">The Westerville Mall knows there are two types of things that look like humans. Shoppers move around and take items  out of the mall and are happy and festive. Mannequins never leave the mall and are constantly screaming inside. If you fail to leave the mall soon enough, or if you are too scared, the Mall will assume you are a mannequin. Thems the breaks.</span>`;
     const monster_desc = pickARandomThemeFromListAndGrabKey(game.rand, redPaste.theme_keys, MONSTER_DESC, false);
 
     ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/mannequin_hand.gif'>${formerNameHTML} falls to the floor, dripping a thick, viscous black fluid from every orifice. They scream and scream as their eyes seal over with ${redPaste.mannequin_type} and their limbs stiffen into ball joints and finally as their throat slowly becomes nothing but innert ${redPaste.mannequin_type} their screams strangle into nothing. Their new body, ${monster_desc}.  ${wasted_knowledge} ${reaction}`;
@@ -800,6 +800,67 @@ Yongki's infinite body stat and captain's clock-like precision are a strong cont
 turns out most cultists can be derailed by letting yongki loose for a bit
 */
 const yongkiKill = makeEventSubType("Yongki Kill", yongkiKillinternalConditionCheck, yongkiKillapplyResult);
+
+//////////////////////
+
+/*even when she knows she needs to put you down like a dog
+camille has her blorbos
+her temperence is so damn low
+she can't help but become attached to people
+*/
+camillenternalConditionCheck = (game, location) => {
+    /*
+    camille glances over whoever is here and if they pique her interest she might go breathe on them and be all :3 and silent
+
+    she doens't really care if you're alive or dead or a mannequin or whatever tho
+    
+    a blorbo is a blorbo
+    */
+    const players = location.players;
+    if (players.length > 0) {
+        const randomPlayer = game.rand.pickFrom(players);
+        return game.rand.nextDouble() < 0.1 && randomPlayer.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE;
+    }
+    return false;
+
+}
+
+
+camilleapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    const players = location.players;
+
+    const tonguePlayer = getPartyHighestTongue(players);
+
+    if (game.tick_funeral_began) {
+        me.chosen_name = "Headless Friend"
+        ele.innerHTML = `<img src='http://farragofiction.com/TwoGayJokes/Stories/the_end2.png'>
+     An unusually tall figure is suddenly behind ${tonguePlayer.nameHTML()}, with a with a clean red stump where a head should be. 
+<br><br>
+Almost as quickly, she is gone.
+<span class="wasted-knowledge">The End is never The End is  never The End is never The End is never The End is never The End is never The End is never The End is never The End is never The End is never The End (Camille doesn't have to be alive to be The End)  </span>
+    `;
+        return;
+    }
+
+
+    ele.innerHTML = `<img src='http://farragofiction.com/TwoGayJokes/Stories/the_end2.png'>
+     An unusually tall woman is suddenly behind ${tonguePlayer.nameHTML()}, with a strange smile on her face. Playful, almost.  She does not say a word, half lidded eyes taking everything in, completely at ease. 
+<br><br>
+Almost as quickly, she is gone.
+<span class="wasted-knowledge">The End is never The End is  never The End is never The End is never The End is never The End is never The End is never The End is never The End is never The End is never The End (Camille doesn't have to be alive to be The End)  </span>
+    `;
+
+}
+
+
+const camilleBreathe = makeEventSubType("Camille Befriends", camillenternalConditionCheck, camilleapplyResult);
 
 //////////////////////////////////////
 
@@ -2010,4 +2071,4 @@ witherby is absolutely convinced that ria is his opposite
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, devonaEvent, nevilleEncounter, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
+const generalEvents = [corruptionEvent, noWayOut, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
