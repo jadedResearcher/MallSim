@@ -705,6 +705,16 @@ button {
 .sub-story-beat {
   margin-top: 13px;
 
+  video {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-height: 200px;
+    margin-top: 31px;
+    max-width: 600px;
+  }
+
+
   img {
     display: block;
     margin-left: auto;

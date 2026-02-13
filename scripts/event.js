@@ -1066,13 +1066,13 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
         if (artMurderVictim.hasEgg()) {
             me.chosen_name = "Quatro Blade Gifts Egg"
             const egg = artMurderVictim.findEgg();
-            ele.innerHTML += `The Eye Killer is holding something. Its...${egg.name}? Where did she get that? ${egg.description}.`
+            ele.innerHTML += `The Eye Killer is holding something. Its...${egg.name}? Where did she get that? ${egg.description}. <video src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/egg3-moshed-02-12-22-26-48-322.mp4' controls loop></video>`
         }
 
     } else {
         if (artMurderVictim.hasEgg()) {
             const egg = artMurderVictim.findEgg();
-            ele.innerHTML += `${formerName} whirls and thrusts out ...is that ${egg.name}? They know their cult lore well. Offer the one eyed monster in the vents an egg to barter for your life.  The Eye Killer accepts and vanishes without a trace.`
+            ele.innerHTML += `${formerName} whirls and thrusts out ...is that ${egg.name}? They know their cult lore well. Offer the one eyed monster in the vents an egg to barter for your life.  The Eye Killer accepts and vanishes without a trace. <video src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/egg3-moshed-02-12-22-26-48-322.mp4' controls loop></video>`
             me.chosen_name = "Eye Killer Accepts Bribe";
             return;
         } else {
