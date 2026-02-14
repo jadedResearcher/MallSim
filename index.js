@@ -114,7 +114,14 @@ window.addEventListener('error', (message, file, line, column, errorObj) => {
 
 });
 
-//we all know capitalism LOVES valentines day, lets convince everyone that the best way to do romance is to spend money, lol
+/*we all know capitalism LOVES valentines day, lets convince everyone that the best way to do romance is to spend money, lol
+
+i love the shallow veneer of romance it adds onto everything
+its pink
+theres hearts
+aren't you happy?
+why are you crying?
+*/
 const isItValentinesDay = () => {
     const date = new Date();
     const queryString = window.location.search;

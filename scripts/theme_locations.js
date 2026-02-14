@@ -137,7 +137,7 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
                 explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. It blurts out terrifying static <audio controls>
   <source src="${game.rand.pickFrom(audioOptions)}" type="audio/mpeg">
 </audio> and the figure lurches to their feet, lassoing a noose around ${target.nameHTML()}'s neck. They struggle some, but ultimately, everything goes dark, and they die.`;
-                target.kill("deep purple and red bruises around their neck halloing a thick rope tied around it, thick scratches from their fingernails having tried to pry it off in time")
+                target.kill("covered in deep purple and red bruises around their neck halloing a thick rope tied around it, thick scratches from their fingernails having tried to pry it off in time")
             } else {
                 const explanation = createElementWithClassAndParent("div", ele, "sub-story-beat");
                 target.preparedToKill = true; //its quiet. you barely even notice the change inside you. but you're laced with violence. ready to leave this parking lot and kill with little rhyme or reason, the radio isn't safe

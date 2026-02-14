@@ -189,6 +189,7 @@ const randomParty = (rand) => {
 }
 
 const initializeRelationshipsForParty = (rand, party) => {
+    const forceLove = isItValentinesDay();
     for (let x of party) {
         x.relationships = {};//reset
         for (let y of party) {
@@ -196,13 +197,19 @@ const initializeRelationshipsForParty = (rand, party) => {
             let romantic = false;
             let familial = false;
             const roll = rand.nextDouble();
-            //if you feel strongly, equal odds of being familiy or partners
-            //but still chance of not yet being partners
-            if (Math.abs(value) > STRONG_RELATIONSHIP_VALUE && roll > 0.60) {
-                familial = true;
-            } else if (Math.abs(value) > STRONG_RELATIONSHIP_VALUE && roll > 0.4) {
-                romantic = true;
+
+            if (forceLove) {
+                romantic = true; //even if you don't like them very much, congrats, you're DATING, happy corporate mandated love day!!!
+            } else {
+                //if you feel strongly, equal odds of being familiy or partners
+                //but still chance of not yet being partners
+                if (Math.abs(value) > STRONG_RELATIONSHIP_VALUE && roll > 0.60) {
+                    familial = true;
+                } else if (Math.abs(value) > STRONG_RELATIONSHIP_VALUE && roll > 0.4) {
+                    romantic = true;
+                }
             }
+
             x.relationships[y.title] = new Relationship(value, romantic, familial);
         }
         //don't have a relationship with yourself
@@ -523,6 +530,22 @@ class Entity {
         return false;
     }
 
+    interactWithLove = (relationship, game, rand, player, ele) => {
+        /*
+            todo, flesh out based on stats and themes, love players should go damnh hard
+        */
+        const relationship_label = relationship.getLabel();
+
+        game.event_list.push("Romance Interaction")
+        if (relationship.value > 0) {
+            ele.innerHTML = `${this.nameHTML()} spends a quiet moment with ${player.nameHTML()}, just enjoying the presence of their ${relationship_label}.`;
+        } else {
+            ele.innerHTML = `${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`;
+
+        }
+    }
+
+
     //returns if interaction happened, if so, no other should
     interactWithMusic = (game, rand, player, ele) => {
         if (player.dead) {
@@ -697,12 +720,8 @@ class Entity {
             const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
 
             if (relationship.romantic) {
-                if (relationship.value > 0) {
-                    deadbeat.innerHTML = `${this.nameHTML()} spends a quiet moment with ${player.nameHTML()}, just enjoying the presence of their ${relationship_label}.`;
-                } else {
-                    deadbeat.innerHTML = `${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`;
+                this.interactWithLove(relationship, game, rand, player, deadbeat)
 
-                }
                 break;
             } else if (relationship.familial) {
                 if (relationship.value > 0) {
