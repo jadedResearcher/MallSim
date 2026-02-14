@@ -568,7 +568,11 @@ class Entity {
                 romanceOptions.push(`${this.nameHTML()} finds a decently intact flower among the mall debris and gifts it to ${player.nameHTML()}.`)
             }
 
-            if (this.theme_keys.includes(PLANTS)) {
+            if (this.theme_keys.includes(DEFENSE)) {
+                romanceOptions.push(`${this.nameHTML()} makes sure they watch ${player.nameHTML()}'s back, for safety.`)
+            }
+
+            if (this.theme_keys.includes(CLOWNS)) {
                 romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} a lot of jokes to keep their mood up.`)
             }
 
@@ -596,7 +600,23 @@ class Entity {
                 romanceOptions.push(`${this.nameHTML()} makes sure ${player.nameHTML()} doesn't get left behind as they move together.`)
             }
 
-            ele.innerHTML = rand.pickFrom(romanceOptions);
+            if (this.inventory.length > 0 && (game.rand.nextDouble > 0.75 || this.theme_keys.includes(SERVICE))) {
+                game.event_list.push("Gift!")
+                const chosen_item = game.rand.pickFrom(this.inventory);
+                chosen_item.description += ` ${this.nameHTML()} gave this to ${player.nameHTML()}.`;
+                const ele1 = createElementWithClassAndParent("p", ele)
+                const ele2 = createElementWithClassAndParent("p", ele)
+                const ele3 = createElementWithClassAndParent("p", ele)
+
+                ele1.innerHTML = rand.pickFrom(romanceOptions) + ` ${this.nameHTML()} decides to give ${player.nameHTML()} their ${chosen_item.name} as a gift!`;
+
+                this.removeItemFromInventory(chosen_item, ele2)
+                player.addItemToInventory(game, chosen_item, ele3);
+
+            } else {
+                ele.innerHTML = rand.pickFrom(romanceOptions);
+
+            }
         }
 
         /*
@@ -606,7 +626,75 @@ Gaga, ooh, la-la
 Want your bad romance
         */
         const badRomance = () => {
-            ele.innerHTML = `${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`;
+            const romanceOptions = [`${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`];
+
+
+
+            if (this.theme_keys.includes(PLANTS)) {
+                romanceOptions.push(`${this.nameHTML()} tricks ${player.nameHTML()} into smelling a dusty fake flower.`)
+            }
+
+
+            if (this.theme_keys.includes(CLOWNS)) {
+                romanceOptions.push(`${this.nameHTML()} tells a lot of cutting jokes about ${player.nameHTML()}.`)
+            }
+
+            if (this.theme_keys.includes(CRAFTING)) {
+                romanceOptions.push(`${this.nameHTML()} spraypaints '${player.nameHTML()} is dumb' on the wall. `)
+            }
+
+            if (this.theme_keys.includes(ANGER)) {
+                romanceOptions.push(`${this.nameHTML()} keeps yelling at '${player.nameHTML()} as they move. `)
+            }
+
+            if (this.theme_keys.includes(LONELY)) {
+                romanceOptions.push(`${this.nameHTML()} tells '${player.nameHTML()} all the hurtful things their friends in common say about them behind their back. `)
+            }
+
+            if (this.theme_keys.includes(KILLING)) {
+                romanceOptions.push(`${this.nameHTML()} makes vaguely threatening gestures towards '${player.nameHTML()} as they walk. `)
+            }
+
+            if (this.theme_keys.includes(DEFENSE)) {
+                romanceOptions.push(`${this.nameHTML()} never turns their back on ${player.nameHTML()} as they walk. `)
+            }
+
+            if (this.stats[MIND_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} they're thinking of how annoying they are.`)
+            }
+
+            if (this.stats[EYES_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} how frumpy they're looking right now.`)
+            }
+
+            if (this.stats[TONGUE_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} all sorts of things that make them pissed off.`)
+            }
+
+            if (this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} slams doors in ${player.nameHTML()}'s face as they move around.`)
+            }
+
+            if (this.stats[LEGS_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} makes sure  to walk extra fast so ${player.nameHTML()} has to hurry to catch up.`)
+            }
+
+            //stealing time
+            if (player.inventory.length > 0 && (game.rand.nextDouble > 0.75 || this.theme_keys.includes(STEALING))) {
+                game.event_list.push("Stealing!")
+                const chosen_item = game.rand.pickFrom(player.inventory);
+                chosen_item.description += ` ${this.nameHTML()} stole this from ${player.nameHTML()}.`;
+                const ele1 = createElementWithClassAndParent("p", ele)
+                const ele2 = createElementWithClassAndParent("p", ele)
+                const ele3 = createElementWithClassAndParent("p", ele)
+
+                ele1.innerHTML = rand.pickFrom(romanceOptions) + ` ${this.nameHTML()} decides to steal ${player.nameHTML()}'s ${chosen_item.name} without them noticing!`;
+                player.removeItemFromInventory(chosen_item, ele2)
+                this.addItemToInventory(game, chosen_item, ele3);
+            } else {
+                ele.innerHTML = rand.pickFrom(romanceOptions);
+
+            }
 
         }
 

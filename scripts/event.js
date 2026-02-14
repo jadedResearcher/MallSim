@@ -271,7 +271,11 @@ they respawn as a human again
         chosen_emmisary.inventory = [...free_items]
 
     }
-    const chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
+
+    let chosen_item = game.rand.pickFrom(chosen_emmisary.inventory);
+    if (!chosen_item) { //somehow ab didn't encounter this scenario for months, don't know how she didn't crash sooner
+        chosen_item = new Item("Perfectly Generic Object", "You can't find the words to describe it...")
+    }
     const players = location.livingNonMannequinPlayers();
     let waste;
     for (let player of players) {
