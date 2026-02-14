@@ -532,16 +532,89 @@ class Entity {
 
     interactWithLove = (relationship, game, rand, player, ele) => {
         /*
-            todo, flesh out based on stats and themes, love players should go damnh hard
+            todo, flesh out based on stats and themes, 
+            love players should go damnh hard
+            if you have items in your inventory, maybe give as a gift
         */
         const relationship_label = relationship.getLabel();
+        relationship.deepenRelationship();
+
+        const goodRomance = () => {
+            const romanceOptions = [`${this.nameHTML()} spends a quiet moment with ${player.nameHTML()}, just enjoying the presence of their ${relationship_label}.`];
+            if (this.theme_keys.includes(MUSIC)) {
+                romanceOptions.push(`${this.nameHTML()} sings a little song about how much they love ${player.nameHTML()}.`)
+            }
+
+            if (this.theme_keys.includes(LANGUAGE)) {
+                romanceOptions.push(`${this.nameHTML()} brainstorms a sonnet about how much they love ${player.nameHTML()}.`)
+            }
+
+
+            if (this.theme_keys.includes(CRAFTING)) {
+                romanceOptions.push(`${this.nameHTML()} makes a little crown out of mall debris and puts it on ${player.nameHTML()}'s head.`)
+            }
+
+            if (this.theme_keys.includes(LOVE)) {
+                romanceOptions.push(`${this.nameHTML()} stares deep into ${player.nameHTML()}'s eyes and tells them how loved they are.`)
+                romanceOptions.push(`${this.nameHTML()} smiles goofily at ${player.nameHTML()} and asks them how they can be so perfect.`)
+                romanceOptions.push(`${this.nameHTML()} giggles softly to themself, in awe that ${player.nameHTML()} is in love with them.`)
+                romanceOptions.push(`${this.nameHTML()} kisses ${player.nameHTML()} softly.`)
+                romanceOptions.push(`${this.nameHTML()} hugs ${player.nameHTML()} close.`)
+                romanceOptions.push(`${this.nameHTML()} holds ${player.nameHTML()} hand as they walk along.`)
+                romanceOptions.push(`${this.nameHTML()} dreamily says ${player.nameHTML()}'s name over and over.`)
+            }
+
+            if (this.theme_keys.includes(PLANTS)) {
+                romanceOptions.push(`${this.nameHTML()} finds a decently intact flower among the mall debris and gifts it to ${player.nameHTML()}.`)
+            }
+
+            if (this.theme_keys.includes(PLANTS)) {
+                romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} a lot of jokes to keep their mood up.`)
+            }
+
+            if (this.theme_keys.includes(SERVICE)) {
+                romanceOptions.push(`${this.nameHTML()} asks if there's anything ${player.nameHTML()} needs.`)
+            }
+
+            if (this.stats[MIND_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} they're thinking of how they first met.`)
+            }
+
+            if (this.stats[EYES_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} how wonderful they're looking right now.`)
+            }
+
+            if (this.stats[TONGUE_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} tells ${player.nameHTML()} all sorts of things that make them blush.`)
+            }
+
+            if (this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} opens doors for ${player.nameHTML()} as they move around.`)
+            }
+
+            if (this.stats[LEGS_METAL_STAT] > MEDIUM_STAT_VALUE) {
+                romanceOptions.push(`${this.nameHTML()} makes sure ${player.nameHTML()} doesn't get left behind as they move together.`)
+            }
+
+            ele.innerHTML = rand.pickFrom(romanceOptions);
+        }
+
+        /*
+Ra-ra, ah-ah-ah
+Roma-, roma-ma-
+Gaga, ooh, la-la
+Want your bad romance
+        */
+        const badRomance = () => {
+            ele.innerHTML = `${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`;
+
+        }
 
         game.event_list.push("Romance Interaction")
         if (relationship.value > 0) {
-            ele.innerHTML = `${this.nameHTML()} spends a quiet moment with ${player.nameHTML()}, just enjoying the presence of their ${relationship_label}.`;
+            return goodRomance();
         } else {
-            ele.innerHTML = `${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`;
-
+            return badRomance();
         }
     }
 

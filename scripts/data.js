@@ -887,8 +887,8 @@ const LONELY = "lonely";
 const OCEAN = "ocean";
 const SPACE = "space";
 const TIME = "time";
-const ART = "art";  //JR NOTE TODO
-const TECHNOLOGY = "technology";  //JR NOTE TODO
+const ART = "art";
+const TECHNOLOGY = "technology";
 
 
 const food_keys = [BAKERY, BREAKFAST, BURGERS, CHICKEN, COFFEE, DESSERTS, DINER, ITALIAN, MEXICAN, PIZZA, PREMIUM, SALAD, SANDWICHES, SEAFOOD, SUSHI];
