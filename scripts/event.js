@@ -538,7 +538,7 @@ randomlyFindShoppingObjectapplyResult = (game, location, parent, me) => {
 
     shopper.addCorruption(-13 + + -1 * location.corruption);//congrats, shoppers aren't mannequins!
     const formerNameHTML = shopper.nameHTML();
-    const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
+    const personal_adj = game.corporateMandatedLove ? game.rand.pickFrom(["Heart-Shaped", "Love-Filled", "Valentine's"]) : pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
 
     if (game.rand.nextDouble() > 0.95) {
         /*

@@ -307,7 +307,7 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
         //a mannequin can take it
         const shopper = game.rand.pickFrom(location.livingPlayers());
         shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
-        const personal_adj = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, COMPLIMENT, true);
+        const personal_adj = game.corporateMandatedLove ? game.rand.pickFrom(["Heart-Shaped", "Love-Filled", "Valentine's"]) : pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, COMPLIMENT, true);
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);
 
         const item = new Item(`${personal_adj} ${object}`, `It's clearly labeled as from the ${location.longer_name}! ${shopper.nameHTML()} bought this originally!`, false)
