@@ -113,8 +113,27 @@ window.addEventListener('error', (message, file, line, column, errorObj) => {
     error_ele6.innerHTML = errorObj;
 
 });
-window.onload = () => {
 
+//we all know capitalism LOVES valentines day, lets convince everyone that the best way to do romance is to spend money, lol
+const isItValentinesDay = () => {
+    const date = new Date();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const love = urlParams.get('love');
+    if (love) {
+        return true;
+    }
+    return date.getDate() === 14 && date.getMonth() === 1; //2/14 but javascript does 0 indexing for months which is....insane,tbh
+
+}
+
+
+window.onload = () => {
+    if (isItValentinesDay()) {
+        const body = document.querySelector("body");
+        body.classList.add("corporate-love")
+    }
     initThemes();
     grabEyes();
     grabCodeComments();
@@ -137,6 +156,9 @@ const debug = () => {
     const debug = createElementWithClassAndParent("div", container, "debug");
     const rand = new SeededRandom(seed);
     game = new Game(rand, false);
+    if (isItValentinesDay()) {
+        game.corporateMandatedLove = true;
+    }
 
     if (custom) {
         try {

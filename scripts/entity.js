@@ -672,13 +672,20 @@ class Entity {
                 const deadbeat = createElementWithClassAndParent("div", ele, "sub-story-beat");
                 if (this.fear < 13) {
                     //they don't know yet
+                    game.event_list.push("Mannequin Realization")
                     deadbeat.innerHTML = `${this.nameHTML()} almost doesn't notice the mannequin in the corner. How strange...it almost looks like... ${player.nameHTML()}? With dawning realization they understand the terrible fate that befell their ${relationship_label}.`;
                 } else {
                     if (tonguePlayer === this) {
+                        game.event_list.push("Mannequin Comfort")
+
                         deadbeat.innerHTML = `${this.nameHTML()} talks softly to ${player.nameHTML()}, hoping they understand past their blank facade.`;
                     } else if (player === tonguePlayer) {
+                        game.event_list.push("Mannequin Comfort 2")
+
                         deadbeat.innerHTML = `${this.nameHTML()} talks softly to ${player.nameHTML()}, hoping that they won't feel so alone.`;
                     } else {
+                        game.event_list.push("Mannequin Sadness")
+
                         deadbeat.innerHTML = `${this.nameHTML()} looks sadly at ${player.nameHTML()}, all too aware of the fate they fell to.`;
                     }
 

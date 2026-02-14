@@ -63,6 +63,7 @@ const getSouth = (map, row, col) => {
 
 
 class Game {
+    corporateMandatedLove = false; //guess what day im writing this lol
     players = [];
     tick_funeral_began = undefined; //for camille and ria
     bunker_phase = 0; //is neville breaching x2 combo?
@@ -416,7 +417,14 @@ class Game {
 
 
                 if (livingPlayers.length > 0) {
-
+                    /*
+                    ah yes
+                    those classic interactions between players
+                    "disolve into goo, are you dead, interact"
+                    past me sure did make a decision having river's check be there
+                    she IS valentines colored
+                    and there is a lot of her to love
+                    */
                     const interaction_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                     const player_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
                     for (let player of livingPlayers) {
@@ -1253,7 +1261,7 @@ its so normal
         }
 
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-        general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2><br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
+        general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2>${game.corporateMandatedLove ? "<h2>Love is in the air!</h2>" : ""}<br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
         const mindPlayer = getPartyHighestMind(this.players);
         const eyesPlayer = getPartyHighestEyes(this.players);
         const tonguePlayer = getPartyHighestTongue(this.players);

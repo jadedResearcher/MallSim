@@ -22,7 +22,7 @@
   position: relative;
 }
 
-body:not(.author-bot):not(.survival):not(.devil-of-spirals)::after {
+body:not(.author-bot):not(.survival):not(.devil-of-spirals):not(.corporate-love)::after {
   background-image: url(images/universe_bg_itsababyechidna_sogross.png);
   background-position: center 0px;
   position: fixed;
@@ -33,6 +33,23 @@ body:not(.author-bot):not(.survival):not(.devil-of-spirals)::after {
   bottom: 0;
   background-size: 4000px;
   z-index: -1000;
+}
+
+body.corporate-love {
+  background-color: pink;
+  color: red;
+
+  p::after {
+    content: "\01F496";
+  }
+
+  p::before {
+    content: "\01F496";
+  }
+
+  .story-beat {
+    background-color: #e4cbcb;
+  }
 }
 
 h1 {
