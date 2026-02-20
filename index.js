@@ -121,6 +121,8 @@ its pink
 theres hearts
 aren't you happy?
 why are you crying?
+
+http://farragofiction.com/MallSim/?love=true
 */
 const isItValentinesDay = () => {
     const date = new Date();

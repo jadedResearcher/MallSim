@@ -39,13 +39,18 @@ body.corporate-love {
   background-color: pink;
   color: red;
 
-  p::after {
+  p,
+  h3,
+  div::after {
     content: "\01F496";
   }
 
-  p::before {
+  p,
+  h3,
+  div::before {
     content: "\01F496";
   }
+
 
   .story-beat {
     background-color: #e4cbcb;

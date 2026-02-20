@@ -3012,7 +3012,7 @@ const initGeneralBackstories = () => {
     general_backstories[GUIDING] = ["try to gently lead those who are lost", "never gets lost", "are a soothing mentor"];
     general_backstories[CRAFTING] = ["enjoy wood-working in their spare time", "are quite a skilled craftman", "are always collecting small objects to make things with"];
     general_backstories[LANGUAGE] = ["alway have their nose in a book", "speaks every language of Zampanio", "can curse in a different language for each day of the week"];
-    general_backstories[BUGS] = ["does light bee-keeping when at home", "don't find bugs creepy", "always have at least one bug on your body"];
+    general_backstories[BUGS] = ["does light bee-keeping when at home", "don't find bugs creepy", "always have at least one bug on their body"];
     general_backstories[ADDICTION] = ["enjoy gambling for any stakes", "have an addictive personality", "have never met a vice they didn't like"];
     general_backstories[SPYING] = ["have an extensive information network", "are always on top of the local gossip", "somehow always are aware of what everyone is doing"];
     general_backstories[CLOWNS] = ["are a clown", "have extensive ties to the Circus", "are an accomplished teller of jokes"];

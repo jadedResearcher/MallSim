@@ -340,6 +340,41 @@ const mallRenderAnimation = async (target) => {
         target.append(ele);
         await sleep(100);
         parent.append(ele);
-    }
+    }//http://farragofiction.com/AnxietySim/
 
 }
+/*
+i was wandering my server from the console today to answer a question about my first arg (who is shogun)
+and i
+i found so many things i don't remember making
+things that feel really zampanio to me in retrospect
+
+theres 307 directories and here are the weirdeset ones i found when i should be sleeping
+
+
+//http://farragofiction.com/BrowerSim/
+//http://farragofiction.com/CardSim/
+//http://farragofiction.com/FractalShitpost/  <-- i do remember making this one, i'm just proud
+//http://farragofiction.com/HoleSim/
+//http://farragofiction.com/Illuminati/
+//http://farragofiction.com/InvestigatorSim/  <-- i didn't ermember making this till i saw it
+//http://farragofiction.com/ManicGiggleSnort/
+//http://farragofiction.com/MindGardenSim/
+http://farragofiction.com/Madness/
+http://farragofiction.com/NagaGirlfriendBeta/
+http://farragofiction.com/PigeonRoomSim/
+http://farragofiction.com/RadioTranscript/
+http://farragofiction.com/RefuseToLose/ <------seriously what is this, i didn't make this, did i.... host this for someone?
+http://farragofiction.com/SBURBThrowBackThursday/
+http://farragofiction.com/SexyMen/
+http://farragofiction.com/SpaceSim/
+http://farragofiction.com/SPLURBSimulator
+http://farragofiction.com/StickSim
+http://farragofiction.com/TitlePendingFanWork/
+http://farragofiction.com/TroveSim/
+http://farragofiction.com/TurtleSim/
+http://farragofiction.com/WebsiteBreeding/
+*/
+
+//https://www.tunera.xyz/fonts/teranoptia/
+// i literally don't remember making this http://farragofiction.com/GigglePoint/

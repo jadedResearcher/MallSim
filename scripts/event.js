@@ -807,6 +807,68 @@ const yongkiKill = makeEventSubType("Yongki Kill", yongkiKillinternalConditionCh
 
 //////////////////////
 
+
+//////////////////////
+
+/*
+she tries
+god help her she tries
+she tries to do right
+she tries to save people
+but it always goes so wrong
+why don't people just LISTEN
+(or an essay on why Skitter from Worm is web, not corruption, lol)
+(same reason ria is more web than desolation)
+(she only falls back to fire when all her words and attempts to control FAIL)
+(same as skitter only uses bugs and grossness when People. Just. Won't. Listen!)
+
+NOTE: Ria is tangled up in everyone else (as she should be, being a web player). So scenes involving others will be here as well. */
+riaInternalConditionCheck = (game, location) => {
+    /*
+     ria does nothing without her twin Eyes
+     devona and neville are her sources of information
+ 
+     SHE makes sense of it
+     they collect and process it for her to consume
+ 
+     the spider doesn't leave its web
+    */
+
+    if (game.tick_funeral_began || game.rand.nextDouble() < 0.95) {
+        return false; //ria is not exactly in a warning mood if camille has died, whoops, also she shouldn't burn herself out trying to warn you hundreds of times in a single expedition
+    }
+    for (let eventString of game.event_list) {
+        if (eventString.includes("Devona") || eventString.includes("Neville")) {
+            return true;
+        }
+    }
+    return false;
+
+}
+
+
+riaApplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    const riaImage = "http://farragofiction.com/TwoGayJokes/Stories/ria.png";
+    ele.innerHTML = "JR NOTE: TODO ria tries to warn you, probably fails" + riaImage
+
+}
+
+
+const riaWarn = makeEventSubType("Ria Warns", riaInternalConditionCheck, riaApplyResult);
+
+
+
+
+
+////////////////////////////////////
+
+
 /*even when she knows she needs to put you down like a dog
 camille has her blorbos
 her temperence is so damn low
@@ -2075,4 +2137,4 @@ witherby is absolutely convinced that ria is his opposite
 
 
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
+const generalEvents = [corruptionEvent, noWayOut, riaWarn, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
