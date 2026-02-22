@@ -1,6 +1,68 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+
+dev_log["2/22/2026"] = `guess it wouldn't be a house of leaves associated thing
+(or is house of leaves associated with zampanio etc etc obligatory fan drama)
+if i didn't start turning the footnotes/devlogs into a diary huh
+work has been...
+a Thing
+so my updates are more scattered
+i'm still making the relentless progression i'm known for
+but it isn't coming effortlessly anymore
+zampanio is a marathon not a sprint, i know i know
+i'm only spending an hour a two a week now poking at htis just so i don't forget how it works
+ria's neutral ish event went in today 
+and i remember being so happy writing it
+excited
+honestly theres not too much to complain about work
+in theory im getting what i want
+just
+changes
+chaos
+people fighting
+rumors
+counter rumors
+its exhausting
+and while i survived the layoffs
+(in a job that has never had layoffs before)
+i don't exactly feel joy programming right now
+which is probably good because i'm barely coding for mallsim rn
+its mostly just wiring up the story beats i want and making the odd
+gif
+i made a bunch for my clown friend maccus the other day
+and today i realized that camille's headless corpse didn't have a gif yet
+but work
+work is
+i've been focused on reality lately
+off screen stuff
+cleaned up my non-work space
+organized all my yarn
+made things clean and bright
+and that makes the work parts feel a little better
+but that means i'm not on my personal computer as much
+coding my games
+or experiences or whatever
+also
+shout out to whats app for auto making all links https and not letting me link http content
+means i couldn't show my improv class what ive been making
+absolute bullshit
+i'm used to browsers giving the scary warning about it might not be safe 
+(honestly it just adds to the ambiance)
+but now whatsapp is just
+haha no, http is illegal
+in theory they could just type the http in their browser themselves but
+improv class is not the most tech saavy
+savy?
+don't care
+anyways
+i did legitimately try to support https a year or two ago
+only to discover if i DID it would destroy everyones wigglersim saves
+and whatever other save data they have as part of my games
+and
+it wasn't worth it
+rest in peace but we'll ride this wave to shore`
+
 dev_log["2/14/2026"] = `corporate mandated love day is just so funny to me
 the idea of the westerville mall
 vaguely remembering it exists

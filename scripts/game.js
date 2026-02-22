@@ -608,7 +608,7 @@ class Game {
                         ele.classList.add("river");
                     }
                     const cached_name = cell.longer_name;
-                    const cached_inhabitants = cell.players.map((p) => p.nameHTML()).join(",");
+                    const cached_inhabitants = cell.players.map((p) => `${p.nameHTML()}${p.fleeing ? "(Fleeing)" : ""}`).join(",");
                     const cached_corpses = cell.deadPlayers().map((p) => `${p.nameHTML()}(${p.state_of_corpse})`).join(",");
 
                     const cached_corruption = cell.corruption;

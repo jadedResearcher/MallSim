@@ -397,8 +397,9 @@ const ethicallyLootCorpse = makeEventSubType("Mannequin Highlight Product", ethi
 //is there at least one person ready to escape?
 const escapeMallinternalConditionCheck = (game, location) => {
     for (let player of location.livingPlayers()) {
+        const fleeing = player.fleeing || player.isStartingToFeelCorruption()
 
-        if (player.isStartingToFeelCorruption() && !player.corrupted) {
+        if (fleeing && !player.corrupted) {
             return true;
         }
     }
@@ -419,7 +420,9 @@ const escapeMallapplyResult = (game, location, parent, me) => {
     let corpses = [];
     let living = [];
     for (let player of location.players) {
-        if (player.isStartingToFeelCorruption() && !player.corrupted) {
+        const fleeing = player.fleeing || player.isStartingToFeelCorruption()
+
+        if (fleeing && !player.corrupted) {
             leaving.push(player);
             if (player.dead) {
                 corpses.push(player);
@@ -833,7 +836,12 @@ riaInternalConditionCheck = (game, location) => {
  
      the spider doesn't leave its web
     */
+    //i really like this spiral metaphor https://www.tumblr.com/jelloapocalypse/809128276555644928?source=share
+    const livingPlayers = location.livingNonMannequinPlayers();
 
+    if (!livingPlayers || !livingPlayers.length || livingPlayers.length === 0) {
+        return false;
+    }
     if (game.tick_funeral_began || game.rand.nextDouble() < 0.95) {
         return false; //ria is not exactly in a warning mood if camille has died, whoops, also she shouldn't burn herself out trying to warn you hundreds of times in a single expedition
     }
@@ -852,10 +860,73 @@ riaApplyResult = (game, location, parent, me) => {
 
     const h3 = createElementWithClassAndParent("h3", cont);
     h3.innerText = "Important Event: " + me.name;
-
+    const livingPlayers = location.livingNonMannequinPlayers();
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
-    const riaImage = "http://farragofiction.com/TwoGayJokes/Stories/ria.png";
-    ele.innerHTML = "JR NOTE: TODO ria tries to warn you, probably fails" + riaImage
+    const riaImage = "<img src='http://farragofiction.com/TwoGayJokes/Stories/ria.png'>";
+
+    const intro = createElementWithClassAndParent("p", ele);
+    const eyes = getPartyHighestEyes(livingPlayers)
+    const mindPlayer = getPartyHighestMind(livingPlayers)
+
+    intro.innerHTML = `${eyes.nameHTML()} spots a strange woman walking towards them, soot smeared under one eye, sleepless bags under the other.  
+<br><br>
+Her hands are up, and she has that slight shine to her that only a miserable fever sweat can provide.
+<br><br>
+She warns ${eyes.nameHTML()} not to get any closer, and the implication of illness has them comply.
+<br><br>
+She says that one of her agents spotted the group of FAITHFUL attempting to delve into the mall, and says that it's not safe here.
+<br><br>
+Her voice rises in pitch and intensity as she tries to explain the shape of the universe (an echidna), memory leaks in computers, and the way a pearl gets sanded smooth over time until nothing is left of the original shape.`;
+
+    /*it works, you're smart enough to mostly follow and good enough at talking to ask questions when you don't
+    with ria, its not enough to be smart to follow her
+    you have to jump around and follow her connections
+    ria and the twins are all different flavors of neuro-diverse and you gotta be able to ride her wave to shore
+    */
+    if (mindPlayer.stats[MIND_METAL_STAT] > HIGH_STAT_VALUE && mindPlayer.stats[TONGUE_METAL_STAT] > MEDIUM_STAT_VALUE) {
+        /*
+        fleeing time!
+        */
+        const conclusion = createElementWithClassAndParent("p", ele);
+        conclusion.innerHTML = `${mindPlayer.nameHTML()} asks a few questions, and starts really getting into her answers. The strange woman and ${mindPlayer.nameHTML()} talk for over ten minutes, and in the end, ${mindPlayer.nameHTML()} is convinced.
+<br><br>
+The universe was not meant to be like this. It can't bear the weight of so many sparks of divinity, so many people joining the loop. Eventually it will crumble under its own weight... And...perhaps more importantly, it is... maybe not the funnest thing to be sanded smooth loop after loop as the universe itself forgets the details of how you used to be.
+<br><br>
+${mindPlayer.nameHTML()} agrees to leave, and to try to convince anyone they can to leave with them.
+${riaImage}
+`;
+        me.chosen_name = "Hope Wins";//ria found a way to save everyone after all
+        for (let player of livingPlayers) {
+            player.fleeing = true;
+        }
+
+    } else {
+        /*
+        Rage wins. 
+        Despair wins.
+        Ria tried. 
+        She warned you.
+        She tried to explain.
+        But you couldn't understand.
+        You couldn't leave well enough alone.
+        You couldn't.
+        Stop.
+        Digging.
+        The consequences are yours now.
+
+        */
+        const conclusion = createElementWithClassAndParent("p", ele);
+        conclusion.innerHTML = `${mindPlayer.nameHTML()} asks a few questions, and starts really getting frustrated with her answers. She jumps around in topics, seemingly no connection between any of them. Everything she says sounds deranged. The universe is a simulation AND some kind of disgusting baby animal? The universe is rotting and also infinitely growing? Partaking of the sacred Harvest Fruit would harm them and the entire universe?  It's nonsense.
+<br><br>
+${mindPlayer.nameHTML()} wastes ten whole minutes before finally concluding that the strange woman is just experiencing fever delirium. 
+<br><br>
+The woman seems sad, but waves them goodbye as they take their leave.
+${riaImage}
+
+`;
+
+    }
+
 
 }
 
@@ -906,7 +977,7 @@ camilleapplyResult = (game, location, parent, me) => {
 
     if (game.tick_funeral_began) {
         me.chosen_name = "Headless Friend"
-        ele.innerHTML = `<img src='http://farragofiction.com/TwoGayJokes/Stories/the_end2.png'>
+        ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/the_end_is_never_the_end.gif'>
      An unusually tall figure is suddenly behind ${tonguePlayer.nameHTML()}, with a with a clean red stump where a head should be. 
 <br><br>
 Almost as quickly, she is gone.

@@ -2147,7 +2147,7 @@ const initObjects = () => {
     object_possibilities[ANGELS] = ["feather", "halo", "scripture"];
     object_possibilities[SERVICE] = ["feather duster", "mop", "broom"];
     object_possibilities[FAMILY] = ["cradle", "rattle", "photo album"];
-    object_possibilities[MAGIC] = ["scoll", "potion", "wand", "staff"];
+    object_possibilities[MAGIC] = ["scroll", "potion", "wand", "staff"];
     object_possibilities[LIGHT] = ["lantern", "flashlight", "torch"];
     object_possibilities[HEALING] = ["potion", "bandage", "scalpel"];
     object_possibilities[PLANTS] = ["seed", "sapling", "shovel", "pot", "fertilizer"];

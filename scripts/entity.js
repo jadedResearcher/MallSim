@@ -1320,6 +1320,8 @@ immune system
         if (this.corrupted) {
             return this.decideWhereToGoAsAMannequin(ele, rand, currentLocation, north, south, east, west);
         }
+        const fleeing = this.fleeing || this.isStartingToFeelCorruption()
+
         let chosenLocation;
 
         //continue down corridor
@@ -1383,7 +1385,7 @@ immune system
 
         const chooseEast = () => {
 
-            if (east && !this.isStartingToFeelCorruption() && (loyalWeight > 30 || rand.nextDouble() > 0.5)) {
+            if (east && !fleeing && (loyalWeight > 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME && east.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.nameHTML()} decides to continue walking down the mall corridor, and moves to the EAST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
                 } else if (east.name === CORRIDOR_NAME) {
@@ -1398,7 +1400,7 @@ immune system
 
         const chooseSouth = () => {
 
-            if (south && !this.isStartingToFeelCorruption() && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
+            if (south && !fleeing && (loyalWeight < 30 || rand.nextDouble() > 0.5)) {
                 if (currentLocation.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.nameHTML()} decides to explore the mysterious ${south.longer_name} and moves to the  SOUTH${DEBUG_PLAYERS ? `, gaining ${south.corruption} corruption` : ""}.`;
                 } else {
@@ -1409,7 +1411,6 @@ immune system
         }
 
         const chooseWest = () => {
-            const fleeing = this.fleeing || this.isStartingToFeelCorruption()
             if (west && fleeing && rand.nextDouble() > 0.5) {
                 if (currentLocation.name === CORRIDOR_NAME) {
                     ele.innerHTML = `${this.nameHTML()} is feeling kind of weird and decides to go back up the mall corridor, and moves to the WEST${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
@@ -1421,7 +1422,6 @@ immune system
         }
 
         const chooseNorth = () => {
-            const fleeing = this.fleeing || this.isStartingToFeelCorruption()
 
             if (north && fleeing && rand.nextDouble() > 0.1) {
                 ele.innerHTML = `${this.nameHTML()} decides to try getting back to the entrance, and moves NORTH, into the ${north.longer_name} ${DEBUG_PLAYERS ? `, gaining ${east.corruption} corruption` : ""}.`;
