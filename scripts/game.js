@@ -1170,7 +1170,14 @@ its so normal
             //technically neville could still stop this. but. not relevant for the mall, everyone in the expedition is DEFINITELY dead before neville can
             this.summary.setEnding("Snow Grave", this.current_tick); //do you see what i did there?
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-            detail.innerHTML = `Somewhere, alone besides a glittering frozen statue, a well-dressed man is hyperventilating. Despite the frost around him, his breath is unseen. As he takes in painful, deep gasps, wave after wave of guilt pulses away from his body, lowering the temperature of areas further and further away from him. Guilt settles into the heart of everyone affected by his chill. Every Sin they have ever commited, big or small, weighs into their heart as they realize that maybe... maybe they just...don't deserve to move. Don't deserve warmth. Love. Companionship.  Little by little the ice overtakes their heart, their body.  The whole world, slowly but surely, freezes over.`;
+            detail.innerHTML = `Somewhere, alone besides a glittering frozen statue, a well-dressed man is hyperventilating.
+            <br><Br>
+            Despite the frost around him, his breath is unseen. 
+            <br><Br>As he takes in painful, deep gasps, wave after wave of guilt pulses away from his body, lowering the temperature of areas further and further away from him.
+            
+            <br><Br>Guilt settles into the heart of everyone affected by his chill. Every Sin they have ever commited, big or small, weighs into their heart as they realize that maybe... maybe they just...don't deserve to move. Don't deserve warmth. Love. Companionship. 
+            
+            <br><Br>Little by little the ice overtakes their heart, their body. <br><Br> The whole world, slowly but surely, freezes over.`;
 
         }
 

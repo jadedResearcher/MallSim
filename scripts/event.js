@@ -444,7 +444,7 @@ const wibbyinternalConditionCheck = (game, location) => {
 
 const wibbyapplyResult = (game, location, parent, me) => {
     const all_players = location.livingNonMannequinPlayers();
-    const player = players[0];
+    const player = all_players[0];
 
     const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
 
@@ -523,7 +523,7 @@ ${player.nameHTML()}  is left alone.
     */
     const highTongue = () => {
         if (!player.preparedToKill) {
-            me.chosen_name = "Snow Queen"
+            //me.chosen_name = "Snow Queen", ending will make this redundant
             game.snowQueenApocalypse = true;
             const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
             ele.innerHTML = `${player.nameHTML()} is poking around the  ${location.longer_name} when they hear a polite little cough behind them.
@@ -624,10 +624,12 @@ The Sinner has been dealt with.
     } else {
         if (player.stats[TONGUE_METAL_STAT] < LOW_STAT_VALUE) {
             return lowTongue();
-        } else if (player.stats[TONGUE_METAL_STAT] < MEDIUM_STAT_VALUE) {
-            return mediumTongue();
         } else if (player.stats[TONGUE_METAL_STAT] < HIGH_STAT_VALUE) {
+            return mediumTongue();
+        } else if (player.stats[TONGUE_METAL_STAT] < VERY_HIGH_STAT_VALUE) {
             return highTongue();
+        } else {
+            return mediumTongue();
         }
     }
 
