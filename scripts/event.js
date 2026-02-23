@@ -393,6 +393,249 @@ const ethicallyLootCorpse = makeEventSubType("Mannequin Highlight Product", ethi
 
 /////////////////////////
 
+/*
+alright funeral ria time
+if ria is currently in a funeral square AND its less than ten since it started, she simply explodes, ending the run
+if its more than ten since the funeral started, ria can spawn anywhere
+she still explodes
+if its more than ten AND ria is in a room that could spawn wibby OR the westerville polycule, she'll only kill YOU not the world
+currently
+wibby rooms do not exist
+do i want to do wibby first then?
+whats wibby?
+wibby spawns in any of his themed rooms, just like the twins
+he gives you confessional
+if you've sinned, he freezes you to death
+otherwise if your tongue is low he convinces you to start fleeing
+or makes you slightly more mannequin (that little ficlet i wrote about Lamb man)
+if you have high tongue you acciddentally get him to breach and he freezes the world
+but you CAN kill him before that happens (he's just a man)
+so
+wibby is relatively easy
+single event
+he only triggers if you're alone
+and then he interacts with you, the only player here in specific ways
+might end the run, might get YOU to run, might quietly make you more corrupt, might kill you, might die 
+like, the range of things he can do to you is hte highest of them all
+it slices his heart, just a little bit, that if HE dies, neville doesn't go into the bunker
+only devona
+but yeah this should be pretty easy to wire up
+*/
+
+const wibbyinternalConditionCheck = (game, location) => {
+    if (game.solemn_death) { //death is real
+        return false;
+    }
+    const players = location.livingNonMannequinPlayers();
+    if (players.length === 1) {
+        /*
+        Witherby gets hives if he tries to talk to more than one person at a time.
+        That's why, before he was dating Neville, he would go to clubs and then bring people back home with him.
+        Way easier to deal with in a quiet location, 1 on 1. 
+        And yeah, if certain activities happened as a result, well... they're both adults, right?
+        */
+        const player = players[0];
+        if (!player.fleeing && game.rand.nextDouble() > 0.95) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const wibbyapplyResult = (game, location, parent, me) => {
+    const all_players = location.livingNonMannequinPlayers();
+    const player = players[0];
+
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+
+
+    //you are easily swayed by witherby's attachment work
+    const lowTongue = () => {
+        me.chosen_name = "Repentant"
+
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${player.nameHTML()} is poking around the ${location.longer_name} when they hear a polite little cough behind them.
+
+A well dressed man, probably older than them, gives them an affable nod of greeting. 
+
+He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
+
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
+
+${player.nameHTML()}  breaks down sobbing, falling to their knees at the redemption, the new lease on life.
+
+The well dressed man kneels next to them, and tells them of the Sin they almost committed. The dangers of the Harvest Fruit. 
+
+${player.nameHTML()} vows to turn their life around, to help their friends realize the errors of their ways as well.
+
+They barely notice that they are alone when they finally dry their tears and rise to their feet.
+`;
+
+    }
+
+    /*wibby gives in to his urge to isolate you just the tiniest bit more
+    technically its the mall that turns you into a mannequin
+    but
+    wibby has pumped the mall full of more humans than anyone else (especially before the cultists, he was the one organizing humans to do urban exploration inside it)
+    if wibby says something is a mannequin
+    something alone and forgotten in a corner somewhere
+    the mall listens
+
+    the Lonely is a harsh entity to serve
+
+    and the Mall is very, VERY lonely.
+
+    (to say nothing of how the mall itself exists as a fucked up maze SPECIFICALLY because the closer 
+    (also Lonely) wanted witherby to suffer for doing attachment work on her (she thought they were friends, he thought she was a  monster to placate, and when she realized...
+    
+    well
+    
+    lets just say she owes wanda a favor now))
+
+    */
+    const mediumTongue = () => {
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${player.nameHTML()} is poking around the ${location.longer_name}  when they hear a polite little cough behind them.
+
+A well dressed man, probably older than them, gives them an affable nod of greeting. 
+
+He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
+
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
+
+${player.nameHTML()}  almost falls to their feet in the quiet relief of that forgiveness, head bowed.
+
+In this unobserved moment, the well dressed man gives them a coldly calculating look, then turns on his heel.
+
+${player.nameHTML()}  is left alone.
+`;
+        player.addCorruption(113);
+    }
+
+    /*you send wibby into a guilt spiral
+    better hope you're prepared to kill him before he freezes the world
+
+    there's something funny to me that both camille and wibby breach if you are too good at talking
+    */
+    const highTongue = () => {
+        if (!player.preparedToKill) {
+            me.chosen_name = "Snow Queen"
+            game.snowQueenApocalypse = true;
+            const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+            ele.innerHTML = `${player.nameHTML()} is poking around the  ${location.longer_name} when they hear a polite little cough behind them.
+<br><br>
+A well dressed man, probably older than them, gives them an affable nod of greeting. 
+<br><br>
+He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
+<br><br>
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
+<br><br>
+${player.nameHTML()} vibrates with rage. How DARE this man draw those words out of them. How DARE he drag their secrets out of them. Who does he even think he is? Does he just lurk in abandoned malls waiting to catch people one on one so he can manipulate them?
+<br><br>
+Them, the cult of the Harvest, they stick together. ${player.nameHTML()} sees what this man is trying to do, separate them-- it's cowardly, and they will not stand for it. Are they just supposed to leave after so many of them have given up so much? Is all their dedication supposed to be for nothing? Would he rather they just selfishly pack up and let all the sacrifice go to waste, to dishonor their god?
+<br><br>
+As ${player.nameHTML()} spits out their rage they fail to notice their breath beginning to become visible. Icicles starting to form from the spittle on their lips. 
+<br><br>
+Their words trail off as they begin shivering. 
+<br><br>
+The well dressed man is quietly looking through them, present in absentia. The howl of sudden wind fills ${player.nameHTML()}'s ears.
+<br><br>
+${player.nameHTML()} begins to stagger away, to try to feel whatever is happening but their leg breaks off at the foot, leaving a ragged edge of red ice behind. 
+<br><br>
+They fall.
+<br><br>
+And their cheek, their hands, any exposed skin, sticks solidly to the icy floor. 
+<br><br>
+They are there, alone, for a long time. It feels like eternity and no time at all. Eventually they die, and the world dies with them.
+`;
+
+        } else {
+            me.chosen_name = "Solemn Death"
+            game.solemn_death = true;
+
+            const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+            ele.innerHTML = `${player.nameHTML()} is poking around the ${location.longer_name} when they hear a polite little cough behind them.
+<br><br>
+A well dressed man, probably older than them, gives them an affable nod of greeting. 
+<br><br>
+He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()}.
+<br><br>
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
+<br><br>
+${player.nameHTML()}  vibrates with rage. How DARE this man draw those words out of them. How DARE he drag their secrets out of them. Who does he even think he is? Does he just lurk in abandoned malls waiting to catch people one on one so he can manipulate them?
+<br><br>
+Them, the cult of the Harvest, they stick together. ${player.nameHTML()} sees what this man is trying to do, separate them-- it's cowardly, and they will not stand for it. Are they just supposed to leave after so many of them have given up so much? Is all their dedication supposed to be for nothing? Would he rather they just selfishly pack up and let all the sacrifice go to waste, to dishonor their god?
+<br><br>
+As ${player.nameHTML()} spits out their rage they start to notice their breath beginning to become visible. Icicles starting to form from the spittle on their lips. 
+<br><br>
+A decision is made in an instant.
+<br><br>
+They kill the well dressed man, the icy chill clearing up even as his corpse begins to cool. 
+<br><br>
+They don't know exactly what would have happened, only that they feel a flood of relief that they did not let it.
+`;
+
+        }
+        /*
+        you know what i just realized
+        coding is one of the few artforms (i'll fight you on this, its an artform)
+        where the neatness and organization of your creation space
+        ends up more or less part of the final output
+        in that code is readable in javascript and etc
+        if i spent all my time making beautiful elegant neatly architected code
+
+        it would be like an artist spending all day organizing and cleaning their studio instead of painting
+        yeah it probably speeds up what work you CAN do
+        but not as much as losing yourself to a haze of inspiration and passion and coming back up for air in a horrible mess of a studio
+        */
+    }
+
+    //welp, at least only YOU freeze to death, not the whole world
+    const sinner = () => {
+        me.chosen_name = "Sinner Punished"
+        const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+        ele.innerHTML = `${player.nameHTML()} is poking around the ${location.longer_name} when they hear a polite little cough behind them.
+
+A well dressed man, probably older than them, gives them an affable nod of greeting. 
+
+He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
+
+The people they've killed. The Sins they've committed.
+
+Word after word pouring out of them even as their body starts shivering, their teeth chattering so hard they risk biting their tongue, still more words of every single horrible thing they've done. Every single person they've hurt.
+
+Every single way the world would be better with their absence.
+
+When the well dressed man finally walks away, breath puffing out against the warm air like smoke, ${player.nameHTML()}  is a crumpled heap on the ground, glittering with ice and frost. Not moving .Not breathing.
+
+The Sinner has been dealt with.
+`;
+        player.kill("frozen into a glistening statue."); //thems the breaks
+
+
+    }
+
+    if (player.sin_array.length > 0) {
+        return sinner();
+    } else {
+        if (player.stats[TONGUE_METAL_STAT] < LOW_STAT_VALUE) {
+            return lowTongue();
+        } else if (player.stats[TONGUE_METAL_STAT] < MEDIUM_STAT_VALUE) {
+            return mediumTongue();
+        } else if (player.stats[TONGUE_METAL_STAT] < HIGH_STAT_VALUE) {
+            return highTongue();
+        }
+    }
+
+}
+
+const wibbysConfession = makeEventSubType("Witherby Confessional", wibbyinternalConditionCheck, wibbyapplyResult)
+
+
 ////////////////////////////////////////////////////////////////////////////
 //is there at least one person ready to escape?
 const escapeMallinternalConditionCheck = (game, location) => {

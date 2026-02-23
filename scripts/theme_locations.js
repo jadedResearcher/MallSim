@@ -35,7 +35,7 @@ const initThemeLocations = (rand) => {
     theme_locations[BURGERS].push(makeGenericThemedLocation(rand, BURGERS)); //CFO
     theme_locations[BREAKFAST].push(makeGenericThemedLocation(rand, BREAKFAST, undefined, [eyeKillerGetsYou])); //captain
     theme_locations[CHICKEN].push(makeGenericThemedLocation(rand, CHICKEN)); // camille
-    theme_locations[COFFEE].push(makeGenericThemedLocation(rand, COFFEE)); //WIBBY
+    theme_locations[COFFEE].push(makeGenericThemedLocation(rand, COFFEE, undefined, undefined, [wibbysConfession])); //WIBBY
     theme_locations[DESSERTS].push(makeGenericThemedLocation(rand, PIZZA)); //YONGKI
     theme_locations[DINER].push(makeGenericThemedLocation(rand, DINER)); //HOON
     theme_locations[ITALIAN].push(makeGenericThemedLocation(rand, ITALIAN)); //JOHN
@@ -57,20 +57,28 @@ const initThemeLocations = (rand) => {
     theme_locations[MUSIC].push(makeGenericThemedLocation(rand, MUSIC, "Records", "rgba(132,90,20)", [parkerEncounter]));
     theme_locations[SPYING].push(makeGenericThemedLocation(rand, SPYING, "Cameras", "rgba(132,90,20)", [parkerEncounter, devonaEvent]));
     theme_locations[SPACE].push(makeGenericThemedLocation(rand, SPACE, "Planetarium", "rgba(132,90,20)", [parkerEncounter]));
-    theme_locations[STEALING].push(makeGenericThemedLocation(rand, STEALING, "Bank", "rgba(132,90,20)", [parkerEncounter]));
+    //i think its funny that unless you know certain things about wibby you'd be SHOCKED he's in the stealing theme. he works hard so he doesn't look like a petty thief, lol
+    theme_locations[STEALING].push(makeGenericThemedLocation(rand, STEALING, "Bank", "rgba(132,90,20)", [wibbysConfession, parkerEncounter]));
 
 
 
     theme_locations[CENSORSHIP].push(makeGenericThemedLocation(rand, CENSORSHIP, "[REDACTED]", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[DECAY].push(makeGenericThemedLocation(rand, DECAY, "Rot", "rgba(0,0,0)", [vikEncounter]));
     theme_locations[OBFUSCATION].push(makeGenericThemedLocation(rand, OBFUSCATION, "Secrets", "rgba(0,0,0)", [vikEncounter, nevilleEncounter]));
-    theme_locations[SERVICE].push(makeGenericThemedLocation(rand, SERVICE, "Service", "rgba(0,0,0)", [vikEncounter]));
+    theme_locations[SERVICE].push(makeGenericThemedLocation(rand, SERVICE, "Service", "rgba(0,0,0)", [vikEncounter, wibbysConfession]));
     theme_locations[MAGIC].push(makeGenericThemedLocation(rand, MAGIC, "Tricks", "rgba(0,0,0)", [vikEncounter]));
 
     theme_locations[DARKNESS].push(makeGenericThemedLocation(rand, OBFUSCATION, "Darkroom", "rgba(0,0,0)", [vikEncounter, nevilleEncounter]));
     theme_locations[MATH].push(makeGenericThemedLocation(rand, OBFUSCATION, "Calculators", "rgba(0,0,0)", [nevilleEncounter]));
 
-    theme_locations[LIGHT].push(makeGenericThemedLocation(rand, LIGHT, "Lighting", "rgba(255,255,255)", [devonaEvent]));
+    theme_locations[LIGHT].push(makeGenericThemedLocation(rand, LIGHT, "Lighting", "rgba(255,255,255)", [devonaEvent, wibbysConfession]));
+
+    theme_locations[LONELY].push(makeGenericThemedLocation(rand, LONELY, "Convenience", "rgba(167,199,203)", [wibbysConfession]));
+    theme_locations[FREEDOM].push(makeGenericThemedLocation(rand, FREEDOM, "Birds", "rgba(167,199,203)", [wibbysConfession]));
+    theme_locations[ANGELS].push(makeGenericThemedLocation(rand, ANGELS, "Scripture", "rgba(167,199,203)", [wibbysConfession]));
+    theme_locations[KNOWING].push(makeGenericThemedLocation(rand, KNOWING, "Books", "rgba(167,199,203)", [wibbysConfession]));
+    //theres something missing inside Witherby, and he searched and searched for it in clubs, in other men's beds, in his own solitude, but somehow when he finally found it, he realized it was the found family he has with the training team all along
+    theme_locations[QUESTING].push(makeGenericThemedLocation(rand, QUESTING, "Escape Room", "rgba(167,199,203)", [wibbysConfession]));
 
 
     theme_locations[TIME].push(makeInfiniteParkingGarageToClone(TIME)) //leehunter

@@ -760,6 +760,7 @@ Want your bad romance
                 player.fear += 113;
                 if (player.preparedToKill) {
                     deadbeat.innerHTML += `<br><br>${player.nameHTML()} doesn't know what the music will do to them but they feel in their bones its dangerous. They grab the loose detritis of the mall and hit ${this.nameHTML()} in the head over and over again, even after they stop playing, only stopping when they finally, finally stop breathing.`;
+                    this.sin_array.push(MONSTER_KILLER)
                     player.murder(this, "head caved in by a heavy object, likely improvised")
                     game.event_list.push("Orchestral Defense");
 
@@ -1083,6 +1084,7 @@ Finally, her head slides off her body, and it tumbles backwards.
 
 ${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly enfold the rapidly cooling corpse, spinning a coffin from thin air.
 `;
+                    this.sin_array.push(MONSTER_KILLER)
                     /*
 
 (and why yes, she is not thinking about the implications that her and her friends being in the loop is both suffering and causing suffering, why do you ask)
