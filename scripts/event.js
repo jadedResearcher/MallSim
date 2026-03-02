@@ -154,17 +154,26 @@ const dramaticStormOffapplyResult = (game, location, parent, me) => {
     if (options.length === 0) {
         //im having fun
         ele.innerHTML = `Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT?WHY WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT???????????????????????????????????????`;
+
     }
 
     for (let pair of dramaPairs) {
         const leaving = pair[0];
         const target = pair[1];
         const chosen = game.rand.pickFrom(options);
-        chosen.movePlayerInto(leaving);
-        leaving.changeRelationshipWithPlayerBy(-13)
-        target.changeRelationshipWithPlayerBy(-13);
-        const explanation = createElementWithClassAndParent("div", cont, "sub-story-beat");
-        explanation.innerHTML = `${leaving.nameHTML()} has had enough of ${target.nameHTML()}'s bullshit. They storm off to the ${chosen.longer_name} without any real plan.`;
+        if (chosen) {
+            chosen.movePlayerInto(leaving);
+            leaving.changeRelationshipWithPlayerBy(-13)
+            target.changeRelationshipWithPlayerBy(-13);
+            const explanation = createElementWithClassAndParent("div", cont, "sub-story-beat");
+            explanation.innerHTML = `${leaving.nameHTML()} has had enough of ${target.nameHTML()}'s bullshit. They storm off to the ${chosen.longer_name} without any real plan.`;
+
+        } else {
+            leaving.fear += 1113; //its so. so. scary
+            const explanation = createElementWithClassAndParent("div", cont, "sub-story-beat");
+            explanation.innerHTML = `${leaving.nameHTML()} has had enough of ${target.nameHTML()}'s bullshit. They try to storm off without any real plan only to realize to their growing horror that there are no longer any exits..... Doors open up to yawning, eternal void. EMPTY EMPTY EMPTY VOID ETERNAL VOID ETERNAL NOTHINGNESS NOTHING NOTHING GOD WHY IS THERE NOTHING WHY ISN'T THERE ANYTHING HOW CAN THERE BE NOTHING ITS NOT BLACK BLACK IS SOMETHING ITS NOT DARK DARK IS STILL SOMETHING ITS NOTHING AND TEH EYES DON'T FOCUS THE EYES DONT SEE THE MIND SLIPS OFF IT the mind can't focus the mind can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist can't exist't exist can't exist`;
+
+        }
 
     }
 

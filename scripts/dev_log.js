@@ -1,6 +1,13 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["03/02/2026"] = `need to fix the bug of people killing themselves to steal their own harvest fruit
+classic sburbsim ass bug
+so nostalgic
+i miss smokey the bear
+which is legally distinct from the
+mascot
+smokey bear`
 
 dev_log["2/26/2026"] = `
 weather radios are the gift that keeps on giving

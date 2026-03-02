@@ -1025,7 +1025,7 @@ Want your bad romance
                 for (let player of this.current_location.players) {
                     //mannequins can kill you for your fruit, but the dead can not
                     //just knowing the wastes, both real and imaginary, will read these comments, gives me life
-                    if (!player.dead && player.preparedToKill) {
+                    if (player != this && !player.dead && player.preparedToKill) {
                         if (!best_murderer) {
                             best_murderer = player;
                         } else {
@@ -1060,7 +1060,7 @@ Want your bad romance
                     }
                     //even if they were a mannequin, the Sin of fraticide is upon you and witherby and hoon can smell it
                     best_murderer.sin_array.push(TEAM_KILLER);
-                    this.kill("head a bruised and bloody mess, fingers stained purple with fruit juice")
+                    this.kill("splayed onto the ground, head a bruised and bloody mess, fingers stained purple with fruit juice.")
                     const recursiveEle = createElementWithClassAndParent('p', child)
 
                     best_murderer.addItemToInventory(game, item, child, recursiveEle)
