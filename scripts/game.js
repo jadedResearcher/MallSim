@@ -1397,6 +1397,7 @@ its so normal
                 }
             }
             if (player.preparedToKillInitially()) {
+                player.preparedToKill = true;
                 text += " They are prepared to kill to secure what is rightfully theirs. "
             }
 

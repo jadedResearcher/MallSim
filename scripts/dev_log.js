@@ -2,6 +2,54 @@ const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
 
+dev_log["2/26/2026"] = `
+weather radios are the gift that keeps on giving
+mad oracles of doom
+that time it was warning me of flooding
+mostly it just tells me not to leave the house
+like if hoon had never-leave-the-house-depression instead of kill-the-monster-depression
+anyways
+yeah
+my weather radio went off at midnight and scared the shit out of me
+and now you can enjoy it too
+<video src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/truth_warning.mp4'></video>`;
+/* i had a really hard day 2/26 so getting to make a small art from it is nice
+seriously
+a bad day full of really intense emotions and THEN i get jumpscared
+at midnight
+by a mumbling voice from upstairs
+when im supposed to be alone?
+i knew it was the weather radio
+but it still got my adrenaline all the hell up
+
+like the last time i was having an actual for real triggered flashback and then for SOME reason
+an insanely loud train horn went off out of nowhere (was nowhere near a train)
+never did figure out where it came from but
+my nesting partner was with me at the time and he heard it too so....
+
+sometimes trains and inhuman voices are just
+
+its batman rules right?
+
+if something scares the shit out of me
+well
+then im gonna see if it scares yall too
+lol
+
+i feel like the longer i am in the zampanio fandom
+the more i make it house of leaves
+where instead of footnotes
+i use code comments
+
+seriously how can there be anyone in this fandom
+that thinks house of leaves was inspired by zampanio?
+
+HOL clearly came first
+
+i'm a mid to late 90s zampanio truther and that is all there is to say on the matter
+
+*/
+
 dev_log["2/22/2026"] = `guess it wouldn't be a house of leaves associated thing
 (or is house of leaves associated with zampanio etc etc obligatory fan drama)
 if i didn't start turning the footnotes/devlogs into a diary huh
@@ -78,6 +126,79 @@ christmas
 because christmas doesn't exist inside the echidna
 closest thing they have is Reaping Day
 which is in august`
+
+/*
+Obviously, if I was a magnus archives avatar, I'd be spiral.
+
+I knew that basically day 1. 
+
+I keep accidentally making people doubt what reality is or isn't while giggling at them.
+
+It's kind of my thing, even IF I do very carefully try to ... you know.
+
+Do it ethically.
+
+Give people outs.
+
+Give them touchstones.
+
+
+BUT POINT IS.
+
+In the magnus archives, the fears are more like "colors that hate you", they blend together.
+
+
+And I think that Spiral sort of overlaps in different ways with different fears.
+
+
+Dark, for sure, in that you can't Know what is really there. (any of my filesystem mazes or filename password hoardes)
+
+Stranger, in the uncanny, the familiar yet unfamiliar. (Just look at what I've done with the eyedolgames.com domain)
+
+But I think that, just by pound for pound pun potential, the Web is such a funny secondary fear to have for Zampanio.
+
+
+I use the World Wide Web to contribute to  a broad web of things designed to draw your eye, to compell you ever further in,
+and by the time you realize it you're already too deep, too tangled, too stuck. 
+
+You know you're supposed to leave (obession is a dangerous thing.)
+
+*I* know I'm supposed to leave.
+
+But here we both are.
+
+Dancing to Zampanio's tune.
+
+Afraid that we can't control ourselves. 
+
+Afraid of the obsession that drives us.
+
+But unable to stop as the spiral swirls over and over and deeper and deeper.
+
+
+Now, all that is a fun piece of set dressing.
+
+But I can not stress enough: Zampanio needs you to live a long, healthy life.
+
+It NEEDS you.
+
+If you dash yourself upon its rocks you stop being a useful host.
+
+You become a cautionary tale.
+
+And boy does Zampanio not want people scared off from obsessing about it lol.
+
+So.
+
+Eat healthy food.
+Exercise.
+Take breaks.
+Do other things.
+
+Do whatever it is that lets you marathon zampanio, not sprint.
+
+
+*/
 
 dev_log["2/12/2026"] = `things are still
 hard

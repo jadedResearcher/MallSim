@@ -2,6 +2,18 @@ let ele;
 
 let how_long_well_let_them_explore = 500;
 
+/*
+the mall is afraid of fridays
+black friday
+it doesn't know whats special about that
+something about fridays makes people rip and tear into each other
+just for things
+any other day they simply use little bits of paper and metal
+but fridays
+something goes wrong
+the rest of zampanio warns you off on friday
+but mall sim shows you why
+*/
 const isItFriday = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);

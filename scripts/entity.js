@@ -1014,6 +1014,62 @@ Want your bad romance
     addItemToInventory = (game, item, ele, surpress_spam) => {
         //automatically eat it if it would waste you
         if (!this.wasted && item.isFruit) {
+
+            /*player on player violence is tragic but possible
+                what would YOU do
+            to become a demi-god
+            */
+
+            if (this.current_location && this.current_location.players.length > 1) {
+                let best_murderer;
+                for (let player of this.current_location.players) {
+                    //mannequins can kill you for your fruit, but the dead can not
+                    //just knowing the wastes, both real and imaginary, will read these comments, gives me life
+                    if (!player.dead && player.preparedToKill) {
+                        if (!best_murderer) {
+                            best_murderer = player;
+                        } else {
+                            //whoever hates the lucky bastard who found Harvest Fruit most gets dibs on shanking them for it
+                            if (player.relationships[this.title] < best_murderer.relationships[this.title]) {
+                                best_murderer = player;
+                            }
+                        }
+                    }
+                }
+
+                if (best_murderer) {
+                    game.event_list.push("Black Friday")
+                    const child = createElementWithClassAndParent('p', ele)
+                    //don't accidentally recurse and risk someone ELSE stealing this from you
+
+                    if (this.corrupted) {
+                        child.innerHTML = `${this.nameHTML()} is battern into many shards of ${this.mannequin_type} as ${best_murderer.nameHTML()} violently pries the ${item.name} from their stiff and unyeilding joints.`;
+                    } else {
+                        child.innerHTML = `${this.nameHTML()} raises the ${item.name} to their lips on base instinct, ready to devour it when some other, deeper instinct has them look behind them. 
+                        <br><br>It's only ${best_murderer.nameHTML()}. 
+                        <br><br>They turn back, intent on achieving their divinity when something heavy hits them on the head and there is a swirl of vertigo as their world view shifts. <br><Br>
+                        Dazed, they try to understand. Floor? Ceiling? Wall? Where...where are they?
+                        <Br><Br>
+                        Try to focus.
+                        <br><Br>
+                        Their hand grips the ${item.name} tighter, feeling its juices just barely begining to seep out.
+                        <br><br>A burst of pain and with it...everything goes dark, and they die.
+                        The mall does not know what sometimes drives shoppers to violence to acquire items.<br><Br>
+                        Only that is sometimes does.`;
+
+                    }
+                    //even if they were a mannequin, the Sin of fraticide is upon you and witherby and hoon can smell it
+                    best_murderer.sin_array.push(TEAM_KILLER);
+                    this.kill("head a bruised and bloody mess, fingers stained purple with fruit juice")
+                    const recursiveEle = createElementWithClassAndParent('p', child)
+
+                    best_murderer.addItemToInventory(game, item, child, recursiveEle)
+
+                    return;
+                }
+            }
+
+
             /*
             camille is just built different
             instead of an event
@@ -1292,7 +1348,28 @@ immune system
     //but you still have to be a very specific kind of person
     //to kill in coold blood
     preparedToKillInitially = () => {
+
+        if (isItFriday()) {
+            /*
+the mall is afraid of fridays
+black friday
+it doesn't know whats special about that
+something about fridays makes people rip and tear into each other
+just for things
+any other day they simply use little bits of paper and metal to get their things
+but fridays
+something goes wrong
+the rest of zampanio warns you off on friday
+but mall sim shows you why
+*/
+            return true;
+        }
+
+        if (this.theme_keys.includes(KILLING)) {
+            return true;
+        }
         //someone will kill if they prefer action strongly over compromise
+
         return this.stats[ARMS_METAL_STAT] > MEDIUM_STAT_VALUE && this.stats[TONGUE_METAL_STAT] < MEDIUM_STAT_VALUE;
     }
 
