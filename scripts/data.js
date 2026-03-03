@@ -2975,7 +2975,7 @@ const initEffectPossibilities = () => {
 
 
 const initGeneralBackstories = () => {
-    general_backstories[ART] = ["would never stop making sculptures if that was an option", "can sketch incredibly lifelike portraits", "always has a dab of paint behind your ears"];
+    general_backstories[ART] = ["would never stop making sculptures if that was an option", "can sketch incredibly lifelike portraits", "always has a dab of paint behind their ears"];
     general_backstories[TECHNOLOGY] = ["can, will, must and should make a robot", "always seem to be on top of the latest technology", "are annoyed that everyone wants you to fix your computer", "can hack into any system"];
     general_backstories[TIME] = ["are always on time to everything", "are kind of impatient", "seem to always have unlimited energy", "always know what time it is", "have an instinctive understanding of timing"];
     general_backstories[SPACE] = ["seem to always be a mile away when everyone is supposed to meet up", "are a very patient person", "have an amazing spatial sense", "always want to talk about space", "love being as high up as possible", "have absolutely no fear of heights"];

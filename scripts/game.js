@@ -347,6 +347,16 @@ class Game {
         this.bunker_phase++; //it starts at zero, we do not void out OURSELVEs....theres something kind of fun that witherby ends teh world in a steadily increasing blizzad, and neville ends it in concentric rings of nothingness
         const voidLocation = (l) => {
             if (l.longer_name === BUNKER_NAME) {
+                //players keep worming their way into neville's safe space :( :( :(
+                for (let player of location.players) {
+                    removeItemOnce(game.players, player);
+                }
+
+                for (let player of location.pending_players) {
+                    removeItemOnce(game.players, player);
+                }
+                l.players = [];
+                l.pending_players = [];
                 return; //neville i swear to fuck if you erase yourself again we are going to have Words. you're supposed to be chill and happy in your little bunker, not seeking self destruction (that's RIAS thing)
             }
             this.map[l.row][l.col] = undefined; //like you never existed

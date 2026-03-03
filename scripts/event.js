@@ -153,7 +153,7 @@ const dramaticStormOffapplyResult = (game, location, parent, me) => {
 
     if (options.length === 0) {
         //im having fun
-        ele.innerHTML = `Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT?WHY WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT???????????????????????????????????????`;
+        ele.innerHTML = `<span class="wasted-knowledge">Fun Fact: I never intended for this to be seen, but it turns out Neville can, in rare cases, cause there to not be any exits. Classic Neville :) :) :)</span>Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? Why is there no exit? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT? WHY IS THERE NO EXIT?WHY WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT?WHY IS THERE NO EXIT???????????????????????????????????????`;
 
     }
 
@@ -606,21 +606,24 @@ They don't know exactly what would have happened, only that they feel a flood of
     //welp, at least only YOU freeze to death, not the whole world
     const sinner = () => {
         me.chosen_name = "Sinner Punished"
+        const sinBlurb = `Even just in the mall they ${arrayToHumanSentence(player.sin_array)}.`;
+
         const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
         ele.innerHTML = `${player.nameHTML()} is poking around the ${location.longer_name} when they hear a polite little cough behind them.
-
+<br><Br>
 A well dressed man, probably older than them, gives them an affable nod of greeting. 
-
+<br><Br>
 He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
-
+<br><Br>
 The people they've killed. The Sins they've committed.
-
+<br><Br>
 Word after word pouring out of them even as their body starts shivering, their teeth chattering so hard they risk biting their tongue, still more words of every single horrible thing they've done. Every single person they've hurt.
-
+<br><Br>
+${sinBlurb}
 Every single way the world would be better with their absence.
-
+<br><Br>
 When the well dressed man finally walks away, breath puffing out against the warm air like smoke, ${player.nameHTML()}  is a crumpled heap on the ground, glittering with ice and frost. Not moving .Not breathing.
-
+<br><Br>
 The Sinner has been dealt with.
 `;
         player.kill("frozen into a glistening statue."); //thems the breaks
@@ -2071,6 +2074,11 @@ const nevilleHuntingapplyResult = (game, location, parent, me) => {
         for (let player of location.players) {
             removeItemOnce(game.players, player);
         }
+
+        for (let player of location.pending_players) {
+            removeItemOnce(game.players, player);
+        }
+
         location.players = [];
         location.pending_players = [];//no one is left
         return;

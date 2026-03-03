@@ -11,9 +11,9 @@ const FUNERAL_FOR_DEAD_BUTTERFLIES = "Funeral For Dead Butterflies";
 
 const STRONG_RELATIONSHIP_VALUE = 50;
 
-const TWIN_KILLER = "TWIN_KILLER";
-const TEAM_KILLER = "TEAM_KILLER";
-const MONSTER_KILLER = "MONSTER_KILLER";
+const TWIN_KILLER = "killed an innocent person that startled them";
+const TEAM_KILLER = "killed someone who trusted them, out of greed";
+const MONSTER_KILLER = "killed a horrible monster, but a death is a death";
 
 
 
@@ -1055,14 +1055,15 @@ Want your bad romance
                         Their hand grips the ${item.name} tighter, feeling its juices just barely begining to seep out.
                         <br><br>A burst of pain and with it...everything goes dark, and they die.
                         The mall does not know what sometimes drives shoppers to violence to acquire items.<br><Br>
-                        Only that is sometimes does.`;
+                        Only that is sometimes does.
+                        <span class="wasted-knowledge">When I first created team killing, Camille would teleport in behind the murderer and murder them. Every. Single. Time. Even though there was no code for her to target them in particular. I shrugged and simply banned her from kiling Sinners becuase it was preventing me from debugging Wibby's murder sequence.</span>`;
 
                     }
                     //even if they were a mannequin, the Sin of fraticide is upon you and witherby and hoon can smell it
                     best_murderer.sin_array.push(TEAM_KILLER);
                     this.kill("splayed onto the ground, head a bruised and bloody mess, fingers stained purple with fruit juice.")
                     const recursiveEle = createElementWithClassAndParent('p', child)
-
+                    item.name = "Bloody " + item.name;
                     best_murderer.addItemToInventory(game, item, child, recursiveEle)
 
                     return;
@@ -1084,20 +1085,22 @@ Want your bad romance
             it ascends just fine
             */
             //if you're in a session ending in 4...thems the breaks, you are NOT going to get wasted on camilles watch (though she still can't sense mannequins as they are neither alive nor)
-            if (((!this.corrupted && !this.wasted) && game.rand.nextDouble() < 0.4) || (!this.corrupted && game.rand.initial_seed % 10 === 4)) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
-                if (game.tick_funeral_began && (game.current_tick - game.tick_funeral_began) > 10) {
-                    //you can't stop her now that she's risen
-                    game.event_list.push("The End Is Never The End")
+            //camille actually doesn't care if you've sinned or not but *I* care because if shes allowed to kill sinner wibby and hoon will NEVER have any fun :( :( :(
+            if (this.sin_array.length === 0) {
+                if (((!this.corrupted && !this.wasted) && game.rand.nextDouble() < 0.4) || (!this.corrupted && game.rand.initial_seed % 10 === 4)) { //camille has a katana, 4 is a death/unlucky number in japan, it makes sense in a doom player way, theres a rule about how often she decapitates you
+                    if (game.tick_funeral_began && (game.current_tick - game.tick_funeral_began) > 10) {
+                        //you can't stop her now that she's risen
+                        game.event_list.push("The End Is Never The End")
 
-                    this.inventory.push(item);
-                    const child = createElementWithClassAndParent('p', ele)
-                    /*
-                    camille isn't in the armor if she's not bringing the End to someone
-                    though she DOES still walk around as a corpse
-                    the end is never the end is never the end is never the end
-                    */
+                        this.inventory.push(item);
+                        const child = createElementWithClassAndParent('p', ele)
+                        /*
+                        camille isn't in the armor if she's not bringing the End to someone
+                        though she DOES still walk around as a corpse
+                        the end is never the end is never the end is never the end
+                        */
 
-                    child.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
+                        child.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
                     <br><br>
                     Is that... metal?  Sticking...out of their chest? 
                     <br><br>
@@ -1111,17 +1114,17 @@ Want your bad romance
                     <br>
                     <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/the_end_breached.gif'>
                     `;
-                    game.event_list.push("The End");
-                    this.kill("decapitated with a clean slice, head neatly beside the body, blood stained in all directions. If you look closely, you can see a stab wound in the chest, but the blood from the missing head seems to almost completely cover it. The head must have been removed within minutes of the stab.")
+                        game.event_list.push("The End");
+                        this.kill("decapitated with a clean slice, head neatly beside the body, blood stained in all directions. If you look closely, you can see a stab wound in the chest, but the blood from the missing head seems to almost completely cover it. The head must have been removed within minutes of the stab.")
 
-                    return;
-                }
+                        return;
+                    }
 
 
-                if (this.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
-                    //you don't get killed but you DO forget to eat your fruit
-                    const child = createElementWithClassAndParent('p', ele)
-                    child.innerHTML = ` 
+                    if (this.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
+                        //you don't get killed but you DO forget to eat your fruit
+                        const child = createElementWithClassAndParent('p', ele)
+                        child.innerHTML = ` 
 ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, ready to devour it when some other, deeper instinct has them look behind them. 
 <br><Br>
 A tall woman looms there, a blade at the ready. 
@@ -1140,52 +1143,52 @@ Finally, her head slides off her body, and it tumbles backwards.
 
 ${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly enfold the rapidly cooling corpse, spinning a coffin from thin air.
 `;
-                    this.sin_array.push(MONSTER_KILLER)
-                    /*
+                        this.sin_array.push(MONSTER_KILLER)
+                        /*
+    
+    (and why yes, she is not thinking about the implications that her and her friends being in the loop is both suffering and causing suffering, why do you ask)
+    
+    
+    vik doesn't get it
+    or does and is maliciously pretending they don't
+    theres a reason camille insists on still doing corporation work
+    in still using the veneer of normalcy
+    the forms
+    the beurocracy
+    camille both is inherently aware of, and trying to ignoroe, the weight on her shoulders
+    haven't they ALWAYS been saving the world with their work?
+    isn't this no different than an aleph teir threat?
+    but it is.
+    its not one world
+    its not even all worlds
+    its all POSSIBLE worlds
+    if the echidna runs out of space, reality crashes
+    and the space its chewing through is whats allocated for... everything
+    ever
+    the future
+    the past
+    the present
+    the entire creation cycle of sburb dies with the echidna
+    OR
+    you know
+    you can kill it
+    before it eats through everything
+    but she won't
+    she protects it
+    immune system
+                        */
+                        game.tick_funeral_began = game.current_tick; //ria spends ten ticks mourning in the funeral, then her event starts responding ANYWHERE
+                        game.event_list.push("The End Is Dead")
+                        this.current_location.name = "Funeral"
+                        this.inventory.push(item);
 
-(and why yes, she is not thinking about the implications that her and her friends being in the loop is both suffering and causing suffering, why do you ask)
+                        this.current_location.longer_name = FUNERAL_FOR_DEAD_BUTTERFLIES
+                        return;
+                    } else {
+                        this.inventory.push(item);
+                        const child = createElementWithClassAndParent('p', ele)
 
-
-vik doesn't get it
-or does and is maliciously pretending they don't
-theres a reason camille insists on still doing corporation work
-in still using the veneer of normalcy
-the forms
-the beurocracy
-camille both is inherently aware of, and trying to ignoroe, the weight on her shoulders
-haven't they ALWAYS been saving the world with their work?
-isn't this no different than an aleph teir threat?
-but it is.
-its not one world
-its not even all worlds
-its all POSSIBLE worlds
-if the echidna runs out of space, reality crashes
-and the space its chewing through is whats allocated for... everything
-ever
-the future
-the past
-the present
-the entire creation cycle of sburb dies with the echidna
-OR
-you know
-you can kill it
-before it eats through everything
-but she won't
-she protects it
-immune system
-                    */
-                    game.tick_funeral_began = game.current_tick; //ria spends ten ticks mourning in the funeral, then her event starts responding ANYWHERE
-                    game.event_list.push("The End Is Dead")
-                    this.current_location.name = "Funeral"
-                    this.inventory.push(item);
-
-                    this.current_location.longer_name = FUNERAL_FOR_DEAD_BUTTERFLIES
-                    return;
-                } else {
-                    this.inventory.push(item);
-                    const child = createElementWithClassAndParent('p', ele)
-
-                    child.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
+                        child.innerHTML = ` ${this.nameHTML()} raises the ${item.name} to their lips on base instinct, barely aware of their action when something tugs at their chest. They look down, the fruit dropping from suddenly enervated fingers and they see something...strange.
                     <br><br>
                     Is that... metal?  Sticking...out of their chest? 
                     <br><br>
@@ -1199,11 +1202,12 @@ immune system
                     <br>
                     <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/the_last_thing_you_see.gif'>
                     `;
-                    game.event_list.push("The End");
-                    this.kill("decapitated with a clean slice, head neatly beside the body, blood stained in all directions. If you look closely, you can see a stab wound in the chest, but the blood from the missing head seems to almost completely cover it. The head must have been removed within minutes of the stab.")
+                        game.event_list.push("The End");
+                        this.kill("decapitated with a clean slice, head neatly beside the body, blood stained in all directions. If you look closely, you can see a stab wound in the chest, but the blood from the missing head seems to almost completely cover it. The head must have been removed within minutes of the stab.")
 
+                    }
+                    return;
                 }
-                return;
             }
 
             const formerName = this.nameHTML();

@@ -1,13 +1,26 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
-dev_log["03/02/2026"] = `need to fix the bug of people killing themselves to steal their own harvest fruit
+dev_log["03/02/2026"] = `needed to fix the bug of people killing themselves to steal their own harvest fruit
 classic sburbsim ass bug
 so nostalgic
 i miss smokey the bear
 which is legally distinct from the
 mascot
-smokey bear`
+smokey bear
+also i fixed the bug of players fighting when suddenly instead they start screaming and screaming as the void swirlled around them and they were trapepd in an eternal moment
+never dying and never experiencing anything ever again and no one anywhere ever experience anything ever again (i.e. the sim crashes)
+now, instead
+CORRECTLY
+they scream and scream as the void swirls around them and their mind begins to break 
+and then
+they cease to exist
+while people in other areas hear their screams cut silent as they know the void comes for them next
+(i..e the simulation no longer crashes and the void creeping out of neville's bunker finishes consuming people)
+fun fact, this is only SLIGHTLY creepier than any sburbsim bug i fixed
+i always wondered how anyone thought i wasn't
+the villain
+of sburbsim`
 
 dev_log["2/26/2026"] = `
 weather radios are the gift that keeps on giving
