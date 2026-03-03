@@ -761,6 +761,7 @@ Want your bad romance
                 if (player.preparedToKill) {
                     deadbeat.innerHTML += `<br><br>${player.nameHTML()} doesn't know what the music will do to them but they feel in their bones its dangerous. They grab the loose detritis of the mall and hit ${this.nameHTML()} in the head over and over again, even after they stop playing, only stopping when they finally, finally stop breathing.`;
                     this.sin_array.push(MONSTER_KILLER)
+                    game.addGeneralEventToAllLocations(wibbysConfession); //he smells it on you
                     player.murder(this, "head caved in by a heavy object, likely improvised")
                     game.event_list.push("Orchestral Defense");
 
@@ -1061,6 +1062,7 @@ Want your bad romance
                     }
                     //even if they were a mannequin, the Sin of fraticide is upon you and witherby and hoon can smell it
                     best_murderer.sin_array.push(TEAM_KILLER);
+                    game.addGeneralEventToAllLocations(wibbysConfession); //he smells it on you
                     this.kill("splayed onto the ground, head a bruised and bloody mess, fingers stained purple with fruit juice.")
                     const recursiveEle = createElementWithClassAndParent('p', child)
                     item.name = "Bloody " + item.name;
@@ -1144,6 +1146,8 @@ Finally, her head slides off her body, and it tumbles backwards.
 ${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly enfold the rapidly cooling corpse, spinning a coffin from thin air.
 `;
                         this.sin_array.push(MONSTER_KILLER)
+                        game.addGeneralEventToAllLocations(wibbysConfession); //he smells it on you
+
                         /*
     
     (and why yes, she is not thinking about the implications that her and her friends being in the loop is both suffering and causing suffering, why do you ask)

@@ -1953,6 +1953,8 @@ The silence that rings out in the aftermath is somehow...deafening.
 ${arms.nameHTML()} shrugs, and moves on after checking there is nothing useful in any of the bodies pockets.
 `;
             arms.sin_array.push(TWIN_KILLER);
+            game.addGeneralEventToAllLocations(wibbysConfession); //not as high priority as hunting, so it gets added before
+
             game.hunting = true;
             generalEvents.unshift(devonaHuntingEvent);
             game.addGeneralEventToAllLocations(devonaHuntingEvent); //add it everywhere as well
@@ -1974,6 +1976,7 @@ ${arms.nameHTML()} shrugs, and moves on after checking there is nothing useful i
             generalEvents.unshift(devonaHuntingEvent);
             removeItemOnce(generalEvents, me)
             game.removeGeneralEventToAllLocations(me); //you can never encounter him again
+            game.addGeneralEventToAllLocations(wibbysConfession); //not as high priority as hunting, so it gets added before
 
             game.addGeneralEventToAllLocations(devonaHuntingEvent); //add it everywhere as well
 
@@ -2269,6 +2272,8 @@ They start running in the opposite direction.
         arms.sin_array.push(TWIN_KILLER);
         game.hunting = true;
         generalEvents.unshift(nevilleHuntingEvent);
+        game.addGeneralEventToAllLocations(wibbysConfession); //not as high priority as hunting, so it gets added before
+
         game.addGeneralEventToAllLocations(nevilleHuntingEvent); //add it everywhere as well
         game.removeGeneralEventToAllLocations(me); //you can never encounter her again
 
