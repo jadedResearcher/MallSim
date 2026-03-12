@@ -1184,6 +1184,8 @@ ${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly en
                         game.tick_funeral_began = game.current_tick; //ria spends ten ticks mourning in the funeral, then her event starts responding ANYWHERE
                         game.event_list.push("The End Is Dead")
                         this.current_location.name = "Funeral"
+                        //the highest priority thing that can possibly happen here now is ria mourning
+                        this.current_location.events.unshift(riaMourn);
                         this.inventory.push(item);
 
                         this.current_location.longer_name = FUNERAL_FOR_DEAD_BUTTERFLIES

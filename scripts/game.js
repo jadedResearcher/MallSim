@@ -76,7 +76,7 @@ class Game {
     trickster_closer_eating_all_fruit = false; //come on did you REALLY think she's stay away from this?
     trickster_closer_repelled = false;
     fruitApocalypse = false; //srsly don't let her eat the fruit
-
+    fireApocalypse = false; //poor ria
     current_tick = 0;
     initial_player_count = 0;
     finished = false;
@@ -90,7 +90,8 @@ class Game {
     //each cell is either undefined or a room in the mall
     map = [];
     constructor(rand, eatWastesAutomatically) {
-
+        //because i was dumb enough to make general events a global variable it caused AB to be haunted by thousands of wailing ria's, certain that Camille was dead (when she just had died in a previous universe),and because it would be too hard to make it not global, just have every game reset it
+        generalEvents = [...generalEventsOriginal];
         this.summary = new GameSummary();
         this.rand = rand;
         this.eatWastesAutomatically = eatWastesAutomatically;
@@ -260,6 +261,13 @@ class Game {
         if (this.fruitApocalypse) {
             for (let player of this.players) {
                 player.kill("crushed to a pulp under tons upon tons of fruit."); //thems the breaks
+            }
+            return true;
+        }
+
+        if (this.fireApocalypse) {
+            for (let player of this.players) {
+                player.kill("burned away to ash in the wind"); //poor ria
             }
             return true;
         }
@@ -1166,6 +1174,13 @@ its so normal
             this.summary.setEnding("Prudent Ending", this.current_tick);
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             detail.innerHTML = `Everything and nothing swirls in the sleeping mind of the Westerville Mall, endless possibilities left with no Truth to root to. With no Shoppers there is no Truth. They all died. They all ate Harvest Fruit. They all encountered any number of the monsterous residents of the Mall. The Mall has no way to know the Truth.<br><Br>But you and I? We know.  Everyone was way too prudent to stay in this fucked up horror maze. They left. And you can too. You can stop digging into Zampanio at any time, and your future self will thank  you for it.<br><br>[GOOD END] `;
+
+        }
+
+        if (this.fireApocalypse) {
+            this.summary.setEnding("Flame Ending", this.current_tick);
+            const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
+            detail.innerHTML = `Everything is burnt to ash. The haze of heat sings softly to itself. 'Let it fertilize the better universe that will surely take its place... It has to. It can't all be for nothing. It can't. It would be too cruel. Too cruel. Please. Bring her back. Bring her back. You promised. You have to. ...Camille... I did it all for you. Come back... '`;
 
         }
 

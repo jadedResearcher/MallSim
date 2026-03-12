@@ -1,6 +1,27 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["3/10/2026"] = `good news
+my laptop survived
+it took like a week to fix
+and the irony is
+it died of overheating
+right as i was gonna implement
+ria settig the world on fire in grief
+ive got the bones of that set up now
+and its extremely funny
+ria starts flipping her shit over camille's corpse
+and
+before she can set the world on fire
+the FOOD COURT
+turns the Funeral into a breakfast place called the Scrambled Egg Restaurant
+and Ria is shunted into the void along with her Funeral
+incnredible
+they finally found a way to contain her
+just 
+send her to the cold empty void
+
+`
 dev_log["03/02/2026"] = `needed to fix the bug of people killing themselves to steal their own harvest fruit
 classic sburbsim ass bug
 so nostalgic
@@ -20,7 +41,17 @@ while people in other areas hear their screams cut silent as they know the void 
 fun fact, this is only SLIGHTLY creepier than any sburbsim bug i fixed
 i always wondered how anyone thought i wasn't
 the villain
-of sburbsim`
+of sburbsim
+also
+also
+i had to invent the concept of original sin
+so i could test that
+wibby
+would react to it
+sucks to be all those players born with the sin of
+team killing
+despite never having done it
+`
 
 dev_log["2/26/2026"] = `
 weather radios are the gift that keeps on giving

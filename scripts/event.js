@@ -1191,6 +1191,249 @@ ${riaImage}
 const riaWarn = makeEventSubType("Ria Warns", riaInternalConditionCheck, riaApplyResult);
 
 
+/*
+the sun rises in the morning with a steady thrum of heat and ria is the sun that heralds the end of all things, mourning all that must be lost in order to make it all anew...i wish that pun meant her associated direction was East but no, there is no one more South than her. The RAGE that spills out of her is an echo of Truth in ZampanioSimNorth.
+Meanwhile Camille is the most North that has ever existed. whaaaat? Nooooo .... she's not dead? She's fiiiine, just don't tug too hard at her.... or make her catch feelings or or or
+
+Witherby is East. He will tell you the pretty lies until you can't help but believe them, until you can't help but agree they are true. 
+
+The twins, of course, are West. Do I even need to explain this? They've been our Training Team  viewpoint characters there, after all.
+devona with her fragment of the universe and neville with his bunker that is a DIRECT line to the observers
+
+damn i kinda wanna call them
+Cardinals now
+instead of blorbos
+
+The Cardinals of Zampanio
+
+like
+
+religious cardinals
+
+but also cardinal directions (ic made this joke)
+
+if you find this and im NOT calling them that, remind me i wanted to
+*/
+riaMournInternalConditionCheck = (game, location) => {
+    //after ten ticks ria starts wandering the mall like a wraith (in theory if this somehow )
+    if (game.current_tick > game.tick_funeral_began + 10) {
+        if (!generalEvents.includes(riaMourn)) {
+            generalEvents.unshift(riaMourn);//new places will be haunted by her grief
+            game.addGeneralEventToAllLocations(riaMourn) //existing places will be haunted by her grief
+            console.log("JR NOTE: added ria mourning everywhere")
+        }
+
+    }
+    const livingPlayers = location.livingNonMannequinPlayers();
+
+
+    if (!livingPlayers || !livingPlayers.length || livingPlayers.length === 0) {
+        return false;
+    }
+    if (game.tick_funeral_began || game.rand.nextDouble() < 0.95) {
+        return true;
+    }
+
+    return false;
+
+}
+
+/*
+flesh out  ria mourning event (at first can only be in the Funeral itself, but can be anywhere after ten ticks) this is NOT a general event at first, camille adds it when she dies (just like twins do), she behaves differently if wibby or the greater westerville polycule could do something in a location
+
+extremely funny bug from this.
+ab was
+SOMETIMES
+showing ria as mourning 16000 times in 100 sessions
+which is
+not normallly
+and especially not normal if camille hadn't even died
+there shouldn't even be a WAY for that to happen
+but
+
+i think i know whats going on
+
+once ria is marked as mourning
+any ria from then on in the loops ab is in
+is mourning
+because its like ab TELLS her
+"hey did you know camille is dead"
+and ria flips her shit
+because im not clearing out the flag for that
+which is fine if its just one loop but
+ria found a huge bug for me by, in ria fashion, being bigger and louder about the problem than anyone else
+*/
+//when i was going to finally code this, my laptop fans stopped working and it overheated and died, finally got repaired
+riaMournApplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+    const livingPlayers = location.livingNonMannequinPlayers();
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    const riaFireImage = "<img src='http://farragofiction.com/TwoGayJokes/Stories/fire_girl.png'>";
+
+    const intro = createElementWithClassAndParent("p", ele);
+    const eyes = getPartyHighestEyes(livingPlayers);
+    const living = location.livingPlayers();
+    const playerNames = arrayToHumanSentence(living.map((i) => i.nameHTML()));
+    const funeral = location.longer_name.includes(FUNERAL_FOR_DEAD_BUTTERFLIES);
+
+    const explode = () => {
+        const leg = getPartyHighestLegs(livingPlayers);
+
+        if (funeral) {
+            intro.innerHTML = `${eyes.nameHTML()} hears a strange sound...something between a tea kettle and a sob, with a thread of almost laughter throughout it. 
+<br><br>
+After several minutes they track it down to a strange woman, hunched over a coffin emblazoned with a crimson butterfly.  Her face is covered in soot, besides twin streaks of shockingly clean skin, directly under her eyes. 
+<br><br>
+${eyes.nameHTML()}can not see any tears, as they cautiously approach, but strange puffs of...is that steam?
+<br><br>
+The woman finally notices them and stands up.
+<br><br>
+Their laughter, their sobbing rises to a crescendo and their hair ignites. 
+<br><br>
+${leg.nameHTML()}  goes to run but it's already too late. 
+<br><br>
+The mall sinks down in an almost embrace as the heat of her body warps the ceiling tiles above and begins a cave in. 
+<br><br>
+The mall lights up like a candle, taking everything with it.
+<br><br>
+The.
+<br><br>
+End.
+<br><br>
+Is.
+<br><br>
+Dead.
+${riaFireImage}
+`;
+
+        } else {
+            intro.innerHTML = `${eyes.nameHTML()} hears a strange sound...something between a tea kettle and a sob, with a thread of almost laughter throughout it. 
+
+After several minutes they track it down to a strange woman, wandering with a shell shocked look on her face..  Her face is covered in soot, besides twin streaks of shockingly clean skin, directly under her eyes. 
+
+${eyes.nameHTML()}  can not see any tears, as they cautiously approach, but strange puffs of...is that steam?
+
+The woman finally notices them and looks towards them.
+
+Their laughter, their sobbing rises to a crescendo and their hair ignites. 
+
+${leg.nameHTML()}   goes to run but it's already too late. 
+
+The mall sinks down in an almost embrace as the heat of her body warps the ceiling tiles above and begins a cave in. 
+
+The mall lights up like a candle, taking everything with it.
+
+The.
+
+End.
+
+Is.
+
+Dead.
+`;
+        }
+
+        game.fireApocalypse = true;
+    }
+
+    /*she remembers the world has good worth saving. like witherby. like leehunter. she won't burn it ALL. just you. 
+
+    neville and ria shake hands at the idea of losing specific people will cause them to throw everything away
+
+    for ria its the love of her life, camille
+    for neville is the sister he never had the good luck to be born with
+
+    but unlike ria
+
+    neville can not be reminded the world has worth
+
+    he will simply remove it all
+
+    anyone who joins him in the bunker that he likes, they'll be safe
+    but anything outside
+    anyONE outside
+    its not relevant anymore
+    not to him
+
+    but ria is stronger than she thinks
+    stronger than most people think
+
+    she just...all she has ever wanted, was the tiny candle of hope to remain lit inside her
+    show her one thing, ANY one thing, worth saving, and she'll try
+    by god she'll try
+
+    its only when despair ENTIRELY consumes her, that her rage burns it all away
+    */
+    const burn = (friendText) => {
+        /*
+        *under normal circumstances she's not on the "kill" team
+but she kinda....
+its no http://farragofiction.com/GhoulishThing/
+but she thinks she has to "carry on" camille's work
+in her deranged grieving state
+poor ria
+
+        */
+        intro.innerHTML = `${eyes.nameHTML()}  hears a strange sound, somewhere between a laugh and a sob.
+<br><Br>
+After several minutes they track it down to a strange woman, wandering with a mournful expression on her face..  Her face is smeared with soot, and a sheen of unhealthy looking sweat. 
+<br><Br>
+${friendText}
+<br><br>
+She is muttering something, something ${eyes.nameHTML()}  can just barely make out. Over and over saying 'she would have wanted this she would have wanted this she would have wanted this i have to contain them i have to contain them'. 
+<br><Br>
+The area around her begins to shimmer, and ${playerNames} don't even have time to run before they are burned to a crisp.
+<br><br>${riaFireImage}
+`
+        for (let corpse of location.players) {
+            corpse.kill("charred to a crisp, blackened figure somehow identifiable")
+        }
+
+        me.chosen_name = "Ria Keeps Hope Alive";//but not you, you don't live
+        return;
+
+    }
+
+    let hasFriend;
+    //if you are actively attending  a funeral, NO one is your friend
+    if (!funeral) {
+        hasFriend = location.events.includes(wibbysConfession) ? `Behind her is the shadow of a single man, frost rising from him in glittering waves. There is something cold about him. He points a single finger, silently, towards ${playerNames}. 
+<br><Br>
+The strange woman turns, and begins staggering towards them.` : undefined;
+        if (!hasFriend) {
+            //check for leehunter's polycule
+            const leehunterText = `Behind her is a crowd of people in black and white uniforms, each holding an instrument. In unison , they silently point towards [NAME]. 
+
+The strange woman turns, and begins staggering towards them.
+`;
+
+            if (currentLocation.infinite) {
+                hasFriend = leehunterText; //leehunter will find their Conductor and give her Purpose
+            } else {
+                for (let player of living) {
+                    if (player.musical) {
+                        hasFriend = leehunterText; //leehunters polycule will find their Conductor and give her Purpose
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    if (hasFriend) {
+        return burn(hasFriend);
+    } else {
+        return explode();
+    }
+
+
+}
+
+//the two ria events are Ria Warn and Ria Mourn and theres something correct about this
+const riaMourn = makeEventSubType("Ria Mourns", riaMournInternalConditionCheck, riaMournApplyResult);
 
 
 
@@ -1205,7 +1448,7 @@ she can't help but become attached to people
 camillenternalConditionCheck = (game, location) => {
     /*
     camille glances over whoever is here and if they pique her interest she might go breathe on them and be all :3 and silent
-
+ 
     she doens't really care if you're alive or dead or a mannequin or whatever tho
     
     a blorbo is a blorbo
@@ -2179,17 +2422,17 @@ const devonaapplyResult = (game, location, parent, me) => {
     h3.innerText = "Important Event: " + me.name;
     /*
     devona is COMPLICATED to encounter (unlike neville)
-
+ 
     FIRST you need to see her (hard, she's good at hiding)
     then you need to CATCH her (not that hard, she sweats just existing)
-
+ 
     THEN you need to interact with her 
     are you keyed up and ready to kill?  (hope you're ready to get hunted by a big were neville bird)
     are you strong enough to scare her into talking (you might not like what happens if you do)
     or does she just sort of awkwardly ask you to leave and then....you let her go)
-
+ 
     (TODO need four events total, devona/neville encounter and then devona/neville hunting (which gets added to general if the encounter goes poorly enough))
-
+ 
     */
 
     /*these might all be the same people, thats fine. all that matters is that 
@@ -2419,22 +2662,22 @@ She won't explode till she finds a Cultist.
 And she doesn't leave the Coffin till like, i dunno, ten ticks. 
 ticking time bomb
 So. 
-
+ 
 Ten ticks of her gnashing her teeth and wailing over a corpse, then a coffin. 
-
+ 
 Then, she starts wandering at random while freaking the fuck out. 
-
-
+ 
+ 
 However I think she should never explode in a parking lot, leehunter stabelize her.
 I think also if you encounter her in a room Wibby could spawn in, she should be calmer.
-
+ 
 she'll still kill you, but ONLY you. Not end the run.
 Ria is about connections.
 To Camille.
 To leeHunter
-
+ 
 To the twins
-
+ 
 To wibby.
 So.
 In order.
@@ -2444,28 +2687,28 @@ okay
 
 /*
 * Twins will add a Ria Encounter to the game (which can't trigger if a funeral is in progress). 
-
+ 
 * a regular, non despairing ria encounter has her sweat and ramble and try to PROVE to you that harvest fruit isn't good for the universe to get you to leave (I think if your Mind is high enough, that should work, unlike anything the twins attempt)
-
+ 
 * camille should try to randomly backstab anyone about to pick up harvest fruit , or about to be killed by some other means  (do i have eles i can grab for that? scan the document?) , if you have high tongue you can bait her into talking (the Cult knows these blorbos because they're looping now)
-
+ 
 * if camille dies, the place she dies in becomes a Funeral and has the Ria event inside where if you so much as look at her she explodes the mall
-
+ 
 * ten ticks after camille dies, the mall adds ria as a wandering encounter you can find anywhere
-
+ 
 * if wandering, grieving ria encounters you and something DOESN'T stop her , she blows up and ends your run
-
+ 
 * if ria is encountered somewhere leehunter or wibby could be encountered (check event list), she only kills the cultists in that room, but doesn't end the run
-
+ 
 * wibby encounter has him do Attachment work on you. If your tongue is low enough, he convinces you to leave. If your tongue is high enough, he snowqueen 
 breeches and the run ends UNLESS your arm is high enough to kill him first.   Also if you are a Sinner he freezes you to death without the other stuff happening
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
  i am currently delighted that i've made ria and wibby so simiilar
-
+ 
 they might just convince you to leave
 they might just kill you in particular
 they might just destroy the world
@@ -2474,5 +2717,8 @@ witherby is absolutely convinced that ria is his opposite
 
 
 
+//keep this as a constant and do NOT modify it, sessions should reset from this
+const generalEventsOriginal = [corruptionEvent, noWayOut, riaWarn, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
 //the events ANY room can have, not just shops
-const generalEvents = [corruptionEvent, noWayOut, riaWarn, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
+
+let generalEvents = [];

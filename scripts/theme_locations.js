@@ -348,3 +348,87 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
 
 }
 
+
+/*
+i wanted it to be clear, early on
+that its not
+100% certain
+for anyone
+even wanda
+if theres an unbroken chain between her and wodin
+in carving away pieces of himself 
+(and you know  DYING to even start)
+was wodin
+becoming something new
+or was
+something else
+using those pieces
+is what comes out of the coffin the person formerly known as wodin 
+or is it the frankenstein created from the pieces tossed away
+and is there a meaningful difference between those two possibilities
+
+
+
+its so fucked up for the intern
+because
+in HIS story
+wanda is stranger coded
+someone he doesn't know
+obsessed with him
+knowing too much
+acting too familiar
+suddenly claiming to be someone he knew
+and any differences....
+well
+circumstances would excuse that? right? whole new gender and 20 years older...
+but also
+wanda IS a stranger
+that isn't his childhood best friend
+thats some OTHER version
+from some other universe
+with some other best friend 
+at BEST
+
+
+wanda both is and isnt, in all possible ways, who she says she is
+and no one can point to where the line is between them
+cant even say that its certain that wanda is the original universes wodin
+even beyond ship of thesis identity
+because every universe has a wodin
+a different one
+and every wodin gets murdered
+what happens next?
+how many of those find their own hell mazes to wander?
+there could be a thousand wanderers
+but lord rules say
+theres only one wanda
+but its space, not time
+for all we know every dozen loops a new wanderer manages to metamorphosis in that cocoon
+and the setting follows the new wanda instead
+
+i think its impossible to know when the spiral started
+
+
+i think its fun to remember that NARRATIVES have fear themes 
+not as much people 
+unless they willingly become avatars
+depending on how you interact with wanda shes not Stranger at all
+shes Eye
+or Spiral
+or even web
+*/
+
+/*
+quotidians are the horror of the every day
+of what "normal" looks like through alien eyes
+
+i use them in eyedolgames.com to show
+how horrifying
+the things we find familiar can be
+
+(and of course, quotidian is an extant word, it means 'every day', its one reason why i named my stupid little crow species that)
+
+(the other being a Baccano Reference. I wanted them to basically be a whole species of info brokers like the Daily Days. So. Quotidian Quorom. A word that kinda means Daily and another word that is alliterative of it. )
+
+now you know
+*/
