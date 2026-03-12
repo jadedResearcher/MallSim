@@ -1239,7 +1239,7 @@ riaMournInternalConditionCheck = (game, location) => {
         canBurn = true;
     }
 
-    if (canBurn && game.rand.nextDouble() < 0.5) {
+    if (canBurn && game.rand.nextDouble() < 0.95) {
         return true;
     }
 
