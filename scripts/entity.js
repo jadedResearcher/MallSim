@@ -1186,6 +1186,9 @@ ${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly en
                         this.current_location.name = "Funeral"
                         //the highest priority thing that can possibly happen here now is ria mourning
                         this.current_location.events.unshift(riaMourn);
+                        generalEvents.unshift(riaMourn);//new places will be haunted by her grief
+                        game.addGeneralEventToAllLocations(riaMourn) //existing places will be haunted by her grief
+
                         this.inventory.push(item);
 
                         this.current_location.longer_name = FUNERAL_FOR_DEAD_BUTTERFLIES

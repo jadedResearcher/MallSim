@@ -507,6 +507,9 @@ class Game {
         //note CAN not loop on location because this MODIFIES location (expanding food court)
         for (let row_index = 0; row_index < this.map.length; row_index++) {
             for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
+                if (this.isItEpilogueTime()) {
+                    break;
+                }
                 const location = this.map[row_index][col_index];
                 if (location) {
                     if (location.movePlayersFromPendingToInternal()) {
@@ -562,6 +565,9 @@ class Game {
         //if yes, stop checking events
         for (let row_index = 0; row_index < this.map.length; row_index++) {
             for (let col_index = 0; col_index < this.map[row_index].length; col_index++) {
+                if (this.isItEpilogueTime()) {
+                    break;
+                }
                 const location = this.map[row_index][col_index];            //only locations with players 
                 if (!location) {
                     continue; //don't stop the for loop, move on, this isn't for us

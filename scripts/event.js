@@ -1215,22 +1215,31 @@ but also cardinal directions (ic made this joke)
 if you find this and im NOT calling them that, remind me i wanted to
 */
 riaMournInternalConditionCheck = (game, location) => {
-    //after ten ticks ria starts wandering the mall like a wraith (in theory if this somehow )
-    if (game.current_tick > game.tick_funeral_began + 10) {
-        if (!generalEvents.includes(riaMourn)) {
-            generalEvents.unshift(riaMourn);//new places will be haunted by her grief
-            game.addGeneralEventToAllLocations(riaMourn) //existing places will be haunted by her grief
-            console.log("JR NOTE: added ria mourning everywhere")
-        }
-
+    if (game.current_tick === game.tick_funeral_began) {
+        return false;
     }
-    const livingPlayers = location.livingNonMannequinPlayers();
+    console.log("JR NOTE: the funeral has begun")
+    //after ten ticks ria starts wandering the mall like a wraith
 
+    const livingPlayers = location.livingNonMannequinPlayers();
+    const funeral = location.longer_name.includes(FUNERAL_FOR_DEAD_BUTTERFLIES);
+    const tenPast = game.current_tick > game.tick_funeral_began + 10;
 
     if (!livingPlayers || !livingPlayers.length || livingPlayers.length === 0) {
         return false;
     }
-    if (game.tick_funeral_began || game.rand.nextDouble() < 0.95) {
+
+    let canBurn = false;
+    //if you've stumbled directly into the funeral, yes
+    if (funeral && game.tick_funeral_began) {
+        canBurn = true;
+    }
+    //otherwise if the funeral is over and ria is wandering around shellshocked with grief, yes
+    if (tenPast) {
+        canBurn = true;
+    }
+
+    if (canBurn && game.rand.nextDouble() < 0.5) {
         return true;
     }
 
@@ -1271,7 +1280,7 @@ riaMournApplyResult = (game, location, parent, me) => {
     h3.innerText = "Important Event: " + me.name;
     const livingPlayers = location.livingNonMannequinPlayers();
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
-    const riaFireImage = "<img src='http://farragofiction.com/TwoGayJokes/Stories/fire_girl.png'>";
+    const riaFireImage = "<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/ria_explodes.gif'>";
 
     const intro = createElementWithClassAndParent("p", ele);
     const eyes = getPartyHighestEyes(livingPlayers);
@@ -1287,7 +1296,7 @@ riaMournApplyResult = (game, location, parent, me) => {
 <br><br>
 After several minutes they track it down to a strange woman, hunched over a coffin emblazoned with a crimson butterfly.  Her face is covered in soot, besides twin streaks of shockingly clean skin, directly under her eyes. 
 <br><br>
-${eyes.nameHTML()}can not see any tears, as they cautiously approach, but strange puffs of...is that steam?
+${eyes.nameHTML()} can not see any tears, as they cautiously approach, but strange puffs of...is that steam?
 <br><br>
 The woman finally notices them and stands up.
 <br><br>
@@ -1311,28 +1320,29 @@ ${riaFireImage}
 
         } else {
             intro.innerHTML = `${eyes.nameHTML()} hears a strange sound...something between a tea kettle and a sob, with a thread of almost laughter throughout it. 
-
+<br><br>
 After several minutes they track it down to a strange woman, wandering with a shell shocked look on her face..  Her face is covered in soot, besides twin streaks of shockingly clean skin, directly under her eyes. 
-
-${eyes.nameHTML()}  can not see any tears, as they cautiously approach, but strange puffs of...is that steam?
-
+<br><br>
+${eyes.nameHTML()} can not see any tears, as they cautiously approach, but strange puffs of...is that steam?
+<br><br>
 The woman finally notices them and looks towards them.
-
+<br><br>
 Their laughter, their sobbing rises to a crescendo and their hair ignites. 
-
-${leg.nameHTML()}   goes to run but it's already too late. 
-
+<br><br>
+${leg.nameHTML()} goes to run but it's already too late. 
+<br><br>
 The mall sinks down in an almost embrace as the heat of her body warps the ceiling tiles above and begins a cave in. 
-
+<br><br>
 The mall lights up like a candle, taking everything with it.
-
+<br><br>
 The.
-
+<br><br>
 End.
-
+<br><br>
 Is.
-
+<br><br>
 Dead.
+${riaFireImage}
 `;
         }
 
@@ -1410,7 +1420,7 @@ The strange woman turns, and begins staggering towards them.` : undefined;
 The strange woman turns, and begins staggering towards them.
 `;
 
-            if (currentLocation.infinite) {
+            if (location.infinite) {
                 hasFriend = leehunterText; //leehunter will find their Conductor and give her Purpose
             } else {
                 for (let player of living) {
