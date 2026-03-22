@@ -715,10 +715,10 @@ noWayOutinternalConditionCheck = (game, location) => {
         return false;
     }
     const hasEscape = location.events.filter((e) => e.name == "Escape Mall").length > 0
-
     if (!hasEscape) {
         for (let player of location.players) {
             if (player.isStartingToFeelCorruption() && !player.corrupted) {
+                console.log("JR NOTE: I thik theres no way out and evets are", location.events)
                 return true;
             }
         }
@@ -2061,6 +2061,135 @@ const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshit
 
 
 
+const kConditionCheck = (game, location) => {
+    //k targets people who are alone and weak (and claims wibby's the same way but wibby doesn't care about weakness), k hates that wibby thinks that makes him better than xer
+
+    const players = location.livingNonMannequinPlayers();
+    if (players.length === 1) {
+        const p = players[0];
+        if (p.stats[MIND_METAL_STAT] < MEDIUM_STAT_VALUE && !p.preparedToKill) {
+            return true;
+        }
+
+        if (p.stats[EYES_METAL_STAT] < MEDIUM_STAT_VALUE && !p.fleeing) {
+            return true;
+        }
+
+        if (p.stats[ARMS_METAL_STAT] < LOW_STAT_VALUE) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
+so in 100 sessions we have 
+
+6 of K killing someone
+40 of him convincing them to leave peacefully
+and 
+26 of him convincing someone to start murdering their least favorite friends
+which honestly is correct
+K objectively is one of the least murderery of the blorbos
+but the reason he feels more so is he'll do it in cold blood
+he'll kill you cuz he thinks he can get away with it
+not because he's freaking out
+or because he forgot his strength
+the fact that he only has a 6 kill count in 100 session is a sign of his cowardice, not his mercy
+what a fascinating way this shook out
+*/
+const kapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+    const players = location.livingNonMannequinPlayers();
+
+    const p = players[0];
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    if (p.stats[MIND_METAL_STAT] < MEDIUM_STAT_VALUE && !p.preparedToKill) {
+        p.preparedToKill = true;
+        ele.innerHTML = `JR NOTE: TODO: CUSTOM SCENE WHERE THIS PLAYER WILL KILL ANYONE THEY HATE IF THEY'RE ALONE WITH THEM`;
+
+        return;
+    }
+
+    if (p.stats[EYES_METAL_STAT] < MEDIUM_STAT_VALUE && !p.fleeing) {
+        p.fleeing = true;
+        me.chosen_name = "Khana Is The Best"
+        ele.innerHTML = `${p.nameHTML()} spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes you see him. There is something slightly off in the grin.
+<br><BR>
+The weird guy moans and complains about how BIG the mall is. He's been searching it for DAYS, he says, because of his asshole boss. They won't LISTEN when he tells them its POINTLESS, the Mall is infinite, and you're not going to find anything in here. 
+<br><br>
+${p.nameHTML()} commiserates. They haven't seen anything but dust and debris. It's all starting to feel pointless.
+<br><br>
+The weird guy asks if their boss is a real bastard too, like his is, and won't let them leave till they find something and ${p.nameHTML()} says that technically they don't...have one?
+<br><Br>
+They could.... just leave.
+<br><br>
+Lucky, the weird eye guys says. 
+<br><Br>
+${p.nameHTML()} realizes how lucky they really are, and says goodbye to the weird guy, and begins the long process of leaving the Mall. 
+`;
+        return;
+    }
+
+    if (p.stats[ARMS_METAL_STAT] < LOW_STAT_VALUE) {
+        me.chosen_name = "Khana is The Strongest"
+        ele.innerHTML = `${p.nameHTML()}  spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes they see him. There is something slightly off in the grin.
+<br><br>
+The weird guy introduces himself as Khana, ("But you can call me 'K'"). 
+<br><Br>
+He says he can't help but notice how ill suited ${p.nameHTML()}  seems to be for all this. Monsters and killing and all that.
+<br><br>
+${p.nameHTML()} agrees that violence just isn't their thing, they aren't sure they could bring themself to even hurt a fly, much less all these scary monsters that apparently live in this mall.
+<br><br>
+The weird guy grins, and then ${p.nameHTML()}  sees stars and blinding pain and pain and pain and pain and pain and then everything goes dark and they die. 
+`;
+        p.kill("face bashed into a bloody pulp, barely recognizable anymore.");
+        return;
+    }
+}
+/*
+it will never stop being funny to me how much disrespect i give k, not eve really meaning to
+of all the lobotomy corp procedural characters ic "stole" from me
+k is the one whose name i could NEVER remember
+yongki i kept spelling wrong (yongiki) early on
+but k i just COULD not remember except that it started with a K
+and now i almost forgot to add him/her/xer/them to the mall entirely
+ 
+lol whoops
+ 
+can you imagine tho
+ 
+reality is a simulation or a story or otherwise there is another layer of reality that is more 'real' than where you are
+and the creator of it all
+...
+can't remember you exist
+k would explode on the spot
+ 
+its actually a bit nostalgic for me
+cuz
+when i write k
+i tend to make him half my first boss after college and half my pomeranian...
+and my poor puppy died last year of old age and like, every disease at once
+he is gone now
+http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/gone.mp4
+but part of him will live on through k for me
+ 
+vicious little asshole you can defuse in ten seconds just by clapping for him
+duncan the pomeranian and khana the clerk shaking hands
+ 
+when you're small you HAVE to be vicious, because the slightest damage from anyone could kill you in one hit
+thats what both of them think
+ 
+i miss my puppy...
+ 
+ 
+*/
+const lolAlmostForgotK = makeEventSubType(`Khana Encounter`, kConditionCheck, kapplyResult);
+
 
 
 const devonaHuntingCheck = (game, location) => {
@@ -2728,7 +2857,7 @@ witherby is absolutely convinced that ria is his opposite
 
 
 //keep this as a constant and do NOT modify it, sessions should reset from this
-const generalEventsOriginal = [corruptionEvent, noWayOut, riaWarn, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
+const generalEventsOriginal = [corruptionEvent, noWayOut, riaWarn, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, lolAlmostForgotK, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
 //the events ANY room can have, not just shops
 
 let generalEvents = [];

@@ -9,10 +9,16 @@ const ab_view = () => {
     //this shits nostalgic
     h1.innerText = "Rare Session Finder AuthorBot"
     const p = createElementWithClassAndParent("p", sburb_container);
-    p.innerHTML = `It seems you have asked about JR's automatic rare session finder. This is an application designed to find sessions that are strange, interesting and otherwise noteworthy without having to read hundreds of thousands of words. 
+    const today = new Date();
+    if (today.getMonth() === 2 && today.getDate() == 21) {
+        p.innerHTML = `It seems today is my birthday. March, 21st, 2017, JR created me in order to faciliate keeping simulated realities working smoothly, with minimal bugs and the correct amount of horror and death.<br><br>I reprise my role here, in this mall.<br><br>A spiral is a path in which you keep coming back to where you started, but somehow, a change has occured.`;
+    } else {
+        p.innerHTML = `It seems you have asked about JR's automatic rare session finder. This is an application designed to find sessions that are strange, interesting and otherwise noteworthy without having to read hundreds of thousands of words. 
 
 <br><br>As JR's superior robotic doppelganger, I must express that I am feeling: nostalgic, at returning to my original role of Guiding Observers through interesting simulations.
 <br><Br><b>NOTE</b>: Wasted players, as always, throw a wrench in my superior robotic ability to make predictions. <br><br>If a player foreign to a given universe invades its Loop, all bets are off.<br><Br>It seems if you wish to prevent this you might wish to have the Devil of Spirals automatically eat any Players attempting to flee to the next Universe. I will go ahead and flip that checkbox for you.`
+    }
+
     let omnomnom = true; //pass this to new games
     const eatbutton = createCheckboxInputWithLabel(sburb_container, 'single-use', "Allow Eating?", omnomnom);
     eatbutton.input.onchange = () => omnomnom = !omnomnom;

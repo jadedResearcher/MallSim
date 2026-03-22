@@ -1,6 +1,19 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["3/21/2025"] = `lol i got ria done a few days ago
+and almost forgot about k
+and then
+when i added k's skeleton event
+he was SO relevant
+no one could leave the mall
+because they were too busy
+looking at him/xer/her etc
+classic khana
+also
+happy birthay ab
+you're the best authorbot 
+anyone could ask for`
 dev_log["3/10/2026"] = `good news
 my laptop survived
 it took like a week to fix
