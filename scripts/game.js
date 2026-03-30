@@ -65,6 +65,7 @@ const getSouth = (map, row, col) => {
 class Game {
     corporateMandatedLove = false; //guess what day im writing this lol
     players = [];
+    radioPlaying = false;
     tick_funeral_began = undefined; //for camille and ria
     bunker_phase = 0; //is neville breaching x2 combo?
     hunting = false; //is one of the twins breaching?

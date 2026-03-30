@@ -2061,8 +2061,8 @@ const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshit
 
 
 const radioConditionCheck = (game, location) => {
-    const living = location.livingWastedPlayers();
-    if (living.length >= 2) {
+    const living = location.livingNonMannequinPlayers();
+    if (living.length > 0) {
         return game.rand.nextDouble() > 0.75;
     }
     return false;
@@ -2085,7 +2085,8 @@ const radioapplyResult = (game, location, parent, me) => {
     if (chosenKiller === chosenVictim) {
 
         //i genuinely think radio suicide is the scariest/best thing ive written in a while and i almost didn't write it
-        ele.innerHTML = `
+        ele.innerHTML = `<video controls src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/VideoTooSpookyForRotation/radio-moshed-03-30-18-17-29-737.mp4'></video>
+
 ${chosenKiller.nameHTML()} suddenly begins beating their own head against the nearest concrete wall of the mall. 
 <br><Br>
 Each THUNK! of their head against the unyielding stone in time to the grating hum coming from the mall's speakers. 
@@ -2120,7 +2121,9 @@ To rest.
 `;
         chosenVictim.kill("in a pool of blood, throat raggedly slit, head sunken and soft and bruised all across their right side")
     } else {
-        ele.innerHTML = `${chosenKiller.nameHTML()} tackles ${chosenVictim.nameHTML()} with a shocking speed. No hesitation as they slam a chunk of the crumbling mall into ${chosenVictim.nameHTML()}'s head again and again and again. The wet squelch and squelch and squelch making a rhythm that pulses in time with the grating hum coming from the mall's speakers.
+        ele.innerHTML = `<video controls src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/VideoTooSpookyForRotation/radio-moshed-03-30-18-17-29-737.mp4'></video>
+
+        ${chosenKiller.nameHTML()} tackles ${chosenVictim.nameHTML()} with a shocking speed. No hesitation as they slam a chunk of the crumbling mall into ${chosenVictim.nameHTML()}'s head again and again and again. The wet squelch and squelch and squelch making a rhythm that pulses in time with the grating hum coming from the mall's speakers.
 <br><Br>
 Finally the pattern is broken, the next squelch is weirdly solid. The one after that a clear THUNK!
 <br><Br>
@@ -2130,7 +2133,7 @@ ${chosenVictim.nameHTML()}'s head is simply a stain on the floor, not even enoug
 <br><Br>
 Finally, it cracks beyond use, falling from ${chosenKiller.nameHTML()}'s numb fingers. Blank static fills their eyes as they stagger to their feet, and begin searching for the next victim.
 `;
-        killer.sin_array.push(TEAM_KILLER)
+        chosenKiller.sin_array.push(TEAM_KILLER)
         chosenVictim.kill("head crushed to a bloody stain, chips of concrete all around them")
 
     }
@@ -2149,7 +2152,7 @@ const kConditionCheck = (game, location) => {
     const players = location.livingNonMannequinPlayers();
     if (players.length === 1) {
         const p = players[0];
-        if (p.stats[MIND_METAL_STAT] < MEDIUM_STAT_VALUE && !p.preparedToKill) {
+        if (!game.radioPlaying && p.stats[MIND_METAL_STAT] < LOW_STAT_VALUE) {
             return true;
         }
 
@@ -2241,7 +2244,8 @@ The weird guy's voice blares out "Attention shoppers, this next one's for you!".
 A maddening hum, somehow in time to ${p.nameHTML()}'s own heart. Violence. Hatred.
 <br><Br>
 All across the Mall, mindless violence thrums into life.
-`;
+<video controls  src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/VideoTooSpookyForRotation/radio-moshed-03-30-18-17-29-737.mp4'></video>
+`;// pleas of help, explosions, screams, and finally - silence. --https://lobotomycorp.fandom.com/wiki/1.76_MHz
 
         const allPlayers = game.players;
         for (let player of allPlayers) {
@@ -2249,6 +2253,7 @@ All across the Mall, mindless violence thrums into life.
             player.preparedToKill = true;
             player.fuckingHATEEveryoneInList(game.players);
         }
+        game.radioPlaying = true;
         generalEvents.unshift(radioViolence);
         game.addGeneralEventToAllLocations(radioViolence); //add it everywhere as well
 

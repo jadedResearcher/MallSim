@@ -76,7 +76,7 @@ anyways
 yeah
 my weather radio went off at midnight and scared the shit out of me
 and now you can enjoy it too
-<video src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/truth_warning.mp4'></video>`;
+<video controls loop src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/truth_warning.mp4'></video>`;
 /* i had a really hard day 2/26 so getting to make a small art from it is nice
 seriously
 a bad day full of really intense emotions and THEN i get jumpscared
