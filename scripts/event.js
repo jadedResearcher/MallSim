@@ -2060,6 +2060,88 @@ const wastesDoBullshitapplyResult = (game, location, parent, me) => {
 const wastesDoBullshit = makeEventSubType(`Wastes Do Bullshit`, wastesDoBullshitConditionCheck, wastesDoBullshitapplyResult);
 
 
+const radioConditionCheck = (game, location) => {
+    const living = location.livingWastedPlayers();
+    if (living.length >= 2) {
+        return game.rand.nextDouble() > 0.75;
+    }
+    return false;
+}
+
+const radioapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    const living = location.livingNonMannequinPlayers();
+
+    //quickest to action
+    const chosenKiller = getPartyHighestArms(living);
+    //slowest to run (if its yourself...uh...whoops, guess its self violence)
+    const chosenVictim = getPartyLowestLegs(living);
+
+    if (chosenKiller === chosenVictim) {
+
+        //i genuinely think radio suicide is the scariest/best thing ive written in a while and i almost didn't write it
+        ele.innerHTML = `
+${chosenKiller.nameHTML()} suddenly begins beating their own head against the nearest concrete wall of the mall. 
+<br><Br>
+Each THUNK! of their head against the unyielding stone in time to the grating hum coming from the mall's speakers. 
+<br><Br>
+Finally the pattern is broken, ${chosenKiller.nameHTML()} stumbles, falls. 
+<br><Br>
+They struggle to their feet but fall again.
+<br><Br>
+They crawl. Dazed. Static filling their eyes. 
+<br><Br>
+Crawl and crawl.
+<br><Br>
+Each painful movement in time to the radio hum. 
+<br><Br>
+Finally.
+<br><Br>
+Almost mercifully.
+<br><Br>
+They find a jagged shard of glass wedged in front of what had once been a display window.
+<br><Br>
+Blood spurts out of their throat, painting shocking streaks along the floor, gushing out ${chosenKiller.nameHTML()}'s life in time to the radio.
+<br><Br>
+Slower.
+<br><Br>
+Slower.
+<br><Br>
+Until finally.
+<br><Br>
+They are finally allowed.
+<br><Br>
+To rest.
+`;
+        chosenVictim.kill("in a pool of blood, throat raggedly slit, head sunken and soft and bruised all across their right side")
+    } else {
+        ele.innerHTML = `${chosenKiller.nameHTML()} tackles ${chosenVictim.nameHTML()} with a shocking speed. No hesitation as they slam a chunk of the crumbling mall into ${chosenVictim.nameHTML()}'s head again and again and again. The wet squelch and squelch and squelch making a rhythm that pulses in time with the grating hum coming from the mall's speakers.
+<br><Br>
+Finally the pattern is broken, the next squelch is weirdly solid. The one after that a clear THUNK!
+<br><Br>
+Thunk after thunk after thunk in time to the radio frequency humming out across the mall.
+<br><Br>
+${chosenVictim.nameHTML()}'s head is simply a stain on the floor, not even enough left to cushion the rapidly deteriorating chunk of concrete. 
+<br><Br>
+Finally, it cracks beyond use, falling from ${chosenKiller.nameHTML()}'s numb fingers. Blank static fills their eyes as they stagger to their feet, and begin searching for the next victim.
+`;
+        killer.sin_array.push(TEAM_KILLER)
+        chosenVictim.kill("head crushed to a bloody stain, chips of concrete all around them")
+
+    }
+
+
+}
+
+const radioViolence = makeEventSubType(`Radio Violence`, radioConditionCheck, radioapplyResult);
+
+
+
 
 const kConditionCheck = (game, location) => {
     //k targets people who are alone and weak (and claims wibby's the same way but wibby doesn't care about weakness), k hates that wibby thinks that makes him better than xer
@@ -2109,8 +2191,67 @@ const kapplyResult = (game, location, parent, me) => {
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
     if (p.stats[MIND_METAL_STAT] < MEDIUM_STAT_VALUE && !p.preparedToKill) {
-        p.preparedToKill = true;
-        ele.innerHTML = `JR NOTE: TODO: CUSTOM SCENE WHERE THIS PLAYER WILL KILL ANYONE THEY HATE IF THEY'RE ALONE WITH THEM`;
+        /*
+i was thinkingn the other day that it wouldn't work like i thought it would
+players don't have events
+locations do
+(a purposeful inversion of sburbsim, which doesn't even have locations, the MALL is the main character, and the only character that truly has agency within it in a meaningful way)
+so i can't treat it like a sburbsim thing
+if i want a new type of event where K's sleeper agent kills someone
+i need to make a new GENERAL event, and either mark K's victim in some way (like the twins do when hunting) or let ANYONE willing to kill in the same location as someone they hate willing to do it at random
+either way k needs to make the player ready to kill AND make them hate ... pretty much everyone in their party
+so they'll probably get it done
+is their a mechanical reason K would effect everyone instead of just one person?
+not directly
+can i make one?
+what if k learns everyones secrest from the low mind person?
+and from his own constant watching of everyone
+he acts like everyone else works for him soo
+could broadcast, on the shitty mall speakers, to everyone, ....
+oh
+K is
+about
+stealing
+what if he fucking steals Hoons radio
+which is of course
+which is of course https://lobotomycorp.fandom.com/wiki/1.76_MHz
+with hoon its twisted to a new purpose, controlling her and her alone (though subtly influcing people to be more quick to violece)
+but if k stole it from hoon, it wouldn't be tied to her anymore
+and would revert to normal behavior
+hoon should get the radio back at the end, cuz i don't want to complicate her event and make her EVEN rarer, when she's the side story mechanic
+        */
+
+        const hated = getLeastFavoriteOfEntity(p);
+        console.log("JR NOTE: they hate", hated)
+        me.chosen_name = "K Steals A Radio"
+        ele.innerHTML = `${p.nameHTML()} spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes you see him. There is something slightly off in the grin.
+<br><Br>
+The guy asks if they know ${hated.nameHTML()}, says they won't stop talking shit about someone called ${p.nameHTML()}. Really cruel stuff. Fucked up shit, actually. Oh, the THINGS ${hated.nameHTML()} plans to do to whoever the poor slob called ${p.nameHTML()} is. 
+<br><Br>
+Oh? That's you? Says the weird guy, a weird glint in his eye. Forget he said anything. 
+<br><Br>
+And off he goes.
+<br><Br>
+${p.nameHTML()} clenches their hand into a fist. ${hated.nameHTML()} will pay.
+<br><Br>
+They almost don't notice the mall's speaker system crackling to life. 
+<br><Br>
+The weird guy's voice blares out "Attention shoppers, this next one's for you!". 
+<br><Br>
+A maddening hum, somehow in time to ${p.nameHTML()}'s own heart. Violence. Hatred.
+<br><Br>
+All across the Mall, mindless violence thrums into life.
+`;
+
+        const allPlayers = game.players;
+        for (let player of allPlayers) {
+            //the radio drives you to violence and hatred
+            player.preparedToKill = true;
+            player.fuckingHATEEveryoneInList(game.players);
+        }
+        generalEvents.unshift(radioViolence);
+        game.addGeneralEventToAllLocations(radioViolence); //add it everywhere as well
+
 
         return;
     }

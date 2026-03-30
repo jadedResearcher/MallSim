@@ -172,6 +172,20 @@ const getRomanticPartnersOfEntity = (person) => {
     return ret;
 }
 
+//maybe you like them, maybe you hate them. don't care. they're your least favorite, the person you could most live without
+const getLeastFavoriteOfEntity = (person) => {
+    let person_ret;
+    let value_ret;
+    for (let [person_title, relationship] of Object.entries(person.relationships)) {
+        if (!person_ret || relationship.value < value_ret) {
+            person_ret = all_entities[person_title];
+            value_ret = relationship.value;
+        }
+    }
+    return person_ret;
+}
+
+
 
 
 const randomParty = (rand) => {
@@ -908,6 +922,8 @@ Want your bad romance
         }
     }
 
+
+
     doYouHateThisPerson = (person) => {
         if (!this.relationships[person.title]) {
             return false;
@@ -928,7 +944,7 @@ Want your bad romance
             if (r) {
                 r.value = -113;
             } else {
-                this.relationships[player.title] = new Relationship(-113, false, false)
+                this.relationships[player.title] = new Relationship(-2 * STRONG_RELATIONSHIP_VALUE, false, false)
             }
         }
     }

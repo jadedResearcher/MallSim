@@ -92,7 +92,7 @@ const grabEyesForThemeKey = (theme_key) => {
     mapping[MUSIC] = ["ria", "leehunter"];
     mapping[DEFENSE] = ["shield"];
     mapping[QUESTING] = ["quest"];
-
+    //green is not a creative color
     words = words.concat(mapping[theme_key]);
     words = words.concat(all_themes[theme_key].getPossibilitiesFor(OBJECT))
 
