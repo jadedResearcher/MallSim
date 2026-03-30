@@ -2152,11 +2152,11 @@ const kConditionCheck = (game, location) => {
     const players = location.livingNonMannequinPlayers();
     if (players.length === 1) {
         const p = players[0];
-        if (!game.radioPlaying && p.stats[MIND_METAL_STAT] < LOW_STAT_VALUE) {
+        if (game.rand.nextDouble() > 0.99 && !game.radioPlaying && p.stats[MIND_METAL_STAT] < LOW_STAT_VALUE) {
             return true;
         }
 
-        if (p.stats[EYES_METAL_STAT] < MEDIUM_STAT_VALUE && !p.fleeing) {
+        if (p.stats[EYES_METAL_STAT] < LOW_STAT_VALUE && !p.fleeing) {
             return true;
         }
 
@@ -2193,7 +2193,44 @@ const kapplyResult = (game, location, parent, me) => {
     const p = players[0];
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
-    if (p.stats[MIND_METAL_STAT] < MEDIUM_STAT_VALUE && !p.preparedToKill) {
+    if (p.stats[EYES_METAL_STAT] < LOW_STAT_VALUE && !p.fleeing) {
+        p.fleeing = true;
+        me.chosen_name = "Khana Is The Best"
+        ele.innerHTML = `${p.nameHTML()} spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes you see him. There is something slightly off in the grin.
+<br><BR>
+The weird guy moans and complains about how BIG the mall is. He's been searching it for DAYS, he says, because of his asshole boss. They won't LISTEN when he tells them its POINTLESS, the Mall is infinite, and you're not going to find anything in here. 
+<br><br>
+${p.nameHTML()} commiserates. They haven't seen anything but dust and debris. It's all starting to feel pointless.
+<br><br>
+The weird guy asks if their boss is a real bastard too, like his is, and won't let them leave till they find something and ${p.nameHTML()} says that technically they don't...have one?
+<br><Br>
+They could.... just leave.
+<br><br>
+Lucky, the weird eye guys says. 
+<br><Br>
+${p.nameHTML()} realizes how lucky they really are, and says goodbye to the weird guy, and begins the long process of leaving the Mall. 
+`;
+        return;
+    }
+
+    if (p.stats[ARMS_METAL_STAT] < LOW_STAT_VALUE) {
+        me.chosen_name = "Khana is The Strongest"
+        ele.innerHTML = `${p.nameHTML()}  spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes they see him. There is something slightly off in the grin.
+<br><br>
+The weird guy introduces himself as Khana, ("But you can call me 'K'"). 
+<br><Br>
+He says he can't help but notice how ill suited ${p.nameHTML()}  seems to be for all this. Monsters and killing and all that.
+<br><br>
+${p.nameHTML()} agrees that violence just isn't their thing, they aren't sure they could bring themself to even hurt a fly, much less all these scary monsters that apparently live in this mall.
+<br><br>
+The weird guy grins, and then ${p.nameHTML()}  sees stars and blinding pain and pain and pain and pain and pain and then everything goes dark and they die. 
+`;
+        p.kill("face bashed into a bloody pulp, barely recognizable anymore.");
+        return;
+    }
+
+
+    if (p.stats[MIND_METAL_STAT] < MEDIUM_STAT_VALUE && !game.radioPlaying) {
         /*
 i was thinkingn the other day that it wouldn't work like i thought it would
 players don't have events
@@ -2261,42 +2298,9 @@ All across the Mall, mindless violence thrums into life.
         return;
     }
 
-    if (p.stats[EYES_METAL_STAT] < MEDIUM_STAT_VALUE && !p.fleeing) {
-        p.fleeing = true;
-        me.chosen_name = "Khana Is The Best"
-        ele.innerHTML = `${p.nameHTML()} spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes you see him. There is something slightly off in the grin.
-<br><BR>
-The weird guy moans and complains about how BIG the mall is. He's been searching it for DAYS, he says, because of his asshole boss. They won't LISTEN when he tells them its POINTLESS, the Mall is infinite, and you're not going to find anything in here. 
-<br><br>
-${p.nameHTML()} commiserates. They haven't seen anything but dust and debris. It's all starting to feel pointless.
-<br><br>
-The weird guy asks if their boss is a real bastard too, like his is, and won't let them leave till they find something and ${p.nameHTML()} says that technically they don't...have one?
-<br><Br>
-They could.... just leave.
-<br><br>
-Lucky, the weird eye guys says. 
-<br><Br>
-${p.nameHTML()} realizes how lucky they really are, and says goodbye to the weird guy, and begins the long process of leaving the Mall. 
-`;
-        return;
-    }
-
-    if (p.stats[ARMS_METAL_STAT] < LOW_STAT_VALUE) {
-        me.chosen_name = "Khana is The Strongest"
-        ele.innerHTML = `${p.nameHTML()}  spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes they see him. There is something slightly off in the grin.
-<br><br>
-The weird guy introduces himself as Khana, ("But you can call me 'K'"). 
-<br><Br>
-He says he can't help but notice how ill suited ${p.nameHTML()}  seems to be for all this. Monsters and killing and all that.
-<br><br>
-${p.nameHTML()} agrees that violence just isn't their thing, they aren't sure they could bring themself to even hurt a fly, much less all these scary monsters that apparently live in this mall.
-<br><br>
-The weird guy grins, and then ${p.nameHTML()}  sees stars and blinding pain and pain and pain and pain and pain and then everything goes dark and they die. 
-`;
-        p.kill("face bashed into a bloody pulp, barely recognizable anymore.");
-        return;
-    }
 }
+
+
 /*
 it will never stop being funny to me how much disrespect i give k, not eve really meaning to
 of all the lobotomy corp procedural characters ic "stole" from me
