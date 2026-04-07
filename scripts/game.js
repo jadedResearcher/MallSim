@@ -1232,6 +1232,10 @@ its so normal
             const body = document.querySelector("body");
 
             const k_is_so_normal = async () => {
+                //yes this means if you're not letting peewee eat wastes if you're in ab mode you'll get absolutely fucking SPAMMED with k's...that's your fate. peewee eats wastes and also excess k's, this is canon now
+                if (this.eatWastesAutomatically) {
+                    return;
+                }
                 const detail = createElementWithClassAndParent("p", body, "kBreach");
 
                 detail.innerHTML = `<img style='width: ${game.rand.getRandomNumberBetween(10, 50)}%; left: ${game.rand.getRandomNumberBetween(150, -150)}%; top: ${game.rand.getRandomNumberBetween(-100, 100)}%;' src='${this.rand.pickFrom(images)}'>LOOK AT ME LOOK AT ME LOOK AT MELOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME`;
@@ -1240,6 +1244,18 @@ its so normal
                 await sleep(500);
                 k_is_so_normal();
             }
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
             k_is_so_normal();
             k_is_so_normal();
             k_is_so_normal();

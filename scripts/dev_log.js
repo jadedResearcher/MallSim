@@ -1,6 +1,9 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["4/6/26"] = `lol instead of wiring up k and finishing up the last of the 'serious' scenes
+i collaborated with kr to make cool nasa stuff (they got an analog casette recorder during the artemis 2 stuff)
+i have decided k now resents the moon`
 
 dev_log["3/31/26"] = `theres something just right
 about setting up the west
