@@ -2146,8 +2146,57 @@ const radioViolence = makeEventSubType(`Radio Violence`, radioConditionCheck, ra
 
 
 
+
 const kConditionCheck = (game, location) => {
     //k targets people who are alone and weak (and claims wibby's the same way but wibby doesn't care about weakness), k hates that wibby thinks that makes him better than xer
+
+    const kMap = {
+        "Khana Is The Best": 0,
+        "Khana is The Strongest": 0,
+        "K Steals A Radio": 0,
+        "Khana Encounter": 0,
+
+
+    }
+    let amountK = 0;
+    for (let event of game.event_list) {
+        for (let key of Object.keys(kMap)) {
+            if (event === key) {
+                kMap[key]++;
+                amountK++;
+            }
+        }
+
+    }
+
+    const uniqueK = () => {
+        let ret = 0;
+        for (let value of Object.values(kMap)) {
+            if (value > 0) {
+                ret++;
+            }
+        }
+        return ret;
+    }
+
+
+
+    if (game.current_tick > 150 && amountK === 0) {
+        console.log("JR NOTE: K is small")
+        game.kTooLittle = true;
+        return true;
+    } else if (amountK > 13 || uniqueK >= 3) {
+        console.log("JR NOTE: K is big")
+
+        game.kTooBig = true;
+        return true;
+    }
+    /*if its been 150 ticks and no one has seen even one K, they throw a fit
+    OR if you've seen TOO much K they ALSO throw a fit
+    k is a creature you have to very carefully keep in balance
+    not too mmuch given to them
+    not too little
+    */
 
     const players = location.livingNonMannequinPlayers();
     if (players.length === 1) {
@@ -2188,11 +2237,56 @@ const kapplyResult = (game, location, parent, me) => {
 
     const h3 = createElementWithClassAndParent("h3", cont);
     h3.innerText = "Important Event: " + me.name;
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    if (game.kTooLittle) {
+        me.chosen_name = "Khana Will Be Seen"
+        game.event_list = []; //nothing else matters
+        ele.innerHTML = `<img src='http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/k_alsoomg.jpg'><span style='font-size: 32px;'>YOU THINK YOU CAN DISRESPECT ME, HUH? YOU THINK I'M LESS THAN THOSE CHUCKLEFUCKS IN TRAINING. THAN FUCKING YONGKI. YOU THINK I DON'T DESERVE YOUR ATTENTION? WELL GUESS WHAT, ASSHOLE. 
+<br><Br>
+YOU.
+<br><Br>
+WILL.
+<br><Br>
+SEE ME.</span>
+`;
+        //(end expedition, replace bg with all the k pics i found in the illusionist plus anything else i can find)
+        return;
+    } else if (game.kTooBig) {
+        //http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/BurrowingHeavenBreach.png
+        me.chosen_name = "Everyone Loves Khana"
+        game.event_list = []; //has anything even happened else that matters?
+        ele.innerHTML = `Yeah. I AM great, aren't I?
+<br><Br>
+You've enjoyed it, haven't you? All the scenes I've been in?
+<br><Br>
+Probably hated all those boring ass scenes with, what, shopping?
+<br><Br>
+Why not give the masses what they want?
+<br><Br>
+MallSim?
+<br><Br>
+No.
+<br><Br>
+Fuck no.
+<br><Br>
+KSim. 
+<br><Br>
+Me.
+<br><Br>
+All the time me.
+<br><Br>
+Let's do this!
+`
+        return;
+    }
+
+
+
     const players = location.livingNonMannequinPlayers();
 
     const p = players[0];
 
-    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
     if (p.stats[EYES_METAL_STAT] < LOW_STAT_VALUE && !p.fleeing) {
         p.fleeing = true;
         me.chosen_name = "Khana Is The Best"

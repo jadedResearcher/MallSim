@@ -66,6 +66,8 @@ class Game {
     corporateMandatedLove = false; //guess what day im writing this lol
     players = [];
     radioPlaying = false;
+    kTooLittle = false;
+    kTooBig = false;
     tick_funeral_began = undefined; //for camille and ria
     bunker_phase = 0; //is neville breaching x2 combo?
     hunting = false; //is one of the twins breaching?
@@ -265,6 +267,14 @@ class Game {
             }
             return true;
         }
+
+        if (this.kTooLittle) {
+            for (let player of this.players) {
+                player.kill("HOW DARE YOU LOOK AT ANYONE BUT ME!"); //thems the breaks
+            }
+            return true;
+        }
+
 
         if (this.fireApocalypse) {
             for (let player of this.players) {
@@ -1195,6 +1205,53 @@ its so normal
             this.summary.setEnding("Fruit Ending", this.current_tick);
             const detail = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             detail.innerHTML = `The Wasted Trickster Lonesome Witch of Threaded Motivation has turned all oxygen into fruit. The entire party is crushed to death, slowly, under all that weight. They...really should not have let her eat the Harvest Fruit!`;
+
+        }
+
+        if (this.kTooLittle) {
+            this.summary.setEnding("Give Me Your Gaze", this.current_tick);
+            const images = ['http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/SchadenfreudeBreach.png',
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/SchadenfreudeBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/SchadenfreudeBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/SchadenfreudeBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/SchadenfreudeBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/SchadenfreudeBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/BurrowingHeavenBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/BurrowingHeavenBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/BurrowingHeavenBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/BurrowingHeavenBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/BurrowingHeavenBreach.png'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/intermissionk.jpg'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/vriskakin.jpg'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/boredk.jpg'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/k_bywhichimean_alt.jpg'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/k_alsoomg.jpg'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/k_alsoomg.jpg'
+                , 'http://farragofiction.com/TwoGayJokes/Stories/IllusionistArt-StridingFeather/k_alsoomg.jpg'
+            ]
+            const body = document.querySelector("body");
+
+            const k_is_so_normal = async () => {
+                const detail = createElementWithClassAndParent("p", body, "kBreach");
+
+                detail.innerHTML = `<img style='width: ${game.rand.getRandomNumberBetween(10, 50)}%; left: ${game.rand.getRandomNumberBetween(150, -150)}%; top: ${game.rand.getRandomNumberBetween(-100, 100)}%;' src='${this.rand.pickFrom(images)}'>LOOK AT ME LOOK AT ME LOOK AT MELOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME LOOK AT ME`;
+                await sleep(4000);
+                detail.remove();
+                await sleep(500);
+                k_is_so_normal();
+            }
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
+            k_is_so_normal();
 
         }
 

@@ -160,7 +160,7 @@ const getFamilyOfEntity = (person) => {
     }
     return ret;
 }
-
+//scary story idea, you see the date everything will die around you and its all the same date and its not very far off... ...and when you look in the mirror, your date is a single day before hand.  to know something HUGE will kill so many people, but to also know you'll NEVER find out what it was...how fucked up would that be
 const getRomanticPartnersOfEntity = (person) => {
     const ret = [];
     for (let [key, value] of Object.entries(person.relationships)) {

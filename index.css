@@ -91,6 +91,18 @@ h3 {
   color: white;
 }
 
+.kBreach {
+  position: relative;
+
+  img {
+    position: fixed;
+  }
+
+  img:hover {
+    opacity: 0.1;
+  }
+}
+
 .subtitle {
   font-family: nunito;
   margin-left: 120px;

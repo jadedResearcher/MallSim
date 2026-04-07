@@ -1,7 +1,29 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
-dev_log["3/21/2025"] = `lol i got ria done a few days ago
+
+dev_log["3/31/26"] = `theres something just right
+about setting up the west
+for the first
+http://farragofiction.com/AdventureSimWest/?nostalgia=author_bot_and_jr_teamup.txt
+got my backup of the current west (and not gonna bother adding it to the list in west proper, you can only find it from here from now on, unless i forget and do it anyways)
+which kinda turned into another alternate devlog
+but ic and i will be doing our traditional live shitposting
+it used to be
+april fools
+was when we got to go hard on puzzles and riddlefuckery and confusion
+but now
+zampanio lets that be EVERY day
+so
+april fools becomes more about
+the live stuff
+zampanio woulda been 56 years old today
+isn't that wild?`;
+
+
+dev_log["3/30/2026"] = `k is bastard
+that is all`
+dev_log["3/21/2026"] = `lol i got ria done a few days ago
 and almost forgot about k
 and then
 when i added k's skeleton event
