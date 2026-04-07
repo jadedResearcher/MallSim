@@ -3,7 +3,12 @@ const dev_log = {}
 
 dev_log["4/6/26"] = `lol instead of wiring up k and finishing up the last of the 'serious' scenes
 i collaborated with kr to make cool nasa stuff (they got an analog casette recorder during the artemis 2 stuff)
-i have decided k now resents the moon`
+i have decided k now resents the moon
+BUT
+but
+i got both breaches wired up tonight so
+all is good
+`
 
 dev_log["3/31/26"] = `theres something just right
 about setting up the west

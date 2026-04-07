@@ -2179,13 +2179,13 @@ const kConditionCheck = (game, location) => {
         return ret;
     }
 
-
-
+    //https://ttftcuts.github.io/Parchment-Map/
+    console.log("JR NOTE: amountK is", amountK)
     if (game.current_tick > 150 && amountK === 0) {
         console.log("JR NOTE: K is small")
         game.kTooLittle = true;
         return true;
-    } else if (amountK > 13 || uniqueK >= 3) {
+    } else if (amountK > 2 || uniqueK >= 2) {
         console.log("JR NOTE: K is big")
 
         game.kTooBig = true;

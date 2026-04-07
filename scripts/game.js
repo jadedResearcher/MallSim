@@ -317,6 +317,31 @@ class Game {
         return ret;
     }
 
+    kTick = (parent) => {
+        const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
+        const header = createElementWithClassAndParent("h2", tick_container, "story-title");
+        header.innerText = `Everyone Loves Khana!!!!!!!!!!!!!!!!!`;
+        const start_phrase = createElementWithClassAndParent("div", tick_container, "sub-story-beat");
+        //yeah, burrowing heaven is supposed to breach with too LITTLE attention, but the ego gear is reversed for schadenfreud so here we are
+        const possibilitiesRaw = `K twirls his huge wrench for a while, throwing it up and down and catching it with a flourish. Everyone is impressed at how strong and skilled you'd have to be to do that.
+        K tries on various outfits while everyone claps.
+        K has red veins spread in every direction, eyes upon eyes upon eyes all with which to Gaze upon him.
+        K dyes xer hair a new color and preens while everyone gazes upon it.
+        K raids the various clothins stores of the mall and tries on every outfit.
+        K eats tasty food while everyone watches, jealously.
+        K edits wikipedia, making sure to dilligently erase all the boring facts and replace them with lies about xerself.
+        K explains to Yongki that snails are the premium shit, they have little houses, unlike slugs, which are losers.
+        K bullies a random mannequin and prooves how strong she is.
+        K tries on a few new pronouns for size. He is so boring, right? Xer sounds fun! Ooo or what about fae?
+        K calls a local politician and bullies them into setting up a new law just for him.
+        K tries texting his ex, Alt, who is clearly too shy and embarassed to respond. He gets it, not everone knows how to handle a 10 out of 10 like himself, their single night of passionate love making must have been too much for her little brain to handle.
+        `;
+
+        const possibilities = possibilitiesRaw.split("\n")
+        start_phrase.innerHTML = this.rand.pickFrom(possibilities);
+
+    }
+
     /*
         locations tick, not people (the mall is alive)
         each tick, look for locations that are awake (blood inside them)
@@ -329,6 +354,10 @@ class Game {
         "The twisted shops and forlorn geometry get worse the longer it suffers, he knows. It needs people. Like a body needs blood. Needs to have objects moved out of it, like blood cells moving oxygen. Helps it think better. Remember what it's supposed to be better."
     */
     tick = (parent) => {
+
+        if (this.kTooBig) {
+            return this.kTick(parent)
+        }
         if (this.finished) {
             return;
         }
