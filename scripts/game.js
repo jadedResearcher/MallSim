@@ -1610,6 +1610,13 @@ its so normal
             ab_view();
         }
 
+        const achieve_button = createElementWithClassAndParent("button", tick_bar, "tick-button survive-button");
+        achieve_button.innerText = "Achieve";
+        achieve_button.onclick = () => {
+            truthView();
+        }
+
+
 
         const survive_button = createElementWithClassAndParent("button", tick_bar, "tick-button survive-button");
         survive_button.innerText = "Survive";

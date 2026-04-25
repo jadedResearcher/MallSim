@@ -131,6 +131,19 @@ body.survival {
   color: red;
 }
 
+a {
+  color: lime;
+  margin-bottom: 13px;
+}
+
+a:visited {
+  color: lime;
+}
+
+a:hover {
+  color: limegreen;
+}
+
 body.author-bot {
   background-color: grey;
   background-image: url(images/ab_bg.png);
