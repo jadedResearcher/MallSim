@@ -103,6 +103,11 @@ h3 {
   }
 }
 
+.instructions {
+  font-weight: 300;
+  font-style: italic;
+}
+
 .subtitle {
   font-family: nunito;
   margin-left: 120px;

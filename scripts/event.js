@@ -470,17 +470,17 @@ const wibbyapplyResult = (game, location, parent, me) => {
         ele.innerHTML = `${player.nameHTML()} is poking around the ${location.longer_name} when they hear a polite little cough behind them.
 
 A well dressed man, probably older than them, gives them an affable nod of greeting. 
-
+<br><Br>
 He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
-
-Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
-
+<br><Br>
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives them.
+<br><Br>
 ${player.nameHTML()}  breaks down sobbing, falling to their knees at the redemption, the new lease on life.
-
+<br><Br>
 The well dressed man kneels next to them, and tells them of the Sin they almost committed. The dangers of the Harvest Fruit. 
-
+<br><Br>
 ${player.nameHTML()} vows to turn their life around, to help their friends realize the errors of their ways as well.
-
+<br><Br>
 They barely notice that they are alone when they finally dry their tears and rise to their feet.
 `;
 
@@ -511,15 +511,15 @@ They barely notice that they are alone when they finally dry their tears and ris
         ele.innerHTML = `${player.nameHTML()} is poking around the ${location.longer_name}  when they hear a polite little cough behind them.
 
 A well dressed man, probably older than them, gives them an affable nod of greeting. 
-
+<br><Br>
 He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
-
-Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
-
+<br><Br>
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives them.
+<br><Br>
 ${player.nameHTML()}  almost falls to their feet in the quiet relief of that forgiveness, head bowed.
-
+<br><Br>
 In this unobserved moment, the well dressed man gives them a coldly calculating look, then turns on his heel.
-
+<br><Br>
 ${player.nameHTML()}  is left alone.
 `;
         player.addCorruption(113);
@@ -541,7 +541,7 @@ A well dressed man, probably older than them, gives them an affable nod of greet
 <br><br>
 He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()} .
 <br><br>
-Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives them.
 <br><br>
 ${player.nameHTML()} vibrates with rage. How DARE this man draw those words out of them. How DARE he drag their secrets out of them. Who does he even think he is? Does he just lurk in abandoned malls waiting to catch people one on one so he can manipulate them?
 <br><br>
@@ -573,7 +573,7 @@ A well dressed man, probably older than them, gives them an affable nod of greet
 <br><br>
 He asks if everything is alright, and the words seem to just spill out of ${player.nameHTML()}.
 <br><br>
-Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives him.
+Every regret they've ever had, every guilty thought, every sin, all of it hangs quivering in the air between them, the tension vibrating until, gently, the well dressed man forgives them.
 <br><br>
 ${player.nameHTML()}  vibrates with rage. How DARE this man draw those words out of them. How DARE he drag their secrets out of them. Who does he even think he is? Does he just lurk in abandoned malls waiting to catch people one on one so he can manipulate them?
 <br><br>
@@ -868,7 +868,8 @@ And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds
         let flavor = `They cannot believe their luck when they stumble upon a ${item.name}!`;
 
         if (shopper.corrupted) {
-            flavor = `Nothing as mundane as a mouth yawns open across the blank ${shopper.mannequin_type} expanse of their face,  stretching impossibly wide over a single ${item.name} they happened to fall onto.`;
+            me.chosen_name = "Impossible Mouth"
+            flavor = `Nothing as mundane as a mouth yawns open across the blank ${shopper.mannequin_type} expanse of their face,  stretching impossibly wide over a single ${item.name} they happened to fall onto. <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/get_ahead-moshed-02-01-10-05-10-088.gif'>`;
         } else if (shopper_highest_stat.key === MIND_METAL_STAT) {
             flavor = `They finally put the pieces together and solve the Riddle of the Mall, revealing a single ${item.name} nestled in a seemingly empty locker.`;
         } else if (shopper_highest_stat.key === EYES_METAL_STAT) {
@@ -1731,7 +1732,7 @@ const eyeKillerGetsYouapplyResult = (game, location, parent, me) => {
             } else {
                 artMurderVictim.kill(`artfully arranged meat and blood and organs and bones and teeth spelling out 'Stop Hunting Me' in large letters, with the eyeless head of ${artMurderVictim.nameHTML()} delicately placed in the center.`);
             }
-            ele.innerHTML += `The EyeKiller shows her stabs to ${formerName}. Repeatedly. You can't tear your eyes away from the glistening blade and the red blood and the meat that spews out from so so many cuts. Your eyes are drawn to each wound, as you helplessly catalog all the ways you COULD help, if you were in the same universe as the poor, poor victim. If there were just one fewer stab...  The Mirroed Quatro Blade whispers to you all the ways this death could be prevented, but alas... there is nothing you can do.`
+            ele.innerHTML += `The EyeKiller shows her stabs to ${formerName}. Repeatedly. You can't tear your eyes away from the glistening blade and the red blood and the meat that spews out from so so many cuts. Your eyes are drawn to each wound, as you helplessly catalog all the ways you COULD help, if you were in the same universe as the poor, poor victim. If there were just one fewer stab...  The Mirrored Quatro Blade whispers to you all the ways this death could be prevented, but alas... there is nothing you can do.`
 
         }
 
@@ -2180,7 +2181,6 @@ const kConditionCheck = (game, location) => {
     }
 
     //https://ttftcuts.github.io/Parchment-Map/
-    console.log("JR NOTE: amountK is", amountK)
     if (game.current_tick > 150 && amountK === 0) {
         console.log("JR NOTE: K is small")
         game.kTooLittle = true;

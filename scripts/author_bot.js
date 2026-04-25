@@ -119,7 +119,7 @@ const ab_view = () => {
 
 const simulateOneSession = (seed, omnomnom, session_summary_container, globalSummaryCallback) => {
     const startTime = performance.now();
-    game = new Game(new SeededRandom(seed), omnomnom);
+    game = new Game(new SeededRandom(seed), omnomnom, true);
     const throw_away_ele = document.createElement("div");
     //create a div but don't give it an attached dom to render to (will be very fast, react uses a virtual dom like this and apparently past me did too)
     game.start(throw_away_ele);

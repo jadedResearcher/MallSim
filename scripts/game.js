@@ -65,6 +65,7 @@ const getSouth = (map, row, col) => {
 class Game {
     corporateMandatedLove = false; //guess what day im writing this lol
     players = [];
+    abMode = false;
     radioPlaying = false;
     kTooLittle = false;
     kTooBig = false;
@@ -92,11 +93,12 @@ class Game {
     //each row is a row in the map
     //each cell is either undefined or a room in the mall
     map = [];
-    constructor(rand, eatWastesAutomatically) {
+    constructor(rand, eatWastesAutomatically, abMode = false) {
         //because i was dumb enough to make general events a global variable it caused AB to be haunted by thousands of wailing ria's, certain that Camille was dead (when she just had died in a previous universe),and because it would be too hard to make it not global, just have every game reset it
         generalEvents = [...generalEventsOriginal];
         this.summary = new GameSummary();
         this.rand = rand;
+        this.abMode = abMode;
         this.eatWastesAutomatically = eatWastesAutomatically;
         this.players = randomParty(rand);
         this.addLoopingPlayersIfAny();
@@ -316,7 +318,8 @@ class Game {
 
         return ret;
     }
-
+    //https://www.youtube.com/shorts/IyUCKNAn7SA
+    //https://www.youtube.com/watch?v=CITxQHkifMw fun audio log hack
     kTick = (parent) => {
         const tick_container = createElementWithClassAndParent("div", parent, "story-beat");
         const header = createElementWithClassAndParent("h2", tick_container, "story-title");
@@ -342,6 +345,21 @@ class Game {
 
     }
 
+    processAchievements = () => {
+        if (this.abMode) {
+            return;//no using dear sweet precious AB as a subsitute for your own Eyes. Zampanio wants you to SEE. She is meant to FIND things for you, not replace you
+        }
+        if (!globalDataObject.achievementsUnlocked) {
+            globalDataObject.achievementsUnlocked = [];
+        }
+        let tmp = [...globalDataObject.achievementsUnlocked];
+        for (let unique_event of uniq(this.event_list)) {
+            tmp.push(unique_event)
+        }
+
+        globalDataObject.achievementsUnlocked = uniq(tmp);
+    }
+
     /*
         locations tick, not people (the mall is alive)
         each tick, look for locations that are awake (blood inside them)
@@ -354,7 +372,7 @@ class Game {
         "The twisted shops and forlorn geometry get worse the longer it suffers, he knows. It needs people. Like a body needs blood. Needs to have objects moved out of it, like blood cells moving oxygen. Helps it think better. Remember what it's supposed to be better."
     */
     tick = (parent) => {
-
+        this.processAchievements();
         if (this.kTooBig) {
             return this.kTick(parent)
         }
@@ -373,6 +391,9 @@ class Game {
             return;
         }
         this.current_tick++;
+        if (this.current_tick === 200 && !this.abMode) {
+            save();
+        }
 
         const locations = this.getLocations();
         for (let player of this.players) {
@@ -1076,6 +1097,9 @@ class Game {
     }
 
     handleEpilogue = (parent) => {
+        if (!this.abMode) {
+            save();
+        }
         this.summary.finalize(this);
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
@@ -1415,6 +1439,8 @@ its so normal
             a.href = `${window.location.pathname}?seed=${this.rand.initial_seed}`;
             a.innerText = " Restore The Universe?";
         }
+        const instructions = createElementWithClassAndParent("p", intro_container, "instructions");
+        instructions.innerHTML = `JR here! If you know what SBURBSim is, you might understand the point of this 'game'! If not... Try ticking for a hundred times or so and get to an ending. you can then look back up and try to figure out how everything spiralled out of control so fast, lol.  OOOOOORRR you can be boring and just tick one at a time and do things the LINEAR way. If you hate spoilers or something. lulz. <br><Br>Either way I really wanted to capture the unsettling vibes of the Westerville Mall in some of the accounts of Zampanio. <video style="margin-left: auto; margin-right: auto; display:block; margin-top: 31px;height:273px;" controls loop src ='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/mallsimbackrooms4.mp4'></video>`;
 
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
         general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2>${game.corporateMandatedLove ? "<h2>Love is in the air!</h2>" : ""}<br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
