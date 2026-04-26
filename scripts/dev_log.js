@@ -1,6 +1,29 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+
+dev_log["4/25"] = `I finished all the 'main' parts of mall sim a while back and forgot to mention lol
+been working on the achievement system
+but right before i was gonna do that
+my internet got literally shredded
+the cable box sticking out of the ground got ripped in half
+so i had no internet for most of a week
+ANYWAYS
+basic achiement unlocking is in
+now to let Truth get to do their achievment thing again (false face becomes real, baby, welcome to the East)
+and explain to you little bits about why its cool you manaaged to do x or y and give you little rewards
+let it be known that i find it EXTREMELY funny
+that an unintended consequence of letting K's 'how dare you not see me' breach
+is that when they make all events THEM
+they're also...stealing all your achievements.
+did you just manage to witness a mannequin going wasted?
+oh well, guess it didn't happen
+K time baby
+i managed to invent a situation where a fictional character an steal achievements from you
+i'm the best
+`;
+
+
 dev_log["4/6/26"] = `lol instead of wiring up k and finishing up the last of the 'serious' scenes
 i collaborated with kr to make cool nasa stuff (they got an analog casette recorder during the artemis 2 stuff)
 i have decided k now resents the moon

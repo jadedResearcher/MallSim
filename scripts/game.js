@@ -345,6 +345,17 @@ class Game {
 
     }
 
+    printAchievements = (parent) => {
+        const header = createElementWithClassAndParent("h2", parent);
+        header.innerHTML = "Achievements Unlocked!"
+
+        const container = createElementWithClassAndParent("h2", parent, 'pill-container');
+
+        for (let unique_event of uniq(this.event_list)) {
+            generateAchievementPill(unique_event, true, container)
+        }
+    }
+
     processAchievements = () => {
         if (this.abMode) {
             return;//no using dear sweet precious AB as a subsitute for your own Eyes. Zampanio wants you to SEE. She is meant to FIND things for you, not replace you
@@ -393,6 +404,7 @@ class Game {
         this.current_tick++;
         if (this.current_tick === 200 && !this.abMode) {
             save();
+            this.printAchievements(parent);
         }
 
         const locations = this.getLocations();
@@ -1097,13 +1109,16 @@ class Game {
     }
 
     handleEpilogue = (parent) => {
-        if (!this.abMode) {
-            save();
-        }
+
         this.summary.finalize(this);
         const intro_container = createElementWithClassAndParent("div", parent, "story-beat");
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
         intro_container.scrollIntoView();
+
+        if (!this.abMode) {
+            save();
+            this.printAchievements(intro_container);
+        }
 
         const mannequins = [];
         const corpses = [];

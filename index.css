@@ -131,6 +131,20 @@ body.survival {
   color: red;
 }
 
+.pill-container {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.achievement-pill {
+  outline: none;
+  border-radius: 13px;
+  padding: 5px;
+  background-color: red;
+  font-weight: bolder;
+}
+
 a {
   color: lime;
   margin-bottom: 13px;
