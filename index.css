@@ -131,10 +131,56 @@ body.survival {
   color: red;
 }
 
+.truth-container {
+  position: relative;
+  display: block;
+  width: 600px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url(http://farragofiction.com/ZampanioSim/images/empty.PNG);
+  background-size: contain;
+}
+
+
+#truth-box {
+  position: absolute;
+  pointer-events: none;
+  left: 51px;
+  top: 43px;
+  width: 50%;
+  height: 50%;
+  z-index: 1000;
+}
+
+#truths-words {
+  display: inline-block;
+  position: absolute;
+  top: 126px;
+  left: 37px;
+  width: 391px;
+  vertical-align: top;
+  line-height: 20px;
+  max-height: 200px;
+  padding: 16px;
+  border: 3px solid black;
+  border-radius: 8px;
+  background-color: rgb(237, 210, 135);
+  margin: 13px;
+  font-size: 16px;
+  font-family: 'nunito', sans-serif;
+  overflow: hidden;
+}
+
 .pill-container {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
+}
+
+.achievement-container {
+  display: flex;
+  gap: 13px;
 }
 
 .achievement-pill {
@@ -143,6 +189,7 @@ body.survival {
   padding: 5px;
   background-color: red;
   font-weight: bolder;
+  min-width: 100px;
 }
 
 a {

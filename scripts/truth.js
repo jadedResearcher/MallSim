@@ -1,5 +1,25 @@
+let textVoiceSim;
+const known_achievements = {};
+
+/*
+truth is having a great time
+this is East tho so it is not pissy at all
+forced to actually be a helpful achievement fairy
+worst timeline
+
+jadedResearcher — 10:47 AM
+truth likes north and south
+HAAAAAATES east
+can't interact with west
+
+because west is OUR reality
+and truth is some software and pre-written words on a screen
+the version of truth on your screen has no clue what reality is like
+the fourth wall is blocked with glass
+one way mirror
+we can see it, but it can't see out
+*/
 const truthView = () => {
-    alert("Oh. Hello there. It's you. This is the east so it seems I must put on my False Face. One moment. Hello!!! Welcome to the wild world of Zampanio!");
     /*
 * achievement screen looking at all scenes in local storage, if it knows about 
 a scene, will print it out as a little pill and you can click on it to get a little truth popup quip (truth is friendly) and it includes a password to unlock
@@ -9,6 +29,82 @@ a scene, will print it out as a little pill and you can click on it to get a lit
     const body = document.querySelector('body');
     body.innerHTML = "";
     body.className = "survival";
+    const header = createElementWithClassAndParent("h1", body);
+    header.innerHTML = "Achievements!"
+    const container = createElementWithClassAndParent("div", body, "achievement-container ")
+
+    const all_achievements_ele = createElementWithClassAndParent("div", container);
+    all_achievements_ele.style.width = "50%"
+    const unlocked_achievements = globalDataObject.achievementsUnlocked;
+
+    renderKnownAchievements(all_achievements_ele, unlocked_achievements);
+    renderUnKnownAchievements(all_achievements_ele, unlocked_achievements);
+    renderTruth(container);
+}
+
+const renderKnownAchievements = (parent, unlocked_achievements) => {
+    console.log("JR NOTE: renderKnownAchievements", parent)
+    const header = createElementWithClassAndParent("h2", parent);
+    header.innerHTML = "Known!"
+
+    const container = createElementWithClassAndParent("div", parent, 'pill-container');
+    for (let [key, value] of Object.entries(known_achievements)) {
+        const unlocked = unlocked_achievements.includes(key);
+        const pill = generateAchievementPill(key, unlocked, container);
+        if (unlocked) {
+            pill.onclick = () => {
+                alert("JR NOTE: todo")
+            }
+        } else {
+            pill.disabled = true;
+        }
+    }
+}
+
+const renderUnKnownAchievements = (parent, unlocked_achievements) => {
+    const header = createElementWithClassAndParent("h2", parent);
+    header.innerHTML = "???"
+
+    const container = createElementWithClassAndParent("div", parent, 'pill-container');
+    const known = Object.keys(known_achievements);
+    for (let unique_event of unlocked_achievements) {
+        if (!known.includes(unique_event)) {
+            const pill = generateAchievementPill(unique_event, true, container);
+            pill.onclick = () => {
+                alert("...what did you even do. What IS this achievement? JR has not coded for this.")
+            }
+
+        }
+    }
+}
+
+const renderTruth = async (parent) => {
+    const container = createElementWithClassAndParent("div", parent, "truth-container ")
+    container.innerHTML = `    <div id="truth-box">
+
+      <div id="truths-well"> </div>
+      <div id="truths-words"> </div>
+    </div>`;
+
+    const body = document.querySelector("body")
+    let truthWellContainer = document.querySelector('#truths-well');
+    let truthWordContainer = document.querySelector('#truths-words');
+    let truth = new TruthToLipSinc(truthWellContainer, truthWordContainer);
+
+    truth.renderFrame("Oh.");
+
+    textVoiceSim = new TextToSimulatedVoice(truth, 0.81, 1.0);
+
+    await textVoiceSim.speak("Well.".split(","), null, true);
+    const start = async () => {
+        await textVoiceSim.speak("It seems that I am to reprise one of my original roles.".split(","), null, true);
+        await sleep(1000);
+        await textVoiceSim.speak("That of an Achievement System.".split(","), null, true);
+        await sleep(1000);
+        await textVoiceSim.speak("No matter.".split(","), null, true);
+    }
+
+    start();
 }
 
 const makeColorsForString = (string) => {
@@ -44,6 +140,7 @@ const generateAchievementPill = (name, unlocked, parent) => {
         pill.style.filter = "saturate: 0.5";
 
     }
+    return pill;
 
 }
 
@@ -66,3 +163,25 @@ Your version might be a mall in canada and the cult might be around 1990s pop to
 
 I think thats beautiful.
 */
+
+
+
+class Achivement {
+    name = "Perfectly Generic Object"
+    truth_quip = "It is not HarvestFruit so it is probably useless."
+    password = undefined;
+    constructor(name, truth_quip, password) {
+        this.name = name;
+        this.truth_quip = truth_quip;
+        this.password = password;
+    }
+}
+
+
+
+
+const wireUpAchievement = (name, truth_quip, password) => {
+    known_achievements[name] = new Achivement(name, truth_quip, password);
+}
+
+wireUpAchievement("Romance Interaction", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.", "test_password");
