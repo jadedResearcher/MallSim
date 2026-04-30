@@ -349,7 +349,7 @@ class Game {
         const header = createElementWithClassAndParent("h2", parent);
         header.innerHTML = "Achievements Unlocked!"
 
-        const container = createElementWithClassAndParent("h2", parent, 'pill-container');
+        const container = createElementWithClassAndParent("div", parent, 'pill-container');
 
         for (let unique_event of uniq(this.event_list)) {
             generateAchievementPill(unique_event, true, container)

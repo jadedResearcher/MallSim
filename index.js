@@ -83,11 +83,31 @@ it'll have a list of things it pulls in like <script> tags or
 
 
 let game;
+/*
+i just realized that zampanio is ...
+
+one of the narrators of house of leaves zampano....but without the "i"
+was that the point?
+assuming HOL came first etc etc
+but 
+house of leaves without a viewpoint character, without a first hand account
+wait no
+reversed polarity
+okay i can still make this work
+WITH an eye added
+i zampanio vs zampano
+its house of leaves but from YOUR perspective, thru YOUR eye
+zampano but with an i
+
+zampano but YOU are the one to find it
+etc
+*/
 window.addEventListener('error', (message, file, line, column, errorObj) => {
     console.log(message)
     if (game) {
         game.event_list.push("ERROR")
     }
+    console.log("JR NOTE: don't forget to wire this up to four E http://farragofiction.com/ZampanioSimEastEastEastEast")
     const all = document.querySelectorAll(".story-beat");
     let target = Object.values(all).at(-1);
     if (!target) {

@@ -177,7 +177,46 @@ class Achivement {
     }
 }
 
+/*
+closer hates wibby but arranged therapy for literally everone but wibby
 
+yeah, closer is the one who kidnapped fiona slaughter from her hoome universe to make her provide therapy
+its fine
+don't worry about it
+its like a gift basket
+"sorry i manipulated wanda into making the mall into a hell maze just to get revenge on your collegue, whoops, i didn't consider you'd be collateral damage"
+
+i can't even remember where its revealed why the closer hates wibby
+basically wibby did his wibby thing to the closer
+i.e. provide an illusion of friendship
+basic l corp attachment work
+the closer, being the closer
+went from "ah yes well i can provide you with Sales"
+to "oh, they are very flattering towards me, yes I feel good about this sale"
+to "wait are we friends now? have i made a friend? i never make friends"
+to "...........of course it was all a lie. why would i believe otherwise. luckily i have guarded my heart against disappointment. for no particular reason i will now dedicate my life to fucking with this particular person, who did not hurt me, as i can not be hurt"
+two lonely players do NOTO interact well together
+
+anyways, as far as closer is concerned, she's square with all the blorboso
+yeah she doomed them to the hell maze mall, but she got them therapy to counter any adverse effects from that
+
+net zero change
+
+i mean, theres two closers right
+the one in the loop, and the one not  
+the one not in the loop works for wanda
+the one out of the loop USED to work for wanda
+so knows how to manage from below
+wanda was .... not a good boss
+so the closer was always doing things like "ah yes, ma'am, brilliant idea to monetize our ip " and wanda looks up from shitposting on her phone and goes "??? " and then they do closers idea
+so very easy to just drop by and put it in wandas head that she's nostalgic for her childhood mall now and wouldn't it be fun to visit, and why yes it IS boring how its just a staight line. say, just an idea, but how would you improve it
+
+
+re: two closers
+(unlike almost everyone else, closer is 'native' to this universe in that she brought herself here with breath-o-mancy, so when wanda started the loop, non-looping closer is part of the initial conditions of any new universe that gets created, and looping closer simply jumps into the new universe that already has a copy of her (same with the eye killer and the innocent))
+just about everyone else STARTS in the moon maze (og group) or joins via the lcorp apocalypse
+so they don't have a native version thats part of the start condition of the universe
+*/
 
 
 const wireUpAchievement = (name, truth_quip, password) => {
