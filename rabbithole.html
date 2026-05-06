@@ -1,0 +1,72 @@
+<html>
+
+<head>
+  <title>RabbitHole</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="custom-slider.css">
+
+  <link rel="icon" href="http://farragofiction.com/ZampanioSimEast/favicon.ico" />
+  <meta name="description" content="You have important words. We have answers.">
+  <script src="scripts/utils.js"></script>
+  <script src="scripts/custom_utils.js"></script>
+  <script>
+    let resultsEle;
+
+    //runSecret(`DEAD`);
+    //file name is relative because you can't use this to trick someone
+    //into running virus javascript or whatever
+    const runSecret = async (fileName) => {
+      console.log("JR NOTE: runSecret being called", fileName)
+      const body = document.querySelector("body");
+      const scriptTag = document.createElement("script")
+      scriptTag.src = `secrets/${fileName}.js`;
+      scriptTag.onerror = () => {
+        resultsEle.innerHTML = "haha whoops, that's not a real password, lulz"
+      }
+      body.append(scriptTag);
+
+    }
+
+    const handleForm = () => {
+
+    }
+
+    window.onload = () => {
+      const inputEle = document.querySelector("#input");
+      const submitEle = document.querySelector("#submit");
+      const formEle = document.querySelector("#form");
+
+      formEle.osubmit = (e) => {
+        e.preventDefault();
+        runSecret(input.value);
+
+        return false;
+      }
+      submitEle.onclick = (e) => {
+        e.preventDefault();
+
+        runSecret(input.value);
+        return false;
+      }
+
+      resultsEle = document.querySelector("#results");
+    }
+  </script>
+
+</head>
+
+
+<body class="rabbit">
+  <div id="container">
+    <form id="form">
+      <label>Do you know any Important Words?</label>
+      <input id="input" placeholder="Place them here"></input>
+      <button id="submit">Submit</button>
+    </form>
+    <br><br>
+    <div id="results"></div>
+
+  </div>
+</body>
+
+</html>

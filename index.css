@@ -35,6 +35,11 @@ body:not(.author-bot):not(.survival):not(.devil-of-spirals):not(.corporate-love)
   z-index: -1000;
 }
 
+body.rabbit::after {
+  background-size: 33% !important;
+
+}
+
 body.corporate-love {
   background-color: pink;
   color: red;
@@ -919,6 +924,14 @@ button {
 
 .empty-cell {
   opacity: 0;
+}
+
+.rabbit-hole {
+  cursor: pointer;
+}
+
+.rabbit-hole:hover {
+  filter: saturate(13.0)
 }
 
 .room-label {

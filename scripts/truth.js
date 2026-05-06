@@ -33,8 +33,14 @@ a scene, will print it out as a little pill and you can click on it to get a lit
     header.innerHTML = "Achievements!"
     const container = createElementWithClassAndParent("div", body, "achievement-container ")
 
+
     const all_achievements_ele = createElementWithClassAndParent("div", container);
     all_achievements_ele.style.width = "50%"
+
+    const rabbit_hole_ele = createElementWithClassAndParent("a", all_achievements_ele, "rabbit-hole");
+    rabbit_hole_ele.innerHTML = "<img src='http://farragofiction.com/ZampanioSimNorth/rabbithole.png'>"
+    rabbit_hole_ele.target = "_blank"
+    rabbit_hole_ele.href = "rabbithole.html"
     const unlocked_achievements = globalDataObject.achievementsUnlocked;
 
     renderKnownAchievements(all_achievements_ele, unlocked_achievements);
