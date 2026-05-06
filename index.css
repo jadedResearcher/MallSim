@@ -309,6 +309,12 @@ body.devil-of-spirals {
   animation: shake 1s linear infinite;
 }
 
+button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  filter: saturate(0.1)
+}
+
 button {
   cursor: pointer;
 }

@@ -42,6 +42,16 @@ a scene, will print it out as a little pill and you can click on it to get a lit
     renderTruth(container);
 }
 
+const renderPrize = async (achievement) => {
+    await haveTruthSayString(achievement.truth_quip)
+    if (achievement) {
+        await sleep(1000)
+        haveTruthSayString("An IMPORTANT WORD you should remember is: " + achievement.password)
+
+    }
+
+}
+
 const renderKnownAchievements = (parent, unlocked_achievements) => {
     console.log("JR NOTE: renderKnownAchievements", parent)
     const header = createElementWithClassAndParent("h2", parent);
@@ -53,7 +63,7 @@ const renderKnownAchievements = (parent, unlocked_achievements) => {
         const pill = generateAchievementPill(key, unlocked, container);
         if (unlocked) {
             pill.onclick = () => {
-                alert("JR NOTE: todo")
+                renderPrize(value)
             }
         } else {
             pill.disabled = true;
@@ -71,11 +81,17 @@ const renderUnKnownAchievements = (parent, unlocked_achievements) => {
         if (!known.includes(unique_event)) {
             const pill = generateAchievementPill(unique_event, true, container);
             pill.onclick = () => {
-                alert("...what did you even do. What IS this achievement? JR has not coded for this.")
+                haveTruthSayString("...what did you even do. What IS this achievement? JR has not coded for this.")
             }
 
         }
     }
+}
+
+const haveTruthSayString = async (potentially_long_string) => {
+    const split = potentially_long_string.split("\n")
+    await textVoiceSim.speak(split, null, true);
+
 }
 
 const renderTruth = async (parent) => {
@@ -127,17 +143,19 @@ const makeColorsForString = (string) => {
     );
     return colors;
 }
-
+//http://zampanio.com/
 const generateAchievementPill = (name, unlocked, parent) => {
     console.log("JR NOTE: generateAchievementPill", { name, unlocked, parent })
     const pill = createElementWithClassAndParent("button", parent, "achievement-pill");
     pill.innerText = name;
     const colors = makeColorsForString(name);
     console.log("JR NOTE: colors is", colors)
-    pill.style.backgroundColor = colors[0];
     if (!unlocked) {
-        pill.style.opacity = "0.75";
-        pill.style.filter = "saturate: 0.5";
+        pill.disabled = true;
+        pill.style.backgroundColor = "#c4c4c4"
+        pill.style.color = "gray"
+    } else {
+        pill.style.backgroundColor = colors[0];
 
     }
     return pill;
@@ -222,5 +240,8 @@ so they don't have a native version thats part of the start condition of the uni
 const wireUpAchievement = (name, truth_quip, password) => {
     known_achievements[name] = new Achivement(name, truth_quip, password);
 }
+//wireUpAchievement("Romance Interaction", "TBD", "test_password");
+wireUpAchievement("Wrong As A Joke", "TBD", "test_password");
+wireUpAchievement("Not unlocked test", "TBD", "test_password");
 
 wireUpAchievement("Romance Interaction", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.", "test_password");
