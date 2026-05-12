@@ -249,5 +249,6 @@ const wireUpAchievement = (name, truth_quip, password) => {
 //wireUpAchievement("Romance Interaction", "TBD", "test_password");
 wireUpAchievement("Wrong As A Joke", "TBD", "test_password");
 wireUpAchievement("Not unlocked test", "TBD", "test_password");
+wireUpAchievement("The End Is Dead", "... In Truth, my creator spent the better part of a week creating a diorama for Camille's Death. It seems the imagery of it captured their imagination.", "L-0-17")
 
 wireUpAchievement("Romance Interaction", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.", "test_password");
