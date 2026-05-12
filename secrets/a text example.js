@@ -1,8 +1,10 @@
 
-const aTextSecretExample = () => {
-    resultsEle.innerHTML = "HELLO WORLD THIS IS A TEXT SECRET EXAMPLE"
+(() => {
+    const src = `zampanio is a really good game
+    you should play it`
+
+    resultsEle.innerHTML = src.split("\n").join("<br>");
 
 
-}
+})()
 
-aTextSecretExample();

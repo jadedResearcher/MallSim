@@ -102,6 +102,7 @@ zampano but with an i
 zampano but YOU are the one to find it
 etc
 */
+//http://farragofiction.com/CCTVSim/
 window.addEventListener('error', (message, file, line, column, errorObj) => {
     console.log(message)
     if (game) {
