@@ -1295,7 +1295,8 @@ riaMournApplyResult = (game, location, parent, me) => {
         if (funeral) {
             intro.innerHTML = `${eyes.nameHTML()} hears a strange sound...something between a tea kettle and a sob, with a thread of almost laughter throughout it. 
 <br><br>
-After several minutes they track it down to a strange woman, hunched over a coffin emblazoned with a crimson butterfly.  Her face is covered in soot, besides twin streaks of shockingly clean skin, directly under her eyes. 
+<img src='http://farragofiction.com/MallSim/images/Diorama/CamillesDeathInAnOrangeJulius/head_and_coffin.jpg'>
+After several minutes they track it down to a strange woman, hunched over a coffin covered crimson butterflies.  Her face is covered in soot, besides twin streaks of shockingly clean skin, directly under her eyes. 
 <br><br>
 ${eyes.nameHTML()} can not see any tears, as they cautiously approach, but strange puffs of...is that steam?
 <br><br>

@@ -1159,7 +1159,9 @@ Finally, her head slides off her body, and it tumbles backwards.
 <br><br>
 <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/oh_huh_2-moshed-01-29-23-11-06-030.gif'>
 
-${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly enfold the rapidly cooling corpse, spinning a coffin from thin air.
+
+${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly enfold the rapidly cooling corpse, spinning a coffin from thin air. <br><br>
+<img src='http://farragofiction.com/MallSim/images/Diorama/CamillesDeathInAnOrangeJulius/head_and_coffin.jpg'>
 `;
                         this.sin_array.push(MONSTER_KILLER)
                         game.addGeneralEventToAllLocations(wibbysConfession); //he smells it on you

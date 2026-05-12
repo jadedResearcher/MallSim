@@ -20,6 +20,8 @@
     
     The butterflies simply consider the head to be...food.
 
+    This hypothesis may explain why the crimson butterflies seem also attracted to the image of faces, even when they bear not flesh or blood.
+
     <u>Exhibit A</u>: Butterflies swarming the raw meat of what had only minutes previously had been a full head.
     
     <img style='width: 75%'src ="http://farragofiction.com/MallSim/images/Diorama/CamillesDeathInAnOrangeJulius/headcloseupgood.jpg">
@@ -28,7 +30,11 @@
     <u>Exhibit B</u>: Butterflies and standard maze video degradation briefly surpressed with <span data-redaction="Sextant">[REDACTED]</span>, leaving only the coffin and partially consumed head behind.
     
     <img style='width: 75%' src ='http://farragofiction.com/MallSim/images/Diorama/CamillesDeathInAnOrangeJulius/clear_picture_of_head_focus.jpg'>
-    <br><br>
+    
+
+    <u>Exhibit C</u>: Retrospective analysis of footage from a Faithful of the Harvest shows butterflies displaying mild attraction even to images of faces.
+    
+    <img style='width: 75%' src='http://farragofiction.com/MallSim/images/Diorama/CamillesDeathInAnOrangeJulius/butterflies_attracted_to_face_pics.JPG'>
 </div>
     `
 
