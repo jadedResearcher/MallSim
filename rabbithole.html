@@ -16,6 +16,7 @@
     //file name is relative because you can't use this to trick someone
     //into running virus javascript or whatever
     const runSecret = async (fileName) => {
+      updateURLParams("importantWords=" + fileName)
       console.log("JR NOTE: runSecret being called", fileName)
       const body = document.querySelector("body");
       const scriptTag = document.createElement("script")
@@ -32,6 +33,11 @@
     }
 
     window.onload = () => {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+
+      const importantWords = urlParams.get('importantWords');
+
       const inputEle = document.querySelector("#input");
       const submitEle = document.querySelector("#submit");
       const formEle = document.querySelector("#form");
@@ -50,6 +56,9 @@
       }
 
       resultsEle = document.querySelector("#results");
+      if (importantWords) {
+        runSecret(importantWords)
+      }
     }
   </script>
 
