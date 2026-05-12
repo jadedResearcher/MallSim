@@ -43,6 +43,9 @@ const load = () => {
     if (data) {
         globalDataObject = JSON.parse(data);
         globalDataObject.lastLoadTimeCode = Date.now();
+        if (!globalDataObject.achievementsUnlocked) {
+            globalDataObject.achievementsUnlocked = [];
+        }
         /*
           only objects that need to respond to functions have to be separately parsed as json
           if they just store data (like facts) its fine to leave them as parsed json
