@@ -57,7 +57,9 @@
 
       resultsEle = document.querySelector("#results");
       if (importantWords) {
-        runSecret(importantWords)
+        runSecret(importantWords);
+        inputEle.value = importantWords;
+
       }
     }
   </script>
