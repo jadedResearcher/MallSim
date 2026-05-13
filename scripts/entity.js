@@ -1128,7 +1128,7 @@ Want your bad romance
                     <br><br>
                     As the life fades from their eyes, they realize they never even saw who stabbed them.
                     <br><br>
-                    As if granting a final mercy, their view suddenly tumbles, and as their vision blurs, they catch a glimpse of a ghastly horror, a figure in thick armor with their head crudely sewn back on, crimson butterfly mask obscuring their face, as well as  ${this.nameHTML()}'s own headless torso, falling limply forward.
+                    As if granting a final mercy, their view suddenly tumbles, and as their vision blurs, they catch a glimpse of a ghastly horror, a figure in thick armor with their skull crudely sewn back on, crimson butterfly mask obscuring their face, as well as  ${this.nameHTML()}'s own headless torso, falling limply forward.
                     <br>
                     <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/the_end_breached.gif'>
                     `;

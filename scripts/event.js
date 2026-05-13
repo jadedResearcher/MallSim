@@ -1247,6 +1247,7 @@ riaMournInternalConditionCheck = (game, location) => {
     return false;
 
 }
+//https://8r8kspider.com/
 
 /*
 flesh out  ria mourning event (at first can only be in the Funeral itself, but can be anywhere after ten ticks) this is NOT a general event at first, camille adds it when she dies (just like twins do), she behaves differently if wibby or the greater westerville polycule could do something in a location
