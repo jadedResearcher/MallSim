@@ -1350,7 +1350,10 @@ its so normal
             
             <br><Br>Guilt settles into the heart of everyone affected by his chill. Every Sin they have ever commited, big or small, weighs into their heart as they realize that maybe... maybe they just...don't deserve to move. Don't deserve warmth. Love. Companionship. 
             
-            <br><Br>Little by little the ice overtakes their heart, their body. <br><Br> The whole world, slowly but surely, freezes over.`;
+            <br><Br>Little by little the ice overtakes their heart, their body. <br><Br> The whole world, slowly but surely, freezes over.
+            <br><br>
+            <img src ='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/bathroom_blizzard.gif'>
+            `;
 
         }
 

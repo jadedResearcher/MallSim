@@ -625,6 +625,8 @@ Every single way the world would be better with their absence.
 When the well dressed man finally walks away, breath puffing out against the warm air like smoke, ${player.nameHTML()}  is a crumpled heap on the ground, glittering with ice and frost. Not moving .Not breathing.
 <br><Br>
 The Sinner has been dealt with.
+<br><br>
+<img src ='http://farragofiction.com/MallSim/images/Diorama/WitherbySnowQueensAMannequinInABathroom/frozen_vinette.jpg'>
 `;
         player.kill("frozen into a glistening statue."); //thems the breaks
 

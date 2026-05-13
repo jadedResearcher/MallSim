@@ -250,5 +250,6 @@ const wireUpAchievement = (name, truth_quip, password) => {
 wireUpAchievement("Wrong As A Joke", "TBD", "test_password");
 wireUpAchievement("Not unlocked test", "TBD", "test_password");
 wireUpAchievement("The End Is Dead", "... In Truth, my creator spent the better part of a week creating a diorama for Camille's Death. It seems the imagery of it captured their imagination.", "L-0-17")
+wireUpAchievement("Sinner Punished", "In Truth, my creator made the frozen diorama in a single day, in a haze of inspiration. A simple concept, the difficulty was always in whether or not a cardboard box could slowly be frozen, layered over and over slowly with mist.", "lonely exit");
 
 wireUpAchievement("Romance Interaction", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.", "test_password");
