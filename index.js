@@ -168,14 +168,22 @@ window.onload = () => {
     grabEyes();
     grabCodeComments();
     load();
-    debug();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const seed = urlParams.get('seed');
+    if (seed) {
+        start();
+    } else {
+        landingPage();
+    }
 
 
 
 }
 //https://www.tumblr.com/verbosebabbler/801492874529259520/guides-alternate-zampaniosim-classpects?source=share
 //its funny this started as debug and now its just... the only way to render the game, whoops
-const debug = () => {
+const start = () => {
     //balanceStatsDebug();
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -204,6 +212,22 @@ const debug = () => {
 
     }
 
+
+    const name = urlParams.get('name');
+    const themes = urlParams.get('themes');
+
+    console.log("JR NOTE: name and themes", name, themes, seed);
+    if (name) {
+        game.players[0].name = name;
+    }
+
+    if (themes) {
+        //don't bother redoing the sprite, its almost midnight
+        const insert = game.players[0];
+        insert.theme_keys = themes.split(",");
+        insert.syncToThemes(rand);
+        game.syncToPlayers();
+    }
 
 
 

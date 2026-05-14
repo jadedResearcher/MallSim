@@ -102,6 +102,12 @@ class Game {
         this.eatWastesAutomatically = eatWastesAutomatically;
         this.players = randomParty(rand);
         this.addLoopingPlayersIfAny();
+        this.syncToPlayers();
+
+
+    }
+
+    syncToPlayers = () => {
         setSpritesForParty(this.rand, this.players);//game handles this because we don't want doubles
         this.initial_player_count = this.players.length;
         for (let player of this.players) {
@@ -110,8 +116,6 @@ class Game {
         //resets them for this game, yeah im mixing an object and global variables
         //so sue me
         initThemeLocations(this.rand);
-
-
     }
 
     //not for looping
@@ -1423,6 +1427,7 @@ its so normal
             makePair("Monstrous:", player.monster_rating)
             makePair("Stolen Name:", player.stolen_name)
 
+            makePair("Themes:", player.theme_keys.join(","))
 
             for (let [key, value] of Object.entries(player.stats)) {
                 makePair(key, value)

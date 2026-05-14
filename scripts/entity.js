@@ -369,6 +369,14 @@ class Entity {
         return false;
     }
 
+    syncToThemes = (rand) => {
+        this.title = classpectFromThemeList(rand, this.theme_keys);
+        all_entities[this.title] = this;
+        this.stats = getStatsFromThemes(this.theme_keys);
+
+
+    }
+
     randomize = (rand, hardcoded_themes) => {
         if (hardcoded_themes) {
             this.theme_keys = hardcoded_themes;
@@ -381,10 +389,7 @@ class Entity {
             rand.pickFrom(no_food_themes)]
         }
         this.name = `${rand.pickFrom(first_names)} ${rand.pickFrom(last_names)}`;
-        this.title = classpectFromThemeList(rand, this.theme_keys);
-        all_entities[this.title] = this;
-        this.stats = getStatsFromThemes(this.theme_keys);
-
+        this.syncToThemes(rand);
         for (let relationship of Object.values(this.relationships)) {
             relationship.value = rand.getRandomNumberBetween(-1 * STRONG_RELATIONSHIP_VALUE, STRONG_RELATIONSHIP_VALUE)
         }

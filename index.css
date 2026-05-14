@@ -35,6 +35,13 @@ body:not(.author-bot):not(.survival):not(.devil-of-spirals):not(.corporate-love)
   z-index: -1000;
 }
 
+.landing {
+  .form-container {
+    display: flex;
+    gap: 31px;
+  }
+}
+
 body.rabbit::after {
   background-size: 33% !important;
 
