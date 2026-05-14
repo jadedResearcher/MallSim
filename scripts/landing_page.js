@@ -23,7 +23,7 @@ const landingPage = () => {
 
     const number = createNumberInputWithLabel(intro_container, "number", "Important #*:", new Date().toLocaleDateString().replaceAll("/", ""))
     const asterisk = createElementWithClassAndParent("div", intro_container);
-    asterisk.innerHTML = "* For example, an important date (birthday, death day, anniversary, etc). If its 4/1/1976 you would just do 4011976. Or just your lucky number, really anything that feels right for this will work."
+    asterisk.innerHTML = "* For example, an important date (birthday, death day, anniversary, etc). If its 4/1/1972 you would just do 4011972. Or just your lucky number, really anything that feels right for this will work."
     asterisk.style.marginBottom = "31px";
     asterisk.style.fontSize = "10px"
     const theme1 = createSelectInputWithLabel(intro_container, "theme1", "Theme 1:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
