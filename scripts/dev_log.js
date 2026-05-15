@@ -2,7 +2,35 @@ const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
 
-dev_log["4/25"] = `I finished all the 'main' parts of mall sim a while back and forgot to mention lol
+dev_log["5/14/26"] = `I finished the achievement system more or less
+and wired up about half the passwords
+then i got distracted realizing i could make dioramas of the mall and hide them in passwords
+THEN i got distracted making a landing page for mall sim thats a mirror of the original zampanio sims landing page (to the north)
+and NOW i am distracted writing up this devlog
+(and remembering i should update LTEsim)
+mall sim is basically done
+but i want achievements to do something
+i love how...theres so MANY different ways you can access infinite secrets
+the achievement system
+the wasted-knowledge
+these dev logs
+uh....
+oh yeah those radio stories
+...theres gotta be more too right?
+i mean the scenes themselves, the actual game i made
+that is not a game
+but i coulda sworn there were more
+well the comments of the code i guess?
+and the javascript logs
+damn this almost sounds straightforwardd when i put it all out like that
+i'm not trying hard enough to spiral
+well, im not gonna layer even more on NOW now am i
+keep making achievements
+damn i forgot to do achievemnts that unlock new scenes
+i want jr to steal names and maccus to maccus and ic if he wants in on this
+the todo pile never stops from being taller`;
+
+dev_log["4/25/26"] = `I finished all the 'main' parts of mall sim a while back and forgot to mention lol
 been working on the achievement system
 but right before i was gonna do that
 my internet got literally shredded

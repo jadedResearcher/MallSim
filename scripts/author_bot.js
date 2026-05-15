@@ -1,4 +1,10 @@
 const ab_view = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const name = urlParams.get('name');
+    const themes = urlParams.get('themes');
+
     const body = document.querySelector('body');
     body.innerHTML = "";
     body.className = "author-bot";
@@ -23,8 +29,7 @@ const ab_view = () => {
     const eatbutton = createCheckboxInputWithLabel(sburb_container, 'single-use', "Allow Eating?", omnomnom);
     eatbutton.input.onchange = () => omnomnom = !omnomnom;
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+
 
     const seed_text = urlParams.get('seed') ? stringtoseed(urlParams.get('seed')) : stringtoseed("Zampanio");
     const seed_input = createTextInputWithLabel(sburb_container, 'seed-input', "Seed:", seed_text);
@@ -71,7 +76,7 @@ const ab_view = () => {
             //pick a new seed
             seed = game.rand.getRandomNumberBetween(0, 4294967296)
         }
-        simulateOneSession(seed, omnomnom, session_summary_container, syncCollatedStats);
+        simulateOneSession(name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
         const endTime = performance.now();;
 
         alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime) + " seconds!")
@@ -88,7 +93,7 @@ const ab_view = () => {
             }
             //lets me render the stats live instead of blocking
             await nextFrame();
-            simulateOneSession(seed, omnomnom, session_summary_container, syncCollatedStats);
+            simulateOneSession(name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
 
         }
         const endTime = performance.now();;
@@ -107,7 +112,7 @@ const ab_view = () => {
             }
             //lets me render the stats live instead of blocking
             await nextFrame();
-            simulateOneSession(seed, omnomnom, session_summary_container, syncCollatedStats);
+            simulateOneSession(name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
 
         }
         const endTime = performance.now();;
@@ -117,9 +122,25 @@ const ab_view = () => {
 }
 
 
-const simulateOneSession = (seed, omnomnom, session_summary_container, globalSummaryCallback) => {
+const simulateOneSession = (name, themes, seed, omnomnom, session_summary_container, globalSummaryCallback) => {
+
+    const rand = new SeededRandom(seed);
+    //console.log("JR NOTE: name and themes", name, themes, seed);
+
     const startTime = performance.now();
-    game = new Game(new SeededRandom(seed), omnomnom, true);
+    game = new Game(rand, omnomnom, true);
+
+    if (name) {
+        game.players[0].name = name;
+    }
+
+    if (themes) {
+        //don't bother redoing the sprite, its almost midnight
+        const insert = game.players[0];
+        insert.theme_keys = themes.split(",");
+        insert.syncToThemes(rand);
+        game.syncToPlayers();
+    }
     const throw_away_ele = document.createElement("div");
     //create a div but don't give it an attached dom to render to (will be very fast, react uses a virtual dom like this and apparently past me did too)
     game.start(throw_away_ele);

@@ -27,9 +27,9 @@ const landingPage = () => {
     asterisk.style.marginBottom = "31px";
     asterisk.style.fontSize = "10px"
     const theme1 = createSelectInputWithLabel(intro_container, "theme1", "Theme 1:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
-    const theme2 = createSelectInputWithLabel(intro_container, "theme1", "Theme 1:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
-    const theme3 = createSelectInputWithLabel(intro_container, "theme1", "Theme 1:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
-    const theme4 = createSelectInputWithLabel(intro_container, "theme1", "Theme 1:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
+    const theme2 = createSelectInputWithLabel(intro_container, "theme1", "Theme 2:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
+    const theme3 = createSelectInputWithLabel(intro_container, "theme1", "Theme 3:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
+    const theme4 = createSelectInputWithLabel(intro_container, "theme1", "Theme 4:", keys.map((e) => ({ value: e, label: titleCase(e) })), rand.pickFrom(keys))
     theme4.container.style.marginBottom = "31px";
 
     const button = createElementWithClassAndParent("button", intro_container)

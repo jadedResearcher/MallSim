@@ -423,6 +423,8 @@ class Entity {
     //when a new session starts with someone who 'is' you, you'll be added (not replace them)
     //why do you think the echidna is causing a memory leak? 
     joinTheLoop = (ele) => {
+        game.event_list.push("Wasted, Wasted Swallowing the Tree")
+
         this.monster_rating++;
         this.sandSmoothByValue(MEDIUM_STAT_VALUE);//congratulations on becoming the 'you' you were always meant to be. technically this should happen a bit over time, over centuries, but we all know simulations are supposed to be super fast
         //yes its accessing a global var called game but im in a hurry
@@ -1083,6 +1085,8 @@ Want your bad romance
                     }
                     //even if they were a mannequin, the Sin of fraticide is upon you and witherby and hoon can smell it
                     best_murderer.sin_array.push(TEAM_KILLER);
+                    game.event_list.push("PVP")
+
                     game.addGeneralEventToAllLocations(wibbysConfession); //he smells it on you
                     this.kill("splayed onto the ground, head a bruised and bloody mess, fingers stained purple with fruit juice.")
                     const recursiveEle = createElementWithClassAndParent('p', child)
