@@ -887,11 +887,11 @@ Want your bad romance
 
                         deadbeat.innerHTML = `${this.nameHTML()} talks softly to ${player.nameHTML()}, hoping they understand past their blank facade.`;
                     } else if (player === tonguePlayer) {
-                        game.event_list.push("Mannequin Comfort 2")
+                        game.event_list.push("Mannequin Comfort")
 
                         deadbeat.innerHTML = `${this.nameHTML()} talks softly to ${player.nameHTML()}, hoping that they won't feel so alone.`;
                     } else {
-                        game.event_list.push("Mannequin Sadness")
+                        game.event_list.push("Mannequin Comfort")
 
                         deadbeat.innerHTML = `${this.nameHTML()} looks sadly at ${player.nameHTML()}, all too aware of the fate they fell to.`;
                     }

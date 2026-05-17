@@ -216,7 +216,7 @@ const start = () => {
     const name = urlParams.get('name');
     const themes = urlParams.get('themes');
 
-    console.log("JR NOTE: name and themes", name, themes, seed);
+    //console.log("JR NOTE: name and themes", name, themes, seed);
     if (name) {
         game.players[0].name = name;
     }

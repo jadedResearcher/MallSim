@@ -377,7 +377,7 @@ class GameSummary {
         const h3 = createElementWithClassAndParent("h3", ele);
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-
+        //https://www.tumblr.com/jadedresearcher/816737338739884032?source=share
         const name = urlParams.get('name');
         const themes = urlParams.get('themes');
         h3.innerHTML = `Mall Expedition: #<a target='_blank' href ='${window.location.pathname}?seed=${this.numberStats[this.SEED]}${name ? "&name=" + name : ""}${themes ? "&themes=" + themes : ""}'>${this.numberStats[this.SEED]}</a>`;

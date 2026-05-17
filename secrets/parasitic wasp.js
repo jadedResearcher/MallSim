@@ -36,6 +36,12 @@
 <br>if you get enough wastes in a single session you'll see it in your browser
 <br>everything slows
 <br>might even crash
+<br><br>
+it kills the host
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+what happens next.
+<br><Br>
+What body or bodies will the Universe...all Universes, Zampanio and otherwise, run on.
     `
 
 

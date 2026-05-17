@@ -318,14 +318,14 @@ they respawn as a human again
                 //skip, no infighting, children
             } else {
                 player.kill("[REDACTED].")
-                //its important we all know they die before whatever makes them never have been here.
+                /*//its important we all know they die before whatever makes them never have been here.
                 //important for our peace of mind
                 //it might not be true
                 //but my simulation
                 //my rules
                 //i want to imagine they die
                 //before whatever it is
-                //happens
+                //happens*/
                 removeItemOnce(location.players, player);
                 removeItemOnce(game.players, player);
             }

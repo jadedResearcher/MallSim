@@ -17,7 +17,14 @@
     <br><br>
     Offshoot branches twisting in all directions.
     <br><Br>
-    All of us reaching towards the unreachable sun of Zampanio...
+    All of us reaching towards the unreachable moon of Zampanio...
+<br><br>
+<div style='font-weight:lighter; font-size:10px;'>
+    may our fates be better than those moths that find flame at the end of their path rather than gentle moonlight
+<br><br>
+
+    zampanio is a marathon, not a sprint
+    </div>
     <br><br>
     `
 
