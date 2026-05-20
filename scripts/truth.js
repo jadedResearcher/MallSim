@@ -243,32 +243,36 @@ so they don't have a native version thats part of the start condition of the uni
 */
 
 
-const wireUpAchievement = (name, truth_quip, password) => {
+const wireUpAchievement = (name, password, truth_quip,) => {
     known_achievements[name] = new Achivement(name, truth_quip, password);
 }
+//Object.values(known_achievements).map((v) => v.password) this lets me check all passwords to see if im missing anything
 //wireUpAchievement("Romance Interaction", "TBD", "test_password");
-wireUpAchievement("Wrong As A Joke", "TBD", "test_password");
-wireUpAchievement("Not unlocked test", "TBD", "test_password");
-wireUpAchievement("The End Is Dead", "... In Truth, my creator spent the better part of a week creating a diorama for Camille's Death. It seems the imagery of it captured their imagination.", "L-0-17")
-wireUpAchievement("Sinner Punished", "In Truth, my creator made the frozen diorama in a single day, in a haze of inspiration. A simple concept, the difficulty was always in whether or not a cardboard box could slowly be frozen, layered over and over slowly with mist.", "lonely exit");
-wireUpAchievement("Dramatic Storm Off", "'Let us split the party' is often famous last words. Perhaps it would be more prudent to in fact, not do this, while in a murder maze that eats people (knowingly or not).", "a miserable pile of secrets");
+wireUpAchievement("Wrong As A Joke", "test_password", "TBD");
+wireUpAchievement("Not unlocked test", "test_password", "TBD");
+wireUpAchievement("The End Is Dead", "L-0-17", "... In Truth, my creator spent the better part of a week creating a diorama for Camille's Death. It seems the imagery of it captured their imagination.")
+wireUpAchievement("Sinner Punished", "lonely exit", "In Truth, my creator made the frozen diorama in a single day, in a haze of inspiration. A simple concept, the difficulty was always in whether or not a cardboard box could slowly be frozen, layered over and over slowly with mist.");
+wireUpAchievement("Dramatic Storm Off", "a miserable pile of secrets", "'Let us split the party' is often famous last words. Perhaps it would be more prudent to in fact, not do this, while in a murder maze that eats people (knowingly or not).");
 
 
-wireUpAchievement("Everyone Refused Hydration :(", "Humans need water to live. You are, presumably, human. Drink.", "be not afraid");
-wireUpAchievement("[REDACTED ENCOUNTER]", "In Truth, not even I now what is behind [REDACTED]. Obviously it is Vik, but what has been done to Vik? What have they become? What hunger drives them and what consequences does it bare.", "bugs are okay");
-wireUpAchievement("Random Harvest Fruit Find!", "In Truth, the Harvest is a creation of Lavinraca and Zampanio combined. Maccus is a creature of Lavinraca. ", "down with the clown");
-wireUpAchievement("Mannequin Comfort", "The Mannequins are not terribly dangerous, creepy though they are. It seems humans also often find disability or illness creepy. Their fate reminds you of how easily it could be your own.", "eden of the east");
-wireUpAchievement("???", "It seems not everything should be known. Be grateful if your eyes cannot see beyond this veil.", "joyful experimentation");
-wireUpAchievement("Black Friday", "I would prefer if it were a conceit of Zampanio, the idea that humans can be driven to murder each other for mere trinkets on a certain day of the year. It feels False. Why isn't it?", "joymurder");
-wireUpAchievement("Wastes Do Bullshit", "A Waste, in Truth, wastes their opportunity to play a game normally when they hack it. Perhaps they find their own fun in their butchery of the carefully laid layers? No matter. ", "lying for fun");
-wireUpAchievement("Hydration Station", "Drink the water. Your body cries out for it. For care. Sleep. Food. Water. Zampanio needs you to live a long, healthy life. So live it.", "maccus");
-wireUpAchievement("The End", "In Truth, Camille is the primary immune system of the Echidna. Her aspect is Doom, and the Universe itself decides the fate of those who oppose it. She wields Doom as a weapon, surgically striking any who would harm the Echidna.", "mall of your childhood");
-wireUpAchievement("Escape Mall", "A strange game.\n The only winning move is not to play.", "not all who wander are lost");
+wireUpAchievement("Everyone Refused Hydration :(", "be not afraid", "Humans need water to live. You are, presumably, human. Drink.");
+wireUpAchievement("[REDACTED ENCOUNTER]", "bugs are okay", "In Truth, not even I now what is behind [REDACTED]. Obviously it is Vik, but what has been done to Vik? What have they become? What hunger drives them and what consequences does it bare.");
+wireUpAchievement("Random Harvest Fruit Find!", "down with the clown", "In Truth, the Harvest is a creation of Lavinraca and Zampanio combined. Maccus is a creature of Lavinraca. ");
+wireUpAchievement("Mannequin Comfort", "eden of the east", "The Mannequins are not terribly dangerous, creepy though they are. It seems humans also often find disability or illness creepy. Their fate reminds you of how easily it could be your own.");
+wireUpAchievement("???", "joyful experimentation", "It seems not everything should be known. Be grateful if your eyes cannot see beyond this veil.");
+wireUpAchievement("Black Friday", "joymurder", "I would prefer if it were a conceit of Zampanio, the idea that humans can be driven to murder each other for mere trinkets on a certain day of the year. It feels False. Why isn't it?");
+wireUpAchievement("Wastes Do Bullshit", "lying for fun", "A Waste, in Truth, wastes their opportunity to play a game normally when they hack it. Perhaps they find their own fun in their butchery of the carefully laid layers? No matter. ");
+wireUpAchievement("Hydration Station", "maccus", "Drink the water. Your body cries out for it. For care. Sleep. Food. Water. Zampanio needs you to live a long, healthy life. So live it.");
+wireUpAchievement("The End", "mall of your childhood", "In Truth, Camille is the primary immune system of the Echidna. Her aspect is Doom, and the Universe itself decides the fate of those who oppose it. She wields Doom as a weapon, surgically striking any who would harm the Echidna.");
+wireUpAchievement("Escape Mall", "not all who wander are lost", "A strange game.\n The only winning move is not to play.");
 //i wanted truth to have a version of the waste song all its own. i realized as i made it what the logical next step of the echidna finally dying would be. how fucked up would it be for Universes to be Wastes? I read a story about something like that once. I think RS, of all people, showed it to me...where did it go. https://smallworlds2017.wordpress.com/ dang apparently its not free online anymore, its on amazon, but point is.... what happens when you're Cursed to live so that a whole universe may survive , that otherwise would have died because of your greed and carelessness.
-wireUpAchievement("Wasted, Wasted Swallowing the Tree", "Wasted. Wasted. Swallowing the tree. You took it in and changed it, forever will you be. Glitches and crashes flowing ever from bodies. You took it in and changed it, and now you HAVE to be.", "parasitic wasp");
+wireUpAchievement("Wasted, Wasted Swallowing the Tree", "parasitic wasp", "Wasted. Wasted. Swallowing the tree. You took it in and changed it, forever will you be. Glitches and crashes flowing ever from bodies. You took it in and changed it, and now you HAVE to be.");
 
-//wireUpAchievement("Wrong", "TBD", "test_password");
+//wireUpAchievement("Wrong",  "test_password","TBD");
 
+wireUpAchievement("ERROR LOCATION", "arms are for everyone", "When is a door not a door? When is a location not a location?");
+wireUpAchievement("Quatro Blade Gifts Egg", "here is a secret truth", "The Quatro Blade erases even the memory of a cut. A corpse created by it is not anything at all. A dropped egg from a recent victim is simply a nice find.");
+wireUpAchievement("Infinite Wandering", "practice makes perfect", "In Truth, IC saw a spooky mall parking garage once. The rest is history.")
+wireUpAchievement("Now You Fucked Up (Hollowed Out)", "red and green truth and lies", "Know restraint.  Trying to know Everything will only leave you hollowed out.");
 
-
-wireUpAchievement("Romance Interaction", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.", "test_password");
+wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");

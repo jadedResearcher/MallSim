@@ -54,8 +54,8 @@ and now youre here with me<br>
 Fun fact, the tune itself is what I thought the hungers game "hanging tree" song was to.
 <br>
 The movie version... was WAY peppier than I expected, lol
-
-    
+<br><br>
+    <a target='_blank' href ='http://farragofiction.com/AudioLogs/?passPhrase=grace_hollowed_out_the_tree'>Audio Log</a> (I wonder if this is your first encounter with this old thing. Technically I can still add things to it, but theres already so so so much and so old by now, too. Even older when you're reading this, because of how time works)
     `
 
 
