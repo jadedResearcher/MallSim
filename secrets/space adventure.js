@@ -50,7 +50,9 @@ CFO comes in, offers her services, and suggests they rebrand to Eyedol Games, an
 
 The End
 
-p.s. If anyone (including future me) wants to write anything set in this (instead of just a high level summary like I did ) and I find out about it, I'll try to link to it from here, if I still remember it exists`
+p.s. If anyone (including future me) wants to write anything set in this (instead of just a high level summary like I did ) and I find out about it, I'll try to link to it from here, if I still remember it exists
+
+p.p.s (i realized half through writing it out that its at least rhyming with what happened with one of IC's rp characters...ah, memories)`
 
     resultsEle.innerHTML = src.split("\n").join("<br>");
 

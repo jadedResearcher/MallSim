@@ -1,9 +1,8 @@
 
 //immediately envoked function does't run into namespacign issues
 (() => {
-    const src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/apocalypse.mp4"
-    resultsEle.innerHTML = `<video src=${src} loop controls></video><br><Br>
-    The Apocalypse, in my branch of Zampanio, is inevitable.
+    const src1 = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/apocalypse.mp4"
+    const src2 = `The Apocalypse, in my branch of Zampanio, is inevitable.
     50 years to the day after Zampanio's supposed creation
     Apr/1/22
     The world ends.
@@ -156,7 +155,9 @@
 
     and you will be there to Witness it.
 
-
+`;
+    resultsEle.innerHTML = `<video src=${src1} loop controls></video><br><Br>
+    ${src2.split("\n").join("<br>")}
     `
 
 

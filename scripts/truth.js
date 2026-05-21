@@ -268,11 +268,27 @@ wireUpAchievement("Escape Mall", "not all who wander are lost", "A strange game.
 //i wanted truth to have a version of the waste song all its own. i realized as i made it what the logical next step of the echidna finally dying would be. how fucked up would it be for Universes to be Wastes? I read a story about something like that once. I think RS, of all people, showed it to me...where did it go. https://smallworlds2017.wordpress.com/ dang apparently its not free online anymore, its on amazon, but point is.... what happens when you're Cursed to live so that a whole universe may survive , that otherwise would have died because of your greed and carelessness.
 wireUpAchievement("Wasted, Wasted Swallowing the Tree", "parasitic wasp", "Wasted. Wasted. Swallowing the tree. You took it in and changed it, forever will you be. Glitches and crashes flowing ever from bodies. You took it in and changed it, and now you HAVE to be.");
 
-//wireUpAchievement("Wrong",  "test_password","TBD");
 
 wireUpAchievement("ERROR LOCATION", "arms are for everyone", "When is a door not a door? When is a location not a location?");
 wireUpAchievement("Quatro Blade Gifts Egg", "here is a secret truth", "The Quatro Blade erases even the memory of a cut. A corpse created by it is not anything at all. A dropped egg from a recent victim is simply a nice find.");
 wireUpAchievement("Infinite Wandering", "practice makes perfect", "In Truth, IC saw a spooky mall parking garage once. The rest is history.")
 wireUpAchievement("Now You Fucked Up (Hollowed Out)", "red and green truth and lies", "Know restraint.  Trying to know Everything will only leave you hollowed out.");
+
+
+
+wireUpAchievement("Parker Befriended", "space adventure", "The Lord of Space is Wanda. The Thief of Space is Parker. The Maid of Space is Alt. Each group of chracters has no more than one space player. It is telling, I think, that the fully assimilated Training team has no Space player. ");
+wireUpAchievement("Eye Killer Accepts Bribe", "the cult of the harvest", "In Truth, even in the RP the Eye Killer originates from, Camellia was both her and not her. Alternate selves are ICs favorite concept.");
+//its inteded that some of these are guessable...but then you miss the context of the achievement its paired to and truths comment (unless you waste, but then you miss the context of the scene, unless you waste, understand the code enough, then go and view and unlock it normally now that you know its trigger condition)
+wireUpAchievement("Orchestral Trumpet", "the rot takes all in the end", "The trumpet sounds the begining of the end. Both in our world, and the Corporation LeeHunter came from.");
+wireUpAchievement("Khana Will Be Seen", "the truth is layered", "Attention is a powerful thing. A gift to give to some. A curse to burden others.");
+wireUpAchievement("Gun-Tan Kills A Random Player", "we miss you", "Temporally Reversed Joke Deployed: But Our Aim Is Getting Better");
+wireUpAchievement("No Way Out", "you cannot go forward", "I am the Words. The Words are everything. Where the Words end the world ends. You cannot go forward in an absence of space. Repeat.");
+wireUpAchievement("Solemn Death", "you get it", "Zampanio needs you to live a very long life.");
+wireUpAchievement("Repentant", "you is needed", "Nothing is with meaning without a 'you' to understand it. Do not be so quick to spend your life.");
+wireUpAchievement("Late With Starbucks", "you should play it", "In Truth, its important to make time for Silly.");
+wireUpAchievement("Food Court Clone", "zampanio is a really good game", "In Truth, it is very difficult to STOP the expanding food court from cloning people. It became canon from sheer force of will.");
+
+//wireUpAchievement("Wrong",  "test_password","TBD");
+
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
