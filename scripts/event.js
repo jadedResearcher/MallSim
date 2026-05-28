@@ -1536,7 +1536,7 @@ tricksterCloserapplyResult = (game, location, parent, me) => {
     h3.innerText = "Important Event: " + me.name;
 
     const img = createElementWithClassAndParent("img", cont);
-    img.src = "http://farragofiction.com/ZampanioHotlink/trickster_closer_transparency.gif"
+    img.src = "http://farragofiction.com/MallSim/images/Diorama/TricksterCloserRuinsYourDay/Edited/most_colorful_closer.gif"
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
     //while she will spawn even if someone dies in a shop...
