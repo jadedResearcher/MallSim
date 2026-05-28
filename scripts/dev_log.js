@@ -1,6 +1,25 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["5/25/26"] = `I have three main dioramas done now, trickster closer being the most recent
+Camille and her Funeral For Butterflies
+Witherby and his Snow Queen
+and of course
+Trickster Closer having a Really Good Time
+i learned something for each of them
+Camille I worked the hardest on making everything look RIGHT
+i wanted "this is a rotten, abandoned orange julius but you still wouldn't expect to find a severedd head in it"
+for witherby, his diorama was temporary but i used real ice (misted with water once every ten minutes during a series of meetings while li was working from home, then added baking soda to the last layer so it looked like scaled air bubbles)
+and trickster closer of course uses green screen paint to get her tv rainbow static effect working
+theres things i don't like about each
+im still learning
+but
+i am...
+really happy
+that i am learning a new skill
+and that mallsim
+can be the catalyst for it
+and of course zampanio`
 
 dev_log["5/14/26"] = `I finished the achievement system more or less
 and wired up about half the passwords
