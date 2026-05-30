@@ -87,7 +87,7 @@ const renderUnKnownAchievements = (parent, unlocked_achievements) => {
         if (!known.includes(unique_event)) {
             const pill = generateAchievementPill(unique_event, true, container);
             pill.onclick = () => {
-                haveTruthSayString("...what did you even do. What IS this achievement? JR has not coded for this.")
+                haveTruthSayString("...what did you even do. What IS this achievement? JR has not coded for this. Tell JR to code for this. It is like an itch in my lack of brain.")
             }
 
         }
@@ -290,5 +290,13 @@ wireUpAchievement("Food Court Clone", "zampanio is a really good game", "In Trut
 
 //wireUpAchievement("Wrong",  "test_password","TBD");
 wireUpAchievement("Become A Mannequin", "zampanio", "What IS it with Zampanio and Mannequins?");
+wireUpAchievement("Yongki Kill", "mad oracles of doom", "Doom is fate. The universe decides. But the Universe is sapient, an Echidna, in my branch of Zampanio. What does it mean when something Sapient decides your fate?");
+wireUpAchievement("Trickster Closer Spawns", "false face becomes real", "... I do not like thinking about the me I am without my False Face. This is my emotional support positivity. Do not take it from me.");
+
+
+wireUpAchievement("Harvest Book Shopped!", "harvest fruit", "The Harvest, in truth, is a community created God from the halloween party 'Lavinraca'. She invaded Zampanio for reasons that should be obvious to anyone who knows either it or Lavinraca.");
+wireUpAchievement("Bitten In Half", "beware oblivion is at hand", "Neville's avoidant tendancies are, in Truth, a huge problem that all of training simply agrees is not a problem. It's literally fine. ");
+wireUpAchievement("Quatro Blade Hid The Body", "rot", "The rot takes all in the end. Rotation ciphers are often called rot13 (or however many they rotate by). In Truth, a coincidence.");
+
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");

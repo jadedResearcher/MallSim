@@ -1,6 +1,12 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["5/30/26"] = `wish me luck
+i'm seeing the backrooms movie today
+and trying to make 20 1:24 scale doors
+for
+no particular reason`
+
 dev_log["5/25/26"] = `I have three main dioramas done now, trickster closer being the most recent
 Camille and her Funeral For Butterflies
 Witherby and his Snow Queen

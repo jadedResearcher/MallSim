@@ -23,8 +23,8 @@ class TruthToLipSinc {
         console.log(`Truth: %c${text}`, "font-weight: bold;font-family: 'Courier New', monospace;color:red; font-size:13px;");
     }
 
-    renderText = (text,truth) => {
-        truth? this.wordContainer.innerHTML = text :this.truthLog(text);
+    renderText = (text, truth) => {
+        truth ? this.wordContainer.innerHTML = text : this.truthLog(text);
     }
 
     renderFrame = (syllable, truth) => {
@@ -58,7 +58,7 @@ class TruthToLipSinc {
         //blur(canvas);
         const eyeSize = 30;
         //future jr, i hacked it so its always truth image
-        ret.getContext("2d").drawImage(truth ? this.falseImage : this.falseImage, this.width/2-eyeSize, this.height/2-eyeSize);
+        ret.getContext("2d").drawImage(truth ? this.truthImage : this.falseImage, this.width / 2 - eyeSize, this.height / 2 - eyeSize);
 
         ret.getContext("2d").drawImage(buffer, 0, 0, this.width, this.height);
 
