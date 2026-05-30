@@ -1085,7 +1085,6 @@ Want your bad romance
                     }
                     //even if they were a mannequin, the Sin of fraticide is upon you and witherby and hoon can smell it
                     best_murderer.sin_array.push(TEAM_KILLER);
-                    game.event_list.push("PVP")
 
                     game.addGeneralEventToAllLocations(wibbysConfession); //he smells it on you
                     this.kill("splayed onto the ground, head a bruised and bloody mess, fingers stained purple with fruit juice.")

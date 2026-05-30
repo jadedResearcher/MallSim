@@ -1452,6 +1452,47 @@ const riaMourn = makeEventSubType("Ria Mourns", riaMournInternalConditionCheck, 
 
 
 
+fridayConditionCheck = (game, location) => {
+
+    const players = location.livingNonMannequinPlayers();
+    if (players.length > 0) {
+        const randomPlayer = game.rand.pickFrom(players);
+        return game.rand.nextDouble() < 0.5;
+    }
+    return false;
+
+}
+
+
+fridayApplyResults = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    const players = location.livingNonMannequinPlayers();
+
+    const mindPlayer = getPartyLowestMind(players);
+
+    mindPlayer.fleeing = true;
+
+
+    ele.innerHTML = `<img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/funfunfunfun_onfriday.gif'>
+    ${mindPlayer.nameHTML()} suddenly stops in their tracks. What are they doing here? It's friday. Or maybe midnight? They suddenly aren't sure... But... but they... should be resting. Shouldn't they? What are they doing in this creepy abandoned mall? They should be outside. In the fresh air! Or back home! In their room! Their cozy bed... They are suddenly sure of it.  
+
+    <br><Br>
+    They turn around to leave.
+   <span class="wasted-knowledge">It's friday, friday, gotta get down on friday! (Don't you know you should take a break? Fridays...midnight. There's all sorts of automatic interupts that can help prevent you spiral. You should leave now. Go rest. Go do something else.  )  </span>
+    `;
+
+}
+
+
+const fridayScene = makeEventSubType("It's Friday!!!", fridayConditionCheck, fridayApplyResults);
+
+
 ////////////////////////////////////
 
 
@@ -3107,5 +3148,9 @@ witherby is absolutely convinced that ria is his opposite
 //keep this as a constant and do NOT modify it, sessions should reset from this
 const generalEventsOriginal = [corruptionEvent, noWayOut, riaWarn, devonaEvent, nevilleEncounter, camilleBreathe, yongkiKill, lolAlmostForgotK, dramaticStormOff, ethicallyLootCorpse, wastesDoBullshit, hydrationStation]
 //the events ANY room can have, not just shops
+
+if (isItFridayOrMidnight()) {
+    generalEventsOriginal.unshift(fridayScene)
+}
 
 let generalEvents = [];

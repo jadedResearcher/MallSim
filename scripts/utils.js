@@ -25,6 +25,15 @@ const isItFriday = () => {
 
 }
 
+const isItFridayOrMidnight = () => {
+  //midnight and fridays are wungle time
+  const date = new Date();
+  if (date.getHours() == 0 || date.getDay() === 5) { //unlike regular friday chec, this can't be escaped with params by wastes
+    return true;
+  }
+  return false;
+}
+
 const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
 
 
