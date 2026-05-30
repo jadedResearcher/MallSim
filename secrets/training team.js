@@ -93,9 +93,11 @@
 
     We have always been at war with East Asia.
 
-    And we have always, always, worked hard to protect Echidna and spread Zampanio.
+    And we have always, always, worked hard to protect the Echidna (the mother of monsters) and spread Zampanio.
 
     And if we haven't well, people change over time! It would be silly to assume we'd stay the same after so many loops.
+
+
 
     You're worrying about nothing.
     
