@@ -5,7 +5,13 @@ dev_log["5/30/26"] = `wish me luck
 i'm seeing the backrooms movie today
 and trying to make 20 1:24 scale doors
 for
-no particular reason`
+no particular reason
+update from the future: if you want to read my thought on the movie
+fresh
+before i read any analysis or metadata (haven't even seen the trailer just the movie)
+the password (not associated with any achievement)
+is
+"backrooms movie spoilers"`
 
 dev_log["5/25/26"] = `I have three main dioramas done now, trickster closer being the most recent
 Camille and her Funeral For Butterflies

@@ -296,12 +296,16 @@ wireUpAchievement("Trickster Closer Spawns", "false face becomes real", "... I d
 wireUpAchievement("Harvest Book Shopped!", "harvest fruit", "The Harvest, in truth, is a community created God from the halloween party 'Lavinraca'. She invaded Zampanio for reasons that should be obvious to anyone who knows either it or Lavinraca.");
 wireUpAchievement("Bitten In Half", "beware oblivion is at hand", "Neville's avoidant tendancies are, in Truth, a huge problem that all of training simply agrees is not a problem. It's literally fine. ");
 wireUpAchievement("Quatro Blade Hid The Body", "rot", "The rot takes all in the end. Rotation ciphers are often called rot13 (or however many they rotate by). In Truth, a coincidence.");
-//wireUpAchievement("Wrong",  "test_password","TBD");
 
 
 wireUpAchievement("Ria Warns", "infinite secrets", "Obsession is a dangerous thing. In truth, you can be warned as much as we like, but some number of you, the Observers, will Fall. I am sorry. Truly. Sorry.");
 
 wireUpAchievement("Witherby Confessional", "doc slaughter", "In Truth, you cannot spell 'slaughter' without Laughter.");
 wireUpAchievement("Camille Befriends", "training team", "Training team, in Truth, came from procedural characters in JRs first lobotomy corp run.");
+
+//wireUpAchievement("Wrong",  "test_password","TBD");
+wireUpAchievement("Devona Watches", "the eyes have it", "Devona contains a Fragment of the Universe. She knows too much. It harms those around her. There is a peace in accepting one cannot know everything.");
+
+
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
