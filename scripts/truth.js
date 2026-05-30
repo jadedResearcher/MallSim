@@ -289,6 +289,6 @@ wireUpAchievement("Late With Starbucks", "you should play it", "In Truth, its im
 wireUpAchievement("Food Court Clone", "zampanio is a really good game", "In Truth, it is very difficult to STOP the expanding food court from cloning people. It became canon from sheer force of will.");
 
 //wireUpAchievement("Wrong",  "test_password","TBD");
-
+wireUpAchievement("Become A Mannequin", "zampanio", "What IS it with Zampanio and Mannequins?");
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
