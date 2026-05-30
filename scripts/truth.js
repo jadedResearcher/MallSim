@@ -302,5 +302,6 @@ wireUpAchievement("Quatro Blade Hid The Body", "rot", "The rot takes all in the 
 wireUpAchievement("Ria Warns", "infinite secrets", "Obsession is a dangerous thing. In truth, you can be warned as much as we like, but some number of you, the Observers, will Fall. I am sorry. Truly. Sorry.");
 
 wireUpAchievement("Witherby Confessional", "doc slaughter", "In Truth, you cannot spell 'slaughter' without Laughter.");
+wireUpAchievement("Camille Befriends", "training team", "Training team, in Truth, came from procedural characters in JRs first lobotomy corp run.");
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
