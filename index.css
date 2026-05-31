@@ -157,7 +157,6 @@ body.survival {
 
 #truth-box {
   position: absolute;
-  pointer-events: none;
   left: 51px;
   top: 43px;
   width: 50%;

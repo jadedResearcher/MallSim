@@ -306,6 +306,7 @@ wireUpAchievement("Camille Befriends", "training team", "Training team, in Truth
 //wireUpAchievement("Wrong",  "test_password","TBD");
 wireUpAchievement("Devona Watches", "the eyes have it", "Devona contains a Fragment of the Universe. She knows too much. It harms those around her. There is a peace in accepting one cannot know everything.");
 
+wireUpAchievement("Mannequin Comfort 2", "illumiknoti", "The end is never the end is a promise. Perhaps an ominous one. But a promise nevertheless. Do not end your story.");
 
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
