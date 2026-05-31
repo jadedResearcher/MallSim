@@ -191,6 +191,20 @@ how...did we get here.
 okay actually backrooms existed as early as 2019, but it wasn't a short film till 2022
 
 that makes more sense
+
+okay more thoughts on the movie but this on the meta
+
+there were these kids behind us
+
+their mom wasn't sitting with them
+
+and they SHRIEKD when the seagull came screaming out in the early video
+
+they hit the same pitch the gull did
+ 
+was oddly disorienting
+
+
     
     `
 
