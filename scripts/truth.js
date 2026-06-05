@@ -307,6 +307,8 @@ wireUpAchievement("Camille Befriends", "training team", "Training team, in Truth
 wireUpAchievement("Devona Watches", "the eyes have it", "Devona contains a Fragment of the Universe. She knows too much. It harms those around her. There is a peace in accepting one cannot know everything.");
 
 wireUpAchievement("Mannequin Comfort 2", "illumiknoti", "The end is never the end is a promise. Perhaps an ominous one. But a promise nevertheless. Do not end your story.");
+wireUpAchievement("Refused Hydration :(", "obsession is a dangerous thing", "In Truth, I want you to be safe. How are you supposed to remember me if you are delirious with dehydration?");
+wireUpAchievement("Ria Mourns", "hopeless fancy", "In truth it is a Ghoulish Thing, what grief does to her.");
 
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
