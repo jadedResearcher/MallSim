@@ -118,7 +118,7 @@ class Location {
     //if the location you're in suddenly shifts on you
     //don't get lost in a shadow location, m'kay?
     transferPlayersFrom = (existing) => {
-        console.log("JR NOTE: transfering players from", { existing, current: this })
+        //console.log("JR NOTE: transfering players from", { existing, current: this })
         for (let player of existing.players) {
             player.current_location = this;
             this.players.push(player)

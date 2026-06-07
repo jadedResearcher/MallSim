@@ -377,8 +377,15 @@ class GameSummary {
         const h3 = createElementWithClassAndParent("h3", ele);
 
 
+        const url = new URL(window.location.href);
+        url.searchParams.set('seed', this.numberStats[this.SEED]);
+        if (url.searchParams.get('custom')) {
+            //custom overrides player
+            url.searchParams.delete("name")
+            url.searchParams.delete("themes")
+        }
 
-        h3.innerHTML = `Mall Expedition: #<a target='_blank' href ='${window.location.href}'>${this.numberStats[this.SEED]}</a>`;
+        h3.innerHTML = `Mall Expedition: #<a target='_blank' href ='${url.toString()}'>${this.numberStats[this.SEED]}</a>`;
 
         if (ab_time) {
             h3.innerHTML += `<div style='font-family:Courier New; color: red;'> (${ab_time} milliseconds)</div>`
