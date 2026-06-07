@@ -258,8 +258,15 @@ class Item {
     name = "Perfectly Generic Object"
     description = "It is not HarvestFruit so it is probably useless."
     //so many foods make zampanio treat you differently, come to think of it
+
+    //closer
     isFruit = false; //the sales beast LOVES fruit, but also Zampanio has made it so all fruit within the mall is Harvest Fruit (which you can eat to Join the Loop/Become Wasted)
+    //eye killer
     isEgg = false; //look, if it SAYS egg it IS egg and the eye killer knows this
+    //yongki
+    isMirror = false;
+    //parker
+    isAnime = false;
     constructor(name, description) {
         this.name = name;
         this.description = description;
@@ -272,6 +279,23 @@ class Item {
         if (nameCheck.includes("EGG")) {
             this.isEgg = true;
         }
+
+        if (nameCheck.includes("MIRROR")) {
+            this.isMirror = true;
+        }
+
+        if (nameCheck.includes("ANIME")) {
+            this.isAnime = true;
+        }
+
+        if (nameCheck.includes("FIGURE")) {
+            this.isAnime = true;
+        }
+
+        if (nameCheck.includes("DOLL")) {
+            this.isAnime = true;
+        }
+
         this.name = "<i>" + this.name + "</i>"
     }
 }
@@ -393,6 +417,10 @@ class Entity {
             item_count++;
         }
 
+        if (this.theme_keys.includes(DOLLS)) {
+            item_count++;
+        }
+
         if (this.theme_keys.includes(SERVICE)) {
             item_count++;
         }
@@ -433,6 +461,16 @@ class Entity {
     hasEgg = () => {
         return (this.inventory.filter((i) => i.isEgg)).length > 0;
     }
+
+    hasMirror = () => {
+        return (this.inventory.filter((i) => i.isMirror)).length > 0;
+    }
+
+    hasAnime = () => {
+        return (this.inventory.filter((i) => i.isAnime)).length > 0;
+    }
+
+
 
     findEgg = () => {
         for (let i of this.inventory) {

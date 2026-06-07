@@ -1821,6 +1821,28 @@ const parkerEncounterapplyResult = (game, location, parent, me) => {
         return;
     }
 
+    if (player.hasAnime()) {
+        me.chosen_name = "Miku Miku Friendship Beam!"
+        const playerFormerName = player.nameHTML();
+
+        const ele2 = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+        ele.innerHTML += `<p>The single eye widens, and before ${playerFormerName} can even react, the wall-figure asks with a dry and raspy voice if that's a limited edition Hatsune Miku figurine in their pocket.
+
+</p><p>${playerFormerName} says it is, and is surprised the man can see it from so far away.
+
+</p><p>The guy in the wall says he would NEVER miss seeing Hatsune Miku. And, with a strangely dry sob in his voice, says he also used to be something of a sharpshooter, back in the day. He is good at seeing things far away.  
+
+</p><p>the wall guy says he gets being a fan of something bigger than oneself. Hatsune Mikue. The Harvest. They're both great ladies.
+
+</p><p>The lone visible eye within the wall tears up a bit and NAME listens to a fifteen minute ramble about how great Hatsune Miku is and how if the Harvest could sing, she'd probably sound like Miku because of her TV head.
+
+</p><p>When he finishes, he thrusts a hand out of the wall, the drywall of it parting like dust and offers NAME a single DUSTY HARVEST FRUIT.
+</p>`;
+        player.addItemToInventory(game, new Item("Dusty Harvest Fruit", `The mysterious wall man, who called himself 'Parker', handed this to ${player.nameHTML()}`), ele2)
+        return;
+    }
+
     if (player.stats[TONGUE_METAL_STAT] > HIGH_STAT_VALUE) {
         me.chosen_name = "Parker Befriended"
         const playerFormerName = player.nameHTML();

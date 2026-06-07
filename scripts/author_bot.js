@@ -4,6 +4,14 @@ const ab_view = () => {
 
     const name = urlParams.get('name');
     const themes = urlParams.get('themes');
+    const custom = urlParams.get('custom');
+    let json_text;
+
+    if (custom) {
+        json_text = JSONCrush.uncrush((custom));
+
+    }
+
 
     const body = document.querySelector('body');
     body.innerHTML = "";
@@ -76,7 +84,7 @@ const ab_view = () => {
             //pick a new seed
             seed = game.rand.getRandomNumberBetween(0, 4294967296)
         }
-        simulateOneSession(name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
+        simulateOneSession(json_text, name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
         const endTime = performance.now();;
 
         alert("Complete! " + calculatePerformanceInSeconds(startTime, endTime) + " seconds!")
@@ -93,7 +101,7 @@ const ab_view = () => {
             }
             //lets me render the stats live instead of blocking
             await nextFrame();
-            simulateOneSession(name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
+            simulateOneSession(json_text, name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
 
         }
         const endTime = performance.now();;
@@ -112,7 +120,7 @@ const ab_view = () => {
             }
             //lets me render the stats live instead of blocking
             await nextFrame();
-            simulateOneSession(name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
+            simulateOneSession(json_text, name, themes, seed, omnomnom, session_summary_container, syncCollatedStats);
 
         }
         const endTime = performance.now();;
@@ -122,7 +130,7 @@ const ab_view = () => {
 }
 
 
-const simulateOneSession = (name, themes, seed, omnomnom, session_summary_container, globalSummaryCallback) => {
+const simulateOneSession = (json_text, name, themes, seed, omnomnom, session_summary_container, globalSummaryCallback) => {
 
     const rand = new SeededRandom(seed);
     //console.log("JR NOTE: name and themes", name, themes, seed);
@@ -140,6 +148,11 @@ const simulateOneSession = (name, themes, seed, omnomnom, session_summary_contai
         insert.theme_keys = themes.split(",");
         insert.syncToThemes(rand);
         game.syncToPlayers();
+    }
+
+    if (json_text) {
+        game.importPlayersFromJSON(json_text);
+        game.custom = true;
     }
     const throw_away_ele = document.createElement("div");
     //create a div but don't give it an attached dom to render to (will be very fast, react uses a virtual dom like this and apparently past me did too)

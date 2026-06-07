@@ -2169,7 +2169,7 @@ const initObjects = () => {
     object_possibilities[ADDICTION] = ["syringe", "vial", "dice", "cigarette", "lighter", "joint"];
     object_possibilities[SPYING] = ["mirror", "spyglass", "camera", "disguise"];
     object_possibilities[CLOWNS] = ["clown wig", "bicycle horn", "facepaint", "balloon animal", "large pants", "circus tent", "unicycle", "ringmasters jacket"];
-    object_possibilities[DOLLS] = ["doll", "mannequin", "statuette"];
+    object_possibilities[DOLLS] = ["anime-girl", "doll", "mannequin", "statuette", "action-figure", "figurine"];
     object_possibilities[OBFUSCATION] = ["white-out", "sharpie", "censor bar"];
     object_possibilities[CENSORSHIP] = ["white-out", "sharpie", "censor bar"];
 
