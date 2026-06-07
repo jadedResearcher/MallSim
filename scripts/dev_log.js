@@ -15,7 +15,18 @@ so i had to upgrade her
 very tired tho
 too much social
 hopefully no new bugs introducced
-its almost midnight`
+its almost midnight
+
+new update
+
+this is the funniest possible thing
+i gave everyone super high eye stats
+to try to bait parker out
+and they all went crazy and died
+the end
+they literally saw too much
+cuz corruption level is keyed to stats
+whoops`
 
 
 dev_log["5/30/26"] = `wish me luck

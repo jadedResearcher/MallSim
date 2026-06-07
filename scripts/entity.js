@@ -433,7 +433,7 @@ class Entity {
             const personal_adj = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, COMPLIMENT, true);
             const object = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, OBJECT, true);
 
-            const item = new Item(`${personal_adj} ${object}`, `${this.nameHTML} brought this into the Mall with them!`, false)
+            const item = new Item(`${personal_adj} ${object}`, `${this.nameHTML()} brought this into the Mall with them!`, false)
             this.inventory.push(item)
         }
 
