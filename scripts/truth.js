@@ -319,4 +319,9 @@ wireUpAchievement("Radio Violence", "confess your sins", "Is a lie really a lie,
 //wireUpAchievement("Wrong",  "test_password","TBD");
 wireUpAchievement("Died In Infinity", "gopher hole", "Death is the only true ending. Avoid it.");
 
+wireUpAchievement("Eye Killer Attack", "lord of space", "In Truth, JR wanders if they should have a copy of the East chat logs somewhere. May as well be here.");
+wireUpAchievement("Gift!", "muse of void", "In Truth, there is no such thing as a free lunch.");
+
+wireUpAchievement("Mannequin Highlight Product", "this is not a game", "In Truth, we all see what we are lead to see.");
+
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
