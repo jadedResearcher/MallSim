@@ -316,12 +316,13 @@ wireUpAchievement("Mannequin Ascension", "the amazing digital circus spoilers", 
 wireUpAchievement("Neville Encounter", "april fools at last", "In Truth, you are an Observer. A being from outside reality compared to any character within fiction. Neville does not like you.");
 wireUpAchievement("Radio Violence", "confess your sins", "Is a lie really a lie, if you did not mean it at the time. Yes. It is your sin to bear.");
 
-//wireUpAchievement("Wrong",  "test_password","TBD");
 wireUpAchievement("Died In Infinity", "gopher hole", "Death is the only true ending. Avoid it.");
 
 wireUpAchievement("Eye Killer Attack", "lord of space", "In Truth, JR wanders if they should have a copy of the East chat logs somewhere. May as well be here.");
 wireUpAchievement("Gift!", "muse of void", "In Truth, there is no such thing as a free lunch.");
 
 wireUpAchievement("Mannequin Highlight Product", "this is not a game", "In Truth, we all see what we are lead to see.");
+//wireUpAchievement("Wrong",  "test_password","TBD");
+wireUpAchievement("Orchestral Bliss", "waste of blood", "In Truth, JR simply wants to connect things and people together. To bind them tightly.");
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
