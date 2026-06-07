@@ -1,3 +1,31 @@
+6/7/26
+
+finally glued all the doors in place. 
+
+i wanted 20 but ended up settling on 10, because they looked weird crowded together
+
+the pipe test went well, but i need a LOT more 3d printed connectors to finish the pipes
+
+might wanna paint the ceiling before i glue pipes onto it, and not put spackle on it at all
+
+gotta spackle wall and floors tho, to over up any obvious cardboard
+
+i saw digital circus the last act this weekend and im exhausted
+
+way oversocialed two weekends in a row
+
+tomorrow my friend dm is coming over to help me assemble furniture (rest in peace nest bed, you were too good for this world)
+
+i want to do nothing but work on the hallway but i can't
+
+gotta wait for things to print and paint to dry
+
+could try seeing what small bits and bobs i want on the walls outside things. 
+
+air vent for sure
+
+how would i make an air vent for the eye killer?
+
 6/2/26
 
 I assembled 5 more doors today. I gotta prime them with silver spray paint, then a rolled layer of black (to look like grime) then red paint (their hinges are on the right so they should all be on the right side of the hallway so they all open away from the camera (not that all of them can open, they just go to a blank wall)

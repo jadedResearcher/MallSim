@@ -303,7 +303,6 @@ wireUpAchievement("Ria Warns", "infinite secrets", "Obsession is a dangerous thi
 wireUpAchievement("Witherby Confessional", "doc slaughter", "In Truth, you cannot spell 'slaughter' without Laughter.");
 wireUpAchievement("Camille Befriends", "training team", "Training team, in Truth, came from procedural characters in JRs first lobotomy corp run.");
 
-//wireUpAchievement("Wrong",  "test_password","TBD");
 wireUpAchievement("Devona Watches", "the eyes have it", "Devona contains a Fragment of the Universe. She knows too much. It harms those around her. There is a peace in accepting one cannot know everything.");
 
 wireUpAchievement("Mannequin Comfort 2", "illumiknoti", "The end is never the end is a promise. Perhaps an ominous one. But a promise nevertheless. Do not end your story.");
@@ -311,5 +310,13 @@ wireUpAchievement("Refused Hydration :(", "obsession is a dangerous thing", "In 
 wireUpAchievement("Ria Mourns", "hopeless fancy", "In truth it is a Ghoulish Thing, what grief does to her.");
 
 wireUpAchievement("Mannequin Ascension", "the amazing digital circus spoilers", "In Truth, since being a mannequin is a single boolean in your file, it is a simple matter for a waste to (eventually) figure out how to undo the horrible transformation of their body.");
+
+
+
+wireUpAchievement("Neville Encounter", "april fools at last", "In Truth, you are an Observer. A being from outside reality compared to any character within fiction. Neville does not like you.");
+wireUpAchievement("Radio Violence", "confess your sins", "Is a lie really a lie, if you did not mean it at the time. Yes. It is your sin to bear.");
+
+//wireUpAchievement("Wrong",  "test_password","TBD");
+wireUpAchievement("Died In Infinity", "gopher hole", "Death is the only true ending. Avoid it.");
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
