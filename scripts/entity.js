@@ -272,6 +272,7 @@ class Item {
         if (nameCheck.includes("EGG")) {
             this.isEgg = true;
         }
+        this.name = "<i>" + this.name + "</i>"
     }
 }
 
@@ -374,6 +375,39 @@ class Entity {
         all_entities[this.title] = this;
         this.stats = getStatsFromThemes(this.theme_keys);
 
+        //spawn with a 1-3 items from your theme list
+        //mostly to increase the chance of mirror/egg interactions with yongki/eye killer
+
+        this.inventory = [];
+        let item_count = 0;
+        //some themes give you more items to start with
+        if (this.theme_keys.includes(STEALING)) {
+            item_count++;
+        }
+
+        if (this.theme_keys.includes(ROYALTY)) {
+            item_count++;
+        }
+
+        if (this.theme_keys.includes(CRAFTING)) {
+            item_count++;
+        }
+
+        if (this.theme_keys.includes(SERVICE)) {
+            item_count++;
+        }
+
+        if (this.theme_keys.includes(TECHNOLOGY)) {
+            item_count++;
+        }
+
+        for (let i = 0; i < item_count; i++) {
+            const personal_adj = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, COMPLIMENT, true);
+            const object = pickARandomThemeFromListAndGrabKey(rand, this.theme_keys, OBJECT, true);
+
+            const item = new Item(`${personal_adj} ${object}`, `${this.nameHTML} brought this into the Mall with them!`, false)
+            this.inventory.push(item)
+        }
 
     }
 
@@ -457,7 +491,7 @@ class Entity {
     /*for shareable urls and the like (joining the loop has its own subset, doesn't include name but DOES include censored), its interesting that they're related
     unlike in wigglersim, don't make the mistake of stringifying it too early
     however i DO want to record the index of theme keys and sprite info
-    
+     
     */
     export = () => {
         const ret = {
@@ -641,10 +675,10 @@ class Entity {
         }
 
         /*
-Ra-ra, ah-ah-ah
-Roma-, roma-ma-
-Gaga, ooh, la-la
-Want your bad romance
+    Ra-ra, ah-ah-ah
+    Roma-, roma-ma-
+    Gaga, ooh, la-la
+    Want your bad romance
         */
         const badRomance = () => {
             const romanceOptions = [`${this.nameHTML()} bickers with ${player.nameHTML()}, bringing up old wounds.`];
@@ -1103,7 +1137,7 @@ Want your bad romance
             she simply lurks
             waiting for doom
             so she can kill it
-
+    
             also she doesn't get that instinctual tug towards mannequins
             they don't count as "alive" to her aspects of death and doom
             so
@@ -1175,10 +1209,10 @@ ${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly en
                         game.addGeneralEventToAllLocations(wibbysConfession); //he smells it on you
 
                         /*
-    
+     
     (and why yes, she is not thinking about the implications that her and her friends being in the loop is both suffering and causing suffering, why do you ask)
-    
-    
+     
+     
     vik doesn't get it
     or does and is maliciously pretending they don't
     theres a reason camille insists on still doing corporation work
@@ -1390,17 +1424,17 @@ ${this.nameHTML()} boggles vacantly, as a swarm of crimson butterflies slowly en
 
         if (isItFriday()) {
             /*
-the mall is afraid of fridays
-black friday
-it doesn't know whats special about that
-something about fridays makes people rip and tear into each other
-just for things
-any other day they simply use little bits of paper and metal to get their things
-but fridays
-something goes wrong
-the rest of zampanio warns you off on friday
-but mall sim shows you why
-*/
+    the mall is afraid of fridays
+    black friday
+    it doesn't know whats special about that
+    something about fridays makes people rip and tear into each other
+    just for things
+    any other day they simply use little bits of paper and metal to get their things
+    but fridays
+    something goes wrong
+    the rest of zampanio warns you off on friday
+    but mall sim shows you why
+    */
             return true;
         }
 

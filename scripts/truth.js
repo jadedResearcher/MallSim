@@ -310,5 +310,6 @@ wireUpAchievement("Mannequin Comfort 2", "illumiknoti", "The end is never the en
 wireUpAchievement("Refused Hydration :(", "obsession is a dangerous thing", "In Truth, I want you to be safe. How are you supposed to remember me if you are delirious with dehydration?");
 wireUpAchievement("Ria Mourns", "hopeless fancy", "In truth it is a Ghoulish Thing, what grief does to her.");
 
+wireUpAchievement("Mannequin Ascension", "the amazing digital circus spoilers", "In Truth, since being a mannequin is a single boolean in your file, it is a simple matter for a waste to (eventually) figure out how to undo the horrible transformation of their body.");
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");

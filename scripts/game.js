@@ -1584,6 +1584,10 @@ its so normal
                 text += " They are prepared to kill to secure what is rightfully theirs. "
             }
 
+            if (player.inventory.length > 0) {
+                text += ` They have brought ${arrayToHumanSentence(player.inventory.map((i) => i.name))} in with them, just in case it helps.  `
+            }
+
             text += ` <span class='spoiler'> Mind: ${player.stats[MIND_METAL_STAT]}, Eyes: ${player.stats[EYES_METAL_STAT]}, Tongue: ${player.stats[TONGUE_METAL_STAT]} , Arms: ${player.stats[ARMS_METAL_STAT]} , Legs: ${player.stats[LEGS_METAL_STAT]} </span>`
 
             ele.innerHTML = text;
