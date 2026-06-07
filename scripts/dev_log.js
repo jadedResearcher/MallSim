@@ -1,6 +1,23 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+
+dev_log["6/6/26"] = `i am trying
+to add mirrors
+and anime figures
+so that yongki and parker
+can have more variations of their scenes
+but
+it turns out
+ab doens't know about custom sessions
+so i can't force test it (very rare)
+so i had to upgrade her
+very tired tho
+too much social
+hopefully no new bugs introducced
+its almost midnight`
+
+
 dev_log["5/30/26"] = `wish me luck
 i'm seeing the backrooms movie today
 and trying to make 20 1:24 scale doors
