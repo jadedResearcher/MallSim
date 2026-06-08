@@ -334,7 +334,7 @@ wireUpAchievement("Mannequin Product Feared", "think like a waste", "In Truth, A
 wireUpAchievement("Khana Is The Best", "dreams", "In Truth, dreams are very zampanio.");
 wireUpAchievement("Gun-Tan Kills A Random Human", "its autumn where you are", "Dream logic. Feelings. It's all connected.");
 wireUpAchievement("Stealing!", "breadcrumbs", "In Truth. Despite JRs wishes. The rot takes all in the end.");
-//wireUpAchievement("Wrong", "test_password", "TBD");
+wireUpAchievement("Twin Sister Encounter", "avalanche of secrets", "In Truth, JR wants to remember everything. No human can.");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");

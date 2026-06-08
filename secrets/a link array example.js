@@ -3,6 +3,7 @@
 (() => {
     const linksRaw = ``;
     const links = linksRaw.split("\n")
+    let src = "";
 
     for (let link of links) {
         src += `<a target ="_blank" href = '${link}'>${link}</a>`;;
