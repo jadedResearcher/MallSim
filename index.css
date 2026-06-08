@@ -203,6 +203,14 @@ body.survival {
   min-width: 100px;
 }
 
+.rabbit a {
+  color: black;
+}
+
+.rabbit a:visited {
+  color: black;
+}
+
 a {
   color: lime;
   margin-bottom: 13px;

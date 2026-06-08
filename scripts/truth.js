@@ -322,7 +322,19 @@ wireUpAchievement("Eye Killer Attack", "lord of space", "In Truth, JR wanders if
 wireUpAchievement("Gift!", "muse of void", "In Truth, there is no such thing as a free lunch.");
 
 wireUpAchievement("Mannequin Highlight Product", "this is not a game", "In Truth, we all see what we are lead to see.");
-//wireUpAchievement("Wrong",  "test_password","TBD");
 wireUpAchievement("Orchestral Bliss", "waste of blood", "In Truth, JR simply wants to connect things and people together. To bind them tightly.");
+wireUpAchievement("Hope Wins", "long life", "Zampanio needs you to live a long life.");
+wireUpAchievement("Devona Escapes", "mystery", "None of us want to end up a Mystery. In Truth, all of us want to leave our Mark.");
+
+//wireUpAchievement("Wrong", "test_password", "TBD");
+
+wireUpAchievement("Harvest Fruit Shopped!", "speedrun", "Zampanio is a marathon, not a sprint. Take the time to absorb things. Rest.");
+wireUpAchievement("Miku Miku Friendship Beam!", "shine so bright", "In Truth, JR never played hypnospace outlaw. But watching it be played, left an impact.");
+wireUpAchievement("Mannequin Product Feared", "think like a waste", "In Truth, A Waste will see more of Zampanio than anyone else will. Not just JR's branch either.");
+wireUpAchievement("Khana Is The Best", "dreams", "In Truth, dreams are very zampanio.");
+wireUpAchievement("Gun-Tan Kills A Random Human", "its autumn where you are", "Dream logic. Feelings. It's all connected.");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+
 
 wireUpAchievement("Romance Interaction", "a image example", "Let us be honest here: It would be more impressive if you did not see romance. Organics are, quite frankly, obsessed with it.");
