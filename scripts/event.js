@@ -2080,6 +2080,100 @@ They run away before its too late.
 
 const vikEncounter = makeEventSubType(`[REDACTED ENCOUNTER]`, vikEncounterConditionCheck, vikEncounterapplyResult);
 
+//////////////////
+
+
+/*a few of these won't be added to general scenes till you let the trap close around you and actually try using a password (literally any password)
+the rabbit hole can always get deeper
+*/
+const clownFuckeryConditionCheck = (game, location) => {
+
+    if (location.livingPlayers().length > 0) {
+        if (location.livingMannequinPlayers().length > 0 && game.theme_keys.includes(CLOWNS)) {
+            return game.rand.nextDouble() > 0.995
+        }
+        if (game.theme_keys.includes(CLOWNS)) {
+            return game.rand.nextDouble() > 0.9995;
+        } else {
+            return game.rand.nextDouble() > 0.99995;
+
+        }
+
+    }
+    return false;
+}
+
+const clownFuckeryApplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    const ele3 = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    const clownVideosRaw = `http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/clown_spin_whimsy.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/clown_laugh_loop.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/clown_ball_low.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/clown_juggle-moshed-02-20-10-41-08-025.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/clownjig.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/clownpuppetx2-moshed-03-02-23-25-28-751.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/maccus-moshed-06-26-21-20-38-515.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/maccus_full_routine-moshed-04-05-00-43-13-682.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/laughing_playing.mp4
+    `;
+    const clownVideos = clownVideosRaw.split("\n")
+
+    const mannequins = location.livingMannequinPlayers();
+    let chosen;
+    //if i don't make maccus MORE likely to target mannequins they almost never happen
+    if (mannequins.length > 0) {
+        chosen = game.rand.pickFrom(mannequins);
+    } else {
+        chosen = game.rand.pickFrom(location.livingPlayers());
+    }
+
+    if (!chosen.corrupted) {
+        chosen.addCorruption(13); //a minor scare. only monsters are in the westerville mall, after all
+        ele.innerHTML = `<video src ='${game.rand.pickFrom(clownVideos)}'controls loop></video><br>
+        ${chosen.nameHTML()} blinks. Are...the colors more...vibrant now?
+<br><br>
+Is that... CIRCUS music they hear?
+<br><br>
+With a startling HONK, an actual for real clown suddenly spins into view from around a corner, dancing on a huge ball. 
+<br><br>
+${chosen.nameHTML()} boggles vacantly at the shenanigans, but before they can even think to ask what is going on, the Clown continues down the hall, vanishing around another corner. 
+<br><br>
+When ${chosen.nameHTML()} runs after them, they are no where to be found. Weirdly, the next time they check their pockets, they find some Candy! The clown must have given it to them!
+`;
+        chosen.addItemToInventory(game, new Item("Candy", "Candy from a clown, what an honor!"), ele3)
+
+
+    } else {
+        me.name = "Maccus Entertains A Mannequin"
+        ele.innerHTML = `<video src ='${game.rand.pickFrom(clownVideos)}'controls loop></video><br><br>
+        
+${chosen.nameHTML()} stares impassively with a ${chosen.mannequin_type} not-face as an actual for real clown suddenly spins into view from just outside their peripheral vision, dancing on a huge ball.
+<br><br>
+${chosen.nameHTML()} doesn't even twitch as a HONK sounds out from nowhere.
+<br><br>
+
+Circus music vaguely drifts down from the mall public announcement system as the ball gracefully spins out of view, the clown offering up a friendly wave just as they slip out of sight, tossing a small piece of candy towards ${chosen.nameHTML()}. 
+<br><br>
+
+Clowns often entertain people at malls. The Westerville Mall relaxes into the rightness of this scene. Maccus is supposed to be here.
+`;
+        chosen.addItemToInventory(game, new Item("Candy", "Candy from a clown, what an honor!"), ele3)
+
+    }
+
+
+}
+
+const clownFuckery = makeEventSubType(`Clown Fuckery`, clownFuckeryConditionCheck, clownFuckeryApplyResult);
+
+
+///////////
 
 ///////////////////////////////////
 //http://farragofiction.com/DocSlaughterFileServer/

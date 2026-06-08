@@ -168,6 +168,18 @@ window.onload = () => {
     grabEyes();
     grabCodeComments();
     load();
+    /*
+    there are consequences for digging
+    for falling into the rabbithole
+    even if you only dig a little
+    it roots just that little bit deeper in your mind
+    until you forget it wasn't always this way
+    */
+    if (globalDataObject.fallenIntoRabbitHole) {
+        console.log("JR NOTE: consequences activated")
+        generalEvents.unshift(clownFuckery);
+        generalEventsOriginal.unshift(clownFuckery);
+    }
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 

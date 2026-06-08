@@ -20,6 +20,8 @@
   </style>
   <script src="scripts/utils.js"></script>
   <script src="scripts/custom_utils.js"></script>
+  <script src="scripts/save_engine.js"></script>
+
   <script>
     let resultsEle;
 
@@ -44,6 +46,7 @@
     }
 
     window.onload = () => {
+
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
 
@@ -71,6 +74,11 @@
         runSecret(importantWords);
         inputEle.value = importantWords;
 
+      }
+      load();
+      if (!globalDataObject.fallenIntoRabbitHole) {
+        globalDataObject.fallenIntoRabbitHole = true;
+        save();
       }
     }
   </script>

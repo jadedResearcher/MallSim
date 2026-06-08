@@ -335,7 +335,8 @@ wireUpAchievement("Khana Is The Best", "dreams", "In Truth, dreams are very zamp
 wireUpAchievement("Gun-Tan Kills A Random Human", "its autumn where you are", "Dream logic. Feelings. It's all connected.");
 wireUpAchievement("Stealing!", "breadcrumbs", "In Truth. Despite JRs wishes. The rot takes all in the end.");
 wireUpAchievement("Twin Sister Encounter", "avalanche of secrets", "In Truth, JR wants to remember everything. No human can.");
-//wireUpAchievement("Wrong", "test_password", "TBD");
+//this achievement is no longer possible. i collapsed two mannequin things together
+wireUpAchievement("Mannequin Sadness", "donut in a corn outfit", "In Truth, We all contain sadness. How much we let the world see is up to each of us.");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
