@@ -333,6 +333,11 @@ wireUpAchievement("Miku Miku Friendship Beam!", "shine so bright", "In Truth, JR
 wireUpAchievement("Mannequin Product Feared", "think like a waste", "In Truth, A Waste will see more of Zampanio than anyone else will. Not just JR's branch either.");
 wireUpAchievement("Khana Is The Best", "dreams", "In Truth, dreams are very zampanio.");
 wireUpAchievement("Gun-Tan Kills A Random Human", "its autumn where you are", "Dream logic. Feelings. It's all connected.");
+wireUpAchievement("Stealing!", "breadcrumbs", "In Truth. Despite JRs wishes. The rot takes all in the end.");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+//wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 
