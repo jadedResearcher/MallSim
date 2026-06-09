@@ -2150,7 +2150,7 @@ When ${chosen.nameHTML()} runs after them, they are no where to be found. Weirdl
 
 
     } else {
-        me.name = "Maccus Entertains A Mannequin"
+        me.chosen_name = "Maccus Entertains A Mannequin"
         ele.innerHTML = `<video src ='${game.rand.pickFrom(clownVideos)}'controls loop></video><br><br>
         
 ${chosen.nameHTML()} stares impassively with a ${chosen.mannequin_type} not-face as an actual for real clown suddenly spins into view from just outside their peripheral vision, dancing on a huge ball.
@@ -2241,7 +2241,7 @@ and then it is gone.
         chosen.corrupted = false;
         chosen.monster_rating = 13; //whoops
         chosen.corruption = -80085; //hope thats enough to keep you safe
-        me.name = "JR Saves A Mannequin"
+        me.chosen_name = "JR Saves A Mannequin"
 
         ele.innerHTML = `<video src ='${game.rand.pickFrom(clownVideos)}'controls loop></video><br><br>
         <br><br>
