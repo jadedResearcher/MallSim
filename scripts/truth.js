@@ -337,8 +337,8 @@ wireUpAchievement("Stealing!", "breadcrumbs", "In Truth. Despite JRs wishes. The
 wireUpAchievement("Twin Sister Encounter", "avalanche of secrets", "In Truth, JR wants to remember everything. No human can.");
 //this achievement is no longer possible. i collapsed two mannequin things together
 wireUpAchievement("Mannequin Sadness", "donut in a corn outfit", "In Truth, We all contain sadness. How much we let the world see is up to each of us.");
-//wireUpAchievement("Wrong", "test_password", "TBD");
-//wireUpAchievement("Wrong", "test_password", "TBD");
+wireUpAchievement("Now You Fucked Up (Hunted)", "am i missing something", "Take care you do not let your hunt for the Truth lead you astray.");
+wireUpAchievement("Now You Fucked Up (Bare Hands)", "ghoulish thing", "How could you.");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 

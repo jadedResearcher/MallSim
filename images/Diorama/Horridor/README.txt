@@ -1,3 +1,23 @@
+6/8/26
+
+had enough 3d printed parts to connect all the straws together to make industrial pipes, then spray painted it
+
+i think the remaining order of operations is:
+
+* spackle walls/floor
+* sand the spackle fairly fine for the walls and *very* fine for the floor
+* paint walls that industrial grey/green 
+* paint floor dark brown
+* add "rust" paint to the ceiling (just light sponging of shades of brown)
+* matte the walls, gloss the floors
+* glue the pipes onto the ceiling
+* add any other details i want (chains hanging from some pipes, water effects from the broken pipe, little boxes implying utility stuff)
+* add corrusion/rust effects to the pipes and anything else i feel like
+* tape back up *heavily*
+* reinforce box with anything i can add to the outside
+* make recordings of it in various ways
+* if i ever make my idea of having a tiny tiny adafruit screen displaying rabbit sim on it, have it ominously deep inside the hallway
+
 6/7/26
 
 finally glued all the doors in place. 
