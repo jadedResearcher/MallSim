@@ -176,9 +176,11 @@ window.onload = () => {
     until you forget it wasn't always this way
     */
     if (globalDataObject.fallenIntoRabbitHole) {
-        console.log("JR NOTE: consequences activated")
+        //console.log("JR NOTE: consequences activated")
         generalEvents.unshift(clownFuckery);
         generalEventsOriginal.unshift(clownFuckery);
+        generalEvents.unshift(minotaurFuckery);
+        generalEventsOriginal.unshift(minotaurFuckery);
     }
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

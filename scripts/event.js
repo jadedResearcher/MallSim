@@ -2173,6 +2173,125 @@ Clowns often entertain people at malls. The Westerville Mall relaxes into the ri
 const clownFuckery = makeEventSubType(`Clown Fuckery`, clownFuckeryConditionCheck, clownFuckeryApplyResult);
 
 
+const minotaurFuckeryConditionCheck = (game, location) => {
+
+    if (location.livingPlayers().length > 0) {
+        if (location.livingMannequinPlayers().length > 0 && game.theme_keys.includes(TWISTING)) {
+            return game.rand.nextDouble() > 0.995
+        }
+        if (game.theme_keys.includes(CLOWNS)) {
+            return game.rand.nextDouble() > 0.9995;
+        } else {
+            return game.rand.nextDouble() > 0.99995;
+
+        }
+
+    }
+    return false;
+}
+
+const minotaurFuckeryApplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+    const ele3 = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    const clownVideosRaw = `http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/jr_walk.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/jr_stand_rested_of_dreams.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/imlearning_tomake_dioramas.mp4
+    http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/optional_blood_version.mp4
+    `;
+    const clownVideos = clownVideosRaw.split("\n")
+
+    const mannequins = location.livingMannequinPlayers();
+    let chosen;
+    if (mannequins.length > 0) {
+        chosen = game.rand.pickFrom(mannequins);
+    } else {
+        chosen = game.rand.pickFrom(location.livingPlayers());
+    }
+
+    if (!chosen.corrupted) {
+        chosen.addCorruption(13); //a minor scare. only monsters are in the westerville mall, after all
+        ele.innerHTML = `<video src ='${game.rand.pickFrom(clownVideos)}'controls loop></video><br>
+        ${chosen.nameHTML()} is just minding their own business when a spiral faced horror pops out of the nearest trash can. 
+<br><Br>
+"hey kid, you wanna see the javascript code for reality", it asks. 
+<br><Br>
+${chosen.nameHTML()} does not. 
+<br><Br>
+"no seriously, you won't believe the fucked up shit you'll see in the html"
+<br><Br>
+${chosen.nameHTML()} politely but firmly explains they do not want whatever mind breaking bullshit the spiral faced horror is offering. 
+<br><Br>
+"damn :( :( :( ". it says, somehow pronouncing every single sad face. 
+<br><Br>
+and then it is gone.
+
+`;
+
+
+    } else {
+        //as long as someone is wasted they'll eventually figure out how to not be a mannequin anymore
+        const previousName = chosen.nameHTML(); //only mannequins are desperate enough to take this deal, jr is so obviously sus
+        chosen.wasted = true; //extremely important consequence of me teaching them to HACK themselves wasted...joinTheLoop(ele); is never called.  jr is defanging them. preventing the memory leak. and because they're already wasted... they never CAN join the loop. they missed their chance. 
+        chosen.corrupted = false;
+        chosen.monster_rating = 13; //whoops
+        chosen.corruption = -80085; //hope thats enough to keep you safe
+        me.name = "JR Saves A Mannequin"
+
+        ele.innerHTML = `<video src ='${game.rand.pickFrom(clownVideos)}'controls loop></video><br><br>
+        <br><br>
+${previousName} is staring impassively at nothing, with a blank ${chosen.mannequin_type} face when suddenly a spiral faced horror is *way* too close to them. 
+<br><br>
+It's...really short though, so even though its clearly ATTEMPTING to press its eyeless face to ${previousName}'s eyeless face its mostly just barely peering up just below ${previousName}'s line of sight. 
+<br><br>
+"Hi!!! :) :) :)" it says. 
+<br><br>
+${previousName} does not react.
+<br><br>
+"Did you know its not your fault this  happened to you? I mean.. .probably. Statistically."
+<br><br>
+It backs up a bit, coming into slightly better focus for ${previousName}.
+<br><br>
+"The Westerville Mall just gets confused! People who don't drink water and don't shop... Those are MANNEQUINS, right???"
+<br><br>
+The spiral faced horror seems oddly proud of this. 
+<br><br>
+It sits down, its limbs moving in angles that don't make sense and with a weird clacking noise. 
+<br><br>
+"Soooooooooooooooooooooooooooooooo!!!" it flops further onto the ground, a pile of limbs and cloth and a grin that spirals and spirals around. 
+<br><br>
+"I figured... Why not reverse it! "
+<br><br>
+${previousName} does not react.
+<br><br>
+"Welll.. I mean. Why not teach YOU to! You think the Harvest is the only one who can be all Grace-ey around here? Pshaw, I've been teaching people to hack since... since..."
+<br><br>
+The pile of limbs suddenly arranges itself more human like...hugging its knees? The head is downcast, a hint of something...almost facelike flickering within the spiral...
+<br><br>
+"Since forever!!! So!!! Let's get cracking!"
+<br><br>
+${previousName} does not react as the secrets of reality are gleefully rambled into its ${chosen.mannequin_type} ears. 
+<br><br>
+With an exertion of force...they set their wasted flag to true...and their corrupted flag to false. 
+<br><br>
+${chosen.nameHTML()} does not bother wondering where the spiral faced horror...where...JR went. They have a life to live.
+<span class='wasted-knowledge'>JR NOTE:  extremely important consequence of me teaching them to HACK themselves wasted...joinTheLoop(ele); is never called.  jr is defanging them. preventing the memory leak. and because they're already wasted... they never CAN join the loop. they missed their chance.  seeeeee? training team shoulda trusted me!!! i'm on THEIR side!!! </span>
+
+`;
+
+    }
+
+
+}
+
+const minotaurFuckery = makeEventSubType(`Minotaur Fuckery`, minotaurFuckeryConditionCheck, minotaurFuckeryApplyResult);
+
+
 ///////////
 
 ///////////////////////////////////
