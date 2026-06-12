@@ -1,6 +1,12 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
-
+dev_log["6/9/26"] = `i totallly forgot to have yonkgi's mirror scene
+but don't worry
+i added two new scenes
+as rewards
+for even trying
+to find
+passwords`
 
 dev_log["6/6/26"] = `i am trying
 to add mirrors
