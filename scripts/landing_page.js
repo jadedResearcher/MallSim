@@ -8,20 +8,20 @@ const landingPage = () => {
     <br><br>
     To me, the most evocative parts of the creepy pasta were always those descriptions of the infinite Westerville Mall.
     <br><br>
-    Here's a simulation of what I think the real game was like. 
+    Here's a simulation of what I think the real game was like. Standard Zampanio warnings apply. Horror, Unreality, all that. 
     <br><br>
     There's not really any game play, but you can add yourself (or a character you like!) and see what would happen if it were. (If you want it more complicated than just adding you, you'll have to work for it, lol.)
     <br><br>
     Happy Hunting :) :) :)!<br><Br><hr>`
 
     //my favorite way to easily make something seem unique to you but actually not be :) :) ;)
-    const rand = new SeededRandom(new Date().getTimezoneOffset());
+    const rand = new SeededRandom(new Date().toLocaleDateString().replaceAll("/", ""));
     const keys = getAllThemeKeysMinusFood();
 
     const name = createTextInputWithLabel(intro_container, "name", "Name:", "")
     name.container.style.marginBottom = "31px";
 
-    const number = createNumberInputWithLabel(intro_container, "number", "Important #*:", new Date().toLocaleDateString().replaceAll("/", ""))
+    const number = createNumberInputWithLabel(intro_container, "number", "Important #*:", rand.initial_seed)
     const asterisk = createElementWithClassAndParent("div", intro_container);
     asterisk.innerHTML = "* For example, an important date (birthday, death day, anniversary, etc). If its 4/1/1972 you would just do 4011972. Or just your lucky number, really anything that feels right for this will work."
     asterisk.style.marginBottom = "31px";

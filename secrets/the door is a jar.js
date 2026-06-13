@@ -152,6 +152,11 @@
 You have 0 gopher gold! `;
 
     let style = createElementWithClassAndParent("style", results);
+    //https://www.tumblr.com/jadedresearcher/819311606942105600?source=share
+    //i briefly let google try to make this css to see if it was just claude that sucked at code
+    //it made it ten times as big and it still barely worked
+    //and if i tried to tweak anything it folded like a house of cards
+    //i just rolled it back to my original version
     style.innerHTML = `
 
     button{
@@ -238,6 +243,9 @@ You have 0 gopher gold! `;
 
                 ${legs ? story.legs : "It hardly seems worth the effort to move."}
 
+                             <br><hr><br>
+
+                ${story.hydration}
 
 
 
