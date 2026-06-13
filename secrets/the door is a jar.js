@@ -27,13 +27,14 @@
         hydration = "This is hydration text"
 
         constructor(text, m, e, t, a, l, h) {
-            this.text ||= text;
-            this.mind ||= m;
-            this.eyes ||= e;
-            this.tongue ||= t;
-            this.arms ||= a;
-            this.legs ||= l;
-            this.hydration ||= h;
+            console.log("JR NOTE: METALStory", { text, m, e, t, a, l, h })
+            this.text = text ? text : this.text;
+            this.mind = m ? m : this.mind;
+            this.eyes = e ? e : this.eyes;
+            this.tongue = t ? t : this.tongue;
+            this.arms = a ? a : this.arms;
+            this.legs = l ? l : this.legs;
+            this.hydration = h ? h : this.hydration;
         }
     }
 
@@ -210,21 +211,17 @@ You have 0 gopher gold! `;
         room.innerHTML = ""
 
         remaingStories = [...stories];
-        renderDoors();
+        const door1 = createElementWithClassAndParent("img", room, "jar");
+
+        const door = createElementWithClassAndParent("img", room, "jar");
+        door.src = "http://farragofiction.com/ZampanioHotlink/northdoor.PNG";
+
+        progressDemandsSacrifice();
 
     }
 
-
-    //remember that elements with id are exposed as global vars
-    //so #results is results
-    const renderDoors = () => {
-        console.log("JR NOTE: rendering things.")
-        if (remaingStories.length === 0) {
-            alert("JR NOTE: todo coffin time")
-        }
-
-        const tellStory = (story, sacrifice) => {
-            storyEle.innerHTML = `Very well. Your ${sacrifice} accepted.<br><br>
+    const tellStory = (story, sacrifice) => {
+        storyEle.innerHTML = `Very well. Your ${sacrifice} accepted.<br><br>
             <hr>
                 ${story.text}
                 <br><hr><br>
@@ -236,7 +233,7 @@ You have 0 gopher gold! `;
                 ${tongue ? story.tongue : "The words don't seem to come."}
                                 <br><hr><br>
 
-                ${mind ? story.arms : "What's the point of even trying?"}
+                ${arms ? story.arms : "What's the point of even trying?"}
                                 <br><hr><br>
 
                 ${legs ? story.legs : "It hardly seems worth the effort to move."}
@@ -245,7 +242,82 @@ You have 0 gopher gold! `;
 
 
             `;
+        renderDoors();
+
+    }
+
+
+    const progressDemandsSacrifice = (story) => {
+        if (!story) {
+            story = new METALStory("You enter the maze, sure that the answers you seek lie deep within.", "You are eager to unravel the puzzles that surely lie within.", "Your eyes take in every detail, your ears strain to absorb every sound. The smells, even the flavors, all may be clues.", "You can't wait to tell everyone about what you find within.", "Your hands clench and unclench just imaging what proof you'll be able to take out with you.", "Your legs are just itching to carry you deeper and deeper within. You feel like you could walk forever!", "You are not even a little bit thirsty.")
         }
+        storyEle.innerHTML += `<br><Br>Progress demands sacrifice. What are you willing to sacrifice?`;
+        const buttonContainer = createElementWithClassAndParent("div", storyEle);
+        buttonContainer.style.cssText = `display: flex;
+                justify-content: space-between;
+                margin-top: 13px;`
+        if (mind) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            button.innerText = "My Mind"
+            button.onclick = () => {
+                mind = false;
+                tellStory(story, "mind is");
+            }
+        }
+
+        if (eyes) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            button.innerText = "My Eyes"
+            button.onclick = () => {
+                eyes = false;
+                tellStory(story, "eyes are");
+            }
+        }
+
+        if (tongue) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            button.innerText = "My Tongue"
+            button.onclick = () => {
+                tongue = false;
+                tellStory(story, 'tongue is');
+            }
+        }
+
+        if (arms) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            button.innerText = "My Arms"
+            button.onclick = () => {
+                arms = false;
+                tellStory(story, "arms are");
+            }
+        }
+
+        if (legs) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            button.innerText = "My Legs"
+            button.onclick = () => {
+                legs = false;
+                tellStory(story, "legs are");
+            }
+        }
+
+
+    }
+
+
+
+
+    //remember that elements with id are exposed as global vars
+    //so #results is results
+    const renderDoors = () => {
+        room.innerHTML = '';
+        console.log("JR NOTE: rendering things.")
+        if (remaingStories.length === 0) {
+            alert("JR NOTE: todo coffin time")
+        }
+
+
+
 
         const doorAndStory = (direction) => {
             console.log("JR NOTE: door and story")
@@ -262,57 +334,8 @@ You have 0 gopher gold! `;
                     }
                 }
 
-                storyEle.innerHTML = `You have chosen the door to the ${direction}.
-                <br><Br>Progress demands sacrifice. What are you willing to sacrifice?`;
-                const buttonContainer = createElementWithClassAndParent("div", storyEle);
-                buttonContainer.style.cssText = `display: flex;
-                justify-content: space-between;
-                margin-top: 13px;`
-                if (mind) {
-                    const button = createElementWithClassAndParent("button", buttonContainer);
-                    button.innerText = "My Mind"
-                    button.onclick = () => {
-                        mind = false;
-                        tellStory(story, "mind is");
-                    }
-                }
-
-                if (eyes) {
-                    const button = createElementWithClassAndParent("button", buttonContainer);
-                    button.innerText = "My Eyes"
-                    button.onclick = () => {
-                        eyes = false;
-                        tellStory(story, "eyes are");
-                    }
-                }
-
-                if (tongue) {
-                    const button = createElementWithClassAndParent("button", buttonContainer);
-                    button.innerText = "My Tongue"
-                    button.onclick = () => {
-                        tongue = false;
-                        tellStory(story, 'tongue is');
-                    }
-                }
-
-                if (arms) {
-                    const button = createElementWithClassAndParent("button", buttonContainer);
-                    button.innerText = "My Arms"
-                    button.onclick = () => {
-                        arms = false;
-                        tellStory(story, "arms are");
-                    }
-                }
-
-                if (legs) {
-                    const button = createElementWithClassAndParent("button", buttonContainer);
-                    button.innerText = "My Legs"
-                    button.onclick = () => {
-                        legs = false;
-                        tellStory(story, "legs are");
-                    }
-                }
-
+                storyEle.innerHTML = `You have chosen the door to the ${direction}.`
+                progressDemandsSacrifice(story);
 
                 removeItemOnce(remaingStories, story)
             }
@@ -338,7 +361,7 @@ You have 0 gopher gold! `;
 
         }
 
-        storyEle.innerHTML += `<br><br>There are ${numDoors} doors before you. Which will you choose?`
+        storyEle.innerHTML += `<br><br><br><hr><br>There are ${numDoors} doors before you. Which will you choose?`
     }
 
     init();
