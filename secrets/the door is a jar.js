@@ -290,7 +290,7 @@ You have 0 gopher gold! `;
     }
 
 
-    const progressDemandsSacrifice = (story) => {
+    const progressDemandsSacrifice = (story, coffin) => {
         if (!story) {
             story = new METALStory("You enter the maze, sure that the answers you seek lie deep within.", "You are eager to unravel the puzzles that surely lie within.", "Your eyes take in every detail, your ears strain to absorb every sound. The smells, even the flavors, all may be clues.", "You can't wait to tell everyone about what you find within.", "Your hands clench and unclench just imaging what proof you'll be able to take out with you.", "Your legs are just itching to carry you deeper and deeper within. You feel like you could walk forever!", "You are not even a little bit thirsty.")
         }
@@ -344,6 +344,16 @@ You have 0 gopher gold! `;
             }
         }
 
+        if (!mind && !eyes && !tongue && !arms && !legs) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            button.innerText = "I have nothing left."
+            button.onclick = () => {
+                legs = false;
+                storyEle.innerHTML = "Very well. Your life is accepted."
+                coffinTime();
+            }
+        }
+
 
     }
 
@@ -355,9 +365,6 @@ You have 0 gopher gold! `;
     const renderDoors = () => {
         room.innerHTML = '';
         console.log("JR NOTE: rendering things.")
-        if (remaingStories.length === 0) {
-            coffinTime();
-        }
 
 
 
@@ -404,7 +411,53 @@ You have 0 gopher gold! `;
 
         }
 
-        storyEle.innerHTML += `<br><br><br><hr><br>There are ${numDoors} doors before you. Which will you choose?`
+        storyEle.innerHTML += `<br><br><br><hr><br>There are ${numDoors} doors before you. Which will you choose? <br><br>`
+        const jars = room.querySelectorAll(".jar");
+        //when is a door not a door? when its a jar. when is a waste not a waste? when its jr. 
+        //fun fact
+        //did you know
+        //my middle initial is A?
+        //i'm literally
+        //jar
+        //yes that is what all the jokes have been all these years
+        //now you know
+        //i keep joking that
+        //i am the door
+        //i'm what's leading you in
+        //to zampanio
+        //and yeah, helen distortion, aka door waifu
+        //is the best character in all of magnus archives
+        let index = 0;
+        const buttonContainer = createElementWithClassAndParent("div", storyEle);
+        buttonContainer.style.cssText = `display: flex;
+                justify-content: space-between;
+                margin-top: 13px;`
+        for (let jar of jars) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            if (index == 0) {
+                button.innerText = `WEST DOOR`;//yes yes, i know, fake ass direction
+
+            }
+
+            if (index == 1) {
+                button.innerText = `NORTH DOOR`;
+            }
+
+            if (index == 2) {
+                button.innerText = `EAST DOOR`;
+            }
+            button.onclick = () => jar.click()
+            index++;
+        }
+
+        if (jars.length === 0) {
+            const button = createElementWithClassAndParent("button", buttonContainer);
+            button.innerText = "It can't end like this. Please don't let it end yet. Please. Please just one more. Just a little further. Please.";
+            button.onclick = () => {
+                progressDemandsSacrifice(impendingCoffin, true);
+            }
+
+        }
     }
 
     //            story = new METALStory("You enter the maze, sure that the answers you seek lie deep within.", "You are eager to unravel the puzzles that surely lie within.", "Your eyes take in every detail, your ears strain to absorb every sound. The smells, even the flavors, all may be clues.", "You can't wait to tell everyone about what you find within.", "Your hands clench and unclench just imaging what proof you'll be able to take out with you.", "Your legs are just itching to carry you deeper and deeper within. You feel like you could walk forever!", "You are not even a little bit thirsty.")
@@ -675,8 +728,8 @@ It was worth it.
 
 Right?
 
-A small dispenser next to you plays a small fanfare, and after some churning, it
-dispenses 8 cents into your hand, coins bouncing off the exposed bone through it.
+A small dispenser next to you plays a small fanfare, and after some churning, it deposits 8 cents into your hand, coins bouncing off the exposed bone through it.
+
 Damn it. This isn't gopher gold.
 
 `, `You remember...
@@ -892,7 +945,7 @@ Your throat is parched, but you move on to the next room.
 Maybe you will find what you are looking for, there.
 `));
 
-
+    const impendingCoffin = new METALStory(`You have finally. Finally sacrificed everything.`, ``, ``, ``, ``, ``, `There is nothing left that could possibly have its thirst quenched.`);
     //    stories.push(new METALStory(``,``,``,``,``,``,``));
 
 
