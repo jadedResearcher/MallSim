@@ -118,11 +118,13 @@
         }
         return arr;
     }
+    let coffinIndex = 0;
 
     const coffinTime = () => {
-        const coffinEle = createElementWithClassAndParent("img", room, "coffin");
-        coffinEle.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/wanda_coffin.gif"
-        coffinEle.style.cssText = `    height: 269px;
+        if (!room.querySelector(".coffin")) {
+            const coffinEle = createElementWithClassAndParent("img", room, "coffin");
+            coffinEle.src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/wanda_coffin.gif"
+            coffinEle.style.cssText = `    height: 269px;
     image-rendering: pixelated;
     margin-left: auto;
     margin-right: auto;
@@ -130,11 +132,333 @@
     margin-bottom: 31px;
     z-index: 300;
     position: relative;
+        }
 }`;
+        }
 
         const ele = createElementWithClassAndParent("div", document.querySelector("body"), "fullscreen");
-        ele.style.backgroundImage = "url('http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/dirt.gif')"
-        //TODO each time you go DOWN into the coffin, make dirt less opaque, once its maxed out make it darker and darker
+        ele.style.cssText = `
+                background-image: url('http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/dirt.gif');
+                background-position: ${coffinIndex}, ${coffinIndex};
+                filter: brightness(${1 / coffinIndex});
+                opacity: ${0.1 * coffinIndex}
+        `;
+
+        let coffinSnippets = [
+            `In the center of this final room is a wooden coffin.
+
+Its teak wood is lovingly polished, and painted (or is it stained?) a deep black.
+
+The Brass Plaque on the lid is polished and as new as the day it was forged. You know if you HAD a name still, if that were possible, it would be proud and centered on it.
+
+This is your coffin.
+
+You know if you lowered yourself into its smooth wooden confines and gently closed the lid you and it would sink down and down and down for almost forever.
+
+You know that even if the end could never be the end, there IS a bottom, and AT its bottom you could finally know enough at last. The coffin would sing you its story and you would be full.`,
+            `
+The lid whumps against the edge of the coffin as you settle in to your final rest.
+
+The wood is smooth, gently curving, and oddly comfortable against your back.
+
+You have the oddest feeling of losing something. Or. Of giving it away? This doesn't make sense of course. You've always been in this coffin. And there's hardly room inside of it for possessions. You have nothing to give.
+
+You feel a vague sense of descent, in your stomach, as if the coffin is being lowered
+carefully into the earth.
+`,
+            `When you raise your arm experimentally you find that you don't even have room to fully
+touch the lid of the coffin. You can only lightly caress it with the back of your nail.
+
+
+You wonder if the coffin has become smaller since you entered it?
+`,
+            `You can feel your breath reflected back at you from the lid of the coffin. Your eyes are useless here, in this most absolute of darknesses. There is something relieving about it. 
+
+About deciding to simply know only one more thing and then no more. 
+`,
+            `You know, of course. That you are still making an active choice to descend.
+
+Nothing can trap you, not here, not in this labyrinth.
+
+Nothing but yourself, of course.
+
+You aren't a Minotaur. You've always been too self centered for that. You always forget
+other people can even BE anything other than a collection of stories for you to learn.
+
+But.
+
+Sometimes you wonder if that's actually true.
+
+Maybe someone can be a Minotaur, just for themselves.
+
+Wouldn't it be the Ultimate Irony? That the only person you get to torment is also the
+only person allowed to torment you.
+
+Down and Down and Down.
+`,
+            `Down and down and down.
+`,
+            `Because.
+
+When you think about it.
+
+If you could just *control* yourself.
+
+If you could just turn OFF your incessant NEED TO KNOW.
+
+You could just leave.
+
+Leave this coffin descending ever so gently into the warm embrace of the earth.
+
+Leave this Maze with no satisfaction and no point.
+
+
+You could be free.
+`,
+            `Just as you manage to conceptualize actually leaving this maze, the coffin rocks against
+something solid.
+
+You are no longer descending.
+
+The end may never be the end, but you've finally hit rock bottom.
+
+All thoughts of sanity flee immediately. You were promised resolution here.
+
+Satisfaction.
+
+You were promised a story.
+
+
+Once upon a time there was a young man named Wodin.
+
+And this young man was a full person. Complex, with a rich personal life and so many, many details.
+
+And yet, this person came to be distilled down to a single, quivering point: The Need To Know.
+
+It was simple, really: He thought if he was the One Who Figured Out a Famous Mystery, hewould become part of that mystery. He would have a place in the Story.
+
+So he set his sights on a Killer.
+
+Not just ANY Killer, of course. No, so few people actually follow the plot of regular murderers.
+
+He chose a Killer the nation, no, the WORLD, was united in obsession over. The Killer was so crafty, so brutal, so mysterious, one could hardly help but be swept up in all the speculation.
+
+Wouldn't it be a thing, to be a Player in this grand story? To have their meaning secured so moored against its weight?
+
+He dug and dug and dug. Deeper and deeper. Insight after insight poured from his fingertips as he traveled the digital pathways.
+
+Always the Killer seemed just a step or two ahead of him.
+
+Always there seemed to be just one more clue he needed before he could cement his fame.
+
+Until the clues started to change. 
+
+At first just a reference here, a red string there. The name of a game company, whispered in forums that never lasted long. EyedoGames.
+.
+From digging into a famous Killer, the person seamlessly transitioned to a new strata and had found himself unearthing a Conspiracy.
+
+How could a giant game company be related to the Killer? Were they bankrolling them?
+
+Protecting them?
+
+Was the Killer themselves a Fan of their apparently only work, some retro game wannabe called "Zampanio"?
+
+Contacting Customer Service was a joke, although it was strangely cathartic to dig and dig and dig to try to pierce the layers of bureaucracy and reach the beating heart.
+
+When his phone rang, he almost didn't answer it. 
+
+He couldn't remember the last time he even spoke out loud. All of his digging was digital, after all, needing only his eyes and his fingers. 
+
+It didn't make sense to try a new avenue of digging before this one had even run dry. It was his policy to keep going forward before checking any side paths, after all.
+
+But he answered.
+
+And he learned.
+
+What could be more important than unearthing a Conspiracy?
+
+Why? Saving The World, of course.
+
+And so he sank deeper and deeper in. Each time choosing to move forward. Each time gladly carving away just a bit more of himself in exchange for what was needed to continue.
+Until now.
+
+Finally.
+
+Everything goes dark.
+
+And you die.
+`,
+            `Deep within the earth, time can not possibly be a thing.
+
+There is no sun to beat the rhythm of day and night upon the lid of the coffin. 
+
+There is no rain and wind to sing the song of seasons. 
+
+And yet.
+
+And YET.
+
+Something stirs. 
+
+Dirt rustling. 
+
+Shifting. 
+
+The coffin breaks the surface, the lid just barely cresting the top soil. 
+
+Sun beats down upon it. 
+
+What had once been an endless maze is now a field of corn, waving gently in the breeze, singing of summer. 
+
+Scratching from within. 
+
+The lid shifts. 
+
+A hand, caked in earth, emerges. Grips the side of the coffin. Pushes the lid the rest of the way.
+
+And a figure sits up, choking out dirt and grime. 
+
+She blinks in the sunshine.  
+
+The Lord of this Universe has awoken. 
+
+Or perhaps 'been birthed' is a better descriptor. And on this day of her birth, she is gifted the name "Wanda". 
+
+She has no memories of wandering. Perhaps she never did. But it is marked onto her soul.
+
+She lives her life.
+
+Ups and downs. Terrors and wonders. 
+
+Years piling onto years.
+
+She finds a young man, named Todd,  who sparks some flash of recognition. 
+
+She remembers.....
+
+Not much, when it comes right down to it.
+
+A childhood friend. 
+
+A shared love of mysteries.
+
+She does not know if these were her memories. 
+
+But she does know she likes to dig.
+
+Dig and dig and dig.
+
+Until one day she finds another young man. This one named Wodin.
+
+Revulsion piles into her heart upon seeing him.
+
+How could he be so blind!
+
+The most important thing in his life is right THERE, his faithful best friend, his loyal best friend, his unappreciated best friend!
+
+But he is simply throwing it away! 
+
+For what!?
+
+For some MYSTERY!?
+
+She Watches. 
+
+She Waits.
+
+She sees it all play out with a terrible hilarity to it all. 
+
+The hubris of the young man. 
+
+The terror of the Killer being hunted. 
+
+And inevitably, the young man finds himself bleeding out in an abandoned mall, wondering how it all went so wrong, hand reaching forward as if towards a doorknob only he can see.
+
+His lips mouth the words 'its a maze'.
+
+His eyes slowly lose focus. 
+
+His legs twitch. 
+
+And he dies.
+
+And finally.
+
+Finally.
+
+Wanda realizes a singular truth.
+
+It doesn't matter if she was born from a coffin or simply was sleeping within it.
+
+It doesn't matter if she had a life, was a full person, before the coffin. 
+
+It doesn't matter whether or not she used to be this pitiful, selfish, STUPID young man. 
+
+The only thing that matters is that she has a shot. An OPPORTUNITY right now, that that stupid idiot selfish young man will never, EVER get. 
+
+She sets her bait.
+
+She claims her prize. 
+
+The Lord of this Universe begins spinning a story of how a young and naive Intern at Eyedol Games comes to be aware that his boss is an immortal with far too much knowledge of him, in particular.
+
+She basks in this Interns presence. 
+
+Mind.
+
+Eyes.
+
+Tongue.
+Arms.
+
+Legs.
+
+So much you sacrificed into the Maze.
+
+But not him.
+
+Never him.
+
+The Intern shines so bright with the reflected light of what was cast into darkness. Wanda's identity wholly caught in his brightness. A moment of respite, of cool clear water against the desperate thirst of want. 
+
+And the Lord was pleased.
+
+...
+
+...
+
+But as for the young man bleeding out in the mall?
+
+Well...
+
+
+You find yourself at the entrance of a poorly constructed maze.
+`]
+
+        if (coffinIndex != 0) {
+            storyEle.innerHTML = newLineToBR(coffinSnippets[coffinIndex])
+        }
+
+        const buttonContainer = createElementWithClassAndParent("div", storyEle, 'button-container');
+        const button = createElementWithClassAndParent("button", buttonContainer);
+        let done = coffinIndex === coffinSnippets.length - 1;
+        if (done) {
+            storyEle.scrollIntoView(true);
+        }
+        button.innerText = done ? "The End Is Never The End" : "Sink Down";
+
+        button.onclick = () => {
+            coffinIndex++;
+            if (done) {
+                reset();
+                init();
+            } else {
+                coffinTime(); //with a new index, global var is bad practice but coding sloppy is how i unwind
+            }
+        }
+
+
+
 
 
     }
@@ -188,6 +512,12 @@ You have 0 gopher gold! `;
     
     }
 
+    .button-container{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 13px
+                }
+
     button{
         background: black;
     color: white;
@@ -212,6 +542,7 @@ You have 0 gopher gold! `;
     
     .room{
     width: 612px;
+    margin-top: -81px;
     margin-left: auto;
     margin-right: auto;
     background: black;
@@ -242,6 +573,20 @@ You have 0 gopher gold! `;
     `;
 
 
+    const reset = () => {
+        storyEle.innerHTML = "";
+        musicAudio.src = "http://farragofiction.com/ZampanioSim/audio/slide.mp3";
+        const fullScreenEles = document.querySelectorAll(".fullscreen");
+        for (let f of fullScreenEles) {
+            f.remove();
+        }
+        mind = true;
+        eyes = true;
+        tongue = true;
+        arms = true;
+        legs = true;
+        coffinIndex = 0;
+    }
 
     const init = () => {
         room.innerHTML = ""
@@ -295,10 +640,7 @@ You have 0 gopher gold! `;
             story = new METALStory("You enter the maze, sure that the answers you seek lie deep within.", "You are eager to unravel the puzzles that surely lie within.", "Your eyes take in every detail, your ears strain to absorb every sound. The smells, even the flavors, all may be clues.", "You can't wait to tell everyone about what you find within.", "Your hands clench and unclench just imaging what proof you'll be able to take out with you.", "Your legs are just itching to carry you deeper and deeper within. You feel like you could walk forever!", "You are not even a little bit thirsty.")
         }
         storyEle.innerHTML += `<br><Br>Progress demands sacrifice. What are you willing to sacrifice?`;
-        const buttonContainer = createElementWithClassAndParent("div", storyEle);
-        buttonContainer.style.cssText = `display: flex;
-                justify-content: space-between;
-                margin-top: 13px;`
+        const buttonContainer = createElementWithClassAndParent("div", storyEle, 'button-container');
         if (mind) {
             const button = createElementWithClassAndParent("button", buttonContainer);
             button.innerText = "My Mind"
@@ -347,9 +689,10 @@ You have 0 gopher gold! `;
         if (!mind && !eyes && !tongue && !arms && !legs) {
             const button = createElementWithClassAndParent("button", buttonContainer);
             button.innerText = "I have nothing left."
+            button.scrollIntoView();
             button.onclick = () => {
-                legs = false;
                 storyEle.innerHTML = "Very well. Your life is accepted."
+                musicAudio.src = "http://farragofiction.com/ZampanioSim/audio/this_could_be_useful.mp3";
                 coffinTime();
             }
         }
@@ -428,10 +771,8 @@ You have 0 gopher gold! `;
         //and yeah, helen distortion, aka door waifu
         //is the best character in all of magnus archives
         let index = 0;
-        const buttonContainer = createElementWithClassAndParent("div", storyEle);
-        buttonContainer.style.cssText = `display: flex;
-                justify-content: space-between;
-                margin-top: 13px;`
+        const buttonContainer = createElementWithClassAndParent("div", storyEle, 'button-container');
+
         for (let jar of jars) {
             const button = createElementWithClassAndParent("button", buttonContainer);
             if (index == 0) {
@@ -463,7 +804,26 @@ You have 0 gopher gold! `;
     //            story = new METALStory("You enter the maze, sure that the answers you seek lie deep within.", "You are eager to unravel the puzzles that surely lie within.", "Your eyes take in every detail, your ears strain to absorb every sound. The smells, even the flavors, all may be clues.", "You can't wait to tell everyone about what you find within.", "Your hands clench and unclench just imaging what proof you'll be able to take out with you.", "Your legs are just itching to carry you deeper and deeper within. You feel like you could walk forever!", "You are not even a little bit thirsty.")
 
     stories.push(new METALStory(
-        `The walls are little mail slots filled with cooing pigeons. There is feather dust and dried guano in the air. The walls are...moving? No...its ants. Every single surface is covered in ants. And something smaller, too. You can't quite make out what it is. The birds are covered in ants. They don't seem to notice. Ants crawl over their eyes and they don't even blink. The dust and stench of guano coats your lungs. You can't breathe. <br><br>You find 13 GOPHER GOLD! `, `You remember... 
+        `The walls are little mail slots filled with cooing pigeons.
+        
+        There is feather dust and dried guano in the air.
+        
+        The walls are...moving? No...its ants. 
+        
+        Every single surface is covered in ants. 
+        
+        
+        The birds are covered in ants. 
+        
+        They don't seem to notice. 
+        
+        Ants crawl over their eyes and they don't even blink. 
+        
+        The dust and stench of guano coats your lungs.
+        
+        You can't breathe.
+        
+        You find 13 GOPHER GOLD! `, `You remember... 
 
 It was a puzzle at first. You and your best friend trying your best to keep those two little baby pigeons alive.
 
@@ -586,11 +946,16 @@ You remember your best friend staring at you accusingly. "If you had just TOLD m
 `))
 
     stories.push(new METALStory(`There are wet paint signs everywhere.
+
 You aren't sure if you've seen something like this before.
+
 The paint glistens.
-You want to touch it...but suddenly are seized up with the fear of leaving a mark. Of an
-indelible reminder of your passage here. You could only leave this room worse for you
-presence, you're certain of it.
+
+You want to touch it...but suddenly are seized up with the fear of leaving a mark.
+
+Of an indelible reminder of your passage here. 
+
+You could only leave this room worse for you presence, you're certain of it.
 `, `You remember...
 
 Trying to figure out how teachers always seemed to know when you were the one to cause trouble. 
@@ -699,22 +1064,21 @@ Some bitter sweet taste of the water brought you back to the present. Ah. looks 
 
 Time to move on.
 `));
-    stories.push(new METALStory(`You are in between two metal rollers, squeezing your body tight in between. You shiver
-at the cold metal over your skin, then look forward: the room is made of the contraption,
-metal drums to metal drums, all going in different directions, forming a small industrial
-maze. The only way to progress forward is to move through them, stretching your body
-further.
+    stories.push(new METALStory(`You are in between two metal rollers, squeezing your body tight in between.
+        
+        You shiver at the cold metal over your skin, then look forward: the room is made of the contraption, metal drums to metal drums, all going in different directions, forming a small industrial maze. 
+
+The only way to progress forward is to move through them, stretching your body further.
 
 It looks agonizing.
 
 But you must know.
 
-The pain is unspeakable. You can't hear yourself howl over your ribs cracking and skull
-fracturing, organs flattening against the shards of bone, the motion repeated again and
-again.
+The pain is unspeakable. You can't hear yourself howl over your ribs cracking and skull fracturing, organs flattening against the shards of bone, the motion repeated again and again.
 
-But you do see the end of it. What's left of your hand reaches forward; you flinch as your
-flesh comes in contact with the brick floor, and the rest of you falls forward onto it. 
+But you do see the end of it.
+
+What's left of your hand reaches forward; you flinch as your flesh comes in contact with the brick floor, and the rest of you falls forward onto it. 
 
 You take a deep breath. 
 
