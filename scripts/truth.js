@@ -339,7 +339,7 @@ wireUpAchievement("Twin Sister Encounter", "avalanche of secrets", "In Truth, JR
 wireUpAchievement("Mannequin Sadness", "donut in a corn outfit", "In Truth, We all contain sadness. How much we let the world see is up to each of us.");
 wireUpAchievement("Now You Fucked Up (Hunted)", "am i missing something", "Take care you do not let your hunt for the Truth lead you astray.");
 wireUpAchievement("Now You Fucked Up (Bare Hands)", "ghoulish thing", "How could you.");
-//wireUpAchievement("Wrong", "test_password", "TBD");
+wireUpAchievement("It's Friday!!!", "the door is a jar", "In Truth, Fridays are a day of rest. Use them wisely.");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 
 
