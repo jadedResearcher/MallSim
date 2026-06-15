@@ -38,6 +38,15 @@
       scriptTag.onerror = () => {
         resultsEle.innerHTML = "haha whoops, that's not a real password, lulz"
       }
+      scriptTag.onload = () => {
+        if (!globalDataObject.passwordsDugInto) {
+          globalDataObject.passwordsDugInto = [];
+        }
+        globalDataObject.passwordsDugInto.push(fileName);
+        globalDataObject.passwordsDugInto = uniq(globalDataObject.passwordsDugInto);
+        globalDataObject.fallenIntoRabbitHole = true;
+        save();
+      }
       body.append(scriptTag);
 
     }
@@ -71,15 +80,17 @@
       }
 
       resultsEle = document.querySelector("#results");
-      if (importantWords) {
-        runSecret(importantWords);
-        inputEle.value = importantWords;
 
-      }
       load();
       if (!globalDataObject.fallenIntoRabbitHole) {
         globalDataObject.fallenIntoRabbitHole = true;
         save();
+      }
+
+      if (importantWords) {
+        runSecret(importantWords);
+        inputEle.value = importantWords;
+
       }
     }
   </script>

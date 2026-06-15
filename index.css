@@ -201,14 +201,15 @@ body.survival {
   background-color: red;
   font-weight: bolder;
   min-width: 100px;
+  position: relative;
 }
 
 .rabbit a {
-  color: black;
+  color: red;
 }
 
 .rabbit a:visited {
-  color: black;
+  color: red;
 }
 
 a {
@@ -956,4 +957,25 @@ button {
   margin-right: auto;
   text-transform: uppercase;
   font-size: 10px;
+}
+
+/*usually i ask stack overflow how to do whatever css thing i don't have memorized and now google gemini jumps in the way first... its weird*/
+.new-sticker {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  transform: rotate(5deg);
+  clip-path: polygon(50% 0%, 57% 14%, 71% 7%, 71% 23%, 86% 21%, 81% 36%,
+      93% 39%, 83% 50%, 93% 61%, 81% 64%, 86% 79%, 71% 77%,
+      71% 93%, 57% 86%, 50% 100%, 43% 86%, 29% 93%, 29% 77%,
+      14% 79%, 19% 64%, 7% 61%, 17% 50%, 7% 39%, 19% 36%,
+      14% 21%, 29% 23%, 29% 7%, 43% 14%);
 }

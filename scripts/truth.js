@@ -66,7 +66,7 @@ const renderKnownAchievements = (parent, unlocked_achievements) => {
     const container = createElementWithClassAndParent("div", parent, 'pill-container');
     for (let [key, value] of Object.entries(known_achievements)) {
         const unlocked = unlocked_achievements.includes(key);
-        const pill = generateAchievementPill(key, unlocked, container);
+        const pill = generateAchievementPill(key, unlocked, !globalDataObject.passwordsDugInto.includes(value.password), container);
         if (unlocked) {
             pill.onclick = () => {
                 renderPrize(value)
@@ -85,7 +85,8 @@ const renderUnKnownAchievements = (parent, unlocked_achievements) => {
     const known = Object.keys(known_achievements);
     for (let unique_event of unlocked_achievements) {
         if (!known.includes(unique_event)) {
-            const pill = generateAchievementPill(unique_event, true, container);
+            //can never be new cuz no passwords associated
+            const pill = generateAchievementPill(unique_event, true, false, container);
             pill.onclick = () => {
                 haveTruthSayString("...what did you even do. What IS this achievement? JR has not coded for this. Tell JR to code for this. It is like an itch in my lack of brain.")
             }
@@ -149,9 +150,9 @@ const makeColorsForString = (string) => {
     );
     return colors;
 }
-//http://zampanio.com/
-const generateAchievementPill = (name, unlocked, parent) => {
-    console.log("JR NOTE: generateAchievementPill", { name, unlocked, parent })
+//http://zampanio.com/  //someone finally made this
+const generateAchievementPill = (name, unlocked, isNew, parent) => {
+    console.log("JR NOTE: generateAchievementPill", { name, unlocked, isNew, parent })
     const pill = createElementWithClassAndParent("button", parent, "achievement-pill");
     pill.innerText = name;
     const colors = makeColorsForString(name);
@@ -162,6 +163,11 @@ const generateAchievementPill = (name, unlocked, parent) => {
         pill.style.color = "gray"
     } else {
         pill.style.backgroundColor = colors[0];
+
+    }
+    if (isNew && unlocked) {
+        const newSticker = createElementWithClassAndParent("div", pill, "new-sticker");
+        newSticker.innerHTML = "New!"
 
     }
     return pill;

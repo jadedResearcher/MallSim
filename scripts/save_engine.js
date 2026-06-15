@@ -16,7 +16,8 @@ const SAVE_KEY = 'ECHIDNA_MEMORY_LEAK_CULTISTS'
 let globalDataObject = {
     highestStoryIndexUnlocked: 0,//for the radio
     achievementsUnlocked: [],
-    fallenIntoRabbitHole: false, //theres always consequences to digging deeper
+    fallenIntoRabbitHole: false, //theres always consequences to digging deeper (technically this could get covered by the passwords found now that it exists but i like how ominous it sounds its not leaving i love it)
+    passwordsDugInto: [],//if you haven't seen the password for a given achievement, i'll mark it as 'new'
     loopingCultists: [] //an array, not a map, so that yes, you can end up with a dozen copies of the same person all with the same title. the echidna is an INCREDIBLY stupid, ineffiicent memory leak and its all of our problem (hopefully i'll remember to have a mode where peewee can eat excess cultists for you)
 }
 
