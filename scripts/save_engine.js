@@ -21,6 +21,63 @@ let globalDataObject = {
     loopingCultists: [] //an array, not a map, so that yes, you can end up with a dozen copies of the same person all with the same title. the echidna is an INCREDIBLY stupid, ineffiicent memory leak and its all of our problem (hopefully i'll remember to have a mode where peewee can eat excess cultists for you)
 }
 
+//JR NOTE: add the things you're worried about desyncing here
+const protectFromDesyncIssues = () => {
+    //if you have nothing you're worried about just return here, it'll be faster
+    //return
+
+
+    //in mallsim, achievementsUnlocked and passwordsDugInto are most at risk of desyncing.
+    //you don't want to add a dozen strings to an array, then have another tab save and blow them away
+    //YES looping cultists matter too but i think its funny that some might get lost in the void (instead of gunking up your cpu and crashing your browser)
+    //probably better to get voided out than eaten by peewee you know?
+
+    let fileData = localStorage.getItem(SAVE_KEY);
+    if (fileData) {
+        let fileJSON = JSON.parse(data);
+
+        if (fileJSON.achievementsUnlocked) {
+            if (globalDataObject.achievementsUnlocked) {
+                const achievementsUnlocked = fileJSON.achievementsUnlocked.concat(globalDataObject.achievementsUnlocked);
+                globalDataObject.achievementsUnlocked = uniq(achievementsUnlocked);
+            } else {
+                globalDataObject.achievementsUnlocked = fileJSON.achievementsUnlocked;
+            }
+        }
+
+        if (fileJSON.passwordsDugInto) {
+            if (globalDataObject.passwordsDugInto) {
+                const passwordsDugInto = fileJSON.passwordsDugInto.concat(globalDataObject.passwordsDugInto);
+                globalDataObject.passwordsDugInto = uniq(passwordsDugInto);
+            } else {
+                globalDataObject.passwordsDugInto = fileJSON.passwordsDugInto;
+            }
+        }
+
+
+        //fiiiiiiiine i'll save the damn looping cultists. don't say i never did anything for a waste
+        if (fileJSON.loopingCultists) {
+            if (globalDataObject.loopingCultists) {
+                const loopingCultists = fileJSON.loopingCultists.concat(globalDataObject.loopingCultists);
+                globalDataObject.loopingCultists = uniq(loopingCultists);
+            } else {
+                globalDataObject.loopingCultists = fileJSON.loopingCultists;
+            }
+        }
+
+
+    }
+
+}
+
+
+//if you, say, have multiple mallsim tabs open, this handles syncing them.
+window.onstorage = () => {
+    // When local storage changes, dump the list to
+    // the console.
+    console.log(JSON.parse(window.localStorage.getItem(SAVE_KEY)));
+};
+
 
 const deleteSave = () => {
     localStorage.removeItem(SAVE_KEY);
@@ -28,8 +85,11 @@ const deleteSave = () => {
 
 //http://www.purplefrog.com/~thoth/ruby/nobody-knows-shoes.pdf
 
+
+
 //up to what uses this to decide how often to save
 const save = () => {
+    protectFromDesyncIssues();//will handle anything that needs to be combined with what's currently in local storage (if another tab saved before us)
     globalDataObject.lastSaveTimeCode = Date.now();
     localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));
     const saveNoise = new Audio("http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH/audio/fx/single_heart.mp3");
