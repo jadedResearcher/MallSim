@@ -955,7 +955,7 @@ You want to touch it...but suddenly are seized up with the fear of leaving a mar
 
 Of an indelible reminder of your passage here. 
 
-You could only leave this room worse for you presence, you're certain of it.
+You could only leave this room worse for your presence, you're certain of it.
 `, `You remember...
 
 Trying to figure out how teachers always seemed to know when you were the one to cause trouble. 
@@ -973,7 +973,7 @@ What would happen when he (or was it a she? You squinted but decided you couldn'
 
 You suddenly wanted to see it. 
 
-You fished out a penny from you pocket and placed it in the path of the little bug and waited patiently for it to step onto it. 
+You fished out a penny from your pocket and placed it in the path of the little bug and waited patiently for it to step onto it. 
 
 Success!
 
@@ -1224,7 +1224,7 @@ Why wouldn't it?
 
 The fact that the media hadn't caught on at all was hilarious to you.
 
-Everyone was following your blog, waiting for you to figure out the next clue (you finally mattered you finally had a pace to belong you were finally smart enough!)
+Everyone was following your blog, waiting for you to figure out the next clue (you finally mattered you finally had a place to belong you were finally smart enough!)
 
 Just one more clue...
 

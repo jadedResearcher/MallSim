@@ -22,7 +22,7 @@
 
     `;
     const links = linksRaw.split("\n")
-    let src = "It feels weird.... realizing I'm almost the the only one left from those days. I was a rallying point for what remained of the fandom when the discord fell. Who... will be the one carrying the torch when my own discord, or even my own websites...finally fall? Will people believe them? That they hadn't made up the whole thing?<br><Br>I leave as much evidence behind as I can...but will it be enough? Or will even this avalance of secrets...one day fade to mere rumors?<br><Br>";
+    let src = "It feels weird.... realizing I'm almost the the only one left from those days. I was a rallying point for what remained of the fandom when the discord fell. Who... will be the one carrying the torch when my own discord, or even my own websites...finally fall? Will people believe them? That they hadn't made up the whole thing?<br><Br>I leave as much evidence behind as I can...but will it be enough? Or will even this avalanche of secrets...one day fade to mere rumors?<br><Br>";
 
     for (let link of links) {
         src += `<a target ="_blank" href = '${link}'>${link}</a>`;;
