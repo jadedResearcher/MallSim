@@ -422,6 +422,7 @@ button {
   border-left: none;
   background-color: rgb(237, 210, 135);
   box-shadow: 2px 2px 4px rgb(50, 37, 1);
+  position: relative;
 }
 
 .tick-once-button {
@@ -957,6 +958,20 @@ button {
   margin-right: auto;
   text-transform: uppercase;
   font-size: 10px;
+}
+
+.click-here::after {
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' enable-background='new 0 0 24 24' height='24px' viewBox='0 0 24 24' width='24px' fill='%23a10000'%3E%3Crect fill='none' height='24' width='24'/%3E%3Cpath d='M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  position: absolute;
+  right: -68;
+  /*that's right. not 67, not 69, the objectively unfunny number*/
+  top: -17px;
+  padding: 31px;
+  animation: shake 1s linear infinite;
+
 }
 
 /*usually i ask stack overflow how to do whatever css thing i don't have memorized and now google gemini jumps in the way first... its weird*/

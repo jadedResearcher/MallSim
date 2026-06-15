@@ -2976,15 +2976,15 @@ const initEffectPossibilities = () => {
 
 const initGeneralBackstories = () => {
     general_backstories[ART] = ["would never stop making sculptures if that was an option", "can sketch incredibly lifelike portraits", "always has a dab of paint behind their ears"];
-    general_backstories[TECHNOLOGY] = ["can, will, must and should make a robot", "always seem to be on top of the latest technology", "are annoyed that everyone wants you to fix your computer", "can hack into any system"];
+    general_backstories[TECHNOLOGY] = ["can, will, must and should make a robot", "always seem to be on top of the latest technology", "are annoyed that everyone wants them to fix their computer", "can hack into any system"];
     general_backstories[TIME] = ["are always on time to everything", "are kind of impatient", "seem to always have unlimited energy", "always know what time it is", "have an instinctive understanding of timing"];
     general_backstories[SPACE] = ["seem to always be a mile away when everyone is supposed to meet up", "are a very patient person", "have an amazing spatial sense", "always want to talk about space", "love being as high up as possible", "have absolutely no fear of heights"];
     general_backstories[STEALING] = ["have extremely light fingers", "have never met and object they didn't want to own", "have never been on the right side of the law", "have been in jail a few times"];
     general_backstories[FREEDOM] = ["never let anyone tie them down", "have travel in their soul", "have never been able to settle down anywhere", "prides themself in their freedom"];
     general_backstories[FIRE] = ["are always enthralled by fire", "have a habit of setting everything on fire", "find fire really calming", "think fire is the best solution to most problems", "think that if you add fire to a problem you have a new problem"];
-    general_backstories[LONELY] = ["are somehow always alone", "never really bonded with anyone", "feel comfortable on your own", "have social anxiety", "don't feel comfortable in a crowd", "mostly just focus on themself"];
-    general_backstories[OCEAN] = ["are married to the sea", "love the ocean with all your heart", "are always surrounded by a thin fog", "can navigate any amount of seas", "feel most comfortable in the water", "can swim like a fish"];
-    general_backstories[FLESH] = ["genuinely enjoy working out", "are remarkably beautiful", "have really good bones", "really are comfortable in your own skin"];
+    general_backstories[LONELY] = ["are somehow always alone", "never really bonded with anyone", "feel comfortable on their own", "have social anxiety", "don't feel comfortable in a crowd", "mostly just focus on themself"];
+    general_backstories[OCEAN] = ["are married to the sea", "love the ocean with all their heart", "are always surrounded by a thin fog", "can navigate any amount of seas", "feel most comfortable in the water", "can swim like a fish"];
+    general_backstories[FLESH] = ["genuinely enjoy working out", "are remarkably beautiful", "have really good bones", "really are comfortable in their own skin"];
     general_backstories[BURIED] = ["are really calm under pressure", "really enjoy digging at the beach", "enjoy spelunking as a hobby"];
     general_backstories[SCIENCE] = ["enjoy learning the 'why' of everything", "treat life like a series of experiments", "always wear a labcoat"];
     general_backstories[MATH] = ["are a very logical person", "can do all sorts of math in their head", "enjoy memorizing mathematical formulas"];
@@ -2993,8 +2993,8 @@ const initGeneralBackstories = () => {
     general_backstories[APOCALYPSE] = ["constantly spew ominous bullshit", "alway remind everyone of how fragile the world truly is", "are just really a huge fan of apocalyptic explosions"];
     general_backstories[ANGELS] = ["walk the path of the gods", "always are a righteous person", "think deeply about the gods", "are a deeply religious person", "strive to do the will of the gods"];
     general_backstories[LIGHT] = ["shine with light wherever they go", "always look on the bright side of any situation", "always have a light source on hand"];
-    general_backstories[SERVICE] = ["do your best to help those in need", "are always there with a helping hand", "keep your room spotless", "clean whenever they are stressed"];
-    general_backstories[FAMILY] = ["love your family with all their heart", "do everything for their family", "really love their found family"];
+    general_backstories[SERVICE] = ["do their best to help those in need", "are always there with a helping hand", "keep their room spotless", "clean whenever they are stressed"];
+    general_backstories[FAMILY] = ["love their family with all their heart", "do everything for their family", "really love their found family"];
     general_backstories[MAGIC] = ["have a natural talent for magic", "are one of the skilled mages of this Era", "are a powerful Enchanter"];
     general_backstories[HEALING] = ["have a powerful healing aura", "have extensive medical training", "never ignore suffering"];
     general_backstories[PLANTS] = ["have an enduring love of flowers", "feel more comfortable in a forest than a city", "garden as a hobby"];
@@ -3007,7 +3007,7 @@ const initGeneralBackstories = () => {
     general_backstories[ANGER] = ["have trouble controlling their temper", "aren't shy about letting people know when theres is a problem"];
     general_backstories[WEB] = ["are a smug chess-master", "are manipulative to their core", "really enjoy spiders", "think spiders are very important to the eco-system"];
     general_backstories[ROYALTY] = ["are experienced with ruling", "have full noble training", "have a princely aura"];
-    general_backstories[ENDINGS] = ["were always going to end up dead", "will be an existentialist", "will focus more on the ending than the begining", "will keep your thoughts firmly in the future"];
+    general_backstories[ENDINGS] = ["were always going to end up dead", "will be an existentialist", "will focus more on the ending than the begining", "will keep their thoughts firmly in the future"];
     general_backstories[KNOWING] = ["are an accomplished scholar", "are obsessed with knowing everything", "are an insufferable know-it-all"];
     general_backstories[GUIDING] = ["try to gently lead those who are lost", "never gets lost", "are a soothing mentor"];
     general_backstories[CRAFTING] = ["enjoy wood-working in their spare time", "are quite a skilled craftman", "are always collecting small objects to make things with"];

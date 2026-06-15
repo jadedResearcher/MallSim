@@ -419,6 +419,13 @@ class Game {
             return;
         }
         this.current_tick++;
+        if (this.current_tick === 1) {
+            console.log("JR NOTE: removing arrow")
+            const clickHere = document.querySelector(".click-here");
+            clickHere.classList.remove("click-here")
+        }
+
+
         if (this.current_tick === 200 && !this.abMode) {
             save("it's been 200 ticks and i want achievements");
             this.printAchievements(parent);
@@ -1479,7 +1486,7 @@ its so normal
         instructions.innerHTML = `JR here! If you know what SBURBSim is, you might understand the point of this 'game'! If not... Try ticking for a hundred times or so and get to an ending. you can then look back up and try to figure out how everything spiralled out of control so fast, lol.  OOOOOORRR you can be boring and just tick one at a time and do things the LINEAR way. If you hate spoilers or something. lulz. <br><Br>Either way I really wanted to capture the unsettling vibes of the Westerville Mall in some of the accounts of Zampanio. <video style="margin-left: auto; margin-right: auto; display:block; margin-top: 31px;height:273px;" controls loop src ='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/mallsimbackrooms4.mp4'></video>`;
 
         const general_intro = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
-        general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2>${game.corporateMandatedLove ? "<h2>Love is in the air!</h2>" : ""}<br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Relclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
+        general_intro.innerHTML = `<h2>Mall Expedition: ${this.rand.initial_seed}</h2>${game.corporateMandatedLove ? "<h2>Love is in the air!</h2>" : ""}<br><br>${this.players.length} members of the Cult of the Harvest gather outside the Westerville Mall. Though it was many years ago each had given themself over to the faith, it is only today they partake in the most sacred ritual of the cult: Delving into the Blasphemous Mall and Reclaiming the Fruit of Wisdom hoarded by the monsters within.<br><br>Should they succeed, they will be granted eldritch knowledge of loops and spirals and endless ends. <br><br>Should they fail...one way or another, they will never leave this mall again.<br><br>They are prepared for their fate, ready to join the Inner Circle of the Cult at last.`;
         const mindPlayer = getPartyHighestMind(this.players);
         const eyesPlayer = getPartyHighestEyes(this.players);
         const tonguePlayer = getPartyHighestTongue(this.players);
@@ -1618,6 +1625,9 @@ its so normal
 
         const tick_button = createElementWithClassAndParent("button", tick_bar, "tick-button tick-once-button");
         tick_button.innerText = "Tick 1x";
+        if (game.current_tick === 0) {
+            tick_button.classList.add("click-here")
+        }
         tick_button.onclick = () => {
             this.tick(parent);
         }
