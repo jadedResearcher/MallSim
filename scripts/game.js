@@ -357,11 +357,18 @@ class Game {
 
         for (let unique_event of uniq(this.event_list)) {
             const achievement = known_achievements[unique_event];
-            console.log("JR NOTE: unique_event is", unique_event)
-            console.log("JR NOTE: achievement is", achievement)
 
 
-            let isOld = (achievement && achievement.password) ? (!globalDataObject.passwordsDugInto.includes(achievement.password)) : false;
+
+
+            let isOld = (achievement && achievement.password) ? (globalDataObject.passwordsDugInto.includes(achievement.password)) : true;
+            if (unique_event === "Solemn Death") {
+                console.log("JR NOTE: unique_event is", unique_event)
+                console.log("JR NOTE: achievement is", achievement)
+                console.log("JR NOTE: isOld is", isOld)
+
+            }
+            console.log("JR NOTE: ???")
             generateAchievementPill(unique_event, true, !isOld, container)
         }
     }

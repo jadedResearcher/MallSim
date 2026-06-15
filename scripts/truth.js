@@ -64,7 +64,7 @@ const renderPrize = async (achievement) => {
 }
 
 const renderKnownAchievements = (parent, unlocked_achievements) => {
-    console.log("JR NOTE: renderKnownAchievements", parent)
+    //console.log("JR NOTE: renderKnownAchievements", parent)
     const header = createElementWithClassAndParent("h2", parent);
     header.innerHTML = "Known!"
 
@@ -162,11 +162,10 @@ const makeColorsForString = (string) => {
 }
 //http://zampanio.com/  //someone finally made this
 const generateAchievementPill = (name, unlocked, isNew, parent) => {
-    console.log("JR NOTE: generateAchievementPill", { name, unlocked, isNew, parent })
+    //console.log("JR NOTE: generateAchievementPill", { name, unlocked, isNew, parent })
     const pill = createElementWithClassAndParent("button", parent, "achievement-pill");
     pill.innerText = name;
     const colors = makeColorsForString(name);
-    console.log("JR NOTE: colors is", colors)
     if (!unlocked) {
         pill.disabled = true;
         pill.style.backgroundColor = "#c4c4c4"
