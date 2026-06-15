@@ -29,6 +29,7 @@
     //file name is relative because you can't use this to trick someone
     //into running virus javascript or whatever
     const runSecret = async (fileName) => {
+      fileName = fileName.toLowerCase(); //all lowercase
       updateURLParams("importantWords=" + fileName)
       console.log("JR NOTE: runSecret being called", fileName)
       const body = document.querySelector("body");
@@ -58,7 +59,7 @@
 
       formEle.osubmit = (e) => {
         e.preventDefault();
-        runSecret(input.value.toLowerCase());
+        runSecret(input.value);
 
         return false;
       }

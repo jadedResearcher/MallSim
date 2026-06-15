@@ -1,5 +1,38 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
+
+dev_log["6/14/26"] = `i finished the horridor diorama!
+
+if you want to check it out, 'the truth is layered' is always a good password, if you know where to put it
+
+and im so so sorry if you THINK you know where to put it but uh...its not the right rabbithole.
+
+i have so many of the damn things lol, 
+you'd think they breed like....
+
+
+
+
+rabbits
+
+
+i'm here all night
+
+honestly tho
+
+mallsim is...
+
+
+done???
+
+theres more passwords i wanna wire up but i think they're not that important
+what IS important is i want to make is easier to understand what your new passwords are
+
+gotta do that. 
+
+
+`
+
 dev_log["6/9/26"] = `i totallly forgot to have yonkgi's mirror scene
 but don't worry
 i added two new scenes
