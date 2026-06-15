@@ -26,6 +26,8 @@ const protectFromDesyncIssues = () => {
     //if you have nothing you're worried about just return here, it'll be faster
     //return
 
+    console.log("JR NOTE: mallsim protectFromDesyncIssues")
+
 
     //in mallsim, achievementsUnlocked and passwordsDugInto are most at risk of desyncing.
     //you don't want to add a dozen strings to an array, then have another tab save and blow them away
@@ -34,7 +36,7 @@ const protectFromDesyncIssues = () => {
 
     let fileData = localStorage.getItem(SAVE_KEY);
     if (fileData) {
-        let fileJSON = JSON.parse(data);
+        let fileJSON = JSON.parse(fileData);
 
         if (fileJSON.achievementsUnlocked) {
             if (globalDataObject.achievementsUnlocked) {
@@ -51,17 +53,6 @@ const protectFromDesyncIssues = () => {
                 globalDataObject.passwordsDugInto = uniq(passwordsDugInto);
             } else {
                 globalDataObject.passwordsDugInto = fileJSON.passwordsDugInto;
-            }
-        }
-
-
-        //fiiiiiiiine i'll save the damn looping cultists. don't say i never did anything for a waste
-        if (fileJSON.loopingCultists) {
-            if (globalDataObject.loopingCultists) {
-                const loopingCultists = fileJSON.loopingCultists.concat(globalDataObject.loopingCultists);
-                globalDataObject.loopingCultists = uniq(loopingCultists);
-            } else {
-                globalDataObject.loopingCultists = fileJSON.loopingCultists;
             }
         }
 
@@ -88,7 +79,8 @@ const deleteSave = () => {
 
 
 //up to what uses this to decide how often to save
-const save = () => {
+const save = (reason) => {
+    console.log("JR NOTE: Saving game because: ", reason)
     protectFromDesyncIssues();//will handle anything that needs to be combined with what's currently in local storage (if another tab saved before us)
     globalDataObject.lastSaveTimeCode = Date.now();
     localStorage.setItem(SAVE_KEY, JSON.stringify(globalDataObject));

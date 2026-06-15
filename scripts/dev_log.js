@@ -30,6 +30,28 @@ what IS important is i want to make is easier to understand what your new passwo
 
 gotta do that. 
 
+~~~
+
+haha whoops
+
+forgot that local storage gets fucky if theres multiple tabs
+and the rabbit hole is all ABOUT multiple tabs
+so
+
+uh
+
+seeing if i can fix that
+
+cuz that'll be kinda imporatnat
+
+to not have your save data
+
+randomly change on you
+
+revert back and stuff
+
+good thing i caught it before fully releasing
+
 
 `
 

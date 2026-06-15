@@ -19,7 +19,8 @@ the fourth wall is blocked with glass
 one way mirror
 we can see it, but it can't see out
 */
-const truthView = () => {
+const truthView = (quip) => {
+    console.log("JR NOTE: truthView")
     /*
 * achievement screen looking at all scenes in local storage, if it knows about 
 a scene, will print it out as a little pill and you can click on it to get a little truth popup quip (truth is friendly) and it includes a password to unlock
@@ -45,7 +46,11 @@ a scene, will print it out as a little pill and you can click on it to get a lit
 
     renderKnownAchievements(all_achievements_ele, unlocked_achievements);
     renderUnKnownAchievements(all_achievements_ele, unlocked_achievements);
-    renderTruth(container);
+    renderTruth(container, quip);
+    window.onstorage = () => {
+        load();
+        truthView("Possible Achievement detected.");
+    };
 }
 
 const renderPrize = async (achievement) => {
@@ -101,7 +106,7 @@ const haveTruthSayString = async (potentially_long_string) => {
 
 }
 
-const renderTruth = async (parent) => {
+const renderTruth = async (parent, quip) => {
     const container = createElementWithClassAndParent("div", parent, "truth-container ")
     container.innerHTML = `    <div id="truth-box">
 
@@ -120,11 +125,16 @@ const renderTruth = async (parent) => {
 
     await textVoiceSim.speak("Well.".split(","), null, true);
     const start = async () => {
-        await textVoiceSim.speak("It seems that I am to reprise one of my original roles.".split(","), null, true);
-        await sleep(1000);
-        await textVoiceSim.speak("That of an Achievement System.".split(","), null, true);
-        await sleep(1000);
-        await textVoiceSim.speak("No matter.".split(","), null, true);
+        if (!quip) {
+            await textVoiceSim.speak("It seems that I am to reprise one of my original roles.".split(","), null, true);
+            await sleep(1000);
+            await textVoiceSim.speak("That of an Achievement System.".split(","), null, true);
+            await sleep(1000);
+            await textVoiceSim.speak("No matter.".split(","), null, true);
+        } else {
+            await textVoiceSim.speak(quip.split(","), null, true);
+
+        }
     }
 
     start();
@@ -256,7 +266,7 @@ const wireUpAchievement = (name, password, truth_quip,) => {
 //wireUpAchievement("Romance Interaction", "TBD", "test_password");
 wireUpAchievement("Wrong As A Joke", "test_password", "TBD");
 wireUpAchievement("Not unlocked test", "test_password", "TBD");
-wireUpAchievement("The End Is Dead", "L-0-17", "... In Truth, my creator spent the better part of a week creating a diorama for Camille's Death. It seems the imagery of it captured their imagination.")
+wireUpAchievement("The End Is Dead", "l-0-17", "... In Truth, my creator spent the better part of a week creating a diorama for Camille's Death. It seems the imagery of it captured their imagination.")
 wireUpAchievement("Sinner Punished", "lonely exit", "In Truth, my creator made the frozen diorama in a single day, in a haze of inspiration. A simple concept, the difficulty was always in whether or not a cardboard box could slowly be frozen, layered over and over slowly with mist.");
 wireUpAchievement("Dramatic Storm Off", "a miserable pile of secrets", "'Let us split the party' is often famous last words. Perhaps it would be more prudent to in fact, not do this, while in a murder maze that eats people (knowingly or not).");
 

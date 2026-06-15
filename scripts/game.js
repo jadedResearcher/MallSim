@@ -230,7 +230,7 @@ class Game {
         }
         //save all at once, not once per cultit.
         if (!this.eatWastesAutomatically) {
-            save();
+            save("incremented looping players monstrousness");
         }
     }
 
@@ -413,7 +413,7 @@ class Game {
         }
         this.current_tick++;
         if (this.current_tick === 200 && !this.abMode) {
-            save();
+            save("it's been 200 ticks and i want achievements");
             this.printAchievements(parent);
         }
 
@@ -1126,7 +1126,7 @@ class Game {
         intro_container.scrollIntoView();
 
         if (!this.abMode) {
-            save();
+            save("its the epilogue");
             this.printAchievements(intro_container);
         }
 
@@ -1718,7 +1718,7 @@ const cullWastes = () => {
             row.remove();
             removeItemOnce(globalDataObject.loopingCultists, cultist);
             crunch.play();
-            save();
+            save("peewee ate some cultists!");
         }
 
         const li = createElementWithClassAndParent("li", row);

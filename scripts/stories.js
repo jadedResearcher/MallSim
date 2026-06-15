@@ -2751,7 +2751,7 @@ const getNextStory = (pleaseSave) => {
     const ret = ordered_stories[globalDataObject.highestStoryIndexUnlocked % ordered_stories.length];
     globalDataObject.highestStoryIndexUnlocked = globalDataObject.highestStoryIndexUnlocked + 1;
     if (pleaseSave) {
-        save();
+        save("a new story got read");
     }
     return ret;
 }

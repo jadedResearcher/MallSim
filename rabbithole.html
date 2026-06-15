@@ -39,14 +39,13 @@
         resultsEle.innerHTML = "haha whoops, that's not a real password, lulz"
       }
       scriptTag.onload = () => {
-        load(); //another tab might have written something in here, grab it.
         if (!globalDataObject.passwordsDugInto) {
           globalDataObject.passwordsDugInto = [];
         }
         globalDataObject.passwordsDugInto.push(fileName);
         globalDataObject.passwordsDugInto = uniq(globalDataObject.passwordsDugInto);
         globalDataObject.fallenIntoRabbitHole = true;
-        save();
+        save("rabbit hole password found");
       }
       body.append(scriptTag);
 
@@ -85,7 +84,7 @@
       load();
       if (!globalDataObject.fallenIntoRabbitHole) {
         globalDataObject.fallenIntoRabbitHole = true;
-        save();
+        save("fallen into rabbithole");
       }
 
       if (importantWords) {

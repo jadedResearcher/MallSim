@@ -108,7 +108,7 @@ window.addEventListener('error', (message, file, line, column, errorObj) => {
     if (game) {
         game.event_list.push("ERROR")
     }
-    console.log("JR NOTE: don't forget to wire this up to four E http://farragofiction.com/ZampanioSimEastEastEastEast")
+    //console.log("JR NOTE: don't forget to wire this up to four E http://farragofiction.com/ZampanioSimEastEastEastEast")
     const all = document.querySelectorAll(".story-beat");
     let target = Object.values(all).at(-1);
     if (!target) {

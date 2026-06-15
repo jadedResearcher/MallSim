@@ -502,7 +502,7 @@ class Entity {
         //yes its accessing a global var called game but im in a hurry
         if (!game.eatWastesAutomatically) {
             globalDataObject.loopingCultists.push({ homeBranch: game.rand.initial_seed, title: this.title, musical: this.musical, censored: this.censored, relationships: this.relationships, stats: this.stats, theme_keys: this.theme_keys, sprite_aspect: this.sprite_aspect, sprite_class: this.sprite_class })
-            save();
+            save("a cultist joined the loop");
         }
         const knowledge = document.querySelectorAll(".wasted-knowledge");
         if (knowledge.length > 0) {
