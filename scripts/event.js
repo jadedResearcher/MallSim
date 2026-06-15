@@ -626,7 +626,7 @@ When the well dressed man finally walks away, breath puffing out against the war
 <br><Br>
 The Sinner has been dealt with.
 <br><br>
-<img src ='http://farragofiction.com/MallSim/images/Diorama/WitherbySnowQueensAMannequinInABathroom/frozen_vinette.jpg'>
+<img src ='http://farragofiction.com/MallSim/images/Diorama/WitherbySnowQueensAMannequinInABathroom/magic_icy_corpse_bigger.jpg'>
 `;
         player.kill("frozen into a glistening statue."); //thems the breaks
 
