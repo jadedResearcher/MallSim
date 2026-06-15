@@ -356,7 +356,13 @@ class Game {
         const container = createElementWithClassAndParent("div", parent, 'pill-container');
 
         for (let unique_event of uniq(this.event_list)) {
-            generateAchievementPill(unique_event, true, container)
+            const achievement = known_achievements[unique_event];
+            console.log("JR NOTE: unique_event is", unique_event)
+            console.log("JR NOTE: achievement is", achievement)
+
+
+            let isOld = (achievement && achievement.password) ? (!globalDataObject.passwordsDugInto.includes(achievement.password)) : false;
+            generateAchievementPill(unique_event, true, !isOld, container)
         }
     }
 

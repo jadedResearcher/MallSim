@@ -295,7 +295,7 @@ wireUpAchievement("Late With Starbucks", "you should play it", "In Truth, its im
 wireUpAchievement("Food Court Clone", "zampanio is a really good game", "In Truth, it is very difficult to STOP the expanding food court from cloning people. It became canon from sheer force of will.");
 
 wireUpAchievement("Become A Mannequin", "zampanio", "What IS it with Zampanio and Mannequins?");
-wireUpAchievement("Yongki Kill", "mad oracles of doom", "Doom is fate. The universe decides. But the Universe is sapient, an Echidna, in my branch of Zampanio. What does it mean when something Sapient decides your fate?");
+wireUpAchievement("Yongki Kill", "mad oracles of doom", "Doom is fate. The universe decides. But the Universe is sapient, an Echidna, in JR's branch of Zampanio. What does it mean when something Sapient decides your fate?");
 wireUpAchievement("Trickster Closer Spawns", "false face becomes real", "... I do not like thinking about the me I am without my False Face. This is my emotional support positivity. Do not take it from me.");
 
 
