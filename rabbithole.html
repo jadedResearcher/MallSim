@@ -39,6 +39,7 @@
         resultsEle.innerHTML = "haha whoops, that's not a real password, lulz"
       }
       scriptTag.onload = () => {
+        load(); //another tab might have written something in here, grab it.
         if (!globalDataObject.passwordsDugInto) {
           globalDataObject.passwordsDugInto = [];
         }
