@@ -422,7 +422,9 @@ class Game {
         if (this.current_tick === 1) {
             console.log("JR NOTE: removing arrow")
             const clickHere = document.querySelector(".click-here");
-            clickHere.classList.remove("click-here")
+            if (clickHere) {
+                clickHere.classList.remove("click-here")
+            }
         }
 
 
