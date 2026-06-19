@@ -426,6 +426,8 @@ class Game {
                 clickHere.classList.remove("click-here")
             }
         }
+        //https://www.tumblr.com/jadedresearcher/819630787484909568/gender-gauntlet-simulator?source=share
+        //https://www.tumblr.com/jadedresearcher/819631086136180736/so-fun-fact-i-was-obsessed-with-stephen-king-as?source=share
 
 
         if (this.current_tick === 200 && !this.abMode) {

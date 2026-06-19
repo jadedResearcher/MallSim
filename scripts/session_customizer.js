@@ -31,7 +31,11 @@ const session_customizer = () => {
     textAreaObject.label.className = "edit-left"
     textAreaObject.container.className = 'edit-pair'
     const warning = createElementWithClassAndParent("div", sburb_container);
-    warning.innerHTML = `*<i>WARNING: edit the JSON directly at your own risk. This is VERY likely to glitch out if you typo.</i>`
+    warning.innerHTML = `*<i>WARNING: edit the JSON directly at your own risk. This is VERY likely to glitch out if you typo. PLUS if stats get too high... there might be Consequences.</i>`
+
+
+    const warning2 = createElementWithClassAndParent("div", sburb_container);
+    warning2.innerHTML = `<u>Typical Stat Ranges</u>: Very Low: ${VERY_LOW_STAT_VALUE}, Average: ${MEDIUM_STAT_VALUE},  Very High: ${VERY_HIGH_STAT_VALUE}`;
 
     textAreaObject.input.onchange = () => {
         game.importPlayersFromJSON(textAreaObject.input.value);
