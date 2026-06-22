@@ -71,6 +71,9 @@ const renderKnownAchievements = (parent, unlocked_achievements) => {
     const container = createElementWithClassAndParent("div", parent, 'pill-container');
     for (let [key, value] of Object.entries(known_achievements)) {
         const unlocked = unlocked_achievements.includes(key);
+        if (!globalDataObject.passwordsDugInto) {
+            globalDataObject.passwordsDugInto = [];
+        }
         const pill = generateAchievementPill(key, unlocked, !globalDataObject.passwordsDugInto.includes(value.password), container);
         if (unlocked) {
             pill.onclick = () => {
