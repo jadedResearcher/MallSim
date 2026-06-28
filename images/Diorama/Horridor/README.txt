@@ -16,7 +16,7 @@ i think the remaining order of operations is:
 * tape back up *heavily*
 * reinforce box with anything i can add to the outside
 * make recordings of it in various ways
-* if i ever make my idea of having a tiny tiny adafruit screen displaying rabbit sim on it, have it ominously deep inside the hallway
+* if i ever make my idea of having a tiny tiny adafruit screen displaying rabbit sim on it, have it ominously deep inside the hallway and make more recordings (same for anything else i make that would be even cooler in a fucked up hallway)
 
 6/7/26
 

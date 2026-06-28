@@ -4,7 +4,9 @@
     "https://spiralsrest.neocities.org/",
     "http://www.knucklessux.com/Blog/",
     "http://zampanio.net/webring.htm",
-    "https://ellienamored.neocities.org/"
+    "https://ellienamored.neocities.org/",
+    "https://lostinzampanio.neocities.org/watchers_room",
+    "https://meowloudly15.neocities.org/404"
   ],
   "jr-note": "This exists specifically for http://zampanio.net/webring.htm, which apparently is too old to query an https json file. I hope I don't forget to keep this up to date as well.",
   "message": "It is absolutely incredible how many modern internet security principles this guide violates: https://irt.org/articles/js085/  Do not follow it. I almost did and then realized I could just host json and then you don't need to trust any random script I tell you to inject into your page. All we really need is a centralized source of truth and a tiny javascript snippet we can copy and paste (after reading it like responsible wastes)"

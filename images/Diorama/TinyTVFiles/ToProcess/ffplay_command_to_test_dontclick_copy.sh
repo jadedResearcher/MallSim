@@ -1,0 +1,1 @@
+ffplay -loop 0 yourfile.mjpeg
