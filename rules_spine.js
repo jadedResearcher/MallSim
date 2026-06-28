@@ -93,6 +93,7 @@ class RulesSpine {
         for (let rule of this.rules) {
             const ele = createElementWithClassAndParent("div", this.element, "rule");
             ele.innerText = rule.text;
+            ele.dataset.ruleText = rule.text;
         }
     }
 
@@ -125,7 +126,18 @@ class RulesSpine {
             if (r.eventName === type) {
                 console.log("JR NOTE: found rule", r);
                 if (r.eventCallback) {
-                    r.eventCallback(r, event);
+                    const ret = r.eventCallback(r, event);
+                    if (ret) {
+                        const all_eles = document.querySelectorAll(".rule");
+
+                        const active_eles = document.querySelectorAll(`[data-rule-text='${r.text}']`);
+                        for (let e of active_eles) {
+                            console.log("JR NOTE: why not active", e)
+                            e.classList.add("active-rule");
+                            //give it a little bit for us to see
+                            setTimeout(() => e.classList.remove("active-rule"), 1000)
+                        }
+                    }
                 }
             }
         }
@@ -170,18 +182,21 @@ global_rules_spine.addRule(new Rule("click", "Any Input Click Plays A Noise", (r
     const target = event.target;
     if (target.closest('input')) {
         global_rules_spine.noisePlayer.play();
+        return true;
     }
 }));
 
 //example rules, we want to turn these off and only let passwords add them
 global_rules_spine.addRule(new Rule("ended", "Noise Ending Earns a Point", (rule, event) => {
-    console.log("JR NOTE: ", rule.text, event);
-    global_rules_spine.changePointsBy(1)
+    console.log("JR NOTE: TODO how to tell was audio", rule.text, event);
+    global_rules_spine.changePointsBy(1);
+    return true;
 }));
 
 global_rules_spine.addRule(new Rule("play", "Noise Playing Earns a Point", (rule, event) => {
-    console.log("JR NOTE: ", rule.text, event);
+    console.log("JR NOTE: TODO how to tell was audio", rule.text, event);
     //i know i'm handling an ended event
-    global_rules_spine.changePointsBy(1)
+    global_rules_spine.changePointsBy(1);
+    return true;
 
 }));
