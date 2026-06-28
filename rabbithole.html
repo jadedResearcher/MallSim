@@ -17,11 +17,31 @@
       max-width: 90%;
       max-height: 90%;
     }
+
+    .rules_list {
+      position: fixed;
+      left: 0px;
+      top: 31px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 1000;
+    }
+
+    .rule {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      background-color: rgb(237, 210, 135);
+      position: relative;
+      border: 1px solid black;
+      padding-left: 13px;
+      border-left: none;
+
+    }
   </style>
   <script src="scripts/utils.js"></script>
   <script src="scripts/custom_utils.js"></script>
   <script src="scripts/save_engine.js"></script>
-  <script src="rules_spine.js"></script>
 
   <script>
     let resultsEle;
@@ -110,6 +130,8 @@
     <div style="padding: 31px" id="results"></div>
 
   </div>
+  <script src="rules_spine.js"></script>
+
 </body>
 
 </html>

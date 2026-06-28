@@ -11,11 +11,42 @@ rules figure out what, if anything they wanna do  (modify global state, modify t
 figure out some way to prevent infinite loops (a click causes a click causes a click causes a click),
 */
 
+
+//we are sinning on purpose tonight boys
+//i haven't attempted to hack language level objects since my Ruby on Rails days
+const OriginalAudio = window.Audio;
+
+//we need to do this if we want to expose non DOM audio events
+window.Audio = function (...args) {
+    // Instantiate the real audio element object
+    const audioInstance = new OriginalAudio(...args);
+
+    //might make new Audio instances that get added to the dom called twice but whatever
+    audioInstance.addEventListener('ended', () => {
+        //even tho this audio isn't in the dom, we want it to expose that it ended for the document listener
+        document.dispatchEvent(new Event('ended'));
+    });
+
+    audioInstance.addEventListener('play', () => {
+        //even tho this audio isn't in the dom, we want it to expose that it ended for the document listener
+        document.dispatchEvent(new Event('play'));
+
+        audioInstance.addEventListener('pause', () => {
+            //even tho this audio isn't in the dom, we want it to expose that it ended for the document listener
+            document.dispatchEvent(new Event('pause'));
+        });
+    });
+
+    return audioInstance;
+};
+
+
 class RulesSpine {
     //no clue what im gonna do with any of these, just letting them do their thing
     points = 0;
     safety = 0;
     danger = 0;
+    points_multiplier = 1;
     turns_of_the_spiral = 0;
     //things can change this
     noise_src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/hallow_is_so_quiet_whenheshappy.mp3";
@@ -23,6 +54,7 @@ class RulesSpine {
     noisePlayer = new Audio(this.noise_src);
     //NOT guaranteed to be unique and that is half the challenge
     rules = [];
+    element;
 
     //i guess todays goal is to learn a lot about events
     constructor() {
@@ -48,6 +80,34 @@ class RulesSpine {
 
     }
 
+    //attach to the body, and check if something else removed you (changing passwords might)
+    render = () => {
+        if (!this.element) {
+            this.element = createElementWithClassAndParent("div", document.body, "rules_list")
+        } else if (document.querySelector("body")) {
+            const body = document.querySelector("body");
+            body.append(this.element)
+        }
+        //the only reason i'm rendering this is to change the rules, so throw them away and rerender
+        this.element.innerHTML = "";
+        for (let rule of this.rules) {
+            const ele = createElementWithClassAndParent("div", this.element, "rule");
+            ele.innerText = rule.text;
+        }
+    }
+
+    addRule = (rule) => {
+        this.rules.push(rule);
+        this.render();
+    }
+
+    //can be negative
+    changePointsBy = (number) => {
+        this.points += number * this.points_multiplier;
+        //don't render points in the rulues list by default
+        //this.render();
+    }
+
 
     /*
     a spine moves information between body and brain
@@ -57,7 +117,7 @@ class RulesSpine {
     */
     handleEvent = (event) => {
         const type = event.type;
-        //console.log("JR NOTE: event called", type);
+        console.log("JR NOTE: event called", type);
         //NOTE: any rule that changes the dom in any way should be tied to events that are  rare
         //because you will brick the browser if you try to constantly mess with the dom every millisecond
 
@@ -104,11 +164,24 @@ class Rule {
 
 const global_rules_spine = new RulesSpine();
 
-global_rules_spine.rules.push(new Rule("click", "Any Input Plays A Noise", (rule, event) => {
+global_rules_spine.addRule(new Rule("click", "Any Input Click Plays A Noise", (rule, event) => {
     console.log("JR NOTE: ", rule.text, event);
     //i know i'm handling a click event
     const target = event.target;
     if (target.closest('input')) {
         global_rules_spine.noisePlayer.play();
     }
+}));
+
+//example rules, we want to turn these off and only let passwords add them
+global_rules_spine.addRule(new Rule("ended", "Noise Ending Earns a Point", (rule, event) => {
+    console.log("JR NOTE: ", rule.text, event);
+    global_rules_spine.changePointsBy(1)
+}));
+
+global_rules_spine.addRule(new Rule("play", "Noise Playing Earns a Point", (rule, event) => {
+    console.log("JR NOTE: ", rule.text, event);
+    //i know i'm handling an ended event
+    global_rules_spine.changePointsBy(1)
+
 }));
