@@ -5,6 +5,8 @@
     const src = `
     
     
+    Coffin is Image. 
+
     Click is Image.
 
     Load is point.
@@ -30,6 +32,8 @@
         img.style.left = `${event.pageX}px`;
         img.style.top = `${event.pageY}px`;
         img.style.transform = "translate(-50%, -50%)";
+        img.style.pointerEvents = "none";
+
         resultsEle.append(img);
 
 
