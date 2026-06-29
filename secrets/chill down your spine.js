@@ -11,6 +11,8 @@
 
     <li> how can your eyes be real</li>
     <li>extreme go horse</li>
+
+    (You can always refresh the page to clear all rules)
     
     `
 
@@ -31,6 +33,11 @@
 
     global_rules_spine.addRule(new Rule("play", "Play is Point", (rule, event) => {
         global_rules_spine.changePointsBy(1);
+        return true;
+    }));
+
+    global_rules_spine.addRule(new Rule("visibilitychange", "Rest is Point", (rule, event) => {
+        global_rules_spine.changePointsBy(113);
         return true;
     }));
 
