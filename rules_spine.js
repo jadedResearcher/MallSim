@@ -97,6 +97,12 @@ class RulesSpine {
 
     }
 
+    renderPoints = () => {
+        if (this.pointsEle) {
+            this.pointsEle.innerText = "Points: " + this.state.points;
+        }
+    }
+
     //attach to the body, and check if something else removed you (changing passwords might)
     render = () => {
         if (!this.element) {
@@ -120,8 +126,8 @@ class RulesSpine {
         }
         //the only reason i'm rendering this is to change the rules, so throw them away and rerender
         this.element.innerHTML = "";
-        const pointsEle = createElementWithClassAndParent("div", this.element);
-        pointsEle.innerText = "Points: " + this.state.points;
+        this.pointsEle = createElementWithClassAndParent("div", this.element);
+        this.pointsEle.innerText = "Points: " + this.state.points;
 
         for (let rule of this.rules) {
             const ele = createElementWithClassAndParent("div", this.element, "rule");
@@ -146,8 +152,7 @@ class RulesSpine {
     //can be negative
     changePointsBy = (number) => {
         this.updateState("points", this.state["points"] + number * this.state["points_multiplier"])
-        //don't render points in the rulues list by default
-        this.render();
+        this.renderPoints();
     }
 
 

@@ -1,7 +1,7 @@
 
 //immediately envoked function does't run into namespacign issues
 (() => {
-
+    //i really need to play baba is you at some point. trying to make rules horror be an actual game is making me feel like that game.
     const src = `
     
     
