@@ -15,6 +15,8 @@
     <li>jr please try to break my browser (Note From Future JR: In theory this doesn't break it anymore, it just makes an ungodly noise)</li>
 
     (You can always refresh the page to clear all rules)
+
+    (Currently a Work In Progress as of 6/28/2026)
     
     `
 
