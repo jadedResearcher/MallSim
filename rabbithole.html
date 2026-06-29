@@ -18,28 +18,41 @@
       max-height: 90%;
     }
 
-    .rules_list {
+    .rules_toggle {
       position: fixed;
       left: 0px;
       top: 31px;
+      z-index: 1000;
+    }
+
+    .rules_list {
+      position: fixed;
+      left: 0px;
+      top: 62px;
       display: flex;
       flex-direction: column;
       gap: 5px;
       z-index: 1000;
     }
 
+    .hidden-rules {
+      transform: translate(-1000px, 0px);
+    }
+
+
     .rule {
       font-family: 'Courier New', Courier, monospace;
       font-size: 13px;
-      background-color: rgb(237, 210, 135);
+      background-color: rgb(238, 228, 202);
       position: relative;
       border: 1px solid black;
       padding-left: 13px;
+      padding-right: 13px;
       border-left: none;
     }
 
     .active-rule {
-      background-color: rgb(182 237 135);
+      background-color: rgb(237, 210, 135);
     }
   </style>
   <script src="scripts/utils.js"></script>

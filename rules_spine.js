@@ -11,6 +11,7 @@ rules figure out what, if anything they wanna do  (modify global state, modify t
 figure out some way to prevent infinite loops (a click causes a click causes a click causes a click),
 */
 
+//i am using gemini like i used to use stack overflow and google searches. generating no code but quickly answering questions about syntax, best practices, etc.
 
 //we are sinning on purpose tonight boys
 //i haven't attempted to hack language level objects since my Ruby on Rails days
@@ -24,16 +25,16 @@ window.Audio = function (...args) {
     //might make new Audio instances that get added to the dom called twice but whatever
     audioInstance.addEventListener('ended', () => {
         //even tho this audio isn't in the dom, we want it to expose that it ended for the document listener
-        document.dispatchEvent(new Event('ended'));
+        document.dispatchEvent(new Event('ended'), { detail: { subtype: "audio" } });
     });
 
     audioInstance.addEventListener('play', () => {
         //even tho this audio isn't in the dom, we want it to expose that it ended for the document listener
-        document.dispatchEvent(new Event('play'));
+        document.dispatchEvent(new Event('play', { detail: { subtype: "audio" } }));
 
         audioInstance.addEventListener('pause', () => {
             //even tho this audio isn't in the dom, we want it to expose that it ended for the document listener
-            document.dispatchEvent(new Event('pause'));
+            document.dispatchEvent(new Event('pause', { detail: { subtype: "audio" } }));
         });
     });
 
@@ -43,18 +44,19 @@ window.Audio = function (...args) {
 
 class RulesSpine {
     //no clue what im gonna do with any of these, just letting them do their thing
-    points = 0;
-    safety = 0;
-    danger = 0;
-    points_multiplier = 1;
-    turns_of_the_spiral = 0;
-    //things can change this
-    noise_src = "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/hallow_is_so_quiet_whenheshappy.mp3";
 
-    noisePlayer = new Audio(this.noise_src);
+    state = {
+        points: 0, safety: 0, danger: 0, points_multiplier: 1,
+        img_src: "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/wanda_coffin.gif",
+        noise_src: "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/hallow_is_so_quiet_whenheshappy.mp3"
+    }
+
+
+    noisePlayer = new Audio(this.state.noise_src);
     //NOT guaranteed to be unique and that is half the challenge
     rules = [];
     element;
+    toggle;
 
     //i guess todays goal is to learn a lot about events
     constructor() {
@@ -80,33 +82,72 @@ class RulesSpine {
 
     }
 
+    //this way we can treat state changes as events to have rules respond to
+    //if you want to add/subtract, figure that out on your own
+    updateState = (key, newValue) => {
+        const oldValue = this.state[key];
+        this.state[key] = newValue;
+        if (key === "noise_src") {
+            this.noisePlayer.src = newValue;
+        }
+
+        //instead of dispatching like normal (and trying to make an event listener for state key (which might grow with new rules), just call directly)
+        //don't need to pass a real event, only required attr is type
+        this.handleEvent({ type: 'state:' + key, newValue, oldValue });
+
+    }
+
     //attach to the body, and check if something else removed you (changing passwords might)
     render = () => {
         if (!this.element) {
-            this.element = createElementWithClassAndParent("div", document.body, "rules_list")
-        } else if (document.querySelector("body")) {
+            this.toggle = createElementWithClassAndParent("button", document.body, "rules_toggle");
+            this.element = createElementWithClassAndParent("div", document.body, "rules_list");
+            this.toggle.innerHTML = "Hide Rules"
+            this.toggle.onclick = () => {
+                if (this.element.classList.contains("hidden-rules")) {
+                    this.element.classList.remove('hidden-rules');
+                    this.toggle.innerHTML = "Hide Rules"
+                } else {
+                    this.element.classList.add('hidden-rules');
+                    this.toggle.innerHTML = "View Rules"
+                }
+            }
+        } else if (!this.element.isConnected) {
             const body = document.querySelector("body");
+            body.append(toggle);
             body.append(this.element)
+
         }
         //the only reason i'm rendering this is to change the rules, so throw them away and rerender
         this.element.innerHTML = "";
+        const pointsEle = createElementWithClassAndParent("div", this.element);
+        pointsEle.innerText = "Points: " + this.state.points;
+
         for (let rule of this.rules) {
             const ele = createElementWithClassAndParent("div", this.element, "rule");
             ele.innerText = rule.text;
             ele.dataset.ruleText = rule.text;
+            //if it doesn't respond to events its active by default
+            if (rule.eventName.trim() === "") {
+                ele.classList.add("active-rule");
+
+            }
         }
     }
 
     addRule = (rule) => {
         this.rules.push(rule);
         this.render();
+        if (rule.eventName.trim() === "") {
+            rule.eventCallback();//with no event
+        }
     }
 
     //can be negative
     changePointsBy = (number) => {
-        this.points += number * this.points_multiplier;
+        this.updateState("points", this.state["points"] + number * this.state["points_multiplier"])
         //don't render points in the rulues list by default
-        //this.render();
+        this.render();
     }
 
 
@@ -132,7 +173,6 @@ class RulesSpine {
 
                         const active_eles = document.querySelectorAll(`[data-rule-text='${r.text}']`);
                         for (let e of active_eles) {
-                            console.log("JR NOTE: why not active", e)
                             e.classList.add("active-rule");
                             //give it a little bit for us to see
                             setTimeout(() => e.classList.remove("active-rule"), 1000)
@@ -164,7 +204,7 @@ a rule might respond to click, but further check if what was clicked had a data-
 //no "RuleXGreaterThanY" here, okay future me?
 class Rule {
     text = "Generic Rule Does Nothing"
-    eventName = "click";
+    eventName = "click"; //if this is empty, eventCallback will be called when added to the spine with no event
     eventCallback;
     constructor(eventName, text, eventCallback) {
         this.eventName = eventName;
@@ -176,27 +216,62 @@ class Rule {
 
 const global_rules_spine = new RulesSpine();
 
-global_rules_spine.addRule(new Rule("click", "Any Input Click Plays A Noise", (rule, event) => {
-    console.log("JR NOTE: ", rule.text, event);
-    //i know i'm handling a click event
+/*
+global_rules_spine.addRule(new Rule("click", "Any Video Click Plays A Noise", (rule, event) => {
+    //i know i'm handling a click event so theres a target
     const target = event.target;
-    if (target.closest('input')) {
+    if (target.closest('video')) {
         global_rules_spine.noisePlayer.play();
         return true;
     }
 }));
 
 //example rules, we want to turn these off and only let passwords add them
-global_rules_spine.addRule(new Rule("ended", "Noise Ending Earns a Point", (rule, event) => {
-    console.log("JR NOTE: TODO how to tell was audio", rule.text, event);
+global_rules_spine.addRule(new Rule("ended", "Ending Earns a Point", (rule, event) => {
     global_rules_spine.changePointsBy(1);
+    //easy to tell if video, hard to tell if audio
     return true;
 }));
 
-global_rules_spine.addRule(new Rule("play", "Noise Playing Earns a Point", (rule, event) => {
-    console.log("JR NOTE: TODO how to tell was audio", rule.text, event);
+
+
+//if the noise changes to giggles you get a one time point bomb (if this rule is AFTER a rule that seets it to giggles you won't get the point)
+global_rules_spine.addRule(new Rule("state:noise_src", "Giggles Is Points", (rule, event) => {
+    console.log("JR NOTE: giggle event is", event)
+    if (event.newValue && event.newValue.includes("giggle")) {
+        global_rules_spine.changePointsBy(113);
+    }
+    return true;
+}));
+
+//because event name is empty, will happen on adding the rule
+global_rules_spine.addRule(new Rule("", "Noise Is Giggles", (rule, event) => {
+    global_rules_spine.updateState("noise_src", "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/gigglebest.mp3")
+    return true;
+}));
+
+
+global_rules_spine.addRule(new Rule("play", "Playing Earns a Point", (rule, event) => {
     //i know i'm handling an ended event
     global_rules_spine.changePointsBy(1);
     return true;
 
 }));
+
+
+
+
+global_rules_spine.addRule(new Rule("play", "Video Playing = Click", (rule, event) => {
+    //i know i'm handling an ended event
+    if (event.target) {
+        console.log("JR NOTE: event.target", event.composedPath())
+        const video = event.composedPath()[0];
+        if (video && video instanceof HTMLVideoElement) {
+            video.click();
+            return true;
+
+        }
+    }
+
+}));
+*/
