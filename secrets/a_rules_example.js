@@ -5,22 +5,24 @@
     const src = `
     
     
-    The rules are simple.
+    Click is Image.
 
-    Here are some Important Words you can use to change that.
+    Load is point.
 
-    <li> how can your eyes be real</li>
+    What will you do with this, I wonder?
     
     `
 
     resultsEle.innerHTML = src.split("\n").join("<br>");
 
-    global_rules_spine.addRule(new Rule("", "Noise Is Static", (rule, event) => {
-        global_rules_spine.updateState("noise_src", "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/static_chrip.mp3")
+
+    //will be called on adding to the spine cuz no event name
+    global_rules_spine.addRule(new Rule("", "Image Is Coffin", (rule, event) => {
+        global_rules_spine.updateState("img_src", "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/wanda_coffin.gif")
         return true;
     }));
 
-    global_rules_spine.addRule(new Rule("click", "Click is Noise", (rule, event) => {
+    global_rules_spine.addRule(new Rule("click", "Click is Image", (rule, event) => {
         //i know i'm handling a click event so theres a target
         const target = event.target;
         global_rules_spine.noisePlayer.play();
@@ -28,7 +30,7 @@
 
     }));
 
-    global_rules_spine.addRule(new Rule("play", "Play is Point", (rule, event) => {
+    global_rules_spine.addRule(new Rule("load", "Load is Point", (rule, event) => {
         global_rules_spine.changePointsBy(1);
         return true;
     }));
