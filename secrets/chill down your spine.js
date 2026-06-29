@@ -11,6 +11,7 @@
 
     <li> how can your eyes be real</li>
     <li>extreme go horse</li>
+    <li>hallowed ground</li>
 
     (You can always refresh the page to clear all rules)
     
