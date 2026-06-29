@@ -172,17 +172,24 @@ class RulesSpine {
             if (r.eventName === type) {
                 console.log("JR NOTE: found rule", r);
                 if (r.eventCallback) {
-                    const ret = r.eventCallback(r, event);
-                    if (ret) {
-                        const all_eles = document.querySelectorAll(".rule");
 
-                        const active_eles = document.querySelectorAll(`[data-rule-text='${r.text}']`);
-                        for (let e of active_eles) {
-                            e.classList.add("active-rule");
-                            //give it a little bit for us to see
-                            setTimeout(() => e.classList.remove("active-rule"), 1000)
+                    //doesn't prevent infinite loops but DOES prevent them from crashing your browser
+                    //this adds it to an event queue so only one happens at a time, not infinity in a single tick
+                    setTimeout(() => {
+                        const ret = r.eventCallback(r, event);
+                        if (ret) {
+                            const all_eles = document.querySelectorAll(".rule");
+
+                            const active_eles = document.querySelectorAll(`[data-rule-text='${r.text}']`);
+                            for (let e of active_eles) {
+                                e.classList.add("active-rule");
+                                //give it a little bit for us to see
+                                setTimeout(() => e.classList.remove("active-rule"), 1000)
+                            }
                         }
-                    }
+                    }, 0)
+
+
                 }
             }
         }

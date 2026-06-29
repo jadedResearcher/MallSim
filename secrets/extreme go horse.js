@@ -49,6 +49,7 @@
 
         console.log("JR NOTE: randomPageX,randomPageY", randomPageX, randomPageY)
         img.style.left = `${randomPageX}px`;
+        img.style.width = "50px"
         img.style.top = `${randomPageY}px`;
         img.style.transform = "translate(-50%, -50%)";
         img.style.pointerEvents = "none";

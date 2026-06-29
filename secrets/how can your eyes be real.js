@@ -29,6 +29,7 @@
         const img = document.createElement("img");
         img.src = global_rules_spine.state.img_src;
         img.style.position = "absolute";
+        img.style.maxWidth = "50px";
         img.style.left = `${event.pageX}px`;
         img.style.top = `${event.pageY}px`;
         img.style.transform = "translate(-50%, -50%)";

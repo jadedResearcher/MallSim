@@ -12,6 +12,7 @@
     <li> how can your eyes be real</li>
     <li>extreme go horse</li>
     <li>hallowed ground</li>
+    <li>jr please try to break my browser (Note From Future JR: In theory this doesn't break it anymore, it just makes an ungodly noise)</li>
 
     (You can always refresh the page to clear all rules)
     
