@@ -6,7 +6,7 @@
     const src = `
     
     
-    Click is Invert
+    Click is Bounce
 
 
     What will you do with this, I wonder?
