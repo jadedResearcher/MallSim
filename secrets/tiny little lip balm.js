@@ -15,7 +15,10 @@
 
     resultsEle.innerHTML = src.split("\n").join("<br>");
 
-
+    global_rules_spine.addRule(new Rule("", "You Are In Danger", (rule, event) => {
+        global_rules_spine.updateState("danger", 13);
+        return true;
+    }));
 
 
     global_rules_spine.addRule(new Rule("click", "Click Is Bounce", (rule, event) => {

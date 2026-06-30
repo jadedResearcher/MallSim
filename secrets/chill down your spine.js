@@ -47,6 +47,88 @@
         return true;
     }));
 
+    global_rules_spine.addRule(new Rule("state:danger", "Danger is Red", (rule, event) => {
+        console.log("JR NOTE: danger is red")
+        if (global_rules_spine.state.danger > 0) {
+            const ele = document.createElement("div");
+            ele.classList.add("danger-overlay");
+            //gemini stuff, it says this is more efficient than just a filter tinting red (cuz it lets animations underneath not rerender)
+            //this fascinates me, cuz it means gemini remembers it helped me make bouncey animations earlier
+            ele.innerHTML = `<style>
+                            .danger-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                
+                /* Ensures it sits on top of text but ignores user interactions */
+                z-index: 99999;
+                pointer-events: none; 
+                
+                /* Semitransparent red base */
+                background-color: rgba(255, 0, 0, 0.25);
+                
+                /* Blends beautifully with text/images underneath without flattening them */
+                mix-blend-mode: multiply; 
+                
+                /* Forces the browser to isolate this on its own GPU layer */
+                will-change: transform; 
+                }
+            </style>
+            <div class="danger-overlay"></div>`;
+            document.body.append(ele)
+        } else {
+            const danger_ele = document.querySelectorAll(".danger-overlay");
+            for (let d of danger_ele) {
+                d.remove();
+            }
+        }
+        return true;
+    }));
+
+    global_rules_spine.addRule(new Rule("state:safety", "Safe is Green", (rule, event) => {
+        console.log("JR NOTE: danger is green")
+        if (global_rules_spine.state.safety > 0) {
+            const ele = document.createElement("div");
+            ele.classList.add("safe-overlay");
+            //gemini stuff, it says this is more efficient than just a filter tinting red (cuz it lets animations underneath not rerender)
+            //this fascinates me, cuz it means gemini remembers it helped me make bouncey animations earlier
+            ele.innerHTML = `<style>
+                            .safe-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                
+                /* Ensures it sits on top of text but ignores user interactions */
+                z-index: 99999;
+                pointer-events: none; 
+                
+                /* Semitransparent red base */
+                background-color: rgba(60, 255, 0, 0.25);
+                
+                /* Blends beautifully with text/images underneath without flattening them */
+                mix-blend-mode: multiply; 
+                
+                /* Forces the browser to isolate this on its own GPU layer */
+                will-change: transform; 
+                }
+            </style>
+            <div class="safe-overlay"></div>`;
+            document.body.append(ele)
+        } else {
+            const danger_ele = document.querySelectorAll(".safe-overlay");
+            for (let d of danger_ele) {
+                d.remove();
+            }
+        }
+        return true;
+    }));
+
+
+
 
 })()
 
