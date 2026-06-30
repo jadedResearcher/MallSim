@@ -54,7 +54,7 @@ class RulesSpine {
     //no clue what im gonna do with any of these, just letting them do their thing
 
     state = {
-        points: 0, safety: 0, danger: 0, points_multiplier: 1,
+        points: 0, danger: 0, points_multiplier: 1,
         img_src: "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/wanda_coffin.gif",
         noise_src: "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/hallow_is_so_quiet_whenheshappy.mp3"
     }
@@ -196,8 +196,10 @@ class RulesSpine {
 
                     //doesn't prevent infinite loops but DOES prevent them from crashing your browser
                     //this adds it to an event queue so only one happens at a time, not infinity in a single tick
+                    //HOWEVER this DOES prevent the target form being stored normally for some events, need to cache it
+                    const target = event.target;
                     setTimeout(() => {
-                        const ret = r.eventCallback(r, event);
+                        const ret = r.eventCallback(r, event, target);
                         if (ret) {
                             const all_eles = document.querySelectorAll(".rule");
 

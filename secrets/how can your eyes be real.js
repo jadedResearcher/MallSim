@@ -25,7 +25,6 @@
 
     global_rules_spine.addRule(new Rule("click", "Click is Image", (rule, event) => {
         //i know i'm handling a click event so theres a target
-        const target = event.target;
         const img = document.createElement("img");
         img.src = global_rules_spine.state.img_src;
         img.style.position = "absolute";

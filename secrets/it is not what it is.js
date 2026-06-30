@@ -25,8 +25,7 @@
     resultsEle.innerHTML = src.split("\n").join("<br>");
 
     //will be called on adding to the spine cuz no event name
-    global_rules_spine.addRule(new Rule("click", "Click Is Invert", (rule, event) => {
-        const target = event.target;
+    global_rules_spine.addRule(new Rule("click", "Click Is Invert", (rule, event, target) => {
         if (target.style.filter.includes("invert(1)")) {
             target.style.filter = "invert(0)";
             target.style.backdropFilter = "invert(0)";
@@ -41,8 +40,7 @@
         return true;
     }));
 
-    global_rules_spine.addRule(new Rule("click", "Rule Click is Not Rule", (rule, event) => {
-        const target = event.target;
+    global_rules_spine.addRule(new Rule("click", "Rule Click is Not Rule", (rule, event, targets) => {
         if (target.classList.contains("rule")) {
             global_rules_spine.removeRule(target.dataset.ruleText);
         }

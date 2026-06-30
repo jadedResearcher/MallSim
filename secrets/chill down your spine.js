@@ -18,7 +18,7 @@
 
     (You can always refresh the page to clear all rules)
 
-    (Currently a Work In Progress as of 6/28/2026f)
+    (Currently a Work In Progress as of 6/29/2026)
     
     `
 
@@ -31,7 +31,6 @@
 
     global_rules_spine.addRule(new Rule("click", "Click is Noise", (rule, event) => {
         //i know i'm handling a click event so theres a target
-        const target = event.target;
         global_rules_spine.noisePlayer.play();
         return true;
 
@@ -48,8 +47,14 @@
     }));
 
     global_rules_spine.addRule(new Rule("state:danger", "Danger is Red", (rule, event) => {
-        console.log("JR NOTE: danger is red")
+        console.log("JR NOTE: danger is red", event)
+        const danger = global_rules_spine.state.danger;
         if (global_rules_spine.state.danger > 0) {
+            const prev = document.querySelector(".danger-overlay");
+            if (prev) {
+                prev.remove();
+            }
+            console.log("JR NOTE: there is a prevs")
             const ele = document.createElement("div");
             ele.classList.add("danger-overlay");
             //gemini stuff, it says this is more efficient than just a filter tinting red (cuz it lets animations underneath not rerender)
@@ -67,7 +72,7 @@
                 pointer-events: none; 
                 
                 /* Semitransparent red base */
-                background-color: rgba(255, 0, 0, 0.25);
+                background-color: rgba(255, 0, 0, ${danger / 100});
                 
                 /* Blends beautifully with text/images underneath without flattening them */
                 mix-blend-mode: multiply; 
@@ -87,10 +92,14 @@
         return true;
     }));
 
-    global_rules_spine.addRule(new Rule("state:safety", "Safe is Green", (rule, event) => {
-        console.log("JR NOTE: danger is green")
-        if (global_rules_spine.state.safety > 0) {
-            const ele = document.createElement("div");
+    global_rules_spine.addRule(new Rule("state:danger", "Safe is Green", (rule, event) => {
+        if (global_rules_spine.state.danger < 0) {
+            const danger = global_rules_spine.state.danger;
+
+            const prev = document.querySelector(".safe-overlay");
+            if (prev) {
+                prev.remove();
+            } const ele = document.createElement("div");
             ele.classList.add("safe-overlay");
             //gemini stuff, it says this is more efficient than just a filter tinting red (cuz it lets animations underneath not rerender)
             //this fascinates me, cuz it means gemini remembers it helped me make bouncey animations earlier
@@ -107,7 +116,7 @@
                 pointer-events: none; 
                 
                 /* Semitransparent red base */
-                background-color: rgba(60, 255, 0, 0.25);
+                background-color: rgba(60, 255, 0, ${-1 * danger / 100});
                 
                 /* Blends beautifully with text/images underneath without flattening them */
                 mix-blend-mode: multiply; 

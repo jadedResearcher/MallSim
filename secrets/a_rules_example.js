@@ -22,9 +22,8 @@
         return true;
     }));
 
-    global_rules_spine.addRule(new Rule("click", "Click is Image", (rule, event) => {
+    global_rules_spine.addRule(new Rule("click", "Click is Image", (rule, event, target) => {
         //i know i'm handling a click event so theres a target
-        const target = event.target;
         global_rules_spine.noisePlayer.play();
         return true;
 

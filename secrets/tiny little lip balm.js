@@ -16,13 +16,12 @@
     resultsEle.innerHTML = src.split("\n").join("<br>");
 
     global_rules_spine.addRule(new Rule("", "You Are In Danger", (rule, event) => {
-        global_rules_spine.updateState("danger", 13);
+        global_rules_spine.updateState("danger", global_rules_spine.state.danger + 50);
         return true;
     }));
 
 
-    global_rules_spine.addRule(new Rule("click", "Click Is Bounce", (rule, event) => {
-        const target = event.target;
+    global_rules_spine.addRule(new Rule("click", "Click Is Bounce", (rule, event, target) => {
 
 
         const id = "bouncey-rules-animation";
@@ -67,6 +66,17 @@
         target.classList.add("rules-bouncy-mover")
 
 
+
+    }));
+
+    global_rules_spine.addRule(new Rule("load", "Hallow Is Safe", (rule, event, target) => {
+        //i know i'm handling a load event so theres a target
+        if (target && target.src && target.src.includes("hallow")) {
+            global_rules_spine.updateState("danger", global_rules_spine.state.danger - 1);
+            return true;
+        }
+
+        return false;
 
     }));
 
