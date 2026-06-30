@@ -11,7 +11,15 @@ rules figure out what, if anything they wanna do  (modify global state, modify t
 figure out some way to prevent infinite loops (a click causes a click causes a click causes a click),
 */
 
-//i am using gemini like i used to use stack overflow and google searches. generating no code but quickly answering questions about syntax, best practices, etc.
+//i am using gemini like i used to use stack overflow and google searches. 
+// generating no code but quickly answering questions about syntax, best practices, etc.
+//it keeps offering up ways i can accomplish my goals and they're all exactly missing
+//  the point (by trying to offer me new goals or reduce the chaos)
+//though it has very useful things to tell me about optimizations
+//  that i can test by trying to brick my browser
+//so my current evaluation is "useful if you already know what you're doing
+//  and how you want to do it but don't have memorized the most optimal way to spam a browsers"
+//this might make things like the custom audio engine in the corn maze way more efficient
 
 //we are sinning on purpose tonight boys
 //i haven't attempted to hack language level objects since my Ruby on Rails days
@@ -147,6 +155,19 @@ class RulesSpine {
         if (rule.eventName.trim() === "") {
             rule.eventCallback();//with no event
         }
+    }
+
+    removeRule = (rule_text) => {
+        console.log("JR NOTE: removeRule", rule_text)
+        const copy = [...this.rules];
+        for (let item of copy) {
+            if (item.text === rule_text) {
+                removeItemOnce(this.rules, item);
+            }
+        }
+        this.render();
+        //i can't undo a rule's add effects (no stack to pop i'm afraid)
+        //i COULD make a stack. just don't want to lol
     }
 
     //can be negative
