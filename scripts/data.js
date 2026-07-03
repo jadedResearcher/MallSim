@@ -3184,6 +3184,10 @@ class Theme {
         if ((key in this.string_possibilities) && this.string_possibilities[key]) {
             return this.string_possibilities[key];
         } else {
+            console.log("JR NOTE: key is", key)
+            if (key === "WALL" || key === "FLOOR") {
+                return [];
+            }
             if (this.key !== "waste" && (food_keys.indexOf(this.key) === -1)) {
                 console.error(`[ERROR: ${key} NOT FOUND in ${this.key} ]`, this.string_possibilities);
             }

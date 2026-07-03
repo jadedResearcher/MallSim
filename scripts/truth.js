@@ -358,7 +358,7 @@ wireUpAchievement("Mannequin Sadness", "donut in a corn outfit", "In Truth, We a
 wireUpAchievement("Now You Fucked Up (Hunted)", "am i missing something", "Take care you do not let your hunt for the Truth lead you astray.");
 wireUpAchievement("Now You Fucked Up (Bare Hands)", "ghoulish thing", "How could you.");
 wireUpAchievement("It's Friday!!!", "the door is a jar", "In Truth, Fridays are a day of rest. Use them wisely.");
-wireUpAchievement("Minotaur Fuckery", "the end is never the end", "In Truth, the correct action when you find a dead end in a maze is to grab a shovel and get digging, so the next Wanderer has something to find.");
+wireUpAchievement("Minotaur Fuckery", "are you sure this was here before", "In Truth, the correct action when you find a dead end in a maze is to grab a shovel and get digging, so the next Wanderer has something to find.");
 wireUpAchievement("LeeHunter Encounter", "ascended bug", "In Truth, JR delights in treating glitches and bugs as opportunity for Lore.");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");

@@ -158,7 +158,7 @@ class RulesSpine {
     }
 
     removeRule = (rule_text) => {
-        console.log("JR NOTE: removeRule", rule_text)
+        //console.log("JR NOTE: removeRule", rule_text)
         const copy = [...this.rules];
         for (let item of copy) {
             if (item.text === rule_text) {
@@ -185,13 +185,13 @@ class RulesSpine {
     */
     handleEvent = (event) => {
         const type = event.type;
-        console.log("JR NOTE: event called", type);
+        //console.log("JR NOTE: event called", type);
         //NOTE: any rule that changes the dom in any way should be tied to events that are  rare
         //because you will brick the browser if you try to constantly mess with the dom every millisecond
 
         for (let r of this.rules) {
             if (r.eventName === type) {
-                console.log("JR NOTE: found rule", r);
+                //console.log("JR NOTE: found rule", r);
                 if (r.eventCallback) {
 
                     //doesn't prevent infinite loops but DOES prevent them from crashing your browser
