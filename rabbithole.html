@@ -107,7 +107,7 @@
       const submitEle = document.querySelector("#submit");
       const formEle = document.querySelector("#form");
 
-      formEle.osubmit = (e) => {
+      formEle.onsubmit = (e) => {
         e.preventDefault();
         runSecret(input.value);
 

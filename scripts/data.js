@@ -3184,7 +3184,7 @@ class Theme {
         if ((key in this.string_possibilities) && this.string_possibilities[key]) {
             return this.string_possibilities[key];
         } else {
-            console.log("JR NOTE: key is", key)
+            //console.log("JR NOTE: key is", key)
             if (key === "WALL" || key === "FLOOR") {
                 return [];
             }
