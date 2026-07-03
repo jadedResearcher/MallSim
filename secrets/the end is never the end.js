@@ -108,9 +108,8 @@ let debug_maze_data;
         } else {
             //i will never forget strong bads text adventure game with obvious exists being like, north, south and DENNIS
             let obvious_exits = getEdgesFromNode(room).map((e) => e.to);
-            if (obvious_exits.length === 0) {
-                obvious_exits = getEdgesToNode(room).map((e) => e.from);
-            }
+            obvious_exits = obvious_exits.concat(getEdgesToNode(room).map((e) => e.from));
+
             themedRoom(theme_keys, obvious_exits, rand1, rand2)
         }
     }
