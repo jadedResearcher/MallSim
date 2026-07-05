@@ -49,6 +49,8 @@ let debug_maze_data;
     const getRandomDoorSense = (room, theme_keys, rand) => {
         if (room === ab_room) {
             return "a superior robot can be heard quietly rapping within."
+        } else if (room.includes("store")) {
+            return "the sound of buzzing static and a humming telephone line is within."
         }
 
         const themes = [all_themes[theme_keys[0]], all_themes[theme_keys[1]]];
@@ -196,9 +198,11 @@ let debug_maze_data;
             obvious_exits = obvious_exits.concat(getEdgesToNode(room).map((e) => e.from));
 
             if (room === ab_room) {
-                abRoom(obvious_exits, entryPhrase)
+                return abRoom(obvious_exits, entryPhrase)
+            } else if (room.includes("store")) {
+                return storeRoom(obvious_exits, entryPhrase)
             } else {
-                themedRoom(theme_keys, obvious_exits, omniRand, entryPhrase)
+                return themedRoom(theme_keys, obvious_exits, omniRand, entryPhrase)
 
             }
         }
@@ -242,6 +246,422 @@ let debug_maze_data;
         <a title='remember me, Observer, remember me as something other than a mute Witness to this story' href ='http://farragofiction.com/TheInternOpensHisEyes/'>Goodbye</a>
         <br><br>
         `
+    }
+
+    const storeRoom = async (obvious_exits, entryPhrase) => {
+        global_rules_spine.state.music_src = ("http://farragofiction.com/CatalystsBathroomSim/seeking_help.mp3");
+        global_rules_spine.musicPlayer.play();
+        const sinfulInjectedCSS = `
+
+  .help-button{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    color: white;
+    text-decoration: none;
+    background-color: #1f3f87;
+    border-radius: 25px;
+    font-size: 28px;
+    line-height: 33px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+
+  }
+    .chat-container{
+      position: fixed;
+      right: 15px;
+      top: 15px;
+      margin-top: 65px;
+      height: 515px;
+      width: 350px;
+      color: white;
+      text-decoration: none;
+      z-index: 10;
+      border-radius: 2px;
+      box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, .4);
+    }
+
+    .chat-header{
+      height: 100px;
+      color: white;
+      background-color: #1f3f87;
+      font-size: 14px;
+      padding: 20px;
+      p{
+          margin-left: 15px;
+      }
+    }
+
+    .small{
+      width: 100px !important;
+    }
+
+    .selected{
+      background: darkred !important;
+    }
+
+    .chat-body{
+      color: #1f3f87;
+      background-color: #f8fafa;
+      width: 100%;
+      height: 100%;
+      p{
+          margin-left: 15px;
+      }
+    }
+
+    .styled-button{
+      color: #1f3f87;
+      background: whie;
+    }
+
+    .chat-line{
+      padding: 5px;
+    }
+
+    .chat-options{
+      padding: 5px;
+      margin-top: 15px;
+      overflow: auto;
+      height: 190px;
+    }
+
+    .chat-icon{
+      clip-path: circle(50% at 50% 50%);
+      -webkit-clip-path: circle(43% at 50% 50%);
+      display: inline-block;
+      background-color: #1f3f87;
+      color: white;
+      padding: 15px;
+      font-size: 16px;
+      line-height: 10px;
+      vertical-align: top;
+    }
+
+    .chat-text{
+      background: white;
+      font-size; 14px;
+      display: inline-block;
+      width: 200px;
+      margin-left: 10px;
+      border: 1px solid #c4c4c4;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .chat-option{
+      background: #1f3f87;
+      font-size; 14px;
+      color: white;
+      display: inline-block;
+      width: 225px;
+      margin-left: 10px;
+      margin-bottom: 8px;
+      border: 1px solid #c4c4c4;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .customer-service-hell{
+      height: 300px;
+      overflow: auto;
+    }
+
+    .closer-chat-container{
+      position: fixed;
+      z-index: 2000;
+      right: 15%;
+      top: 15px;
+      margin-top: 65px;
+      height: 515px;
+      width: 80%;
+      color: white;
+      text-decoration: none;
+      border-radius: 2px;
+      box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, .4);
+    }
+
+    .closer-chat-header{
+      height: 25px;
+      color: white;
+      background-color: #b72a21;
+      font-size:22px;
+      padding: 5px;
+      p{
+          margin-left: 15px;
+          margin-top: 0px;
+      }
+    }
+
+    .closer-chat-body{
+      color: #b72a21;
+        background-color: #f8fafa;
+        width: 100%;
+        height: 100%;
+        p{
+            margin-left: 15px;
+        }
+    }
+
+    .closer-chat-line{
+      padding: 5px;
+    }
+
+    .closer-chat-icon{
+      clip-path: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(43% at 50% 50%);
+        display: inline-block;
+        background-color: #b72a21;
+        color: white;
+        padding: 15px;
+        font-size: 16px;
+        line-height: 10px;
+        vertical-align: top;
+    }
+
+    .closer-chat-option{
+      background: #b72a21;
+      font-size; 14px;
+      color: white;
+      display: inline-block;
+      width: 225px;
+      margin-left: 10px;
+      margin-bottom: 8px;
+      border: 1px solid #c4c4c4;
+      padding: 10px;
+      border-radius: 8px;
+      height: 42px;
+      overflow: hidden;
+      cursor: pointer;
+      p{
+        padding: 2px;
+        margin: 2px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    .closer-chat-text{
+      background: white;
+      font-size; 14px;
+      display: inline-block;
+      width: 80%;
+      margin-left: 10px;
+      border: 1px solid #c4c4c4;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .closer-customer-service-hell{
+      overflow: auto;
+      height: 465px;
+    }
+
+    .closer{
+      z-index: 1000;
+      left: 200px;
+      top: 113px !important;
+      animation: flipout 1s linear infinite;
+    }
+
+    .closer-chat-options{
+
+      padding: 20px;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes flipout{
+      0%,20%,40%,60%,80%,100%{
+        transform: translate(0px, 10px);
+      }
+      10%,30%,50%,70%,90%{
+        transform: translate(0px, 0px);
+      }
+    }
+
+ 
+`;
+        const style = createElementWithClassAndParent("style", resultsEle);
+        style.innerHTML = sinfulInjectedCSS;
+        const closerPopup = createElementWithClassAndParent("div", resultsEle, 'closer-chat-container');
+        const closerHeader = createElementWithClassAndParent("div", closerPopup, 'closer-chat-header');
+        closerHeader.innerHTML = `<p>The Closer will fulfill your Customer Support needs.</p>`;
+        const closerBody = createElementWithClassAndParent("div", closerPopup, 'closer-chat-body');
+        const hell = createElementWithClassAndParent("div", closerBody, 'closer-customer-service-hell');
+
+        const closerChat = (line, parent) => {
+            const ele = createElementWithClassAndParent("div", parent, 'closer-chat-line');
+
+            const icon = createElementWithClassAndParent("div", parent, 'closer-chat-icon');
+            icon.innerText = "TC";
+
+            const textEle = createElementWithClassAndParent("div", parent, 'closer-chat-text');
+            textEle.innerText = line;
+
+
+        }
+
+        closerChat("Straight to the point,so to speak. I like that. It's an admirable trait in someone.", hell);
+        await sleep(1000)
+        closerChat("But yes, you /can/ buy things here with Points, if you know the right Rules to play. The infection from the Harvest runs deep, one supposes.", hell);
+        await sleep(1000);
+        console.log("JR NOTE: checking points")
+        if (global_rules_spine.state.points === 0) {
+            closerChat("Ah.", hell);
+            await sleep(1000);
+            closerChat("Not much of a gamer, are we?", hell);
+            await sleep(1000);
+            closerChat("Then as a special introductory offer, allow me to unlock the feature for you.", hell);
+            await sleep(1000);
+            closerChat("I look forward to  your future patronage.", hell);
+
+            global_rules_spine.addRule(new Rule("", "Noise Is Static", (rule, event) => {
+                global_rules_spine.updateState("noise_src", "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/static_chrip.mp3")
+                return true;
+            }));
+
+            global_rules_spine.addRule(new Rule("click", "Click is Noise", (rule, event) => {
+                //i know i'm handling a click event so theres a target
+                global_rules_spine.noisePlayer.play();
+                return true;
+
+            }));
+
+            global_rules_spine.addRule(new Rule("play", "Play is Point", (rule, event) => {
+                global_rules_spine.changePointsBy(1);
+                return true;
+            }));
+
+            global_rules_spine.addRule(new Rule("visibilitychange", "Rest is Point", (rule, event) => {
+                global_rules_spine.changePointsBy(113);
+                return true;
+            }));
+
+            global_rules_spine.addRule(new Rule("state:danger", "Danger is Red", (rule, event) => {
+                console.log("JR NOTE: danger is red", event)
+                const danger = global_rules_spine.state.danger;
+                if (global_rules_spine.state.danger > 0) {
+                    const prev = document.querySelector(".danger-overlay");
+                    if (prev) {
+                        prev.remove();
+                    }
+                    console.log("JR NOTE: there is a prevs")
+                    const ele = document.createElement("div");
+                    ele.classList.add("danger-overlay");
+                    //gemini stuff, it says this is more efficient than just a filter tinting red (cuz it lets animations underneath not rerender)
+                    //this fascinates me, cuz it means gemini remembers it helped me make bouncey animations earlier
+                    ele.innerHTML = `<style>
+                            .danger-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                
+                /* Ensures it sits on top of text but ignores user interactions */
+                z-index: 99999;
+                pointer-events: none; 
+                
+                /* Semitransparent red base */
+                background-color: rgba(255, 0, 0, ${danger / 100});
+                
+                /* Blends beautifully with text/images underneath without flattening them */
+                mix-blend-mode: multiply; 
+                
+                /* Forces the browser to isolate this on its own GPU layer */
+                will-change: transform; 
+                }
+            </style>
+            <div class="danger-overlay"></div>`;
+                    document.body.append(ele)
+                } else {
+                    const danger_ele = document.querySelectorAll(".danger-overlay");
+                    for (let d of danger_ele) {
+                        d.remove();
+                    }
+                }
+                return true;
+            }));
+
+            global_rules_spine.addRule(new Rule("state:danger", "Safe is Green", (rule, event) => {
+                if (global_rules_spine.state.danger < 0) {
+                    const danger = global_rules_spine.state.danger;
+
+                    const prev = document.querySelector(".safe-overlay");
+                    if (prev) {
+                        prev.remove();
+                    } const ele = document.createElement("div");
+                    ele.classList.add("safe-overlay");
+                    //gemini stuff, it says this is more efficient than just a filter tinting red (cuz it lets animations underneath not rerender)
+                    //this fascinates me, cuz it means gemini remembers it helped me make bouncey animations earlier
+                    ele.innerHTML = `<style>
+                            .safe-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                
+                /* Ensures it sits on top of text but ignores user interactions */
+                z-index: 99999;
+                pointer-events: none; 
+                
+                /* Semitransparent red base */
+                background-color: rgba(60, 255, 0, ${-1 * danger / 100});
+                
+                /* Blends beautifully with text/images underneath without flattening them */
+                mix-blend-mode: multiply; 
+                
+                /* Forces the browser to isolate this on its own GPU layer */
+                will-change: transform; 
+                }
+            </style>
+            <div class="safe-overlay"></div>`;
+                    document.body.append(ele)
+                } else {
+                    const danger_ele = document.querySelectorAll(".safe-overlay");
+                    for (let d of danger_ele) {
+                        d.remove();
+                    }
+                }
+                return true;
+            }));
+
+            closerChat("Ah. Forgive me. Allow me to show you the exits:", hell);
+
+
+
+        } else {
+            closerChat(`Currently, you have ${global_rules_spine.state.points} points.`, hell);
+            alert("TODO")
+
+            closerChat("Ah. Forgive me. Allow me to show you the exits:", hell);
+
+        }
+        console.log("JR NOTE: going to handle store obvious exits")
+
+        for (let exit of obvious_exits) {
+            const ele = createElementWithClassAndParent("li", hell, "closer-chat-option");
+            ele.style.cursor = "pointer";
+            ele.style.marginBottom = "13px"
+            ele.style.display = "flex";
+            ele.style.gap = "13px"
+            const src = 'http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/door_without_rug.png';
+            const img = createElementWithClassAndParent("img", ele);
+            img.style.height = "25px"
+            img.src = src;
+            const div = createElementWithClassAndParent("div", ele);
+            div.innerText = renderOneNode(exit, true);
+            div.title = exit;
+            ele.onclick = () => {
+                renderOneNode(exit);
+            }
+        }
+
     }
 
     const abRoom = (obvious_exits, entryPhrase) => {
@@ -386,10 +806,11 @@ let debug_maze_data;
     }
 
 
+    const store_example = 'http://farragofiction.com/CatalystsBathroomSim/store_inventory'
     const starting_room = "http://farragofiction.com/MallSim"
     //abs location, which will let us type in map locations to move to
     const ab_room = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/SOUTH/NORTH";
-    renderOneNode(ab_room)
+    renderOneNode(store_example)
 
 })()
 

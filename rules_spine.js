@@ -55,12 +55,15 @@ class RulesSpine {
 
     state = {
         points: 0, danger: 0, points_multiplier: 1,
+        music_src: "http://farragofiction.com/CatalystsBathroomSim/seeking_help.mp3",
         img_src: "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/wanda_coffin.gif",
         noise_src: "http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/hallow_is_so_quiet_whenheshappy.mp3"
     }
 
 
     noisePlayer = new Audio(this.state.noise_src);
+    musicPlayer = new Audio(this.state.music_src);
+
     //NOT guaranteed to be unique and that is half the challenge
     rules = [];
     element;
@@ -68,6 +71,7 @@ class RulesSpine {
 
     //i guess todays goal is to learn a lot about events
     constructor() {
+        this.musicPlayer.loop = true;
         //keydown/up and mouse out/over won't work on mobile
         //instead if want to have a rule about typing  "e" i can use before input
         document.addEventListener("click", this.handleEvent);
