@@ -277,7 +277,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
             //lets doors be different from each other
             return getRandomDoorSense(room, theme_keys, omniRand);
         } else {
-            const entryPhrase = `You step through a door, ${getRandomDoorSense(room, theme_keys, omniRand).toLowerCase()}<br><Br>`;
+            const entryPhrase = `You step through a door, ${getRandomDoorSense(room, theme_keys, omniRand).toLowerCase()} ${redBall ? "Your red yarn pulls tightly, reminding you the way to where you tied it." : ""}<br><Br>`;
             //i will never forget strong bads text adventure game with obvious exists being like, north, south and DENNIS
             let obvious_exits = getEdgesFromNode(room).map((e) => e.to);
             obvious_exits = obvious_exits.concat(getEdgesToNode(room).map((e) => e.from));
@@ -742,7 +742,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
             img.src = src;
             const div = createElementWithClassAndParent("div", ele);
             div.innerText = renderOneNode(exit, true);
-            div.dataset.url = exit;
+            ele.dataset.url = exit;
             ele.onclick = () => {
                 renderOneNode(exit);
             }
@@ -812,7 +812,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
             img.src = src;
             const div = createElementWithClassAndParent("div", ele);
             div.innerText = renderOneNode(exit, true);
-            div.dataset.url = exit;
+            ele.dataset.url = exit;
             ele.onclick = () => {
                 renderOneNode(exit);
             }
@@ -861,6 +861,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
 
     //its a classic way to navigate mazes, isn't it? trying one end to where you currently are, so you can always go back, and know when you're going in circles.
     const handleRedString = (current_physical_room) => {
+
         if (!redBall) {
             return;
         }
@@ -869,7 +870,11 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
         const doors = document.querySelectorAll("[data-url]");
         for (let door of doors) {
             if (path.includes(door.dataset.url)) {
-                door.style.border = "3px solid red";
+                //door.style.cssText = `    border-bottom: 5px solid transparent;
+                //border-image: url(http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/thread.png) 9;`;
+                //  
+                door.style.borderBottom = "5px solid transparent"
+                door.style.borderImage = "url(http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/thread.png) 9";
             }
         }
 
@@ -917,7 +922,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
             img.src = src;
             const div = createElementWithClassAndParent("div", ele);
             div.innerText = renderOneNode(exit, true);
-            div.dataset.url = exit;
+            ele.dataset.url = exit;
             ele.onclick = () => {
                 renderOneNode(exit);
             }
