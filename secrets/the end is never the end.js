@@ -1,7 +1,11 @@
 
 //immediately envoked function does't run into namespacign issues
-let debug_maze_data;
+let hax_maze_data;
+//you can set your red ball of yarn to remember a specific place to return to, but only if you've unlocked it
+//if you waste this, you can put a location you HAVEN'T been in and navigate that way, but be careful you don't typo, or don't use have a '/' on the end when there isn't supposed to be one or a www if theres not supposed to be one. fiddly hacking
+let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/SOUTH/NORTH";
 (async () => {
+
     initThemes();
     //key is url, value is domain
     let nodes = {};
@@ -31,7 +35,7 @@ let debug_maze_data;
         }
         edges = data.edges;
 
-        debug_maze_data = { nodes: nodes, edges: edges };
+        hax_maze_data = { nodes: nodes, edges: edges };
     } catch (error) {
         console.error('Network or parsing error:', error);
     }
@@ -46,6 +50,87 @@ let debug_maze_data;
         return edges.filter((e) => e.to === full_url_of_node);
     }
 
+    //needed for closer's store, bredth first search
+    /*
+    because cycles are possible, if you ever see a room in your current path stack, abort
+
+    works backwards from target to the current room you are in
+    NOTE: current_room never changes
+    */
+    const findPathFromAToB = (current_physical_room, target_room, current_path = [], all_visited = [], pending_explorations = []) => {
+        console.log("JR NOTE: findPathFromAToB ", { current_physical_room, target_room, current_path, all_visited, pending_explorations })
+        current_path = [...current_path, target_room]; //copied so i don't edit anyone elses
+        all_visited.push(target_room); //used to avoid repeitition or loops
+        //remove this exploration from the front of the array
+        pending_explorations.shift();
+        /*
+            starting at target_room, check all edges going TO it
+            to see if the FROM location is current_room
+            if it is, return the current path + target_room (reversed), hooray you did it
+
+            if its not, confirm that the edge isn't FROM anywhere in the all_visited
+            if it is, return undefined or some other error signal
+
+            otherwise, for each edge you have, recursively call pickNextDoorToGetFromAToB
+            with (current_room, FROM and curernt_path + target_room)
+            if you get anything but 'undefined' returned, return it up the chain
+            should mean that only the fastest path gets returned.
+             incorrect paths might go forever though, so add logging just to confirm it doesn't explode
+             plus research this
+        */
+
+        //its a loop, prune this and abort
+        if (all_visited.includes(current_physical_room)) {
+            console.log("JR NOTE: found a loop ", { current_physical_room, target_room, current_path, all_visited, pending_explorations })
+            return undefined;
+        }
+
+        //the graph/reality is directed but im letting the maze not be
+        //i..e eyedol games links to eyedlr but not necessarily the reverse
+        //but that makes for an annoying maze
+        const edgesTO = getEdgesToNode(target_room);
+        console.log("JR NOTE: edges to were", edgesTO)
+        const edgesFROM = getEdgesFromNode(target_room);
+        console.log("JR NOTE: edges from were", edgesFROM)
+
+        for (let e of edgesTO) {
+            //we found our shortest path
+            if (e.from === current_physical_room) {
+                console.log("JR NOTE: found a path!!!!!!!!!!!!! ", { current_physical_room, target_room, current_path, all_visited, pending_explorations })
+                return current_path.reverse();
+            }
+
+
+            //recurse
+            pending_explorations.push({ current_physical_room, target_room: e.from, current_path, all_visited, pending_explorations });
+
+        }
+
+        for (let e of edgesFROM) {
+            //we found our shortest path
+            if (e.to === current_physical_room) {
+                console.log("JR NOTE: found a path!!!!!!!!!!!!! ", { current_physical_room, target_room, current_path, all_visited, pending_explorations })
+                return current_path.reverse();
+            }
+            //recurse
+            pending_explorations.push({ current_physical_room, target_room: e.to, current_path, all_visited, pending_explorations });
+
+        }
+
+        if (pending_explorations.length === 0) {
+            console.log("JR NOTE: end of the road ", { current_physical_room, target_room, current_path, all_visited, pending_explorations })
+            return undefined; //end of the road
+        } else {
+            //will always pick siblings of the previous path before children of this one
+            //since we start at the top
+            const next = pending_explorations[0];
+            return findPathFromAToB(next.current_physical_room, next.target_room, next.current_path, next.all_visited, next.pending_explorations)
+        }
+
+    }
+    window.haxFindPathFromAToB = findPathFromAToB; //for testing/wasting, use with hax_debug_data
+    //haxFindPathFromAToB(hax_maze_data.edges[4].from, hax_maze_data.edges[44].from) (eyedolgames.com to eyedlr)
+    //haxFindPathFromAToB("http://eyedolgames.com/","http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH") //gotta be careful with this version, things like trailing / or www matter
     const getRandomDoorSense = (room, theme_keys, rand) => {
         if (room === ab_room) {
             return "a superior robot can be heard quietly rapping within."
@@ -198,13 +283,14 @@ let debug_maze_data;
             obvious_exits = obvious_exits.concat(getEdgesToNode(room).map((e) => e.from));
 
             if (room === ab_room) {
-                return abRoom(obvious_exits, entryPhrase)
+                abRoom(obvious_exits, entryPhrase)
             } else if (room.includes("store")) {
-                return storeRoom(obvious_exits, entryPhrase)
+                storeRoom(obvious_exits, entryPhrase)
             } else {
-                return themedRoom(theme_keys, obvious_exits, omniRand, entryPhrase)
-
+                themedRoom(theme_keys, obvious_exits, omniRand, entryPhrase)
             }
+            //no matter what kind of room, handle red strings. if there are doors within we'll find it
+            handleRedString(room);
         }
     }
 
@@ -656,7 +742,7 @@ let debug_maze_data;
             img.src = src;
             const div = createElementWithClassAndParent("div", ele);
             div.innerText = renderOneNode(exit, true);
-            div.title = exit;
+            div.dataset.url = exit;
             ele.onclick = () => {
                 renderOneNode(exit);
             }
@@ -707,6 +793,32 @@ let debug_maze_data;
             renderOneNode(input.value.trim().replace(/\/$/, ""), false);
             return false;
         }
+
+        const h2 = createElementWithClassAndParent("h2", container);
+        h2.innerText = "Obvious Exits:"
+
+        const obvious_exits_list_ele = createElementWithClassAndParent("ol", container);
+        obvious_exits_list_ele.style.columnCount = "2"
+
+        for (let exit of obvious_exits) {
+            const ele = createElementWithClassAndParent("li", obvious_exits_list_ele);
+            ele.style.cursor = "pointer";
+            ele.style.marginBottom = "13px"
+            ele.style.display = "flex";
+            ele.style.gap = "13px"
+            const src = 'http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/door_without_rug.png';
+            const img = createElementWithClassAndParent("img", ele);
+            img.style.height = "25px"
+            img.src = src;
+            const div = createElementWithClassAndParent("div", ele);
+            div.innerText = renderOneNode(exit, true);
+            div.dataset.url = exit;
+            ele.onclick = () => {
+                renderOneNode(exit);
+            }
+        }
+
+
     }
 
 
@@ -745,6 +857,22 @@ let debug_maze_data;
         ret.push(getRandomHallSense(themes, rand));
         ret.push(getRandomHallSense(themes, rand));
         ele.innerHTML += ret.join(" ");
+    }
+
+    //its a classic way to navigate mazes, isn't it? trying one end to where you currently are, so you can always go back, and know when you're going in circles.
+    const handleRedString = (current_physical_room) => {
+        if (!redBall) {
+            return;
+        }
+        const path = findPathFromAToB(current_physical_room, redBall);
+        console.log("JR NOTE: red ball path is", path);
+        const doors = document.querySelectorAll("[data-url]");
+        for (let door of doors) {
+            if (path.includes(door.dataset.url)) {
+                door.style.border = "3px solid red";
+            }
+        }
+
     }
 
     //this doesn't care it was part of a graph
@@ -789,7 +917,7 @@ let debug_maze_data;
             img.src = src;
             const div = createElementWithClassAndParent("div", ele);
             div.innerText = renderOneNode(exit, true);
-            div.title = exit;
+            div.dataset.url = exit;
             ele.onclick = () => {
                 renderOneNode(exit);
             }
