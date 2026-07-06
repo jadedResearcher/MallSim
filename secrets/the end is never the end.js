@@ -3,7 +3,11 @@
 let hax_maze_data;
 //you can set your red ball of yarn to remember a specific place to return to, but only if you've unlocked it
 //if you waste this, you can put a location you HAVEN'T been in and navigate that way, but be careful you don't typo, or don't use have a '/' on the end when there isn't supposed to be one or a www if theres not supposed to be one. fiddly hacking
-let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/SOUTH/NORTH";
+let redBall;
+//the closer can give you a ball of yarn already tied to AB's room
+let blueBall;
+
+//trying to shove everything into a single file for rabbithole is exhausting lol, so messy
 (async () => {
 
     initThemes();
@@ -11,6 +15,9 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
     let nodes = {};
     //array of from, to pairs
     let edges = [];
+
+    let right_list_ele;
+    let current_room;
 
     //this used to be a big picture of my horridor that covered up the password field
     //but now its "are you sure this was here before"
@@ -21,6 +28,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
 
     try {
         const response = await fetch('https://laughing.observer/DataSets/zampanio_urlmap_v8_pruned.json');
+        right_list_ele = createElementWithClassAndParent("div", document.body, "right_list");
 
         // Always check if the HTTP status code is successful (200-299)
         if (!response.ok) {
@@ -257,9 +265,10 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
     //figures out what edges it has and makes a room for it
     const renderOneNode = (room, summarize = false) => {
         if (!summarize) {
-            console.log("JR NOTE: You have arrived in " + room);
 
             resultsEle.innerHTML = "DEBUG: " + room;
+        } else {
+            current_room = room;
         }
 
         if (!nodes[room]) {
@@ -285,12 +294,13 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
             if (room === ab_room) {
                 abRoom(obvious_exits, entryPhrase)
             } else if (room.includes("store")) {
-                storeRoom(obvious_exits, entryPhrase)
+                storeRoom(obvious_exits, entryPhrase, room); //it needs room to manually handle its own redstring 
             } else {
                 themedRoom(theme_keys, obvious_exits, omniRand, entryPhrase)
             }
             //no matter what kind of room, handle red strings. if there are doors within we'll find it
             handleRedString(room);
+            handleBlueWire(room);
         }
     }
 
@@ -334,7 +344,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
         `
     }
 
-    const storeRoom = async (obvious_exits, entryPhrase) => {
+    const storeRoom = async (obvious_exits, entryPhrase, room) => {
         global_rules_spine.state.music_src = ("http://farragofiction.com/CatalystsBathroomSim/seeking_help.mp3");
         global_rules_spine.musicPlayer.play();
         const sinfulInjectedCSS = `
@@ -512,7 +522,7 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
       font-size; 14px;
       color: white;
       display: inline-block;
-      width: 225px;
+      width: fit-content;
       margin-left: 10px;
       margin-bottom: 8px;
       border: 1px solid #c4c4c4;
@@ -723,15 +733,71 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
 
         } else {
             closerChat(`Currently, you have ${global_rules_spine.state.points} points.`, hell);
-            alert("TODO")
+            const shopEle = createElementWithClassAndParent("div", hell,);
+            shopEle.style.padding = "13px";
+            shopEle.style.margin = "13px"
+            shopEle.style.border = "1px solid red";
+
+            if (!redBall) {
+                const ele = createElementWithClassAndParent("li", shopEle, "closer-chat-option");
+                ele.innerText = "Ball of Red Yarn (5 points)";
+                ele.onclick = () => {
+                    if (global_rules_spine.iWantToSpendPoints(5)) {
+                        redBall = room;
+                        closerChat(`A wise choise indeed.`, shopEle);
+                        closerChat(`I have taken the liberty of tying one end to this shop.`, shopEle);
+                        closerChat(`But you are free to snip off the end and tie it anywhere new.`, shopEle);
+                        closerChat(`It is only yarn, after all.`, shopEle);
+                        const div = createElementWithClassAndParent("div", right_list_ele, 'icon-container');
+
+                        const ball_icon = createElementWithClassAndParent("img", div, 'img-icon');
+                        ball_icon.src = 'http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/ballofyarn.png';
+                        const ball_button = createElementWithClassAndParent("button", div);
+                        ball_button.innerText = "Tie Here";
+                        div.onclick = () => {
+                            redBall = current_room;
+                        }
+
+                        ele.remove();
+                    } else {
+                        closerChat(`I am afraid you can not yet afford that.`, shopEle);
+
+                    }
+                }
+            }
+
+            if (!blueBall) {
+                const ele = createElementWithClassAndParent("li", shopEle, "closer-chat-option");
+                ele.innerText = "Ball of Blue Wire (13 points)";
+                if (global_rules_spine.iWantToSpendPoints(13)) {
+                    redBall = room;
+                    closerChat(`It should serve you well.`, shopEle);
+                    closerChat(`The far end of this wire leads to a helpful guide.`, shopEle);
+                    closerChat(`It will always point you towards her.`, shopEle);
+
+
+                    const div = createElementWithClassAndParent("div", right_list_ele, 'icon-container');
+
+                    const ball_icon = createElementWithClassAndParent("img", div, 'img-icon');
+                    ball_icon.src = 'http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/ballofyarn.png';
+                    ball_icon.style.filter = "hue-rotate(-113deg)";
+                    blueBall = ab_room;
+                    ele.remove();
+                } else {
+                    closerChat(`I am afraid you can not yet afford that.`, shopEle);
+
+                }
+            }
 
             closerChat("Ah. Forgive me. Allow me to show you the exits:", hell);
 
-        }
-        console.log("JR NOTE: going to handle store obvious exits")
 
+        }
+
+        const exitsEle = createElementWithClassAndParent("div", hell,);
+        exitsEle.style.marginTop = "31px"
         for (let exit of obvious_exits) {
-            const ele = createElementWithClassAndParent("li", hell, "closer-chat-option");
+            const ele = createElementWithClassAndParent("li", exitsEle, "closer-chat-option");
             ele.style.cursor = "pointer";
             ele.style.marginBottom = "13px"
             ele.style.display = "flex";
@@ -747,6 +813,8 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
                 renderOneNode(exit);
             }
         }
+        handleRedString(room);
+        handleBlueWire(room);
 
     }
 
@@ -879,6 +947,30 @@ let redBall = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SO
         }
 
     }
+
+
+    //you can always find ab
+    const handleBlueWire = (current_physical_room) => {
+
+        if (!blueBall) {
+            return;
+        }
+        const path = findPathFromAToB(current_physical_room, blueBall);
+
+        //i wish i hadn't made the naming connection of red ball lol
+        console.log("JR NOTE: blue ball path is", path);
+        const doors = document.querySelectorAll("[data-url]");
+        for (let door of doors) {
+            if (path.includes(door.dataset.url)) {
+                //door.style.cssText = `    border-bottom: 5px solid transparent;
+                //border-image: url(http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/thread.png) 9;`;
+                //  
+                door.style.borderBottom = "3px double blue";
+            }
+        }
+
+    }
+
 
     //this doesn't care it was part of a graph
     const themedRoom = (theme_keys, obvious_exits, omniRand, entryPhrase) => {

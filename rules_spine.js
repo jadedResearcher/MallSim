@@ -180,6 +180,16 @@ class RulesSpine {
         this.renderPoints();
     }
 
+    //you can fail to spend points, but if you do it happens here
+    iWantToSpendPoints = (number) => {
+        if (this.state.points >= number) {
+            this.updateState("points", this.state.points - number);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /*
     a spine moves information between body and brain
