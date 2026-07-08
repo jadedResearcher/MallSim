@@ -223,7 +223,7 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
             if (to_kill_old.length > 0) {
                 game.event_list.push("Orchestral Trumpet");
 
-                ele.innerHTML += `<br><br>The trumpet's clarion call rings in ${arrayToHumanSentence(to_kill_old.map((e) => e.nameHTML()))} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
+                ele.innerHTML += `<br><br><video controls loop src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/orchestral_trumpet.mp4'></video>The trumpet's clarion call rings in ${arrayToHumanSentence(to_kill_old.map((e) => e.nameHTML()))} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
             }
 
             for (player of to_kill_young) {
@@ -233,7 +233,7 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
             if (to_kill_young.length > 0) {
                 game.event_list.push("Orchestral Piano");
 
-                ele.innerHTML += `<br><br>The soothing piano calms ${arrayToHumanSentence(to_kill_young.map((e) => e.nameHTML()))} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                ele.innerHTML += `<br><br><video controls loop src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/orchestral_piano.mp4'></video>The soothing piano calms ${arrayToHumanSentence(to_kill_young.map((e) => e.nameHTML()))} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
 
             }
         }

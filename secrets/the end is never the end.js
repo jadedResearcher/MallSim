@@ -286,7 +286,7 @@ let blueBall;
             //lets doors be different from each other
             return getRandomDoorSense(room, theme_keys, omniRand);
         } else {
-            const entryPhrase = `You step through a door, ${getRandomDoorSense(room, theme_keys, omniRand).toLowerCase()} ${redBall ? "Your red yarn pulls tightly, reminding you the way to where you tied it." : ""}<br><Br>`;
+            const entryPhrase = `You step through a door, ${getRandomDoorSense(room, theme_keys, omniRand).toLowerCase()} ${blueBall ? "Your blue wire steadfastly points toward some far off Guide." : ""} ${redBall ? "Your red yarn pulls tightly, reminding you the way to where you tied it." : ""}<br><Br>`;
             //i will never forget strong bads text adventure game with obvious exists being like, north, south and DENNIS
             let obvious_exits = getEdgesFromNode(room).map((e) => e.to);
             obvious_exits = obvious_exits.concat(getEdgesToNode(room).map((e) => e.from));
@@ -633,7 +633,7 @@ let blueBall;
             }));
 
             global_rules_spine.addRule(new Rule("visibilitychange", "Rest is Point", (rule, event) => {
-                global_rules_spine.changePointsBy(113);
+                global_rules_spine.changePointsBy(13);
                 return true;
             }));
 
@@ -744,7 +744,7 @@ let blueBall;
                 ele.onclick = () => {
                     if (global_rules_spine.iWantToSpendPoints(5)) {
                         redBall = room;
-                        closerChat(`A wise choise indeed.`, shopEle);
+                        closerChat(`The Red Yarn. A wise choise indeed.`, shopEle);
                         closerChat(`I have taken the liberty of tying one end to this shop.`, shopEle);
                         closerChat(`But you are free to snip off the end and tie it anywhere new.`, shopEle);
                         closerChat(`It is only yarn, after all.`, shopEle);
@@ -768,24 +768,27 @@ let blueBall;
 
             if (!blueBall) {
                 const ele = createElementWithClassAndParent("li", shopEle, "closer-chat-option");
-                ele.innerText = "Ball of Blue Wire (13 points)";
-                if (global_rules_spine.iWantToSpendPoints(13)) {
-                    redBall = room;
-                    closerChat(`It should serve you well.`, shopEle);
-                    closerChat(`The far end of this wire leads to a helpful guide.`, shopEle);
-                    closerChat(`It will always point you towards her.`, shopEle);
+                ele.innerText = "Ball of Blue Wire (113 points)";
+                ele.onclick = () => {
+
+                    if (global_rules_spine.iWantToSpendPoints(113)) {
+                        console.log("JR NOTE: bought ball");
+                        closerChat(`The Blue Wire. It should serve you well.`, shopEle);
+                        closerChat(`The far end of it leads to a helpful guide.`, shopEle);
+                        closerChat(`It will always point you towards her.`, shopEle);
 
 
-                    const div = createElementWithClassAndParent("div", right_list_ele, 'icon-container');
+                        const div = createElementWithClassAndParent("div", right_list_ele, 'icon-container');
 
-                    const ball_icon = createElementWithClassAndParent("img", div, 'img-icon');
-                    ball_icon.src = 'http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/ballofyarn.png';
-                    ball_icon.style.filter = "hue-rotate(-113deg)";
-                    blueBall = ab_room;
-                    ele.remove();
-                } else {
-                    closerChat(`I am afraid you can not yet afford that.`, shopEle);
+                        const ball_icon = createElementWithClassAndParent("img", div, 'img-icon');
+                        ball_icon.src = 'http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/ballofyarn.png';
+                        ball_icon.style.filter = "hue-rotate(-113deg)";
+                        blueBall = ab_room;
+                        ele.remove();
+                    } else {
+                        closerChat(`I am afraid you can not yet afford that.`, shopEle);
 
+                    }
                 }
             }
 
@@ -1035,7 +1038,7 @@ let blueBall;
     const starting_room = "http://farragofiction.com/MallSim"
     //abs location, which will let us type in map locations to move to
     const ab_room = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/SOUTH/NORTH";
-    renderOneNode(store_example)
+    renderOneNode(starting_room)
 
 })()
 

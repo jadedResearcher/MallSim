@@ -827,12 +827,12 @@ class Entity {
 
                 //become too old or too young but they got you
                 if (rand.nextDouble() > 0.5) {
-                    deadbeat.innerHTML += `<br><br>The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly get older and older until they finally collapse to the ground, dead.`;
+                    deadbeat.innerHTML += `<br><br><video controls loop src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/orchestral_trumpet.mp4'></video>The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly get older and older until they finally collapse to the ground, dead.`;
                     this.kill("wrinkled into an ancient mummy with whispy grey hair and thin, dessicated skin")
                     game.event_list.push("Orchestral Trumpet");
 
                 } else {
-                    deadbeat.innerHTML += `<br><br>The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                    deadbeat.innerHTML += `<br><br><video controls loop src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/orchestral_piano.mp4'></video>The soothing piano calms ${this.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
                     game.event_list.push("Orchestral Piano");
                     this.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
                 }
@@ -863,12 +863,12 @@ class Entity {
 
                 //become too old or too young but they got you
                 if (rand.nextDouble() > 0.5) {
-                    deadbeat.innerHTML += `<br><br>The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
+                    deadbeat.innerHTML += `<br><br><video controls loop src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/orchestral_trumpet.mp4'></video>The trumpet's clarion call rings in ${player.nameHTML()} head as they rapidly gets older and older until they finally collapse to the ground, dead.`;
                     player.kill("wrinkled into an ancient mummy with whispy grey hair and thin, dessicated skin")
                     game.event_list.push("Orchestral Trumpet");
 
                 } else {
-                    deadbeat.innerHTML += `<br><br>The soothing piano calms ${player.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
+                    deadbeat.innerHTML += `<br><br><video controls loop src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/orchestral_piano.mp4'></video>The soothing piano calms ${player.nameHTML()} as they rapidly get younger and younger until they finally lose their ability to survive outside a womb that has long forgotten them, and take their final breath in a macabre inverse of their first.`;
                     game.event_list.push("Orchestral Piano");
 
                     player.kill("shrunk away to a tiny, oozing fetus, pitifully squashed into the ground")
