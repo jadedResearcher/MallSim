@@ -733,7 +733,7 @@ let blueBall;
 
         } else {
             closerChat(`Currently, you have ${global_rules_spine.state.points} points.`, hell);
-            const shopEle = createElementWithClassAndParent("div", hell,);
+            const shopEle = createElementWithClassAndParent("div", hell, "shop-ele");
             shopEle.style.padding = "13px";
             shopEle.style.margin = "13px"
             shopEle.style.border = "1px solid red";
@@ -790,6 +790,10 @@ let blueBall;
 
                     }
                 }
+            }
+
+            if (shopEle.children.length === 0) {
+                shopEle.innerText = "Well done, Observer. You have been a most excellent Shopper. Your patronage is appreciated and you will be the first to know when we have additional stock."
             }
 
             closerChat("Ah. Forgive me. Allow me to show you the exits:", hell);
@@ -1038,7 +1042,7 @@ let blueBall;
     const starting_room = "http://farragofiction.com/MallSim"
     //abs location, which will let us type in map locations to move to
     const ab_room = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/SOUTH/NORTH";
-    renderOneNode(starting_room)
+    renderOneNode(store_example)
 
 })()
 
