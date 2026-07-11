@@ -142,14 +142,12 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
             if (target.monster_rating > 0 || target.sin_array.length > 0) {
                 me.chosen_name = "Radio Kill"
                 const explanation = createElementWithClassAndParent("div", ele, "sub-story-beat");
-                explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. It blurts out terrifying static <audio controls>
-  <source src="${game.rand.pickFrom(audioOptions)}" type="audio/mpeg">
-</audio> and the figure lurches to their feet, lassoing a noose around ${target.nameHTML()}'s neck. They struggle some, but ultimately, everything goes dark, and they die.`;
+                explanation.innerHTML = `<video src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/themsthebreaks_kid.mp4' controls></video>After increasingly seeing mannequins (and hopefully ONLY mannequins) hanging from the parking lot ceiling, ${target.nameHTML()} suddenly hears a blurt of terrifying static from behind. They feel something tighten around their neck and flail and struggle. As their vision dims they see a bandaged figure gripping a noose tightly, grimly. They struggle some, but ultimately, everything goes dark, and they die.`;
                 target.kill("covered in deep purple and red bruises around their neck halloing a thick rope tied around it, thick scratches from their fingernails having tried to pry it off in time")
             } else {
                 const explanation = createElementWithClassAndParent("div", ele, "sub-story-beat");
                 target.preparedToKill = true; //its quiet. you barely even notice the change inside you. but you're laced with violence. ready to leave this parking lot and kill with little rhyme or reason, the radio isn't safe
-                explanation.innerHTML = `${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. With a husky voice, she offers to let them listen along for a while. Something within ${target.nameHTML()}'s heart shifts to a new frequency, but they can't explain how.`;
+                explanation.innerHTML = `<video controls  src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/walkingunderhoonsbodies.mp4'> </video> After increasingly seeing mannequins (and hopefully ONLY mannequins) hanging from the parking lot ceiling, ${target.nameHTML()} encounters a strange bandaged figure, quietly listening to a radio. With a husky voice, she offers to let them listen along for a while. Something within ${target.nameHTML()}'s heart shifts to a new frequency, but they can't explain how.`;
 
                 renderRadioCipherStory(getNextStory(!game.eatWastesAutomatically), ele);
             }
