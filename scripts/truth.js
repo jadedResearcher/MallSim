@@ -361,7 +361,12 @@ wireUpAchievement("It's Friday!!!", "the door is a jar", "In Truth, Fridays are 
 wireUpAchievement("Minotaur Fuckery", "are you sure this was here before", "In Truth, the correct action when you find a dead end in a maze is to grab a shovel and get digging, so the next Wanderer has something to find.");
 wireUpAchievement("LeeHunter Encounter", "ascended bug", "In Truth, JR delights in treating glitches and bugs as opportunity for Lore.");
 wireUpAchievement("Orchestral Piano", "time is fake", "In Truth, Zampanio has no concept of time because JR enjoys twisting and warping canon in ways that don't have time. ");
-wireUpAchievement("Hoon Encounter", "cast the first stone", "In Truth, Hoon gave up her own ability to judge long ago. Now she simply allows the radio to tell her who must live and who must die..");
+wireUpAchievement("Hoon Encounter", "cast the first stone", "In Truth, Hoon gave up her own ability to judge long ago. Now she simply allows the radio to tell her who must live and who must die.");
+wireUpAchievement("River Encounter", "infinite parking lot", "Parker reported, in Truth, that the infinite parking lot is not infinite. It has an end. And somehow that made it worse. ");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+//wireUpAchievement("Wrong", "test_password", "TBD");
+//wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 

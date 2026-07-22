@@ -266,7 +266,7 @@ http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/NORTH/NORTH/NORTH
             h3.innerText = "Important Event: " + this.name;
             const living = location.livingPlayers()
             const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
-            ele.innerHTML = `${arrayToHumanSentence(living.map((n) => n.nameHTML()))} watch in horror as a viscous pink goo begins bubbling up from everywhere and nowhere. <video src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/undulatingflesh%20moshed-03-26-23-14-03-123.mp4' controls loop></video>`;
+            ele.innerHTML = `${arrayToHumanSentence(living.map((n) => n.nameHTML()))} watch in horror as a viscous pink goo begins flowing slowly through the parking lot, packing itself into every inch of free space. <video src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/river_listens_to_some_tunes-byleehunter.mp4' controls loop></video>`;
             location.river = true;
 
 

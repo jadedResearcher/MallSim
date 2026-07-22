@@ -7,6 +7,10 @@ let redBall;
 //the closer can give you a ball of yarn already tied to AB's room
 let blueBall;
 
+//the closer can give you a pager that always prints out where you already are
+//is a number that increments (so CFO can chatter about how long you've been going, too)
+let pager;
+
 //trying to shove everything into a single file for rabbithole is exhausting lol, so messy
 (async () => {
 
@@ -261,12 +265,20 @@ let blueBall;
     }
 
 
+    //bare minimum it prints out the url of where you currently are.
+    //but CFO might have some comments for you, too
+    const handlePager = (url) => {
+        let ret = `With a loud BEEP the pager prints out the following message: 'Current Location: ${url}'`;
+        return "<span class='cfo'>" + ret + "</span>";
+    }
+
+
 
     //figures out what edges it has and makes a room for it
     const renderOneNode = (room, summarize = false) => {
         if (!summarize) {
 
-            resultsEle.innerHTML = "DEBUG: " + room;
+            resultsEle.innerHTML = "";
         } else {
             current_room = room;
         }
@@ -286,7 +298,7 @@ let blueBall;
             //lets doors be different from each other
             return getRandomDoorSense(room, theme_keys, omniRand);
         } else {
-            const entryPhrase = `You step through a door, ${getRandomDoorSense(room, theme_keys, omniRand).toLowerCase()} ${blueBall ? "Your blue wire steadfastly points toward some far off Guide." : ""} ${redBall ? "Your red yarn pulls tightly, reminding you the way to where you tied it." : ""}<br><Br>`;
+            const entryPhrase = `You step through a door, ${getRandomDoorSense(room, theme_keys, omniRand).toLowerCase()}  ${blueBall ? "Your blue wire steadfastly points toward some far off Guide." : ""} ${redBall ? "Your red yarn pulls tightly, reminding you the way to where you tied it." : ""}<br><Br>${pager !== undefined ? handlePager(room) : ""}<br><br>`;
             //i will never forget strong bads text adventure game with obvious exists being like, north, south and DENNIS
             let obvious_exits = getEdgesFromNode(room).map((e) => e.to);
             obvious_exits = obvious_exits.concat(getEdgesToNode(room).map((e) => e.from));
@@ -766,6 +778,25 @@ let blueBall;
                 }
             }
 
+            if (!pager) {
+                const ele = createElementWithClassAndParent("li", shopEle, "closer-chat-option");
+                ele.innerText = "Pager (13 points)";
+                ele.onclick = () => {
+
+                    if (global_rules_spine.iWantToSpendPoints(13)) {
+                        console.log("JR NOTE: bought pager");
+                        closerChat(`The Pager. How...archaic.`, shopEle);
+                        closerChat(`Any time you enter a new room, you will get a message regarding its contents. `, shopEle);
+                        closerChat(`Be warned. Any who read my dear Fleuriste's instructions tend to...see further than most desire.`, shopEle);
+                        pager = 0;
+                        ele.remove();
+                    } else {
+                        closerChat(`I am afraid you can not yet afford that.`, shopEle);
+
+                    }
+                }
+            }
+
             if (!blueBall) {
                 const ele = createElementWithClassAndParent("li", shopEle, "closer-chat-option");
                 ele.innerText = "Ball of Blue Wire (113 points)";
@@ -791,7 +822,7 @@ let blueBall;
                     }
                 }
             }
-
+            //https://zampanio.straw.page/
             if (shopEle.children.length === 0) {
                 shopEle.innerText = "Well done, Observer. You have been a most excellent Shopper. Your patronage is appreciated and you will be the first to know when we have additional stock."
             }
@@ -1039,10 +1070,10 @@ let blueBall;
 
 
     const store_example = 'http://farragofiction.com/CatalystsBathroomSim/store_inventory'
-    const starting_room = "http://farragofiction.com/MallSim"
+    const starting_room = "http://farragofiction.com/MallSim/rabbithole.html"
     //abs location, which will let us type in map locations to move to
     const ab_room = "http://farragofiction.com/CatalystsBathroomSim/EAST/SOUTH/EAST/SOUTH/NORTH/SOUTH/SOUTH/NORTH";
-    renderOneNode(store_example)
+    renderOneNode(starting_room)
 
 })()
 
