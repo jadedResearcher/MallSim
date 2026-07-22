@@ -268,8 +268,48 @@ let pager;
     //bare minimum it prints out the url of where you currently are.
     //but CFO might have some comments for you, too
     const handlePager = (url) => {
-        let ret = `With a loud BEEP the pager prints out the following message: 'Current Location: ${url}'`;
-        return "<span class='cfo'>" + ret + "</span>";
+        let ret = `With a loud BEEP the pager prints out the following message: <span class='cfo'>Current Location: ${url}`;
+        const special_responses = {
+            "0": "oh heeeeeeeeeey...<br><br>I was wondering when the Closer would sell someone the Pager!<br><br>I'm sure you'll find a real Guide soon enough....<br><Br>Buuuuuuuuuuuuut!<br><br>I think its fun to help Observers learn more about Zampanio, you know?<br><Br>Especially probably already wasted ones like you!"
+            , "http://eyedolgames.com/Gender": "Fair warning: this space isn't a warped mirror of the maze as it is NOW.<br><br>You get me?<br><br>Its how it WAS.<br><Br>Was when? <br><br>No clue.<br><br>Wanda keeps insisting time is fake.<br><br>GG No Re"
+            , "http://eyedolgames.com/": "I never could figure out why those dumb birds keep making fake sites.<br><br>I mean... does aaaaaaaaaaaaaannnnybody really even get fooled by them???????"
+            , "13": "Sooooooooooo...<br><br>Having fun???????<br><br>Yeah you can't answer.<br><br>But maybe you care that I'm asking how you're doing?<br><Br>Hard to tell what an extra-dimensional being is feeling, lol."
+            , "http://farragofiction.com/ZampanioSim": "...<br><br>I wonder...<br><br>Sometimes...<br><Br>What does our Universe even look like to you?<br><Br>Like yeah yeah, Echidna but...<br><Br>Do you just see me, right now?<br><Br>Like the top of my head?<br><Br>Sorry I haven't showered today lol.<br><br>Or are you seeing something I can't even imagine right now..."
+            , "http://farragofiction.com/CatalystsBathroomSim": "Have you met the Detective?"
+            , "http://farragofiction.com/": "As long as Observers keep coming...<br><br>The end really will never be the end.<br><br>I need that.<br><br>You know?<br><br>Can't let myself think that SHE wins.<br><br>That version of me."
+            , "http://farragofiction.com/MallSim": "... You know, right?<br><Br>Why we have to keep your Cult from getting their hands on the Harvest Fruit.<br><br>Why *I* have to.<br><Br>Every second you're here, with me.<br><br>Is a second you're not exactly grabbing fruit, now are you.<br><br>Classic kiting strategy really, lulz<br><bR>Real gamers keep their eyeeeeeeeeees on the priiiiiiiiiiiiize."
+            , "31": "Why'd an Observer like you join a cult anyways?<br><br>I meaaaaaan...<br><br>I *assume* you're in a cult?<br><br>Why were you trying to get Harvest Fruit if you're not in a cult????????"
+            , "5": "Oh right!<br><Br>While you're in the rabbit-hole, why not grab some free passwords: 'chill down your spine' <br><br>"
+            , "http://eyedolgames.com/JackElope": "siiiiiiiiiigh<br><Br>I don't even know why that re-skin of me runs all those porn bots, you know?<bR><br>Yeaaaaaaaah<br><Br>I get she wants to be sooooooo different from me.<br><br>Even thought we share a face.<br><Br>But why go that far?????<br><br>She already will never be half the gamer I am."
+            , "https://calljoker.com/zampanio": "..................<br><br>Why does this...<br><br>Why...<br><br>Why does it feel like...<br><br>Home?????????"
+            , "http://farragofiction.com/Gopher": "whoaaaaaaaaaaa<br><br>heeeeeeeeeeeey<br><br>Maybe...<br><Br>Be careful here?<br><br>Not sure there's a way out of here..."
+            , "http://eyedolgames.com/PersonalityQuiz": "gamer stratz"
+            , "http://eyedolgames.com/Zampanini": "I keeeeeeep warning people not to click sus links!!!!!"
+            , "http://eyedolgames.com/Eyedlr": ":/<br><bR>Not a fan of all the sussy imposters in there."
+            , "http://farragofiction.com/RabbitSim": "Shame what happened to those kids."
+            , "50": "Wow...50 whole times you've moved through this rabbithole maze.<br><br>You're okay, right?<br><br>Not liiiiiiiike...<br><br>Thirsty or anything?"
+            , "100": "...<br><br>Obsession is a dangerous thing, you know.<br><br>Look, I love Zampanio with the best of them!<br><br>Game of the year all years and all.<br><br>Buuuuuuuut...<br><br>If Observers start taking damage...<br><br>That caaaaaan't be good for our session stability.<br><br>You know?"
+            , "http://eyedolgames.com/QuotidianAdoption": "Honestly?<br><bR>It's fiiiiiiiiiiine to adopt those dumb little birds.<br><br>Never hurt Wanda any at least.<br><br>Just know what you're getting into."
+            , "http://farragofiction.com/LifeSim": "Something happened here.<br><Br>Something...awful."
+            , "http://farragofiction.com/CodexOfRuin/viewer.html": "Training has been fantastic, by the way.<br><br>The whole team is really on the ball taking care of Cultists, protecting fruit.<br><br>Shame what the Closer did to them but, I think she made it right.<br><br>Or right enough.<br><br>Maybe sometime I should go apologize to that chilly queen."
+            , "http://farragofiction.com/RabbitSimPuppeteerOfTheLost": "...<br><br>Observers like you can have great power."
+            , "http://farragofiction.com/NagaGirlfriend": "...<br><br>Do not end the world.<br><Br>Not even as a joke."
+            , "113": "Welp.<br><br>That's on me.<br><br>Tried to stop Obsession by adding more content.<br><br>Big L.<br><br>This'll be the last one you hear from me.<br><br>Besides the preset ones attached to rooms.<br><br>Go to sleep!<br><br>Or touch grass!<br><br>Or you know, play a regular video game!"
+
+
+
+
+        }
+        let special = special_responses[`${pager}`]
+        //prefer special room count to urls
+        if (!special) {
+            special = special_responses[`${url}`];
+        }
+        if (special) {
+            ret += "<br><br>" + special;
+        }
+        pager++;
+        return ret + "</span>";
     }
 
 
@@ -277,6 +317,7 @@ let pager;
     //figures out what edges it has and makes a room for it
     const renderOneNode = (room, summarize = false) => {
         if (!summarize) {
+            global_rules_spine.musicPlayer.pause();
 
             resultsEle.innerHTML = "";
         } else {
