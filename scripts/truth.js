@@ -363,7 +363,7 @@ wireUpAchievement("LeeHunter Encounter", "ascended bug", "In Truth, JR delights 
 wireUpAchievement("Orchestral Piano", "time is fake", "In Truth, Zampanio has no concept of time because JR enjoys twisting and warping canon in ways that don't have time. ");
 wireUpAchievement("Hoon Encounter", "cast the first stone", "In Truth, Hoon gave up her own ability to judge long ago. Now she simply allows the radio to tell her who must live and who must die.");
 wireUpAchievement("River Encounter", "infinite parking lot", "Parker reported, in Truth, that the infinite parking lot is not infinite. It has an end. And somehow that made it worse. ");
-//wireUpAchievement("Wrong", "test_password", "TBD");
+wireUpAchievement("Mannequin Realization", "the end is never the end", "The end is never the end.");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
