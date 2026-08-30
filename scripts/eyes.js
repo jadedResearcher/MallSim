@@ -62,7 +62,7 @@ const grabEyesForThemeKey = (theme_key) => {
     mapping[ANGELS] = ["witherby"];
     mapping[SERVICE] = ["vik"];
     mapping[FAMILY] = ["twins"];
-    mapping[MAGIC] = [];
+    mapping[MAGIC] = ["wow","the"];
     mapping[LIGHT] = ["slaughter", "fiona"];
     mapping[HEALING] = ["doc"];
     mapping[PLANTS] = ["nidhogg"];
@@ -74,7 +74,7 @@ const grabEyesForThemeKey = (theme_key) => {
     mapping[SOUL] = ["captain", "yongki"];
     mapping[ANGER] = ["peewee"];
     mapping[WEB] = ["watcher", "threads", "medium", "spider", "puppet", "raconteur"];
-    mapping[ROYALTY] = [];
+    mapping[ROYALTY] = ["incredible","amazing"];
     mapping[ENDINGS] = ["lost", "puppeteer", "necromancer", "camille"];
     mapping[KNOWING] = ["devona", "personality", "weaver", "drowned", "fiona", "witherby", "slaughter"];
     mapping[GUIDING] = ["author", "bot", "ab", "guide"];
@@ -83,7 +83,7 @@ const grabEyesForThemeKey = (theme_key) => {
     mapping[BUGS] = ["anon", "void", "spores"];
     mapping[ADDICTION] = ["ria", "obsession"];
     mapping[SPYING] = ["personality", "weaver", "drowned", "quotidian", "fiona", "slaughter"];
-    mapping[CLOWNS] = ["taxonomist", "wisp", "illusionist", "friday", "neighbor"];
+    mapping[CLOWNS] = ["lol","taxonomist", "wisp", "illusionist", "friday", "neighbor"];
     mapping[DOLLS] = ["taxonomist", "wisp", "illusionist", "friday", "neighbor"];
     mapping[OBFUSCATION] = ["hidden", "mystery", "guy", "shadows", "neville"];
     mapping[CENSORSHIP] = ["vik"];
