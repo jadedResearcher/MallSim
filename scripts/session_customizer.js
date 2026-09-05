@@ -68,6 +68,7 @@ const session_customizer = () => {
     const players_container = createElementWithClassAndParent("div", sburb_container, 'player-flex');
 
     const handleChange = () => {
+        textAreaObject.input.value = game.exportPlayersForCustomization()
         renderPlayers();
     }
 
