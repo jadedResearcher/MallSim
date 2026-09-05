@@ -536,6 +536,8 @@ class Entity {
             name: this.name,
             title: this.title,
             musical: this.musical,
+            corrupted: this.corrupted,
+            wasted: this.wasted,
             relationships: this.relationships,
             stats: this.stats,
             theme_keys: this.theme_keys.map((t) => keys.indexOf(t)),

@@ -1503,12 +1503,14 @@ its so normal
             const ele = createElementWithClassAndParent("p", intro_container, "sub-story-beat");
             let text = "";
 
-            if (player.leader) {
-                text = `Leading the Faithful is ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
+            if(player.corrupted){
+                text = `For some reason a figure made entirely of ${player.mannequin_type} is here. ${player.nameHTML()}...somehow you think that as you gaze upon them.`;
             } else if (player.wasted && !player.isStartingToFeelMonstrous()) {
                 text = `... ${player.nameHTML()} is here as well. They rave of loops and spirals and no longer have a name. Their lips are stained black with the Harvest Fruit they already partook of. They will not explain why they have joined this expedition but something about them is strangely familiar...`;
             } else if (player.wasted && player.isStartingToFeelMonstrous()) {
                 text = `... ${player.nameHTML()} lurks in a corner. There is something inhuman about them that only comes out occasionally.`;
+            }else if (player.leader) {
+                text = `Leading the Faithful is ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
             } else {
                 text = `There was also ${player.nameHTML()}, or as they would soon come to be known, ${player.titleHTML()}.`
             }
