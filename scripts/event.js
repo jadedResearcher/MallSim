@@ -880,7 +880,7 @@ And then ${shopper.nameHTML()} begins to be crushed under the weight of hundreds
             flavor = `The information they had is good:, right where their contact said it would be, a single ${item.name}. `;
         } else if (shopper_highest_stat.key === ARMS_METAL_STAT) {
             flavor = `Their constant digging through trash, debris, abandoned merchandise has finally paid off! There, half buried under a shopping bag is, a single ${item.name}!`;
-        } else if (shopper_highest_stat.key === EYES_METAL_STAT) {
+        } else if (shopper_highest_stat.key === LEGS_METAL_STAT) {
             flavor = `Their legs pound the tile of the mall frantically, searching, pacing back and forth and back and forth until they finally...yes! There! They almost stumble over the ${item.name}, carelessly strewn in the less traveled path.`;
         }
         ele.innerHTML = `The Westerville Mall has decided ${formerNameHTML} is a shopper! ${flavor}`;
