@@ -341,8 +341,7 @@ class Game {
         K bullies a random mannequin and prooves how strong she is.
         K tries on a few new pronouns for size. He is so boring, right? Xer sounds fun! Ooo or what about fae?
         K calls a local politician and bullies them into setting up a new law just for him.
-        K tries texting his ex, Alt, who is clearly too shy and embarassed to respond. He gets it, not everone knows how to handle a 10 out of 10 like himself, their single night of passionate love making must have been too much for her little brain to handle.
-        `;
+        K tries texting his ex, Alt, who is clearly too shy and embarassed to respond. He gets it, not everone knows how to handle a 10 out of 10 like himself, their single night of passionate love making must have been too much for her little brain to handle.`;
 
         const possibilities = possibilitiesRaw.split("\n")
         start_phrase.innerHTML = this.rand.pickFrom(possibilities);
