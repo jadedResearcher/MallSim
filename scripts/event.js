@@ -762,6 +762,39 @@ const noWayOut = makeEventSubType("No Way Out", noWayOutinternalConditionCheck, 
 
 
 
+const ghoulHalloweenConditionCheck = (game, location) => {
+
+    if (location.livingPlayers().length > 0) {
+        return game.rand.nextDouble() > 0.5;
+    }
+    return false;
+}
+
+const ghoulHalloweenapplyResult = (game, location, parent, me) => {
+    const cont = createElementWithClassAndParent("div", parent, "sub-story-beat");
+
+    const h3 = createElementWithClassAndParent("h3", cont);
+    h3.innerText = "Important Event: " + me.name;
+
+    const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    const shopper = game.rand.pickFrom(location.livingPlayers());
+    ele.innerHTML = `It's <a target='_blank' href='https://laughing.observer/Lavinraca/'>Lavinraca</a> season and we all know what that means!`;
+    const personal_adj = game.rand.nextDouble()>0.5 ? game.rand.pickFrom(["Spooky", "Spine-Chilling", "Horror", "Scary", "Spoopy", "Terrifying", "Horrific", "Blood-Curdling"]) : pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, ADJ, true);
+
+    
+    const spookyItems = ["Mask","Candy","Costume","Skull","Outfit","Decoration"]
+    const item = new Item(`${personal_adj} ${game.rand.pickFrom(spookyItems)}`, `${shopper.nameHTML()} found this in the ${location.longer_name}!`, false)
+
+    ele.innerHTML += `<br><br>The Westerville Mall has decided ${shopper.nameHTML()} is a shopper! They stumble upon a ${item.name} at too good a deal to turn down (its a free gift!).  `;
+    const pickupEle = createElementWithClassAndParent("span", ele, "sub-story-beat");
+    shopper.addItemToInventory(game, item, pickupEle);
+
+}
+
+const ghoulHalloween = makeEventSubType(`Halloween Shopping!!!`, ghoulHalloweenConditionCheck, ghoulHalloweenapplyResult);
+
+
 
 //no skill, no stats, just an incredibly rare chance to just, stumble on it
 //because the mall WANTS you to find the goods you're looking for and take them back out

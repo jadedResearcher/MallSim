@@ -1,6 +1,11 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+
+dev_log["9/30/26"] = `shoutout to the Taxonomist for suggesting i add Ghoul Halloween
+which is definitely not spirit halloween
+to mall sim during october
+links to Lavinraca too`
 dev_log["6/14/26"] = `i finished the horridor diorama!
 
 if you want to check it out, 'the truth is layered' is always a good password, if you know where to put it

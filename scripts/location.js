@@ -43,7 +43,11 @@ const randomThemedShop = (rand, themes, right_row, right_col) => {
 }
 
 const randomShop = (rand, themes, right_row, right_col) => {
+    //im sure its fine
+    if (new Date().getMonth() === 9 && rand.nextDouble() > 0.75) {
+        return new Location(`Holiday`, `Ghoul Halloween`, themes, right_row, right_col, [ghoulHalloween.clone()], "rgba(161,0,66)");
 
+    }
 
     const personal_adj = pickARandomThemeFromListAndGrabKey(rand, themes, ADJ, true);
 
