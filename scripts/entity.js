@@ -359,6 +359,7 @@ class Entity {
     dead = false;
     musical = false; //hey how could this be bad???
     corrupted = false;
+    hunter = false; //hunters are not prey
     preparedToKill = false;
     sprite_aspect = Object.keys(aspect_mapping)[0];
     sprite_class = Object.keys(class_mapping)[0];
@@ -537,6 +538,7 @@ class Entity {
             title: this.title,
             musical: this.musical,
             corrupted: this.corrupted,
+            hunter: this.hunter,
             wasted: this.wasted,
             relationships: this.relationships,
             stats: this.stats,
@@ -891,7 +893,7 @@ class Entity {
 
 
 
-        console.warn("JR NOTE: flesh out interaction later, use more stats.")
+        //console.warn("JR NOTE: flesh out interaction later, use more stats.")
         const mindPlayer = getPartyHighestMind(game.players);
         const eyesPlayer = getPartyHighestEyes(game.players);
         const tonguePlayer = getPartyHighestTongue(game.players);
@@ -1091,7 +1093,7 @@ class Entity {
     //https://www.tumblr.com/jadedresearcher/801579387276378112/whiteantcrawls-helloitsbees?source=share
     getName = () => {
         let name_holder = this.wasted ? this.title : this.name;
-        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""}`);
+        return titleCase(`${this.dead ? "the corpse of " : ""}${this.corrupted ? "what had once been " : ""}${this.corrupted ? Zalgo.generate(name_holder) : name_holder}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""}${this.hunter ? "(Hunter)" : ""}`);
     }
 
 
@@ -1104,7 +1106,7 @@ class Entity {
 
     titleHTML = () => {
         if (this.wasted) {
-            return `<span class='player-wasted-title'>${this.title}</span>`;
+            return `<span class='player-wasted-title'>${this.title}${this.wasted ? "(Looping)" : ""}${this.hunted() ? "(Hunted)" : ""}${this.hunter ? "(Hunter)" : ""}</span>`;
         }
         return `<span class='player-title'>${this.title}</span>`;
     }

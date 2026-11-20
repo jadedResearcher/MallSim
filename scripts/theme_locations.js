@@ -20,7 +20,7 @@ NOTE: these are TEMPLATE locations
 you need to clone them to move forward and give them the correct row/col etc so they can calculate their corruption level
 */
 const initThemeLocations = (rand) => {
-    console.warn("JR NOTE: don't forget to wire up template locations with custom events")
+   // console.warn("JR NOTE: don't forget to wire up template locations with custom events")
     //at least init
     for (let key of Object.keys(all_themes)) {
         theme_locations[key] = [];
@@ -295,7 +295,7 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
     const location = location_override ? location_override : titleCase(all_themes[theme_key].pickPossibilityFor(LOCATION, rand));
 
     const conditionCheck = (game, location) => {
-        if (location.livingNonMannequinPlayers().length > 0) {
+        if (location.livingNonMannequinPlayers(true).length > 0) {
             return game.rand.nextDouble() > 0.75;
         }
         return false;
@@ -311,7 +311,7 @@ const makeGenericThemedLocation = (rand, theme_key, location_override, color_ove
 
         //yes even if the mall was trying to give a human something
         //a mannequin can take it
-        const shopper = game.rand.pickFrom(location.livingPlayers());
+        const shopper = game.rand.pickFrom(location.livingPlayers(true));
         shopper.addCorruption(-13);//congrats, shoppers aren't mannequins!
         const personal_adj = game.corporateMandatedLove ? game.rand.pickFrom(["Heart-Shaped", "Love-Filled", "Valentine's"]) : pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, COMPLIMENT, true);
         const object = pickARandomThemeFromListAndGrabKey(game.rand, location.theme_keys, OBJECT, true);

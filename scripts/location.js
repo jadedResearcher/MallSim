@@ -135,41 +135,59 @@ class Location {
     };
 
 
-    livingNonMannequinPlayers = () => {
+    livingNonMannequinPlayers = (waitItsGood=false) => {
         let ret = [];
         for (let player of this.players) {
             if (!player.dead && !player.corrupted) {
-                ret.push(player)
+                 if(player.hunted && waitItsGood){
+                    ret.push(player)
+                }else if(!player.hunted){
+                    ret.push(player)
+                }
             }
         }
         return ret;
     }
 
-    livingMannequinPlayers = () => {
+    livingMannequinPlayers = (waitItsGood=false) => {
         let ret = [];
         for (let player of this.players) {
             if (!player.dead && player.corrupted) {
-                ret.push(player)
+                 if(player.hunted && waitItsGood){
+                    ret.push(player)
+                }else if(!player.hunted){
+                    ret.push(player)
+                }
             }
         }
         return ret;
     }
 
-    livingWastedPlayers = () => {
+    livingWastedPlayers = (waitItsGood=false) => {
         let ret = [];
         for (let player of this.players) {
             if (!player.dead && player.wasted) {
-                ret.push(player)
+                if(player.hunted && waitItsGood){
+                    ret.push(player)
+                }else if(!player.hunted){
+                    ret.push(player)
+                }
             }
         }
         return ret;
     }
 
-    livingPlayers = () => {
+    //waitItsGood lets hunters know to surface
+    livingPlayers = (waitItsGood=false) => {
         let ret = [];
         for (let player of this.players) {
+            //hunters are alive, but nothing in the mall wants to kill them. wearing the skin of a beast makes the mall weirdly blind to them.
             if (!player.dead) {
-                ret.push(player)
+                if(player.hunted && waitItsGood){
+                    ret.push(player)
+                }else if(!player.hunted){
+                    ret.push(player)
+                }
             }
         }
         return ret;
@@ -185,11 +203,15 @@ class Location {
         return ret;
     }
 
-    nonCorruptedPlayers = () => {
+    nonCorruptedPlayers = (waitItsGood=false) => {
         let ret = [];
         for (let player of this.players) {
             if (!player.corrupted) {
-                ret.push(player)
+                 if(player.hunted && waitItsGood){
+                    ret.push(player)
+                }else if(!player.hunted){
+                    ret.push(player)
+                }
             }
         }
         return ret;

@@ -421,7 +421,7 @@ class Game {
         }
         this.current_tick++;
         if (this.current_tick === 1) {
-            console.log("JR NOTE: removing arrow")
+           // console.log("JR NOTE: removing arrow")
             const clickHere = document.querySelector(".click-here");
             if (clickHere) {
                 clickHere.classList.remove("click-here")
@@ -1578,13 +1578,18 @@ its so normal
 
             if (player.wasted) {
                 const family = getFamilyOfEntity(player);
-                if (family && family.length > 0) {
+                //for some reason, rarely, a waste spawns with "undefined" for family.  and it crashes when they try to remember their name
+                //its so rare i can't replicate it consistently, vik interferes
+                //so at least it won't crash anymore?
+                //some wastes just know they SHOULD have a family but aren't allowed to think about it too hard
+                //its literally fine
+                if (family && family.length > 0 && family[0]) {
                     text += ` They seem weirdly invested in the safety of ${family[0].nameHTML()}. `;
 
                 }
 
                 const romanticPartners = getRomanticPartnersOfEntity(player);
-                if (romanticPartners && romanticPartners.length > 0) {
+                if (romanticPartners && romanticPartners.length > 0 && romanticPartners[0]) {
                     text += ` They seem weirdly invested in the safety of ${romanticPartners[0].nameHTML()}. `;
                 }
 

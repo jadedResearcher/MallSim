@@ -844,6 +844,7 @@ button {
 
 .sub-story-beat {
   margin-top: 13px;
+  line-height: 24px;
 
   video {
     margin-left: auto;

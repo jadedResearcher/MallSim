@@ -212,7 +212,7 @@ const ethicallyLootCorpseinternalConditionCheck = (game, location) => {
         }
     }
 
-    return inventory_items_available && mannequins_available && location.livingNonMannequinPlayers().length > 0;
+    return inventory_items_available && mannequins_available && location.livingNonMannequinPlayers(true).length > 0;
 }
 
 const ethicallyLootCorpseapplyResult = (game, location, parent, me) => {
@@ -285,7 +285,7 @@ they respawn as a human again
     if (!chosen_item) { //somehow ab didn't encounter this scenario for months, don't know how she didn't crash sooner
         chosen_item = new Item("Perfectly Generic Object", "You can't find the words to describe it...")
     }
-    const players = location.livingNonMannequinPlayers();
+    const players = location.livingNonMannequinPlayers(true);
     let waste;
     for (let player of players) {
         if (player.wasted) {
@@ -720,7 +720,7 @@ noWayOutinternalConditionCheck = (game, location) => {
     if (!hasEscape) {
         for (let player of location.players) {
             if (player.isStartingToFeelCorruption() && !player.corrupted) {
-                console.log("JR NOTE: I thik theres no way out and evets are", location.events)
+                //console.log("JR NOTE: I thik theres no way out and evets are", location.events)
                 return true;
             }
         }
@@ -1688,7 +1688,7 @@ const tricksterCloser = makeEventSubType("Trickster Closer Spawns", tricksterClo
 
 //is there at least one person ready to escape?
 hydrationStationinternalConditionCheck = (game, location) => {
-    const players = location.livingNonMannequinPlayers();
+    const players = location.livingNonMannequinPlayers(true);
     if (players.length > 0) {
         let shopping_count = 0;
         //the Westerville Mall rewards good shoppers
@@ -1710,7 +1710,7 @@ hydrationStationapplyResult = (game, location, parent, me) => {
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
 
-    const players = location.livingNonMannequinPlayers();
+    const players = location.livingNonMannequinPlayers(true);
     const hydrated_players = [];
     const dehydrated_players = [];
     for (let player of players) {
@@ -2669,7 +2669,7 @@ hoon should get the radio back at the end, cuz i don't want to complicate her ev
         */
 
         const hated = getLeastFavoriteOfEntity(p);
-        console.log("JR NOTE: they hate", hated)
+        //console.log("JR NOTE: they hate", hated)
         me.chosen_name = "K Steals A Radio"
         ele.innerHTML = `${p.nameHTML()} spots a guy with a weird eye design on his suit front and center, casually sauntering towards them, whistling to himself and tossing a slightly oversized wrench up and down in his left hand, grinning as he realizes you see him. There is something slightly off in the grin.
 <br><Br>
@@ -2769,13 +2769,47 @@ const devonaHuntingapplyResult = (game, location, parent, me) => {
 
     const players = location.players;
     let sinner;
+    let hunter;
     for (let player of players) {
         if (player.hunted()) {
             sinner = player;
         }
+
+        if(player.wasted && !player.dead){
+            hunter = player;
+        }
     }
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+if(hunter){
+        /*
+            IC wrote a fic in which a Wasted cultist
+            described knowing how to counter the Hunting Birds
+            by cornering them
+            skinning them
+            and wearing their skin (which made everything ignore them)
+            that's fucked up
+            obviously i need to code it.
+            so.
+            if there is a hunter.
+            remove the corresponding twin's hunting event entirely
+            and add Hunter to the player's titles
+            an entity with "Hunter" in their title
+            has all events skip them.
+
+        */
+        game.removeGeneralEventToAllLocations(me); //you can never encounter her again
+        removeItemOnce(generalEvents, me);
+        hunter.hunter = true;
+        hunter.sin_array = []; //its not a sin to hunt or be hunted
+        me.chosen_name = "Skinned Orange Eyed Bird Bird"
+        const hunterName = hunter.nameHTML();
+        ele.innerHTML = `${hunterName} is patient. The Orange Eyed bird is easily tricked into a space it can't quite leave from, with ${sinner.nameHTML()} serving as bait. Taking no risks, they methodically stab the hulking bird over and over until until it stops moving. Then. Slowly. They begin to skin the beast. The leather has its uses. Nothing within this mall will be willing to harm them anymore, so long as they seem sufficiently monstrous. In this world its hunt or be hunted, and ${hunterName} knows where they are in the food chain.`;
+
+        return;
+    }
+
 
     if (!sinner) {
         ele.innerHTML = `The silence is echoing.`;
@@ -2806,6 +2840,7 @@ ${sinner.nameHTML()} never knows why they were targeted for death, but they see 
             <img src='http://farragofiction.com/CatalystsBathroomSim/audio_utils/weird_sounds/weird_video/WeirdGifs/Breaching_Devona_pixel_by_the_guide_ofhunters.gif'>
     `;
 
+        me.chosen_name = "Torn To Pieces And Devoured"
 
     sinner.kill("only a few recognizable body parts remain, with dull chunks torn out of them by a monstrous beak"); //devona will eat literally anything, especially if its intense
 
@@ -2991,13 +3026,46 @@ const nevilleHuntingapplyResult = (game, location, parent, me) => {
 
     const players = location.players;
     let sinner;
+    let hunter;
     for (let player of players) {
         if (player.hunted()) {
             sinner = player;
         }
+
+        if(player.wasted && !player.dead){
+            hunter = player;
+        }
     }
 
     const ele = createElementWithClassAndParent("div", cont, "sub-story-beat");
+
+    if(hunter){
+        /*
+            IC wrote a fic in which a Wasted cultist
+            described knowing how to counter the Hunting Birds
+            by cornering them
+            skinning them
+            and wearing their skin (which made everything ignore them)
+            that's fucked up
+            obviously i need to code it.
+            so.
+            if there is a hunter.
+            remove the corresponding twin's hunting event entirely
+            and add Hunter to the player's titles
+            an entity with "Hunter" in their title
+            has all events skip them.
+
+        */
+        game.removeGeneralEventToAllLocations(me); //you can never encounter her again
+        removeItemOnce(generalEvents, me);
+        hunter.hunter = true;
+        hunter.sin_array = []; //its not a sin to hunt or be hunted
+        me.chosen_name = "Skinned Blue Eyed Bird"
+        const hunterName = hunter.nameHTML();
+        ele.innerHTML = `${hunterName} is patient. The Blue Eyed bird's frantic, chaotic flight through the mall has it easily cornered, with ${sinner.nameHTML()} serving as bait. Taking no risks, they methodically stab the hulking bird over and over until until it stops moving. Then. Slowly. They begin to skin the beast. The leather has its uses. Nothing within this mall will be willing to harm them anymore, so long as they seem sufficiently monstrous. In this world its hunt or be hunted, and ${hunterName} knows where they are in the food chain.`;
+
+        return;
+    }
 
     if (!sinner) {
         ele.innerHTML = `Thrashing and howling and crashing is heard echoing throughout the mall.`;
