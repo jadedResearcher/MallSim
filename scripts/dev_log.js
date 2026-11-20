@@ -1,6 +1,14 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+dev_log["11/19/26"]=`took longer recovering from this years lavinraca than i thought i was gonna need, lol
+no worries tho
+the dioramas were a blast to make
+i wired up a Hunter mechanic based on a short story IC wrote
+haven't added rabibt hole things for them yet tho
+plus i am fleshing out a Boss Scenario mechanic
+reminiscent of the big bads in sburbsim
+`
 
 dev_log["9/30/26"] = `shoutout to the Taxonomist for suggesting i add Ghoul Halloween
 which is definitely not spirit halloween
