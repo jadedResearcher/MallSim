@@ -1,6 +1,15 @@
 const dev_log = {}
 //http://farragofiction.com/CatalystsBathroomSim/NORTH/EAST/EAST/NORTH/bathroom.html?list=http%3A%2F%2Ffarragofiction.com%2FColonistsEyes5%2F&filter=quest
 
+
+dev_log["11/21/26"] =`lol
+cultists are no frozen in a rictus of terror at the entrance to the mall
+because the mall no longer recognizes ANYONE as alive
+lol
+my bad
+it was a typo `
+
+
 dev_log["11/19/26"]=`took longer recovering from this years lavinraca than i thought i was gonna need, lol
 no worries tho
 the dioramas were a blast to make
