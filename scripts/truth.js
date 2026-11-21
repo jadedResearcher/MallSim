@@ -364,6 +364,11 @@ wireUpAchievement("Orchestral Piano", "time is fake", "In Truth, Zampanio has no
 wireUpAchievement("Hoon Encounter", "cast the first stone", "In Truth, Hoon gave up her own ability to judge long ago. Now she simply allows the radio to tell her who must live and who must die.");
 wireUpAchievement("River Encounter", "infinite parking lot", "Parker reported, in Truth, that the infinite parking lot is not infinite. It has an end. And somehow that made it worse. ");
 wireUpAchievement("Mannequin Realization", "the end is never the end", "The end is never the end.");
+wireUpAchievement("Skinned Orange Eyed Bird", "skinned", "In Truth, a lot of the horror elements come from IC.");
+wireUpAchievement("Skinned Blue Eyed Bird", "bird", "In Truth, JR often hesitates to make anything too scary. Usually.");
+
+
+
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");
 //wireUpAchievement("Wrong", "test_password", "TBD");

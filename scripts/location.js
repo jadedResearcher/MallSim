@@ -139,9 +139,9 @@ class Location {
         let ret = [];
         for (let player of this.players) {
             if (!player.dead && !player.corrupted) {
-                 if(player.hunted && waitItsGood){
+                 if(player.hunter && waitItsGood){
                     ret.push(player)
-                }else if(!player.hunted){
+                }else if(!player.hunter){
                     ret.push(player)
                 }
             }
@@ -153,9 +153,9 @@ class Location {
         let ret = [];
         for (let player of this.players) {
             if (!player.dead && player.corrupted) {
-                 if(player.hunted && waitItsGood){
+                 if(player.hunter && waitItsGood){
                     ret.push(player)
-                }else if(!player.hunted){
+                }else if(!player.hunter){
                     ret.push(player)
                 }
             }
@@ -167,9 +167,9 @@ class Location {
         let ret = [];
         for (let player of this.players) {
             if (!player.dead && player.wasted) {
-                if(player.hunted && waitItsGood){
+                if(player.hunter && waitItsGood){
                     ret.push(player)
-                }else if(!player.hunted){
+                }else if(!player.hunter){
                     ret.push(player)
                 }
             }
@@ -183,9 +183,9 @@ class Location {
         for (let player of this.players) {
             //hunters are alive, but nothing in the mall wants to kill them. wearing the skin of a beast makes the mall weirdly blind to them.
             if (!player.dead) {
-                if(player.hunted && waitItsGood){
+                if(player.hunter && waitItsGood){
                     ret.push(player)
-                }else if(!player.hunted){
+                }else if(!player.hunter){
                     ret.push(player)
                 }
             }
@@ -207,9 +207,9 @@ class Location {
         let ret = [];
         for (let player of this.players) {
             if (!player.corrupted) {
-                 if(player.hunted && waitItsGood){
+                 if(player.hunter && waitItsGood){
                     ret.push(player)
-                }else if(!player.hunted){
+                }else if(!player.hunter){
                     ret.push(player)
                 }
             }

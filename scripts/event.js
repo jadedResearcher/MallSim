@@ -2803,7 +2803,7 @@ if(hunter){
         removeItemOnce(generalEvents, me);
         hunter.hunter = true;
         hunter.sin_array = []; //its not a sin to hunt or be hunted
-        me.chosen_name = "Skinned Orange Eyed Bird Bird"
+        me.chosen_name = "Skinned Orange Eyed Bird"
         const hunterName = hunter.nameHTML();
         ele.innerHTML = `${hunterName} is patient. The Orange Eyed bird is easily tricked into a space it can't quite leave from, with ${sinner.nameHTML()} serving as bait. Taking no risks, they methodically stab the hulking bird over and over until until it stops moving. Then. Slowly. They begin to skin the beast. The leather has its uses. Nothing within this mall will be willing to harm them anymore, so long as they seem sufficiently monstrous. In this world its hunt or be hunted, and ${hunterName} knows where they are in the food chain.`;
 
