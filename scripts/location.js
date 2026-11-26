@@ -36,7 +36,6 @@ const randomThemedShop = (rand, themes, right_row, right_col) => {
     }
 
     if (foundTemplates.length > 0) {
-        console.log("JR NOTE: trying to make a theme location from foundTemplates", foundTemplates,theme_locations)
         const ret = rand.pickFrom(foundTemplates).cloneIntoLocation(right_row, right_col);
         ret.theme_keys = themes; //don't throw away all the other themes
 
@@ -65,7 +64,6 @@ const randomShop = (rand, themes, right_row, right_col) => {
 
     const ret = randomThemedShop(rand, themes, right_row, right_col);
     if (ret || rand.nextDouble() > 0.88) { //not guaranteed to have a themed shop
-        console.log("JR NOTE: making random themed shop",ret, theme_locations)
         return ret;
     }
 

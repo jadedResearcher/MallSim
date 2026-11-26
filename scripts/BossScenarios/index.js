@@ -29,7 +29,7 @@ const clearPreviousScenario = (game)=>{
     for (let row of game.map) {
             for (let item of row) {
                 if (item) { //its not empty space
-                    item.events = []; //be purged
+                    item.events = item.events.filter((e)=>e.name.includes("Shopping") || e.name.includes("Hydration") || e.name.includes("Become A Mannequin"))
                 }
             }
         }
@@ -37,10 +37,10 @@ const clearPreviousScenario = (game)=>{
     //each item in theme_locations is an array of locations
     for(let loc_array of Object.values(theme_locations)){
         for(let loc of loc_array){
-            loc.events = []
+            loc.events = loc.events.filter((e)=>e.name.includes("Shopping") || e.name.includes("Hydration") || e.name.includes("Become A Mannequin"))
         }
     }
-    //all that remains should be non events like hanging out and shopping. normal mall stuff.
+    //all that remains should be non events like hanging out and shopping and becoming a constantly silently screaming mannequin. normal mall stuff.
 }
 
 const injectNewScenario = ()=>{

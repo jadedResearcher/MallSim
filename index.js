@@ -108,7 +108,6 @@ window.addEventListener('error', (message, file, line, column, errorObj) => {
     if (game) {
         game.event_list.push("ERROR")
     }
-    //console.log("JR NOTE: don't forget to wire this up to four E http://farragofiction.com/ZampanioSimEastEastEastEast")
     const all = document.querySelectorAll(".story-beat");
     let target = Object.values(all).at(-1);
     if (!target) {
@@ -176,7 +175,6 @@ window.onload = () => {
     until you forget it wasn't always this way
     */
     if (globalDataObject.fallenIntoRabbitHole) {
-        //console.log("JR NOTE: consequences activated")
         generalEvents.unshift(clownFuckery);
         generalEventsOriginal.unshift(clownFuckery);
         generalEvents.unshift(minotaurFuckery);
@@ -215,7 +213,6 @@ const start = () => {
     if (custom) {
         try {
             const json_text = JSONCrush.uncrush((custom));
-            console.info("JR NOTE: ", { custom, json_text })
             game.importPlayersFromJSON(json_text);
             game.custom = true;
         } catch (e) {
@@ -230,7 +227,6 @@ const start = () => {
     const name = urlParams.get('name');
     const themes = urlParams.get('themes');
 
-    //console.log("JR NOTE: name and themes", name, themes, seed);
     if (name) {
         game.players[0].name = name;
     }
