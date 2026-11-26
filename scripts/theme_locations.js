@@ -20,7 +20,6 @@ NOTE: these are TEMPLATE locations
 you need to clone them to move forward and give them the correct row/col etc so they can calculate their corruption level
 */
 const initThemeLocations = (rand) => {
-   // console.warn("JR NOTE: don't forget to wire up template locations with custom events")
     //at least init
     for (let key of Object.keys(all_themes)) {
         theme_locations[key] = [];
