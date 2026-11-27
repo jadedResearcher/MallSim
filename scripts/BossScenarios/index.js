@@ -24,12 +24,12 @@ each boss scenario has its own file and will use this file to handle setup and t
 //NOTE: this can not be undone. this will even unwire things like the meeting blorbos in their locations
 const clearPreviousScenario = (game) => {
     //clear out generalEvents
-    generalEvents = [];
+    generalEvents = generalEvents.filter((e) => e.name.includes("Shopping") || e.name.includes("Hydration") || e.name.includes("Become A Mannequin") || e.name.includes("Twin"))
     //clear out all existing locations
     for (let row of game.map) {
         for (let item of row) {
             if (item) { //its not empty space
-                item.events = item.events.filter((e) => e.name.includes("Shopping") || e.name.includes("Hydration") || e.name.includes("Become A Mannequin"))
+                item.events = item.events.filter((e) => e.name.includes("Shopping") || e.name.includes("Hydration") || e.name.includes("Become A Mannequin") || e.name.includes("Twin"))
             }
         }
     }
@@ -41,6 +41,7 @@ const clearPreviousScenario = (game) => {
         }
     }
     //all that remains should be non events like hanging out and shopping and becoming a constantly silently screaming mannequin. normal mall stuff.
+    //but also being hunted by the twins. they will not stop. they do not know trucies.
 }
 
 
