@@ -48,7 +48,7 @@ const clearPreviousScenario = (game) => {
 //no matter what you inject, basic things like shopping, hydration, turning into a mannequin (and camille stabbing you if you get harvest fruit sometimes) will happen
 const injectNewScenario = (scenario) => {
     console.log("JR NOTE: injecting new scenario: ", scenario)
-    generalEvents = scenario.generalEvents;
+    generalEvents = generalEvents.concat(scenario.generalEvents);
     for (let row of game.map) {
         for (let item of row) {
             if (item) { //its not empty space
